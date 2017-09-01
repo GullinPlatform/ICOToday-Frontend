@@ -11,9 +11,9 @@ const state = {
 
 // getters
 const getters = {
-    posts(state) {
-        return state.posts
-    },
+    // posts(state) {
+    //     return state.posts
+    // },
     currentPost(state) {
         return state.current_post
     }

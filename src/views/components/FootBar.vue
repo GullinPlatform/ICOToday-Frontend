@@ -6,7 +6,7 @@
       <div class="row">
         <div class="col-md-4">
           <h4 class="text-uppercase text-white">
-            联系我们
+            Contact Us
           </h4>
           <address>
             <ul class="list-unstyled">

@@ -29,8 +29,10 @@ export const VERIFY_SELF = 'VERIFY_SELF'
 
 
 // ----- question -----
-export const POST_QUESTION = 'ADD_QUESTION'
-export const GET_QUESTION = 'GET_QUESTION'
-export const LIST_QUESTIONS = 'LIST_QUESTIONS'
-export const MARK_QUESTION = 'MARK_QUESTION'
-export const APPLY_QUESTION = 'APPLY_QUESTION'
+export const ADD_POST = 'ADD_POST'
+export const GET_POST = 'GET_POST'
+export const LIST_POSTS = 'LIST_POSTS'
+export const LIST_PROMO_POSTS = 'LIST_PROMO_POSTS'
+export const APPEND_POSTS = 'APPEND_POSTS'
+export const MARK_POST = 'MARK_POST'
+export const APPLY_POST = 'APPLY_POST'
