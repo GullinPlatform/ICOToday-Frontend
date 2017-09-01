@@ -1,0 +1,14 @@
+{
+  "brace_style": "collapse,preserve-inline",
+  "indent_size": 2,
+  "indent_char": " ",
+  "end_with_newline": true,
+  "beautify.language": {
+    "js": {
+      "type": ["javascript", "json"],
+      "filename": [".jshintrc", ".jsbeautifyrc"]
+    },
+    "css": ["css", "scss"],
+    "html": ["htm", "html", "vue"]
+  }
+}
