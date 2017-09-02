@@ -8,51 +8,68 @@ Vue.use(Resource)
 
 export default {
   // Authorization
-  login(formData) {
+  login (formData) {
     return Vue.http.post(API_ROOT + 'account/login/', formData)
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
-  signup(formData) {
+  signup (formData) {
     return Vue.http.post(API_ROOT + 'account/signup/', formData)
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
-  passwordReset(formData) {
+  passwordReset (formData) {
     return Vue.http.post(API_ROOT + 'account/reset/', formData)
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
-  tokenVerify(formData) {
+  tokenVerify (formData) {
     return Vue.http.post(API_ROOT + 'account/verify/', formData)
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
-  tokenRefresh(formData) {
+  tokenRefresh (formData) {
     return Vue.http.post(API_ROOT + 'account/refresh/', formData)
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
+
   // Load User Data
-  getSelf() {
-    return Vue.http.get(API_ROOT + 'account/me/', { headers: { Authorization: 'TOKEN ' + getCookie('token') } })
+  getSelf () {
+    return Vue.http.get(API_ROOT + 'account/me/', {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
-  getUser(pk) {
-    return Vue.http.get(API_ROOT + 'account/' + pk + '/', { headers: { Authorization: 'TOKEN ' + getCookie('token') } })
+  getUser (pk) {
+    return Vue.http.get(API_ROOT + 'account/' + pk + '/', {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
-  getAvatar() {
-    return Vue.http.get(API_ROOT + 'account/avatar/', { headers: { Authorization: 'TOKEN ' + getCookie('token') } })
+  getSelfCreatedPost () {
+    return Vue.http.get(API_ROOT + 'account/me/marked_posts/', {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
+      .then((response) => Promise.resolve(response.data))
+      .catch((error) => Promise.reject(error))
+  },
+  getUserCreatedPost (pk) {
+    return Vue.http.get(API_ROOT + 'account/' + pk + '/marked_posts/', {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
+      .then((response) => Promise.resolve(response.data))
+      .catch((error) => Promise.reject(error))
+  },
+  getSelfMarkedPost () {
+    return Vue.http.get(API_ROOT + 'account/me/created_posts/', {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
+      .then((response) => Promise.resolve(response.data))
+      .catch((error) => Promise.reject(error))
+  },
+  getUserMakredPost (pk) {
+    return Vue.http.get(API_ROOT + 'account/' + pk + '/created_posts/', {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
   // Change User 
-  verifySelf(formData) {
-    return Vue.http.post(API_ROOT + 'account/me/verify/', formData, { headers: { Authorization: 'TOKEN ' + getCookie('token') } })
+  verifySelf (formData) {
+    return Vue.http.post(API_ROOT + 'account/me/verify/', formData, {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   }
+
 }

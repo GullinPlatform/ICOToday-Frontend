@@ -11,12 +11,12 @@
                     <!--main content-->
                     <div class="col-md-9" v-if="self.is_verified === 0">
                         <h3>
-                            资历验证
+                           My Team
                         </h3>
                         <p class="mb-4">您提供的信息越完善，验证进度就会越快</p>
                         <div v-if="!self.is_company">
                             <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-2 col-form-label">真实姓名
+                                <label for="example-text-input" class="col-sm-2 col-form-label">Team
                                     <span class="text-danger">*</span>
                                 </label>
                                 <div class="col-sm-10">
