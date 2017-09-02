@@ -56,8 +56,8 @@ const getters = {
 
   self_name: state => {
     if (state.login_status && state.self) {
-      if (state.self.first_name && state.self.last_name) {
-        return state.self.first_name + ' ' + state.self.last_name
+      if (state.self.info.first_name && state.self.info.last_name) {
+        return state.self.info.first_name + ' ' + state.self.info.last_name
       }
       else {
         return state.self.email

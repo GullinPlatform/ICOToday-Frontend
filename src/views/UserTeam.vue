@@ -9,7 +9,7 @@
                     <!-- sidebar -->
                     <user-sidebar></user-sidebar>
                     <!--main content-->
-                    <div class="col-md-9" v-if="self.is_verified === 1">
+                    <div class="col-md-9" v-if="me.is_verified && me.type===0">
                         <h3>
                             Team/Company Settings
                         </h3>
@@ -28,7 +28,7 @@
                             <label class="col-sm-2 col-form-label">Description
                             </label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" v-model="description" type="date"></textarea>
+                                <textarea class="form-control" rows="4" v-model="description" type="date"></textarea>
                             </div>
                         </div>
                         <div class="form-group row justify-content-md-center">
@@ -169,7 +169,8 @@
                                             <i class="fa fa-plus"></i>
                                         </a>
                                         <h5 class="name">
-                                            <a href="team-member.htm" title="View Kate's profile">Add New Team Member</a>
+                                            <a href="team-member.htm"
+                                               title="View Kate's profile">Add New Team Member</a>
                                         </h5>
                                     </div>
                                 </div>
@@ -226,10 +227,15 @@
           })
       },
     },
+    mounted () {
+      this.team_name = this.me.info.team.name
+      this.description = this.me.info.team.description
+
+    },
     computed: {
-      self () {
+      me () {
         return this.$store.getters.self
-      }
+      },
     },
   }
 </script>

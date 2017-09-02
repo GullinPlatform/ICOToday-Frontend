@@ -34,7 +34,7 @@ export const LOAD_USER = 'LOAD_USER'
 export const VERIFY_SELF = 'VERIFY_SELF'
 
 
-// ----- question -----
+// ----- POST -----
 export const ADD_POST = 'ADD_POST'
 export const GET_POST = 'GET_POST'
 export const LIST_POSTS = 'LIST_POSTS'
@@ -42,3 +42,5 @@ export const LIST_PROMO_POSTS = 'LIST_PROMO_POSTS'
 export const APPEND_POSTS = 'APPEND_POSTS'
 export const MARK_POST = 'MARK_POST'
 export const APPLY_POST = 'APPLY_POST'
+
+// ----- TEAM -----

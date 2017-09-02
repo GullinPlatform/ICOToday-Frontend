@@ -21,7 +21,8 @@
                         <p v-if="$route.name === 'me' && me.type === 0" class="mb-4">My ICO Projects</p>
                         <p v-else class="mb-4">Marked ICO Projects</p>
 
-                        <div class="card px-3 py-4 mb-3 row-hover card-outline-primary pos-relative" v-if="loaded" v-for="project in projects">
+                        <div class="card px-3 py-4 mb-3 row-hover card-outline-primary pos-relative" v-if="loaded"
+                             v-for="project in projects">
                             <div class="row align-items-center ">
                                 <span class="pos-absolute pos-t pos-l bg-primary text-white text-xs px-1">我参与的</span>
                                 <div class="col-md-2">
@@ -49,6 +50,9 @@
                                         <i class="fa fa-heart"></i> Shortlist</a>
                                 </div>
                             </div>
+                        </div>
+                        <div v-if="loaded && projects.length===0">
+                            Nothing Here
                         </div>
                     </div>
                 </div>
@@ -96,13 +100,20 @@
             this.loaded = true
           })
           .catch(() => {
-            this.errorMsg = 'Unable to login using provided email and password'
+
           })
 
       }
       // My Marked Projects
       else {
+        this.$store.dispatch('getSelfMarkedPost')
+          .then(() => {
+            this.projects = this.$store.getters.self_marked_posts
+            this.loaded = true
+          })
+          .catch(() => {
 
+          })
       }
     }
   }

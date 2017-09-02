@@ -41,7 +41,7 @@ export default {
       .catch((error) => Promise.reject(error))
   },
   getUser (pk) {
-    return Vue.http.get(API_ROOT + 'account/' + pk + '/', {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
+    return Vue.http.get(API_ROOT + 'account/' + pk + '/')
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
@@ -51,7 +51,7 @@ export default {
       .catch((error) => Promise.reject(error))
   },
   getUserCreatedPost (pk) {
-    return Vue.http.get(API_ROOT + 'account/' + pk + '/created_posts/', {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
+    return Vue.http.get(API_ROOT + 'account/' + pk + '/created_posts/')
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
@@ -61,7 +61,7 @@ export default {
       .catch((error) => Promise.reject(error))
   },
   getUserMakredPost (pk) {
-    return Vue.http.get(API_ROOT + 'account/' + pk + '/marked_posts/', {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
+    return Vue.http.get(API_ROOT + 'account/' + pk + '/marked_posts/')
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
@@ -71,5 +71,7 @@ export default {
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   }
+
+  // Change Team
 
 }

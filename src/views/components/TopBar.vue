@@ -15,13 +15,14 @@
                         <div class="header-slogan hidden-md-down m-t">Find your next ICO</div>
                     </div>
                     <!-- other header content -->
-                    <div class=" header-block flex-last navbar navbar-toggleable-md">
+                    <div class="flex-last navbar navbar-toggleable-md">
                         <!--everything within this div is collapsed on mobile-->
                         <div class="navbar-main">
                             <!--main navigation-->
                             <ul class="nav navbar-nav">
                                 <li class="nav-item dropdown" v-if="login_status">
-                                    <a href="javascript:void(0)" class="nav-link dropdown-toggle animated dropdown" data-toggle="dropdown"
+                                    <a href="javascript:void(0)" class="nav-link dropdown-toggle animated dropdown"
+                                       data-toggle="dropdown"
                                        data-hover="dropdown">
                                         {{self_name}}
                                         <i class="ml-1 fa fa-user nav-link-icon"></i>
