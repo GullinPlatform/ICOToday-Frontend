@@ -64,64 +64,9 @@
             <!-- Main content -->
             <div class="container pb-6">
                 <div class="row">
-                    <!-- Sidebar content -->
-                    <div class="col-lg-3 push-lg-9 mb-4 mb-lg-0">
-                        <div>
-                            <hr class="hr-lg mt-0 mb-2 w-10 ml-0 hr-primary"/>
-                            <h3 class="text-uppercase mb-3">
-                                Filter Jobs
-                            </h3>
-                            <div class="p-3 bg-faded">
-                                <h4>
-                                    Location
-                                </h4>
-                                <div class="pos-relative">
-                                    <i class="fa fa-map-marker icon-1x pos-absolute pos-l mt-1"></i>
-                                    <input class="form-control form-control-transparent pl-4" type="text"
-                                           placeholder="Location ie. London">
-                                    <hr class="mt-1 mb-0">
-                                </div>
-                                <h4 class="mt-3">
-                                    Remote OK
-                                </h4>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" value=""> Remote OK
-                                    </label>
-                                </div>
-                                <hr class="my-3">
-                                <h4>
-                                    Job Type
-                                </h4>
-                                <div class="checkboxes">
-                                    <div class="form-check">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="checkbox" value=""> Freelance
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="checkbox" value=""> Full Time
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="checkbox" value=""> Part Time
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="checkbox" value=""> Internship
-                                        </label>
-                                    </div>
-                                </div>
-                                <hr class="my-3">
-                                <a href="#" class="btn btn-primary btn-block btn-rounded">Filter</a>
-                            </div>
-                        </div>
-                    </div>
+
                     <!-- Main content -->
-                    <div class="col-lg-9 pull-lg-3 mb-3">
+                    <div class="col-lg-12">
                         <!-- Jobs list -->
                         <hr class="hr-lg mt-0 mb-2 w-10 ml-0 hr-primary"/>
                         <h3 class="mb-3 font-weight-bold text-uppercase">

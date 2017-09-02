@@ -22,6 +22,48 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Icon</label>
+                            <div class="col-sm-10">
+                                <div class="dropzone-area" v-if="!icon_loaded">
+                                    <div class="dropzone-text">
+                                        <i class="fa fa-cloud-upload"> </i>
+                                        <span>Drag file here or click to upload file</span>
+                                    </div>
+                                    <input type="file" @change="onIconChange">
+                                </div>
+
+                                <div v-else>
+                                    <button type="button" class="mb-1 btn btn-secondary">{{icon.name}}</button>
+                                    <button type="button" class="mb-1 btn btn-secondary" @click="removeFile('i')">
+                                        <span>
+                                            <i class="fa fa-times"></i> Remove
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Large Icon</label>
+                            <div class="col-sm-10">
+                                <div class="dropzone-area" v-if="!large_icon_loaded">
+                                    <div class="dropzone-text">
+                                        <i class="fa fa-cloud-upload"> </i>
+                                        <span>Drag file here or click to upload file</span>
+                                    </div>
+                                    <input type="file" @change="onLargeIconChange">
+                                </div>
+
+                                <div v-else>
+                                    <button type="button" class="mb-1 btn btn-secondary">{{large_icon.name}}</button>
+                                    <button type="button" class="mb-1 btn btn-secondary" @click="removeFile('l')">
+                                        <span>
+                                            <i class="fa fa-times"></i> Remove
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Description</label>
                             <div class="col-sm-10">
                                 <textarea class="form-control" v-model="description_full" type="text"
@@ -29,16 +71,6 @@
                             </div>
                         </div>
                         <h4>Time And Amount</h4>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">ICO Goal</label>
-                            <div class="col-sm-5">
-                                <input class="form-control" placeholder="Minimum" v-model="minimum_goal" type="number">
-                            </div>
-                            <div class="col-sm-5">
-                                <input class="form-control" placeholder="Maximum" v-model="maximum_goal" type="number">
-                            </div>
-
-                        </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">ICO Unit</label>
                             <div class="col-sm-10">
@@ -49,6 +81,17 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">ICO Goal</label>
+                            <div class="col-sm-5">
+                                <input class="form-control" placeholder="Minimum" v-model="minimum_goal" type="number">
+                            </div>
+                            <div class="col-sm-5">
+                                <input class="form-control" placeholder="Maximum" v-model="maximum_goal" type="number">
+                            </div>
+
+                        </div>
+
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Start Date</label>
                             <div class="col-sm-10">
@@ -66,7 +109,6 @@
                                 <vue-datetime-picker class="vue-end-picker" id="end-picker"
                                                      ref="endPicker"
                                                      placeholder="End Time"
-
                                                      v-model="end_datetime"
                                                      @change="onEndDatetimeChanged">
                                 </vue-datetime-picker>
@@ -87,7 +129,7 @@
 
                                 <div v-else>
                                     <button type="button" class="mb-1 btn btn-secondary">{{white_paper.name}}</button>
-                                    <button type="button" class="mb-1 btn btn-secondary" @click="removeWhitePaper()">
+                                    <button type="button" class="mb-1 btn btn-secondary" @click="removeFile('w')">
                                         <span>
                                             <i class="fa fa-times"></i> Remove
                                         </span>
@@ -109,49 +151,10 @@
                                 <input class="form-control" v-model="website" placeholder="http://">
                             </div>
                         </div>
-                        <!--<div class="form-group row">-->
-                        <!--<label class="col-sm-2 col-form-label">Bid Icon</label>-->
-                        <!--<div class="col-sm-10">-->
-                        <!--<div class="dropzone-area">-->
-                        <!--<div class="dropzone-text">-->
-                        <!--<i class="fa fa-cloud-upload"> </i>-->
-                        <!--<span>Drag file here or click to upload file</span>-->
-                        <!--</div>-->
-                        <!--<input type="file" @change="onFileChange">-->
-                        <!--</div>-->
-                        <!--<div class="mt-1 btn-group" v-for="file in files">-->
-                        <!--<button type="button" class="mb-1 btn btn-secondary">{{file.name}}</button>-->
-                        <!--<button type="button" class="mb-1 btn btn-secondary" @click="removeFile(file)">-->
-                        <!--<span>-->
-                        <!--<i class="fa fa-times"></i>-->
-                        <!--</span>-->
-                        <!--</button>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="form-group row">-->
-                        <!--<label class="col-sm-2 col-form-label">Small Icon</label>-->
-                        <!--<div class="col-sm-10">-->
-                        <!--<div class="dropzone-area">-->
-                        <!--<div class="dropzone-text">-->
-                        <!--<i class="fa fa-cloud-upload"> </i>-->
-                        <!--<span>Drag file here or click to upload file</span>-->
-                        <!--</div>-->
-                        <!--<input type="file" @change="onFileChange">-->
-                        <!--</div>-->
-                        <!--<div class="mt-1 btn-group" v-for="file in files">-->
-                        <!--<button type="button" class="mb-1 btn btn-secondary">{{file.name}}</button>-->
-                        <!--<button type="button" class="mb-1 btn btn-secondary" @click="removeFile(file)">-->
-                        <!--<span>-->
-                        <!--<i class="fa fa-times"></i>-->
-                        <!--</span>-->
-                        <!--</button>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</div>-->
+
                         <div class="form-group row justify-content-md-center">
                             <div class="col-md-10 offset-md-2">
-                                <button type="button" @click="postNewQuestion()" class="mb-1 btn btn-block btn-primary">
+                                <button type="button" @click="postNewPost()" class="mb-1 btn btn-block btn-primary">
                                     Submit
                                 </button>
                                 <p class="text-primary">{{message}}</p>
@@ -184,6 +187,8 @@
       return {
         // -- form info start --
         title: '',
+        icon: null,
+        large_icon: null,
         description_full: '',
 
         maximum_goal: null,
@@ -200,6 +205,8 @@
         // -- form info end --
 
         white_paper_loaded: false,
+        icon_loaded: false,
+        large_icon_loaded: false,
 
         message: ''
       }
@@ -216,13 +223,36 @@
         this.white_paper = file[0]
         this.white_paper_loaded = true
       },
-      removeWhitePaper () {
-        this.white_paper = null
-        this.white_paper_loaded = false
+      onIconChange (e) {
+        var file = e.target.files || e.dataTransfer.files
+        if (!file.length) return
+        this.icon = file[0]
+        this.icon_loaded = true
       },
-      postNewQuestion () {
+      onLargeIconChange (e) {
+        var file = e.target.files || e.dataTransfer.files
+        if (!file.length) return
+        this.large_icon = file[0]
+        this.large_icon_loaded = true
+      },
+      removeFile (name) {
+        if (name === 'w') {
+          this.white_paper = null
+          this.white_paper_loaded = false
+        } else if (name === 'i') {
+          this.icon = null
+          this.icon_loaded = false
+        } else {
+          this.large_icon = null
+          this.large_icon_loaded = false
+        }
+      },
+
+      postNewPost () {
         /* global FormData */
-        let formData = new FormData()
+        let formData = new FormData(
+
+        )
 
         formData.append('title', this.title)
         formData.append('description_full', this.description_full)
@@ -235,28 +265,24 @@
         formData.append('video_link', this.video_link)
         formData.append('website', this.website)
 
-//        if (this.files.length)
-//          Array.from(Array(this.files.length).keys())
-//            .map(x => {
-//              formData.append(this.files[x].name, this.files[x])
-//            })
+        console.log(formData)
 
         this.$store.dispatch('postNewPost', formData)
           .then(() => {
-            this.title = ''
-            this.description_full = ''
-
-            this.maximum_goal = null
-            this.minimum_goal = null
-            this.coin_type = ''
-
-            this.start_datetime = ''
-            this.end_datetime = ''
-
-            this.white_paper = null
-
-            this.video_link = ''
-            this.website = ''
+//            this.title = ''
+//            this.description_full = ''
+//
+//            this.maximum_goal = null
+//            this.minimum_goal = null
+//            this.coin_type = ''
+//
+//            this.start_datetime = ''
+//            this.end_datetime = ''
+//
+//            this.white_paper = null
+//
+//            this.video_link = ''
+//            this.website = ''
 
             this.message = 'Success!'
           })

@@ -24,7 +24,7 @@ const actions = {
   postNewPost ({commit}, formData) {
     return postApi.postPost(formData)
       .then((response) => {
-        commit(types.POST_POST, response)
+        commit(types.ADD_POST, response)
         return Promise.resolve()
       })
       .catch((error) => {

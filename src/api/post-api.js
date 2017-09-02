@@ -47,11 +47,6 @@ export default {
       .catch((error) => Promise.reject(error))
   },
 
-  appliedPosts () {
-    return Vue.http.post(API_ROOT + 'post/applied/', {}, {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
-  },
   markedPosts () {
     return Vue.http.post(API_ROOT + 'post/marked/', {}, {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
       .then((response) => Promise.resolve(response.data))

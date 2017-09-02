@@ -11,7 +11,7 @@
         <div class="modal-body">
           <div>
             <div class="form-group">
-              <input type="email" v-model="username" class="form-control email" placeholder="Email" required>
+              <input type="email" v-model="email" class="form-control email" placeholder="Email" required>
             </div>
             <div class="form-group">
               <input type="password" @keyup.enter="login($event)" v-model="password" class="form-control password" placeholder="Password" required>
@@ -42,7 +42,7 @@ export default {
   name: 'Login',
   data() {
     return {
-      username: '',
+      email: '',
       password: '',
       errorMsg: '',
     }
@@ -50,8 +50,8 @@ export default {
   methods: {
     login(e) {
       e.preventDefault()
-      var formData = {
-        'username': this.username,
+      const formData = {
+        'email': this.email,
         'password': this.password
       }
       this.$store.dispatch('login', formData)
