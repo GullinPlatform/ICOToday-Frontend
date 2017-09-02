@@ -1,7 +1,6 @@
 <template>
   <!-- ======== @Region: #footer ======== -->
   <footer id="footer" class="py-3">
-  
     <div class="container pt-2 pb-2" v-if="$route.name=='landing'">
       <div class="row">
         <div class="col-md-4">
@@ -13,12 +12,17 @@
               <li>
                 <abbr title="Phone">
                   <i class="fa fa-phone fa-fw"></i>
-                </abbr> (+86) 15116931616
+                </abbr> 8147772479
               </li>
               <li>
                 <abbr title="Email">
                   <i class="fa fa-envelope fa-fw"></i>
-                </abbr> <a href="mailto:david@DeepComputation.com">david@DeepComputation.com</a> 
+                </abbr> <a href="mailto:C0dezLee@gmail.com">C0dezLee@gmail.com</a>
+              </li>
+              <li>
+                <abbr title="Email">
+                  <i class="fa fa-envelope fa-fw"></i>
+                </abbr> <a href="mailto:kitongajoseph@gmail.com">KitongaJoseph@gmail.com</a>
               </li>
               <li>
                 <abbr title="Address">
@@ -29,7 +33,6 @@
           </address>
         </div>
       </div>
-  
     </div>
     <div class="container" v-else>
       <div class=" row ">

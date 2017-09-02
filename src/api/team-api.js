@@ -25,6 +25,10 @@ export default {
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
-
+  remTeamMember (pk) {
+    return Vue.http.delete(API_ROOT + 'account/team/' + pk + '/', {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
+      .then((response) => Promise.resolve(response.data))
+      .catch((error) => Promise.reject(error))
+  },
 }
 

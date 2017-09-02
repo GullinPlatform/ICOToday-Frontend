@@ -96,7 +96,6 @@
         this.$store.dispatch('logout')
       }
     }
-
   }
 
 </script>

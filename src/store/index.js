@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 import PersistedState from 'vuex-persistedstate'
 import user from './modules/user'
 import post from './modules/post'
+import team from './modules/team'
 import discussion from './modules/discussion'
 
 Vue.use(Vuex)
@@ -15,7 +16,8 @@ const store = new Vuex.Store({
   modules: {
     user,
     post,
-    discussion
+    discussion,
+    team
   }
 })
 export default store

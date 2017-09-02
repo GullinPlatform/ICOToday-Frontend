@@ -8,10 +8,10 @@
             <div class="col-md-8">
 
                 <h4 class="mb-0">
-                    {{username}}
+                    {{username}}  <span class="text-muted text-light">{{me.info.title}}</span>
                 </h4>
-                <p class="text-muted mb-2 text-sm">@
-                    <a href="#" class="font-weight-bold text-muted">机构</a>
+                <p class="text-muted mb-2 text-sm">
+                    <a href="#" class="font-weight-bold text-muted">@ {{me.info.team.name}}</a>
                 </p>
                 <p class="text-muted mb-2 text-sm">
                     <span class="d-block d-md-inline">
@@ -35,7 +35,7 @@
   export default {
     name: 'UserHeadBar',
     computed: {
-      self () {
+      me () {
         return this.$store.getters.self
       },
       username () {
