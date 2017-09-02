@@ -23,7 +23,7 @@
               <li>
                 <abbr title="Address">
                   <i class="fa fa-globe fa-fw"></i>
-                </abbr> <a href="http://www.DeepComputation.com">http://www.DeepComputation.com</a>
+                </abbr> <a href="http://www.icotoday.io">http://www.icotoday.io</a>
               </li>
             </ul>
           </address>
@@ -35,7 +35,7 @@
       <div class=" row ">
         <!--@todo: replace with company copyright details-->
         <div class="col-md-6 ">
-          <p class="mb-0 text-sm ">Copyright 2017 &copy; DeepComputation Technologies</p>
+          <p class="mb-0 text-sm ">Copyright 2017 &copy; ICOToday</p>
           <ul class="list-inline footer-links mb-0 text-sm ">
             <li class="list-inline-item ">
               <a href="# ">Terms</a>

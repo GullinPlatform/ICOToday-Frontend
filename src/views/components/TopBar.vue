@@ -31,7 +31,7 @@
                                     </a>
                                     <!-- Dropdown menu -->
                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-nobullets">
-                                        <router-link :to="{name:'me_new_question'}" class="dropdown-item">
+                                        <router-link :to="{name:'me_new_project'}" class="dropdown-item">
                                             <i class="fa fa-plus dropdown-icon" aria-hidden="true"></i>新的项目
                                         </router-link>
                                         <router-link :to="{name:'me'}" class="dropdown-item">

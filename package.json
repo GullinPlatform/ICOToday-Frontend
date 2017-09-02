@@ -18,6 +18,7 @@
     "v-mask": "^1.0.2",
     "vue": "^2.1.0",
     "vue-avatar": "^2.0.0",
+    "vue-bootstrap-datetimepicker": "^3.0.0",
     "vue-datetime-picker": "^0.2.1",
     "vue-dropzone": "^1.0.4",
     "vue-full-calendar": "^1.0.0",

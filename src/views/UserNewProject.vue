@@ -24,7 +24,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Description</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" v-model="descr" type="text"
+                                <textarea class="form-control" v-model="description_full" type="text"
                                           placeholder="( Markdown Support Enabled )" rows="10"></textarea>
                             </div>
                         </div>
@@ -32,18 +32,18 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">ICO Goal</label>
                             <div class="col-sm-5">
-                                <input class="form-control" placeholder="Minimum" v-model="prize" type="number">
+                                <input class="form-control" placeholder="Minimum" v-model="minimum_goal" type="number">
                             </div>
                             <div class="col-sm-5">
-                                <input class="form-control" placeholder="Maximum" v-model="prize" type="number">
+                                <input class="form-control" placeholder="Maximum" v-model="maximum_goal" type="number">
                             </div>
 
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">ICO Goal</label>
+                            <label class="col-sm-2 col-form-label">ICO Unit</label>
                             <div class="col-sm-10">
-                                <select class="form-control" v-model="industry_tags">
-                                    <option value="BTC" selected>Unit</option>
+                                <select class="form-control" v-model="coin_type">
+                                    <option value="" selected>-- Choose Unit --</option>
                                     <option value="BTC">BTC - Bitcoin</option>
                                     <option value="ETH">ETH - Ethereum</option>
                                 </select>
@@ -52,13 +52,24 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Start Date</label>
                             <div class="col-sm-10">
-                                <input class="form-control" placeholder="Start" v-model="prize" type="date">
+                                <vue-datetime-picker class="vue-start-picker" id="start-picker"
+                                                     ref="startPicker"
+                                                     placeholder="Start Time"
+                                                     v-model="start_datetime"
+                                                     @change="onStartDatetimeChanged">
+                                </vue-datetime-picker>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">End Date</label>
                             <div class="col-sm-10">
-                                <input class="form-control" placeholder="End" v-model="prize" type="date">
+                                <vue-datetime-picker class="vue-end-picker" id="end-picker"
+                                                     ref="endPicker"
+                                                     placeholder="End Time"
+
+                                                     v-model="end_datetime"
+                                                     @change="onEndDatetimeChanged">
+                                </vue-datetime-picker>
                             </div>
                         </div>
                         <h4>Supplement</h4>
@@ -66,18 +77,19 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">White Paper</label>
                             <div class="col-sm-10">
-                                <div class="dropzone-area">
+                                <div class="dropzone-area" v-if="!white_paper_loaded">
                                     <div class="dropzone-text">
                                         <i class="fa fa-cloud-upload"> </i>
                                         <span>Drag file here or click to upload file</span>
                                     </div>
-                                    <input type="file" @change="onFileChange">
+                                    <input type="file" @change="onWhitePaperChange">
                                 </div>
-                                <div class="mt-1 btn-group" v-for="file in files">
-                                    <button type="button" class="mb-1 btn btn-secondary">{{file.name}}</button>
-                                    <button type="button" class="mb-1 btn btn-secondary" @click="removeFile(file)">
+
+                                <div v-else>
+                                    <button type="button" class="mb-1 btn btn-secondary">{{white_paper.name}}</button>
+                                    <button type="button" class="mb-1 btn btn-secondary" @click="removeWhitePaper()">
                                         <span>
-                                            <i class="fa fa-times"></i>
+                                            <i class="fa fa-times"></i> Remove
                                         </span>
                                     </button>
                                 </div>
@@ -87,48 +99,55 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Video Link</label>
                             <div class="col-sm-10">
-                                <input class="form-control" v-model="tech_tags" placeholder="Youtube Video Link">
+                                <input class="form-control" v-model="video_link" placeholder="Youtube Video Link">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Website</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" v-model="website" placeholder="http://">
                             </div>
                         </div>
                         <!--<div class="form-group row">-->
-                            <!--<label class="col-sm-2 col-form-label">Bid Icon</label>-->
-                            <!--<div class="col-sm-10">-->
-                                <!--<div class="dropzone-area">-->
-                                    <!--<div class="dropzone-text">-->
-                                        <!--<i class="fa fa-cloud-upload"> </i>-->
-                                        <!--<span>Drag file here or click to upload file</span>-->
-                                    <!--</div>-->
-                                    <!--<input type="file" @change="onFileChange">-->
-                                <!--</div>-->
-                                <!--<div class="mt-1 btn-group" v-for="file in files">-->
-                                    <!--<button type="button" class="mb-1 btn btn-secondary">{{file.name}}</button>-->
-                                    <!--<button type="button" class="mb-1 btn btn-secondary" @click="removeFile(file)">-->
-                                        <!--<span>-->
-                                            <!--<i class="fa fa-times"></i>-->
-                                        <!--</span>-->
-                                    <!--</button>-->
-                                <!--</div>-->
-                            <!--</div>-->
+                        <!--<label class="col-sm-2 col-form-label">Bid Icon</label>-->
+                        <!--<div class="col-sm-10">-->
+                        <!--<div class="dropzone-area">-->
+                        <!--<div class="dropzone-text">-->
+                        <!--<i class="fa fa-cloud-upload"> </i>-->
+                        <!--<span>Drag file here or click to upload file</span>-->
+                        <!--</div>-->
+                        <!--<input type="file" @change="onFileChange">-->
+                        <!--</div>-->
+                        <!--<div class="mt-1 btn-group" v-for="file in files">-->
+                        <!--<button type="button" class="mb-1 btn btn-secondary">{{file.name}}</button>-->
+                        <!--<button type="button" class="mb-1 btn btn-secondary" @click="removeFile(file)">-->
+                        <!--<span>-->
+                        <!--<i class="fa fa-times"></i>-->
+                        <!--</span>-->
+                        <!--</button>-->
+                        <!--</div>-->
+                        <!--</div>-->
                         <!--</div>-->
                         <!--<div class="form-group row">-->
-                            <!--<label class="col-sm-2 col-form-label">Small Icon</label>-->
-                            <!--<div class="col-sm-10">-->
-                                <!--<div class="dropzone-area">-->
-                                    <!--<div class="dropzone-text">-->
-                                        <!--<i class="fa fa-cloud-upload"> </i>-->
-                                        <!--<span>Drag file here or click to upload file</span>-->
-                                    <!--</div>-->
-                                    <!--<input type="file" @change="onFileChange">-->
-                                <!--</div>-->
-                                <!--<div class="mt-1 btn-group" v-for="file in files">-->
-                                    <!--<button type="button" class="mb-1 btn btn-secondary">{{file.name}}</button>-->
-                                    <!--<button type="button" class="mb-1 btn btn-secondary" @click="removeFile(file)">-->
-                                        <!--<span>-->
-                                            <!--<i class="fa fa-times"></i>-->
-                                        <!--</span>-->
-                                    <!--</button>-->
-                                <!--</div>-->
-                            <!--</div>-->
+                        <!--<label class="col-sm-2 col-form-label">Small Icon</label>-->
+                        <!--<div class="col-sm-10">-->
+                        <!--<div class="dropzone-area">-->
+                        <!--<div class="dropzone-text">-->
+                        <!--<i class="fa fa-cloud-upload"> </i>-->
+                        <!--<span>Drag file here or click to upload file</span>-->
+                        <!--</div>-->
+                        <!--<input type="file" @change="onFileChange">-->
+                        <!--</div>-->
+                        <!--<div class="mt-1 btn-group" v-for="file in files">-->
+                        <!--<button type="button" class="mb-1 btn btn-secondary">{{file.name}}</button>-->
+                        <!--<button type="button" class="mb-1 btn btn-secondary" @click="removeFile(file)">-->
+                        <!--<span>-->
+                        <!--<i class="fa fa-times"></i>-->
+                        <!--</span>-->
+                        <!--</button>-->
+                        <!--</div>-->
+                        <!--</div>-->
                         <!--</div>-->
                         <div class="form-group row justify-content-md-center">
                             <div class="col-md-10 offset-md-2">
@@ -140,6 +159,7 @@
 
                         </div>
                     </div>
+
                     <div class="col-md-9 text-center" v-else>
                         <h4 class="mt-3">
                             You have to verify your email first
@@ -151,73 +171,107 @@
             </div>
         </div>
     </div>
-    </div>
 </template>
 
 <script>
   import UserSidebar from 'components/UserSidebar'
   import UserHeader from 'components/UserHeader'
+  import VueDatetimePicker from 'vue-bootstrap-datetimepicker'
 
   export default {
     name: 'UserNewProject',
     data () {
       return {
-        files: [],
+        // -- form info start --
         title: '',
-        descr: '',
-        industry_tags: '',
-          tech_tags: '',
-          prize: '',
+        description_full: '',
 
-          message: ''
+        maximum_goal: null,
+        minimum_goal: null,
+        coin_type: '',
+
+        start_datetime: '',
+        end_datetime: '',
+
+        white_paper: null,
+
+        video_link: '',
+        website: '',
+        // -- form info end --
+
+        white_paper_loaded: false,
+
+        message: ''
       }
     },
     components: {
       'user-sidebar': UserSidebar,
-      'user-header': UserHeader
+      'user-header': UserHeader,
+      'vue-datetime-picker': VueDatetimePicker
     },
     methods: {
-      onFileChange (e) {
+      onWhitePaperChange (e) {
         var file = e.target.files || e.dataTransfer.files
         if (!file.length) return
-        this.files.push(file[0])
+        this.white_paper = file[0]
+        this.white_paper_loaded = true
       },
-      removeFile (file) {
-        for (var i = this.files.length - 1; i >= 0; i--) {
-          if (this.files[i] === file)
-            this.files.splice(i, 1)
-        }
+      removeWhitePaper () {
+        this.white_paper = null
+        this.white_paper_loaded = false
       },
       postNewQuestion () {
         /* global FormData */
         let formData = new FormData()
+
         formData.append('title', this.title)
-        formData.append('description_short', this.descr)
-        formData.append('industry_tags', this.industry_tags)
-        formData.append('tech_tags', this.tech_tags)
-        formData.append('prize', this.prize)
+        formData.append('description_full', this.description_full)
+        formData.append('maximum_goal', this.maximum_goal)
+        formData.append('minimum_goal', this.minimum_goal)
+        formData.append('coin_type', this.coin_type)
+        formData.append('start_datetime', this.start_datetime)
+        formData.append('end_datetime', this.end_datetime)
+        formData.append('white_paper', this.white_paper)
+        formData.append('video_link', this.video_link)
+        formData.append('website', this.website)
 
-        if (this.files.length)
-          Array.from(Array(this.files.length).keys())
-            .map(x => {
-              formData.append(this.files[x].name, this.files[x])
-            })
+//        if (this.files.length)
+//          Array.from(Array(this.files.length).keys())
+//            .map(x => {
+//              formData.append(this.files[x].name, this.files[x])
+//            })
 
-        this.$store.dispatch('postNewQuestion', formData)
+        this.$store.dispatch('postNewPost', formData)
           .then(() => {
-            this.files = []
             this.title = ''
-            this.descr = ''
-            this.industry_tags = ''
-            this.tech_tags = ''
-            this.prize = ''
-            this.message = '提交成功！'
+            this.description_full = ''
+
+            this.maximum_goal = null
+            this.minimum_goal = null
+            this.coin_type = ''
+
+            this.start_datetime = ''
+            this.end_datetime = ''
+
+            this.white_paper = null
+
+            this.video_link = ''
+            this.website = ''
+
+            this.message = 'Success!'
           })
           .catch((error) => {
             console.log(error)
           })
-
       },
+      onStartDatetimeChanged (newStart) {
+        const endPicker = this.$refs.endPicker.control
+        endPicker.minDate(newStart)
+      },
+      onEndDatetimeChanged (newEnd) {
+        const startPicker = this.$refs.startPicker.control
+        startPicker.maxDate(newEnd)
+      }
     },
     computed: {
       self () {
@@ -226,3 +280,7 @@
     }
   }
 </script>
+
+<style scoped>
+    @import url("../../static/css/glyphicons.css");
+</style>
