@@ -9,9 +9,9 @@ import RootLayout from 'layouts/RootLayout'
 // import Home from 'views/Home'
 import Landing from 'views/Landing'
 import UserProjects from 'views/UserProjects'
-import UserVerify from 'views/UserVerify'
+import UserTeam from 'views/UserTeam'
 import UserSettings from 'views/UserSettings'
-import UserNewQuestion from 'views/UserNewQuestion'
+import UserNewProject from 'views/UserNewProject'
 import Post from 'views/Post'
 import Team from 'views/Team'
 
@@ -44,17 +44,17 @@ export default new Router({
       component: UserProjects,
       name: 'me_marked'
     }, {
-      path: '/me/verify',
-      component: UserVerify,
-      name: 'me_verify'
+      path: '/me/team',
+      component: UserTeam,
+      name: 'me_team'
     }, {
       path: '/me/settings',
       component: UserSettings,
       name: 'me_settings'
     }, {
       path: '/me/new',
-      component: UserNewQuestion,
-      name: 'me_new_question'
+      component: UserNewProject,
+      name: 'me_new_project'
     }, {
       path: '/user/:id',
       component: UserProjects,

@@ -6,9 +6,9 @@
                 <img src="/static/img/homes/code.jpg" class="rounded-circle img-padded" width="100" height="100">
             </div>
             <div class="col-md-8">
-    
+
                 <h4 class="mb-0">
-                    {{self.username}}
+                    {{username}}
                 </h4>
                 <p class="text-muted mb-2 text-sm">@
                     <a href="#" class="font-weight-bold text-muted">机构</a>
@@ -23,22 +23,25 @@
                 </p>
             </div>
             <div class="col-md-2 text-md-center">
-    
+
                 <a href="#" class="btn btn-yellow text-uppercase font-weight-bold d-lg-block">
-                    <i class="fa fa-check"></i> 通过验证</a>
+                    <i class="fa fa-check"></i> Verified</a>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-export default {
+  export default {
     name: 'UserHeadBar',
     computed: {
-        self() {
-            return this.$store.getters.self
-        }
+      self () {
+        return this.$store.getters.self
+      },
+      username () {
+        return this.$store.getters.self_name
+      },
     }
-}
+  }
 </script>
 

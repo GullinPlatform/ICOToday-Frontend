@@ -11,55 +11,55 @@
                     <!--main content-->
                     <div class="col-md-9">
                         <h3>
-                            账号设置
+                            Account Settings
                         </h3>
-                        <p class="mb-4">您的账户详细信息</p>
+                        <p class="mb-4">Your Account Detail</p>
                         <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Text</label>
+                            <label class="col-sm-2 col-form-label">First Name</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" type="text" id="first_name">
+                            </div>
+                            <label class="col-sm-2 col-form-label">Last Name</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" type="text" id="last_name">
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Title</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" value="Artisanal kale" id="example-text-input">
+                                <input class="form-control" type="text" placeholder="ex. CEO">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Text</label>
+                            <label class="col-sm-2 col-form-label">Description</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" value="Artisanal kale" id="example-text-input">
+                                <textarea class="form-control" placeholder=""></textarea>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">LinkedIn</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Text</label>
+                            <label class="col-sm-2 col-form-label">Twitter</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" value="Artisanal kale" id="example-text-input">
+                                <input class="form-control" type="text">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Text</label>
+                            <label class="col-sm-2 col-form-label">Slack</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" value="Artisanal kale" id="example-text-input">
+                                <input class="form-control" type="text">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Text</label>
+                            <label class="col-sm-2 col-form-label">Telegram</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" value="Artisanal kale" id="example-text-input">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Text</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" value="Artisanal kale" id="example-text-input">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Text</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" value="Artisanal kale" id="example-text-input">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Text</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" value="Artisanal kale" id="example-text-input">
+                                <input class="form-control" type="text">
                             </div>
                         </div>
                     </div>
@@ -70,13 +70,14 @@
 </template>
 
 <script>
-import UserSidebar from 'components/UserSidebar'
-import UserHeader from 'components/UserHeader'
-export default {
+  import UserSidebar from 'components/UserSidebar'
+  import UserHeader from 'components/UserHeader'
+
+  export default {
     name: 'UserSettings',
     components: {
-        'user-sidebar': UserSidebar,
-        'user-header': UserHeader
+      'user-sidebar': UserSidebar,
+      'user-header': UserHeader
     }
-}
+  }
 </script>

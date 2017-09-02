@@ -26,7 +26,7 @@
                                 <li class="nav-item d-lg-flex dropdown" v-if="login_status">
                                     <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown"
                                        data-hover="dropdown">
-                                        {{me.username}}
+                                        {{me.email}}
                                         <i class="ml-1 fa fa-user nav-link-icon"></i>
                                     </a>
                                     <!-- Dropdown menu -->
@@ -51,7 +51,7 @@
                         </div>
                         <button data-toggle="modal" data-target="#signup-modal"
                                 class="btn btn-primary d-lg-flex btn-rounded btn-sm font-weight-bold"
-                                v-if="!login_status">Register
+                                v-if="!login_status">REGISTER
                         </button>
 
                     </div>

@@ -127,14 +127,16 @@
                         <h3 class="mb-3 font-weight-bold text-uppercase">
                             Runing ICOs
                             <span class="text-xs text-muted font-weight-normal text-normalcase op-7">{{getMonth()}}</span>
-                            <router-link :to="{name:'question_list'}" class="text-xs float-md-right mb-0">>> Upcoming
-                            </router-link>
+                            <a href="javascript:void(0)" @click="current=false;upcoming=true" v-if="current"
+                               class="text-xs float-md-right mb-0">>> Upcoming</a>
+                            <a href="javascript:void(0)" @click="current=true;upcoming=false" v-if="upcoming"
+                               class="text-xs float-md-right mb-0">>> Current</a>
                         </h3>
 
                         <!-- Job 1 -->
                         <div v-if="loaded">
                             <div v-for="post in posts" class="card px-3 py-4 mb-3 row-hover pos-relative">
-                                <div class="row align-items-center ">
+                                <div class="row align-items-center">
                                     <div class="col-md-2">
                                         <img :src="post.icon_image" alt="ICO Icon"
                                              class="img-fluid hidden-sm-down"/>
@@ -151,7 +153,7 @@
                                         </p>
                                         <p class="text-muted mb-2 text-sm">
                                             <span class="d-block d-md-inline">
-                                                <i class="fa fa-map-marker"></i> Goal {{post.goal}} {{post.coin_type}}
+                                                <i class="fa fa-map-marker"></i> Goal {{post.maximum_goal}} {{post.coin_type}}
                                             </span>
                                             <span class="d-block d-md-inline">
                                                 <i class="fa fa-money ml-md-3"></i> Ends {{post.end_datetime}}
@@ -167,7 +169,7 @@
                                             Detail
                                         </router-link>
                                         <!--TODO: If login-->
-                                        <a href="#" class="text-muted text-xs op-7">
+                                        <a href="#" v-if="logedin" class="text-muted text-xs op-7">
                                             <i class="fa fa-star"></i> Star For Me
                                         </a>
                                     </div>
@@ -211,9 +213,9 @@
                         <!--<div v-scroll-at="loadMore"></div>-->
                         <div class="row">
                             <div class="col-md-12 text-md-center mt-0">
-                                <router-link :to="{name:'question_list'}" class="btn btn-primary btn-md btn-rounded">
+                                <a class="btn btn-primary btn-md btn-rounded">
                                     + More
-                                </router-link>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -246,7 +248,6 @@
             this.page += 1
           })
           .catch(() => {
-
           })
       }
     },
@@ -258,7 +259,7 @@
       promo_posts () {
         return this.$store.getters.promo_posts
       },
-      login_status () {
+      logedin () {
         return this.$store.getters.login_status
       }
     },

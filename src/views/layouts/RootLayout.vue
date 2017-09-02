@@ -41,7 +41,7 @@ export default {
     font-size: 1rem;
     line-height: 1.25;
     color: #464a4c;
-    height: 150px;
+    height: 100px;
     position: relative;
     border: 2px dashed #CBCBCB;
 }
