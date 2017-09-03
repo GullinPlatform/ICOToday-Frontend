@@ -70,7 +70,7 @@
                         <!-- Jobs list -->
                         <hr class="hr-lg mt-0 mb-2 w-10 ml-0 hr-primary"/>
                         <h3 class="mb-3 font-weight-bold text-uppercase">
-                            Runing ICOs
+                            Active ICOs
                             <span class="text-xs text-muted font-weight-normal text-normalcase op-7">{{getMonth()}}</span>
                             <a href="javascript:void(0)" @click="current=false;upcoming=true" v-if="current"
                                class="text-xs float-md-right mb-0">>> Upcoming</a>

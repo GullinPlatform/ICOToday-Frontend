@@ -160,7 +160,6 @@
                                 </button>
                                 <p class="text-red">{{message}}</p>
                             </div>
-
                         </div>
                     </div>
 
@@ -169,7 +168,6 @@
                             You have to verify your email first
                         </h4>
                         <a href="javascript:void(0)" @click="" class="btn btn-primary mt-2">Resend Email</a>
-
                     </div>
                 </div>
             </div>
