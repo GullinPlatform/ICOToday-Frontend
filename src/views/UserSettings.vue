@@ -14,6 +14,26 @@
                             Account Settings
                         </h3>
                         <p class="mb-4">Your Account Detail</p>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="col-md-2 text-md-center">
+                                    <img src="../../static/img/homes/code.jpg" class="rounded-circle img-padded"
+                                         width="100" height="100">
+                                </div>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="form-group">
+                                    <div class="dropzone-area" v-if="!avatar_loaded">
+                                        <div class="dropzone-text">
+                                            <i class="fa fa-cloud-upload"> </i>
+                                            <span>Drag file here or click to upload file</span>
+                                        </div>
+                                        <input type="file" required @change="onAvatarChange">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">First Name</label>
                             <div class="col-sm-4">
@@ -24,7 +44,6 @@
                                 <input class="form-control" type="text" id="last_name">
                             </div>
                         </div>
-                        <hr>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Title</label>
                             <div class="col-sm-10">

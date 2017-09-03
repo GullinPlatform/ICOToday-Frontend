@@ -2,7 +2,7 @@
     <div id="header">
         <div data-toggle="sticky">
             <!--Header & Branding region-->
-            <div class="header  py-1 py-lg-0">
+            <div class="header py-0">
                 <div class="header-inner container">
                     <!--branding/logo -->
                     <div class="header-brand flex-first">
@@ -15,21 +15,19 @@
                         <div class="header-slogan hidden-md-down m-t">Find your next ICO</div>
                     </div>
                     <!-- other header content -->
-                    <div class="flex-last navbar navbar-toggleable-md">
+                    <div class="navbar navbar-toggleable">
                         <!--everything within this div is collapsed on mobile-->
                         <div class="navbar-main">
                             <!--main navigation-->
                             <ul class="nav navbar-nav">
                                 <li class="nav-item dropdown" v-if="login_status">
-                                    <a href="javascript:void(0)" class="nav-link dropdown-toggle animated dropdown"
-                                       data-toggle="dropdown"
-                                       data-hover="dropdown">
+                                    <a href="javascript:void(0)" class="nav-link dropdown-toggle"
+                                       data-toggle="dropdown">
                                         {{self_name}}
                                         <i class="ml-1 fa fa-user nav-link-icon"></i>
                                     </a>
                                     <!-- Dropdown menu -->
-                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-nobullets">
-
+                                    <div class="dropdown-menu dropdown-menu-nobullets">
                                         <router-link :to="{name:'me_new_project'}" class="dropdown-item">
                                             <i class="fa fa-plus dropdown-icon" aria-hidden="true"></i>Launch New ICO
                                         </router-link>
