@@ -33,7 +33,6 @@ export default {
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
-
   // Load User Data
   getSelf () {
     return Vue.http.get(API_ROOT + 'account/me/', {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
@@ -65,13 +64,12 @@ export default {
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
-  // Change User 
-  verifySelf (formData) {
-    return Vue.http.post(API_ROOT + 'account/me/verify/', formData, {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
+  // Change User
+  updateSelf(formData) {
+    return Vue.http.put(API_ROOT + 'account/me/', formData, {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
-  }
-
+  },
   // Change Team
 
 }

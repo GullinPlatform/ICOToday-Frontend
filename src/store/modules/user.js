@@ -205,21 +205,14 @@ const actions = {
   },
 
   updateSelf ({commit}, formData) {
-    userApi.updateSelf(formData)
+    return userApi.updateSelf(formData)
       .then(() => {
         commit(types.UPDATE_SELF)
+        return Promise.resolve()
       })
       .catch((error) => {
         commit(types.LOG_ERROR, error)
-      })
-  },
-  verifySelf ({commit}, formData) {
-    userApi.verifySelf(formData)
-      .then(() => {
-        commit(types.VERIFY_SELF)
-      })
-      .catch((error) => {
-        commit(types.LOG_ERROR, error)
+        return Promise.reject(error)
       })
   },
 }

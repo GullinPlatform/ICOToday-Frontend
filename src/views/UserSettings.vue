@@ -37,48 +37,56 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">First Name</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" id="first_name">
+                                <input class="form-control" v-model="me.first_name" type="text" id="first_name">
                             </div>
                             <label class="col-sm-2 col-form-label">Last Name</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" id="last_name">
+                                <input class="form-control" v-model="me.last_name" type="text" id="last_name">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Title</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" placeholder="ex. CEO">
+                                <input class="form-control" v-model="me.title" type="text" placeholder="ex. CEO">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Description</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" placeholder=""></textarea>
+                                <textarea class="form-control" v-model="me.description" placeholder=""></textarea>
                             </div>
                         </div>
                         <hr>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">LinkedIn</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text">
+                                <input class="form-control" v-model="me.linkedin" type="text">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Twitter</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text">
+                                <input class="form-control" v-model="me.twitter" type="text">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Slack</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text">
+                                <input class="form-control" v-model="me.slack" type="text">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Telegram</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text">
+                                <input class="form-control" v-model="me.telegram" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group row justify-content-md-center">
+                            <div class="col-md-10 offset-md-2">
+                                <button type="button" @click="updateSelf()" class="mb-1 btn btn-block btn-primary">
+                                    Submit Change
+                                </button>
+                                <p class="text-green">{{message}}</p>
                             </div>
                         </div>
                     </div>
@@ -94,9 +102,41 @@
 
   export default {
     name: 'UserSettings',
+    data () {
+      return {
+        me: {},
+
+        avatar_loaded: false,
+        message: ''
+      }
+    },
     components: {
       'user-sidebar': UserSidebar,
       'user-header': UserHeader
+    },
+    methods: {
+      onAvatarChange () {},
+      updateSelf () {
+        this.message = '...'
+        this.$store.dispatch('updateSelf', this.me)
+          .then(() => {
+            this.$store.dispatch('getSelf').then(() => {
+              this.me = this.self.info
+            })
+            this.message = 'Updated Successfully.'
+          })
+          .catch((error) => {
+            this.message = error.body.detail
+          })
+      }
+    },
+    computed: {
+      self () {
+        return this.$store.getters.self
+      },
+    },
+    mounted () {
+      this.me = this.self.info
     }
   }
 </script>
