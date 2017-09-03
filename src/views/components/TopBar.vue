@@ -60,9 +60,8 @@
                         </div>
                         <button data-toggle="modal" data-target="#signup-modal"
                                 class="btn btn-primary d-lg-flex btn-rounded btn-sm font-weight-bold"
-                                v-if="!login_status">REGISTER
+                                v-if="!login_status">PUBLISH YOUR ICO NOW
                         </button>
-
                     </div>
                 </div>
             </div>

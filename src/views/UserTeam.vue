@@ -69,12 +69,12 @@
                                 </div>
                                 <div class="col-6 col-sm-4 col-md-3 grid-item">
                                     <div class="team-member">
-                                        <a href="team-member.htm" class="mt-5">
+                                        <button href="team-member.htm"
+                                                class="mt-3 btn btn-lg btn-secondary btn-rounded">
                                             <i class="fa fa-plus"></i>
-                                        </a>
+                                        </button>
                                         <h5 class="name">
-                                            <a href="team-member.htm"
-                                               title="View Kate's profile">Add New Team Member</a>
+                                            New Member
                                         </h5>
                                     </div>
                                 </div>
@@ -121,12 +121,17 @@
                 </div>
             </div>
         </div>
+        <!-- Modal -->
+        <add-team-member></add-team-member>
+
+        <!-- Modal End-->
     </div>
 </template>
 
 <script>
   import UserSidebar from 'components/UserSidebar'
   import UserHeader from 'components/UserHeader'
+  import AddTeamMember from 'components/AddTeamMember'
 
   export default {
     name: 'UserTeam',
@@ -143,14 +148,10 @@
     },
     components: {
       'user-sidebar': UserSidebar,
-      'user-header': UserHeader
+      'user-header': UserHeader,
+      'add-team-member': AddTeamMember,
     },
     methods: {
-      onFileChange (e) {
-        var file = e.target.files || e.dataTransfer.files
-        if (!file.length) return
-        this.file = file[0]
-      },
       updateTeam () {
         const formData = {
           name: this.name,
@@ -167,6 +168,11 @@
           })
 
       },
+
+      triggerModal () {
+        /* global $:true */
+        $('#myModal').modal('show')
+      }
     },
     mounted () {
       this.name = this.me.info.team.name
