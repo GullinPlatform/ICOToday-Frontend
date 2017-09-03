@@ -40,10 +40,10 @@
                                 GOAL {{post.maximum_goal}} {{post.coin_type}}
                             </h4>
                             <hr class="my-3">
-                            <button @click="mark()" class="btn btn-primary">
-                                <i class="fa fa-star mr-2"></i> Star it for me
+                            <button @click="mark()" class="btn btn-primary btn-sm">
+                                <i class="fa fa-star mr-2"></i> Mark for me
                             </button>
-                            <a :href="post.website" class="d-block d-md-inline">
+                            <a :href="post.website" class="btn btn-link">
                                 <i class="fa fa-globe text-primary ml-md-3"></i> Website
                             </a>
                             <p class="text-muted text-xs d-inline hidden-md-down"></p>
@@ -61,7 +61,7 @@
                 <h3>
                     White Paper
                 </h3>
-                <p>fjskdjafkljklds;</p>
+                <p><a :href="post.white_paper">White Paper</a></p>
                 <hr class="my-3">
                 <h3>
                     Video
@@ -70,7 +70,7 @@
                     <iframe src="http://www.youtube.com/embed/bwj2s_5e12U"
                             frameborder="0"
                             allowfullscreen
-                    style="width: 70%; height: 400px;">
+                            style="width: 70%; height: 400px;">
 
                     </iframe>
                 </p>
@@ -80,194 +80,64 @@
                 </h3>
                 <div class="team team-grid mt-4">
                     <div class="row" data-toggle="isotope-grid">
-                        <!--Team Member jimi-->
-                        <div class="col-6 col-sm-4 col-md-3 grid-item">
+                        <!--Team Member -->
+                        <div class="col-6 col-sm-4 col-md-3 grid-item" v-for="member in current_team_members"  v-if="!member.is_advisor">
                             <div class="team-member">
-                                <a href="team-member.htm" title="View Jimi's profile">
-                                    <img src="assets/img/team/jimi.jpg" class="img-thumbnail" alt="Jimi">
+                                <a href="team-member.htm">
+                                    <img :src="member.avatar" class="img-thumbnail">
                                 </a>
                                 <h5 class="name">
-                                    <a href="team-member.htm" title="View Jimi's profile">Jimi</a>
+                                    <a href="team-member.htm" >{{member.first_name}} {{member.last_name}}</a>
+
                                 </h5>
-                                <p class="role">Founder &amp; developer</p>
+                                <p class="role">{{member.title}}</p>
                                 <div class="social-media-branding social-media-branding-xs">
-                                    <!--@todo: replace with real social share links -->
-                                    <a href="#" class="social-link branding-twitter"><i
-                                            class="fa fa-twitter-square"></i></a>
-                                    <a href="#" class="social-link branding-facebook"><i
-                                            class="fa fa-facebook-square"></i></a>
-                                    <a href="#" class="social-link branding-linkedin"><i
-                                            class="fa fa-linkedin-square"></i></a>
-                                    <a href="#" class="social-link branding-google-plus"><i
-                                            class="fa fa-google-plus-square"></i></a>
+                                    <a :href="member.twitter" class="social-link branding-twitter" v-if="member.twitter">
+                                        <i class="fa fa-twitter"></i>
+                                    </a>
+                                    <a :href="member.slack" class="social-link branding-facebook" v-if="member.slack">
+                                        <i class="fa fa-slack"></i>
+                                    </a>
+                                    <a  :href="member.linkedin" class="social-link branding-linkedin"  v-if="member.linkedin">
+                                        <i class="fa fa-linkedin-square"></i>
+                                    </a>
+                                    <a :href="member.telegram" class="social-link branding-linkedin"v-if="member.telegram">
+                                        <i class="fa fa-telegram"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
-
-                        <!--Team Member adele-->
-                        <div class="col-6 col-sm-4 col-md-3 grid-item">
+                    </div>
+                </div>
+                <hr class="my-5">
+                <h3>
+                    Advisors
+                </h3>
+                <div class="team team-grid mt-4">
+                    <div class="row" data-toggle="isotope-grid">
+                        <!--Team Advisors -->
+                        <div class="col-6 col-sm-4 col-md-3 grid-item" v-for="member in current_team_members"  v-if="member.is_advisor">
                             <div class="team-member">
-                                <a href="team-member.htm" title="View Adele's profile">
-                                    <img src="assets/img/team/adele.jpg" class="img-thumbnail" alt="Adele">
+                                <a href="team-member.htm" >
+                                    <img :src="member.avatar" class="img-thumbnail">
                                 </a>
                                 <h5 class="name">
-                                    <a href="team-member.htm" title="View Adele's profile">Adele</a>
+                                    <a href="team-member.htm" >{{member.first_name}} {{member.last_name}}</a>
                                 </h5>
-                                <p class="role">Founder &amp; designer</p>
+                                <p class="role">{{member.title}}</p>
                                 <div class="social-media-branding social-media-branding-xs">
-                                    <!--@todo: replace with real social share links -->
-                                    <a href="#" class="social-link branding-twitter"><i
-                                            class="fa fa-twitter-square"></i></a>
-                                    <a href="#" class="social-link branding-facebook"><i
-                                            class="fa fa-facebook-square"></i></a>
-                                    <a href="#" class="social-link branding-linkedin"><i
-                                            class="fa fa-linkedin-square"></i></a>
-                                    <a href="#" class="social-link branding-google-plus"><i
-                                            class="fa fa-google-plus-square"></i></a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--Team Member bono-->
-                        <div class="col-6 col-sm-4 col-md-3 grid-item">
-                            <div class="team-member">
-                                <a href="team-member.htm" title="View Bono's profile">
-                                    <img src="assets/img/team/bono.jpg" class="img-thumbnail" alt="Bono">
-                                </a>
-                                <h5 class="name">
-                                    <a href="team-member.htm" title="View Bono's profile">Bono</a>
-                                </h5>
-                                <p class="role">The Tech Guy</p>
-                                <div class="social-media-branding social-media-branding-xs">
-                                    <!--@todo: replace with real social share links -->
-                                    <a href="#" class="social-link branding-twitter"><i
-                                            class="fa fa-twitter-square"></i></a>
-                                    <a href="#" class="social-link branding-facebook"><i
-                                            class="fa fa-facebook-square"></i></a>
-                                    <a href="#" class="social-link branding-linkedin"><i
-                                            class="fa fa-linkedin-square"></i></a>
-                                    <a href="#" class="social-link branding-google-plus"><i
-                                            class="fa fa-google-plus-square"></i></a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--Team Member robert-->
-                        <div class="col-6 col-sm-4 col-md-3 grid-item">
-                            <div class="team-member">
-                                <a href="team-member.htm" title="View Robert's profile">
-                                    <img src="assets/img/team/robert.jpg" class="img-thumbnail" alt="Robert">
-                                </a>
-                                <h5 class="name">
-                                    <a href="team-member.htm" title="View Robert's profile">Robert</a>
-                                </h5>
-                                <p class="role">Junior designer</p>
-                                <div class="social-media-branding social-media-branding-xs">
-                                    <!--@todo: replace with real social share links -->
-                                    <a href="#" class="social-link branding-twitter"><i
-                                            class="fa fa-twitter-square"></i></a>
-                                    <a href="#" class="social-link branding-facebook"><i
-                                            class="fa fa-facebook-square"></i></a>
-                                    <a href="#" class="social-link branding-linkedin"><i
-                                            class="fa fa-linkedin-square"></i></a>
-                                    <a href="#" class="social-link branding-google-plus"><i
-                                            class="fa fa-google-plus-square"></i></a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--Team Member steve-->
-                        <div class="col-6 col-sm-4 col-md-3 grid-item">
-                            <div class="team-member">
-                                <a href="team-member.htm" title="View Steve's profile">
-                                    <img src="assets/img/team/steve.jpg" class="img-thumbnail" alt="Steve">
-                                </a>
-                                <h5 class="name">
-                                    <a href="team-member.htm" title="View Steve's profile">Steve</a>
-                                </h5>
-                                <p class="role">Sales Manager</p>
-                                <div class="social-media-branding social-media-branding-xs">
-                                    <!--@todo: replace with real social share links -->
-                                    <a href="#" class="social-link branding-twitter"><i
-                                            class="fa fa-twitter-square"></i></a>
-                                    <a href="#" class="social-link branding-facebook"><i
-                                            class="fa fa-facebook-square"></i></a>
-                                    <a href="#" class="social-link branding-linkedin"><i
-                                            class="fa fa-linkedin-square"></i></a>
-                                    <a href="#" class="social-link branding-google-plus"><i
-                                            class="fa fa-google-plus-square"></i></a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--Team Member jolie-->
-                        <div class="col-6 col-sm-4 col-md-3 grid-item">
-                            <div class="team-member">
-                                <a href="team-member.htm" title="View Jolie's profile">
-                                    <img src="assets/img/team/jolie.jpg" class="img-thumbnail" alt="Jolie">
-                                </a>
-                                <h5 class="name">
-                                    <a href="team-member.htm" title="View Jolie's profile">Jolie</a>
-                                </h5>
-                                <p class="role">Marketing Expert</p>
-                                <div class="social-media-branding social-media-branding-xs">
-                                    <!--@todo: replace with real social share links -->
-                                    <a href="#" class="social-link branding-twitter"><i
-                                            class="fa fa-twitter-square"></i></a>
-                                    <a href="#" class="social-link branding-facebook"><i
-                                            class="fa fa-facebook-square"></i></a>
-                                    <a href="#" class="social-link branding-linkedin"><i
-                                            class="fa fa-linkedin-square"></i></a>
-                                    <a href="#" class="social-link branding-google-plus"><i
-                                            class="fa fa-google-plus-square"></i></a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--Team Member obama-->
-                        <div class="col-6 col-sm-4 col-md-3 grid-item">
-                            <div class="team-member">
-                                <a href="team-member.htm" title="View Obama's profile">
-                                    <img src="assets/img/team/obama.jpg" class="img-thumbnail" alt="Obama">
-                                </a>
-                                <h5 class="name">
-                                    <a href="team-member.htm" title="View Obama's profile">Obama</a>
-                                </h5>
-                                <p class="role">Project Manager</p>
-                                <div class="social-media-branding social-media-branding-xs">
-                                    <!--@todo: replace with real social share links -->
-                                    <a href="#" class="social-link branding-twitter"><i
-                                            class="fa fa-twitter-square"></i></a>
-                                    <a href="#" class="social-link branding-facebook"><i
-                                            class="fa fa-facebook-square"></i></a>
-                                    <a href="#" class="social-link branding-linkedin"><i
-                                            class="fa fa-linkedin-square"></i></a>
-                                    <a href="#" class="social-link branding-google-plus"><i
-                                            class="fa fa-google-plus-square"></i></a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--Team Member kate-->
-                        <div class="col-6 col-sm-4 col-md-3 grid-item">
-                            <div class="team-member">
-                                <a href="team-member.htm" title="View Kate's profile">
-                                    <img src="assets/img/team/kate.jpg" class="img-thumbnail" alt="Kate">
-                                </a>
-                                <h5 class="name">
-                                    <a href="team-member.htm" title="View Kate's profile">Kate</a>
-                                </h5>
-                                <p class="role">Project Manager</p>
-                                <div class="social-media-branding social-media-branding-xs">
-                                    <!--@todo: replace with real social share links -->
-                                    <a href="#" class="social-link branding-twitter"><i
-                                            class="fa fa-twitter-square"></i></a>
-                                    <a href="#" class="social-link branding-facebook"><i
-                                            class="fa fa-facebook-square"></i></a>
-                                    <a href="#" class="social-link branding-linkedin"><i
-                                            class="fa fa-linkedin-square"></i></a>
-                                    <a href="#" class="social-link branding-google-plus"><i
-                                            class="fa fa-google-plus-square"></i></a>
+                                    <a :href="member.twitter" class="social-link branding-twitter" v-if="member.twitter">
+                                        <i class="fa fa-twitter"></i>
+                                    </a>
+                                    <a :href="member.slack" class="social-link branding-facebook" v-if="member.slack">
+                                        <i class="fa fa-slack"></i>
+                                    </a>
+                                    <a  :href="member.linkedin" class="social-link branding-linkedin"  v-if="member.linkedin">
+                                        <i class="fa fa-linkedin-square"></i>
+                                    </a>
+                                    <a :href="member.telegram" class="social-link branding-linkedin"v-if="member.telegram">
+                                        <i class="fa fa-telegram"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -386,13 +256,13 @@
                 </ul>
                 <form id="reviews-form" class="comment-form mt-3 p-3 bg-white rounded clearfix">
                     <div class="row">
-                        <div class="col-md-6 mb-2">
-                            <label class="sr-only" for="comment-name">Name</label>
-                            <input type="text" class="form-control mb-3" id="comment-name" placeholder="Name">
-                            <label class="sr-only" for="comment-name">Email</label>
-                            <input type="email" class="form-control mb-3" id="comment-email" placeholder="Email">
+                        <div class="col-md-1 mb-2">
+                            <a href="#">
+                                <img src="assets/img/team/adele.jpg" alt="Picture of Jo"
+                                     class="d-flex mr-3 img-thumbnail img-fluid">
+                            </a>
                         </div>
-                        <div class="col-md-6 mb-2">
+                        <div class="col-md-11 mb-2">
                             <label class="sr-only" for="comment-comment">Comment</label>
                             <textarea rows="4" class="form-control" id="comment-comment"
                                       placeholder="Comment"></textarea>
@@ -403,7 +273,7 @@
             </div>
         </div>
         <!-- /container -->
-        <hr class="mb-0"/>
+        <!--<hr class="mb-0"/>-->
     </div>
 </template>
 
@@ -417,9 +287,9 @@
       'vue-markdown': VueMarkdown
     },
     data () {
-        return {
-          tab_index: 0
-        }
+      return {
+        tab_index: 0
+      }
     },
     methods: {
       apply () {
@@ -434,6 +304,9 @@
       post () {
         return this.$store.getters.current_post
       },
+      current_team_members () {
+        return this.$store.getters.current_team_members
+      },
       login_status () {
         return this.$store.getters.login_status
       }
@@ -441,6 +314,7 @@
     beforeCreate () {
       this.$store.dispatch('getPost', this.$route.params.id)
         .then(() => {
+          this.$store.dispatch('getTeam', this.post.team.id)
         })
         .catch(() => {
 
