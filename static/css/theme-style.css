@@ -1745,12 +1745,6 @@ small img {
   right: 0;
 }
 
-@media (max-width: 767px) {
-  .header {
-    padding: 15px 0 !important;
-  }
-}
-
 .header .navbar {
   position: static;
 }
@@ -2018,38 +2012,6 @@ small img {
   position: relative;
 }
 
-#jPanelMenu-menu {
-  background-color: #292b2c !important;
-  background-image: url(../img/bg_noise-2.png);
-  background-position: left top;
-  background-repeat: repeat;
-  padding: 0;
-  max-height: none;
-  overflow-y: scroll !important;
-  -webkit-overflow-scrolling: touch;
-  position: fixed !important;
-  opacity: 0;
-  -webkit-transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
-  -ms-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
-}
-
-#jPanelMenu-menu.navbar-main,
-#jPanelMenu-menu.navbar-main.collapse,
-#jPanelMenu-menu.navbar-main.in {
-  padding: 0;
-  margin: 0;
-  height: 100% !important;
-  display: block !important;
-  visibility: visible !important;
-}
-
-#jPanelMenu-menu>.container {
-  padding-left: 0;
-  padding-right: 0;
-}
 
 [data-menu-position="open"] #jPanelMenu-menu {
   opacity: 1;
@@ -2071,176 +2033,18 @@ small img {
   overflow-y: auto;
 }
 
+@media (max-width: 575px){
+  .navbar-toggleable .navbar-nav .dropdown-menu {
+     position: absolute !important;
+  }}
+
 @media (min-width: 576px) {
   .has-navbar-fixed-top #content {
     padding-top: 160px;
   }
 }
 
-#jPanelMenu-menu.navbar-toggleable-collapse {
-  -webkit-box-flex: 0;
-  -webkit-flex: 0 0 100%;
-  -ms-flex: 0 0 100%;
-  flex: 0 0 100%;
-  max-width: 100%;
-  top: 7.5px;
-  position: relative !important;
-  clear: both;
-}
-
-#jPanelMenu-menu .nav .nav-item,
-#jPanelMenu-menu .nav .nav-link {
-  display: block;
-}
-
-#jPanelMenu-menu.navbar-main .navbar-nav,
-#jPanelMenu-menu .navbar-main .navbar-nav {
-  margin-bottom: 0;
-  margin-top: 0;
-}
-
-#jPanelMenu-menu.navbar-main .navbar-nav .dropdown-menu,
-#jPanelMenu-menu.navbar-main .navbar-nav .mega-menu,
-#jPanelMenu-menu.navbar-main .navbar-nav .dropdown-menu.mega-menu,
-#jPanelMenu-menu .navbar-main .navbar-nav .dropdown-menu,
-#jPanelMenu-menu .navbar-main .navbar-nav .mega-menu,
-#jPanelMenu-menu .navbar-main .navbar-nav .dropdown-menu.mega-menu {
-  padding: 0;
-}
-
-#jPanelMenu-menu.navbar-main .dropdown-effect-fade .dropdown-menu,
-#jPanelMenu-menu.navbar-main .dropdown-effect-fade.open>.dropdown-menu,
-#jPanelMenu-menu.navbar-main .dropdown-effect-fade .open>.dropdown-menu,
-#jPanelMenu-menu.navbar-main .dropdown-effect-fadeup .dropdown-menu,
-#jPanelMenu-menu.navbar-main .dropdown-effect-fadeup.open>.dropdown-menu,
-#jPanelMenu-menu.navbar-main .dropdown-effect-fadeup .open>.dropdown-menu,
-#jPanelMenu-menu.navbar-main .dropdown-effect-fadedown .dropdown-menu,
-#jPanelMenu-menu.navbar-main .dropdown-effect-fadedown.open>.dropdown-menu,
-#jPanelMenu-menu.navbar-main .dropdown-effect-fadedown .open>.dropdown-menu,
-#jPanelMenu-menu .navbar-main .dropdown-effect-fade .dropdown-menu,
-#jPanelMenu-menu .navbar-main .dropdown-effect-fade.open>.dropdown-menu,
-#jPanelMenu-menu .navbar-main .dropdown-effect-fade .open>.dropdown-menu,
-#jPanelMenu-menu .navbar-main .dropdown-effect-fadeup .dropdown-menu,
-#jPanelMenu-menu .navbar-main .dropdown-effect-fadeup.open>.dropdown-menu,
-#jPanelMenu-menu .navbar-main .dropdown-effect-fadeup .open>.dropdown-menu,
-#jPanelMenu-menu .navbar-main .dropdown-effect-fadedown .dropdown-menu,
-#jPanelMenu-menu .navbar-main .dropdown-effect-fadedown.open>.dropdown-menu,
-#jPanelMenu-menu .navbar-main .dropdown-effect-fadedown .open>.dropdown-menu {
-  display: none !important;
-  opacity: 1;
-  -webkit-transition: all 0.4s ease-out;
-  -moz-transition: all 0.4s ease-out;
-  -ms-transition: all 0.4s ease-out;
-  -o-transition: all 0.4s ease-out;
-  transition: all 0.4s ease-out;
-  visibility: visible;
-}
-
-#jPanelMenu-menu.navbar-main .dropdown-effect-fade.show>.dropdown-menu,
-#jPanelMenu-menu.navbar-main .dropdown-effect-fade .show>.dropdown-menu,
-#jPanelMenu-menu.navbar-main .dropdown-effect-fadeup.show>.dropdown-menu,
-#jPanelMenu-menu.navbar-main .dropdown-effect-fadeup .show>.dropdown-menu,
-#jPanelMenu-menu.navbar-main .dropdown-effect-fadedown.show>.dropdown-menu,
-#jPanelMenu-menu.navbar-main .dropdown-effect-fadedown .show>.dropdown-menu,
-#jPanelMenu-menu .navbar-main .dropdown-effect-fade.show>.dropdown-menu,
-#jPanelMenu-menu .navbar-main .dropdown-effect-fade .show>.dropdown-menu,
-#jPanelMenu-menu .navbar-main .dropdown-effect-fadeup.show>.dropdown-menu,
-#jPanelMenu-menu .navbar-main .dropdown-effect-fadeup .show>.dropdown-menu,
-#jPanelMenu-menu .navbar-main .dropdown-effect-fadedown.show>.dropdown-menu,
-#jPanelMenu-menu .navbar-main .dropdown-effect-fadedown .show>.dropdown-menu {
-  opacity: 1;
-  display: block !important;
-  visibility: visible !important;
-}
-
-#jPanelMenu-menu .collapse .dropdown-menu .dropdown.open {
-  border-bottom: none;
-}
-
-#jPanelMenu-menu .dropdown-mega-menu .dropdown-menu {
-  min-width: 0;
-}
-
-@media (max-width: 575px) {
-  .navbar-toggleable.navbar-toggleable-collapse {
-    -webkit-box-flex: 0;
-    -webkit-flex: 0 0 100%;
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    max-width: 100%;
-    top: 7.5px;
-    position: relative !important;
-    clear: both;
-  }
-  .navbar-toggleable .nav .nav-item,
-  .navbar-toggleable .nav .nav-link {
-    display: block;
-  }
-  .navbar-toggleable.navbar-main .navbar-nav,
-  .navbar-toggleable .navbar-main .navbar-nav {
-    margin-bottom: 0;
-    margin-top: 0;
-  }
-  .navbar-toggleable.navbar-main .navbar-nav .dropdown-menu,
-  .navbar-toggleable.navbar-main .navbar-nav .mega-menu,
-  .navbar-toggleable.navbar-main .navbar-nav .dropdown-menu.mega-menu,
-  .navbar-toggleable .navbar-main .navbar-nav .dropdown-menu,
-  .navbar-toggleable .navbar-main .navbar-nav .mega-menu,
-  .navbar-toggleable .navbar-main .navbar-nav .dropdown-menu.mega-menu {
-    padding: 0;
-  }
-  .navbar-toggleable.navbar-main .dropdown-effect-fade .dropdown-menu,
-  .navbar-toggleable.navbar-main .dropdown-effect-fade.open>.dropdown-menu,
-  .navbar-toggleable.navbar-main .dropdown-effect-fade .open>.dropdown-menu,
-  .navbar-toggleable.navbar-main .dropdown-effect-fadeup .dropdown-menu,
-  .navbar-toggleable.navbar-main .dropdown-effect-fadeup.open>.dropdown-menu,
-  .navbar-toggleable.navbar-main .dropdown-effect-fadeup .open>.dropdown-menu,
-  .navbar-toggleable.navbar-main .dropdown-effect-fadedown .dropdown-menu,
-  .navbar-toggleable.navbar-main .dropdown-effect-fadedown.open>.dropdown-menu,
-  .navbar-toggleable.navbar-main .dropdown-effect-fadedown .open>.dropdown-menu,
-  .navbar-toggleable .navbar-main .dropdown-effect-fade .dropdown-menu,
-  .navbar-toggleable .navbar-main .dropdown-effect-fade.open>.dropdown-menu,
-  .navbar-toggleable .navbar-main .dropdown-effect-fade .open>.dropdown-menu,
-  .navbar-toggleable .navbar-main .dropdown-effect-fadeup .dropdown-menu,
-  .navbar-toggleable .navbar-main .dropdown-effect-fadeup.open>.dropdown-menu,
-  .navbar-toggleable .navbar-main .dropdown-effect-fadeup .open>.dropdown-menu,
-  .navbar-toggleable .navbar-main .dropdown-effect-fadedown .dropdown-menu,
-  .navbar-toggleable .navbar-main .dropdown-effect-fadedown.open>.dropdown-menu,
-  .navbar-toggleable .navbar-main .dropdown-effect-fadedown .open>.dropdown-menu {
-    display: none !important;
-    opacity: 1;
-    -webkit-transition: all 0.4s ease-out;
-    -moz-transition: all 0.4s ease-out;
-    -ms-transition: all 0.4s ease-out;
-    -o-transition: all 0.4s ease-out;
-    transition: all 0.4s ease-out;
-    visibility: visible;
-  }
-  .navbar-toggleable.navbar-main .dropdown-effect-fade.show>.dropdown-menu,
-  .navbar-toggleable.navbar-main .dropdown-effect-fade .show>.dropdown-menu,
-  .navbar-toggleable.navbar-main .dropdown-effect-fadeup.show>.dropdown-menu,
-  .navbar-toggleable.navbar-main .dropdown-effect-fadeup .show>.dropdown-menu,
-  .navbar-toggleable.navbar-main .dropdown-effect-fadedown.show>.dropdown-menu,
-  .navbar-toggleable.navbar-main .dropdown-effect-fadedown .show>.dropdown-menu,
-  .navbar-toggleable .navbar-main .dropdown-effect-fade.show>.dropdown-menu,
-  .navbar-toggleable .navbar-main .dropdown-effect-fade .show>.dropdown-menu,
-  .navbar-toggleable .navbar-main .dropdown-effect-fadeup.show>.dropdown-menu,
-  .navbar-toggleable .navbar-main .dropdown-effect-fadeup .show>.dropdown-menu,
-  .navbar-toggleable .navbar-main .dropdown-effect-fadedown.show>.dropdown-menu,
-  .navbar-toggleable .navbar-main .dropdown-effect-fadedown .show>.dropdown-menu {
-    opacity: 1;
-    display: block !important;
-    visibility: visible !important;
-  }
-  .navbar-toggleable .collapse .dropdown-menu .dropdown.open {
-    border-bottom: none;
-  }
-  .navbar-toggleable .dropdown-mega-menu .dropdown-menu {
-    min-width: 0;
-  }
-}
-
-@media (min-width: 576px) {
+@media (min-width: 200px) {
   .navbar-toggleable.navbar-main,
   .navbar-toggleable .navbar-main {
     display: block !important;
@@ -13210,7 +13014,7 @@ hr.hr-green-bright {
 }
 
 .progress-bar-sm {
-  height: 2px;
+  height: 5px;
   padding: 0;
 }
 

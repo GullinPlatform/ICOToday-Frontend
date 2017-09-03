@@ -7,7 +7,7 @@
                  data-bg-img="static/img/backgrounds/computer-screens.jpg"
                  data-css='{"background-position": "center bottom","background-attachment": "fixed"}'
                  data-animate="fadeIn">
-                <div data-scroll="scrollax" data-scrollax-y-ratio="1000" class="py-lg-10 pt-lg-8">
+                <div data-scroll="scrollax" data-scrollax-y-ratio="1000" class="py-sm-8 pt-sm-8 hidden-xs-down">
                     <h2 class="display-3 text-white text-uppercase font-weight-bold" data-animate="fadeInDown"
                         data-animate-delay="0.6">
                         ICO Today
@@ -29,7 +29,7 @@
                     Special ICO Events
                 </h3>
                 <div class="row text-left">
-                    <div class="col-lg-4 d-lg-flex mb-3" v-for="promo in promo_posts">
+                    <div class="col-md-4 d-lg-flex mb-3" v-for="promo in promo_posts">
                         <div class="px-3 pb-3 pt-6 overlay overlay-gradient-flip overlay-op-8 rounded flex-ew flex-valign-b"
                              data-bg-img="static/img/homes/code.jpg">
                             <h2 class="text-white text-uppercase font-weight-bold mb-0 ">
@@ -39,7 +39,7 @@
                             <hr class="hr-lg mt-2 mb-0 w-20 ml-0 hr-primary"/>
                         </div>
                     </div>
-                    <div class="col-lg-4 d-lg-flex mb-3">
+                    <div class="col-md-4 d-lg-flex mb-3">
                         <div class="px-3 pb-3 pt-6 overlay overlay-gradient-flip overlay-op-8 rounded flex-ew flex-valign-b"
                              data-bg-img="static/img/homes/desk.jpg">
                             <h2 class="text-white text-uppercase font-weight-bold mb-0 display-4">
@@ -49,7 +49,7 @@
                             <hr class="hr-lg mt-2 mb-0 w-20 ml-0 hr-primary"/>
                         </div>
                     </div>
-                    <div class="col-lg-4 d-lg-flex mb-3">
+                    <div class="col-md-4 d-lg-flex mb-3">
                         <div class="px-3 pb-3 pt-6 overlay overlay-gradient-flip overlay-op-8 rounded flex-ew flex-valign-b"
                              data-bg-img="static/img/homes/happy.jpg">
                             <h2 class="text-white text-uppercase font-weight-bold mb-0 display-4">
@@ -82,11 +82,14 @@
                         <div v-if="loaded">
                             <div v-for="post in posts" class="card px-3 py-4 mb-3 row-hover pos-relative">
                                 <div class="row align-items-center">
-                                    <div class="col-md-2">
-                                        <img :src="post.icon_image" alt="ICO Icon"
-                                             class="img-fluid hidden-sm-down"/>
+                                    <div class="col-md-2 col-sm-4">
+                                        <!--<img :src="post.icon_image" alt="ICO Icon"-->
+                                             <!--class="img-fluid"/>  -->
+                                        <img  src="static/img/customers/customer-2.png"alt="ICO Icon"
+                                                                       class="img-fluid"/>
+
                                     </div>
-                                    <div class="col-md-8">
+                                    <div class="col-sm-8">
                                         <h4 class="mb-0">
                                             {{post.title}}
                                         </h4>
@@ -107,15 +110,16 @@
                                                 <i class="fa fa-globe text-primary ml-md-3"></i> Website
                                             </a>
                                         </p>
+                                        <div class="progress-bar w-100 mb-2 progress-bar-sm" role="progressbar"></div>
                                     </div>
-                                    <div class="col-md-2 text-md-center">
+                                    <div class="col-sm-12 col-md-2 text-md-center">
                                         <router-link :to="{name:'post', params:{id:post.id}}"
                                                      class="btn btn-danger text-uppercase font-weight-bold d-lg-block">
                                             Detail
                                         </router-link>
-                                        <!--TODO: If login-->
-                                        <a href="#" v-if="logedin" class="text-muted text-xs op-7">
-                                            <i class="fa fa-star"></i> Star For Me
+
+                                        <a href="#" v-if="logedin" class="btn btn-link text-muted text-xs">
+                                            <i class="fa fa-star"></i> Mark For Me
                                         </a>
                                     </div>
                                 </div>
@@ -124,11 +128,11 @@
                             <div class="card px-3 py-4 mb-3 row-hover card-outline-primary pos-relative">
                                 <div class="row align-items-center ">
                                     <span class="pos-absolute pos-t pos-l bg-primary text-white text-xs px-1">featured</span>
-                                    <div class="col-md-2">
+                                    <div class="col-md-2 col-sm-4">
                                         <img src="static/img/customers/customer-2.png" alt="TSU"
-                                             class="img-fluid hidden-sm-down"/>
+                                             class="img-fluid"/>
                                     </div>
-                                    <div class="col-md-8">
+                                    <div class="col-sm-8">
                                         <h4 class="mb-0">
                                             Drupal Developer
                                         </h4>
@@ -140,16 +144,22 @@
                                         <span class="d-block d-md-inline">
                                           <i class="fa fa-map-marker"></i> London, UK
                                         </span>
-                                            <span class="d-block d-md-inline">
-                                      <i class="fa fa-money ml-md-3"></i> $70USD/hour
+                                        <span class="d-block d-md-inline">
+                                            <i class="fa fa-money ml-md-3"></i> $70USD/hour
                                         </span>
                                         </p>
+
+                                        <div class="progress-bar w-100 mb-2 progress-bar-sm" role="progressbar"></div>
+
                                     </div>
-                                    <div class="col-md-2 text-md-center">
+                                    <div class="col-sm-12 col-md-2 text-md-center">
                                         <a href="#"
-                                           class="btn btn-danger text-uppercase font-weight-bold d-lg-block">Apply</a>
-                                        <a href="#" class="text-muted text-xs op-7">
-                                            <i class="fa fa-heart"></i> Shortlist</a>
+                                           class="btn btn-danger text-uppercase font-weight-bold d-lg-block">
+                                            Apply
+                                        </a>
+                                        <a href="#" class="btn btn-link text-muted text-xs">
+                                            <i class="fa fa-heart"></i> Shortlist
+                                        </a>
                                     </div>
                                 </div>
                             </div>
