@@ -47,32 +47,37 @@
                         <h4>Team Members</h4>
                         <div class="team team-grid mt-4">
                             <div data-toggle="isotope-grid" class="row">
-                                <div class="col-6 col-sm-4 col-md-3 grid-item">
+                                <div class="col-6 col-sm-4 col-md-3 grid-item" v-for="member in team_members">
                                     <div class="team-member">
                                         <a href="team-member.htm" title="View Jimi's profile">
                                             <img src="assets/img/team/jimi.jpg" alt="Jimi" class="img-thumbnail">
                                         </a>
                                         <h5 class="name">
-                                            <a href="team-member.htm" title="View Jimi's profile">Jimi</a>
+                                            <a href="team-member.htm" title="View Jimi's profile">{{member.first_name}} {{member.last_name}}</a>
                                         </h5>
-                                        <p class="role">Founder &amp; developer</p>
-                                        <div class="social-media-branding social-media-branding-xs"><a href="#"
-                                                                                                       class="social-link branding-twitter"><i
-                                                class="fa fa-twitter-square"></i></a> <a href="#"
-                                                                                         class="social-link branding-facebook"><i
-                                                class="fa fa-facebook-square"></i></a> <a href="#"
-                                                                                          class="social-link branding-linkedin"><i
-                                                class="fa fa-linkedin-square"></i></a> <a href="#"
-                                                                                          class="social-link branding-google-plus"><i
-                                                class="fa fa-google-plus-square"></i></a></div>
+                                        <p class="role">{{member.title}}</p>
+                                        <div class="social-media-branding social-media-branding-xs">
+                                            <a href="#" class="social-link branding-twitter">
+                                                <i class="fa fa-twitter"></i>
+                                            </a>
+                                            <a href="#" class="social-link branding-facebook">
+                                                <i class="fa fa-slack"></i>
+                                            </a>
+                                            <a href="#" class="social-link branding-linkedin">
+                                                <i class="fa fa-linkedin-square"></i>
+                                            </a>
+                                            <a href="#" class="social-link branding-linkedin">
+                                                <i class="fa fa-telegram"></i>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-6 col-sm-4 col-md-3 grid-item">
                                     <div class="team-member">
-                                        <button href="team-member.htm"
+                                        <a href="" data-toggle="modal" data-target="#add-member-modal" data-dismiss="modal"
                                                 class="mt-3 btn btn-lg btn-secondary btn-rounded">
                                             <i class="fa fa-plus"></i>
-                                        </button>
+                                        </a>
                                         <h5 class="name">
                                             New Member
                                         </h5>
@@ -93,25 +98,30 @@
                                             <a href="team-member.htm" title="View Jimi's profile">Jimi</a>
                                         </h5>
                                         <p class="role">Founder &amp; developer</p>
-                                        <div class="social-media-branding social-media-branding-xs"><a href="#"
-                                                                                                       class="social-link branding-twitter"><i
-                                                class="fa fa-twitter-square"></i></a> <a href="#"
-                                                                                         class="social-link branding-facebook"><i
-                                                class="fa fa-facebook-square"></i></a> <a href="#"
-                                                                                          class="social-link branding-linkedin"><i
-                                                class="fa fa-linkedin-square"></i></a> <a href="#"
-                                                                                          class="social-link branding-google-plus"><i
-                                                class="fa fa-google-plus-square"></i></a></div>
+                                        <div class="social-media-branding social-media-branding-xs">
+                                            <a href="#" class="social-link branding-twitter">
+                                                <i class="fa fa-twitter"></i>
+                                            </a>
+                                            <a href="#" class="social-link branding-facebook">
+                                                <i class="fa fa-slack"></i>
+                                            </a>
+                                            <a href="#" class="social-link branding-linkedin">
+                                                <i class="fa fa-linkedin-square"></i>
+                                            </a>
+                                            <a href="#" class="social-link branding-linkedin">
+                                                <i class="fa fa-telegram"></i>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-6 col-sm-4 col-md-3 grid-item">
                                     <div class="team-member">
-                                        <a href="team-member.htm" class="mt-5">
+                                        <a href="" data-toggle="modal" data-target="#add-advisor-modal" data-dismiss="modal"
+                                           class="mt-3 btn btn-lg btn-secondary btn-rounded">
                                             <i class="fa fa-plus"></i>
                                         </a>
                                         <h5 class="name">
-                                            <a href="team-member.htm"
-                                               title="View Kate's profile">Add New Team Member</a>
+                                            New Advisor
                                         </h5>
                                     </div>
                                 </div>
@@ -123,7 +133,7 @@
         </div>
         <!-- Modal -->
         <add-team-member></add-team-member>
-
+        <add-team-advisor></add-team-advisor>
         <!-- Modal End-->
     </div>
 </template>
@@ -132,6 +142,7 @@
   import UserSidebar from 'components/UserSidebar'
   import UserHeader from 'components/UserHeader'
   import AddTeamMember from 'components/AddTeamMember'
+  import AddTeamAdvisor from 'components/AddTeamAdvisor'
 
   export default {
     name: 'UserTeam',
@@ -150,6 +161,7 @@
       'user-sidebar': UserSidebar,
       'user-header': UserHeader,
       'add-team-member': AddTeamMember,
+      'add-team-advisor': AddTeamAdvisor,
     },
     methods: {
       updateTeam () {
@@ -168,11 +180,6 @@
           })
 
       },
-
-      triggerModal () {
-        /* global $:true */
-        $('#myModal').modal('show')
-      }
     },
     mounted () {
       this.name = this.me.info.team.name

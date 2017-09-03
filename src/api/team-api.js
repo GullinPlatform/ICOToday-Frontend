@@ -21,7 +21,7 @@ export default {
   },
   // Change Team
   addTeamMember (formData) {
-    return Vue.http.patch(API_ROOT + 'account/team/' + formData.pk + '/', formData, {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
+    return Vue.http.patch(API_ROOT + 'account/team/' + formData.get('pk') + '/', formData, {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
