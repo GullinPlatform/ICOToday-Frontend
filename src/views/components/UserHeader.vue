@@ -4,20 +4,19 @@
         <div class="row">
             <div class="col-md-10 offset-md-1">
                 <div class="row bg-faded p-3">
-                    <div class="row">
-                        <div class="col-md-4 col-sm-4 text-center">
+                        <div class="col-md-2 col-sm-4 text-center">
                             <img src="/static/img/homes/code.jpg"
                                  class="rounded-circle img-padded"
                                  width="100" height="100">
                             <div class="hidden-sm-up mt-3"> </div>
                         </div>
-                        <div class="col-md-8 col-sm-8">
+                        <div class="col-md-10 col-sm-8">
                             <h4 class="mb-0">
                                 {{username}}  <span class="text-muted text-light">{{me.info.title}}</span>
                                 <span class="badge badge-primary" v-if="me.is_verified"> <i class="fa fa-check"></i> Verified</span>
                                 <span class="badge badge-warning" v-else> <i class="fa fa-warning"></i> Unverified</span>
                             </h4>
-                            <p class="text-muted mt-2 text-sm">
+                            <p class="text-muted mt-2 text-sm" v-if="me.info.team">
                                 <a href="#" class="font-weight-bold text-muted">@ {{me.info.team.name}}</a>
                             </p>
                             <p class="text-muted mb-2 text-sm">
@@ -36,7 +35,6 @@
                                 <span v-if="me.info.telegram">|</span>
                             </p>
                         </div>
-                    </div>
                 </div>
             </div>
         </div>

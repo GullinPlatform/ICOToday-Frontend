@@ -9,13 +9,16 @@ import store from './store'
 import RootLayout from 'views/layouts/RootLayout'
 import * as cookie from './utils/cookie'
 
+import VueHead from 'vue-head'
 Vue.use(Router)
 Vue.use(Resource)
+Vue.use(VueHead)
 
 sync(store, router)
 
 // set csrf token for django
 Vue.http.headers.common['X-CSRFToken'] = cookie.getCookie('csrftoken')
+
 
 export const app = new Vue({
   el: '#app',

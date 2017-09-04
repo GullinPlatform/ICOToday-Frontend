@@ -110,10 +110,19 @@
         message: ''
       }
     },
+    head: {
+      title () {
+        return {
+          inner: 'ICOToday',
+          complement: 'Settings'
+        }
+      }
+    },
     components: {
       'user-sidebar': UserSidebar,
       'user-header': UserHeader
     },
+
     methods: {
       onAvatarChange () {},
       updateSelf () {

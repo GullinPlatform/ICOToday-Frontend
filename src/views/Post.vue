@@ -81,27 +81,31 @@
                 <div class="team team-grid mt-4">
                     <div class="row" data-toggle="isotope-grid">
                         <!--Team Member -->
-                        <div class="col-6 col-sm-4 col-md-3 grid-item" v-for="member in current_team_members"  v-if="!member.is_advisor">
+                        <div class="col-6 col-sm-4 col-md-3 grid-item" v-for="member in current_team_members"
+                             v-if="!member.is_advisor">
                             <div class="team-member">
                                 <a href="team-member.htm">
                                     <img :src="member.avatar" class="img-thumbnail">
                                 </a>
                                 <h5 class="name">
-                                    <a href="team-member.htm" >{{member.first_name}} {{member.last_name}}</a>
+                                    <a href="team-member.htm">{{member.first_name}} {{member.last_name}}</a>
 
                                 </h5>
                                 <p class="role">{{member.title}}</p>
                                 <div class="social-media-branding social-media-branding-xs">
-                                    <a :href="member.twitter" class="social-link branding-twitter" v-if="member.twitter">
+                                    <a :href="member.twitter" class="social-link branding-twitter"
+                                       v-if="member.twitter">
                                         <i class="fa fa-twitter"></i>
                                     </a>
                                     <a :href="member.slack" class="social-link branding-facebook" v-if="member.slack">
                                         <i class="fa fa-slack"></i>
                                     </a>
-                                    <a  :href="member.linkedin" class="social-link branding-linkedin"  v-if="member.linkedin">
+                                    <a :href="member.linkedin" class="social-link branding-linkedin"
+                                       v-if="member.linkedin">
                                         <i class="fa fa-linkedin-square"></i>
                                     </a>
-                                    <a :href="member.telegram" class="social-link branding-linkedin"v-if="member.telegram">
+                                    <a :href="member.telegram" class="social-link branding-linkedin"
+                                       v-if="member.telegram">
                                         <i class="fa fa-telegram"></i>
                                     </a>
                                 </div>
@@ -116,26 +120,30 @@
                 <div class="team team-grid mt-4">
                     <div class="row" data-toggle="isotope-grid">
                         <!--Team Advisors -->
-                        <div class="col-6 col-sm-4 col-md-3 grid-item" v-for="member in current_team_members"  v-if="member.is_advisor">
+                        <div class="col-6 col-sm-4 col-md-3 grid-item" v-for="member in current_team_members"
+                             v-if="member.is_advisor">
                             <div class="team-member">
-                                <a href="team-member.htm" >
+                                <a href="team-member.htm">
                                     <img :src="member.avatar" class="img-thumbnail">
                                 </a>
                                 <h5 class="name">
-                                    <a href="team-member.htm" >{{member.first_name}} {{member.last_name}}</a>
+                                    <a href="team-member.htm">{{member.first_name}} {{member.last_name}}</a>
                                 </h5>
                                 <p class="role">{{member.title}}</p>
                                 <div class="social-media-branding social-media-branding-xs">
-                                    <a :href="member.twitter" class="social-link branding-twitter" v-if="member.twitter">
+                                    <a :href="member.twitter" class="social-link branding-twitter"
+                                       v-if="member.twitter">
                                         <i class="fa fa-twitter"></i>
                                     </a>
                                     <a :href="member.slack" class="social-link branding-facebook" v-if="member.slack">
                                         <i class="fa fa-slack"></i>
                                     </a>
-                                    <a  :href="member.linkedin" class="social-link branding-linkedin"  v-if="member.linkedin">
+                                    <a :href="member.linkedin" class="social-link branding-linkedin"
+                                       v-if="member.linkedin">
                                         <i class="fa fa-linkedin-square"></i>
                                     </a>
-                                    <a :href="member.telegram" class="social-link branding-linkedin"v-if="member.telegram">
+                                    <a :href="member.telegram" class="social-link branding-linkedin"
+                                       v-if="member.telegram">
                                         <i class="fa fa-telegram"></i>
                                     </a>
                                 </div>
@@ -283,6 +291,14 @@
 
   export default {
     name: 'Post',
+    head: {
+      title () {
+        return {
+          inner: 'ICOToday',
+          complement: this.post.title
+        }
+      }
+    },
     components: {
       'vue-markdown': VueMarkdown
     },
@@ -298,7 +314,6 @@
       mark () {
         this.$store.dispatch('markQuestion', this.$route.params.id)
       },
-
     },
     computed: {
       post () {

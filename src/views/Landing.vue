@@ -13,7 +13,7 @@
                         ICO Today
                     </h2>
                     <h3 class="text-grey font-weight-normal" data-animate="fadeInUp" data-animate-delay="0.8">
-                        <span data-typed='["Share Your Intelligence", "共享才智，挑战未来"]'
+                        <span data-typed='["Share Your Intelligence", "Bring your ICO to the world"]'
                               data-typed-settings='{"delay":2000, "speed":120,"breakLines":false, "deleteDelay":1400, "doneClass":{"#get-btn":"animated fadeIn"}}'></span>
                     </h3>
                 </div>
@@ -84,9 +84,9 @@
                                 <div class="row align-items-center">
                                     <div class="col-md-2 col-sm-4">
                                         <!--<img :src="post.icon_image" alt="ICO Icon"-->
-                                             <!--class="img-fluid"/>  -->
-                                        <img  src="static/img/customers/customer-2.png"alt="ICO Icon"
-                                                                       class="img-fluid"/>
+                                        <!--class="img-fluid"/>  -->
+                                        <img src="static/img/customers/customer-2.png" alt="ICO Icon"
+                                             class="img-fluid"/>
 
                                     </div>
                                     <div class="col-sm-8">
@@ -144,7 +144,7 @@
                                         <span class="d-block d-md-inline">
                                           <i class="fa fa-map-marker"></i> London, UK
                                         </span>
-                                        <span class="d-block d-md-inline">
+                                            <span class="d-block d-md-inline">
                                             <i class="fa fa-money ml-md-3"></i> $70USD/hour
                                         </span>
                                         </p>
@@ -183,6 +183,12 @@
 <script>
   export default {
     name: 'Landing',
+    head: {
+      title: {
+        inner: 'ICOToday',
+        complement: 'Find Your Next ICO',
+      }
+    },
     data () {
       return {
         upcoming: false,
@@ -205,7 +211,6 @@
           })
       }
     },
-
     computed: {
       posts () {
         return this.$store.getters.posts

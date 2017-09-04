@@ -210,6 +210,14 @@
         message: ''
       }
     },
+    head: {
+      title () {
+        return {
+          inner: 'ICOToday',
+          complement: 'New ICO'
+        }
+      }
+    },
     components: {
       'user-sidebar': UserSidebar,
       'user-header': UserHeader,

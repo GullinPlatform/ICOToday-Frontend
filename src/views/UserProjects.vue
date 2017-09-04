@@ -73,6 +73,14 @@
         projects: [],
       }
     },
+    head: {
+      title () {
+        return {
+          inner: 'ICOToday',
+          complement: (this.$route.name === 'me' && this.me.type === 0) ? 'My ICOs' : 'Marked ICOs'
+        }
+      }
+    },
     components: {
       'user-sidebar': UserSidebar,
       'user-header': UserHeader

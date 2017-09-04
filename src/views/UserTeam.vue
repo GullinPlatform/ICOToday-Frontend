@@ -157,6 +157,14 @@
         message: ''
       }
     },
+    head: {
+      title () {
+        return {
+          inner: 'ICOToday',
+          complement: 'My Team'
+        }
+      }
+    },
     components: {
       'user-sidebar': UserSidebar,
       'user-header': UserHeader,
