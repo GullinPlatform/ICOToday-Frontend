@@ -284,9 +284,7 @@ const mutations = {
   },
 
   // post change
-  [types.VERIFY_SELF] (state) {
-    state.self.is_verified = 1
-  },
+  [types.UPDATE_SELF] (state) {},
 
 }
 

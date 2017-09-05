@@ -5,7 +5,7 @@
             <div class="col-md-10 offset-md-1">
                 <div class="row bg-faded p-3">
                         <div class="col-md-2 col-sm-4 text-center">
-                            <img src="/static/img/homes/code.jpg"
+                            <img :src="me.info.avatar"
                                  class="rounded-circle img-padded"
                                  width="100" height="100">
                             <div class="hidden-sm-up mt-3"> </div>
@@ -28,7 +28,7 @@
                                 <span v-if="me.info.linkedin">|</span>
                                 <a :href="me.info.twitter" v-if="me.info.twitter"><i class="fa fa-twitter"></i> Twitter</a>
                                 <span v-if="me.info.twitter">|</span>
-                                <a :href="me.info.slack" v-if="me.info.slcak"><i class="fa fa-slack"></i> Slack</a>
+                                <a :href="me.info.slack" v-if="me.info.slack"><i class="fa fa-slack"></i> Slack</a>
                                 <span v-if="me.info.slack">|</span>
                                 <a :href="me.info.telegram" v-if="me.info.telegram"><i class="fa fa-telegram"></i>
                                     Telegram</a>

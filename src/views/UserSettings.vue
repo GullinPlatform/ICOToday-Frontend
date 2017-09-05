@@ -15,22 +15,35 @@
                         </h3>
                         <p class="mb-4">Your Account Detail</p>
                         <div class="row">
-                            <div class="col-sm-4">
-                                <div class="col-md-2 text-md-center">
-                                    <img src="../../static/img/homes/code.jpg" class="rounded-circle img-padded"
-                                         width="100" height="100">
-                                </div>
+                            <label class="col-sm-2 col-form-label">Avatar</label>
+                            <div class="col-sm-2">
+                                <img :src="self.info.avatar" v-if="!avatar_cropped"
+                                     class="rounded-circle img-padded"
+                                     width="100" height="100">
+                                <img :src="avatar_img.toDataURL()"
+                                     class="rounded-circle img-padded"
+                                     width="100" height="100" v-else>
                             </div>
-                            <div class="col-sm-8">
-                                <div class="form-group">
-                                    <div class="dropzone-area" v-if="!avatar_loaded">
-                                        <div class="dropzone-text">
-                                            <i class="fa fa-cloud-upload"> </i>
-                                            <span>Drag file here or click to upload file</span>
-                                        </div>
-                                        <input type="file" required @change="onAvatarChange">
-                                    </div>
-                                </div>
+                            <div class="col-sm-4" v-if="!avatar_change">
+                                <button class="btn btn-secondary mr-3" @click="avatar_change = true">Change</button>
+                            </div>
+                            <div class="col-sm-4" v-if="avatar_change">
+                                <!--<div class="row">-->
+                                <avatar-editor :width=150 :height=150 ref="vueavatar"
+                                               @vue-avatar-editor:image-ready="onImageReady">
+                                </avatar-editor>
+                                <avatar-editor-scale :width=200 :min=1 :max=3 :step=0.02 ref="vueavatarscale"
+                                                     @vue-avatar-editor-scale:change-scale="onChangeScale">
+                                </avatar-editor-scale>
+                                <br>
+
+                            </div>
+                            <div class="col-sm-4" v-if="avatar_change">
+                                <button class="btn btn-primary mr-3" v-on:click="saveClicked">Update
+                                </button>
+                                <button class="btn btn-secondary"
+                                        @click="avatar_cropped=false; avatar_change=false; avatar_img='';">Cancel
+                                </button>
                             </div>
                         </div>
                         <hr>
@@ -99,32 +112,68 @@
 <script>
   import UserSidebar from 'components/UserSidebar'
   import UserHeader from 'components/UserHeader'
+  import AvatarEditor from 'components/AvatarEditor'
+  import AvatarEditorScale from 'components/AvatarEditorScale'
 
   export default {
     name: 'UserSettings',
-    data () {
-      return {
-        me: {},
-
-        avatar_loaded: false,
-        message: ''
-      }
-    },
     head: {
       title () {
         return {
           inner: 'ICOToday',
-          complement: 'Settings'
+          complement: 'Settings',
         }
       }
     },
+    data () {
+      return {
+        me: {},
+
+        avatar_change: false,
+        avatar_cropped: false,
+        avatar_img: '',
+
+        message: ''
+      }
+    },
     components: {
-      'user-sidebar': UserSidebar,
-      'user-header': UserHeader
+      AvatarEditor,
+      AvatarEditorScale,
+      UserSidebar,
+      UserHeader
     },
 
     methods: {
-      onAvatarChange () {},
+      onChangeScale (scale) {
+        this.$refs.vueavatar.changeScale(scale)
+        this.avatar_img = this.$refs.vueavatar.getImageScaled()
+      },
+      saveClicked () {
+        /* global FormData */
+
+        let formData = new FormData()
+
+        this.avatar_img.toBlob((blob) => {
+          formData.append('avatar', blob, 'avatar.id' + this.self.id + '.png')
+          this.$store.dispatch('updateSelf', formData)
+            .then(() => {
+              this.$store.dispatch('getSelf').then(() => {
+                this.avatar_cropped = false
+                this.avatar_change = false
+                this.avatar_img = ''
+              })
+            })
+            .catch((error) => {
+              console.log(error)
+            })
+        })
+
+      },
+      onImageReady (scale) {
+        this.$refs.vueavatarscale.setScale(scale)
+        this.avatar_cropped = true
+        this.avatar_img = this.$refs.vueavatar.getImageScaled()
+      },
       updateSelf () {
         this.message = '...'
         this.$store.dispatch('updateSelf', this.me)
