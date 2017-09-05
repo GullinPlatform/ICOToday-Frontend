@@ -6187,12 +6187,6 @@ video {
   .offcanvas-toggle.menu-toggle {
     display: table-cell;
   }
-  .site-menu,
-  .offcanvas-toggle.cats-toggle,
-  .toolbar .account,
-  .toolbar-dropdown {
-    display: none !important;
-  }
 }
 
 @media (max-width: 576px) {
@@ -6515,8 +6509,24 @@ video {
   height: 26px;
   padding: 0 12px;
   border-radius: 13px;
-  background-color: #ffffff;
-  color: #606975;
+  background-color: #0da9ef;
+  color: #ffffff;
+  font-size: 12px;
+  line-height: 26px;
+  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+}
+
+.user-info-wrapper .warning-label {
+  display: block;
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  height: 26px;
+  padding: 0 12px;
+  border-radius: 13px;
+  background-color: #ffb74f;
+  color: #ffffff;
   font-size: 12px;
   line-height: 26px;
   box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.18);

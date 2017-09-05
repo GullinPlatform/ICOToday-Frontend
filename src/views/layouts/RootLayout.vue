@@ -3,36 +3,18 @@
         <!-- ======== @Region: #topbar ======== -->
         <top-bar></top-bar>
         <div class="offcanvas-wrapper">
-            <!-- Page Title-->
-            <!--<div class="page-title">-->
-                <!--<div class="container">-->
-                    <!--<div class="column">-->
-                        <!--<h1>My Orders</h1>-->
-                    <!--</div>-->
-                    <!--<div class="column">-->
-                        <!--<ul class="breadcrumbs">-->
-                            <!--<li><a href="index.html">Home</a>-->
-                            <!--</li>-->
-                            <!--<li class="separator">&nbsp;</li>-->
-                            <!--<li><a href="account-orders.html">Account</a>-->
-                            <!--</li>-->
-                            <!--<li class="separator">&nbsp;</li>-->
-                            <!--<li>My Orders</li>-->
-                        <!--</ul>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!-- Page Content-->
-            <div class="container padding-bottom-3x mb-2">
-                <router-view></router-view>
-            </div>
+            <router-view></router-view>
+
+
         </div>
         <!-- ======== @Region: #footer ======== -->
         <foot-bar></foot-bar>
-        <div class="hidden-elements jpanel-menu-exclude">
-            <login-modal v-if="!login_status"></login-modal>
-            <signup-modal v-if="!login_status"></signup-modal>
-        </div>
+        <!-- Modal -->
+        <login-modal v-if="!login_status"></login-modal>
+        <signup-modal v-if="!login_status"></signup-modal>
+        <add-team-member v-if="login_status"></add-team-member>
+        <add-team-advisor v-if="login_status"></add-team-advisor>
+        <!-- Modal End-->
     </div>
 </template>
 
@@ -41,6 +23,8 @@
   import FootBar from 'components/FootBar'
   import SignupModal from 'components/Signup'
   import LoginModal from 'components/Login'
+  import AddTeamMember from 'components/AddTeamMember'
+  import AddTeamAdvisor from 'components/AddTeamAdvisor'
 
   export default {
     name: 'RootLayout',
@@ -48,7 +32,9 @@
       TopBar,
       FootBar,
       LoginModal,
-      SignupModal
+      SignupModal,
+      AddTeamMember,
+      AddTeamAdvisor,
     },
     computed: {
       login_status () {
@@ -65,8 +51,8 @@
         line-height: 1.25;
         color: #464a4c;
         height: 100px;
-        position: relative;
-        border: 2px dashed #CBCBCB;
+        border: 1px dashed #464a4c;
+        border-radius: 22px;
     }
 
     .dropzone-area input {

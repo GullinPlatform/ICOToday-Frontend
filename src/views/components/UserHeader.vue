@@ -1,9 +1,11 @@
 <template>
-    <div class="col-lg-4">
+    <div class="col-lg-4 mb-5">
         <aside class="user-info-wrapper">
             <div class="user-cover" style="background-image: url(../../../static/img/account/user-cover-img.jpg);">
-                <div class="info-label" data-toggle="tooltip" title=""
-                     data-original-title="You currently have 290 Reward Points to spend"><i class="icon-medal"></i>290 points
+                <div class="info-label" v-if="me.is_verified" ><i class="fa fa-id-badge"></i> Verified
+                </div>
+                <div class="info-label warning-label" data-toggle="tooltip" v-if="!me.is_verified"
+                     data-original-title="Verify Your Email"><i class="fa fa-warning"></i> Unverified
                 </div>
             </div>
             <div class="user-info">
@@ -11,12 +13,8 @@
                     <img :src="me.info.avatar" alt="User"></div>
                 <div class="pl-2">
                     <h4>{{username}}  <span class="text-muted">{{me.info.title}}</span></h4>
-
-                    <span class="badge badge-primary" v-if="me.is_verified"> <i
-                            class="fa fa-check"></i> Verified</span>
-                    <span class="badge badge-warning" v-else> <i class="fa fa-warning"></i> Unverified</span>
-                    <br>
                     <span>@ {{me.info.team.name}}</span>
+                    <br>
                     <p>{{me.info.description}}</p>
 
                     <a :href="me.info.linkedin" v-if="me.info.linkedin"><i class="fa fa-linkedin-square"></i></a>

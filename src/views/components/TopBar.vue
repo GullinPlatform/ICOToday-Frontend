@@ -1,18 +1,19 @@
 <template>
     <!-- Navbar-->
     <!-- Remove ".navbar-sticky" class to make navigation bar scrollable with the page.-->
-    <header class="navbar navbar-sticky">
+    <header class="navbar">
         <div class="site-branding">
             <div class="inner">
-                <!-- Site Logo--><router-link :to="{name:'landing'}" class="site-logo">ICOToday</router-link>
+                <!-- Site Logo-->
+                <router-link :to="{name:'landing'}" class="site-logo">ICOToday</router-link>
             </div>
         </div>
         <!-- Main Navigation-->
         <nav class="site-menu">
             <ul>
-                <li><a href="../index.html"><span>Publish ICO</span></a></li>
-                <li><a href="../shop-grid-ls.html"><span>Invest</span></a></li>
-                <li><a href="../shop-grid-ls.html"><span>Learn</span></a></li>
+                <li><a href="../index.html" class="hidden-sm-down"><span>Publish ICO</span></a></li>
+                <li><a href="../shop-grid-ls.html" class="hidden-sm-down"><span>Invest</span></a></li>
+                <li><a href="../shop-grid-ls.html" class="hidden-sm-down"><span>Learn</span></a></li>
             </ul>
         </nav>
         <!-- Toolbar-->
