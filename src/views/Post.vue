@@ -270,7 +270,7 @@
                     <div class="row">
                         <div class="col-md-1 mb-2">
                             <a href="#">
-                                <img src="assets/img/team/adele.jpg" alt="Picture of Jo"
+                                <img :src="me.info.avatar" alt="Picture of Jo"
                                      class="d-flex mr-3 img-thumbnail img-fluid">
                             </a>
                         </div>
