@@ -5,7 +5,10 @@
         <div class="site-branding">
             <div class="inner">
                 <!-- Site Logo-->
-                <router-link :to="{name:'landing'}" class="site-logo">ICOToday</router-link>
+                <router-link :to="{name:'landing'}" class="site-logo">
+                    <h1 class="text-black text-bold mt-2">ICO<span class="text-primary">Today</span></h1>
+                </router-link>
+
             </div>
         </div>
         <!-- Main Navigation-->
