@@ -1,129 +1,131 @@
 <template>
     <div>
 
-           <section class="hero-slider" style="background-image: url('../../../static/img/rocket-image.png');">
-               <div class="item">
-                 <div class="container padding-top-4x">
-                   <div class="row justify-content-end align-items-right">
-                     <div class="col-lg-4 col-md-6 padding-bottom-2x text-md-left text-center">
-                       <div class="grid-item align-items-right">
-                         <div class="product-card">
-                             <div class="rating-stars"><i class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star filled"></i>
-                             </div><a class="product-thumb" href="shop-single.html"><img src="../../static/img/shop/products/11.jpg" alt="Product"></a>
-                           <h3 class="product-title"><a href="shop-single.html">Top-Sider Fathom</a></h3>
-                           <h4 class="product-price">$90.00</h4>
-                           <div class="product-buttons">
-                             <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip" title="Whishlist"><i class="icon-heart"></i></button>
-                             <button class="btn btn-outline-primary btn-sm" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Product" data-toast-message="successfuly added to cart!">Add to Cart</button>
-                           </div>
-                         </div>
-                       </div>
-                     </div>
+        <section class="hero-slider" style="background-image: url('../../../static/img/rocket-image.png');">
+            <div class="item">
+                <div class="container padding-top-4x">
+                    <div class="row justify-content-end align-items-right">
+                        <div class="col-lg-4 col-md-6 padding-bottom-2x text-md-left text-center">
+                            <div class="grid-item align-items-right">
+                                <div class="product-card">
+                                    <div class="rating-stars"><i class="icon-star filled"></i><i
+                                            class="icon-star filled"></i><i class="icon-star filled"></i><i
+                                            class="icon-star filled"></i><i class="icon-star filled"></i>
+                                    </div>
+                                    <a class="product-thumb" href="shop-single.html"><img
+                                            src="../../static/img/shop/products/11.jpg" alt="Product"></a>
+                                    <h3 class="product-title"><a href="shop-single.html">Top-Sider Fathom</a></h3>
+                                    <h4 class="product-price">$90.00</h4>
+                                    <div class="product-buttons">
+                                        <button class="btn btn-outline-secondary btn-sm btn-wishlist"
+                                                data-toggle="tooltip" title="Whishlist"><i class="icon-heart"></i>
+                                        </button>
+                                        <button class="btn btn-outline-primary btn-sm" data-toast
+                                                data-toast-type="success" data-toast-position="topRight"
+                                                data-toast-icon="icon-circle-check" data-toast-title="Product"
+                                                data-toast-message="successfuly added to cart!">Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                   </div>
-                 </div>
-               </div>
-           </section>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-         <!-- Featured Products Carousel-->
-      <section class="container padding-top-3x padding-bottom-3x">
-        <h3 class="text-left mb-30">Today's Top ICOs</h3>
-        <div class="owl-carousel" data-owl-carousel="{ &quot;nav&quot;: false, &quot;dots&quot;: true, &quot;margin&quot;: 30, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;576&quot;:{&quot;items&quot;:2},&quot;768&quot;:{&quot;items&quot;:3},&quot;991&quot;:{&quot;items&quot;:4},&quot;1200&quot;:{&quot;items&quot;:4}} }">
-          <!-- Product-->
-          <div class="grid-item">
-            <div class="product-card">
-              <div class="product-badge text-danger">22% Off</div><a class="product-thumb" href="shop-single.html"><img src="../../static/img/shop/products/09.jpg" alt="Product"></a>
-              <h3 class="product-title"><a href="shop-single.html">Rocket Dog</a></h3>
-              <h4 class="product-price">
-                <del>$44.95</del>$34.99
-              </h4>
-              <div class="product-buttons">
-                <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip" title="Whishlist"><i class="icon-heart"></i></button>
-                <button class="btn btn-outline-primary btn-sm" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Product" data-toast-message="successfuly added to cart!">Add to Cart</button>
-              </div>
-            </div>
-          </div>
-          <!-- Product-->
-          <div class="grid-item">
-            <div class="product-card">
-                <div class="rating-stars"><i class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star"></i>
-                </div><a class="product-thumb" href="shop-single.html"><img src="../../static/img/shop/products/03.jpg" alt="Product"></a>
-              <h3 class="product-title"><a href="shop-single.html">Oakley Kickback</a></h3>
-              <h4 class="product-price">$155.00</h4>
-              <div class="product-buttons">
-                <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip" title="Whishlist"><i class="icon-heart"></i></button>
-                <button class="btn btn-outline-primary btn-sm" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Product" data-toast-message="successfuly added to cart!">Add to Cart</button>
-              </div>
-            </div>
-          </div>
-          <!-- Product-->
-          <div class="grid-item">
-            <div class="product-card"><a class="product-thumb" href="shop-single.html"><img src="../../static/img/shop/products/12.jpg" alt="Product"></a>
-              <h3 class="product-title"><a href="shop-single.html">Vented Straw Fedora</a></h3>
-              <h4 class="product-price">$49.50</h4>
-              <div class="product-buttons">
-                <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip" title="Whishlist"><i class="icon-heart"></i></button>
-                <button class="btn btn-outline-primary btn-sm" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Product" data-toast-message="successfuly added to cart!">Add to Cart</button>
-              </div>
-            </div>
-          </div>
-          <!-- Product-->
-          <div class="grid-item">
-            <div class="product-card">
-                <div class="rating-stars"><i class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star filled"></i>
-                </div><a class="product-thumb" href="shop-single.html"><img src="../../static/img/shop/products/11.jpg" alt="Product"></a>
-              <h3 class="product-title"><a href="shop-single.html">Top-Sider Fathom</a></h3>
-              <h4 class="product-price">$90.00</h4>
-              <div class="product-buttons">
-                <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip" title="Whishlist"><i class="icon-heart"></i></button>
-                <button class="btn btn-outline-primary btn-sm" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Product" data-toast-message="successfuly added to cart!">Add to Cart</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-        <!-- ======== @Region: #content ======== -->
-        <div id="content" class="pt-5 pb-6 bg-white pos-relative pos-zindex-10">
-            <!-- Promo -->
-            <div class="container pb-6">
-                <hr class="hr-lg mt-0 mb-2 w-10 ml-0 hr-primary"/>
-                <h3 class="text-left text-uppercase mt-0 mb-3">
-                    Special ICO Events
-                </h3>
-                <div class="row text-left">
-                    <div class="col-md-4 d-lg-flex mb-3" v-for="promo in promo_posts">
-                        <div class="px-3 pb-3 pt-6 overlay overlay-gradient-flip overlay-op-8 rounded flex-ew flex-valign-b"
-                             data-bg-img="static/img/homes/code.jpg">
-                            <h2 class="text-white text-uppercase font-weight-bold mb-0 ">
-                                <span>{{promo.title}}</span>
-                            </h2>
-                            <p class="text-white text-uppercase mb-0">{{promo.start_datetime}}</p>
-                            <hr class="hr-lg mt-2 mb-0 w-20 ml-0 hr-primary"/>
+        <!-- Featured Products Carousel-->
+        <section class="container padding-top-3x padding-bottom-3x">
+            <h3 class="text-left mb-30">Today's Top ICOs</h3>
+            <div class="owl-carousel"
+                 data-owl-carousel="{ &quot;nav&quot;: false, &quot;dots&quot;: true, &quot;margin&quot;: 30, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;576&quot;:{&quot;items&quot;:2},&quot;768&quot;:{&quot;items&quot;:3},&quot;991&quot;:{&quot;items&quot;:4},&quot;1200&quot;:{&quot;items&quot;:4}} }">
+                <!-- Product-->
+                <div class="grid-item">
+                    <div class="product-card">
+                        <div class="product-badge text-danger">22% Off</div>
+                        <a class="product-thumb" href="shop-single.html"><img
+                                src="../../static/img/shop/products/09.jpg" alt="Product"></a>
+                        <h3 class="product-title"><a href="shop-single.html">Rocket Dog</a></h3>
+                        <h4 class="product-price">
+                            <del>$44.95</del>
+                            $34.99
+                        </h4>
+                        <div class="product-buttons">
+                            <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip"
+                                    title="Whishlist"><i class="icon-heart"></i></button>
+                            <button class="btn btn-outline-primary btn-sm" data-toast data-toast-type="success"
+                                    data-toast-position="topRight" data-toast-icon="icon-circle-check"
+                                    data-toast-title="Product" data-toast-message="successfuly added to cart!">
+                                Add to Cart
+                            </button>
                         </div>
                     </div>
-                    <div class="col-md-4 d-lg-flex mb-3">
-                        <div class="px-3 pb-3 pt-6 overlay overlay-gradient-flip overlay-op-8 rounded flex-ew flex-valign-b"
-                             data-bg-img="static/img/homes/desk.jpg">
-                            <h2 class="text-white text-uppercase font-weight-bold mb-0 display-4">
-                                <span data-toggle="count-to" data-to="538" data-from="0">0</span>
-                            </h2>
-                            <p class="text-white text-uppercase mb-0">Admin Jobs</p>
-                            <hr class="hr-lg mt-2 mb-0 w-20 ml-0 hr-primary"/>
+                </div>
+                <!-- Product-->
+                <div class="grid-item">
+                    <div class="product-card">
+                        <div class="rating-stars"><i class="icon-star filled"></i><i class="icon-star filled"></i><i
+                                class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star"></i>
+                        </div>
+                        <a class="product-thumb" href="shop-single.html"><img
+                                src="../../static/img/shop/products/03.jpg" alt="Product"></a>
+                        <h3 class="product-title"><a href="shop-single.html">Oakley Kickback</a></h3>
+                        <h4 class="product-price">$155.00</h4>
+                        <div class="product-buttons">
+                            <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip"
+                                    title="Whishlist"><i class="icon-heart"></i></button>
+                            <button class="btn btn-outline-primary btn-sm" data-toast data-toast-type="success"
+                                    data-toast-position="topRight" data-toast-icon="icon-circle-check"
+                                    data-toast-title="Product" data-toast-message="successfuly added to cart!">
+                                Add to Cart
+                            </button>
                         </div>
                     </div>
-                    <div class="col-md-4 d-lg-flex mb-3">
-                        <div class="px-3 pb-3 pt-6 overlay overlay-gradient-flip overlay-op-8 rounded flex-ew flex-valign-b"
-                             data-bg-img="static/img/homes/happy.jpg">
-                            <h2 class="text-white text-uppercase font-weight-bold mb-0 display-4">
-                                <span data-toggle="count-to" data-to="138" data-from="0">0</span>
-                            </h2>
-                            <p class="text-white text-uppercase mb-0">Freelance Jobs</p>
-                            <hr class="hr-lg mt-2 mb-0 w-20 ml-0 hr-primary"/>
+                </div>
+                <!-- Product-->
+                <div class="grid-item">
+                    <div class="product-card"><a class="product-thumb" href="shop-single.html"><img
+                            src="../../static/img/shop/products/12.jpg" alt="Product"></a>
+                        <h3 class="product-title"><a href="shop-single.html">Vented Straw Fedora</a></h3>
+                        <h4 class="product-price">$49.50</h4>
+                        <div class="product-buttons">
+                            <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip"
+                                    title="Whishlist"><i class="icon-heart"></i></button>
+                            <button class="btn btn-outline-primary btn-sm" data-toast data-toast-type="success"
+                                    data-toast-position="topRight" data-toast-icon="icon-circle-check"
+                                    data-toast-title="Product" data-toast-message="successfuly added to cart!">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product-->
+                <div class="grid-item">
+                    <div class="product-card">
+                        <div class="rating-stars"><i class="icon-star filled"></i><i class="icon-star filled"></i><i
+                                class="icon-star filled"></i><i class="icon-star filled"></i><i
+                                class="icon-star filled"></i>
+                        </div>
+                        <a class="product-thumb" href="shop-single.html"><img
+                                src="../../static/img/shop/products/11.jpg" alt="Product"></a>
+                        <h3 class="product-title"><a href="shop-single.html">Top-Sider Fathom</a></h3>
+                        <h4 class="product-price">$90.00</h4>
+                        <div class="product-buttons">
+                            <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip"
+                                    title="Whishlist"><i class="icon-heart"></i></button>
+                            <button class="btn btn-outline-primary btn-sm" data-toast data-toast-type="success"
+                                    data-toast-position="topRight" data-toast-icon="icon-circle-check"
+                                    data-toast-title="Product" data-toast-message="successfuly added to cart!">
+                                Add to Cart
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
+        </section>
+        <!-- ======== @Region: #content ======== -->
+        <div id="content" class="pt-5 pb-6 bg-white pos-relative pos-zindex-10">
             <!-- Main content -->
             <div class="container pb-6">
                 <div class="row">
@@ -131,98 +133,68 @@
                     <!-- Main content -->
                     <div class="col-lg-12">
                         <!-- Jobs list -->
-                        <hr class="hr-lg mt-0 mb-2 w-10 ml-0 hr-primary"/>
-                        <h3 class="mb-3 font-weight-bold text-uppercase">
-                            Active ICOs
-                            <span class="text-xs text-muted font-weight-normal text-normalcase op-7">{{getMonth()}}</span>
-                            <a href="javascript:void(0)" @click="current=false;upcoming=true" v-if="current"
-                               class="text-xs float-md-right mb-0">>> Upcoming</a>
-                            <a href="javascript:void(0)" @click="current=true;upcoming=false" v-if="upcoming"
-                               class="text-xs float-md-right mb-0">>> Current</a>
+                        <h3 class="text-left mb-2">Active ICOs <span class="text-md text-muted font-weight-normal text-normalcase op-7">{{getMonth()}}</span>
                         </h3>
-
+                        <h3 class="text-center mb-2">Upcoming ICOs <span class="text-md text-muted font-weight-normal text-normalcase op-7">{{getMonth()}}</span>
+                        </h3>
+                        <h3 class="text-right mb-2">Passed ICOs <span class="text-md text-muted font-weight-normal text-normalcase op-7">{{getMonth()}}</span>
+                        </h3>
+                        <hr class="mb-4"/>
                         <!-- Job 1 -->
                         <div v-if="loaded">
-                            <div v-for="post in posts" class="card px-3 py-4 mb-3 row-hover pos-relative">
-                                <div class="row align-items-center">
-                                    <div class="col-md-2 col-sm-4">
-                                        <!--<img :src="post.icon_image" alt="ICO Icon"-->
-                                        <!--class="img-fluid"/>  -->
-                                        <img src="static/img/customers/customer-2.png" alt="ICO Icon"
-                                             class="img-fluid"/>
-
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <h4 class="mb-0">
-                                            {{post.title}}
-                                        </h4>
-                                        <p class="text-muted mb-2 text-sm">By
-                                            <router-link :to="{name:'team', params:{id:post.team.id}}"
-                                                         class="font-weight-bold text-uppercase text-muted">
-                                                {{post.team.name}}
-                                            </router-link>
-                                        </p>
-                                        <p class="text-muted mb-2 text-sm">
-                                            <span class="d-block d-md-inline">
-                                                <i class="fa fa-map-marker"></i> Goal {{post.maximum_goal}} {{post.coin_type}}
-                                            </span>
-                                            <span class="d-block d-md-inline">
-                                                <i class="fa fa-money ml-md-3"></i> Ends {{post.end_datetime}}
-                                            </span>
-                                            <a :href="post.website" class="d-block d-md-inline">
-                                                <i class="fa fa-globe text-primary ml-md-3"></i> Website
-                                            </a>
-                                        </p>
-                                        <div class="progress-bar w-100 mb-2 progress-bar-sm" role="progressbar"></div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-2 text-md-center">
-                                        <router-link :to="{name:'post', params:{id:post.id}}"
-                                                     class="btn btn-danger text-uppercase font-weight-bold d-lg-block">
-                                            Detail
+                            <div class="product-card product-list" v-if="loaded" v-for="project in posts">
+                                <router-link :to="{name:'post', params:{id: project.id}}" class="product-thumb">
+                                    <img :src="project.logo_image" alt="Logo"></router-link>
+                                <div class="product-info">
+                                    <h3 class="product-title">
+                                        <router-link :to="{name:'post', params:{id: project.id}}"> {{project.title}}
                                         </router-link>
-
-                                        <a href="#" v-if="logedin" class="btn btn-link text-muted text-xs">
-                                            <i class="fa fa-star"></i> Mark For Me
-                                        </a>
+                                        <span v-if="project.status===0" class="badge badge-warning">Verifying</span>
+                                        <span v-else-if="project.status===1" class="badge badge-primary">Active</span>
+                                        <span v-else-if="project.status===2" class="badge badge-success"><i
+                                                class="fa fa-check"></i> Completed</span>
+                                        <span v-else-if="project.status===3" class="badge badge-info"><i
+                                                class="fa fa-star-o"></i> Promoting</span>
+                                        <span v-else-if="project.status===4" class="badge badge-warning"><i
+                                                class="fa fa-star-o"></i> Premium</span>
+                                        <span v-else="project.status===5" class="badge badge-default"><i
+                                                class="fa fa-check"></i> Closed</span>
+                                    </h3>
+                                    <div class="rating-stars">
+                                        Rate:
+                                        <i class="icon-star filled"></i>
+                                        <i class="icon-star filled"></i>
+                                        <i class="icon-star filled"></i>
+                                        <i class="icon-star filled"></i>
+                                        <i class="icon-star filled"></i>
                                     </div>
-                                </div>
-                            </div>
-                            <!-- Job 2 -->
-                            <div class="card px-3 py-4 mb-3 row-hover card-outline-primary pos-relative">
-                                <div class="row align-items-center ">
-                                    <span class="pos-absolute pos-t pos-l bg-primary text-white text-xs px-1">featured</span>
-                                    <div class="col-md-2 col-sm-4">
-                                        <img src="static/img/customers/customer-2.png" alt="TSU"
-                                             class="img-fluid"/>
+                                    <h4 class="product-price">
+                                        {{formatTime(project.start_datetime, project.end_datetime)}}</h4>
+                                    <p> {{project.description_short}}</p>
+                                    <div class="progress mb-1">
+                                        <div class="progress-bar bg-info" role="progressbar"
+                                             style="width: 70%; height: 5px;"
+                                             aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
-                                    <div class="col-sm-8">
-                                        <h4 class="mb-0">
-                                            Drupal Developer
-                                        </h4>
-                                        <p class="text-muted mb-2 text-sm">@
-                                            <a href="#" class="font-weight-bold text-muted">TSU</a>
-                                            (Senior level, Full Time Employment)
-                                        </p>
-                                        <p class="text-muted mb-2 text-sm">
-                                        <span class="d-block d-md-inline">
-                                          <i class="fa fa-map-marker"></i> London, UK
-                                        </span>
-                                            <span class="d-block d-md-inline">
-                                            <i class="fa fa-money ml-md-3"></i> $70USD/hour
-                                        </span>
-                                        </p>
-
-                                        <div class="progress-bar w-100 mb-2 progress-bar-sm" role="progressbar"></div>
-
-                                    </div>
-                                    <div class="col-sm-12 col-md-2 text-md-center">
-                                        <a href="#"
-                                           class="btn btn-danger text-uppercase font-weight-bold d-lg-block">
-                                            Apply
-                                        </a>
-                                        <a href="#" class="btn btn-link text-muted text-xs">
-                                            <i class="fa fa-heart"></i> Shortlist
-                                        </a>
+                                    <div class="product-buttons">
+                                        <button class="btn btn-outline-secondary btn-sm btn-wishlist"
+                                                data-toggle="tooltip"
+                                                title="" data-original-title="Whishlist"><i class="fa fa-star-o"></i>
+                                        </button>
+                                        <button class="btn btn-outline-primary btn-sm"
+                                                @click="getProjectAndShowModal(project.id)"
+                                                v-if="me.info.team&&project.team.id===me.info.team.id&&project.status==0">
+                                            EDIT
+                                        </button>
+                                        <button class="btn btn-outline-primary btn-sm"
+                                                v-else-if="me.info.team&&project.team.id===me.info.team.id&&project.status!=0">
+                                            UPDATE
+                                        </button>
+                                        <router-link :to="{name:'post', params:{id: project.id}}"
+                                                     class="btn btn-danger text-uppercase btn-sm">
+                                            <span v-if="project.status!==0">DETAIL</span>
+                                            <span v-else>PREVIEW</span>
+                                        </router-link>
                                     </div>
                                 </div>
                             </div>
@@ -230,8 +202,8 @@
                         <!-- Call to action -->
                         <!--<div v-scroll-at="loadMore"></div>-->
                         <div class="row">
-                            <div class="col-md-12 text-md-center mt-0">
-                                <a class="btn btn-primary btn-md btn-rounded">
+                            <div class="col-md-12 text-md-center mt-0 mb-5">
+                                <a class="btn btn-primary btn-md btn-rounded text-white">
                                     + More
                                 </a>
                             </div>
@@ -272,6 +244,15 @@
           })
           .catch(() => {
           })
+      },
+      formatTime (start, end) {
+        /* global moment:true */
+        // Haven't start
+        if (moment().diff(start, 'minutes') < 0) {
+          return 'Start: ' + moment(start).format('MM/DD, hh:mm')
+        } else {
+          return 'End: ' + moment(end).format('MM/DD, hh:mm')
+        }
       }
     },
     computed: {
@@ -283,6 +264,9 @@
       },
       logedin () {
         return this.$store.getters.login_status
+      },
+      me () {
+        return this.$store.getters.self
       }
     },
     beforeCreate () {

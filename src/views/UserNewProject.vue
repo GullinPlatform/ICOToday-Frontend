@@ -30,13 +30,13 @@
                     <h6 class="text-muted text-normal text-uppercase ">Basic info</h6>
                     <hr class="mb-3 mt-2">
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Title <span class="text-red">*</span></label>
+                        <label class="col-sm-2 col-form-label">Title <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <input class="form-control" v-model="title" required type="text">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Icon <span class="text-red">*</span></label>
+                        <label class="col-sm-2 col-form-label">Icon <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <div class="dropzone-area" v-if="!icon_loaded">
                                 <div class="dropzone-text">
@@ -78,7 +78,16 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Description<span class="text-red">*</span></label>
+                        <label class="col-sm-2 col-form-label">Description Short <span
+                                class="text-danger">*</span></label>
+                        <div class="col-sm-10">
+                                <textarea class="form-control" v-model="description_short" type="text"
+                                          placeholder="( Markdown Support Enabled )" required rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Description Full <span
+                                class="text-danger">*</span></label>
                         <div class="col-sm-10">
                                 <textarea class="form-control" v-model="description_full" type="text"
                                           placeholder="( Markdown Support Enabled )" required rows="10"></textarea>
@@ -87,7 +96,7 @@
                     <h6 class="text-muted text-normal text-uppercase ">ICO Detail</h6>
                     <hr class="mb-3 mt-2">
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">ICO Unit <span class="text-red">*</span></label>
+                        <label class="col-sm-2 col-form-label">ICO Unit <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <select class="form-control" v-model="coin_type" required>
                                 <option value="" selected>-- Choose Unit --</option>
@@ -97,7 +106,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">ICO Goals <span class="text-red">*</span></label>
+                        <label class="col-sm-2 col-form-label">ICO Goals <span class="text-danger">*</span></label>
                         <div class="col-sm-5">
                             <input class="form-control" placeholder="Minimum" v-model="minimum_goal" required
                                    type="number">
@@ -106,11 +115,10 @@
                             <input class="form-control" placeholder="Maximum" v-model="maximum_goal" required
                                    type="number">
                         </div>
-
                     </div>
 
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Start Date <span class="text-red">*</span></label>
+                        <label class="col-sm-2 col-form-label">Start Date <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <vue-datetime-picker class="vue-start-picker" id="start-picker"
                                                  ref="startPicker"
@@ -121,7 +129,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">End Date <span class="text-red">*</span></label>
+                        <label class="col-sm-2 col-form-label">End Date <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <vue-datetime-picker class="vue-end-picker" id="end-picker"
                                                  ref="endPicker"
@@ -131,10 +139,24 @@
                             </vue-datetime-picker>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Token Name <span class="text-danger">*</span></label>
+                        <div class="col-sm-10">
+                            <input class="form-control" v-model="coin_name" placeholder="Token Name" required type="text">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Ratio <span class="text-danger">*</span></label>
+                        <div class="col-sm-7">
+                            <input class="form-control" placeholder="Ex: 0.00005" v-model="ratio" required
+                                   type="number">
+                        </div>
+                        <div class="col-sm-3"><p>Your Token = 1 {{coin_type}}</p></div>
+                    </div>
                     <h6 class="text-muted text-normal text-uppercase ">Supplement</h6>
                     <hr class="mb-3 mt-2">
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">White Paper<span class="text-red">*</span></label>
+                        <label class="col-sm-2 col-form-label">White Paper <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <div class="dropzone-area" v-if="!white_paper_loaded">
                                 <div class="dropzone-text">
@@ -155,13 +177,13 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Video Link</label>
+                        <label class="col-sm-2 col-form-label">Video Link <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <input class="form-control" v-model="video_link" placeholder="Youtube Video Link">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Website <span class="text-red">*</span></label>
+                        <label class="col-sm-2 col-form-label">Website <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <input class="form-control" v-model="website" required
                                    placeholder="https://example.com">
@@ -173,7 +195,7 @@
                             <button type="button" @click="postNewPost()" class="mb-1 btn btn-block btn-primary">
                                 Submit
                             </button>
-                            <p class="text-red">{{message}}</p>
+                            <p class="text-danger">{{message}}</p>
                         </div>
                     </div>
                 </div>
@@ -201,6 +223,7 @@
         title: '',
         icon: null,
         large_icon: null,
+        description_short: '',
         description_full: '',
 
         maximum_goal: null,
@@ -209,8 +232,11 @@
 
         start_datetime: '',
         end_datetime: '',
-
         white_paper: null,
+
+        coin_name: '',
+        rating: '',
+        ratio: '',
 
         video_link: '',
         website: '',
@@ -308,6 +334,7 @@
 
             this.video_link = ''
             this.website = ''
+            this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'Your project is submitted!'})
             this.$router.push({name: 'me'})
           })
           .catch((error) => {
