@@ -1,24 +1,25 @@
 <template>
     <div>
-        <!-- ======== @Region: #highlighted ======== -->
-        <div id="highlighted" class="border-bottom-0 bg-black">
-            <!-- Image Banner: Use the the data-bg-img functionality to create a simple image banner Use spacer classes to make the banner larger with padding, allows for easy responsive changes too see: elements-ctas.htm To make the banner full height/screen add the attributes: data-toggle="full-height" data-offset="#header" -->
-            <div class="overlay overlay-op-7 text-center flex-valign"
-                 data-bg-img="static/img/backgrounds/computer-screens.jpg"
-                 data-css='{"background-position": "center bottom","background-attachment": "fixed"}'
-                 data-animate="fadeIn">
-                <div data-scroll="scrollax" data-scrollax-y-ratio="1000" class="py-sm-8 pt-sm-8 hidden-xs-down">
-                    <h2 class="display-3 text-white text-uppercase font-weight-bold" data-animate="fadeInDown"
-                        data-animate-delay="0.6">
-                        ICO Today
-                    </h2>
-                    <h3 class="text-grey font-weight-normal" data-animate="fadeInUp" data-animate-delay="0.8">
-                        <span data-typed='["Share Your Intelligence", "Bring your ICO to the world"]'
-                              data-typed-settings='{"delay":2000, "speed":120,"breakLines":false, "deleteDelay":1400, "doneClass":{"#get-btn":"animated fadeIn"}}'></span>
-                    </h3>
-                </div>
-            </div>
-        </div>
+      <!-- Off-Canvas Wrapper-->
+         <div class="offcanvas-wrapper">
+           <!-- Page Content-->
+           <!-- Main Slider-->
+           <section class="hero-slider" style="background-image: url(img/rocket-image.png);">
+               <div class="item">
+                 <div class="container padding-top-3x">
+                   <div class="row justify-content-center align-items-center">
+                     <div class="col-lg-5 col-md-6 padding-bottom-2x text-md-left text-center">
+                       <div class="from-bottom"><img class="d-inline-block w-200 mb-4" src="img/rocket-image.png" alt="Converse">
+                         <div class="h2 text-body text-normal mb-2 pt-1">Chuck Taylor All Star II</div>
+                         <div class="h2 text-body text-normal mb-4 pb-1">for only <span class="text-bold">$59.99</span></div>
+                       </div><a class="btn btn-primary scale-up delay-1" href="shop-single.html">Shop Now</a>
+                     </div>
+                     <div class="col-md-6 padding-bottom-2x mb-3"><img class="d-block mx-auto" src="img/rocket-image.png" alt="Chuck Taylor All Star II"></div>
+                   </div>
+                 </div>
+               </div>
+           </section>
+         </div>
 
         <!-- ======== @Region: #content ======== -->
         <div id="content" class="pt-5 pb-6 bg-white pos-relative pos-zindex-10">
