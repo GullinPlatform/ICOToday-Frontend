@@ -2,7 +2,31 @@
     <div>
         <!-- ======== @Region: #topbar ======== -->
         <top-bar></top-bar>
-        <router-view></router-view>
+        <div class="offcanvas-wrapper">
+            <!-- Page Title-->
+            <!--<div class="page-title">-->
+                <!--<div class="container">-->
+                    <!--<div class="column">-->
+                        <!--<h1>My Orders</h1>-->
+                    <!--</div>-->
+                    <!--<div class="column">-->
+                        <!--<ul class="breadcrumbs">-->
+                            <!--<li><a href="index.html">Home</a>-->
+                            <!--</li>-->
+                            <!--<li class="separator">&nbsp;</li>-->
+                            <!--<li><a href="account-orders.html">Account</a>-->
+                            <!--</li>-->
+                            <!--<li class="separator">&nbsp;</li>-->
+                            <!--<li>My Orders</li>-->
+                        <!--</ul>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!-- Page Content-->
+            <div class="container padding-bottom-3x mb-2">
+                <router-view></router-view>
+            </div>
+        </div>
         <!-- ======== @Region: #footer ======== -->
         <foot-bar></foot-bar>
         <div class="hidden-elements jpanel-menu-exclude">

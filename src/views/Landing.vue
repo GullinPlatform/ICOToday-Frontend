@@ -238,11 +238,6 @@
         })
     },
     mounted () {
-      /* global $:true */
-      $(document).ready(function () {
-        // Init theme functions
-        $(document).themeInit()
-      })
     },
 
     directives: {

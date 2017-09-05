@@ -323,7 +323,6 @@
     </div>
 </template>
 <script>
-  import UserSidebar from 'components/UserSidebar'
   import UserHeader from 'components/UserHeader'
 
   export default {
@@ -335,7 +334,6 @@
       }
     },
     components: {
-      'user-sidebar': UserSidebar,
       'user-header': UserHeader
     },
     methods: {

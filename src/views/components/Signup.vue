@@ -15,13 +15,16 @@
                             <h5>
                                 Account Type
                             </h5>
-                            <div class="btn-group" data-toggle="buttons">
-                                <label class="btn btn-primary active" @click="type=0">
-                                    <input type="radio" name="options" autocomplete="off" value="0" checked> ICO Company
-                                </label>
-                                <label class="btn btn-primary" @click="type=1">
-                                    <input type="radio" name="options" autocomplete="off" value="1"> ICO Investor
-                                </label>
+                            <div class="row text-center">
+                                <div class="col-sm-6">
+                                    <a class="btn btn-outline-primary" @click="type=0" v-show="type===1"> ICO Company</a>
+                                    <a class="btn btn-primary  text-white" @click="type=0" v-show="type===0"> ICO Company</a>
+
+                                </div>
+                                <div class="col-sm-6">
+                                    <a class="btn btn-outline-primary" @click="type=1" v-show="type===0"> ICO Investor</a>
+                                    <a class="btn btn-primary  text-white" @click="type=1" v-show="type===1"> ICO Investor</a>
+                                </div>
                             </div>
                         </div>
                         <hr>
