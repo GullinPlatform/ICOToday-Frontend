@@ -36,26 +36,14 @@ export default {
       .catch((error) => Promise.reject(error))
   },
 
-  applyPost (id) {
-    return Vue.http.post(API_ROOT + 'post/' + id + '/apply/', {}, {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
-  },
   markPost (id) {
     return Vue.http.post(API_ROOT + 'post/' + id + '/mark/', {}, {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
-
-  markedPosts () {
-    return Vue.http.post(API_ROOT + 'post/marked/', {}, {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
+  updatePost (formData) {
+    return Vue.http.patch(API_ROOT + 'post/' + formData.id + '/', {formData}, {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
-  createdPosts () {
-    return Vue.http.post(API_ROOT + 'post/created/', {}, {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
-  },
-
 }

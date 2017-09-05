@@ -14,6 +14,8 @@
         <signup-modal v-if="!login_status"></signup-modal>
         <add-team-member v-if="login_status"></add-team-member>
         <add-team-advisor v-if="login_status"></add-team-advisor>
+        <edit-project v-if="login_status"></edit-project>
+        <update-project v-if="login_status"></update-project>
         <!-- Modal End-->
     </div>
 </template>
@@ -25,6 +27,8 @@
   import LoginModal from 'components/Login'
   import AddTeamMember from 'components/AddTeamMember'
   import AddTeamAdvisor from 'components/AddTeamAdvisor'
+  import EditProject from 'components/EditProject'
+  import UpdateProject from 'components/UpdateProject'
 
   export default {
     name: 'RootLayout',
@@ -35,10 +39,15 @@
       SignupModal,
       AddTeamMember,
       AddTeamAdvisor,
+      EditProject,
+      UpdateProject,
     },
     computed: {
       login_status () {
         return this.$store.getters.login_status
+      },
+      current_post () {
+        return this.$store.getters.current_post
       }
     },
   }

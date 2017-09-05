@@ -76,17 +76,6 @@ const actions = {
         return Promise.reject(error)
       })
   },
-  applyPost ({commit}, id) {
-    return postApi.applyPost(id)
-      .then((response) => {
-        commit(types.APPLY_POST, response)
-        return Promise.resolve(response)
-      })
-      .catch((error) => {
-        console.log(error)
-        return Promise.reject(error)
-      })
-  },
   markPost ({commit}, id) {
     return postApi.markPost(id)
       .then((response) => {
@@ -99,33 +88,10 @@ const actions = {
       })
   },
 
-  // TODO
-  markedPosts ({commit}, id) {
-    return postApi.markPost(id)
+  updatePost ({commit}, formData) {
+    return postApi.updatePost(formData)
       .then((response) => {
-        commit(types.MARK_POST, response)
-        return Promise.resolve(response)
-      })
-      .catch((error) => {
-        console.log(error)
-        return Promise.reject(error)
-      })
-  },
-  createdPosts ({commit}, id) {
-    return postApi.markPost(id)
-      .then((response) => {
-        commit(types.MARK_POST, response)
-        return Promise.resolve(response)
-      })
-      .catch((error) => {
-        console.log(error)
-        return Promise.reject(error)
-      })
-  },
-  appliedPost ({commit}, id) {
-    return postApi.markPost(id)
-      .then((response) => {
-        commit(types.MARK_POST, response)
+        commit(types.UPDATE_POST, response)
         return Promise.resolve(response)
       })
       .catch((error) => {
@@ -158,6 +124,7 @@ const mutations = {
   [types.ADD_POST] (state, response) {},
   [types.APPLY_POST] (state, response) {},
   [types.MARK_POST] (state, response) {},
+  [types.UPDATE_POST] (state, response) {},
 
   [types.LIST_POSTS] (state, response) {
     state.posts = response

@@ -45,12 +45,24 @@
                     </h6>
                     <hr class="mb-3 mt-2">
 
-
                     <div class="product-card product-list" v-if="loaded" v-for="project in projects">
-                        <a class="product-thumb" href="#">
-                            <img :src="project.logo_image" alt="Logo"></a>
+                        <router-link :to="{name:'post', params:{id: project.id}}" class="product-thumb">
+                            <img :src="project.logo_image" alt="Logo"></router-link>
                         <div class="product-info">
-                            <h3 class="product-title"><a href="#"> {{project.title}}</a></h3>
+                            <h3 class="product-title">
+                                <router-link :to="{name:'post', params:{id: project.id}}"> {{project.title}}
+                                </router-link>
+                                <span v-if="project.status===0" class="badge badge-warning">Verifying</span>
+                                <span v-else-if="project.status===1" class="badge badge-primary">Active</span>
+                                <span v-else-if="project.status===2" class="badge badge-success"><i
+                                        class="fa fa-check"></i> Completed</span>
+                                <span v-else-if="project.status===3" class="badge badge-info"><i
+                                        class="fa fa-star-o"></i> Promoting</span>
+                                <span v-else-if="project.status===4" class="badge badge-warning"><i
+                                        class="fa fa-star-o"></i> Premium</span>
+                                <span v-else="project.status===5" class="badge badge-default"><i
+                                        class="fa fa-check"></i> Closed</span>
+                            </h3>
                             <div class="rating-stars">
                                 Rate:
                                 <i class="icon-star filled"></i>
@@ -62,17 +74,26 @@
                             <h4 class="product-price"> {{formatTime(project.start_datetime, project.end_datetime)}}</h4>
                             <p> {{project.description_short}}</p>
                             <div class="progress mb-1">
-                                <div class="progress-bar bg-info" role="progressbar" style="width: 70%; height: 5px;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">70%</div>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 70%; height: 5px;"
+                                     aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
-                            <div class="product-buttons">`
+                            <div class="product-buttons">
                                 <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip"
-                                        title="" data-original-title="Whishlist"><i class="icon-heart"></i></button>
-                                <button class="btn btn-outline-primary btn-sm">
+                                        title="" data-original-title="Whishlist"><i class="fa fa-star-o"></i>
+                                </button>
+                                <button class="btn btn-outline-primary btn-sm"
+                                        @click="getProjectAndShowModal(project.id)"
+                                        v-if="me.info.team&&project.team.id===me.info.team.id&&project.status==0">
                                     EDIT
+                                </button>
+                                <button class="btn btn-outline-primary btn-sm"
+                                        v-else-if="me.info.team&&project.team.id===me.info.team.id&&project.status!=0">
+                                    UPDATE
                                 </button>
                                 <router-link :to="{name:'post', params:{id: project.id}}"
                                              class="btn btn-danger text-uppercase btn-sm">
-                                    <span v-if="project.status!==0">DETAIL</span><span v-else>PREVIEW</span>
+                                    <span v-if="project.status!==0">DETAIL</span>
+                                    <span v-else>PREVIEW</span>
                                 </router-link>
                             </div>
                         </div>
@@ -106,7 +127,7 @@
       }
     },
     components: {
-      'user-header': UserHeader
+      UserHeader,
     },
     methods: {
       loadProjects () {
@@ -133,6 +154,15 @@
 
             })
         }
+      },
+      getProjectAndShowModal (id) {
+        this.$store.dispatch('getPost', id)
+          .then(() => {
+            /* global $:true */
+            $('#edit-project-modal').modal('show')
+          })
+          .catch(() => {
+          })
       },
       formatTime (start, end) {
         /* global moment:true */
