@@ -14,8 +14,8 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="col-md-2 text-md-center">
-                                <img src="../../../static/img/homes/code.jpg" class="rounded-circle img-padded"
-                                     width="100" height="100">
+                                <!-- <img src="../../../static/img/homes/code.jpg" class="rounded-circle img-padded"
+                                     width="100" height="100"> -->
                             </div>
                         </div>
                         <div class="col-sm-8">
