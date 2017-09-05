@@ -1,6 +1,7 @@
 import userApi from '../../api/user-api'
 import * as cookie from '../../utils/cookie'
 import * as types from '../mutation-types'
+import router from '../../router/index'
 
 // initial state
 // shape: [{ id, quantity }]
@@ -230,6 +231,7 @@ const mutations = {
     state.login_status = false
     state.token = null
     state.self = {}
+    router.push({ name: 'landing' })
   },
   [types.REGSITER_SUCCESS] (state, response) {
     cookie.setCookie('token', response.token)

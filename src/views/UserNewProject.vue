@@ -8,10 +8,12 @@
                 </div>
                 <div class="column">
                     <ul class="breadcrumbs">
-                        <li><router-link :to="{name:'landing'}">Home</router-link>
+                        <li>
+                            <router-link :to="{name:'landing'}">Home</router-link>
                         </li>
                         <li class="separator">&nbsp;</li>
-                        <li><router-link :to="{name:'me_new_project'}">Account</router-link>
+                        <li>
+                            <router-link :to="{name:'me_new_project'}">Account</router-link>
                         </li>
                         <li class="separator">&nbsp;</li>
                         <li>New ICO Application</li>
@@ -306,7 +308,7 @@
 
             this.video_link = ''
             this.website = ''
-            this.$router.push('me')
+            this.$router.push({name: 'me'})
           })
           .catch((error) => {
             console.log(error)

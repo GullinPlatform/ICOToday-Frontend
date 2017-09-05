@@ -200,6 +200,7 @@
           .then(() => {
             this.edit = false
             this.$store.dispatch('getSelf')
+            this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'Your team info is updated!'})
           })
           .catch(() => {
           })

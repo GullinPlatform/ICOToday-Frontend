@@ -2,18 +2,19 @@
     <div class="col-lg-4 mb-5">
         <aside class="user-info-wrapper">
             <div class="user-cover" style="background-image: url(../../../static/img/account/user-cover-img.jpg);">
-                <div class="info-label" v-if="me.is_verified" ><i class="fa fa-id-badge"></i> Verified
+                <div class="info-label" v-if="me.is_verified"><i class="fa fa-id-badge"></i> Verified
                 </div>
                 <div class="info-label warning-label" data-toggle="tooltip" v-if="!me.is_verified"
                      data-original-title="Verify Your Email"><i class="fa fa-warning"></i> Unverified
                 </div>
             </div>
             <div class="user-info">
-                <div class="user-avatar"><a class="edit-avatar" href="#"></a>
+                <div class="user-avatar">
+                    <router-link class="edit-avatar" :to="{name:'me_settings'}"></router-link>
                     <img :src="me.info.avatar" alt="User"></div>
                 <div class="pl-2">
                     <h4>{{username}}  <span class="text-muted">{{me.info.title}}</span></h4>
-                    <span>@ {{me.info.team.name}}</span>
+                    <span v-if="me.info.team">@ {{me.info.team.name}}</span>
                     <br>
                     <p>{{me.info.description}}</p>
 
@@ -38,7 +39,7 @@
                 <i class="fa fa-angle-right"></i>Marked ICO Projects
             </router-link>
 
-            <router-link :to="{name:'me_team'}" class="list-group-item" v-if="me.is_verified!==2"
+            <router-link :to="{name:'me_team'}" class="list-group-item" v-if="me.type===0"
                          :class="{active: $route.name==='me_team'}">
                 <i class="fa fa-angle-right"></i>My Team Information
             </router-link>

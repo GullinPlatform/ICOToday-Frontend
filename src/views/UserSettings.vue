@@ -174,6 +174,7 @@
                 this.avatar_cropped = false
                 this.avatar_change = false
                 this.avatar_img = ''
+                this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'Your avatar is updated!'})
               })
             })
             .catch((error) => {
@@ -195,7 +196,7 @@
             this.$store.dispatch('getSelf').then(() => {
               this.me = this.self.info
             })
-            this.message = 'Updated Successfully.'
+            this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'Your info is updated!'})
           })
           .catch((error) => {
             this.message = error.body.detail

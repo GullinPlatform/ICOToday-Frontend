@@ -25,7 +25,7 @@
                         <router-link :to="{name:'me'}"></router-link>
                         <ul class="toolbar-dropdown">
                             <li>
-                                <router-link :to="{name:'me_new_project'}" class="dropdown-item">
+                                <router-link :to="{name:'me_new_project'}" class="dropdown-item" v-if="me.type===0">
                                     <i class="fa fa-plus dropdown-icon" aria-hidden="true"></i>Launch New ICO
                                 </router-link>
                             </li>

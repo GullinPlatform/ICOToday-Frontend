@@ -133,6 +133,25 @@ const actions = {
         return Promise.reject(error)
       })
   },
+
+  toastr ({commit}, data) {
+    let toastOptions = {
+      class: 'iziToast-' + data.type || '',
+      title: data.title,
+      message: data.message,
+      animateInside: false,
+      position: 'topRight',
+      progressBar: false,
+      icon: 'icon-bell',
+      timeout: 3200,
+      transitionIn: 'fadeInLeft',
+      transitionOut: 'fadeOut',
+      transitionInMobile: 'fadeIn',
+      transitionOutMobile: 'fadeOut'
+    }
+    /* global iziToast:true */
+    iziToast.show(toastOptions)
+  }
 }
 
 const mutations = {

@@ -10,18 +10,21 @@
 <style type="text/css">
     .cursorPointer {
         cursor: pointer;
+        border-radius: 22px;
     }
 
     .cursorGrab {
         cursor: grab;
         cursor: -webkit-grab;
         cursor: -moz-grab;
+        border-radius: 22px;
     }
 
     .cursorGrabbing {
         cursor: grabbing;
         cursor: -webkit-grabbing;
         cursor: -moz-grabbing;
+        border-radius: 22px;
     }
 </style>
 <script>
