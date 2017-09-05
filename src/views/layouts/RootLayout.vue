@@ -26,20 +26,6 @@
       LoginModal,
       SignupModal
     },
-    head: {
-      // Meta tags
-      meta: [
-        {name: 'application-name', content: 'ICOToday'},
-        {name: 'description', content: 'ICO Platform, ICO Today, Launch ICO'}, // id to replace intead of create element
-        {name: 'author', content: 'C0deZ'},
-        // Twitter
-        // {name: 'twitter:title', content: 'Content Title'},
-        // Facebook / Open Graph
-        // { property: 'fb:app_id', content: '123456789' },
-        // { property: 'og:title', content: 'Content Title' },
-        // ...
-      ]
-    },
     computed: {
       login_status () {
         return this.$store.getters.login_status
