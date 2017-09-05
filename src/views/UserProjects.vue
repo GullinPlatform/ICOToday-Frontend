@@ -24,18 +24,19 @@
                         <div class="card px-3 py-4 mb-3 row-hover card-outline-primary pos-relative" v-if="loaded"
                              v-for="project in projects">
                             <div class="row align-items-center ">
-                                <span class="pos-absolute pos-t pos-l bg-primary text-white text-xs px-1">我参与的</span>
+
+                                <span class="pos-absolute pos-t pos-r bg-primary text-white text-sm px-1"
+                                      v-if="project.status===1">Verified</span>
                                 <div class="col-md-2">
-                                    <img src="static/img/customers/customer-2.png" alt="TSU"
+                                    <img :src="project.logo_image"
                                          class="img-fluid hidden-sm-down"/>
                                 </div>
                                 <div class="col-md-8">
                                     <h4 class="mb-0">
-                                        Drupal Developer
+                                        {{project.title}}
                                     </h4>
-                                    <p class="text-muted mb-2 text-sm">@
-                                        <a href="#" class="font-weight-bold text-muted">TSU</a>
-                                        (Senior level, Full Time Employment)</p>
+                                    <p class="text-muted mb-2 text-sm">By
+                                        <span class="font-weight-bold text-uppercase">{{project.team.name}}</span>
                                     <p class="text-muted mb-2 text-sm">
                                         <span class="d-block d-md-inline">
                                             <i class="fa fa-map-marker"></i> London, UK</span>
@@ -44,10 +45,10 @@
                                     </p>
                                 </div>
                                 <div class="col-md-2 text-md-center">
-                                    <a href="#"
-                                       class="btn btn-danger text-uppercase font-weight-bold d-lg-block">Apply</a>
-                                    <a href="#" class="text-muted text-xs op-7">
-                                        <i class="fa fa-heart"></i> Shortlist</a>
+                                    <router-link :to="{name:'post', params:{id: project.id}}"
+                                                 class="btn btn-danger text-uppercase font-weight-bold d-lg-block">
+                                        <span v-if="project.status!==0">DETAIL</span><span v-else>PREVIEW</span>
+                                    </router-link>
                                 </div>
                             </div>
                         </div>
@@ -91,6 +92,32 @@
       },
       proposedProject () {
 
+      },
+      loadProjects () {
+        // My ICO Projects
+        if (this.$route.name === 'me' && this.$store.getters.self.type === 0) {
+
+          this.$store.dispatch('getSelfCreatedPost')
+            .then(() => {
+              this.projects = this.$store.getters.self_created_posts
+              this.loaded = true
+            })
+            .catch(() => {
+
+            })
+
+        }
+        // My Marked Projects
+        else {
+          this.$store.dispatch('getSelfMarkedPost')
+            .then(() => {
+              this.projects = this.$store.getters.self_marked_posts
+              this.loaded = true
+            })
+            .catch(() => {
+
+            })
+        }
       }
     },
     computed: {
@@ -107,10 +134,6 @@
             this.projects = this.$store.getters.self_created_posts
             this.loaded = true
           })
-          .catch(() => {
-
-          })
-
       }
       // My Marked Projects
       else {
@@ -119,9 +142,11 @@
             this.projects = this.$store.getters.self_marked_posts
             this.loaded = true
           })
-          .catch(() => {
-
-          })
+      }
+    },
+    watch: {
+      '$route' () {
+        this.loadProjects()
       }
     }
   }

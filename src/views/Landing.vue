@@ -239,11 +239,9 @@
     mounted () {
       /* global $:true */
       $(document).ready(function () {
-        'use strict'
         // Init theme functions
         $(document).themeInit()
       })
-
     },
 
     directives: {

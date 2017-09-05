@@ -275,8 +275,8 @@
         formData.append('start_datetime', this.start_datetime.format('YYYY-MM-DD HH:mmZ'))
         formData.append('end_datetime', this.end_datetime.format('YYYY-MM-DD HH:mmZ'))
         formData.append('white_paper', this.white_paper)
-        formData.append('promo_icon', this.large_icon)
-        formData.append('icon', this.icon)
+        formData.append('promote_image', this.large_icon)
+        formData.append('logo_image', this.icon)
         formData.append('video_link', this.video_link)
         formData.append('website', this.website)
 

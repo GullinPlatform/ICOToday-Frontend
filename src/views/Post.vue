@@ -11,15 +11,16 @@
                 </div>
                 <div class="col-lg-8">
                     <div class="card  mb-4">
-                        <!-- Ribbon -->
-                        <div class="card-ribbon card-ribbon-top card-ribbon-right bg-green text-white">Verified</div>
                         <!-- Content -->
                         <div class="card-block p-4 pos-relative">
                             <!-- Product details -->
                             <p class="text-muted text-uppercase text-xs mb-0">
-                                <span class="text-primary">{{post.tags[0]}}</span></p>
+                                <span class="text-primary">{{post.tags[0]}}</span>
+                            </p>
+
+
                             <h3 class="card-title mb-2 mt-2">
-                                {{post.title}}
+                                {{post.title}}   <a class="btn btn-primary" v-if="post.team.id===me.info.team.id&&post.status===0">Edit</a>
                             </h3>
 
                             <div class="product-offer-countdown">
@@ -46,7 +47,10 @@
                             <a :href="post.website" class="btn btn-link">
                                 <i class="fa fa-globe text-primary ml-md-3"></i> Website
                             </a>
-                            <p class="text-muted text-xs d-inline hidden-md-down"></p>
+                            <div class="pos-md-absolute pos-t pos-r mr-4 mt-3 text-md-right">
+                                <i class="fa fa-star text-primary"></i> <i class="fa fa-star text-primary"></i> <i class="fa fa-star text-primary"></i>                  <i class="fa fa-star text-primary"></i> <i class="fa fa-star text-primary"></i>
+                                <p class="my-0 text-xs">10 reviews | <a href="#reviews">write review</a></p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -324,7 +328,10 @@
       },
       login_status () {
         return this.$store.getters.login_status
-      }
+      },
+      me () {
+        return this.$store.getters.self
+      },
     },
     beforeCreate () {
       this.$store.dispatch('getPost', this.$route.params.id)

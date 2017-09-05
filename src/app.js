@@ -10,6 +10,7 @@ import RootLayout from 'views/layouts/RootLayout'
 import * as cookie from './utils/cookie'
 
 import VueHead from 'vue-head'
+
 Vue.use(Router)
 Vue.use(Resource)
 Vue.use(VueHead)
@@ -19,16 +20,19 @@ sync(store, router)
 // set csrf token for django
 Vue.http.headers.common['X-CSRFToken'] = cookie.getCookie('csrftoken')
 
+router.beforeEach(function (to, from, next) {
+  window.scrollTo(0, 0)
+  next()
+})
 
 export const app = new Vue({
   el: '#app',
   data: {},
-  beforeCreate() {
-    const formData = { token: cookie.getCookie('token') }
+  beforeCreate () {
+    const formData = {token: cookie.getCookie('token')}
     this.$store.dispatch('tokenVerify', formData)
-    /* global Array:true Object:true */
   },
   router,
   store,
-  components: { RootLayout }
+  components: {RootLayout}
 })
