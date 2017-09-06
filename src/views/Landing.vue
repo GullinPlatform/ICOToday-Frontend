@@ -132,33 +132,38 @@
 
                     <!-- Main content -->
                     <div class="col-lg-12">
-                        <!-- Jobs list -->
-                        <h3 class="text-left mb-2">Active ICOs <span class="text-md text-muted font-weight-normal text-normalcase op-7">{{getMonth()}}</span>
-                        </h3>
-                        <h3 class="text-center mb-2">Upcoming ICOs <span class="text-md text-muted font-weight-normal text-normalcase op-7">{{getMonth()}}</span>
-                        </h3>
-                        <h3 class="text-right mb-2">Passed ICOs <span class="text-md text-muted font-weight-normal text-normalcase op-7">{{getMonth()}}</span>
-                        </h3>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h3 class="text-left mb-2"><a>Active ICOs</a>
+                                </h3>
+                            </div>
+                            <div class="col-sm-3">
+                                <h3 class="text-center mb-2">Upcoming ICOs
+
+                                </h3>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <h3 class="text-right mb-2">Passed ICOs
+                                </h3>
+                            </div>
+                            <div class="col-sm-3">
+                                <h3 class="text-right mb-2">Filters
+                                </h3>
+                            </div>
+                        </div>
                         <hr class="mb-4"/>
                         <!-- Job 1 -->
                         <div v-if="loaded">
-                            <div class="product-card product-list" v-if="loaded" v-for="project in posts">
+                            <div class="product-card product-list"
+                                 v-for="project in posts"
+                                 v-if="loaded&&project.status===1">
                                 <router-link :to="{name:'post', params:{id: project.id}}" class="product-thumb">
                                     <img :src="project.logo_image" alt="Logo"></router-link>
                                 <div class="product-info">
                                     <h3 class="product-title">
                                         <router-link :to="{name:'post', params:{id: project.id}}"> {{project.title}}
                                         </router-link>
-                                        <span v-if="project.status===0" class="badge badge-warning">Verifying</span>
-                                        <span v-else-if="project.status===1" class="badge badge-primary">Active</span>
-                                        <span v-else-if="project.status===2" class="badge badge-success"><i
-                                                class="fa fa-check"></i> Completed</span>
-                                        <span v-else-if="project.status===3" class="badge badge-info"><i
-                                                class="fa fa-star-o"></i> Promoting</span>
-                                        <span v-else-if="project.status===4" class="badge badge-warning"><i
-                                                class="fa fa-star-o"></i> Premium</span>
-                                        <span v-else="project.status===5" class="badge badge-default"><i
-                                                class="fa fa-check"></i> Closed</span>
                                     </h3>
                                     <div class="rating-stars">
                                         Rate:
@@ -177,23 +182,12 @@
                                              aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                     <div class="product-buttons">
-                                        <button class="btn btn-outline-secondary btn-sm btn-wishlist"
-                                                data-toggle="tooltip"
-                                                title="" data-original-title="Whishlist"><i class="fa fa-star-o"></i>
-                                        </button>
-                                        <button class="btn btn-outline-primary btn-sm"
-                                                @click="getProjectAndShowModal(project.id)"
-                                                v-if="me.info.team&&project.team.id===me.info.team.id&&project.status==0">
-                                            EDIT
-                                        </button>
-                                        <button class="btn btn-outline-primary btn-sm"
-                                                v-else-if="me.info.team&&project.team.id===me.info.team.id&&project.status!=0">
-                                            UPDATE
+                                        <button class="btn btn-outline-danger btn-sm">
+                                            <span><i class="fa fa-star-o"></i> Mark for me</span>
                                         </button>
                                         <router-link :to="{name:'post', params:{id: project.id}}"
-                                                     class="btn btn-danger text-uppercase btn-sm">
-                                            <span v-if="project.status!==0">DETAIL</span>
-                                            <span v-else>PREVIEW</span>
+                                                     class="btn btn-outline-primary text-uppercase btn-sm">
+                                            <span>DETAIL</span>
                                         </router-link>
                                     </div>
                                 </div>
