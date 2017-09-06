@@ -1,14 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Resource from 'vue-resource'
-
-// import AuthLayout from 'layouts/AuthLayout'
-// import DefaultLayout from 'layouts/DefaultLayout'
 import RootLayout from 'layouts/RootLayout'
 
 // import Home from 'views/Home'
 import Landing from 'views/Landing'
 import UserProjects from 'views/UserProjects'
+import UserCreatedProjects from 'views/UserCreatedProjects'
+import UserMarkedProjects from 'views/UserMarkedProjects'
 import UserTeam from 'views/UserTeam'
 import UserSettings from 'views/UserSettings'
 import UserNewProject from 'views/UserNewProject'
@@ -36,12 +35,12 @@ export default new Router({
       component: Team,
       name: 'team'
     }, {
-      path: '/me',
-      component: UserProjects,
-      name: 'me'
+      path: '/me/created',
+      component: UserCreatedProjects,
+      name: 'me_created'
     }, {
       path: '/me/marked',
-      component: UserProjects,
+      component: UserMarkedProjects,
       name: 'me_marked'
     }, {
       path: '/me/team',
@@ -59,12 +58,11 @@ export default new Router({
       path: '/user/:id',
       component: UserProjects,
       name: 'user'
-    },
-      {
-        path: '/user/:id/makred',
-        component: UserProjects,
-        name: 'user_marked'
-      }
+    }, {
+      path: '/user/:id/makred',
+      component: UserProjects,
+      name: 'user_marked'
+    }
       // {
       //   path: '/login',
       //   component: Question,

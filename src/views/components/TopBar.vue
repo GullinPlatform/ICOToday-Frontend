@@ -25,7 +25,8 @@
                 <div class="tools">
                     <div class="account" v-if="login_status">
                         <img :src="me.info.avatar" class="rounded-circle">
-                        <router-link :to="{name:'me'}"></router-link>
+                        <router-link v-if="me.type===0" :to="{name:'me_created'}"></router-link>
+                        <router-link v-else :to="{name:'me_marked'}"></router-link>
                         <ul class="toolbar-dropdown">
                             <li>
                                 <router-link :to="{name:'me_new_project'}" class="dropdown-item" v-if="me.type===0">
@@ -33,7 +34,7 @@
                                 </router-link>
                             </li>
                             <li>
-                                <router-link :to="{name:'me'}" class="dropdown-item" v-if="me.type===0">
+                                <router-link :to="{name:'me_created'}" class="dropdown-item" v-if="me.type===0">
                                     <i class="fa fa-bitcoin dropdown-icon" aria-hidden="true"></i>My ICO Projects
                                 </router-link>
                             </li>
@@ -43,7 +44,7 @@
                                 </router-link>
                             </li>
                             <li>
-                                <router-link :to="{name:'me'}" class="dropdown-item" v-if="me.type===1">
+                                <router-link :to="{name:'me_marked'}" class="dropdown-item" v-if="me.type===1">
                                     <i class="fa fa-bitcoin dropdown-icon" aria-hidden="true"></i>My Marked Projects
                                 </router-link>
                             </li>

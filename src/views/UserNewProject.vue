@@ -57,27 +57,6 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Large Icon</label>
-                        <div class="col-sm-10">
-                            <div class="dropzone-area" v-if="!large_icon_loaded">
-                                <div class="dropzone-text">
-                                    <i class="fa fa-cloud-upload"> </i>
-                                    <span>Drag file here or click to upload file</span>
-                                </div>
-                                <input type="file" @change="onLargeIconChange">
-                            </div>
-
-                            <div v-else>
-                                <button type="button" class="mb-1 btn btn-secondary">{{large_icon.name}}</button>
-                                <button type="button" class="mb-1 btn btn-secondary" @click="removeFile('l')">
-                                        <span>
-                                            <i class="fa fa-times"></i> Remove
-                                        </span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Description Short <span
                                 class="text-danger">*</span></label>
                         <div class="col-sm-10">
@@ -222,7 +201,6 @@
         // -- form info start --
         title: '',
         icon: null,
-        large_icon: null,
         description_short: '',
         description_full: '',
 
@@ -274,12 +252,6 @@
         this.icon = file[0]
         this.icon_loaded = true
       },
-      onLargeIconChange (e) {
-        var file = e.target.files || e.dataTransfer.files
-        if (!file.length) return
-        this.large_icon = file[0]
-        this.large_icon_loaded = true
-      },
       removeFile (name) {
         if (name === 'w') {
           this.white_paper = null
@@ -287,9 +259,6 @@
         } else if (name === 'i') {
           this.icon = null
           this.icon_loaded = false
-        } else {
-          this.large_icon = null
-          this.large_icon_loaded = false
         }
       },
 
@@ -313,7 +282,6 @@
         formData.append('start_datetime', this.start_datetime.format('YYYY-MM-DD HH:mmZ'))
         formData.append('end_datetime', this.end_datetime.format('YYYY-MM-DD HH:mmZ'))
         formData.append('white_paper', this.white_paper)
-        formData.append('promote_image', this.large_icon)
         formData.append('logo_image', this.icon)
         formData.append('video_link', this.video_link)
         formData.append('website', this.website)
@@ -335,7 +303,7 @@
             this.video_link = ''
             this.website = ''
             this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'Your project is submitted!'})
-            this.$router.push({name: 'me'})
+//            this.$router.push({name: 'me_created'})
           })
           .catch((error) => {
             console.log(error)

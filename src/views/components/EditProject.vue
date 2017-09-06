@@ -12,15 +12,20 @@
                     <h6 class="text-muted text-normal text-uppercase ">Basic info</h6>
                     <hr class="mb-3 mt-2">
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Title <span class="text-red">*</span></label>
+                        <label class="col-sm-2 col-form-label">Title <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <input class="form-control" v-model="title" required type="text">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Icon <span class="text-red">*</span></label>
+                        <label class="col-sm-2 col-form-label">Icon <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
-                            <div class="dropzone-area" v-if="!icon_loaded">
+                            <button type="button" class="mb-1 btn btn-secondary btn-sm"
+                                    v-if="!icon_change&&!icon_loaded"
+                                    @click="icon_change=true">
+                                <span><i class="fa fa-refresh"></i> Change</span>
+                            </button>
+                            <div class="dropzone-area" v-if="icon_change&&!icon_loaded">
                                 <div class="dropzone-text">
                                     <i class="fa fa-cloud-upload"> </i>
                                     <span>Drag file here or click to upload file</span>
@@ -28,33 +33,10 @@
                                 <input type="file" required @change="onIconChange">
                             </div>
 
-                            <div v-else>
+                            <div v-if="icon_change&&icon_loaded">
                                 <button type="button" class="mb-1 btn btn-secondary">{{icon.name}}</button>
                                 <button type="button" class="mb-1 btn btn-secondary" @click="removeFile('i')">
-                                        <span>
-                                            <i class="fa fa-times"></i> Remove
-                                        </span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Large Icon</label>
-                        <div class="col-sm-10">
-                            <div class="dropzone-area" v-if="!large_icon_loaded">
-                                <div class="dropzone-text">
-                                    <i class="fa fa-cloud-upload"> </i>
-                                    <span>Drag file here or click to upload file</span>
-                                </div>
-                                <input type="file" @change="onLargeIconChange">
-                            </div>
-
-                            <div v-else>
-                                <button type="button" class="mb-1 btn btn-secondary">{{large_icon.name}}</button>
-                                <button type="button" class="mb-1 btn btn-secondary" @click="removeFile('l')">
-                                        <span>
-                                            <i class="fa fa-times"></i> Remove
-                                        </span>
+                                    <span><i class="fa fa-times"></i> Remove</span>
                                 </button>
                             </div>
                         </div>
@@ -105,7 +87,7 @@
                                                  ref="startPicker"
                                                  placeholder="Start Time"
                                                  v-model="start_datetime"
-                                                 @change="onStartDatetimeChanged">
+                                                 @change="onStartDatetimeChanged()">
                             </vue-datetime-picker>
                         </div>
                     </div>
@@ -116,7 +98,7 @@
                                                  ref="endPicker"
                                                  placeholder="End Time"
                                                  v-model="end_datetime"
-                                                 @change="onEndDatetimeChanged">
+                                                 @change="onEndDatetimeChanged()">
                             </vue-datetime-picker>
                         </div>
                     </div>
@@ -140,7 +122,12 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">White Paper<span class="text-red">*</span></label>
                         <div class="col-sm-10">
-                            <div class="dropzone-area" v-if="!white_paper_loaded">
+                            <button type="button" class="mb-1 btn btn-secondary btn-sm"
+                                    v-if="!white_paper_change&&!white_paper_loaded"
+                                    @click="icon_change=true">
+                                <span><i class="fa fa-refresh"></i> Change</span>
+                            </button>
+                            <div class="dropzone-area" v-if="white_paper_change&&!white_paper_loaded">
                                 <div class="dropzone-text">
                                     <i class="fa fa-cloud-upload"> </i>
                                     <span>Drag file here or click to upload file</span>
@@ -148,12 +135,10 @@
                                 <input type="file" required @change="onWhitePaperChange">
                             </div>
 
-                            <div v-else>
+                            <div v-if="white_paper_change&&white_paper_loaded">
                                 <button type="button" class="mb-1 btn btn-secondary">{{white_paper.name}}</button>
                                 <button type="button" class="mb-1 btn btn-secondary" @click="removeFile('w')">
-                                        <span>
-                                            <i class="fa fa-times"></i> Remove
-                                        </span>
+                                    <span> <i class="fa fa-times"></i> Remove</span>
                                 </button>
                             </div>
                         </div>
@@ -171,22 +156,15 @@
                                    placeholder="https://example.com">
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-md-2">
                         </div>
                         <div class="col-md-10">
-                            <button type="button" @click="postNewPost()" class="mb-1 btn btn-block btn-primary">
+                            <button type="button" @click="editPost()" class="mb-1 btn btn-block btn-primary">
                                 Submit change
                             </button>
-                            <p class="text-red">{{message}}</p>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <small>
-                        We'll send a confirmation message to the email address you provided, notice your team member to click the confirmation link
-                    </small>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -207,7 +185,6 @@
         // -- form info start --
         title: '',
         icon: null,
-        large_icon: null,
         description_short: '',
         description_full: '',
 
@@ -226,11 +203,10 @@
         website: '',
         // -- form info end --
 
+        white_paper_change: false,
         white_paper_loaded: false,
+        icon_change: false,
         icon_loaded: false,
-        large_icon_loaded: false,
-
-        message: ''
       }
     },
     components: {
@@ -249,12 +225,6 @@
         this.icon = file[0]
         this.icon_loaded = true
       },
-      onLargeIconChange (e) {
-        var file = e.target.files || e.dataTransfer.files
-        if (!file.length) return
-        this.large_icon = file[0]
-        this.large_icon_loaded = true
-      },
       removeFile (name) {
         if (name === 'w') {
           this.white_paper = null
@@ -262,24 +232,26 @@
         } else if (name === 'i') {
           this.icon = null
           this.icon_loaded = false
-        } else {
-          this.large_icon = null
-          this.large_icon_loaded = false
         }
       },
 
-      postNewPost () {
+      editPost () {
         /* global FormData */
         let formData = new FormData()
 
-        if (!(this.title && this.description_full &&
+        if (!(this.title && this.description_full && this.description_full &&
             this.maximum_goal && this.minimum_goal &&
             this.coin_type && this.start_datetime &&
-            this.end_datetime && this.icon && this.website)) {
-          this.message = 'Please Make Sure Fill Out Required Fields'
+            this.end_datetime && this.website)) {
+          this.$store.dispatch('toastr', {
+            type: 'danger',
+            title: 'Error',
+            message: 'Please Make Sure Fill Out Required Fields!'
+          })
           return
         }
 
+        formData.append('id', this.current_post.id)
         formData.append('title', this.title)
         formData.append('description_short', this.description_short)
         formData.append('description_full', this.description_full)
@@ -290,32 +262,26 @@
         formData.append('end_datetime', this.end_datetime.format('YYYY-MM-DD HH:mmZ'))
         formData.append('coin_name', this.coin_name)
         formData.append('ratio', this.ratio)
-        formData.append('white_paper', this.white_paper)
-        formData.append('promote_image', this.large_icon)
-        formData.append('logo_image', this.icon)
+
+        if (this.white_paper)
+          formData.append('white_paper', this.white_paper)
+
+        if (this.icon)
+          formData.append('logo_image', this.icon)
+
         formData.append('video_link', this.video_link)
         formData.append('website', this.website)
 
-        this.$store.dispatch('postNewPost', formData)
+        this.$store.dispatch('updatePost', formData)
           .then(() => {
-            this.title = ''
-            this.description_full = ''
-            this.description_short = ''
-
-            this.maximum_goal = null
-            this.minimum_goal = null
-            this.coin_type = ''
-            this.coin_name = ''
-
-            this.start_datetime = ''
-            this.end_datetime = ''
-            this.ratio = ''
-
-            this.white_paper = null
-
-            this.video_link = ''
-            this.website = ''
-            this.$router.push({name: 'me'})
+            /* global $:true */
+            $('#edit-project-modal').modal('hide')
+            this.$router.push({name: 'me_created'})
+            this.$store.dispatch('toastr', {
+              type: 'success',
+              title: 'Success',
+              message: 'Your Project Info is updated!'
+            })
           })
           .catch((error) => {
             console.log(error)
@@ -338,21 +304,27 @@
         return this.$store.getters.current_post
       }
     },
-    mounted () {
-      this.title = this.current_post.title
-      this.description_full = this.current_post.description_full
+    watch: {
+      'current_post': function () {
+        /* global moment:true */
+        this.title = this.current_post.title
+        this.description_short = this.current_post.description_short
+        this.description_full = this.current_post.description_full
 
-      this.maximum_goal = this.current_post.maximum_goal
-      this.minimum_goal = this.current_post.minimum_goal
-      this.coin_type = this.current_post.coin_type
+        this.maximum_goal = this.current_post.maximum_goal
+        this.minimum_goal = this.current_post.minimum_goal
+        this.coin_type = this.current_post.coin_type
 
-      this.start_datetime = this.current_post.start_datetime
-      this.end_datetime = this.current_post.end_datetime
+        this.start_datetime = moment(this.current_post.start_datetime)
+        this.end_datetime = moment(this.current_post.end_datetime)
 
-      this.white_paper = null
+        this.white_paper = null
+        this.coin_name = this.current_post.coin_name
+        this.ratio = this.current_post.ratio
 
-      this.video_link = this.current_post.video_link
-      this.website = this.current_post.website
+        this.video_link = this.current_post.video_link
+        this.website = this.current_post.website
+      }
     }
   }
 

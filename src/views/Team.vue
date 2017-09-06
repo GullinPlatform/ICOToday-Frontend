@@ -351,7 +351,7 @@
     },
     beforeCreate () {
       // My ICO Projects
-      if (this.$route.name === 'me' && this.$store.getters.self.type === 0) {
+      if (this.$route.name === 'me_created' && this.$store.getters.self.type === 0) {
 
         this.$store.dispatch('getSelfCreatedPost')
           .then(() => {

@@ -42,7 +42,7 @@ export default {
       .catch((error) => Promise.reject(error))
   },
   updatePost (formData) {
-    return Vue.http.patch(API_ROOT + 'post/' + formData.id + '/', {formData}, {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
+    return Vue.http.patch(API_ROOT + 'post/' + formData.get('id') + '/', formData, {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },

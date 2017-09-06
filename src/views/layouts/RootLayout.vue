@@ -14,8 +14,8 @@
         <signup-modal v-if="!login_status"></signup-modal>
         <add-team-member v-if="login_status"></add-team-member>
         <add-team-advisor v-if="login_status"></add-team-advisor>
-        <edit-project v-if="login_status"></edit-project>
-        <update-project v-if="login_status"></update-project>
+        <edit-project v-if="login_status&&me.type==0"></edit-project>
+        <update-project v-if="login_status&&me.type==0"></update-project>
         <!-- Modal End-->
     </div>
 </template>
@@ -48,7 +48,10 @@
       },
       current_post () {
         return this.$store.getters.current_post
-      }
+      },
+      me() {
+        return this.$store.getters.self
+      },
     },
   }
 </script>
