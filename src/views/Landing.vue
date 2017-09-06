@@ -164,15 +164,9 @@
                                     <h3 class="product-title">
                                         <router-link :to="{name:'post', params:{id: project.id}}"> {{project.title}}
                                         </router-link>
+                                        <span class="text-sm text-info ml-2">{{project.rating}}/100</span>
                                     </h3>
-                                    <div class="rating-stars">
-                                        Rate:
-                                        <i class="icon-star filled"></i>
-                                        <i class="icon-star filled"></i>
-                                        <i class="icon-star filled"></i>
-                                        <i class="icon-star filled"></i>
-                                        <i class="icon-star filled"></i>
-                                    </div>
+
                                     <h4 class="product-price">
                                         {{formatTime(project.start_datetime, project.end_datetime)}}</h4>
                                     <p> {{project.description_short}}</p>

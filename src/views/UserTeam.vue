@@ -28,8 +28,8 @@
                 <div class="col-md-8" v-if="me.type===0">
 
                     <h6 class="text-muted text-normal text-uppercase ">Basic Info</h6>
-
                     <hr class="mb-3 mt-2">
+
                     <div class="form-group row">
                         <p class="col-sm-2 col-form-label">Name
                             <span class="text-danger">*</span>
@@ -40,8 +40,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <p class="col-sm-2 col-form-label">Description
-                        </p>
+                        <p class="col-sm-2 col-form-label">Description</p>
                         <div class="col-sm-8">
                             <p class="mt-2 ml-2 text-bold" v-show="!edit">{{description}}</p>
                             <textarea class="form-control" rows="4" v-model="description" type="date"
@@ -49,6 +48,37 @@
                         </div>
                     </div>
 
+                    <h6 class="text-muted text-normal text-uppercase ">Social Media</h6>
+                    <hr class="mb-3 mt-2">
+
+                    <div class="form-group row">
+                        <p class="col-sm-2 col-form-label">Medium</p>
+                        <div class="col-sm-8">
+                            <p class="mt-2 ml-2 text-bold" v-show="!edit">{{medium}}</p>
+                            <input class="form-control" v-model="medium" type="text" v-show="edit">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <p class="col-sm-2 col-form-label">Twitter</p>
+                        <div class="col-sm-8">
+                            <p class="mt-2 ml-2 text-bold" v-show="!edit">{{twitter}}</p>
+                            <input class="form-control" v-model="twitter" type="text" v-show="edit">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <p class="col-sm-2 col-form-label">Slack</p>
+                        <div class="col-sm-8">
+                            <p class="mt-2 ml-2 text-bold" v-show="!edit">{{slack}}</p>
+                            <input class="form-control" v-model="slack" type="text" v-show="edit">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <p class="col-sm-2 col-form-label">Telegram</p>
+                        <div class="col-sm-8">
+                            <p class="mt-2 ml-2 text-bold" v-show="!edit">{{telegram}}</p>
+                            <input class="form-control" v-model="telegram" type="text" v-show="edit">
+                        </div>
+                    </div>
                     <div class="form-group row justify-content-md-center">
 
                         <div class="col-sm-2">
@@ -56,7 +86,7 @@
                                 <i class="fa fa-edit"></i> Edit
                             </button>
                         </div>
-                        <div class="col-sm-8">
+                        <div class="col-sm-4">
                             <button type="button" @click="updateTeam()" v-show="edit"
                                     class="btn btn-primary">Submit Change
                             </button>
@@ -99,7 +129,7 @@
                                     <a href="" data-toggle="modal" data-target="#add-member-modal"
                                        data-dismiss="modal">
                                         <img class="rounded-circle mb-2" height="100" width="100"
-                                             src="../../static/img/services/add.png"  alt="Team Member">
+                                             src="../../static/img/services/add.png" alt="Team Member">
                                     </a>
                                     <h6>
                                         New Member
@@ -143,7 +173,7 @@
                                     <a href="" data-toggle="modal" data-target="#add-advisor-modal"
                                        data-dismiss="modal">
                                         <img class="rounded-circle mb-2" height="100" width="100"
-                                             src="../../static/img/services/add.png"  alt="Team Advisor">
+                                             src="../../static/img/services/add.png" alt="Team Advisor">
                                     </a>
                                     <h6>
                                         New Advisor
@@ -173,6 +203,11 @@
         name: '',
         description: '',
 
+        medium: '',
+        twitter: '',
+        slack: '',
+        telegram: '',
+
         message: ''
       }
     },
@@ -193,6 +228,10 @@
         const formData = {
           name: this.name,
           description: this.description,
+          medium: this.medium,
+          twitter: this.twitter,
+          slack: this.slack,
+          telegram: this.telegram,
           pk: this.me.info.team.id
         }
 
