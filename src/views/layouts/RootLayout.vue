@@ -16,6 +16,7 @@
         <add-team-advisor v-if="login_status"></add-team-advisor>
         <edit-project v-if="login_status&&me.type==0"></edit-project>
         <update-project v-if="login_status&&me.type==0"></update-project>
+        <post-modal></post-modal>
         <!-- Modal End-->
     </div>
 </template>
@@ -29,10 +30,12 @@
   import AddTeamAdvisor from 'components/AddTeamAdvisor'
   import EditProject from 'components/EditProject'
   import UpdateProject from 'components/UpdateProject'
+  import PostModal from 'components/PostModal'
 
   export default {
     name: 'RootLayout',
     components: {
+      PostModal,
       TopBar,
       FootBar,
       LoginModal,

@@ -158,12 +158,13 @@
                             <div class="product-card product-list"
                                  v-for="project in posts"
                                  v-if="loaded&&project.status===1">
-                                <router-link :to="{name:'post', params:{id: project.id}}" class="product-thumb">
-                                    <img :src="project.logo_image" alt="Logo"></router-link>
+                                <a class="product-thumb" @click="postModal(project.id)">
+                                    <img :src="project.logo_image" alt="Logo">
+                                </a>
                                 <div class="product-info">
                                     <h3 class="product-title">
-                                        <router-link :to="{name:'post', params:{id: project.id}}"> {{project.title}}
-                                        </router-link>
+                                        <a @click="postModal(project.id)"> {{project.title}}
+                                        </a>
                                         <span class="text-sm text-info ml-2">{{project.rating}}/100</span>
                                     </h3>
 
@@ -241,6 +242,14 @@
         } else {
           return 'End: ' + moment(end).format('MM/DD, hh:mm')
         }
+      },
+      postModal (id) {
+        /* global $:true */
+        this.$store.dispatch('getPost', id)
+          .then(() => {
+            this.$store.dispatch('getTeam', id)
+            $('#post-modal').modal('show')
+          })
       }
     },
     computed: {
