@@ -20,7 +20,6 @@
 
                     <a :href="me.info.linkedin" v-if="me.info.linkedin"><i class="fa fa-linkedin-square"></i></a>
                     <a :href="me.info.twitter" v-if="me.info.twitter"><i class="fa fa-twitter"></i></a>
-                    <a :href="me.info.slack" v-if="me.info.slack"><i class="fa fa-slack"></i></a>
                     <a :href="me.info.telegram" v-if="me.info.telegram"><i class="fa fa-telegram"></i></a>
                 </div>
             </div>

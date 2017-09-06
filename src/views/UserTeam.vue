@@ -110,10 +110,6 @@
                                        v-if="member.twitter">
                                         <i class="fa fa-twitter"></i>
                                     </a>
-                                    <a :href="member.slack" class="social-link branding-facebook"
-                                       v-if="member.slack">
-                                        <i class="fa fa-slack"></i>
-                                    </a>
                                     <a :href="member.linkedin" class="social-link branding-linkedin"
                                        v-if="member.linkedin">
                                         <i class="fa fa-linkedin-square"></i>
@@ -153,10 +149,6 @@
                                     <a :href="member.twitter" class="social-link branding-twitter"
                                        v-if="member.twitter">
                                         <i class="fa fa-twitter"></i>
-                                    </a>
-                                    <a :href="member.slack" class="social-link branding-facebook"
-                                       v-if="member.slack">
-                                        <i class="fa fa-slack"></i>
                                     </a>
                                     <a :href="member.linkedin" class="social-link branding-linkedin"
                                        v-if="member.linkedin">

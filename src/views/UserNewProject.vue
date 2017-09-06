@@ -61,7 +61,7 @@
                                 class="text-danger">*</span></label>
                         <div class="col-sm-10">
                                 <textarea class="form-control" v-model="description_short" type="text"
-                                          placeholder="( Markdown Support Enabled )" required rows="3"></textarea>
+                                          placeholder="Short description in 200 characters." required rows="3"></textarea>
                         </div>
                     </div>
                     <div class="form-group row">
