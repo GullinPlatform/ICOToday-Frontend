@@ -30,7 +30,7 @@
                         <div class="col-sm-10">
                             <button type="button" class="mb-1 btn btn-secondary btn-sm"
                                     v-if="!white_paper_change&&!white_paper_loaded"
-                                    @click="icon_change=true">
+                                    @click="white_paper_change=true">
                                 <span><i class="fa fa-refresh"></i> Change</span>
                             </button>
                             <div class="dropzone-area" v-if="white_paper_change&&!white_paper_loaded">
@@ -69,7 +69,7 @@
                 <div class="modal-footer">
                     <small>
                         <span class="text-danger">* </span>
-                       After project is online, we only allow user to update their finical data
+                        After project is online, we only allow user to update their finical data
                     </small>
                 </div>
             </div>
@@ -84,7 +84,7 @@
 <script>
 
   export default {
-    name: 'EditProjectModal',
+    name: 'UpdateProjectModal',
     data () {
       return {
         // -- form info start --
@@ -162,6 +162,9 @@
     watch: {
       'current_post': function () {
         this.white_paper = null
+        this.white_paper_change = false
+        this.white_paper_loaded = false
+
         this.video_link = this.current_post.video_link
         this.money_raised = this.current_post.money_raised
         this.current = this.current_post.current
