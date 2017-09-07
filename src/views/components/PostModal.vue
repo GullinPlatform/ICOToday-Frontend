@@ -152,7 +152,9 @@
                                     <img :src="comment.creator.info.avatar"
                                          class="d-flex rounded-circle align-self-start mr-4" width="55">
                                     <div class="media-body">
-                                        <h6 class="comment-title">{{commentCreatorName(comment.creator)}}</h6>
+                                        <h6 class="comment-title">{{commentCreatorName(comment.creator)}}
+                                            <span class="badge badge-primary" v-if="is_team_member">Team Member</span>
+                                        </h6>
                                         <p class="mb-1">
                                             {{comment.content}}
                                         </p>
@@ -200,7 +202,9 @@
                                                  class="d-flex rounded-circle align-self-start mr-4"
                                                  width="55">
                                             <div class="media-body">
-                                                <h6 class="comment-title">{{commentCreatorName(reply.creator)}}</h6>
+                                                <h6 class="comment-title">{{commentCreatorName(reply.creator)}}
+                                                    <span class="badge badge-primary" v-if="is_team_member">Team Member</span>
+                                                </h6>
                                                 <p class="mb-1">
                                                     {{reply.content}}
                                                 </p>
@@ -326,7 +330,7 @@
             this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'You removed your comment!'})
             this.new_comment = ''
           })
-      }
+      },
     },
     computed: {
       post () {
@@ -344,6 +348,14 @@
       me () {
         return this.$store.getters.self
       },
+      is_team_member () {
+        for (let member of this.current_team_members) {
+          if (this.me.info.id === member.id) {
+            return true
+          }
+        }
+        return false
+      }
     },
     watch: {
       'post': function () {
