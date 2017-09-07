@@ -62,6 +62,10 @@ export default new Router({
       path: '/user/:id/makred',
       component: UserProjects,
       name: 'user_marked'
+    }, {
+      path: '/team/:id',
+      component: Team,
+      name: 'team'
     }
       // {
       //   path: '/login',
