@@ -55,9 +55,10 @@ const actions = {
 
   deleteComment ({commit}, pk) {
     return discussionApi.deleteComment(pk)
-      .then((response) => {
+      .then(() => {
+        commit(types.REMOVE_COMMENT_LOCALLY, pk)
         commit(types.DELETE_COMMENT)
-        return Promise.resolve(response)
+        return Promise.resolve()
       })
       .catch((error) => {
         console.log(error)
@@ -70,7 +71,6 @@ const actions = {
       .then((response) => {
         commit(types.REPLY_COMMENT)
         commit(types.APPEND_REPLY, response)
-
         return Promise.resolve(response)
       })
       .catch((error) => {
@@ -92,6 +92,20 @@ const mutations = {
     for (let comment of state.current_post_comments) {
       if (comment.id === parseInt(response.reply_to_id)) {
         comment.replies.unshift(response)
+      }
+    }
+  },
+  [types.REMOVE_COMMENT_LOCALLY] (state, pk) {
+    for (let comment of state.current_post_comments) {
+      if (comment.id === parseInt(pk)) {
+        state.current_post_comments.pop(comment)
+        return
+      }
+      for (let reply of comment.replies) {
+        if (reply.id === parseInt(pk)) {
+          comment.replies.pop(reply)
+          return
+        }
       }
     }
   },
