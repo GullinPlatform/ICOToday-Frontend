@@ -161,10 +161,10 @@
                                 <a class="product-thumb" href="#" @click="postModal(project.id)">
                                     <img :src="project.logo_image" alt="Logo">
                                 </a>
-                                <div class="product-info">
+                                <div class="product-info" @click="postModal(project.id)">
                                     <h3 class="product-title">
-                                        <a href="#" @click="postModal(project.id)"> {{project.title}}
-                                        </a>
+                                        {{project.title}}
+
                                         <span class="float-right text-bold text-info ml-2">{{project.rating}}/100</span>
                                     </h3>
 
