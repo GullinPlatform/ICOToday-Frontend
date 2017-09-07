@@ -2,7 +2,7 @@
     <div>
         <!-- Page Title-->
         <div class="page-title">
-            <div class="container">
+            <div class="container pl-5 pr-5">
                 <div class="column">
                     <h1>New ICO Application</h1>
                 </div>
@@ -22,7 +22,7 @@
             </div>
         </div>
         <!-- Page Content-->
-        <div class="container padding-bottom-3x mb-2">
+        <div class="container  pl-5 pr-5">
             <div class="row">
                 <user-header></user-header>
                 <!--main content-->
