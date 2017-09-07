@@ -7,51 +7,33 @@ import { getCookie } from '../utils/cookie'
 Vue.use(Resource)
 
 export default {
-  // post changes
-  solveMoment(pk) {
-    return Vue.http.post(API_ROOT + 'post/moment/' + pk + '/solve/', {}, { headers: { Authorization: 'TOKEN ' + getCookie('token') } })
+  getComments (pk) {
+    return Vue.http.get(API_ROOT + 'discussion/' + pk + '/', {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
-  postMomentComment(pk, formData) {
-    return Vue.http.post(API_ROOT + 'post/moment/' + pk + '/comment/', formData, { headers: { Authorization: 'TOKEN ' + getCookie('token') } })
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
-  },
-  addLike(pk) {
-    return Vue.http.post(API_ROOT + 'post/moment/' + pk + '/like/', {}, { headers: { Authorization: 'TOKEN ' + getCookie('token') } })
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
-  },
-  addReport(pk) {
-    return Vue.http.put(API_ROOT + 'post/moment/' + pk + '/report/', {}, { headers: { Authorization: 'TOKEN ' + getCookie('token') } })
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
-  },
-  getPosts() {
-    return Vue.http.get(API_ROOT + 'post/post/', { headers: { Authorization: 'TOKEN ' + getCookie('token') } })
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
-  },
-  getPost(pk) {
-    return Vue.http.get(API_ROOT + 'post/post/' + pk + '/', { headers: { Authorization: 'TOKEN ' + getCookie('token') } })
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
-  },
-  postPost(formData) {
-    return Vue.http.post(API_ROOT + 'post/post/', formData, { headers: { Authorization: 'TOKEN ' + getCookie('token') } })
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
-  },
-  postPostComment(pk, formData) {
-    return Vue.http.post(API_ROOT + 'post/post/' + pk + '/comment/', formData, { headers: { Authorization: 'TOKEN ' + getCookie('token') } })
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
-  },
-  addPostVote(pk, formData) {
-    return Vue.http.put(API_ROOT + 'post/post/' + pk + '/', formData, { headers: { Authorization: 'TOKEN ' + getCookie('token') } })
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
-  }
 
+  postComment (formData) {
+    return Vue.http.post(API_ROOT + 'discussion/' + formData.pk + '/', formData, {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
+      .then((response) => Promise.resolve(response.data))
+      .catch((error) => Promise.reject(error))
+  },
+
+  replyComment (formData) {
+    return Vue.http.post(API_ROOT + 'discussion/' + formData.pk + '/reply/', formData, {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
+      .then((response) => Promise.resolve(response.data))
+      .catch((error) => Promise.reject(error))
+  },
+
+  editComment (formData) {
+    return Vue.http.patch(API_ROOT + 'discussion/' + formData.pk + '/edit/', formData, {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
+      .then((response) => Promise.resolve(response.data))
+      .catch((error) => Promise.reject(error))
+  },
+
+  deleteComment (pk) {
+    return Vue.http.delete(API_ROOT + 'discussion/' + pk + '/edit/', {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
+      .then((response) => Promise.resolve(response.data))
+      .catch((error) => Promise.reject(error))
+  },
 }

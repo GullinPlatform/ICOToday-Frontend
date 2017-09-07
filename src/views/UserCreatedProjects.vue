@@ -56,7 +56,7 @@
                                         class="fa fa-check"></i> Closed</span>
                             </h3>
                             <div class="rating-stars" v-if="project.status!==0">
-                                <span class="text-sm text-info ml-2">{{project.rating}}/100</span>
+                                <span class="float-right text-bold text-info ml-2">{{project.rating}}/100</span>
                             </div>
                             <h4 class="product-price"> {{formatTime(project.start_datetime, project.end_datetime)}}</h4>
                             <p> {{project.description_short}}</p>

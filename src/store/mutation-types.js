@@ -48,3 +48,12 @@ export const GET_TEAM = 'GET_TEAM'
 export const UPDATE_TEAM = 'UPDATE_TEAM'
 export const ADD_TEAM_MEMBER = 'ADD_TEAM_MEMBER'
 export const REM_TEAM_MEMBER = 'REM_TEAM_MEMBER'
+
+// ----- COMMENT -----
+export const POST_COMMENT = 'POST_COMMENT'
+export const EDIT_COMMENT = 'EDIT_COMMENT'
+export const GET_COMMENTS = 'GET_COMMENTS'
+export const DELETE_COMMENT = 'DELETE_COMMENT'
+export const REPLY_COMMENT = 'REPLY_COMMENT'
+export const APPEND_COMMENT = 'APPEND_COMMENT'
+export const APPEND_REPLY = 'APPEND_REPLY'

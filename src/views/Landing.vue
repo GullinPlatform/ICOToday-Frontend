@@ -125,7 +125,7 @@
             </div>
         </section>
         <!-- ======== @Region: #content ======== -->
-        <div id="content" class="pt-5 pb-6 bg-white pos-relative pos-zindex-10">
+        <div id="content" class="pb-6 bg-white pos-relative pos-zindex-10">
             <!-- Main content -->
             <div class="container pb-6">
                 <div class="row">
@@ -158,32 +158,33 @@
                             <div class="product-card product-list"
                                  v-for="project in posts"
                                  v-if="loaded&&project.status===1">
-                                <a class="product-thumb" @click="postModal(project.id)">
+                                <a class="product-thumb" href="#" @click="postModal(project.id)">
                                     <img :src="project.logo_image" alt="Logo">
                                 </a>
                                 <div class="product-info">
                                     <h3 class="product-title">
-                                        <a @click="postModal(project.id)"> {{project.title}}
+                                        <a href="#" @click="postModal(project.id)"> {{project.title}}
                                         </a>
-                                        <span class="text-sm text-info ml-2">{{project.rating}}/100</span>
+                                        <span class="float-right text-bold text-info ml-2">{{project.rating}}/100</span>
                                     </h3>
 
                                     <h4 class="product-price">
                                         {{formatTime(project.start_datetime, project.end_datetime)}}</h4>
                                     <p> {{project.description_short}}</p>
-                                    <div class="progress mb-1">
-                                        <div class="progress-bar bg-info" role="progressbar"
-                                             style="width: 70%; height: 5px;"
-                                             aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <div class="product-buttons">
-                                        <button class="btn btn-outline-danger btn-sm">
-                                            <span><i class="fa fa-star-o"></i> Mark for me</span>
-                                        </button>
-                                        <router-link :to="{name:'post', params:{id: project.id}}"
-                                                     class="btn btn-outline-primary text-uppercase btn-sm">
-                                            <span>DETAIL</span>
-                                        </router-link>
+                                    <div class="row">
+                                        <div class="col-sm-8">
+                                            ICO Process
+                                            <div class="progress">
+                                                <div class="progress-bar bg-info" role="progressbar"
+                                                     style="width: 70%; height: 5px;"
+                                                     aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 float-right">
+                                            <button class="btn btn-outline-danger btn-sm float-right">
+                                                <span><i class="fa fa-star-o"></i> Mark for me</span>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -247,7 +248,6 @@
         /* global $:true */
         this.$store.dispatch('getPost', id)
           .then(() => {
-            this.$store.dispatch('getTeam', id)
             $('#post-modal').modal('show')
           })
       }

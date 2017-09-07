@@ -4220,7 +4220,7 @@ a.list-group-item {
     z-index: 9100;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1200px) {
     .modal-xlg {
         max-width: 1200px;
     }
@@ -7564,4 +7564,17 @@ video {
 .entry-share .social-button {
     margin-right: 0;
     margin-left: 8px;
+}
+
+/* Customize */
+@media (max-width: 991px) {
+    .post-modal > .col-lg-8 {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    .post-modal > .col-lg-4 {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
 }
