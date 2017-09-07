@@ -6,6 +6,9 @@
                 <div class="column">
                     <h1>
                         {{post.title}}
+                        <button class="btn btn-outline-danger btn-sm ml-3">
+                        <span><i class="fa fa-star-o"></i> Mark for me</span>
+                    </button>
                     </h1>
                 </div>
                 <div class="column">
@@ -28,400 +31,266 @@
         <!-- Page Content-->
         <div class="container padding-bottom-3x mb-2">
             <div class="container">
-                <div class="example-modal">
-                    <div class="modal">
-                        <div class="modal-dialog modal-xlg" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <div class="media">
-                                        <img class="d-flex rounded mr-3" :src="post.logo_image" width="75" alt="Media">
-                                        <div class="media-body">
-                                            <h6 class="mt-0 mb-1">{{post.title}}  <span class="text-sm text-info ml-2">{{post.rating}}/100</span>
 
-                                            </h6>
-                                            <span class="d-block text-sm text-muted">
-                                               {{post.description_short}}
-                                            </span>
-                                        </div>
-                                    </div>
+                <div class="row post-modal ml-3 mr-3 mb-3">
+                    <div class="col-lg-8 pl-0">
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe src="http://www.youtube.com/embed/bwj2s_5e12U"
+                                    class="embed-responsive-item"
+                                    allowfullscreen>
+                            </iframe>
 
-                                    <p class="mb-0">
-                                        <button class="btn btn-outline-danger btn-sm">
-                                            <span><i class="fa fa-star-o"></i> Mark for me</span>
-                                        </button>
-                                        <router-link :to="{name:'post', params:{id:post.id}}"
-                                                     class="btn btn-outline-primary btn-sm mr-2">
-                                            Go To Full Page
-                                        </router-link>
-                                    </p>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row justify-content-center">
-                                        <div class="col-md-8">
-                                            <div class="embed-responsive embed-responsive-16by9">
-                                                <iframe src="http://www.youtube.com/embed/bwj2s_5e12U"
-                                                        class="embed-responsive-item"
-                                                        allowfullscreen>
-                                                </iframe>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row justify-content-center">
-                                        <a class="social-button shape-circle" href="#"><i class="fa fa-slack"></i></a>
-                                        <a class="social-button shape-circle" href="#"><i
-                                                class="socicon-twitter"></i></a>
-                                        <a class="social-button shape-circle" href="#"><i class="socicon-telegram"></i></a>
-                                        <a class="social-button shape-circle" href="#"><i
-                                                class="socicon-medium"></i></a>
-                                    </div>
-                                    <div class="row justify-content-center">
-                                        <a class="btn btn-outline-secondary btn-sm"><i class="fa fa-file-o"></i>
-                                            White paper</a>
-                                        <a class="btn btn-outline-secondary btn-sm"><i class="fa fa-globe"></i> Website</a>
-                                    </div>
-                                    <div class="ml-5 mr-5">
-                                        <h3 class="text-left">Description</h3>
-                                        <p>{{post.description_full}}</p>
-                                        <h3 class="text-left">Financial</h3>
-                                        <p></p>
-                                        <h3 class="text-left">Team</h3>
-                                        <div class="row">
-                                            <div class="col-md-3 col-sm-6 mb-3 text-center"
-                                                 v-for="member in current_team_members"
-                                                 v-if="!member.is_advisor">
-                                                <img class="img-thumbnail rounded-circle mb-2" height="100" width="100"
-                                                     :src="member.avatar" alt="Team Member">
-                                                <h6>{{member.first_name}} {{member.last_name}}</h6>
-                                                <p class="text-muted mb-2">{{member.title}}</p>
-                                                <div class="social-bar">
-                                                    <a :href="member.twitter" class="social-link branding-twitter"
-                                                       v-if="member.twitter">
-                                                        <i class="fa fa-twitter"></i>
-                                                    </a>
-                                                    <a :href="member.linkedin" class="social-link branding-linkedin"
-                                                       v-if="member.linkedin">
-                                                        <i class="fa fa-linkedin-square"></i>
-                                                    </a>
-                                                    <a :href="member.telegram" class="social-link branding-linkedin"
-                                                       v-if="member.telegram">
-                                                        <i class="fa fa-telegram"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h3 class="text-left">Advisors</h3>
-                                        <div class="row">
-                                            <div class="col-md-3 col-sm-6 mb-3 text-center"
-                                                 v-for="member in current_team_members"
-                                                 v-if="member.is_advisor">
-                                                <img class="img-thumbnail rounded-circle mb-2" height="100" width="100"
-                                                     :src="member.avatar" alt="Team Member">
-                                                <h6>{{member.first_name}} {{member.last_name}}</h6>
-                                                <p class="text-muted mb-2">{{member.title}}</p>
-                                                <div class="social-bar">
-                                                    <a :href="member.twitter" class="social-link branding-twitter"
-                                                       v-if="member.twitter">
-                                                        <i class="fa fa-twitter"></i>
-                                                    </a>
-                                                    <a :href="member.linkedin" class="social-link branding-linkedin"
-                                                       v-if="member.linkedin">
-                                                        <i class="fa fa-linkedin-square"></i>
-                                                    </a>
-                                                    <a :href="member.telegram" class="social-link branding-linkedin"
-                                                       v-if="member.telegram">
-                                                        <i class="fa fa-telegram"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h3 class="text-left">Comments</h3>
-                                        <ul class="comment mt-3 pl-3">
-                                            <li class="media mb-3 pos-relative">
-                                                <a href="#">
-                                                    <img :src="me.info.avatar"
-                                                         class="d-flex rounded-circle align-self-start mr-4" width="55">
-                                                </a>
-                                                <div class="media-body">
-                                                    <h6 class="comment-title">Francis Burton</h6>
-                                                    <p class="mb-1">
-                                                        amet urna integer urna enim, sit arcu pid in nec?amet urna integer
-                                                        urna enim, sit arcu pid in nec?amet urna integer urna enim, sit
-                                                        arcu pid in nec?amet urna integer urna enim, sit arcu pid in nec?</p>
-                                                    <p>
-                                                    <span class="float-right">
-                                                        <a class="reply-link" href="#">
-                                                            <i class="icon-reply"></i>Reply
-                                                        </a>
-                                                    </span>
-                                                        <i class="fa fa-calendar"></i> Sat 3rd Jun 2017
-                                                    </p>
-                                                    <!-- Nested reply area-->
-                                                    <div class="media mt-4 mb-2 pos-relative">
-                                                        <a href="#">
-                                                            <img :src="me.info.avatar"
-                                                                 class="d-flex rounded-circle align-self-start mr-4"
-                                                                 width="55">
-                                                        </a>
-                                                        <div class="media-body">
-                                                             <textarea rows="4" class="form-control"
-                                                                       id="comment"
-                                                                       placeholder="Comment"></textarea>
-
-                                                        </div>
-
-                                                        <button type="submit" class="ml-4 btn btn-sm btn-primary">
-                                                            Reply
-                                                        </button>
-                                                    </div>
-
-                                                    <!-- Nested media object -->
-                                                    <div class="media mt-4 mb-2 pos-relative">
-                                                        <a href="#">
-                                                            <img :src="me.info.avatar"
-                                                                 class="d-flex rounded-circle align-self-start mr-4"
-                                                                 width="55">
-                                                        </a>
-                                                        <div class="media-body">
-                                                            <h6 class="comment-title">Francis Burton</h6>
-                                                            <p class="mb-1">
-                                                                amet urna integer urna enim, sit arcu pid in nec?amet urna integer u
-                                                                rna enim, sit arcu pid in nec?amet urna integer urna enim, sit arcu p
-                                                                id in nec?amet urna integer urna enim, sit arcu pid in nec?</p>
-                                                            <i class="fa fa-calendar"></i> Sat 3rd Jun 2017
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                        <div class="row">
-                                            <div class="col-md-1 mb-2">
-                                                <a href="#">
-                                                    <img :src="me.info.avatar"
-                                                         class="d-flex rounded-circle align-self-start mr-4" width="55">
-                                                </a>
-                                            </div>
-                                            <div class="col-md-11 mb-2">
-                                                <label class="sr-only" for="comment-comment">Comment</label>
-                                                <textarea rows="4" class="form-control" id="comment-comment"
-                                                          placeholder="Comment"></textarea>
-                                            </div>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary float-right">Submit</button>
-                                    </div>
-                                </div>
+                        </div>
+                        <p class="text-center">
+                            <a class="social-button shape-circle" href="#"><i class="fa fa-slack"></i></a>
+                            <a class="social-button shape-circle" href="#"><i
+                                    class="socicon-twitter"></i></a>
+                            <a class="social-button shape-circle" href="#"><i class="socicon-telegram"></i></a>
+                            <a class="social-button shape-circle" href="#"><i
+                                    class="socicon-medium"></i></a>
+                        </p>
+                    </div>
+                    <div class="col-lg-4 pr-0">
+                        <section>
+                            <h3 class="widget-title mb-2">Rating</h3>
+                            <h2 class="text-bold text-info text-center">{{post.rating}}/100</h2>
+                        </section>
+                        <section>
+                            <h3 class="widget-title mb-2">Start Time</h3>
+                            <h3>
+                                {{formatTime(post.start_datetime, post.end_datetime)}}
+                            </h3>
+                        </section>
+                        <section>
+                            <h3 class="widget-title mb-2">Progress</h3>
+                            200/5000 ETH Raised
+                            <div class="progress mb-3">
+                                <div class="progress-bar bg-info" role="progressbar"
+                                     style="width: 70%; height: 5px;"
+                                     aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class=" py-lg-7 bg-grey-dark text-center overlay overlay-op-7"
-                             data-bg-img="assets/img/backgrounds/ysvazfxdz_8-alvaro-serrano.jpg">
-                            <h2 class="text-uppercase font-weight-bold m-0 text-white">Simple Background Overlay</h2>
-                        </div>
-                    </div>
-                    <div class="col-lg-8">
-                        <div class="card  mb-4">
-                            <!-- Content -->
-                            <div class="card-block p-4 pos-relative">
-                                <!-- Product details -->
-                                <p class="text-muted text-uppercase text-xs mb-0">
-                                    <span class="text-primary">{{post.tags[0]}}</span>
-                                </p>
-
-
-                                <h3 class="card-title mb-2 mt-2">
-                                    {{post.title}}   <a class="btn btn-primary"
-                                                        v-if="post.team.id===me.info.team.id&&post.status===0">Edit</a>
-                                </h3>
-
-                                <div class="product-offer-countdown">
-                                    <p class="mb-t mb-0">ICO Ends: {{post.end_datetime}}</p>
-                                    <div class="countdown">
-                                    </div>
-                                </div>
-                                <div class="pos-md-absolute pos-t pos-r mr-8 mt-3 text-md-right">
-
-                                </div>
-                                <hr class="my-3"/>
-                                <span class="text-muted text-sm">
-                            70%
-                        </span>
-                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success w-70"
-                                     role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-                                <h4 class="font-weight-bold text-primary">
-                                    GOAL {{post.maximum_goal}} {{post.coin_type}}
-                                </h4>
-                                <hr class="my-3">
-                                <button @click="mark()" class="btn btn-primary btn-sm">
-                                    <i class="fa fa-star mr-2"></i> Mark for me
-                                </button>
-                                <a :href="post.website" class="btn btn-link">
-                                    <i class="fa fa-globe text-primary ml-md-3"></i> Website
-                                </a>
-                                <div class="pos-md-absolute pos-t pos-r mr-4 mt-3 text-md-right">
-                                    <i class="fa fa-star text-primary"></i> <i class="fa fa-star text-primary"></i> <i
-                                        class="fa fa-star text-primary"></i> <i class="fa fa-star text-primary"></i> <i
-                                        class="fa fa-star text-primary"></i>
-                                    <p class="my-0 text-xs">10 reviews | <a href="#reviews">write review</a></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-12 mt-5">
-
-                    <h3>
-                        Project Detail
-                    </h3>
-                    <p> {{post.description_short}}</p>
-                    <hr class="my-3">
-                    <h3>
-                        White Paper
-                    </h3>
-                    <p><a :href="post.white_paper">White Paper</a></p>
-                    <hr class="my-3">
-                    <h3>
-                        Video
-                    </h3>
-                    <p class="text-center">
-
-                    </p>
-                    <hr class="my-3">
-                    <h3>
-                        Team
-                    </h3>
-                    <div class="team team-grid mt-4">
-                        <div class="row" data-toggle="isotope-grid">
-                            <!--Team Member -->
-                            <div class="col-6 col-sm-4 col-md-3 grid-item" v-for="member in current_team_members"
-                                 v-if="!member.is_advisor">
-                                <div class="team-member">
-                                    <a href="team-member.htm">
-                                        <img :src="member.avatar" class="img-thumbnail">
-                                    </a>
-                                    <h5 class="name">
-                                        <a href="team-member.htm">{{member.first_name}} {{member.last_name}}</a>
-
-                                    </h5>
-                                    <p class="role">{{member.title}}</p>
-                                    <div class="social-media-branding social-media-branding-xs">
-                                        <a :href="member.twitter" class="social-link branding-twitter"
-                                           v-if="member.twitter">
-                                            <i class="fa fa-twitter"></i>
-                                        </a>
-                                        <!--<a :href="member.slack" class="social-link branding-facebook"-->
-                                        <!--v-if="member.slack">-->
-                                        <!--<i class="fa fa-slack"></i>-->
-                                        <!--</a>-->
-                                        <a :href="member.linkedin" class="social-link branding-linkedin"
-                                           v-if="member.linkedin">
-                                            <i class="fa fa-linkedin-square"></i>
-                                        </a>
-                                        <a :href="member.telegram" class="social-link branding-linkedin"
-                                           v-if="member.telegram">
-                                            <i class="fa fa-telegram"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <hr class="my-5">
-                    <h3>
-                        Advisors
-                    </h3>
-                    <div class="team team-grid mt-4">
-                        <div class="row" data-toggle="isotope-grid">
-                            <!--Team Advisors -->
-                            <div class="col-6 col-sm-4 col-md-3 grid-item" v-for="member in current_team_members"
-                                 v-if="member.is_advisor">
-                                <div class="team-member">
-                                    <a href="team-member.htm">
-                                        <img :src="member.avatar" class="img-thumbnail">
-                                    </a>
-                                    <h5 class="name">
-                                        <a href="team-member.htm">{{member.first_name}} {{member.last_name}}</a>
-                                    </h5>
-                                    <p class="role">{{member.title}}</p>
-                                    <div class="social-media-branding social-media-branding-xs">
-                                        <a :href="member.twitter" class="social-link branding-twitter"
-                                           v-if="member.twitter">
-                                            <i class="fa fa-twitter"></i>
-                                        </a>
-                                        <a :href="member.slack" class="social-link branding-facebook"
-                                           v-if="member.slack">
-                                            <i class="fa fa-slack"></i>
-                                        </a>
-                                        <a :href="member.linkedin" class="social-link branding-linkedin"
-                                           v-if="member.linkedin">
-                                            <i class="fa fa-linkedin-square"></i>
-                                        </a>
-                                        <a :href="member.telegram" class="social-link branding-linkedin"
-                                           v-if="member.telegram">
-                                            <i class="fa fa-telegram"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <hr class="my-5">
-                    <h3>
-                        Comments
-                    </h3>
-                    <ul class="comment mt-3 pl-3">
-                        <li class="media mb-3 pos-relative">
-                            <a href="#">
-                                <img :src="me.info.avatar"
-                                     class="d-flex rounded-circle align-self-start mr-4" width="55">
+                        </section>
+                        <section class="mt-5">
+                            <a class="btn btn-outline-primary btn-sm btn-block text-primary"
+                               :href="post.white_paper">
+                                <i class="fa fa-file-o"></i>
+                                White paper
                             </a>
-                            <div class="media-body">
-                                <h6 class="comment-title">Francis Burton</h6>
+                            <a class="btn btn-outline-secondary btn-sm btn-block" :href="post.website">
+                                <a><i class="fa fa-globe"></i> Website</a>
+                            </a>
+                        </section>
+                    </div>
+                </div>
 
-                                <p class="mb-1">
-                                    amet urna integer urna enim, sit arcu pid in nec?amet urna integer
-                                    urna enim, sit arcu pid in nec?amet urna integer urna enim, sit
-                                    arcu pid in nec?amet urna integer urna enim, sit arcu pid in nec?</p>
-                                <p>
-                                    <span class="float-right">
-                                        <a class="reply-link" href="#">
+                <div class="row ml-3 mr-3">
+                    <!-- Description -->
+                    <div class="col-lg-8 pl-0">
+                        <section>
+                            <h3 class="text-left">Description</h3>
+                            <p>{{post.description_full}}</p>
+                        </section>
+                    </div>
+                    <!-- Financial -->
+                    <div class="col-lg-4 pr-0">
+                        <h3 class="text-left">Financial</h3>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
+                                <tr>
+                                    <td class="text-bold pl-1">Token Name</td>
+                                    <td>Anna</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-bold pl-1">Soft Cap</td>
+                                    <td>Cabana</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-bold pl-1">Hard Cap</td>
+                                    <td>Thornton</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-bold pl-1">Bonus</td>
+                                    <td>Thornton</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-bold pl-1">Equity on offer</td>
+                                    <td>Thornton</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-bold pl-1">Accepting</td>
+                                    <td>Thornton</td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row ml-3 mr-3">
+                    <!-- Team -->
+                    <div class="col-lg-12 pl-0 pr-0">
+                        <h3 class="text-left">Team</h3>
+                        <div class="row" v-if="team_loaded">
+                            <div class="col-md-3 col-sm-6 mb-3 text-center"
+                                 v-for="member in current_team_members"
+                                 v-if="!member.is_advisor">
+                                <img class="img-thumbnail rounded-circle mb-2" height="100" width="100"
+                                     :src="member.avatar" alt="Team Member">
+                                <h6>{{member.first_name}} {{member.last_name}}</h6>
+                                <p class="text-muted mb-2">{{member.title}}</p>
+                                <div class="social-bar">
+                                    <a :href="member.twitter" class="social-link branding-twitter"
+                                       v-if="member.twitter">
+                                        <i class="fa fa-twitter"></i>
+                                    </a>
+                                    <a :href="member.linkedin" class="social-link branding-linkedin"
+                                       v-if="member.linkedin">
+                                        <i class="fa fa-linkedin-square"></i>
+                                    </a>
+                                    <a :href="member.telegram" class="social-link branding-linkedin"
+                                       v-if="member.telegram">
+                                        <i class="fa fa-telegram"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row ml-3 mr-3">
+                    <!-- Advisors -->
+                    <div class="col-lg-12 pl-0 pr-0">
+                        <h3 class="text-left">Advisors</h3>
+                        <div class="row" v-if="team_loaded">
+                            <div class="col-md-3 col-sm-6 mb-3 text-center"
+                                 v-for="member in current_team_members"
+                                 v-if="member.is_advisor">
+                                <img class="img-thumbnail rounded-circle mb-2" height="100" width="100"
+                                     :src="member.avatar" alt="Team Member">
+                                <h6>{{member.first_name}} {{member.last_name}}</h6>
+                                <p class="text-muted mb-2">{{member.title}}</p>
+                                <div class="social-bar">
+                                    <a :href="member.twitter" class="social-link branding-twitter"
+                                       v-if="member.twitter">
+                                        <i class="fa fa-twitter"></i>
+                                    </a>
+                                    <a :href="member.linkedin" class="social-link branding-linkedin"
+                                       v-if="member.linkedin">
+                                        <i class="fa fa-linkedin-square"></i>
+                                    </a>
+                                    <a :href="member.telegram" class="social-link branding-linkedin"
+                                       v-if="member.telegram">
+                                        <i class="fa fa-telegram"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row ml-3 mr-3">
+                    <!-- Comments -->
+                    <div class="col-lg-12 pl-0 pr-0">
+                        <h3 class="text-left">Comments</h3>
+                        <ul class="comment mt-3 pl-3" v-if="comments_loaded">
+                            <li class="media mb-3 pos-relative" v-for="comment in current_post_comments">
+                                <img :src="comment.creator.info.avatar"
+                                     class="d-flex rounded-circle align-self-start mr-4" width="55">
+                                <div class="media-body">
+                                    <h6 class="comment-title">{{commentCreatorName(comment.creator)}}
+                                        <span class="badge badge-primary" v-if="is_team_member">Team Member</span>
+                                    </h6>
+                                    <p class="mb-1">
+                                        {{comment.content}}
+                                    </p>
+                                    <p>
+                                        <i class="fa fa-calendar"></i> {{comment.created}}
+                                        <a class="reply-link float-right" href="#" v-if="login_status"
+                                           @click="reply_comment_box_index=comment.id;reply_comment_box_show=true">
                                             <i class="icon-reply"></i>Reply
                                         </a>
-                                    </span>
-                                    <i class="fa fa-calendar"></i> Sat 3rd Jun 2017
-                                </p>
-                                <!-- Nested media object -->
-                                <div class="media mt-4 mb-2 pos-relative">
-                                    <a href="#">
-                                        <img :src="me.info.avatar"
-                                             class="d-flex rounded-circle align-self-start mr-4" width="55">
-                                    </a>
-                                    <div class="media-body">
-                                        <h6 class="comment-title">Francis Burton</h6>
-                                        <h5 class="mt-0 mb-2">
-                                            amet urna integer urna enim, sit arcu pid in nec?
-                                        </h5>
-                                        <p class="mb-1">
-                                            amet urna integer urna enim, sit arcu pid in nec?amet urna integer u
-                                            rna enim, sit arcu pid in nec?amet urna integer urna enim, sit arcu p
-                                            id in nec?amet urna integer urna enim, sit arcu pid in nec?</p>
-                                        <i class="fa fa-calendar"></i> Sat 3rd Jun 2017
+                                        <a class="reply-link float-right mr-3" href="#"
+                                           v-if="comment.creator.id===me.id"
+                                           @click="preDeleteComment(comment.id)">
+                                            <i class="fa fa-times"></i>
+                                            <span v-if="delete_comment_id===comment.id">Cancel</span>
+                                            <span v-else>delete</span>
+                                        </a>
+                                        <a class="reply-link text-danger float-right mr-3" href="#"
+                                           v-if="delete_comment_id===comment.id"
+                                           @click="deleteComment(comment.id)">
+                                            <i class="fa fa-times"></i>This will delete all replies, confirm?
+                                        </a>
+                                    </p>
+                                    <!-- Nested reply area-->
+                                    <div class="row"
+                                         v-if="reply_comment_box_show&&reply_comment_box_index===comment.id">
+                                        <div class="col-md-12 mb-2">
+                                              <textarea rows="4" class="form-control" v-model="new_reply"
+                                                        placeholder="Reply"></textarea>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <button class="btn btn-sm btn-primary float-right"
+                                                    @click="newReply(comment.id)">
+                                                Reply
+                                            </button>
+                                            <button class="btn btn-sm btn-secondary float-right"
+                                                    @click="reply_comment_box_show=!reply_comment_box_show">
+                                                Cancel
+                                            </button>
+                                        </div>
+                                    </div>
 
+                                    <!-- Nested media object -->
+                                    <div class="media mt-4 mb-2 pos-relative" v-for="reply in comment.replies">
+                                        <img :src="reply.creator.info.avatar"
+                                             class="d-flex rounded-circle align-self-start mr-4"
+                                             width="55">
+                                        <div class="media-body">
+                                            <h6 class="comment-title">{{commentCreatorName(reply.creator)}}
+                                                <span class="badge badge-primary"
+                                                      v-if="is_team_member">Team Member</span>
+                                            </h6>
+                                            <p class="mb-1">
+                                                {{reply.content}}
+                                            </p>
+                                            <p>
+                                                <i class="fa fa-calendar"></i> {{reply.created}}
+                                                <a class="reply-link float-right mr-3" href="#"
+                                                   v-if="reply.creator.id===me.id"
+                                                   @click="preDeleteComment(reply.id)">
+                                                    <i class="fa fa-times"></i>
+                                                    <span v-if="delete_comment_id===reply.id">Cancel</span>
+                                                    <span v-else>delete</span>
+                                                </a>
+                                                <a class="reply-link text-danger float-right mr-3" href="#"
+                                                   v-if="delete_comment_id===reply.id"
+                                                   @click="deleteComment(reply.id)">
+                                                    <i class="fa fa-times"></i>Confirm
+                                                </a>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
+                            </li>
+                        </ul>
+                        <div class="row" v-if="login_status">
+                            <div class="col-md-12 mb-2">
+                                <label class="sr-only">Comment</label>
+                                <textarea rows="4" class="form-control" v-model="new_comment"
+                                          placeholder="Comment"></textarea>
                             </div>
-                        </li>
-                    </ul>
-                    <form id="reviews-form" class="comment-form mt-3 p-3 bg-white rounded clearfix">
-
-                    </form>
+                        </div>
+                        <button @click="newComment()" v-if="login_status" class="btn btn-primary float-right">
+                            Submit
+                        </button>
+                        <button class="btn btn-sm btn-outline-secondary float-right" data-toggle="modal"
+                                data-dismiss="modal" data-target="#login-modal"
+                                v-if="!login_status">Login to leave comment
+                        </button>
+                    </div>
                 </div>
+
             </div>
-            <!-- /container -->
-            <!--<hr class="mb-0"/>-->
         </div>
     </div>
 </template>
@@ -431,20 +300,22 @@
 
   export default {
     name: 'Post',
-    head: {
-      title () {
-        return {
-          inner: 'ICOToday',
-          complement: this.post.title
-        }
-      }
-    },
     components: {
       'vue-markdown': VueMarkdown
     },
     data () {
       return {
-        tab_index: 0
+        new_reply: '',
+        new_comment: '',
+        delete_comment_id: 0,
+
+        // UI Control
+        reply_comment_box_show: false,
+        reply_comment_box_index: -1,
+
+        // Data Load Trigger
+        team_loaded: false,
+        comments_loaded: false
       }
     },
     methods: {
@@ -454,6 +325,57 @@
       mark () {
         this.$store.dispatch('markQuestion', this.$route.params.id)
       },
+      formatTime (start, end) {
+        /* global moment:true */
+        // Haven't start
+        if (moment().diff(start, 'minutes') < 0) {
+          return moment(start).format('MMM DD hh:mm')
+        } else {
+          return moment(end).format('MMM DD hh:mm')
+        }
+      },
+      commentCreatorName (creator) {
+        if (creator.info.first_name && creator.info.last_name) {
+          return creator.info.first_name + ' ' + creator.info.last_name
+        } else {
+          return creator.email
+        }
+      },
+      newComment () {
+        const formData = {
+          pk: this.post.id,
+          content: this.new_comment
+        }
+        this.$store.dispatch('postComment', formData)
+          .then(() => {
+            this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'You have posted new comment!'})
+            this.new_comment = ''
+          })
+      },
+      newReply (comment_id) {
+        const formData = {
+          pk: comment_id,
+          content: this.new_reply
+        }
+        this.$store.dispatch('replyComment', formData)
+          .then(() => {
+            this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'You have posted new comment!'})
+            this.new_reply = ''
+            // UI Control
+            this.reply_comment_box_show = false
+            this.reply_comment_box_index = -1
+          })
+      },
+      preDeleteComment (comment_id) {
+        this.delete_comment_id === 0 ? this.delete_comment_id = comment_id : this.delete_comment_id = 0
+      },
+      deleteComment (comment_id) {
+        this.$store.dispatch('deleteComment', comment_id)
+          .then(() => {
+            this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'You removed your comment!'})
+            this.new_comment = ''
+          })
+      },
     },
     computed: {
       post () {
@@ -462,20 +384,36 @@
       current_team_members () {
         return this.$store.getters.current_team_members
       },
+      current_post_comments () {
+        return this.$store.getters.current_post_comments
+      },
       login_status () {
         return this.$store.getters.login_status
       },
       me () {
         return this.$store.getters.self
       },
+      is_team_member () {
+        for (let member of this.current_team_members) {
+          if (this.me.info.id === member.id) {
+            return true
+          }
+        }
+        return false
+      }
     },
     beforeCreate () {
-      this.$store.dispatch('getPost', this.$route.params.id)
-        .then(() => {
-          this.$store.dispatch('getTeam', this.post.team.id)
-        })
-        .catch(() => {
+      this.team_loaded = false
+      this.comments_loaded = false
 
+      this.$store.dispatch('getComments', this.$store.getters.current_post.id)
+        .then(() => {
+          this.comments_loaded = true
+        })
+
+      this.$store.dispatch('getTeam', this.$store.getters.current_post.team.id)
+        .then(() => {
+          this.team_loaded = true
         })
     }
   }

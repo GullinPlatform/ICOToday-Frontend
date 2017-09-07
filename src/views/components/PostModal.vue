@@ -6,8 +6,8 @@
                     <div class="media">
                         <img class="d-flex rounded mr-3" :src="post.logo_image" width="75" alt="Media">
                         <div class="media-body">
-                            <h6 class="mt-0 mb-1">{{post.title}}  <span class="text-bold text-info ml-2">{{post.rating}}/100</span>
-                            </h6>
+                            <h3 class="mt-0 mb-1 text-bold">{{post.title}}
+                            </h3>
                             <span class="d-block text-sm text-muted">
                                 {{post.description_short}}
                             </span>
@@ -15,10 +15,10 @@
                     </div>
 
                     <p class="mb-0">
-                        <a class="btn btn-outline-secondary btn-sm">
-                            <a><i class="fa fa-globe"></i> Website</a>
-                        </a>
-                        <router-link :to="{name:'post', params:{id:post.id}}"
+                        <button class="btn btn-outline-danger btn-sm">
+                            <span><i class="fa fa-star-o"></i> Mark for me</span>
+                        </button>
+                        <router-link :to="{name:'post', params:{id:post.id}}" data-dismiss="modal"
                                      class="btn btn-outline-primary btn-sm mr-2">
                             Go To Full Page
                         </router-link>
@@ -32,17 +32,21 @@
                                         class="embed-responsive-item"
                                         allowfullscreen>
                                 </iframe>
+
                             </div>
+                            <p class="text-center">
+                                <a class="social-button shape-circle" href="#"><i class="fa fa-slack"></i></a>
+                                <a class="social-button shape-circle" href="#"><i
+                                        class="socicon-twitter"></i></a>
+                                <a class="social-button shape-circle" href="#"><i class="socicon-telegram"></i></a>
+                                <a class="social-button shape-circle" href="#"><i
+                                        class="socicon-medium"></i></a>
+                            </p>
                         </div>
                         <div class="col-lg-4 pr-0">
                             <section>
-                                <a class="btn btn-outline-primary btn-sm btn-block text-primary">
-                                    <i class="fa fa-file-o"></i>
-                                    White paper
-                                </a>
-                                <button class="btn btn-outline-danger btn-sm btn-block">
-                                    <span><i class="fa fa-star-o"></i> Mark for me</span>
-                                </button>
+                                <h3 class="widget-title mb-2">Rating</h3>
+                                <h2 class="text-bold text-info text-center">{{post.rating}}/100</h2>
                             </section>
                             <section>
                                 <h3 class="widget-title mb-2">Start Time</h3>
@@ -59,35 +63,66 @@
                                          aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </section>
-
-                            <section>
-                                <h3 class="widget-title mb-2">Social Media</h3>
-                                <a class="social-button shape-circle" href="#"><i class="fa fa-slack"></i></a>
-                                <a class="social-button shape-circle" href="#"><i
-                                        class="socicon-twitter"></i></a>
-                                <a class="social-button shape-circle" href="#"><i class="socicon-telegram"></i></a>
-                                <a class="social-button shape-circle" href="#"><i
-                                        class="socicon-medium"></i></a>
+                            <section class="mt-5">
+                                <a class="btn btn-outline-primary btn-sm btn-block text-primary"
+                                   :href="post.white_paper">
+                                    <i class="fa fa-file-o"></i>
+                                    White paper
+                                </a>
+                                <a class="btn btn-outline-secondary btn-sm btn-block" :href="post.website">
+                                    <a><i class="fa fa-globe"></i> Website</a>
+                                </a>
                             </section>
-
                         </div>
                     </div>
 
-                    <div class="ml-3 mr-3">
+                    <div class="row ml-3 mr-3">
                         <!-- Description -->
-                        <section>
-                            <h3 class="text-left">Description</h3>
-                            <p>{{post.description_full}}</p>
-                        </section>
-
+                        <div class="col-lg-8 pl-0">
+                            <section>
+                                <h3 class="text-left">Description</h3>
+                                <p>{{post.description_full}}</p>
+                            </section>
+                        </div>
                         <!-- Financial -->
-                        <section>
+                        <div class="col-lg-4 pr-0">
                             <h3 class="text-left">Financial</h3>
-                            <p></p>
-                        </section>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <td class="text-bold pl-1">Token Name</td>
+                                        <td>Anna</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-bold pl-1">Soft Cap</td>
+                                        <td>Cabana</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-bold pl-1">Hard Cap</td>
+                                        <td>Thornton</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-bold pl-1">Bonus</td>
+                                        <td>Thornton</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-bold pl-1">Equity on offer</td>
+                                        <td>Thornton</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-bold pl-1">Accepting</td>
+                                        <td>Thornton</td>
+                                    </tr>
 
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row ml-3 mr-3">
                         <!-- Team -->
-                        <section>
+                        <div class="col-lg-12 pl-0 pr-0">
                             <h3 class="text-left">Team</h3>
                             <div class="row" v-if="team_loaded">
                                 <div class="col-md-3 col-sm-6 mb-3 text-center"
@@ -113,10 +148,11 @@
                                     </div>
                                 </div>
                             </div>
-                        </section>
-
+                        </div>
+                    </div>
+                    <div class="row ml-3 mr-3">
                         <!-- Advisors -->
-                        <section>
+                        <div class="col-lg-12 pl-0 pr-0">
                             <h3 class="text-left">Advisors</h3>
                             <div class="row" v-if="team_loaded">
                                 <div class="col-md-3 col-sm-6 mb-3 text-center"
@@ -142,10 +178,11 @@
                                     </div>
                                 </div>
                             </div>
-                        </section>
-
+                        </div>
+                    </div>
+                    <div class="row ml-3 mr-3">
                         <!-- Comments -->
-                        <section>
+                        <div class="col-lg-12 pl-0 pr-0">
                             <h3 class="text-left">Comments</h3>
                             <ul class="comment mt-3 pl-3" v-if="comments_loaded">
                                 <li class="media mb-3 pos-relative" v-for="comment in current_post_comments">
@@ -203,7 +240,8 @@
                                                  width="55">
                                             <div class="media-body">
                                                 <h6 class="comment-title">{{commentCreatorName(reply.creator)}}
-                                                    <span class="badge badge-primary" v-if="is_team_member">Team Member</span>
+                                                    <span class="badge badge-primary"
+                                                          v-if="is_team_member">Team Member</span>
                                                 </h6>
                                                 <p class="mb-1">
                                                     {{reply.content}}
@@ -242,7 +280,7 @@
                                     data-dismiss="modal" data-target="#login-modal"
                                     v-if="!login_status">Login to leave comment
                             </button>
-                        </section>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -284,9 +322,9 @@
         /* global moment:true */
         // Haven't start
         if (moment().diff(start, 'minutes') < 0) {
-          return moment(start).format('MM/DD, hh:mm')
+          return moment(start).format('MMM DD hh:mm')
         } else {
-          return moment(end).format('MM/DD, hh:mm')
+          return moment(end).format('MMM DD hh:mm')
         }
       },
       commentCreatorName (creator) {
