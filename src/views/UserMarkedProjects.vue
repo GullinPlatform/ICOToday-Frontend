@@ -2,7 +2,7 @@
     <div>
         <!-- Page Title-->
         <div class="page-title">
-            <div class="container pl-5 pr-5">
+            <div class="container">
                 <div class="column">
                     <h1 v-if="$route.name === 'me' && me.type === 0">
                         My ICO Projects
@@ -29,7 +29,7 @@
             </div>
         </div>
         <!-- Page Content-->
-        <div class="container pl-5 pr-5">
+        <div class="container padding-bottom-3x mb-2">
             <div class="row">
                 <user-header></user-header>
                 <!--main content-->
