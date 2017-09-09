@@ -48,6 +48,7 @@ export const GET_TEAM = 'GET_TEAM'
 export const UPDATE_TEAM = 'UPDATE_TEAM'
 export const ADD_TEAM_MEMBER = 'ADD_TEAM_MEMBER'
 export const REM_TEAM_MEMBER = 'REM_TEAM_MEMBER'
+export const SET_IS_ADVISOR = 'SET_IS_ADVISOR'
 
 // ----- COMMENT -----
 export const GET_COMMENTS = 'GET_COMMENTS'

@@ -4,6 +4,7 @@ import * as types from '../mutation-types'
 // initial state
 const state = {
   team: {},
+  is_advisor: false
 }
 
 const getters = {
@@ -12,9 +13,11 @@ const getters = {
   },
   current_team_members: state => {
     return state.team.members
+  },
+  is_advisor: state => {
+    return state.is_advisor
   }
 }
-
 const actions = {
   getTeam ({commit}, pk) {
     return teamApi.getTeam(pk)
@@ -60,6 +63,9 @@ const actions = {
         return Promise.reject(error)
       })
   },
+  setIsAdvisor ({commit}, is_advisor) {
+    commit(types.SET_IS_ADVISOR, is_advisor)
+  }
 }
 
 const mutations = {
@@ -69,6 +75,10 @@ const mutations = {
   [types.UPDATE_TEAM] (state, response) {},
   [types.ADD_TEAM_MEMBER] (state, response) {},
   [types.REM_TEAM_MEMBER] (state, response) {},
+  [types.SET_IS_ADVISOR] (state, is_advisor) {
+    state.is_advisor = is_advisor
+  },
+
 }
 
 export default {

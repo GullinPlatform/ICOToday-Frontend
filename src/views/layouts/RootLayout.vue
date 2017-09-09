@@ -13,7 +13,6 @@
         <login-modal v-if="!login_status"></login-modal>
         <signup-modal v-if="!login_status"></signup-modal>
         <add-team-member v-if="login_status"></add-team-member>
-        <add-team-advisor v-if="login_status"></add-team-advisor>
         <edit-project v-if="login_status&&me.type==0"></edit-project>
         <update-project v-if="login_status&&me.type==0"></update-project>
         <post-modal></post-modal>
@@ -27,7 +26,6 @@
   import SignupModal from 'components/Signup'
   import LoginModal from 'components/Login'
   import AddTeamMember from 'components/AddTeamMember'
-  import AddTeamAdvisor from 'components/AddTeamAdvisor'
   import EditProject from 'components/EditProject'
   import UpdateProject from 'components/UpdateProject'
   import PostModal from 'components/PostModal'
@@ -41,7 +39,6 @@
       LoginModal,
       SignupModal,
       AddTeamMember,
-      AddTeamAdvisor,
       EditProject,
       UpdateProject,
     },

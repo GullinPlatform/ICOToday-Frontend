@@ -122,8 +122,7 @@
                             </div>
                             <div class="col-md-3 col-sm-6 mb-3 text-center">
                                 <div>
-                                    <a href="" data-toggle="modal" data-target="#add-member-modal"
-                                       data-dismiss="modal">
+                                    <a href="javascript:void(0)" @click="popUpModal(false)">
                                         <img class="rounded-circle mb-2" height="100" width="100"
                                              src="../../static/img/services/add.png" alt="Team Member">
                                     </a>
@@ -162,8 +161,7 @@
                             </div>
                             <div class="col-md-3 col-sm-6 mb-3 text-center">
                                 <div class="team-member">
-                                    <a href="" data-toggle="modal" data-target="#add-advisor-modal"
-                                       data-dismiss="modal">
+                                    <a href="javascript:void(0)" @click="popUpModal(true)">
                                         <img class="rounded-circle mb-2" height="100" width="100"
                                              src="../../static/img/services/add.png" alt="Team Advisor">
                                     </a>
@@ -237,6 +235,11 @@
           })
 
       },
+      popUpModal (is_advisor) {
+        /* global $:true */
+        this.$store.dispatch('setIsAdvisor', is_advisor)
+        $('#add-member-modal').modal('show')
+      }
     },
     mounted () {
       this.name = this.me.info.team.name
