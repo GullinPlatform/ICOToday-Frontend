@@ -27,7 +27,7 @@ export default new Router({
       component: Landing,
       name: 'landing'
     }, {
-      path: '/post/:id',
+      path: '/project/:id',
       component: Post,
       name: 'post'
     }, {
