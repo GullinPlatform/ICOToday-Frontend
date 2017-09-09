@@ -6,25 +6,13 @@
                 <div class="column">
                     <h1>
                         {{post.title}}
-                        <button class="btn btn-outline-danger btn-sm ml-3">
-                            <span><i class="fa fa-star-o"></i> Mark for me</span>
-                        </button>
+
                     </h1>
                 </div>
-                <div class="column">
-                    <ul class="breadcrumbs">
-                        <li>
-                            <router-link :to="{name:'landing'}">Home</router-link>
-                        </li>
-                        <li class="separator">&nbsp;</li>
-                        <li>
-                            <router-link :to="{name:'landing'}">ICO Projects</router-link>
-                        </li>
-                        <li class="separator">&nbsp;</li>
-                        <li>
-                            {{post.title}}
-                        </li>
-                    </ul>
+                <div class="column text-right">
+                    <button class="btn btn-outline-danger btn-sm ml-3">
+                        <span><i class="fa fa-star-o"></i> Mark for me</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -40,11 +28,11 @@
 
                     </div>
                     <p class="text-center">
-                        <a class="social-button shape-circle" href="#"><i class="fa fa-slack"></i></a>
-                        <a class="social-button shape-circle" href="#"><i
+                        <a class="social-button shape-circle" href="javascript:void(0)"><i class="fa fa-slack"></i></a>
+                        <a class="social-button shape-circle" href="javascript:void(0)"><i
                                 class="socicon-twitter"></i></a>
-                        <a class="social-button shape-circle" href="#"><i class="socicon-telegram"></i></a>
-                        <a class="social-button shape-circle" href="#"><i
+                        <a class="social-button shape-circle" href="javascript:void(0)"><i class="socicon-telegram"></i></a>
+                        <a class="social-button shape-circle" href="javascript:void(0)"><i
                                 class="socicon-medium"></i></a>
                     </p>
                 </div>
@@ -202,18 +190,18 @@
                                 </p>
                                 <p>
                                     <i class="fa fa-calendar"></i> {{comment.created}}
-                                    <a class="reply-link float-right" href="#" v-if="login_status"
+                                    <a class="reply-link float-right" href="javascript:void(0)" v-if="login_status"
                                        @click="reply_comment_box_index=comment.id;reply_comment_box_show=true">
                                         <i class="icon-reply"></i>Reply
                                     </a>
-                                    <a class="reply-link float-right mr-3" href="#"
+                                    <a class="reply-link float-right mr-3" href="javascript:void(0)"
                                        v-if="comment.creator.id===me.id"
                                        @click="preDeleteComment(comment.id)">
                                         <i class="fa fa-times"></i>
                                         <span v-if="delete_comment_id===comment.id">Cancel</span>
                                         <span v-else>delete</span>
                                     </a>
-                                    <a class="reply-link text-danger float-right mr-3" href="#"
+                                    <a class="reply-link text-danger float-right mr-3" href="javascript:void(0)"
                                        v-if="delete_comment_id===comment.id"
                                        @click="deleteComment(comment.id)">
                                         <i class="fa fa-times"></i>This will delete all replies, confirm?
@@ -253,14 +241,14 @@
                                         </p>
                                         <p>
                                             <i class="fa fa-calendar"></i> {{reply.created}}
-                                            <a class="reply-link float-right mr-3" href="#"
+                                            <a class="reply-link float-right mr-3" href="javascript:void(0)"
                                                v-if="reply.creator.id===me.id"
                                                @click="preDeleteComment(reply.id)">
                                                 <i class="fa fa-times"></i>
                                                 <span v-if="delete_comment_id===reply.id">Cancel</span>
                                                 <span v-else>delete</span>
                                             </a>
-                                            <a class="reply-link text-danger float-right mr-3" href="#"
+                                            <a class="reply-link text-danger float-right mr-3" href="javascript:void(0)"
                                                v-if="delete_comment_id===reply.id"
                                                @click="deleteComment(reply.id)">
                                                 <i class="fa fa-times"></i>Confirm
