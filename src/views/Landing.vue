@@ -1,39 +1,58 @@
 <template>
     <div>
-
-        <section class="hero-slider" style="background-image: url('../../../static/img/rocket-image.png');">
-            <div class="item">
-                <div class="container padding-top-4x">
-                    <div class="row justify-content-end align-items-right">
-                        <div class="col-lg-4 col-md-6 padding-bottom-2x text-md-left text-center">
-                            <div class="grid-item align-items-right">
-                                <div class="product-card">
-                                    <div class="rating-stars"><i class="icon-star filled"></i><i
-                                            class="icon-star filled"></i><i class="icon-star filled"></i><i
-                                            class="icon-star filled"></i><i class="icon-star filled"></i>
-                                    </div>
-                                    <a class="product-thumb" href="shop-single.html"><img
-                                            src="../../static/img/shop/products/11.jpg" alt="Product"></a>
-                                    <h3 class="product-title"><a href="shop-single.html">Top-Sider Fathom</a></h3>
-                                    <h4 class="product-price">$90.00</h4>
-                                    <div class="product-buttons">
-                                        <button class="btn btn-outline-secondary btn-sm btn-wishlist"
-                                                data-toggle="tooltip" title="Whishlist"><i class="icon-heart"></i>
-                                        </button>
-                                        <button class="btn btn-outline-primary btn-sm" data-toast
-                                                data-toast-type="success" data-toast-position="topRight"
-                                                data-toast-icon="icon-circle-check" data-toast-title="Product"
-                                                data-toast-message="successfuly added to cart!">Add to Cart
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
+        <div id="home" class="landing-title">
+            <div id="particles-js"></div><!-- /.particles div -->
+            <div class="row justify-content-center pt-5">
+                <div class="col-sm-8">
+                    <h1 class="text-white">
+                        A template with a bit of a different <strong>look &amp; feel</strong>.
+                    </h1>
+                    <hr class="bottomReveal">
+                    <p class="bottomReveal">
+                        Particles is a fun and multipurpose template, with clean &amp; modern design <i>+</i>&nbsp;
+                        code.</p>
+                    <a href="#ideology" data-id="ideology" class="scroll-link">
+                        <div class="scroll-indicator rotateBottomReveal">
+                            <span class="ion-mouse"></span><br>
+                            <span class="ion-android-arrow-down arrow-scroll-indicator"></span>
                         </div>
-
-                    </div>
+                    </a>
                 </div>
             </div>
-        </section>
+        </div>
+        <!--<section class="hero-slider">-->
+        <!--<div class="item">-->
+        <!--<div class="container padding-top-4x">-->
+        <!--<div class="row justify-content-end align-items-right">-->
+        <!--<div class="col-lg-4 col-md-6 padding-bottom-2x text-md-left text-center">-->
+        <!--<div class="grid-item align-items-right">-->
+        <!--<div class="product-card">-->
+        <!--<div class="rating-stars"><i class="icon-star filled"></i><i-->
+        <!--class="icon-star filled"></i><i class="icon-star filled"></i><i-->
+        <!--class="icon-star filled"></i><i class="icon-star filled"></i>-->
+        <!--</div>-->
+        <!--<a class="product-thumb" href="shop-single.html"><img-->
+        <!--src="../../static/img/shop/products/11.jpg" alt="Product"></a>-->
+        <!--<h3 class="product-title"><a href="shop-single.html">Top-Sider Fathom</a></h3>-->
+        <!--<h4 class="product-price">$90.00</h4>-->
+        <!--<div class="product-buttons">-->
+        <!--<button class="btn btn-outline-secondary btn-sm btn-wishlist"-->
+        <!--data-toggle="tooltip" title="Whishlist"><i class="icon-heart"></i>-->
+        <!--</button>-->
+        <!--<button class="btn btn-outline-primary btn-sm" data-toast-->
+        <!--data-toast-type="success" data-toast-position="topRight"-->
+        <!--data-toast-icon="icon-circle-check" data-toast-title="Product"-->
+        <!--data-toast-message="successfuly added to cart!">Add to Cart-->
+        <!--</button>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</section>-->
 
         <!-- Featured Products Carousel-->
         <section class="container padding-top-3x padding-bottom-3x">
@@ -281,6 +300,117 @@
         })
     },
     mounted () {
+      /* global particlesJS:true */
+      particlesJS('particles-js', {
+        'particles': {
+          'number': {
+            'value': 100,
+            'density': {
+              'enable': true,
+              'value_area': 800
+            }
+          },
+          'color': {
+            'value': '#ffffff'
+          },
+          'shape': {
+            'type': 'circle',
+            'stroke': {
+              'width': 0,
+              'color': '#000000'
+            },
+            'polygon': {
+              'nb_sides': 5
+            },
+            'image': {
+              'src': 'img/github.svg',
+              'width': 100,
+              'height': 100
+            }
+          },
+          'opacity': {
+            'value': 0.5,
+            'random': false,
+            'anim': {
+              'enable': false,
+              'speed': 1,
+              'opacity_min': 0.1,
+              'sync': false
+            }
+          },
+          'size': {
+            'value': 3,
+            'random': true,
+            'anim': {
+              'enable': false,
+              'speed': 40,
+              'size_min': 0.1,
+              'sync': false
+            }
+          },
+          'line_linked': {
+            'enable': true,
+            'distance': 150,
+            'color': '#ffffff',
+            'opacity': 0.4,
+            'width': 1
+          },
+          'move': {
+            'enable': true,
+            'speed': 6,
+            'direction': 'none',
+            'random': false,
+            'straight': false,
+            'out_mode': 'out',
+            'bounce': false,
+            'attract': {
+              'enable': false,
+              'rotateX': 600,
+              'rotateY': 1200
+            }
+          }
+        },
+        'interactivity': {
+          'detect_on': 'canvas',
+          'events': {
+            'onhover': {
+              'enable': true,
+              'mode': 'grab'
+            },
+            'onclick': {
+              'enable': true,
+              'mode': 'push'
+            },
+            'resize': true
+          },
+          'modes': {
+            'grab': {
+              'distance': 140,
+              'line_linked': {
+                'opacity': 1
+              }
+            },
+            'bubble': {
+              'distance': 400,
+              'size': 40,
+              'duration': 2,
+              'opacity': 8,
+              'speed': 3
+            },
+            'repulse': {
+              'distance': 200,
+              'duration': 0.4
+            },
+            'push': {
+              'particles_nb': 4
+            },
+            'remove': {
+              'particles_nb': 2
+            }
+          }
+        },
+        'retina_detect': true
+      })
     },
 
     directives: {
