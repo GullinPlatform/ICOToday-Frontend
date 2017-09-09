@@ -59,30 +59,30 @@
                                         class="fa fa-check"></i> Closed</span>
                                 <span class="text-sm text-info ml-2">{{project.rating}}/100</span>
                             </h3>
-                            </div>
-                            <h4 class="product-price"> {{formatTime(project.start_datetime, project.end_datetime)}}</h4>
-                            <p> {{project.description_short}}</p>
-                            <div class="progress mb-1">
-                                <div class="progress-bar bg-info" role="progressbar" style="width: 70%; height: 5px;"
-                                     aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <div class="product-buttons">
-                                <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip"
-                                        title="" data-original-title="Whishlist"><i class="fa fa-star-o"></i>
-                                </button>
-                                <router-link :to="{name:'post', params:{id: project.id}}"
-                                             class="btn btn-danger text-uppercase btn-sm">
-                                    <span>DETAIL</span>
-                                </router-link>
-                            </div>
+                        </div>
+                        <h4 class="product-price"> {{formatTime(project.start_datetime, project.end_datetime)}}</h4>
+                        <p> {{project.description_short}}</p>
+                        <div class="progress mb-1">
+                            <div class="progress-bar bg-info" role="progressbar" style="width: 70%; height: 5px;"
+                                 aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="product-buttons">
+                            <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip"
+                                    title="" data-original-title="Whishlist"><i class="fa fa-star-o"></i>
+                            </button>
+                            <router-link :to="{name:'post', params:{id: project.id}}"
+                                         class="btn btn-danger text-uppercase btn-sm">
+                                <span>DETAIL</span>
+                            </router-link>
                         </div>
                     </div>
-                    <div v-if="loaded && projects.length===0">
-                        Nothing Here
-                    </div>
+                </div>
+                <div v-if="loaded && projects.length===0">
+                    Nothing Here
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </template>
 
@@ -98,11 +98,9 @@
       }
     },
     head: {
-      title () {
-        return {
-          inner: 'ICOToday',
-          complement: 'Marked ICOs'
-        }
+      title: {
+        inner: 'ICOToday',
+        complement: 'Marked ICOs'
       }
     },
     components: {

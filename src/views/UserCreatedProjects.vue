@@ -105,11 +105,9 @@
       }
     },
     head: {
-      title () {
-        return {
-          inner: 'ICOToday',
-          complement: 'My ICO Projects'
-        }
+      title: {
+        inner: 'ICOToday',
+        complement: 'My ICO Projects'
       }
     },
     components: {

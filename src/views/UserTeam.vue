@@ -202,11 +202,9 @@
       }
     },
     head: {
-      title () {
-        return {
-          inner: 'ICOToday',
-          complement: 'My Team'
-        }
+      title: {
+        inner: 'ICOToday',
+        complement: 'My Team'
       }
     },
     components: {

@@ -8,10 +8,12 @@
                 </div>
                 <div class="column">
                     <ul class="breadcrumbs">
-                        <li><router-link :to="{name:'landing'}">Home</router-link>
+                        <li>
+                            <router-link :to="{name:'landing'}">Home</router-link>
                         </li>
                         <li class="separator">&nbsp;</li>
-                        <li><router-link :to="{name:'me_settings'}">Account</router-link>
+                        <li>
+                            <router-link :to="{name:'me_settings'}">Account</router-link>
                         </li>
                         <li class="separator">&nbsp;</li>
                         <li>Account Settings</li>
@@ -126,11 +128,9 @@
   export default {
     name: 'UserSettings',
     head: {
-      title () {
-        return {
-          inner: 'ICOToday',
-          complement: 'Settings',
-        }
+      title: {
+        inner: 'ICOToday',
+        complement: 'Settings',
       }
     },
     data () {
