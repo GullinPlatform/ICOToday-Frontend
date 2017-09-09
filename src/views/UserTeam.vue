@@ -1,27 +1,7 @@
 <template>
     <div>
-        <!-- Page Title-->
-        <div class="page-title">
-            <div class="container">
-                <div class="column">
-                    <h1>My Team Information</h1>
-                </div>
-                <div class="column">
-                    <ul class="breadcrumbs">
-                        <li>
-                            <router-link :to="{name:'landing'}">Home</router-link>
-                        </li>
-                        <li class="separator">&nbsp;</li>
-                        <li><a href="#">Account</a>
-                        </li>
-                        <li class="separator">&nbsp;</li>
-                        <li>My Team Information</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
         <!-- Page Content-->
-        <div class="container padding-bottom-3x mb-2">
+        <div class="container padding-bottom-3x mb-2 mt-5">
             <div class="row">
                 <user-header></user-header>
                 <!--main content-->
@@ -173,10 +153,8 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
-
     </div>
 </template>
 

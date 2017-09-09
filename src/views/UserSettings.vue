@@ -1,28 +1,7 @@
 <template>
     <div>
-        <!-- Page Title-->
-        <div class="page-title">
-            <div class="container">
-                <div class="column">
-                    <h1> Account Settings</h1>
-                </div>
-                <div class="column">
-                    <ul class="breadcrumbs">
-                        <li>
-                            <router-link :to="{name:'landing'}">Home</router-link>
-                        </li>
-                        <li class="separator">&nbsp;</li>
-                        <li>
-                            <router-link :to="{name:'me_settings'}">Account</router-link>
-                        </li>
-                        <li class="separator">&nbsp;</li>
-                        <li>Account Settings</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
         <!-- Page Content-->
-        <div class="container padding-bottom-3x mb-2">
+        <div class="container padding-bottom-3x mb-2 mt-5">
             <div class="row">
                 <user-header></user-header>
                 <!--main content-->
