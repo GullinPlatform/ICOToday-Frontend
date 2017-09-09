@@ -28,29 +28,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                        <p class="col-sm-2 col-form-label">Twitter</p>
-                        <div class="col-sm-8">
-                            <p class="mt-2 ml-2 text-bold" v-show="!edit">{{twitter}}</p>
-                            <input class="form-control" v-model="twitter" type="text" v-show="edit">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <p class="col-sm-2 col-form-label">Slack</p>
-                        <div class="col-sm-8">
-                            <p class="mt-2 ml-2 text-bold" v-show="!edit">{{slack}}</p>
-                            <input class="form-control" v-model="slack" type="text" v-show="edit">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <p class="col-sm-2 col-form-label">Telegram</p>
-                        <div class="col-sm-8">
-                            <p class="mt-2 ml-2 text-bold" v-show="!edit">{{telegram}}</p>
-                            <input class="form-control" v-model="telegram" type="text" v-show="edit">
-                        </div>
-                    </div>
                     <div class="form-group row justify-content-md-center">
-
                         <div class="col-sm-2">
                             <button @click="edit=!edit" class="btn btn-secondary">
                                 <i class="fa fa-edit"></i> Edit

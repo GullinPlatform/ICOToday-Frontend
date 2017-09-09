@@ -112,7 +112,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Ratio <span class="text-danger">*</span></label>
                         <div class="col-sm-7">
-                            <input class="form-control" placeholder="Ex: 0.00005" v-model="ratio" required
+                            <input class="form-control" placeholder="Ex: 5000" v-model="ratio" required
                                    type="number">
                         </div>
                         <div class="col-sm-3"><p>Your Token = 1 {{coin_type}}</p></div>
@@ -156,6 +156,35 @@
                                    placeholder="https://example.com">
                         </div>
                     </div>
+                    <h6 class="text-muted text-normal text-uppercase ">Social Media</h6>
+                    <hr class="mb-3 mt-2">
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Medium</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" v-model="medium" type="text">
+                        </div>
+
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Twitter</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" v-model="twitter" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Slack</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" v-model="slack" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Telegram</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" v-model="telegram" type="text">
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div class="col-md-2">
                         </div>
@@ -201,6 +230,11 @@
 
         video_link: '',
         website: '',
+
+        medium: '',
+        twitter: '',
+        slack: '',
+        telegram: '',
         // -- form info end --
 
         white_paper_change: false,
@@ -262,6 +296,10 @@
         formData.append('end_datetime', this.end_datetime.format('YYYY-MM-DD HH:mmZ'))
         formData.append('coin_name', this.coin_name)
         formData.append('ratio', this.ratio)
+        formData.append('medium', this.medium)
+        formData.append('twitter', this.twitter)
+        formData.append('slack', this.slack)
+        formData.append('telegram', this.telegram)
 
         if (this.white_paper)
           formData.append('white_paper', this.white_paper)
@@ -324,6 +362,11 @@
 
         this.video_link = this.current_post.video_link
         this.website = this.current_post.website
+
+        this.medium = this.current_post.medium
+        this.twitter = this.current_post.twitter
+        this.slack = this.current_post.slack
+        this.telegram = this.current_post.telegram
       }
     }
   }

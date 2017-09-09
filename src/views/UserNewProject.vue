@@ -54,6 +54,12 @@
                     <h6 class="text-muted text-normal text-uppercase ">ICO Detail</h6>
                     <hr class="mb-3 mt-2">
                     <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Token Name <span class="text-danger">*</span></label>
+                        <div class="col-sm-10">
+                            <input class="form-control" v-model="coin_name" placeholder="Token Name" required type="text">
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label class="col-sm-2 col-form-label">ICO Unit <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <select class="form-control" v-model="coin_type" required>
@@ -66,11 +72,11 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">ICO Goals <span class="text-danger">*</span></label>
                         <div class="col-sm-5">
-                            <input class="form-control" placeholder="Minimum" v-model="minimum_goal" required
+                            <input class="form-control" placeholder="Soft Cap" v-model="minimum_goal" required
                                    type="number">
                         </div>
                         <div class="col-sm-5">
-                            <input class="form-control" placeholder="Maximum" v-model="maximum_goal" required
+                            <input class="form-control" placeholder="Hard Cap" v-model="maximum_goal" required
                                    type="number">
                         </div>
                     </div>
@@ -98,18 +104,12 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Token Name <span class="text-danger">*</span></label>
-                        <div class="col-sm-10">
-                            <input class="form-control" v-model="coin_name" placeholder="Token Name" required type="text">
-                        </div>
-                    </div>
-                    <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Ratio <span class="text-danger">*</span></label>
                         <div class="col-sm-7">
-                            <input class="form-control" placeholder="Ex: 0.00005" v-model="ratio" required
+                            <input class="form-control" placeholder="Ex: 5000" v-model="ratio" required
                                    type="number">
                         </div>
-                        <div class="col-sm-3"><p>Your Token = 1 {{coin_type}}</p></div>
+                        <div class="col-sm-3"><p>{{coin_name}} = 1 {{coin_type}}</p></div>
                     </div>
                     <h6 class="text-muted text-normal text-uppercase ">Supplement</h6>
                     <hr class="mb-3 mt-2">
@@ -151,14 +151,33 @@
                     <hr class="mb-3 mt-2">
 
                     <div class="form-group row">
-                        <p class="col-sm-2 col-form-label">Medium</p>
-                        <div class="col-sm-8">
-                            <p class="mt-2 ml-2 text-bold" v-show="!edit">{{medium}}</p>
-                            <input class="form-control" v-model="medium" type="text" v-show="edit">
+                        <label class="col-sm-2 col-form-label">Medium</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" v-model="medium" type="text">
+                        </div>
+
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Twitter</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" v-model="twitter" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Slack</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" v-model="slack" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Telegram</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" v-model="telegram" type="text">
                         </div>
                     </div>
                     <div class="form-group row justify-content-md-center">
-                        <div class="col-md-10 offset-md-2">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-10">
                             <button type="button" @click="postNewPost()" class="mb-1 btn btn-block btn-primary">
                                 Submit
                             </button>

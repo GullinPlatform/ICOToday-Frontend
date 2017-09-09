@@ -85,6 +85,12 @@
                             <input class="form-control" v-model="me.telegram" type="text">
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Facebook</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" v-model="me.facebook" type="text">
+                        </div>
+                    </div>
                     <div class="form-group row justify-content-md-center">
                         <div class="col-md-10 offset-md-2">
                             <button type="button" @click="updateSelf()" class="mb-1 btn btn-block btn-primary">
