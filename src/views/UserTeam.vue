@@ -28,16 +28,6 @@
                         </div>
                     </div>
 
-                    <h6 class="text-muted text-normal text-uppercase ">Social Media</h6>
-                    <hr class="mb-3 mt-2">
-
-                    <div class="form-group row">
-                        <p class="col-sm-2 col-form-label">Medium</p>
-                        <div class="col-sm-8">
-                            <p class="mt-2 ml-2 text-bold" v-show="!edit">{{medium}}</p>
-                            <input class="form-control" v-model="medium" type="text" v-show="edit">
-                        </div>
-                    </div>
                     <div class="form-group row">
                         <p class="col-sm-2 col-form-label">Twitter</p>
                         <div class="col-sm-8">
@@ -171,11 +161,6 @@
         name: '',
         description: '',
 
-        medium: '',
-        twitter: '',
-        slack: '',
-        telegram: '',
-
         message: ''
       }
     },
@@ -194,10 +179,6 @@
         const formData = {
           name: this.name,
           description: this.description,
-          medium: this.medium,
-          twitter: this.twitter,
-          slack: this.slack,
-          telegram: this.telegram,
           pk: this.me.info.team.id
         }
 

@@ -126,6 +126,11 @@
                             <h6>{{member.first_name}} {{member.last_name}}</h6>
                             <p class="text-muted mb-2">{{member.title}}</p>
                             <div class="social-bar">
+                                <a :href="member.facebook" target="_blank"
+                                   class="social-button shape-circle branding-facebook"
+                                   v-if="member.facebook">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
                                 <a :href="member.twitter" class="social-link branding-twitter"
                                    v-if="member.twitter">
                                     <i class="fa fa-twitter"></i>
@@ -156,6 +161,11 @@
                             <h6>{{member.first_name}} {{member.last_name}}</h6>
                             <p class="text-muted mb-2">{{member.title}}</p>
                             <div class="social-bar">
+                                <a :href="member.facebook" target="_blank"
+                                   class="social-button shape-circle branding-facebook"
+                                   v-if="member.facebook">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
                                 <a :href="member.twitter" class="social-link branding-twitter"
                                    v-if="member.twitter">
                                     <i class="fa fa-twitter"></i>

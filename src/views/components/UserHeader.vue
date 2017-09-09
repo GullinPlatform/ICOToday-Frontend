@@ -17,10 +17,22 @@
                     <span v-if="me.info.team">@ {{me.info.team.name}}</span>
                     <br>
                     <p>{{me.info.description}}</p>
-
-                    <a :href="me.info.linkedin" v-if="me.info.linkedin"><i class="fa fa-linkedin-square"></i></a>
-                    <a :href="me.info.twitter" v-if="me.info.twitter"><i class="fa fa-twitter"></i></a>
-                    <a :href="me.info.telegram" v-if="me.info.telegram"><i class="fa fa-telegram"></i></a>
+                    <a :href="me.info.facebook" target="_blank"
+                       v-if="me.info.facebook">
+                        <i class="fa fa-facebook"></i>
+                    </a>
+                    <a :href="me.info.linkedin" target="_blank"
+                       v-if="me.info.linkedin">
+                        <i class="fa fa-linkedin-square"></i>
+                    </a>
+                    <a :href="me.info.twitter" target="_blank"
+                       v-if="me.info.twitter">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                    <a :href="me.info.telegram" target="_blank"
+                       v-if="me.info.telegram">
+                        <i class="fa fa-telegram"></i>
+                    </a>
                 </div>
             </div>
         </aside>

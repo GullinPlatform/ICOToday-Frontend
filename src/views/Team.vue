@@ -11,15 +11,6 @@
                     <h6>
                         {{current_team.description}}
                     </h6>
-                    <div class="social-media-branding">
-                        <!--@todo: replace with real social share links -->
-                        <a href="#" class="social-link branding-twitter"><i
-                                class="fa fa-twitter-square"></i></a>
-                        <a href="#" class="social-link branding-facebook"><i class="fa fa-facebook-square"></i></a>
-                        <a href="#" class="social-link branding-linkedin"><i class="fa fa-linkedin-square"></i></a>
-                        <a href="#" class="social-link branding-google-plus"><i
-                                class="fa fa-google-plus-square"></i></a>
-                    </div>
                 </div>
             </div>
             <!-- The team list -->
@@ -36,10 +27,15 @@
                         <img class="d-block mx-auto img-thumbnail rounded-circle d-table-cell align-middle"
                              width="100" :src="member.avatar" alt="Team">
                         <div class="pl-3 d-table-cell align-middle">
-                            <h6>{{member.first_name}} {{member.last_name}}<span
-                                    class="text-muted text-sm mb-2">{{member.title}}</span></h6>
+                            <h6>{{member.first_name}} {{member.last_name}}
+                                <span class="text-muted text-sm mb-2">{{member.title}}</span></h6>
                             <p>{{member.description}}</p>
                             <div class="social-bar">
+                                <a :href="member.facebook" target="_blank"
+                                   class="social-button shape-circle branding-facebook"
+                                   v-if="member.facebook">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
                                 <a :href="member.twitter" target="_blank"
                                    class="social-button shape-circle branding-twitter"
                                    v-if="member.twitter">
@@ -75,10 +71,15 @@
                         <img class="d-block mx-auto img-thumbnail rounded-circle d-table-cell align-middle"
                              width="100" :src="member.avatar" alt="Team">
                         <div class="pl-3 d-table-cell align-middle">
-                            <h6>{{member.first_name}} {{member.last_name}}<span
-                                    class="text-muted text-sm mb-2">{{member.title}}</span></h6>
+                            <h6>{{member.first_name}} {{member.last_name}}
+                                <span class="text-muted text-sm mb-2">{{member.title}}</span></h6>
                             <p>{{member.description}}</p>
                             <div class="social-bar">
+                                <a :href="member.facebook" target="_blank"
+                                   class="social-button shape-circle branding-facebook"
+                                   v-if="member.facebook">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
                                 <a :href="member.twitter" target="_blank"
                                    class="social-button shape-circle branding-twitter"
                                    v-if="member.twitter">

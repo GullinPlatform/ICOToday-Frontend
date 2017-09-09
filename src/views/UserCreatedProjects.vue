@@ -19,7 +19,7 @@
                                 <router-link :to="{name:'post', params:{id: project.id}}"> {{project.title}}
                                 </router-link>
                                 <span v-if="project.status===0" class="badge badge-warning">Verifying</span>
-                                <span v-else-if="project.status===1" class="badge badge-primary">Active</span>
+                                <span v-else-if="project.status===1" class="badge badge-primary">Verified</span>
                                 <span v-else-if="project.status===2" class="badge badge-success"><i
                                         class="fa fa-check"></i> Completed</span>
                                 <span v-else-if="project.status===3" class="badge badge-info"><i

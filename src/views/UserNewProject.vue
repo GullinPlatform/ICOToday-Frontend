@@ -147,7 +147,16 @@
                                    placeholder="https://example.com">
                         </div>
                     </div>
+                    <h6 class="text-muted text-normal text-uppercase ">Social Media</h6>
+                    <hr class="mb-3 mt-2">
 
+                    <div class="form-group row">
+                        <p class="col-sm-2 col-form-label">Medium</p>
+                        <div class="col-sm-8">
+                            <p class="mt-2 ml-2 text-bold" v-show="!edit">{{medium}}</p>
+                            <input class="form-control" v-model="medium" type="text" v-show="edit">
+                        </div>
+                    </div>
                     <div class="form-group row justify-content-md-center">
                         <div class="col-md-10 offset-md-2">
                             <button type="button" @click="postNewPost()" class="mb-1 btn btn-block btn-primary">
@@ -197,6 +206,11 @@
 
         video_link: '',
         website: '',
+
+        medium: '',
+        twitter: '',
+        slack: '',
+        telegram: '',
         // -- form info end --
 
         white_paper_loaded: false,
@@ -264,6 +278,10 @@
         formData.append('logo_image', this.icon)
         formData.append('video_link', this.video_link)
         formData.append('website', this.website)
+        formData.append('medium', this.medium)
+        formData.append('twitter', this.twitter)
+        formData.append('slack', this.slack)
+        formData.append('telegram', this.telegram)
 
         this.$store.dispatch('postNewPost', formData)
           .then(() => {
@@ -281,8 +299,14 @@
 
             this.video_link = ''
             this.website = ''
+
+            this.medium = ''
+            this.twitter = ''
+            this.slack = ''
+            this.telegram = ''
+
             this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'Your project is submitted!'})
-//            this.$router.push({name: 'me_created'})
+            //  this.$router.push({name: 'me_created'})
           })
           .catch((error) => {
             console.log(error)
