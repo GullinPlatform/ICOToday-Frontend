@@ -71,7 +71,7 @@
 
             <div class="row">
                 <!-- Description -->
-                <div class="col-lg-8 pl-0">
+                <div class="col-lg-8 pl-0 pl-0">
                     <section>
                         <h3 class="text-left">Description</h3>
                         <p>{{post.description_full}}</p>
@@ -116,7 +116,12 @@
             <div class="row">
                 <!-- Team -->
                 <div class="col-lg-12 pl-0 pr-0">
-                    <h3 class="text-left">Team</h3>
+                    <h3 class="text-left">Team
+                        <router-link :to="{name:'team', params:{id:current_team.id}}"
+                                     class="text-sm text-primary">DETAIL
+                        </router-link>
+                    </h3>
+
                     <div class="row" v-if="team_loaded">
                         <div class="col-md-3 col-sm-6 mb-3 text-center"
                              v-for="member in current_team_members"
@@ -151,7 +156,8 @@
             <div class="row">
                 <!-- Advisors -->
                 <div class="col-lg-12 pl-0 pr-0">
-                    <h3 class="text-left">Advisors</h3>
+                    <h3 class="text-left">Advisors
+                    </h3>
                     <div class="row" v-if="team_loaded">
                         <div class="col-md-3 col-sm-6 mb-3 text-center"
                              v-for="member in current_team_members"
@@ -377,6 +383,9 @@
       },
       current_team_members () {
         return this.$store.getters.current_team_members
+      },
+      current_team () {
+        return this.$store.getters.current_team
       },
       current_post_comments () {
         return this.$store.getters.current_post_comments

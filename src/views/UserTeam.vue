@@ -7,7 +7,11 @@
                 <!--main content-->
                 <div class="col-md-8" v-if="me.type===0">
 
-                    <h6 class="text-muted text-normal text-uppercase ">Basic Info</h6>
+                    <h6 class="text-muted text-normal text-uppercase ">Basic Info
+                        <router-link :to="{name:'team', params:{id:me.info.team.id}}" class="text-sm text-primary float-right">
+                            <i class="fa fa-external-link"></i> Preview
+                        </router-link>
+                    </h6>
                     <hr class="mb-3 mt-2">
 
                     <div class="form-group row">

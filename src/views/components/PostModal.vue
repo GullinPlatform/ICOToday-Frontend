@@ -1,5 +1,5 @@
 <template>
-    <div class="modal fade" id="post-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal" id="post-modal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-xlg modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -85,7 +85,7 @@
                             </section>
                         </div>
                         <!-- Financial -->
-                        <div class="col-lg-4 pr-0">
+                        <div class="col-lg-4 pr-0 pl-0">
                             <h3 class="text-left">Financial</h3>
                             <div class="table-responsive">
                                 <table class="table">
@@ -123,7 +123,11 @@
                     <div class="row ml-3 mr-3">
                         <!-- Team -->
                         <div class="col-lg-12 pl-0 pr-0">
-                            <h3 class="text-left">Team</h3>
+                            <h3 class="text-left">Team
+                                <router-link :to="{name:'team', params:{id:current_team.id}}" data-dismiss="modal"
+                                             class="text-sm text-primary">DETAIL
+                                </router-link>
+                            </h3>
                             <div class="row" v-if="team_loaded">
                                 <div class="col-md-3 col-sm-6 mb-3 text-center"
                                      v-for="member in current_team_members"
@@ -158,7 +162,8 @@
                     <div class="row ml-3 mr-3">
                         <!-- Advisors -->
                         <div class="col-lg-12 pl-0 pr-0">
-                            <h3 class="text-left">Advisors</h3>
+                            <h3 class="text-left">Advisors
+                            </h3>
                             <div class="row" v-if="team_loaded">
                                 <div class="col-md-3 col-sm-6 mb-3 text-center"
                                      v-for="member in current_team_members"
@@ -386,6 +391,9 @@
       },
       current_team_members () {
         return this.$store.getters.current_team_members
+      },
+      current_team () {
+        return this.$store.getters.current_team
       },
       current_post_comments () {
         return this.$store.getters.current_post_comments
