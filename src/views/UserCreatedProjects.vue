@@ -59,8 +59,13 @@
                             </div>
                         </div>
                     </div>
-                    <div v-if="loaded && projects.length===0">
-                        Nothing Here
+                    <div class="mt-5" v-if="loaded && projects.length===0">
+                        <div class="text-center">
+                            <h3 class="product-title">You don't have ICO projects now</h3>
+                            <router-link :to="{name:'me_new_project'}" class="btn btn-outline-primary btn-sm text-primary">
+                                Create Now
+                            </router-link>
+                        </div>
                     </div>
                 </div>
             </div>

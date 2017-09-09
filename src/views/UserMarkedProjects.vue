@@ -19,16 +19,6 @@
                             <h3 class="product-title">
                                 <router-link :to="{name:'post', params:{id: project.id}}"> {{project.title}}
                                 </router-link>
-                                <span v-if="project.status===0" class="badge badge-warning">Verifying</span>
-                                <span v-else-if="project.status===1" class="badge badge-primary">Active</span>
-                                <span v-else-if="project.status===2" class="badge badge-success"><i
-                                        class="fa fa-check"></i> Completed</span>
-                                <span v-else-if="project.status===3" class="badge badge-info"><i
-                                        class="fa fa-star-o"></i> Promoting</span>
-                                <span v-else-if="project.status===4" class="badge badge-warning"><i
-                                        class="fa fa-star-o"></i> Premium</span>
-                                <span v-else="project.status===5" class="badge badge-default"><i
-                                        class="fa fa-check"></i> Closed</span>
                                 <span class="text-sm text-info ml-2">{{project.rating}}/100</span>
                             </h3>
                         </div>
@@ -39,22 +29,23 @@
                                  aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <div class="product-buttons">
-                            <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip"
-                                    title="" data-original-title="Whishlist"><i class="fa fa-star-o"></i>
-                            </button>
                             <router-link :to="{name:'post', params:{id: project.id}}"
                                          class="btn btn-danger text-uppercase btn-sm">
                                 <span>DETAIL</span>
                             </router-link>
                         </div>
                     </div>
-                </div>
-                <div v-if="loaded && projects.length===0">
-                    Nothing Here
+                    <div class="mt-5" v-if="loaded && projects.length===0">
+                        <div class="text-center">
+                            <h3 class="product-title">You don't have marked projects now</h3>
+                            <router-link :to="{name:'landing'}" class="btn btn-outline-primary btn-sm text-primary">
+                                Explore
+                            </router-link>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </template>
 
