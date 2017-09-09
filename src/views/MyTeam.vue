@@ -3,7 +3,7 @@
         <!-- Page Content-->
         <div class="container padding-bottom-3x mb-2 mt-5">
             <div class="row">
-                <user-header></user-header>
+                <my-header></my-header>
                 <!--main content-->
                 <div class="col-md-8" v-if="me.type===0">
 
@@ -131,7 +131,7 @@
 </template>
 
 <script>
-  import UserHeader from 'components/UserHeader'
+  import MyHeader from 'components/MyHeader'
 
   export default {
     name: 'UserTeam',
@@ -153,8 +153,7 @@
       }
     },
     components: {
-      'user-header': UserHeader,
-
+      MyHeader,
     },
     methods: {
       updateTeam () {

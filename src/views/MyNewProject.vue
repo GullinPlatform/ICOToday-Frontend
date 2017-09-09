@@ -3,7 +3,7 @@
         <!-- Page Content-->
         <div class="container padding-bottom-3x mb-2 mt-5">
             <div class="row">
-                <user-header></user-header>
+                <my-header></my-header>
                 <!--main content-->
                 <div class="col-md-8" v-if="self.is_verified">
                     <h6 class="text-muted text-normal text-uppercase ">Basic info</h6>
@@ -40,7 +40,8 @@
                                 class="text-danger">*</span></label>
                         <div class="col-sm-10">
                                 <textarea class="form-control" v-model="description_short" type="text"
-                                          placeholder="Short description in 200 characters." required rows="3"></textarea>
+                                          placeholder="Short description in 200 characters." required
+                                          rows="3"></textarea>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -56,7 +57,8 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Token Name <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
-                            <input class="form-control" v-model="coin_name" placeholder="Token Name" required type="text">
+                            <input class="form-control" v-model="coin_name" placeholder="Token Name" required
+                                   type="text">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -198,7 +200,7 @@
 </template>
 
 <script>
-  import UserHeader from 'components/UserHeader'
+  import MyHeader from 'components/MyHeader'
   import VueDatetimePicker from 'vue-bootstrap-datetimepicker'
 
   export default {
@@ -248,8 +250,8 @@
       }
     },
     components: {
-      'user-header': UserHeader,
-      'vue-datetime-picker': VueDatetimePicker
+      MyHeader,
+      VueDatetimePicker
     },
     methods: {
       onWhitePaperChange (e) {
