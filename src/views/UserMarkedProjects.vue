@@ -6,9 +6,8 @@
                 <user-header></user-header>
                 <!--main content-->
                 <div class="col-md-8">
-
                     <h6 class="text-muted text-normal text-uppercase">
-                        My Marked ICO Projects
+                        User Marked ICO Projects
                     </h6>
                     <hr class="mb-3 mt-2">
 
@@ -19,29 +18,44 @@
                             <h3 class="product-title">
                                 <router-link :to="{name:'post', params:{id: project.id}}"> {{project.title}}
                                 </router-link>
-                                <span class="text-sm text-info ml-2">{{project.rating}}/100</span>
+                                <span v-if="project.status===0" class="badge badge-warning">Verifying</span>
+                                <span v-else-if="project.status===1" class="badge badge-primary">Active</span>
+                                <span v-else-if="project.status===2" class="badge badge-success"><i
+                                        class="fa fa-check"></i> Completed</span>
+                                <span v-else-if="project.status===3" class="badge badge-info"><i
+                                        class="fa fa-star-o"></i> Promoting</span>
+                                <span v-else-if="project.status===4" class="badge badge-warning"><i
+                                        class="fa fa-star-o"></i> Premium</span>
+                                <span v-else="project.status===5" class="badge badge-default"><i
+                                        class="fa fa-check"></i> Closed</span>
                             </h3>
-                        </div>
-                        <h4 class="product-price"> {{formatTime(project.start_datetime, project.end_datetime)}}</h4>
-                        <p> {{project.description_short}}</p>
-                        <div class="progress mb-1">
-                            <div class="progress-bar bg-info" role="progressbar" style="width: 70%; height: 5px;"
-                                 aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <div class="product-buttons">
-                            <router-link :to="{name:'post', params:{id: project.id}}"
-                                         class="btn btn-danger text-uppercase btn-sm">
-                                <span>DETAIL</span>
-                            </router-link>
+                            <div class="rating-stars">
+                                Rate:
+                                <i class="icon-star filled"></i>
+                                <i class="icon-star filled"></i>
+                                <i class="icon-star filled"></i>
+                                <i class="icon-star filled"></i>
+                                <i class="icon-star filled"></i>
+                            </div>
+                            <h4 class="product-price"> {{formatTime(project.start_datetime, project.end_datetime)}}</h4>
+                            <p> {{project.description_short}}</p>
+                            <div class="progress mb-1">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 70%; height: 5px;"
+                                     aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="product-buttons">
+                                <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip"
+                                        title="" data-original-title="Whishlist"><i class="fa fa-star-o"></i>
+                                </button>
+                                <router-link :to="{name:'post', params:{id: project.id}}"
+                                             class="btn btn-danger text-uppercase btn-sm">
+                                    <span>DETAIL</span>
+                                </router-link>
+                            </div>
                         </div>
                     </div>
-                    <div class="mt-5" v-if="loaded && projects.length===0">
-                        <div class="text-center">
-                            <h3 class="product-title">You don't have marked projects now</h3>
-                            <router-link :to="{name:'landing'}" class="btn btn-outline-primary btn-sm text-primary">
-                                Explore
-                            </router-link>
-                        </div>
+                    <div v-if="loaded && projects.length===0">
+                        Nothing Here
                     </div>
                 </div>
             </div>
@@ -57,13 +71,14 @@
     data () {
       return {
         loaded: false,
-        projects: [],
       }
     },
     head: {
-      title: {
-        inner: 'ICOToday',
-        complement: 'Marked ICOs'
+      title () {
+        return {
+          inner: 'ICOToday',
+          complement: 'User Marked ICOs'
+        }
       }
     },
     components: {
@@ -91,22 +106,20 @@
       }
     },
     computed: {
-      me () {
-        return this.$store.getters.self
+      user () {
+        return this.$store.getters.user
+      },
+      projects () {
+        return this.$store.getters.user_marked_posts
       }
     },
-    beforeCreate () {
-      // My Marked Projects
-      this.$store.dispatch('getSelfMarkedPost')
+    beforeMount () {
+      // My ICO Projects
+      this.loaded = false
+      this.$store.dispatch('getUserMarkedPost', this.$route.params.id)
         .then(() => {
-          this.projects = this.$store.getters.self_marked_posts
           this.loaded = true
         })
-    },
-    watch: {
-      '$route' () {
-        this.loadProjects()
-      }
     }
   }
 </script>

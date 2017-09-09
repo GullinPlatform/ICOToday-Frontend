@@ -102,11 +102,6 @@
           this.projects = this.$store.getters.self_marked_posts
           this.loaded = true
         })
-    },
-    watch: {
-      '$route' () {
-        this.loadProjects()
-      }
     }
   }
 </script>

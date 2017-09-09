@@ -7,7 +7,7 @@
                 <!--main content-->
                 <div class="col-md-8">
                     <h6 class="text-muted text-normal text-uppercase ">
-                        My ICO Projects
+                        User ICO Projects
                     </h6>
                     <hr class="mb-3 mt-2">
 
@@ -39,30 +39,18 @@
                                      aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                             <div class="product-buttons">
-                                <router-link :to="{name:'post', params:{id: project.id}}"
-                                             class="btn btn-outline-primary text-uppercase btn-sm">
-                                    <span>DETAIL</span>
-                                </router-link>
 
-                                <button class="btn btn-outline-danger btn-sm"
-                                        @click="getEditProjectAndShowModal(project.id)"
-                                        v-if="me.info.team&&project.team.id===me.info.team.id&&project.status==0">
-                                    <i class="fa fa-edit"></i> EDIT
+                                <button class="btn btn-outline-danger btn-sm">
+                                    <i class="fa fa-star-o"></i> Mark for me
                                 </button>
-                                <button class="btn btn-outline-danger btn-sm"
-                                        @click="getUpdateProjectAndShowModal(project.id)"
-                                        v-else-if="me.info.team&&project.team.id===me.info.team.id&&project.status!=0">
-                                    <span><i class="fa fa-edit"></i> EDIT</span>
-
-                                </button>
-
                             </div>
                         </div>
                     </div>
                     <div class="mt-5" v-if="loaded && projects.length===0">
                         <div class="text-center">
                             <h3 class="product-title">You don't have ICO projects now</h3>
-                            <router-link :to="{name:'me_new_project'}" class="btn btn-outline-primary btn-sm text-primary">
+                            <router-link :to="{name:'me_new_project'}"
+                                         class="btn btn-outline-primary btn-sm text-primary">
                                 Create Now
                             </router-link>
                         </div>
@@ -86,7 +74,7 @@
     head: {
       title: {
         inner: 'ICOToday',
-        complement: 'My ICO Projects'
+        complement: 'User ICO Projects'
       }
     },
     components: {
@@ -104,24 +92,6 @@
 
           })
       },
-      getEditProjectAndShowModal (id) {
-        this.$store.dispatch('getPost', id)
-          .then(() => {
-            /* global $:true */
-            $('#edit-project-modal').modal('show')
-          })
-          .catch(() => {
-          })
-      },
-      getUpdateProjectAndShowModal (id) {
-        this.$store.dispatch('getPost', id)
-          .then(() => {
-            /* global $:true */
-            $('#update-project-modal').modal('show')
-          })
-          .catch(() => {
-          })
-      },
       formatTime (start, end) {
         /* global moment:true */
         // Haven't start
@@ -133,16 +103,17 @@
       }
     },
     computed: {
-      me () {
-        return this.$store.getters.self
+      user () {
+        return this.$store.getters.user
       },
       projects () {
-        return this.$store.getters.self_created_posts
+        return this.$store.getters.user_created_posts
       }
     },
-    beforeCreate () {
+    beforeMount () {
       // My ICO Projects
-      this.$store.dispatch('getSelfCreatedPost')
+      this.loaded = false
+      this.$store.dispatch('getUserCreatedPost', this.$route.params.id)
         .then(() => {
           this.loaded = true
         })

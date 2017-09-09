@@ -138,7 +138,7 @@
                                     <p class="text-muted mb-2">{{member.title}}</p>
                                     <div class="social-bar">
                                         <a :href="member.facebook" target="_blank"
-                                           class="social-button shape-circle branding-facebook"
+                                           class="social-link branding-facebook"
                                            v-if="member.facebook">
                                             <i class="fa fa-facebook"></i>
                                         </a>
@@ -174,7 +174,7 @@
                                     <p class="text-muted mb-2">{{member.title}}</p>
                                     <div class="social-bar">
                                         <a :href="member.facebook" target="_blank"
-                                           class="social-button shape-circle branding-facebook"
+                                           class="social-link branding-facebook"
                                            v-if="member.facebook">
                                             <i class="fa fa-facebook"></i>
                                         </a>

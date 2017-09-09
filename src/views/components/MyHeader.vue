@@ -74,9 +74,6 @@
       username () {
         return this.$store.getters.self_name
       },
-      has_social_media () {
-        return (this.me.info.linkedin || this.me.info.twitter || this.me.info.slack || this.me.info.telegram)
-      }
     }
   }
 </script>

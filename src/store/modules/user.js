@@ -44,6 +44,16 @@ const getters = {
       return []
     }
   },
+  self_name: state => {
+    if (state.login_status && state.self.info) {
+      if (state.self.info.first_name && state.self.info.last_name) {
+        return state.self.info.first_name + ' ' + state.self.info.last_name
+      }
+      else {
+        return state.self.email
+      }
+    }
+  },
 
   user: state => {
     return state.user
@@ -54,14 +64,13 @@ const getters = {
   user_created_posts: state => {
     return state.user_created_posts
   },
-
-  self_name: state => {
-    if (state.login_status && state.self.info) {
-      if (state.self.info.first_name && state.self.info.last_name) {
-        return state.self.info.first_name + ' ' + state.self.info.last_name
+  user_name: state => {
+    if (state.user.info) {
+      if (state.user.info.first_name && state.user.info.last_name) {
+        return state.user.info.first_name + ' ' + state.user.info.last_name
       }
       else {
-        return state.self.email
+        return state.user.email
       }
     }
   },
@@ -231,7 +240,7 @@ const mutations = {
     state.login_status = false
     state.token = null
     state.self = {}
-    router.push({ name: 'landing' })
+    router.push({name: 'landing'})
   },
   [types.REGSITER_SUCCESS] (state, response) {
     cookie.setCookie('token', response.token)

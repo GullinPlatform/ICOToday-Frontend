@@ -93,17 +93,6 @@
       MyHeader,
     },
     methods: {
-      loadProjects () {
-        // My ICO Projects
-        this.$store.dispatch('getSelfCreatedPost')
-          .then(() => {
-            this.projects = this.$store.getters.self_created_posts
-            this.loaded = true
-          })
-          .catch(() => {
-
-          })
-      },
       getEditProjectAndShowModal (id) {
         this.$store.dispatch('getPost', id)
           .then(() => {

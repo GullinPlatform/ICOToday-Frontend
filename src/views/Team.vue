@@ -1,9 +1,9 @@
 <template>
     <div>
         <!-- Page Content-->
-        <div class="container padding-bottom-3x mb-2 mt-5">
+        <div class="container padding-bottom-3x mb-2 mt-5 pl-3 pr-3">
             <!-- The team title -->
-            <div class="row pl-3">
+            <div class="row">
                 <div class="col-sm-12">
                     <h3 class="name">
                         {{current_team.name}}
@@ -14,14 +14,14 @@
                 </div>
             </div>
             <!-- The team list -->
-            <div class="row pt-5 pl-3">
+            <div class="row pt-3">
                 <div class="col-sm-12">
                     <h3 class="name">
                         Team Members
                     </h3>
                 </div>
             </div>
-            <div class="row pl-3">
+            <div class="row">
                 <div class="col-md-6 mb-4" v-for="member in current_team_members" v-if="!member.is_advisor">
                     <div class="d-table">
                         <img class="d-block mx-auto img-thumbnail rounded-circle d-table-cell align-middle"
@@ -58,14 +58,14 @@
             </div>
 
             <!-- The advisor list -->
-            <div class="row pt-5 pl-3">
+            <div class="row pt-3">
                 <div class="col-sm-12">
                     <h3 class="name">
                         Advisors
                     </h3>
                 </div>
             </div>
-            <div class="row pl-3">
+            <div class="row">
                 <div class="col-md-6 mb-4" v-for="member in current_team_members" v-if="member.is_advisor">
                     <div class="d-table">
                         <img class="d-block mx-auto img-thumbnail rounded-circle d-table-cell align-middle"
@@ -104,17 +104,12 @@
     </div>
 </template>
 <script>
-  import UserHeader from 'components/UserHeader'
-
   export default {
     name: 'Team',
     data () {
       return {
         loaded: false,
       }
-    },
-    components: {
-      'user-header': UserHeader
     },
     methods: {},
     computed: {

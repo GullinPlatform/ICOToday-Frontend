@@ -1,23 +1,29 @@
 <template>
     <div>
-        <!-- Page Title-->
-        <div class="page-title">
-            <div class="container pl-5 pr-5">
-                <div class="column">
-                    <h1>
-                        {{post.title}}
+        <!-- Page Content-->
+        <div class="container pl-5 pr-5 padding-bottom-3x mb-2 mt-3">
 
-                    </h1>
+            <div class="row">
+                <div class="col-md-8 pl-0 pr-0">
+                    <div class="modal-header pl-0">
+                        <img class="d-flex rounded mr-3" :src="post.logo_image" width="75" alt="Media">
+                        <div class="media-body">
+                            <h3 class="mt-0 mb-1 text-bold">{{post.title}}</h3>
+                            <span class="d-block text-sm text-muted">
+                                {{post.description_short}}
+                            fasdfsfsd
+                            </span>
+
+                        </div>
+                    </div>
                 </div>
-                <div class="column text-right">
-                    <button class="btn btn-outline-danger btn-sm ml-3">
+                <div class="col-md-4 text-center pt-2">
+                    <button class="btn btn-outline-danger btn-sm">
                         <span><i class="fa fa-star-o"></i> Mark for me</span>
                     </button>
                 </div>
             </div>
-        </div>
-        <!-- Page Content-->
-        <div class="container pl-5 pr-5">
+
             <div class="row post-modal">
                 <div class="col-lg-8 pl-0">
                     <div class="embed-responsive embed-responsive-16by9">
@@ -78,7 +84,7 @@
                     </section>
                 </div>
                 <!-- Financial -->
-                <div class="col-lg-4 pr-0">
+                <div class="col-lg-4 pl-0 pr-0">
                     <h3 class="text-left">Financial</h3>
                     <div class="table-responsive">
                         <table class="table">
@@ -123,7 +129,7 @@
                     </h3>
 
                     <div class="row" v-if="team_loaded">
-                        <div class="col-md-3 col-sm-6 mb-3 text-center"
+                        <div class="col-md-3 col-sm-6 col-xs-6 mb-3 text-center"
                              v-for="member in current_team_members"
                              v-if="!member.is_advisor">
                             <img class="img-thumbnail rounded-circle mb-2" height="100" width="100"
@@ -132,7 +138,7 @@
                             <p class="text-muted mb-2">{{member.title}}</p>
                             <div class="social-bar">
                                 <a :href="member.facebook" target="_blank"
-                                   class="social-button shape-circle branding-facebook"
+                                   class="social-link branding-facebook"
                                    v-if="member.facebook">
                                     <i class="fa fa-facebook"></i>
                                 </a>
@@ -159,7 +165,7 @@
                     <h3 class="text-left">Advisors
                     </h3>
                     <div class="row" v-if="team_loaded">
-                        <div class="col-md-3 col-sm-6 mb-3 text-center"
+                        <div class="col-md-3 col-sm-6 col-xs-6 mb-3 text-center"
                              v-for="member in current_team_members"
                              v-if="member.is_advisor">
                             <img class="img-thumbnail rounded-circle mb-2" height="100" width="100"
@@ -168,7 +174,7 @@
                             <p class="text-muted mb-2">{{member.title}}</p>
                             <div class="social-bar">
                                 <a :href="member.facebook" target="_blank"
-                                   class="social-button shape-circle branding-facebook"
+                                   class="social-link branding-facebook"
                                    v-if="member.facebook">
                                     <i class="fa fa-facebook"></i>
                                 </a>
