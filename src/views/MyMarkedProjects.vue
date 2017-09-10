@@ -37,7 +37,7 @@
                     </div>
                     <div class="mt-5" v-if="loaded && projects.length===0">
                         <div class="text-center">
-                            <h3 class="product-title">You don't have marked projects now</h3>
+                            <h3 class="product-title">You don't have marked projects right now</h3>
                             <router-link :to="{name:'landing'}" class="btn btn-outline-primary btn-sm text-primary">
                                 Explore
                             </router-link>

@@ -48,11 +48,7 @@
                     </div>
                     <div class="mt-5" v-if="loaded && projects.length===0">
                         <div class="text-center">
-                            <h3 class="product-title">You don't have ICO projects now</h3>
-                            <router-link :to="{name:'me_new_project'}"
-                                         class="btn btn-outline-primary btn-sm text-primary">
-                                Create Now
-                            </router-link>
+                            <h3 class="product-title">This user doesn't have any ICO projects right now</h3>
                         </div>
                     </div>
                 </div>
@@ -81,17 +77,6 @@
       UserHeader,
     },
     methods: {
-      loadProjects () {
-        // My ICO Projects
-        this.$store.dispatch('getSelfCreatedPost')
-          .then(() => {
-            this.projects = this.$store.getters.self_created_posts
-            this.loaded = true
-          })
-          .catch(() => {
-
-          })
-      },
       formatTime (start, end) {
         /* global moment:true */
         // Haven't start

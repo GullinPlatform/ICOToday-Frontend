@@ -18,16 +18,6 @@
                             <h3 class="product-title">
                                 <router-link :to="{name:'post', params:{id: project.id}}"> {{project.title}}
                                 </router-link>
-                                <span v-if="project.status===0" class="badge badge-warning">Verifying</span>
-                                <span v-else-if="project.status===1" class="badge badge-primary">Active</span>
-                                <span v-else-if="project.status===2" class="badge badge-success"><i
-                                        class="fa fa-check"></i> Completed</span>
-                                <span v-else-if="project.status===3" class="badge badge-info"><i
-                                        class="fa fa-star-o"></i> Promoting</span>
-                                <span v-else-if="project.status===4" class="badge badge-warning"><i
-                                        class="fa fa-star-o"></i> Premium</span>
-                                <span v-else="project.status===5" class="badge badge-default"><i
-                                        class="fa fa-check"></i> Closed</span>
                             </h3>
                             <div class="rating-stars">
                                 Rate:
@@ -54,8 +44,13 @@
                             </div>
                         </div>
                     </div>
-                    <div v-if="loaded && projects.length===0">
-                        Nothing Here
+                    <div class='mt-5' v-if="loaded && projects.length===0">
+                        <div class="text-center">
+                            <h3 class="product-title">This user doesn't have any marked projects</h3>
+                            <router-link :to="{name:'landing'}" class="btn btn-outline-primary btn-sm text-primary">
+                                Explore
+                            </router-link>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -85,16 +80,6 @@
       UserHeader,
     },
     methods: {
-      loadProjects () {
-        // My Marked Projects
-        this.$store.dispatch('getSelfMarkedPost')
-          .then(() => {
-
-          })
-          .catch(() => {
-
-          })
-      },
       formatTime (start, end) {
         /* global moment:true */
         // Haven't start

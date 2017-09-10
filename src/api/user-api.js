@@ -59,7 +59,7 @@ export default {
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
-  getUserMakredPost (pk) {
+  getUserMarkedPost (pk) {
     return Vue.http.get(API_ROOT + 'account/' + pk + '/marked_posts/')
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
