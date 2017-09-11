@@ -1,24 +1,37 @@
 <template>
     <div>
-        <div id="home" class="landing-title">
-            <div id="particles-js"></div><!-- /.particles div -->
-            <div class="row justify-content-center pt-5">
-                <div class="col-sm-8">
-                    <h1 class="text-white">
-                        Find your next ICO <strong>Today</strong>.
-                    </h1>
-                    <hr class="bottomReveal">
-                    <p class="bottomReveal">
-                        A revolution of ICO Platform </p>
-                    <a href="#ideology" data-id="ideology" class="scroll-link">
-                        <div class="scroll-indicator rotateBottomReveal">
-                            <span class="ion-mouse"></span><br>
-                            <span class="ion-android-arrow-down arrow-scroll-indicator"></span>
-                        </div>
-                    </a>
+                      <!-- Begin Jumbotron -->
+                <div id="home" class="jumbotron jumbotron-register">
+                <div id="particles-js"></div><!-- /.particles div -->
+
+                      <div class="container center-vertically-holder">
+                        <div class="center-vertically ">
+                            <div class="row" >
+                          <div class="col-sm-7 col-lg-7 mt40-xs">
+                            <h1 class="mb30 no-margin-top scaleReveal">
+                               <strong>ICOToday</strong>
+                            </h1>
+                            <p class="bottomReveal">Seamless Platform for Launching and Investing in ICOs on Ethereum blockchain</p>
+                          </div>
+
+                          <div class="col-sm-5 col-lg-5 col-lg-offset-1 mt40-xs float-right">
+                            <form role="form" id="register_form" class="register-form mb40-xs">
+                                          <h3 class="no-margin-top mb20">Sign up for our WhiteList</h3>
+
+                                          <div class="form-group">
+                                              <input type="text" class="form-control" placeholder="Email Address" required="required">
+                                          </div>
+
+                                          <div class="form-group no-margin-bottom mt20">
+                                              <button type="submit" class="btn btn-primary">Subscibe</button>
+                                          </div>
+                                      </form>
+                          </div><!-- /.column -->
+                  </div><!-- /.vertical center -->
+                </div><!-- /.container -->
+              </div>
                 </div>
-            </div>
-        </div>
+                <!-- End Jumbotron -->
         <!--<section class="hero-slider">-->
         <!--<div class="item">-->
         <!--<div class="container padding-top-4x">-->
@@ -55,7 +68,7 @@
 
         <!-- Featured Products Carousel-->
         <section class="container padding-top-3x padding-bottom-3x">
-            <h3 class="text-left mb-30">Today's Top ICOs</h3>
+            <h1 class="text-left mb-30">Today's Top ICOs</h1>
 
             <div class="row">
                 <div class="col-md-3 col-sm-6"
