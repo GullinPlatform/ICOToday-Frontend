@@ -37,13 +37,13 @@
             </div>
         </aside>
         <nav class="list-group">
-            <router-link :to="{name:'me_created'}" class="list-group-item with-badge" v-if="me.type===0"
-                         :class="{active: $route.name==='me_created'}">
-                <i class="fa fa-angle-right"></i>My ICO Projects
-            </router-link>
             <router-link :to="{name:'me_new_project'}" class="list-group-item" v-if="me.type===0"
                          :class="{active: $route.name==='me_new_project'}">
                 <i class="fa fa-angle-right"></i>New ICO Application
+            </router-link>
+            <router-link :to="{name:'me_created'}" class="list-group-item with-badge" v-if="me.type===0"
+                         :class="{active: $route.name==='me_created'}">
+                <i class="fa fa-angle-right"></i>My ICO Projects
             </router-link>
             <router-link :to="{name:'me_marked'}" class="list-group-item"
                          :class="{active: $route.name==='me_marked'}">
@@ -52,7 +52,7 @@
 
             <router-link :to="{name:'me_team'}" class="list-group-item" v-if="me.type===0"
                          :class="{active: $route.name==='me_team'}">
-                <i class="fa fa-angle-right"></i>My Team Information
+                <i class="fa fa-angle-right"></i>My Team
             </router-link>
 
             <router-link :to="{name:'me_settings'}" class="list-group-item"

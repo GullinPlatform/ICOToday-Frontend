@@ -1,70 +1,40 @@
 <template>
     <div>
-                      <!-- Begin Jumbotron -->
-                <div id="home" class="jumbotron jumbotron-register">
-                <div id="particles-js"></div><!-- /.particles div -->
-
-                      <div class="container center-vertically-holder">
-                        <div class="center-vertically ">
-                            <div class="row" >
-                          <div class="col-sm-7 col-lg-7 mt40-xs">
-                            <h1 class="mb30 no-margin-top scaleReveal">
-                               <strong>ICOToday</strong>
+        <!-- Begin Jumbotron -->
+        <div id="home" class="jumbotron jumbotron-register">
+            <div id="particles-js"></div><!-- /.particles div -->
+            <div class="container center-vertically-holder">
+                <div class="center-vertically ">
+                    <div class="row">
+                        <div class="col-sm-7 col-lg-7 mt40-xs">
+                            <h1 class="text-white">
+                                <strong>ICOToday</strong>
                             </h1>
-                            <p class="bottomReveal">Seamless Platform for Launching and Investing in ICOs on Ethereum blockchain</p>
-                          </div>
+                            <h4 class="text-white">
+                                Seamless Platform for Launching and Investing in ICOs on Ethereum Blockchain
+                            </h4>
+                        </div>
 
-                          <div class="col-sm-5 col-lg-5 col-lg-offset-1 mt40-xs float-right">
-                            <form role="form" id="register_form" class="register-form mb40-xs">
-                                          <h3 class="no-margin-top mb20">Sign up for our WhiteList</h3>
-
-                                          <div class="form-group">
-                                              <input type="text" class="form-control" placeholder="Email Address" required="required">
-                                          </div>
-
-                                          <div class="form-group no-margin-bottom mt20">
-                                              <button type="submit" class="btn btn-primary">Subscibe</button>
-                                          </div>
-                                      </form>
-                          </div><!-- /.column -->
-                  </div><!-- /.vertical center -->
-                </div><!-- /.container -->
-              </div>
+                        <div class="col-sm-5 float-right">
+                            <div class="register-form pb-0 pt-3">
+                                <h3 class="no-margin-top">Sign up for our WhiteList</h3>
+                                <div class="row">
+                                    <div class="form-group col-sm-12 mb-3">
+                                        <input class="form-control" placeholder="Email Address" v-model="email"
+                                               @keydown.enter="whiteListSubmit($event)">
+                                    </div>
+                                    <div class="form-group col-sm-4 mb-2">
+                                        <button class="btn btn-primary mt-0"
+                                                @click="whiteListSubmit($event)">Subscribe
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <!-- End Jumbotron -->
-        <!--<section class="hero-slider">-->
-        <!--<div class="item">-->
-        <!--<div class="container padding-top-4x">-->
-        <!--<div class="row justify-content-end align-items-right">-->
-        <!--<div class="col-lg-4 col-md-6 padding-bottom-2x text-md-left text-center">-->
-        <!--<div class="grid-item align-items-right">-->
-        <!--<div class="product-card">-->
-        <!--<div class="rating-stars"><i class="icon-star filled"></i><i-->
-        <!--class="icon-star filled"></i><i class="icon-star filled"></i><i-->
-        <!--class="icon-star filled"></i><i class="icon-star filled"></i>-->
-        <!--</div>-->
-        <!--<a class="product-thumb" href="shop-single.html"><img-->
-        <!--src="../../static/img/shop/products/11.jpg" alt="Product"></a>-->
-        <!--<h3 class="product-title"><a href="shop-single.html">Top-Sider Fathom</a></h3>-->
-        <!--<h4 class="product-price">$90.00</h4>-->
-        <!--<div class="product-buttons">-->
-        <!--<button class="btn btn-outline-secondary btn-sm btn-wishlist"-->
-        <!--data-toggle="tooltip" title="Whishlist"><i class="icon-heart"></i>-->
-        <!--</button>-->
-        <!--<button class="btn btn-outline-primary btn-sm" data-toast-->
-        <!--data-toast-type="success" data-toast-position="topRight"-->
-        <!--data-toast-icon="icon-circle-check" data-toast-title="Product"-->
-        <!--data-toast-message="successfuly added to cart!">Add to Cart-->
-        <!--</button>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</section>-->
+            </div>
+        </div>
 
         <!-- Featured Products Carousel-->
         <section class="container padding-top-3x padding-bottom-3x">
@@ -72,10 +42,8 @@
 
             <div class="row">
                 <div class="col-md-3 col-sm-6"
-                v-for="project in promo_posts"
-                >
-                    <div class="product-card"
-                        >
+                     v-for="project in promo_posts">
+                    <div class="product-card">
                         <a class="product-thumb" href="javascript:void(0)" @click="postModal(project.id)">
                             <img :src="project.logo_image" alt="Logo">
                         </a>
@@ -86,9 +54,9 @@
                             {{project.description_short}}
                         </h4>
                         <div class="product-buttons">
-                          <button class="btn btn-outline-danger btn-sm ">
-                              <span><i class="fa fa-star-o"></i> Mark for me</span>
-                          </button>
+                            <button class="btn btn-outline-danger btn-sm ">
+                                <span><i class="fa fa-star-o"></i> Mark for me</span>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -219,6 +187,9 @@
         upcoming: false,
         current: true,
         loaded: false,
+
+        email: '',
+
         page: 1,
       }
     },
@@ -250,6 +221,10 @@
           .then(() => {
             $('#post-modal').modal('show')
           })
+      },
+      whiteListSubmit (e) {
+        e.preventDefault()
+        this.$store.dispatch('whiteListEmail', this.email)
       }
     },
     computed: {
@@ -393,7 +368,6 @@
         'retina_detect': true
       })
     },
-
     directives: {
       'scroll-at': {
         /**

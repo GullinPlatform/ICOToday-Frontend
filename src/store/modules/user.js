@@ -19,6 +19,7 @@ const state = {
   token: null,
   upload_file: null,
 
+  white_list_email: ''
 }
 
 // getters
@@ -75,8 +76,8 @@ const getters = {
     }
   },
 
-  loadedUser: state => {
-    return state.user
+  white_list_email: state => {
+    return state.white_list_email
   }
 }
 
@@ -199,6 +200,14 @@ const actions = {
       .catch((error) => {
         return Promise.reject(error)
       })
+  },
+
+  whiteListEmail ({commit}, email) {
+    commit(types.WHITE_LIST_EMAIL, email)
+    $('#signup-modal').modal('show')
+  },
+  cleanWhiteListEmail ({commit}) {
+    commit(types.CLEAN_WHITE_LIST_EMAIL)
   },
 
   invitedGetUser ({commit}, token) {
@@ -331,6 +340,13 @@ const mutations = {
   },
   [types.LOAD_USER_MARKED_POST] (state, response) {
     state.user_marked_posts = response
+  },
+
+  [types.WHITE_LIST_EMAIL] (state, email) {
+    state.white_list_email = email
+  },
+  [types.CLEAN_WHITE_LIST_EMAIL] (state, email) {
+    state.white_list_email = ''
   },
 
   // post change

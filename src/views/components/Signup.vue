@@ -17,13 +17,17 @@
                             </h5>
                             <div class="row text-center">
                                 <div class="col-sm-6">
-                                    <a class="btn btn-outline-primary" @click="type=0" v-show="type===1"> ICO Company</a>
-                                    <a class="btn btn-primary  text-white" @click="type=0" v-show="type===0"> ICO Company</a>
+                                    <a class="btn btn-outline-primary" @click="type=0" v-show="type===1">
+                                        ICO Company</a>
+                                    <a class="btn btn-primary  text-white" @click="type=0" v-show="type===0">
+                                        ICO Company</a>
 
                                 </div>
                                 <div class="col-sm-6">
-                                    <a class="btn btn-outline-primary" @click="type=1" v-show="type===0"> ICO Investor</a>
-                                    <a class="btn btn-primary  text-white" @click="type=1" v-show="type===1"> ICO Investor</a>
+                                    <a class="btn btn-outline-primary" @click="type=1" v-show="type===0">
+                                        ICO Investor</a>
+                                    <a class="btn btn-primary  text-white" @click="type=1" v-show="type===1">
+                                        ICO Investor</a>
                                 </div>
                             </div>
                         </div>
@@ -101,7 +105,7 @@
 
         email: '',
         password: '',
-        type: 0,
+        type: 1,
 
         email_msg: '',
         select_msg: '',
@@ -111,11 +115,10 @@
     methods: {
       getToken () {
         this.email_msg = ''
-        this.password_msg = ''
-        this.last_msg = ''
-        this.first_msg = ''
+        this.select_msg = ''
+        this.team_msg = ''
         const formData = {
-          email: this.email.replace(/%20/g, ''),
+          email: this.email.replace(' ', ''),
           password: this.password,
           type: this.type,
           first_name: this.first_name,
@@ -123,9 +126,11 @@
           team_name: this.team_name,
         }
         if (this.select_msg === -1) { this.select_msg = 'This field cannot be null' }
-
         else {
           this.$store.dispatch('signup', formData)
+            .then(() => {
+              this.$store.dispatch('cleanWhiteListEmail')
+            })
             .catch((error) => {
               for (let e in error.data) {
                 if (e === 'email') this.email_msg = error.data[e][0]
@@ -133,6 +138,16 @@
             })
         }
       },
+    },
+    computed: {
+      white_list_email () {
+        return this.$store.getters.white_list_email
+      }
+    },
+    watch: {
+      white_list_email: function () {
+        this.email = this.white_list_email
+      }
     }
   }
 

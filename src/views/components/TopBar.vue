@@ -1,6 +1,5 @@
 <template>
-    <!-- Navbar-->
-    <!-- Remove ".navbar-sticky" class to make navigation bar scrollable with the page.-->
+    <div>
     <header class="navbar">
         <div class="site-branding">
             <div class="inner">
@@ -30,27 +29,27 @@
                         <ul class="toolbar-dropdown">
                             <li>
                                 <router-link :to="{name:'me_new_project'}" class="dropdown-item" v-if="me.type===0">
-                                    <i class="fa fa-plus dropdown-icon" aria-hidden="true"></i>Launch New ICO
+                                    <i class="fa fa-chevron-up" aria-hidden="true"></i>Launch New ICO
                                 </router-link>
                             </li>
                             <li>
                                 <router-link :to="{name:'me_created'}" class="dropdown-item" v-if="me.type===0">
-                                    <i class="fa fa-bitcoin dropdown-icon" aria-hidden="true"></i>My ICO Projects
+                                    <i class="fa fa-bitcoin" aria-hidden="true"></i> My ICO Projects
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link :to="{name:'me_marked'}" class="dropdown-item">
+                                    <i class="fa fa-bitcoin" aria-hidden="true"></i> Marked ICO Projects
                                 </router-link>
                             </li>
                             <li>
                                 <router-link :to="{name:'me_team'}" class="dropdown-item" v-if="me.type===0">
-                                    <i class="fa fa-users dropdown-icon" aria-hidden="true"></i>My Team
-                                </router-link>
-                            </li>
-                            <li>
-                                <router-link :to="{name:'me_marked'}" class="dropdown-item" v-if="me.type===1">
-                                    <i class="fa fa-bitcoin dropdown-icon" aria-hidden="true"></i>My Marked Projects
+                                    <i class="fa fa-user" aria-hidden="true"></i> My Team
                                 </router-link>
                             </li>
                             <li>
                                 <router-link :to="{name:'me_settings'}" class="dropdown-item">
-                                    <i class="fa fa-gear dropdown-icon" aria-hidden="true"></i>Settings
+                                    <i class="fa fa-gear" aria-hidden="true"></i>Account Settings
                                 </router-link>
                             </li>
                             <li class="sub-menu-separator"></li>
@@ -71,6 +70,12 @@
             </div>
         </div>
     </header>
+        <div class="alert alert-warning alert-dismissible fade show text-center" v-if="login_status && !me.is_verified">
+            <span class="alert-close" data-dismiss="alert"></span>
+            <i class="icon-bell"></i>&nbsp;&nbsp;<strong>Account Unverified:</strong>
+            Please verify your account to have fully access to ICOToday's great features.
+        </div>
+    </div>
 </template>
 <script>
   import SignupModal from 'components/Signup'

@@ -4,7 +4,7 @@
         <div class="container padding-bottom-3x mb-2 mt-3 pl-3 pr-3">
             <div class="row">
                 <div class="col-md-8 pl-0 pr-0">
-                    <div class="modal-header pl-0">
+                    <div class="post-header">
                         <img class="d-flex rounded mr-3" :src="post.logo_image" width="75" alt="Media">
                         <div class="media-body">
                             <h3 class="mt-0 mb-1 text-bold">{{post.title}}</h3>
