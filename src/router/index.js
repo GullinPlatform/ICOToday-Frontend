@@ -6,6 +6,7 @@ import RootLayout from 'layouts/RootLayout'
 import Landing from 'views/Landing'
 
 import EmailVerify from 'views/EmailVerify'
+import InvitedRegister from 'views/InvitedRegister'
 
 import MyCreatedProjects from 'views/MyCreatedProjects'
 import MyMarkedProjects from 'views/MyMarkedProjects'
@@ -76,6 +77,10 @@ export default new Router({
       path: '/verify',
       component: EmailVerify,
       name: 'email_verify'
+    }, {
+      path: '/invited',
+      component: InvitedRegister,
+      name: 'invited_register'
     }
     ]
   }]

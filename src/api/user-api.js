@@ -43,6 +43,16 @@ export default {
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
+  invitedSignup (formData) {
+    return Vue.http.post(API_ROOT + 'account/invited_signup/' + formData.token + '/', formData)
+      .then((response) => Promise.resolve(response.data))
+      .catch((error) => Promise.reject(error))
+  },
+  invitedGetUser (token) {
+    return Vue.http.get(API_ROOT + 'account/invited_signup/' + token + '/')
+      .then((response) => Promise.resolve(response.data))
+      .catch((error) => Promise.reject(error))
+  },
   // Load User Data
   getSelf () {
     return Vue.http.get(API_ROOT + 'account/me/', {headers: {Authorization: 'TOKEN ' + getCookie('token')}})

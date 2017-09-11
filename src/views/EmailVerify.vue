@@ -1,17 +1,7 @@
 <template>
     <div v-if="loaded">
-
         <div class="row justify-content-center mt-5">
-            <div class="col-sm-8" v-if="!token_valid">
-                <div class="card text-center">
-                    <div class="card-body">
-                        <h3 class="card-title"><i class="fa fa-times"></i> Ooops, Something went wrong</h3>
-                        <p class="text-danger">Error Message: {{err_msg}}</p>
-                        <p>Tips: Did you use the right URL?</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-8" v-else>
+            <div class="col-sm-8" v-if="token_valid">
                 <div class="card text-center">
                     <div class="card-body">
                         <h3 class="card-title"><i class="fa fa-check"></i> Congratulations</h3>
@@ -19,6 +9,15 @@
                     </div>
                     <div class="card-footer text-muted">
                         <router-link :to="{name:'landing'}" class="btn btn-primary">Explore</router-link>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8" v-else>
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h3 class="card-title"><i class="fa fa-times"></i> Ooops, Something went wrong</h3>
+                        <p class="text-danger">Error Message: {{err_msg}}</p>
+                        <p>Tips: Did you use the right URL?</p>
                     </div>
                 </div>
             </div>

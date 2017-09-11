@@ -2,9 +2,9 @@ import userApi from '../../api/user-api'
 import * as cookie from '../../utils/cookie'
 import * as types from '../mutation-types'
 import router from '../../router/index'
+/* global $:true */
 
 // initial state
-// shape: [{ id, quantity }]
 const state = {
   // self
   self: {},
@@ -159,7 +159,6 @@ const actions = {
   signup ({commit, dispatch}, formData) {
     return userApi.signup(formData)
       .then((response) => {
-        /* global $ */
         $('#signup-modal').modal('hide')
         commit(types.REGSITER_SUCCESS, response)
         dispatch('getSelf')
@@ -173,7 +172,6 @@ const actions = {
   login ({commit, dispatch}, formData) {
     return userApi.login(formData)
       .then((response) => {
-        /* global $ */
         $('#login-modal').modal('hide')
         commit(types.LOGIN_SUCCESS, response)
         dispatch('getSelf')
@@ -193,9 +191,31 @@ const actions = {
         return Promise.reject(error)
       })
   },
-  resendConfirmEmail() {
+  resendConfirmEmail () {
     return userApi.resendConfirmEmail()
       .then(() => {
+        return Promise.resolve()
+      })
+      .catch((error) => {
+        return Promise.reject(error)
+      })
+  },
+
+  invitedGetUser ({commit}, token) {
+    return userApi.invitedGetUser(token)
+      .then((response) => {
+        commit(types.LOAD_USER, response)
+        return Promise.resolve()
+      })
+      .catch((error) => {
+        return Promise.reject(error)
+      })
+  },
+  invitedSignup ({dispatch, commit}, formData) {
+    return userApi.invitedSignup(formData)
+      .then((response) => {
+        commit(types.REGSITER_SUCCESS, response)
+        dispatch('getSelf')
         return Promise.resolve()
       })
       .catch((error) => {

@@ -10,7 +10,8 @@
             </div>
             <div class="user-info">
                 <div class="user-avatar">
-                    <img :src="user.info.avatar" alt="User"></div>
+                    <img :src="user.info.avatar" alt="User">
+                </div>
                 <div class="pl-2">
                     <h4>{{username}}  <span class="text-muted">{{user.info.title}}</span></h4>
                     <span v-if="user.info.team">@ {{user.info.team.name}}</span>
