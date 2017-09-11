@@ -35,11 +35,11 @@
 
                             </div>
                             <p class="text-center">
-                                <a class="social-button shape-circle" href="#"><i class="fa fa-slack"></i></a>
-                                <a class="social-button shape-circle" href="#"><i
+                                <a class="social-button shape-circle" href="javascript:void(0)"><i class="fa fa-slack"></i></a>
+                                <a class="social-button shape-circle" href="javascript:void(0)"><i
                                         class="socicon-twitter"></i></a>
-                                <a class="social-button shape-circle" href="#"><i class="socicon-telegram"></i></a>
-                                <a class="social-button shape-circle" href="#"><i
+                                <a class="social-button shape-circle" href="javascript:void(0)"><i class="socicon-telegram"></i></a>
+                                <a class="social-button shape-circle" href="javascript:void(0)"><i
                                         class="socicon-medium"></i></a>
                             </p>
                         </div>
@@ -132,8 +132,10 @@
                                 <div class="col-md-3 col-sm-6 mb-3 text-center"
                                      v-for="member in current_team_members"
                                      v-if="!member.is_advisor">
-                                    <img class="img-thumbnail rounded-circle mb-2" height="100" width="100"
-                                         :src="member.avatar" alt="Team Member">
+                                    <router-link :to="{name:'user_created', params:{id:member.id}}" data-dismiss="modal">
+                                        <img class="img-thumbnail rounded-circle mb-2" height="100" width="100"
+                                             :src="member.avatar" alt="Team Member">
+                                    </router-link>
                                     <h6>{{member.first_name}} {{member.last_name}}</h6>
                                     <p class="text-muted mb-2">{{member.title}}</p>
                                     <div class="social-bar">
@@ -168,8 +170,10 @@
                                 <div class="col-md-3 col-sm-6 mb-3 text-center"
                                      v-for="member in current_team_members"
                                      v-if="member.is_advisor">
-                                    <img class="img-thumbnail rounded-circle mb-2" height="100" width="100"
-                                         :src="member.avatar" alt="Team Member">
+                                    <router-link :to="{name:'user_created', params:{id:member.id}}" data-dismiss="modal">
+                                        <img class="img-thumbnail rounded-circle mb-2" height="100" width="100"
+                                             :src="member.avatar" alt="Team Member">
+                                    </router-link>
                                     <h6>{{member.first_name}} {{member.last_name}}</h6>
                                     <p class="text-muted mb-2">{{member.title}}</p>
                                     <div class="social-bar">
@@ -212,18 +216,18 @@
                                         </p>
                                         <p>
                                             <i class="fa fa-calendar"></i> {{comment.created}}
-                                            <a class="reply-link float-right" href="#" v-if="login_status"
+                                            <a class="reply-link float-right" href="javascript:void(0)" v-if="login_status"
                                                @click="reply_comment_box_index=comment.id;reply_comment_box_show=true">
                                                 <i class="icon-reply"></i>Reply
                                             </a>
-                                            <a class="reply-link float-right mr-3" href="#"
+                                            <a class="reply-link float-right mr-3" href="javascript:void(0)"
                                                v-if="comment.creator.id===me.id"
                                                @click="preDeleteComment(comment.id)">
                                                 <i class="fa fa-times"></i>
                                                 <span v-if="delete_comment_id===comment.id">Cancel</span>
                                                 <span v-else>delete</span>
                                             </a>
-                                            <a class="reply-link text-danger float-right mr-3" href="#"
+                                            <a class="reply-link text-danger float-right mr-3" href="javascript:void(0)"
                                                v-if="delete_comment_id===comment.id"
                                                @click="deleteComment(comment.id)">
                                                 <i class="fa fa-times"></i>This will delete all replies, confirm?
@@ -263,14 +267,14 @@
                                                 </p>
                                                 <p>
                                                     <i class="fa fa-calendar"></i> {{reply.created}}
-                                                    <a class="reply-link float-right mr-3" href="#"
+                                                    <a class="reply-link float-right mr-3" href="javascript:void(0)"
                                                        v-if="reply.creator.id===me.id"
                                                        @click="preDeleteComment(reply.id)">
                                                         <i class="fa fa-times"></i>
                                                         <span v-if="delete_comment_id===reply.id">Cancel</span>
                                                         <span v-else>delete</span>
                                                     </a>
-                                                    <a class="reply-link text-danger float-right mr-3" href="#"
+                                                    <a class="reply-link text-danger float-right mr-3" href="javascript:void(0)"
                                                        v-if="delete_comment_id===reply.id"
                                                        @click="deleteComment(reply.id)">
                                                         <i class="fa fa-times"></i>Confirm

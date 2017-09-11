@@ -132,8 +132,10 @@
                         <div class="col-md-3 col-sm-6 col-xs-6 mb-3 text-center"
                              v-for="member in current_team_members"
                              v-if="!member.is_advisor">
+                            <router-link :to="{name:'user_created', params:{id:member.id}}">
                             <img class="img-thumbnail rounded-circle mb-2" height="100" width="100"
                                  :src="member.avatar" alt="Team Member">
+                            </router-link>
                             <h6>{{member.first_name}} {{member.last_name}}</h6>
                             <p class="text-muted mb-2">{{member.title}}</p>
                             <div class="social-bar">
@@ -168,8 +170,10 @@
                         <div class="col-md-3 col-sm-6 col-xs-6 mb-3 text-center"
                              v-for="member in current_team_members"
                              v-if="member.is_advisor">
+                            <router-link :to="{name:'user_created', params:{id:member.id}}">
                             <img class="img-thumbnail rounded-circle mb-2" height="100" width="100"
                                  :src="member.avatar" alt="Team Member">
+                            </router-link>
                             <h6>{{member.first_name}} {{member.last_name}}</h6>
                             <p class="text-muted mb-2">{{member.title}}</p>
                             <div class="social-bar">

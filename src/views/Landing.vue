@@ -5,7 +5,7 @@
             <div class="row justify-content-center pt-5">
                 <div class="col-sm-8">
                     <h1 class="text-white">
-                       Find your next ICO <strong>Today</strong>.
+                        Find your next ICO <strong>Today</strong>.
                     </h1>
                     <hr class="bottomReveal">
                     <p class="bottomReveal">
@@ -151,36 +151,66 @@
             <!-- Main content -->
             <div class="container pb-6">
                 <div class="row">
-
                     <!-- Main content -->
                     <div class="col-lg-12">
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <h3 class="text-left mb-2"><a>Active ICOs</a>
-                                </h3>
-                            </div>
-                            <div class="col-sm-3">
-                                <h3 class="text-center mb-2">Upcoming ICOs
+                        <ul class="nav nav-tabs md-4" role="tablist">
+                            <li class="nav-item"><a class="nav-link active" data-toggle="tab" role="tab"
+                                                    aria-expanded="true">Active</a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" role="tab" aria-expanded="false">Upcoming</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" role="tab" aria-expanded="false">Passed</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-lg-3">
+                        <div class="card p-3">
+                            <section class="widget widget-links">
+                                <h3 class="widget-title">Search Widget</h3>
+                                <form class="input-group form-group" method="get"><span class="input-group-btn">
+                                <button type="submit"><i class="icon-search"></i></button></span>
+                                    <input class="form-control" type="search" placeholder="Search site">
+                                </form>
+                            </section>
+                            <section class="widget widget-categories">
+                                <h3 class="widget-title">Price Range Widget</h3>
+                                <form class="price-range-slider" method="post" data-start-min="250" data-start-max="650"
+                                      data-min="0" data-max="1000" data-step="1">
+                                    <div class="ui-range-slider noUi-target noUi-ltr noUi-horizontal noUi-background">
 
-                                </h3>
-                            </div>
-
-                            <div class="col-sm-3">
-                                <h3 class="text-right mb-2">Passed ICOs
-                                </h3>
-                            </div>
-                            <div class="col-sm-3">
-                                <h3 class="text-right mb-2">Filters
-                                </h3>
-                            </div>
+                                    </div>
+                                    <footer class="ui-range-slider-footer">
+                                        <div class="column">
+                                            <button class="btn btn-outline-primary btn-sm" type="submit">Filter</button>
+                                        </div>
+                                        <div class="column">
+                                            <div class="ui-range-values">
+                                                <div class="ui-range-value-min">$<span>250</span>
+                                                    <input type="hidden" value="250">
+                                                </div>&nbsp;-&nbsp;
+                                                <div class="ui-range-value-max">$<span>650</span>
+                                                    <input type="hidden" value="650">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </footer>
+                                </form>
+                            </section>
+                            <section class="widget widget-tags">
+                                <h3 class="widget-title">Tags Widget</h3><a class="tag" href="#">#design</a><a
+                                    class="tag" href="#">#fashion</a><a class="tag" href="#">#travelling</a><span
+                                    class="tag active">#active tag</span><a class="tag" href="#">#shopping</a>
+                            </section>
                         </div>
-                        <hr class="mb-4"/>
-                        <!-- Job 1 -->
+                    </div>
+
+                    <div class="col-lg-9">
                         <div v-if="loaded">
                             <div class="product-card product-list"
                                  v-for="project in posts"
                                  v-if="loaded&&project.status===1">
-                                <a class="product-thumb" href="#" @click="postModal(project.id)">
+                                <a class="product-thumb" href="javascript:void(0)" @click="postModal(project.id)">
                                     <img :src="project.logo_image" alt="Logo">
                                 </a>
                                 <div class="product-info" @click="postModal(project.id)">
@@ -214,7 +244,7 @@
                         <!-- Call to action -->
                         <!--<div v-scroll-at="loadMore"></div>-->
                         <div class="row">
-                            <div class="col-md-12 text-md-center mt-0 mb-5">
+                            <div class="col-md-12 text-md-center">
                                 <a class="btn btn-primary btn-md btn-rounded text-white">
                                     + More
                                 </a>

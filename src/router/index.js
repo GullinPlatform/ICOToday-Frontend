@@ -5,6 +5,8 @@ import RootLayout from 'layouts/RootLayout'
 
 import Landing from 'views/Landing'
 
+import EmailVerify from 'views/EmailVerify'
+
 import MyCreatedProjects from 'views/MyCreatedProjects'
 import MyMarkedProjects from 'views/MyMarkedProjects'
 import MyTeam from 'views/MyTeam'
@@ -70,12 +72,11 @@ export default new Router({
       path: '/user/:id/team',
       component: UserTeam,
       name: 'user_team'
-    },
-      // {
-      //   path: '/login',
-      //   component: Question,
-      //   name: 'login'
-      // }
+    }, {
+      path: '/verify',
+      component: EmailVerify,
+      name: 'email_verify'
+    }
     ]
   }]
 })

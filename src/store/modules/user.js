@@ -183,6 +183,25 @@ const actions = {
         return Promise.reject(error)
       })
   },
+  confirmEmail ({dispatch}, token) {
+    return userApi.confirmEmail(token)
+      .then(() => {
+        dispatch('getSelf')
+        return Promise.resolve()
+      })
+      .catch((error) => {
+        return Promise.reject(error)
+      })
+  },
+  resendConfirmEmail() {
+    return userApi.resendConfirmEmail()
+      .then(() => {
+        return Promise.resolve()
+      })
+      .catch((error) => {
+        return Promise.reject(error)
+      })
+  },
 
   tokenVerify ({rootState, commit, dispatch}, formData) {
     userApi.tokenVerify(formData)

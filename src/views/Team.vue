@@ -24,8 +24,10 @@
             <div class="row">
                 <div class="col-md-6 mb-4" v-for="member in current_team_members" v-if="!member.is_advisor">
                     <div class="d-table">
-                        <img class="d-block mx-auto img-thumbnail rounded-circle d-table-cell align-middle"
-                             width="100" :src="member.avatar" alt="Team">
+                        <router-link :to="{name:'user_created', params:{id:member.id}}">
+                            <img class="d-block mx-auto img-thumbnail rounded-circle d-table-cell align-middle"
+                                 width="100" :src="member.avatar" alt="Team">
+                        </router-link>
                         <div class="pl-3 d-table-cell align-middle">
                             <h6>{{member.first_name}} {{member.last_name}}
                                 <span class="text-muted text-sm mb-2">{{member.title}}</span></h6>
@@ -68,8 +70,10 @@
             <div class="row">
                 <div class="col-md-6 mb-4" v-for="member in current_team_members" v-if="member.is_advisor">
                     <div class="d-table">
-                        <img class="d-block mx-auto img-thumbnail rounded-circle d-table-cell align-middle"
-                             width="100" :src="member.avatar" alt="Team">
+                        <router-link :to="{name:'user_created', params:{id:member.id}}">
+                            <img class="d-block mx-auto img-thumbnail rounded-circle d-table-cell align-middle"
+                                 width="100" :src="member.avatar" alt="Team">
+                        </router-link>
                         <div class="pl-3 d-table-cell align-middle">
                             <h6>{{member.first_name}} {{member.last_name}}
                                 <span class="text-muted text-sm mb-2">{{member.title}}</span></h6>

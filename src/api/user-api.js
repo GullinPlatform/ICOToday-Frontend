@@ -33,6 +33,16 @@ export default {
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
+  confirmEmail (token) {
+    return Vue.http.get(API_ROOT + 'account/email_verify/' + token + '/')
+      .then((response) => Promise.resolve(response.data))
+      .catch((error) => Promise.reject(error))
+  },
+  resendConfirmEmail () {
+    return Vue.http.get(API_ROOT + 'account/email_verify/', {}, {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
+      .then((response) => Promise.resolve(response.data))
+      .catch((error) => Promise.reject(error))
+  },
   // Load User Data
   getSelf () {
     return Vue.http.get(API_ROOT + 'account/me/', {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
@@ -65,7 +75,7 @@ export default {
       .catch((error) => Promise.reject(error))
   },
   // Change User
-  updateSelf(formData) {
+  updateSelf (formData) {
     return Vue.http.put(API_ROOT + 'account/me/', formData, {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
