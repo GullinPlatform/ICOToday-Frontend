@@ -56,91 +56,26 @@
         <!-- Featured Products Carousel-->
         <section class="container padding-top-3x padding-bottom-3x">
             <h3 class="text-left mb-30">Today's Top ICOs</h3>
+
             <div class="row">
-                <div class="col-md-3 col-sm-6">
-                    <div class="product-card">
-                        <div class="product-badge text-danger">22% Off</div>
-                        <a class="product-thumb" href="shop-single.html"><img
-                                src="../../static/img/shop/products/09.jpg" alt="Product"></a>
-                        <h3 class="product-title"><a href="shop-single.html">Rocket Dog</a></h3>
-                        <h4 class="product-price">
-                            <del>$44.95</del>
-                            $34.99
+                <div class="col-md-3 col-sm-6"
+                v-for="project in promo_posts"
+                >
+                    <div class="product-card"
+                        >
+                        <a class="product-thumb" href="javascript:void(0)" @click="postModal(project.id)">
+                            <img :src="project.logo_image" alt="Logo">
+                        </a>
+                        <h3 class="product-price">
+                            {{project.title}}
+                        </h3>
+                        <h4 class="product-title">
+                            {{project.description_short}}
                         </h4>
                         <div class="product-buttons">
-                            <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip"
-                                    title="Whishlist"><i class="icon-heart"></i></button>
-                            <button class="btn btn-outline-primary btn-sm" data-toast data-toast-type="success"
-                                    data-toast-position="topRight" data-toast-icon="icon-circle-check"
-                                    data-toast-title="Product" data-toast-message="successfuly added to cart!">
-                                Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 col-sm-6">
-                    <div class="product-card">
-                        <div class="product-badge text-danger">22% Off</div>
-                        <a class="product-thumb" href="shop-single.html"><img
-                                src="../../static/img/shop/products/09.jpg" alt="Product"></a>
-                        <h3 class="product-title"><a href="shop-single.html">Rocket Dog</a></h3>
-                        <h4 class="product-price">
-                            <del>$44.95</del>
-                            $34.99
-                        </h4>
-                        <div class="product-buttons">
-                            <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip"
-                                    title="Whishlist"><i class="icon-heart"></i></button>
-                            <button class="btn btn-outline-primary btn-sm" data-toast data-toast-type="success"
-                                    data-toast-position="topRight" data-toast-icon="icon-circle-check"
-                                    data-toast-title="Product" data-toast-message="successfuly added to cart!">
-                                Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 col-sm-6">
-                    <div class="product-card">
-                        <div class="product-badge text-danger">22% Off</div>
-                        <a class="product-thumb" href="shop-single.html"><img
-                                src="../../static/img/shop/products/09.jpg" alt="Product"></a>
-                        <h3 class="product-title"><a href="shop-single.html">Rocket Dog</a></h3>
-                        <h4 class="product-price">
-                            <del>$44.95</del>
-                            $34.99
-                        </h4>
-                        <div class="product-buttons">
-                            <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip"
-                                    title="Whishlist"><i class="icon-heart"></i></button>
-                            <button class="btn btn-outline-primary btn-sm" data-toast data-toast-type="success"
-                                    data-toast-position="topRight" data-toast-icon="icon-circle-check"
-                                    data-toast-title="Product" data-toast-message="successfuly added to cart!">
-                                Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 col-sm-6">
-                    <div class="product-card">
-                        <div class="product-badge text-danger">22% Off</div>
-                        <a class="product-thumb" href="shop-single.html"><img
-                                src="../../static/img/shop/products/09.jpg" alt="Product"></a>
-                        <h3 class="product-title"><a href="shop-single.html">Rocket Dog</a></h3>
-                        <h4 class="product-price">
-                            <del>$44.95</del>
-                            $34.99
-                        </h4>
-                        <div class="product-buttons">
-                            <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip"
-                                    title="Whishlist"><i class="icon-heart"></i></button>
-                            <button class="btn btn-outline-primary btn-sm" data-toast data-toast-type="success"
-                                    data-toast-position="topRight" data-toast-icon="icon-circle-check"
-                                    data-toast-title="Product" data-toast-message="successfuly added to cart!">
-                                Add to Cart
-                            </button>
+                          <button class="btn btn-outline-danger btn-sm ">
+                              <span><i class="fa fa-star-o"></i> Mark for me</span>
+                          </button>
                         </div>
                     </div>
                 </div>
