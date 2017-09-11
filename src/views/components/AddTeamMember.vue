@@ -71,7 +71,7 @@
                                placeholder="Twitter">
                     </div>
                     <div class="form-group">
-                        <input v-model="slack" type="text" class="form-control" placeholder="Slack">
+                        <input v-model="facebook" type="text" class="form-control" placeholder="Facebook">
                     </div>
                     <div class="form-group">
                         <input v-model="telegram" type="text" class="form-control"
@@ -118,7 +118,7 @@
 
         linkedin: '',
         twitter: '',
-        slack: '',
+        facebook: '',
         telegram: '',
 
         errorMsg: '',
@@ -139,7 +139,7 @@
           formData.append('description', this.description)
           formData.append('linkedin', this.linkedin)
           formData.append('twitter', this.twitter)
-          formData.append('slack', this.slack)
+          formData.append('facebook', this.facebook)
           formData.append('telegram', this.telegram)
           formData.append('is_advisor', this.is_advisor)
 
@@ -158,7 +158,7 @@
 
                 this.linkedin = ''
                 this.twitter = ''
-                this.slack = ''
+                this.facebook = ''
                 this.telegram = ''
 
                 this.errorMsg = ''
@@ -201,7 +201,7 @@
 
         this.linkedin = ''
         this.twitter = ''
-        this.slack = ''
+        this.facebook = ''
         this.telegram = ''
 
         this.errorMsg = ''

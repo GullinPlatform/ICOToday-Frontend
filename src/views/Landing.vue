@@ -62,109 +62,108 @@
                 </div>
             </div>
         </section>
-        <!-- ======== @Region: #content ======== -->
-        <div id="content" class="pb-6 bg-white pos-relative pos-zindex-10">
-            <!-- Main content -->
-            <div class="container pb-6">
-                <div class="row">
-                    <!-- Main content -->
-                    <div class="col-lg-12">
-                        <ul class="nav nav-tabs md-4" role="tablist">
-                            <li class="nav-item"><a class="nav-link active" data-toggle="tab" role="tab"
-                                                    aria-expanded="true">Active</a></li>
-                            <li class="nav-item"><a class="nav-link" data-toggle="tab" role="tab" aria-expanded="false">Upcoming</a>
-                            </li>
-                            <li class="nav-item"><a class="nav-link" data-toggle="tab" role="tab" aria-expanded="false">Passed</a>
-                            </li>
-                        </ul>
+
+        <!-- Main content -->
+        <div class="container pb-6">
+            <h1 class="text-left mb-30">ICO Projects</h1>
+            <div class="row">
+                <!-- Main content -->
+                <div class="col-lg-12">
+                    <ul class="nav nav-tabs md-4" role="tablist">
+                        <li class="nav-item"><a class="nav-link active" data-toggle="tab" role="tab"
+                                                aria-expanded="true">Active</a></li>
+                        <li class="nav-item"><a class="nav-link" data-toggle="tab" role="tab" aria-expanded="false">Upcoming</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" data-toggle="tab" role="tab" aria-expanded="false">Passed</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-lg-3">
+                    <div class="card p-3">
+                        <section class="widget widget-links">
+                            <h3 class="widget-title">Search Widget</h3>
+                            <form class="input-group form-group" method="get"><span class="input-group-btn">
+                                <button type="submit"><i class="icon-search"></i></button></span>
+                                <input class="form-control" type="search" placeholder="Search site">
+                            </form>
+                        </section>
+                        <section class="widget widget-categories">
+                            <h3 class="widget-title">Price Range Widget</h3>
+                            <form class="price-range-slider" method="post" data-start-min="250" data-start-max="650"
+                                  data-min="0" data-max="1000" data-step="1">
+                                <div class="ui-range-slider noUi-target noUi-ltr noUi-horizontal noUi-background">
+
+                                </div>
+                                <footer class="ui-range-slider-footer">
+                                    <div class="column">
+                                        <button class="btn btn-outline-primary btn-sm" type="submit">Filter</button>
+                                    </div>
+                                    <div class="column">
+                                        <div class="ui-range-values">
+                                            <div class="ui-range-value-min">$<span>250</span>
+                                                <input type="hidden" value="250">
+                                            </div>&nbsp;-&nbsp;
+                                            <div class="ui-range-value-max">$<span>650</span>
+                                                <input type="hidden" value="650">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </footer>
+                            </form>
+                        </section>
+                        <section class="widget widget-tags">
+                            <h3 class="widget-title">Tags Widget</h3><a class="tag" href="#">#design</a><a
+                                class="tag" href="#">#fashion</a><a class="tag" href="#">#travelling</a><span
+                                class="tag active">#active tag</span><a class="tag" href="#">#shopping</a>
+                        </section>
                     </div>
                 </div>
-                <div class="row mt-4">
-                    <div class="col-lg-3">
-                        <div class="card p-3">
-                            <section class="widget widget-links">
-                                <h3 class="widget-title">Search Widget</h3>
-                                <form class="input-group form-group" method="get"><span class="input-group-btn">
-                                <button type="submit"><i class="icon-search"></i></button></span>
-                                    <input class="form-control" type="search" placeholder="Search site">
-                                </form>
-                            </section>
-                            <section class="widget widget-categories">
-                                <h3 class="widget-title">Price Range Widget</h3>
-                                <form class="price-range-slider" method="post" data-start-min="250" data-start-max="650"
-                                      data-min="0" data-max="1000" data-step="1">
-                                    <div class="ui-range-slider noUi-target noUi-ltr noUi-horizontal noUi-background">
 
+                <div class="col-lg-9">
+                    <div v-if="loaded">
+                        <div class="product-card product-list"
+                             v-for="project in posts"
+                             v-if="loaded&&project.status===1">
+                            <a class="product-thumb" href="javascript:void(0)" @click="postModal(project.id)">
+                                <img :src="project.logo_image" alt="Logo">
+                            </a>
+                            <div class="product-info" @click="postModal(project.id)">
+                                <h3 class="product-title">
+                                    {{project.title}}
+
+                                    <span class="float-right text-bold text-info ml-2">{{project.rating}}/100</span>
+                                </h3>
+
+                                <h4 class="product-price">
+                                    {{formatTime(project.start_datetime, project.end_datetime)}}</h4>
+                                <p> {{project.description_short}}</p>
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        ICO Process
+                                        <div class="progress">
+                                            <div class="progress-bar bg-info" role="progressbar"
+                                                 style="width: 70%; height: 5px;"
+                                                 aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
                                     </div>
-                                    <footer class="ui-range-slider-footer">
-                                        <div class="column">
-                                            <button class="btn btn-outline-primary btn-sm" type="submit">Filter</button>
-                                        </div>
-                                        <div class="column">
-                                            <div class="ui-range-values">
-                                                <div class="ui-range-value-min">$<span>250</span>
-                                                    <input type="hidden" value="250">
-                                                </div>&nbsp;-&nbsp;
-                                                <div class="ui-range-value-max">$<span>650</span>
-                                                    <input type="hidden" value="650">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </footer>
-                                </form>
-                            </section>
-                            <section class="widget widget-tags">
-                                <h3 class="widget-title">Tags Widget</h3><a class="tag" href="#">#design</a><a
-                                    class="tag" href="#">#fashion</a><a class="tag" href="#">#travelling</a><span
-                                    class="tag active">#active tag</span><a class="tag" href="#">#shopping</a>
-                            </section>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-9">
-                        <div v-if="loaded">
-                            <div class="product-card product-list"
-                                 v-for="project in posts"
-                                 v-if="loaded&&project.status===1">
-                                <a class="product-thumb" href="javascript:void(0)" @click="postModal(project.id)">
-                                    <img :src="project.logo_image" alt="Logo">
-                                </a>
-                                <div class="product-info" @click="postModal(project.id)">
-                                    <h3 class="product-title">
-                                        {{project.title}}
-
-                                        <span class="float-right text-bold text-info ml-2">{{project.rating}}/100</span>
-                                    </h3>
-
-                                    <h4 class="product-price">
-                                        {{formatTime(project.start_datetime, project.end_datetime)}}</h4>
-                                    <p> {{project.description_short}}</p>
-                                    <div class="row">
-                                        <div class="col-sm-8">
-                                            ICO Process
-                                            <div class="progress">
-                                                <div class="progress-bar bg-info" role="progressbar"
-                                                     style="width: 70%; height: 5px;"
-                                                     aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-2 float-right">
-                                            <button class="btn btn-outline-danger btn-sm float-right">
-                                                <span><i class="fa fa-star-o"></i> Mark for me</span>
-                                            </button>
-                                        </div>
+                                    <div class="col-sm-2 float-right">
+                                        <button class="btn btn-outline-danger btn-sm float-right">
+                                            <span><i class="fa fa-star-o"></i> Mark for me</span>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- Call to action -->
-                        <!--<div v-scroll-at="loadMore"></div>-->
-                        <div class="row">
-                            <div class="col-md-12 text-md-center">
-                                <a class="btn btn-primary btn-md btn-rounded text-white">
-                                    + More
-                                </a>
-                            </div>
+                    </div>
+                    <!-- Call to action -->
+                    <!--<div v-scroll-at="loadMore"></div>-->
+                    <div class="row">
+                        <div class="col-md-12 text-md-center">
+                            <a class="btn btn-primary btn-md btn-rounded text-white">
+                                + More
+                            </a>
                         </div>
                     </div>
                 </div>

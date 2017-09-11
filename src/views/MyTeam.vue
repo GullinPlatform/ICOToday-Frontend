@@ -8,7 +8,8 @@
                 <div class="col-md-8" v-if="me.type===0">
 
                     <h6 class="text-muted text-normal text-uppercase ">Basic Info
-                        <router-link :to="{name:'team', params:{id:me.info.team.id}}" class="text-sm text-primary float-right">
+                        <router-link :to="{name:'team', params:{id:me.info.team.id}}"
+                                     class="text-sm text-primary float-right">
                             <i class="fa fa-external-link"></i> Preview
                         </router-link>
                     </h6>
@@ -53,8 +54,10 @@
                         <div class="row">
                             <div class="col-md-3 col-sm-6 mb-3 text-center" v-for="member in team_members"
                                  v-if="!member.is_advisor">
-                                <img class="img-thumbnail rounded-circle mb-2" height="100" width="100"
-                                     :src="member.avatar" alt="Team Member">
+                                <router-link :to="{name:'user_created', params:{id:member.account}}">
+                                    <img class="img-thumbnail rounded-circle mb-2" height="100" width="100"
+                                         :src="member.avatar" alt="Team Member">
+                                </router-link>
                                 <h6>{{member.first_name}} {{member.last_name}}</h6>
                                 <p class="text-muted mb-2">{{member.title}}</p>
                                 <div class="social-bar">
@@ -92,8 +95,10 @@
                         <div class="row">
                             <div class="col-md-3 col-sm-6 mb-3 text-center" v-for="member in team_members"
                                  v-if="member.is_advisor">
-                                <img class="img-thumbnail rounded-circle mb-2" height="100" width="100"
-                                     :src="member.avatar" alt="Team Member">
+                                <router-link :to="{name:'user_created', params:{id:member.account}}">
+                                    <img class="img-thumbnail rounded-circle mb-2" height="100" width="100"
+                                         :src="member.avatar" alt="Team Member">
+                                </router-link>
                                 <h6>{{member.first_name}} {{member.last_name}}</h6>
                                 <p class="text-muted mb-2">{{member.title}}</p>
                                 <div class="social-bar">

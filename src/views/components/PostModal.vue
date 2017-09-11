@@ -92,19 +92,19 @@
                                     <tbody>
                                     <tr>
                                         <td class="text-bold pl-1">Token Name</td>
-                                        <td>Anna</td>
+                                        <td>{{post.coin_name}}</td>
                                     </tr>
                                     <tr>
                                         <td class="text-bold pl-1">Soft Cap</td>
-                                        <td>Cabana</td>
+                                        <td>{{post.minimum_goal}}</td>
                                     </tr>
                                     <tr>
                                         <td class="text-bold pl-1">Hard Cap</td>
-                                        <td>Thornton</td>
+                                        <td>{{post.maximum_goal}}</td>
                                     </tr>
                                     <tr>
                                         <td class="text-bold pl-1">Bonus</td>
-                                        <td>Thornton</td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td class="text-bold pl-1">Equity on offer</td>
@@ -132,7 +132,7 @@
                                 <div class="col-md-3 col-sm-6 mb-3 text-center"
                                      v-for="member in current_team_members"
                                      v-if="!member.is_advisor">
-                                    <router-link :to="{name:'user_created', params:{id:member.id}}" data-dismiss="modal">
+                                    <router-link :to="{name:'user_created', params:{id:member.account}}" data-dismiss="modal">
                                         <img class="img-thumbnail rounded-circle mb-2" height="100" width="100"
                                              :src="member.avatar" alt="Team Member">
                                     </router-link>
@@ -170,7 +170,7 @@
                                 <div class="col-md-3 col-sm-6 mb-3 text-center"
                                      v-for="member in current_team_members"
                                      v-if="member.is_advisor">
-                                    <router-link :to="{name:'user_created', params:{id:member.id}}" data-dismiss="modal">
+                                    <router-link :to="{name:'user_created', params:{id:member.account}}" data-dismiss="modal">
                                         <img class="img-thumbnail rounded-circle mb-2" height="100" width="100"
                                              :src="member.avatar" alt="Team Member">
                                     </router-link>

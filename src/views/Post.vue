@@ -133,7 +133,7 @@
                         <div class="col-md-3 col-sm-6 col-xs-6 mb-3 text-center"
                              v-for="member in current_team_members"
                              v-if="!member.is_advisor">
-                            <router-link :to="{name:'user_created', params:{id:member.id}}">
+                            <router-link :to="{name:'user_created', params:{id:member.account}}">
                             <img class="img-thumbnail rounded-circle mb-2" height="100" width="100"
                                  :src="member.avatar" alt="Team Member">
                             </router-link>
@@ -171,7 +171,7 @@
                         <div class="col-md-3 col-sm-6 col-xs-6 mb-3 text-center"
                              v-for="member in current_team_members"
                              v-if="member.is_advisor">
-                            <router-link :to="{name:'user_created', params:{id:member.id}}">
+                            <router-link :to="{name:'user_created', params:{id:member.account}}">
                             <img class="img-thumbnail rounded-circle mb-2" height="100" width="100"
                                  :src="member.avatar" alt="Team Member">
                             </router-link>
