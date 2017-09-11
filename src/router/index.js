@@ -15,6 +15,7 @@ import MySettings from 'views/MySettings'
 import MyNewProject from 'views/MyNewProject'
 
 import Post from 'views/Post'
+import PostRatingDetail from 'views/PostRatingDetail'
 import Team from 'views/Team'
 
 import UserCreatedProjects from 'views/UserCreatedProjects'
@@ -37,6 +38,10 @@ export default new Router({
       path: '/project/:id',
       component: Post,
       name: 'post'
+    }, {
+      path: '/project/:id/rating',
+      component: PostRatingDetail,
+      name: 'post_rating_detail'
     }, {
       path: '/team/:id',
       component: Team,

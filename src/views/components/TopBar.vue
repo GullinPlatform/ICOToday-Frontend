@@ -14,9 +14,9 @@
         <!-- Main Navigation-->
         <nav class="site-menu">
             <ul>
-                <li><a href="../index.html" class="hidden-sm-down"><span>Publish ICO</span></a></li>
-                <li><a href="../shop-grid-ls.html" class="hidden-sm-down"><span>Invest</span></a></li>
-                <li><a href="../shop-grid-ls.html" class="hidden-sm-down"><span>Learn</span></a></li>
+                <li><a href="../index.html" class="hidden-sm-down text-primary"><span>Publish Your ICO</span></a></li>
+                <li><a href="../shop-grid-ls.html" class="hidden-sm-down"><span>White paper</span></a></li>
+                <li><a href="../shop-grid-ls.html" class="hidden-sm-down"><span>About us</span></a></li>
             </ul>
         </nav>
         <!-- Toolbar-->

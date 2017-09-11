@@ -46,4 +46,9 @@ export default {
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
+  getPostRatingDetail(id) {
+    return Vue.http.get(API_ROOT + 'post/' + id + '/rating/')
+      .then((response) => Promise.resolve(response.data))
+      .catch((error) => Promise.reject(error))
+  }
 }

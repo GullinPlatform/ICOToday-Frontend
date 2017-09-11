@@ -5,12 +5,16 @@ import * as types from '../mutation-types'
 const state = {
   posts: [],
   promo_posts: [],
-  current_post: {}
+  current_post: {},
+  current_post_rating_detail: ''
 }
 
 const getters = {
   current_post: state => {
     return state.current_post
+  },
+  current_post_rating_detail: state => {
+    return state.current_post_rating_detail
   },
   posts: state => {
     return state.posts
@@ -100,6 +104,18 @@ const actions = {
       })
   },
 
+  getPostRatingDetail ({commit}, id) {
+    return postApi.getPostRatingDetail(id)
+      .then((response) => {
+        commit(types.GET_POST_RATING_DETAIL, response)
+        return Promise.resolve()
+      })
+      .catch((error) => {
+        console.log(error)
+        return Promise.reject(error)
+      })
+  },
+
   toastr ({commit}, data) {
     let toastOptions = {
       class: 'iziToast-' + data.type || '',
@@ -142,6 +158,9 @@ const mutations = {
   },
   [types.GET_POST] (state, response) {
     state.current_post = response
+  },
+  [types.GET_POST_RATING_DETAIL] (state, response) {
+    state.current_post_rating_detail = response
   },
 }
 

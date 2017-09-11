@@ -10,9 +10,7 @@
                             <h3 class="mt-0 mb-1 text-bold">{{post.title}}</h3>
                             <span class="d-block text-sm text-muted">
                                 {{post.description_short}}
-                            fasdfsfsd
                             </span>
-
                         </div>
                     </div>
                 </div>
@@ -43,8 +41,12 @@
                 </div>
                 <div class="col-lg-4 pr-0">
                     <section>
-                        <h3 class="widget-title mb-2">Rating</h3>
-                        <h2 class="text-bold text-info text-center">{{post.rating}}/100</h2>
+                        <h3 class="widget-title mb-2">Rating <span class="text-sm text-black"><router-link :to="{name:'post_rating_detail', params:{is:post.id}}">
+                                <i class="fa fa-question-circle"></i></router-link>
+                            </span></h3>
+                        <h2 class="text-bold text-info text-center">{{post.rating}}/100
+
+                        </h2>
                     </section>
                     <section>
                         <h3 class="widget-title mb-2">Start Time</h3>
@@ -328,11 +330,8 @@
       }
     },
     methods: {
-      apply () {
-        this.$store.dispatch('applyQuestion', this.$route.params.id)
-      },
       mark () {
-        this.$store.dispatch('markQuestion', this.$route.params.id)
+        this.$store.dispatch('markPost', this.$route.params.id)
       },
       formatTime (start, end) {
         /* global moment:true */

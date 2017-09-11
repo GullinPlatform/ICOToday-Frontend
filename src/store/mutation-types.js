@@ -37,6 +37,7 @@ export const VERIFY_SELF = 'VERIFY_SELF'
 // ----- POST -----
 export const ADD_POST = 'ADD_POST'
 export const GET_POST = 'GET_POST'
+export const GET_POST_RATING_DETAIL = 'GET_POST_RATING_DETAIL'
 export const LIST_POSTS = 'LIST_POSTS'
 export const LIST_PROMO_POSTS = 'LIST_PROMO_POSTS'
 export const APPEND_POSTS = 'APPEND_POSTS'
