@@ -22,6 +22,8 @@ import UserCreatedProjects from 'views/UserCreatedProjects'
 import UserMarkedProjects from 'views/UserMarkedProjects'
 import UserTeam from 'views/UserTeam'
 
+import WhitePaperPage from 'views/WhitePaperPage'
+
 Vue.use(Router)
 Vue.use(Resource)
 
@@ -86,7 +88,12 @@ export default new Router({
       path: '/invited',
       component: InvitedRegister,
       name: 'invited_register'
+    }, {
+      path: '/white-paper',
+      component: WhitePaperPage,
+      name: 'white_paper'
     }
+
     ]
   }]
 })

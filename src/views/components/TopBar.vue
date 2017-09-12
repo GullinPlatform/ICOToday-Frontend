@@ -13,9 +13,9 @@
         <!-- Main Navigation-->
         <nav class="site-menu">
             <ul>
-                <li><a href="../index.html" class="hidden-sm-down text-primary"><span>Publish Your ICO</span></a></li>
-                <li><a href="../shop-grid-ls.html" class="hidden-sm-down"><span>White paper</span></a></li>
-                <li><a href="../shop-grid-ls.html" class="hidden-sm-down"><span>About us</span></a></li>
+                <li><a href="../index.html" class="hidden-sm-down"><span>Publish Your ICO</span></a></li>
+                <li><router-link :to="{name:'white_paper'}"><span>White paper</span></router-link></li>
+                <li><a target="_blank" href="https://trello.com/b/JxFOIC9x" class="hidden-sm-down"><span>Upcoming Releases</span></a></li>
             </ul>
         </nav>
         <!-- Toolbar-->
