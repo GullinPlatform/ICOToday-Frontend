@@ -134,14 +134,19 @@
                                 <h3 class="product-title" @click="postModal(project.id)">
                                     {{project.title}}
                                     <span class="text-muted text-sm"> {{project.description_short}}</span>
-                                    <span class="float-right text-bold text-primary ml-2">{{project.rating}}/100</span>
+                                    <span class="float-right text-bold text-primary ml-2"
+                                          v-if="project.rating">{{project.rating}}/100</span>
+                                    <span class="float-right text-bold text-primary ml-2" v-else>None</span>
                                 </h3>
 
                                 <div class="row" @click="postModal(project.id)">
                                     <div class="col-sm-3">
                                         Type
-                                        <h4 class="product-price">
+                                        <h4 class="product-price" v-if="project.type===0">
                                             Pre-ICO
+                                        </h4>
+                                        <h4 class="product-price" v-else>
+                                            ICO
                                         </h4>
                                     </div>
                                     <div class="col-sm-3">
@@ -153,13 +158,13 @@
                                     <div class="col-sm-3">
                                         Soft Cap / Hard Cap
                                         <h4 class="product-price">
-                                            1200 / 4000
+                                            {{project.minimum_goal}} /  {{project.maximum_goal}} {{project.coin_type}}
                                         </h4>
                                     </div>
                                     <div class="col-sm-3">
                                         Equity On Offer
                                         <h4 class="product-price">
-                                            50%
+                                            {{project.equality_on_offer}}%
                                         </h4>
                                     </div>
                                 </div>

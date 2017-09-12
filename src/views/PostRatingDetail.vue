@@ -28,7 +28,9 @@
                         <div class="media-body">
                             <h5 class="comment-title">{{raterName(detail.rater)}}
                                 <span class="text-muted">{{detail.rater.info.title}}</span>
-                                <span class="text-lg text-primary float-right">{{detail.score}}/100</span>
+
+                                <h2 class="text-bold text-info text-center" v-if="post.rating">{{post.rating}}/100</h2>
+                                <h2 class="text-bold text-info text-center" v-else>None</h2>
                             </h5>
                             <div class="social-bar">
                                 <a :href="detail.rater.info.facebook" target="_blank"

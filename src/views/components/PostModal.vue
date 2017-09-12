@@ -35,18 +35,28 @@
 
                             </div>
                             <p class="text-center">
-                                <a class="social-button shape-circle" href="javascript:void(0)"><i class="fa fa-slack"></i></a>
+                                <a class="social-button shape-circle" href="javascript:void(0)"><i
+                                        class="fa fa-slack"></i></a>
                                 <a class="social-button shape-circle" href="javascript:void(0)"><i
                                         class="socicon-twitter"></i></a>
-                                <a class="social-button shape-circle" href="javascript:void(0)"><i class="socicon-telegram"></i></a>
+                                <a class="social-button shape-circle" href="javascript:void(0)"><i
+                                        class="socicon-telegram"></i></a>
                                 <a class="social-button shape-circle" href="javascript:void(0)"><i
                                         class="socicon-medium"></i></a>
                             </p>
                         </div>
                         <div class="col-lg-4 pr-0">
                             <section>
-                                <h3 class="widget-title mb-2">Rating</h3>
-                                <h2 class="text-bold text-info text-center">{{post.rating}}/100</h2>
+                                <h3 class="widget-title mb-2">Rating
+                                    <span>
+                                    <router-link :to="{name:'post_rating_detail', params:{id:post.id}}"
+                                                 data-dismiss="modal">
+                                        <i class="fa fa-question-circle"></i></router-link>
+                                    </span>
+                                </h3>
+
+                                <h2 class="text-bold text-info text-center" v-if="post.rating">{{post.rating}}/100</h2>
+                                <h2 class="text-bold text-info text-center" v-else>None</h2>
                             </section>
                             <section>
                                 <h3 class="widget-title mb-2">Start Time</h3>
@@ -132,7 +142,8 @@
                                 <div class="col-md-3 col-sm-6 mb-3 text-center"
                                      v-for="member in current_team_members"
                                      v-if="!member.is_advisor">
-                                    <router-link :to="{name:'user_created', params:{id:member.account}}" data-dismiss="modal">
+                                    <router-link :to="{name:'user_created', params:{id:member.account}}"
+                                                 data-dismiss="modal">
                                         <img class="img-thumbnail rounded-circle mb-2" height="100" width="100"
                                              :src="member.avatar" alt="Team Member">
                                     </router-link>
@@ -170,7 +181,8 @@
                                 <div class="col-md-3 col-sm-6 mb-3 text-center"
                                      v-for="member in current_team_members"
                                      v-if="member.is_advisor">
-                                    <router-link :to="{name:'user_created', params:{id:member.account}}" data-dismiss="modal">
+                                    <router-link :to="{name:'user_created', params:{id:member.account}}"
+                                                 data-dismiss="modal">
                                         <img class="img-thumbnail rounded-circle mb-2" height="100" width="100"
                                              :src="member.avatar" alt="Team Member">
                                     </router-link>
@@ -216,7 +228,8 @@
                                         </p>
                                         <p>
                                             <i class="fa fa-calendar"></i> {{comment.created}}
-                                            <a class="reply-link float-right" href="javascript:void(0)" v-if="login_status"
+                                            <a class="reply-link float-right" href="javascript:void(0)"
+                                               v-if="login_status"
                                                @click="reply_comment_box_index=comment.id;reply_comment_box_show=true">
                                                 <i class="icon-reply"></i>Reply
                                             </a>
@@ -274,7 +287,8 @@
                                                         <span v-if="delete_comment_id===reply.id">Cancel</span>
                                                         <span v-else>delete</span>
                                                     </a>
-                                                    <a class="reply-link text-danger float-right mr-3" href="javascript:void(0)"
+                                                    <a class="reply-link text-danger float-right mr-3"
+                                                       href="javascript:void(0)"
                                                        v-if="delete_comment_id===reply.id"
                                                        @click="deleteComment(reply.id)">
                                                         <i class="fa fa-times"></i>Confirm

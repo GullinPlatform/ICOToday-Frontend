@@ -122,6 +122,13 @@
                         </div>
                         <div class="col-sm-3"><p>{{coin_name}} = 1 {{coin_type}}</p></div>
                     </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Equality on Offer <span class="text-danger">*</span></label>
+                        <div class="col-sm-10">
+                            <input class="form-control" v-model="equality_on_offer" placeholder="Ex: 30%" required
+                                   type="text">
+                        </div>
+                    </div>
                     <h6 class="text-muted text-normal text-uppercase ">Supplement</h6>
                     <hr class="mb-3 mt-2">
                     <div class="form-group row">
@@ -233,6 +240,7 @@
 
         coin_name: '',
         ratio: '',
+        equality_on_offer: '',
 
         video_link: '',
         website: '',
@@ -300,6 +308,7 @@
         formData.append('title', this.title)
         formData.append('description_short', this.description_short)
         formData.append('description_full', this.description_full)
+        formData.append('equality_on_offer', this.equality_on_offer)
         formData.append('maximum_goal', this.maximum_goal)
         formData.append('minimum_goal', this.minimum_goal)
         formData.append('coin_type', this.coin_type)
@@ -327,6 +336,8 @@
             this.minimum_goal = null
             this.coin_type = ''
             this.coin_name = ''
+            this.equality_on_offer = ''
+            this.ratio = ''
 
             this.start_datetime = ''
             this.end_datetime = ''

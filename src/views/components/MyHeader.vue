@@ -13,7 +13,8 @@
                     <router-link class="edit-avatar" :to="{name:'me_settings'}"></router-link>
                     <img :src="me.info.avatar" alt="User"></div>
                 <div class="pl-2">
-                    <h4>{{username}}  <span class="text-muted">{{me.info.title}}</span></h4>
+                    <h4 class="mb-0">{{username}}  </h4>
+                    <h4 class="text-muted">{{me.info.title}}</h4>
                     <span v-if="me.info.team">@ {{me.info.team.name}}</span>
                     <br>
                     <p>{{me.info.description}}</p>

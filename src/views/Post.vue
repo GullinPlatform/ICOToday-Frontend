@@ -41,12 +41,13 @@
                 </div>
                 <div class="col-lg-4 pr-0">
                     <section>
-                        <h3 class="widget-title mb-2">Rating <span class="text-sm text-black"><router-link :to="{name:'post_rating_detail', params:{is:post.id}}">
+                        <h3 class="widget-title mb-2">Rating <span class="text-sm text-black">
+                            <router-link :to="{name:'post_rating_detail', params:{is:post.id}}">
                                 <i class="fa fa-question-circle"></i></router-link>
-                            </span></h3>
-                        <h2 class="text-bold text-info text-center">{{post.rating}}/100
-
-                        </h2>
+                            </span>
+                        </h3>
+                        <h2 class="text-bold text-info text-center" v-if="post.rating">{{post.rating}}/100</h2>
+                        <h2 class="text-bold text-info text-center" v-else>None</h2>
                     </section>
                     <section>
                         <h3 class="widget-title mb-2">Start Time</h3>
@@ -134,8 +135,8 @@
                              v-for="member in current_team_members"
                              v-if="!member.is_advisor">
                             <router-link :to="{name:'user_created', params:{id:member.account}}">
-                            <img class="img-thumbnail rounded-circle mb-2" height="100" width="100"
-                                 :src="member.avatar" alt="Team Member">
+                                <img class="img-thumbnail rounded-circle mb-2" height="100" width="100"
+                                     :src="member.avatar" alt="Team Member">
                             </router-link>
                             <h6>{{member.first_name}} {{member.last_name}}</h6>
                             <p class="text-muted mb-2">{{member.title}}</p>
@@ -172,8 +173,8 @@
                              v-for="member in current_team_members"
                              v-if="member.is_advisor">
                             <router-link :to="{name:'user_created', params:{id:member.account}}">
-                            <img class="img-thumbnail rounded-circle mb-2" height="100" width="100"
-                                 :src="member.avatar" alt="Team Member">
+                                <img class="img-thumbnail rounded-circle mb-2" height="100" width="100"
+                                     :src="member.avatar" alt="Team Member">
                             </router-link>
                             <h6>{{member.first_name}} {{member.last_name}}</h6>
                             <p class="text-muted mb-2">{{member.title}}</p>

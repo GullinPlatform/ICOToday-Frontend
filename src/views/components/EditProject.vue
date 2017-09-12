@@ -43,11 +43,11 @@
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Description Short
-                            <span  class="text-danger">*</span>
+                            <span class="text-danger">*</span>
                         </label>
                         <div class="col-sm-10">
-                                <input class="form-control" v-model="description_short" type="text"
-                                          placeholder="Short description in one sentence (100 characters).">
+                            <input class="form-control" v-model="description_short" type="text"
+                                   placeholder="Short description in one sentence (100 characters).">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -127,6 +127,13 @@
                                    type="number">
                         </div>
                         <div class="col-sm-3"><p>{{coin_name}} = 1 {{coin_type}}</p></div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Equality on Offer <span class="text-danger">*</span></label>
+                        <div class="col-sm-10">
+                            <input class="form-control" v-model="equality_on_offer" placeholder="Ex: 30%" required
+                                   type="text">
+                        </div>
                     </div>
                     <h6 class="text-muted text-normal text-uppercase ">Supplement</h6>
                     <hr class="mb-3 mt-2">
@@ -236,6 +243,7 @@
         start_datetime: '',
         end_datetime: '',
         white_paper: null,
+        equality_on_offer: '',
 
         coin_name: '',
         rating: '',
@@ -304,6 +312,7 @@
         formData.append('description_full', this.description_full)
         formData.append('maximum_goal', this.maximum_goal)
         formData.append('minimum_goal', this.minimum_goal)
+        formData.append('equality_on_offer', this.equality_on_offer)
         formData.append('coin_type', this.coin_type)
         formData.append('ratio', this.ratio)
         formData.append('type', this.type)
@@ -368,6 +377,7 @@
         this.minimum_goal = this.current_post.minimum_goal
         this.coin_type = this.current_post.coin_type
         this.type = this.current_post.type
+        this.equality_on_offer = this.current_post.equality_on_offer
 
         this.start_datetime = moment(this.current_post.start_datetime)
         this.end_datetime = moment(this.current_post.end_datetime)

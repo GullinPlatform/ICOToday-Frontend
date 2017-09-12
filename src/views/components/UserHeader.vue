@@ -13,7 +13,8 @@
                     <img :src="user.info.avatar" alt="User">
                 </div>
                 <div class="pl-2">
-                    <h4>{{username}}  <span class="text-muted">{{user.info.title}}</span></h4>
+                    <h4 class="mb-0">{{username}}  </h4>
+                    <h4 class="text-muted">{{user.info.title}}</h4>
                     <span v-if="user.info.team">@ {{user.info.team.name}}</span>
                     <br>
                     <p>{{user.info.description}}</p>
