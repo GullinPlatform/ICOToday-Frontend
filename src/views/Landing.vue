@@ -55,7 +55,7 @@
                         </h4>
                         <div class="product-buttons">
                             <button class="btn btn-outline-danger btn-sm ">
-                                <span><i class="fa fa-star-o"></i> Mark for me</span>
+                                <span><i class="fa fa-star-o"></i> SUBSCRIBE</span>
                             </button>
                         </div>
                     </div>
@@ -81,7 +81,7 @@
             </div>
             <div class="row mt-4">
                 <div class="col-lg-3">
-                    <div class="card p-3">
+                    <div class="card p-3 mb-3">
                         <section class="widget widget-links">
                             <h3 class="widget-title">Search Widget</h3>
                             <form class="input-group form-group" method="get"><span class="input-group-btn">
@@ -125,35 +125,48 @@
                     <div v-if="loaded">
                         <div class="product-card product-list"
                              v-for="project in posts"
-                             v-if="loaded&&project.status===1">
+                             v-if="loaded&&project.status===1"
+                             @mouseover="mark_show=project.id" @mouseleave="mark_show=false">
                             <a class="product-thumb" href="javascript:void(0)" @click="postModal(project.id)">
                                 <img :src="project.logo_image" alt="Logo">
                             </a>
-                            <div class="product-info" @click="postModal(project.id)">
+                            <div class="product-info pt-2 pb-2 active" @click="postModal(project.id)">
                                 <h3 class="product-title">
-                                    {{project.title}}
-
-                                    <span class="float-right text-bold text-info ml-2">{{project.rating}}/100</span>
+                                    {{project.title}}    <span
+                                        class="text-muted text-sm"> {{project.description_short}}</span>
+                                    <span class="float-right text-bold text-success ml-2">{{project.rating}}/100</span>
                                 </h3>
 
-                                <h4 class="product-price">
-                                    {{formatTime(project.start_datetime, project.end_datetime)}}</h4>
-                                <p> {{project.description_short}}</p>
                                 <div class="row">
-                                    <div class="col-sm-8">
-                                        ICO Process
-                                        <div class="progress">
-                                            <div class="progress-bar bg-info" role="progressbar"
-                                                 style="width: 70%; height: 5px;"
-                                                 aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
+                                    <div class="col-sm-3">
+                                        Type
+                                        <h4 class="product-price">
+                                            Pre-ICO
+                                        </h4>
                                     </div>
-                                    <div class="col-sm-2 float-right">
-                                        <button class="btn btn-outline-danger btn-sm float-right">
-                                            <span><i class="fa fa-star-o"></i> Mark for me</span>
-                                        </button>
+                                    <div class="col-sm-3">
+                                        Time
+                                        <h4 class="product-price">
+                                            {{timeCounter(project.start_datetime, project.end_datetime)}}
+                                        </h4>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        Soft Cap / Hard Cap
+                                        <h4 class="product-price">
+                                            1200 / 4000
+                                        </h4>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        Equity On Offer
+                                        <h4 class="product-price">
+                                            50%
+                                        </h4>
                                     </div>
                                 </div>
+                                <span class="badge badge-sm badge-default">Real estate
+                               </span>
+                                <span class="badge badge-sm badge-outline-danger float-right" v-show="mark_show===project.id"><i class="fa fa-star-o"></i> SUBSCRIBE
+                               </span>
                             </div>
                         </div>
                     </div>
@@ -187,9 +200,11 @@
         current: true,
         loaded: false,
 
+        mark_show: false,
+
         email: '',
 
-        page: 1,
+        page: 1
       }
     },
     methods: {
@@ -205,15 +220,59 @@
           .catch(() => {
           })
       },
-      formatTime (start, end) {
+
+      timeCounter (start, end) {
         /* global moment:true */
         // Haven't start
         if (moment().diff(start, 'minutes') < 0) {
-          return 'Start: ' + moment(start).format('MM/DD, hh:mm')
-        } else {
-          return 'End: ' + moment(end).format('MM/DD, hh:mm')
+          let rest = -moment().diff(start, 'days') + ' days '
+
+          if (rest === '0 days ') {
+            rest = -moment().diff(start, 'hours') + ' hours '
+          }
+          if (rest === '0 hours ') {
+            rest = -moment().diff(start, 'minutes') + ' minutes '
+          }
+          return 'Start in ' + rest
+        }
+        // Started
+        else if (moment().diff(end, 'minutes') < 0) {
+          let rest = -moment().diff(end, 'days') + ' days '
+
+          if (rest === '0 days ') {
+            rest = -moment().diff(end, 'hours') + ' hours '
+          }
+          if (rest === '0 hours ') {
+            rest = -moment().diff(end, 'minutes') + ' minutes '
+          }
+
+          return 'End in ' + rest
+        }
+        // Ended
+        else {
+          let rest = moment().diff(end, 'days') + ' days '
+
+          if (rest === '0 days ') {
+            rest = moment().diff(end, 'hours') + ' hours '
+          }
+          if (rest === '0 hours ') {
+            rest = moment().diff(end, 'minutes') + ' minutes '
+          }
+
+          return 'Ended ' + rest + 'ago'
         }
       },
+      formatTime (start, end) {
+        if (moment().diff(start, 'minutes') < 0) {
+
+          return moment(start).format('MM/DD, hh:mm')
+        }
+        else {
+
+          return moment(end).format('MM/DD, hh:mm')
+        }
+      },
+
       postModal (id) {
         /* global $:true */
         this.$store.dispatch('getPost', id)
@@ -223,7 +282,20 @@
       },
       whiteListSubmit (e) {
         e.preventDefault()
-        this.$store.dispatch('whiteListEmail', this.email)
+        if (!this.login_status) {
+          this.$store.dispatch('whiteListEmail', this.email)
+        }
+        else {
+          this.$store.dispatch('toastr', {
+            type: 'success',
+            title: 'Success',
+            message: 'By being one of the first users to register, you were already added to our white list!'
+          })
+        }
+      },
+
+      mouseOver: function () {
+        this.mark_show = !this.active
       }
     },
     computed: {
@@ -233,7 +305,7 @@
       promo_posts () {
         return this.$store.getters.promo_posts
       },
-      logedin () {
+      login_status () {
         return this.$store.getters.login_status
       },
       me () {
