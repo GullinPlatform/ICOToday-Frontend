@@ -45,7 +45,7 @@
             </router-link>
             <router-link :to="{name:'user_marked', params:{id:user.id}}" class="list-group-item"
                          :class="{active: $route.name==='user_marked'}">
-                <i class="fa fa-angle-right"></i>User Marked ICO Projects
+                <i class="fa fa-angle-right"></i>User Subscribed ICO Projects
             </router-link>
             <router-link :to="{name:'user_team', params:{id:user.id}}" class="list-group-item"
                          v-if="user.type===0"

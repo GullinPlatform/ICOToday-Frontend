@@ -129,9 +129,9 @@
                         <div class="col-sm-3"><p>{{coin_name}} = 1 {{coin_type}}</p></div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Equality on Offer <span class="text-danger">*</span></label>
+                        <label class="col-sm-2 col-form-label">% of Token for Sale <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
-                            <input class="form-control" v-model="equality_on_offer" placeholder="Ex: 30%" required
+                            <input class="form-control" v-model="equality_on_offer" placeholder="Ex: 30" required
                                    type="text">
                         </div>
                     </div>

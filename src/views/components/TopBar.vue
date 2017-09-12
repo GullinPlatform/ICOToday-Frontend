@@ -34,12 +34,12 @@
                             </li>
                             <li>
                                 <router-link :to="{name:'me_created'}" class="dropdown-item" v-if="me.type===0">
-                                    <i class="fa fa-bitcoin" aria-hidden="true"></i> My ICO Projects
+                                    <i class="fa fa-bitcoin" aria-hidden="true"></i> My ICO
                                 </router-link>
                             </li>
                             <li>
                                 <router-link :to="{name:'me_marked'}" class="dropdown-item">
-                                    <i class="fa fa-bitcoin" aria-hidden="true"></i> Marked ICO Projects
+                                    <i class="fa fa-bitcoin" aria-hidden="true"></i> Subscribed ICOs
                                 </router-link>
                             </li>
                             <li>

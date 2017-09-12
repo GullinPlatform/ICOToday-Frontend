@@ -51,7 +51,8 @@
                                     <span>
                                     <router-link :to="{name:'post_rating_detail', params:{id:post.id}}"
                                                  data-dismiss="modal">
-                                        <i class="fa fa-question-circle"></i></router-link>
+                                        <i class="fa fa-question-circle"></i>
+                                    </router-link>
                                     </span>
                                 </h3>
 

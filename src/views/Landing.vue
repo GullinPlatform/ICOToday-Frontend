@@ -140,7 +140,7 @@
                             </h3>
 
                             <div class="row" @click="postModal(project.id)">
-                                <div class="col-sm-3">
+                                <div class="col-sm-2">
                                     Type
                                     <h4 class="product-price" v-if="project.type===0">
                                         Pre-ICO
@@ -155,14 +155,14 @@
                                         {{timeCounter(project.start_datetime, project.end_datetime)}}
                                     </h4>
                                 </div>
-                                <div class="col-sm-3">
+                                <div class="col-sm-4">
                                     Soft Cap / Hard Cap
                                     <h4 class="product-price">
                                         {{project.minimum_goal}} /  {{project.maximum_goal}} {{project.coin_type}}
                                     </h4>
                                 </div>
                                 <div class="col-sm-3">
-                                    Equity On Offer
+                                    Token for Sale
                                     <h4 class="product-price">
                                         {{project.equality_on_offer}}%
                                     </h4>
@@ -372,7 +372,6 @@
             return false
         }
         for (let p of this.self_marked_posts) {
-          console.log(p)
           if (id === p.id)
             return true
         }
