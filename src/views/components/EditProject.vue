@@ -42,11 +42,12 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Description Short <span
-                                class="text-danger">*</span></label>
+                        <label class="col-sm-2 col-form-label">Description Short
+                            <span  class="text-danger">*</span>
+                        </label>
                         <div class="col-sm-10">
-                                <textarea class="form-control" v-model="description_short" type="text"
-                                          placeholder="( Markdown Support Enabled )" required rows="3"></textarea>
+                                <input class="form-control" v-model="description_short" type="text"
+                                          placeholder="Short description in one sentence (100 characters).">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -58,6 +59,16 @@
                     </div>
                     <h6 class="text-muted text-normal text-uppercase ">ICO Detail</h6>
                     <hr class="mb-3 mt-2">
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">ICO Type <span class="text-danger">*</span></label>
+                        <div class="col-sm-10">
+                            <select class="form-control" v-model="type" required>
+                                <option value="" selected>-- Choose Type --</option>
+                                <option value="0">Pre-ICO</option>
+                                <option value="1">ICO</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">ICO Unit <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
@@ -115,7 +126,7 @@
                             <input class="form-control" placeholder="Ex: 5000" v-model="ratio" required
                                    type="number">
                         </div>
-                        <div class="col-sm-3"><p>Your Token = 1 {{coin_type}}</p></div>
+                        <div class="col-sm-3"><p>{{coin_name}} = 1 {{coin_type}}</p></div>
                     </div>
                     <h6 class="text-muted text-normal text-uppercase ">Supplement</h6>
                     <hr class="mb-3 mt-2">
@@ -217,6 +228,7 @@
         description_short: '',
         description_full: '',
 
+        type: '',
         maximum_goal: null,
         minimum_goal: null,
         coin_type: '',
@@ -226,6 +238,7 @@
         white_paper: null,
 
         coin_name: '',
+        rating: '',
         ratio: '',
 
         video_link: '',
@@ -292,6 +305,8 @@
         formData.append('maximum_goal', this.maximum_goal)
         formData.append('minimum_goal', this.minimum_goal)
         formData.append('coin_type', this.coin_type)
+        formData.append('ratio', this.ratio)
+        formData.append('type', this.type)
         formData.append('start_datetime', this.start_datetime.format('YYYY-MM-DD HH:mmZ'))
         formData.append('end_datetime', this.end_datetime.format('YYYY-MM-DD HH:mmZ'))
         formData.append('coin_name', this.coin_name)
@@ -352,6 +367,7 @@
         this.maximum_goal = this.current_post.maximum_goal
         this.minimum_goal = this.current_post.minimum_goal
         this.coin_type = this.current_post.coin_type
+        this.type = this.current_post.type
 
         this.start_datetime = moment(this.current_post.start_datetime)
         this.end_datetime = moment(this.current_post.end_datetime)

@@ -163,14 +163,15 @@
                                         </h4>
                                     </div>
                                 </div>
-                                <span class="badge badge-sm badge-default">Real estate
-                               </span>
+                                <span class="badge badge-sm badge-default">Real estate</span>
+                                <a href="javascript:void(0)">
                                 <span class="badge badge-sm badge-outline-danger float-right"
                                       v-show="subscribe_show===project.id"
                                       :class="{active:subscribe_hover}"
                                       @mouseover="subscribe_hover=true" @mouseleave="subscribe_hover=false">
                                     <i class="fa fa-star-o"></i> SUBSCRIBE
                                </span>
+                                </a>
                             </div>
                         </div>
                     </div>

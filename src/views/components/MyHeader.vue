@@ -1,5 +1,5 @@
 <template>
-    <div class="col-lg-4 mb-5">
+    <div class="col-md-4 mb-5">
         <aside class="user-info-wrapper">
             <div class="user-cover" style="background-image: url(../../../static/img/account/user-cover-img.jpg);">
                 <div class="info-label" v-if="me.is_verified"><i class="fa fa-id-badge"></i> Verified

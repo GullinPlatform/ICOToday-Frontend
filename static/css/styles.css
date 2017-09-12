@@ -3842,6 +3842,17 @@ a.list-group-item {
     color: #ffffff !important;
 }
 
+.badge.badge-outline-primary {
+    border: 1px solid #0da9ef;
+    background-color: transparent;
+    color: #0da9ef;
+}
+
+.badge.badge-outline-primary.active {
+    background-color: #0da9ef;
+    color: #ffffff !important;
+}
+
 .badge.badge-default {
     background-color: #eaeef2;
     color: #606975;
@@ -6755,7 +6766,7 @@ video {
     .product-card.product-list .product-thumb {
         position: relative;
         width: 100px;
-        padding: 18px 18px;
+        padding: 5px;
         border-right: 1px solid #e1e7ec;
     }
 

@@ -11,13 +11,16 @@
                     </h6>
                     <hr class="mb-3 mt-2">
 
-                    <div class="product-card product-list" v-if="loaded" v-for="project in projects">
-                        <router-link :to="{name:'post', params:{id: project.id}}" class="product-thumb">
-                            <img :src="project.logo_image" alt="Logo"></router-link>
-                        <div class="product-info">
-                            <h3 class="product-title">
-                                <router-link :to="{name:'post', params:{id: project.id}}"> {{project.title}}
-                                </router-link>
+                    <div class="product-card product-list"
+                         v-for="project in projects"
+                         v-if="loaded"
+                         @mouseover="active=project.id" @mouseleave="active=false">
+                        <a href="javascript:void(0)" @click="postModal(project.id)" class="product-thumb">
+                            <img :src="project.logo_image" alt="Logo">
+                        </a>
+                        <div class="product-info pt-2 pb-2" :class="{active:active===project.id}">
+                            <h3 class="product-title" @click="postModal(project.id)">
+                                {{project.title}}
                                 <span v-if="project.status===0" class="badge badge-warning">Verifying</span>
                                 <span v-else-if="project.status===1" class="badge badge-primary">Verified</span>
                                 <span v-else-if="project.status===2" class="badge badge-success"><i
@@ -28,41 +31,59 @@
                                         class="fa fa-star-o"></i> Premium</span>
                                 <span v-else="project.status===5" class="badge badge-default"><i
                                         class="fa fa-check"></i> Closed</span>
+                                <span class="text-muted text-sm"> {{project.description_short}}</span>
+                                <span class="float-right text-bold text-primary ml-2">{{project.rating}}/100</span>
                             </h3>
-                            <div class="rating-stars" v-if="project.status!==0">
-                                <span class="float-right text-bold text-info ml-2">{{project.rating}}/100</span>
-                            </div>
-                            <h4 class="product-price"> {{formatTime(project.start_datetime, project.end_datetime)}}</h4>
-                            <p> {{project.description_short}}</p>
-                            <div class="progress mb-1">
-                                <div class="progress-bar bg-info" role="progressbar" style="width: 70%; height: 5px;"
-                                     aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <div class="product-buttons">
-                                <router-link :to="{name:'post', params:{id: project.id}}"
-                                             class="btn btn-outline-primary text-uppercase btn-sm">
-                                    <span>DETAIL</span>
-                                </router-link>
 
-                                <button class="btn btn-outline-danger btn-sm"
-                                        @click="getEditProjectAndShowModal(project.id)"
-                                        v-if="me.info.team&&project.team.id===me.info.team.id&&project.status==0">
-                                    <i class="fa fa-edit"></i> EDIT
-                                </button>
-                                <button class="btn btn-outline-danger btn-sm"
-                                        @click="getUpdateProjectAndShowModal(project.id)"
-                                        v-else-if="me.info.team&&project.team.id===me.info.team.id&&project.status!=0">
-                                    <span><i class="fa fa-edit"></i> EDIT</span>
-
-                                </button>
-
+                            <div class="row" @click="postModal(project.id)">
+                                <div class="col-sm-3">
+                                    Type
+                                    <h4 class="product-price">
+                                        Pre-ICO
+                                    </h4>
+                                </div>
+                                <div class="col-sm-3">
+                                    Time
+                                    <h4 class="product-price">
+                                        {{timeCounter(project.start_datetime, project.end_datetime)}}
+                                    </h4>
+                                </div>
+                                <div class="col-sm-3">
+                                    Soft Cap / Hard Cap
+                                    <h4 class="product-price">
+                                        1200 / 4000
+                                    </h4>
+                                </div>
+                                <div class="col-sm-3">
+                                    Equity On Offer
+                                    <h4 class="product-price">
+                                        50%
+                                    </h4>
+                                </div>
                             </div>
+                            <span class="badge badge-sm badge-default">Real estate</span>
+                            <a href="javascript:void(0)">
+                            <span class="badge badge-sm badge-outline-primary float-right"
+                                  @click="getEditProjectAndShowModal(project.id)"
+                                  :class="{active:active}"
+                                  v-if="me.info.team&&project.team.id===me.info.team.id&&project.status==0">
+                                    <i class="fa fa-edit"></i> Edit
+                            </span>
+                                <span class="badge badge-sm badge-outline-primary float-right"
+                                      @click="getUpdateProjectAndShowModal(project.id)"
+                                      :class="{active:active}"
+                                      v-else-if="me.info.team&&project.team.id===me.info.team.id&&project.status!=0">
+                                    <i class="fa fa-edit"></i> Edit
+                            </span>
+                            </a>
                         </div>
                     </div>
+
                     <div class="mt-5" v-if="loaded && projects.length===0">
                         <div class="text-center">
                             <h3 class="product-title">You don't have ICO projects now</h3>
-                            <router-link :to="{name:'me_new_project'}" class="btn btn-outline-primary btn-sm text-primary">
+                            <router-link :to="{name:'me_new_project'}"
+                                         class="btn btn-outline-primary btn-sm text-primary">
                                 Create Now
                             </router-link>
                         </div>
@@ -80,6 +101,7 @@
     name: 'MyCreatedProjects',
     data () {
       return {
+        active: false,
         loaded: false,
       }
     },
@@ -111,15 +133,64 @@
           .catch(() => {
           })
       },
-      formatTime (start, end) {
+      timeCounter (start, end) {
         /* global moment:true */
         // Haven't start
         if (moment().diff(start, 'minutes') < 0) {
-          return 'Start: ' + moment(start).format('MM/DD, hh:mm')
-        } else {
-          return 'End: ' + moment(end).format('MM/DD, hh:mm')
+          let rest = -moment().diff(start, 'days') + ' days '
+
+          if (rest === '0 days ') {
+            rest = -moment().diff(start, 'hours') + ' hours '
+          }
+          if (rest === '0 hours ') {
+            rest = -moment().diff(start, 'minutes') + ' minutes '
+          }
+          return 'Start in ' + rest
         }
-      }
+        // Started
+        else if (moment().diff(end, 'minutes') < 0) {
+          let rest = -moment().diff(end, 'days') + ' days '
+
+          if (rest === '0 days ') {
+            rest = -moment().diff(end, 'hours') + ' hours '
+          }
+          if (rest === '0 hours ') {
+            rest = -moment().diff(end, 'minutes') + ' minutes '
+          }
+
+          return 'End in ' + rest
+        }
+        // Ended
+        else {
+          let rest = moment().diff(end, 'days') + ' days '
+
+          if (rest === '0 days ') {
+            rest = moment().diff(end, 'hours') + ' hours '
+          }
+          if (rest === '0 hours ') {
+            rest = moment().diff(end, 'minutes') + ' minutes '
+          }
+
+          return 'Ended ' + rest + 'ago'
+        }
+      },
+      formatTime (start, end) {
+        if (moment().diff(start, 'minutes') < 0) {
+
+          return moment(start).format('MM/DD, hh:mm')
+        }
+        else {
+
+          return moment(end).format('MM/DD, hh:mm')
+        }
+      },
+      postModal (id) {
+        /* global $:true */
+        this.$store.dispatch('getPost', id)
+          .then(() => {
+            $('#post-modal').modal('show')
+          })
+      },
     },
     computed: {
       me () {
