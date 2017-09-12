@@ -126,18 +126,18 @@
                         <div class="product-card product-list"
                              v-for="project in posts"
                              v-if="loaded&&project.status===1"
-                             @mouseover="mark_show=project.id" @mouseleave="mark_show=false">
+                             @mouseover="subscribe_show=project.id" @mouseleave="subscribe_show=false">
                             <a class="product-thumb" href="javascript:void(0)" @click="postModal(project.id)">
                                 <img :src="project.logo_image" alt="Logo">
                             </a>
-                            <div class="product-info pt-2 pb-2 active" @click="postModal(project.id)">
-                                <h3 class="product-title">
-                                    {{project.title}}    <span
-                                        class="text-muted text-sm"> {{project.description_short}}</span>
-                                    <span class="float-right text-bold text-success ml-2">{{project.rating}}/100</span>
+                            <div class="product-info pt-2 pb-2" :class="{active:subscribe_show===project.id}">
+                                <h3 class="product-title" @click="postModal(project.id)">
+                                    {{project.title}}
+                                    <span class="text-muted text-sm"> {{project.description_short}}</span>
+                                    <span class="float-right text-bold text-primary ml-2">{{project.rating}}/100</span>
                                 </h3>
 
-                                <div class="row">
+                                <div class="row" @click="postModal(project.id)">
                                     <div class="col-sm-3">
                                         Type
                                         <h4 class="product-price">
@@ -165,7 +165,11 @@
                                 </div>
                                 <span class="badge badge-sm badge-default">Real estate
                                </span>
-                                <span class="badge badge-sm badge-outline-danger float-right" v-show="mark_show===project.id"><i class="fa fa-star-o"></i> SUBSCRIBE
+                                <span class="badge badge-sm badge-outline-danger float-right"
+                                      v-show="subscribe_show===project.id"
+                                      :class="{active:subscribe_hover}"
+                                      @mouseover="subscribe_hover=true" @mouseleave="subscribe_hover=false">
+                                    <i class="fa fa-star-o"></i> SUBSCRIBE
                                </span>
                             </div>
                         </div>
@@ -200,7 +204,8 @@
         current: true,
         loaded: false,
 
-        mark_show: false,
+        subscribe_show: false,
+        subscribe_hover: false,
 
         email: '',
 
@@ -292,10 +297,6 @@
             message: 'By being one of the first users to register, you were already added to our white list!'
           })
         }
-      },
-
-      mouseOver: function () {
-        this.mark_show = !this.active
       }
     },
     computed: {
@@ -319,6 +320,7 @@
         })
         .catch(() => {
         })
+
       this.$store.dispatch('listPromoPosts')
         .then(() => {
           this.loaded = true

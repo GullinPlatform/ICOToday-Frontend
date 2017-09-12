@@ -3837,6 +3837,11 @@ a.list-group-item {
     color: #ff5252;
 }
 
+.badge.badge-outline-danger.active {
+    background-color: #ff5252;
+    color: #ffffff !important;
+}
+
 .badge.badge-default {
     background-color: #eaeef2;
     color: #606975;
@@ -6755,7 +6760,10 @@ video {
     }
 
     .product-card.product-list .product-info {
-        padding: 20px 22px;
+         padding: 20px 22px;
+     }
+    .product-card.product-list .product-info.active {
+        background-color: #f9f9f9;
     }
 
     .product-card.product-list .product-info .product-title,
