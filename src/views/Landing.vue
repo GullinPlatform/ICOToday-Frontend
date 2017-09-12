@@ -6,7 +6,7 @@
             <div class="container center-vertically-holder">
                 <div class="center-vertically ">
                     <div class="row">
-                        <div class="col-sm-7 col-lg-7 mt40-xs">
+                        <div class="col-md-7 mt40-xs">
                             <h1 class="text-white">
                                 <strong>ICOToday</strong>
                             </h1>
@@ -15,7 +15,7 @@
                             </h4>
                         </div>
 
-                        <div class="col-sm-5 float-right">
+                        <div class="col-md-5 float-right">
                             <div class="register-form pb-0 pt-3">
                                 <h3 class="no-margin-top">Sign up for our WhiteList</h3>
                                 <div class="row">
@@ -41,7 +41,8 @@
             <h1 class="text-left mb-30">Today's Top ICOs</h1>
 
             <div class="row">
-                <div class="col-md-3 col-sm-6"
+                <div class="col-lg-3 col-md-4 col-sm-6"
+                     v-if="promotion_loaded"
                      v-for="project in promo_posts">
                     <div class="product-card">
                         <a class="product-thumb" href="javascript:void(0)" @click="postModal(project.id)">
@@ -122,62 +123,69 @@
                 </div>
 
                 <div class="col-lg-9">
-                    <div v-if="loaded">
-                        <div class="product-card product-list"
-                             v-for="project in posts"
-                             v-if="loaded&&project.status===1"
-                             @mouseover="subscribe_show=project.id" @mouseleave="subscribe_show=false">
-                            <a class="product-thumb" href="javascript:void(0)" @click="postModal(project.id)">
-                                <img :src="project.logo_image" alt="Logo">
-                            </a>
-                            <div class="product-info pt-2 pb-2" :class="{active:subscribe_show===project.id}">
-                                <h3 class="product-title" @click="postModal(project.id)">
-                                    {{project.title}}
-                                    <span class="text-muted text-sm"> {{project.description_short}}</span>
-                                    <span class="float-right text-bold text-primary ml-2"
-                                          v-if="project.rating">{{project.rating}}/100</span>
-                                    <span class="float-right text-bold text-primary ml-2" v-else>None</span>
-                                </h3>
+                    <div class="product-card product-list"
+                         v-for="project in posts"
+                         v-if="list_loaded&&project.status===1"
+                         @mouseover="subscribe_show=project.id" @mouseleave="subscribe_show=false">
+                        <a class="product-thumb" href="javascript:void(0)" @click="postModal(project.id)">
+                            <img :src="project.logo_image" alt="Logo">
+                        </a>
+                        <div class="product-info pt-2 pb-2" :class="{active:subscribe_show===project.id}">
+                            <h3 class="product-title" @click="postModal(project.id)">
+                                {{project.title}}
+                                <span class="text-muted text-sm"> {{project.description_short}}</span>
+                                <span class="float-right text-bold text-primary ml-2"
+                                      v-if="project.rating">{{project.rating}}/100</span>
+                                <span class="float-right text-bold text-primary ml-2" v-else>None</span>
+                            </h3>
 
-                                <div class="row" @click="postModal(project.id)">
-                                    <div class="col-sm-3">
-                                        Type
-                                        <h4 class="product-price" v-if="project.type===0">
-                                            Pre-ICO
-                                        </h4>
-                                        <h4 class="product-price" v-else>
-                                            ICO
-                                        </h4>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        Time
-                                        <h4 class="product-price">
-                                            {{timeCounter(project.start_datetime, project.end_datetime)}}
-                                        </h4>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        Soft Cap / Hard Cap
-                                        <h4 class="product-price">
-                                            {{project.minimum_goal}} /  {{project.maximum_goal}} {{project.coin_type}}
-                                        </h4>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        Equity On Offer
-                                        <h4 class="product-price">
-                                            {{project.equality_on_offer}}%
-                                        </h4>
-                                    </div>
+                            <div class="row" @click="postModal(project.id)">
+                                <div class="col-sm-3">
+                                    Type
+                                    <h4 class="product-price" v-if="project.type===0">
+                                        Pre-ICO
+                                    </h4>
+                                    <h4 class="product-price" v-else>
+                                        ICO
+                                    </h4>
                                 </div>
-                                <span class="badge badge-sm badge-default">Real estate</span>
-                                <a href="javascript:void(0)">
+                                <div class="col-sm-3">
+                                    Time
+                                    <h4 class="product-price">
+                                        {{timeCounter(project.start_datetime, project.end_datetime)}}
+                                    </h4>
+                                </div>
+                                <div class="col-sm-3">
+                                    Soft Cap / Hard Cap
+                                    <h4 class="product-price">
+                                        {{project.minimum_goal}} /  {{project.maximum_goal}} {{project.coin_type}}
+                                    </h4>
+                                </div>
+                                <div class="col-sm-3">
+                                    Equity On Offer
+                                    <h4 class="product-price">
+                                        {{project.equality_on_offer}}%
+                                    </h4>
+                                </div>
+                            </div>
+                            <span class="badge badge-sm badge-default">Real estate</span>
+                            <a href="javascript:void(0)" @click="markPost(project.id)">
                                 <span class="badge badge-sm badge-outline-danger float-right"
-                                      v-show="subscribe_show===project.id"
+                                      v-show="showSubscribe(project.id)"
                                       :class="{active:subscribe_hover}"
                                       @mouseover="subscribe_hover=true" @mouseleave="subscribe_hover=false">
                                     <i class="fa fa-star-o"></i> SUBSCRIBE
                                </span>
-                                </a>
-                            </div>
+                            </a>
+                            <a href="javascript:void(0)" @click="unmarkPost(project.id)">
+                                <span class="badge badge-sm badge-outline-danger  float-right"
+                                      v-show="alreadySubscribed(project.id)"
+                                      :class="{active:!(subscribe_hover&&subscribe_show===project.id)}"
+                                      @mouseover="subscribe_hover=true" @mouseleave="subscribe_hover=false">
+                                    <span v-if="subscribe_hover&&subscribe_show===project.id">UNSUBSCRIBE</span>
+                                    <span v-else><i class="fa fa-check"></i> SUBSCRIBED</span>
+                               </span>
+                            </a>
                         </div>
                     </div>
                     <!-- Call to action -->
@@ -208,10 +216,14 @@
       return {
         upcoming: false,
         current: true,
-        loaded: false,
+        list_loaded: false,
+        promotion_loaded: false,
 
         subscribe_show: false,
         subscribe_hover: false,
+
+        marked: [],
+        unmarked: [],
 
         email: '',
 
@@ -303,6 +315,68 @@
             message: 'By being one of the first users to register, you were already added to our white list!'
           })
         }
+      },
+
+      markPost (id) {
+        this.$store.dispatch('markPost', id)
+          .then(() => {
+            this.marked.push(id)
+            this.unmarked.pop(id)
+
+            this.$store.dispatch('toastr', {
+              type: 'success',
+              title: 'Success',
+              message: 'The selected ICO is added to your subscription list, you\'ll receive free updates from now on'
+            })
+          })
+      },
+      unmarkPost (id) {
+        this.$store.dispatch('markPost', id)
+          .then(() => {
+            this.unmarked.push(id)
+            this.marked.pop(id)
+            this.$store.dispatch('toastr', {
+              type: 'success',
+              title: 'Success',
+              message: 'The selected ICO is removed from your subscription list'
+            })
+          })
+      },
+      showSubscribe (id) {
+        // order matters here
+        if (!this.subscribe_show) return false
+        for (let uid of this.unmarked) {
+          if (id === uid)
+            return true
+        }
+        for (let mid of this.marked) {
+          if (id === mid)
+            return false
+        }
+        for (let p of this.self_marked_posts) {
+          if (id === p.id)
+            return false
+        }
+        if (this.subscribe_show === id) {
+          return true
+        }
+      },
+      alreadySubscribed (id) {
+        // order matters here
+        for (let mid of this.marked) {
+          if (id === mid)
+            return true
+        }
+        for (let uid of this.unmarked) {
+          if (id === uid)
+            return false
+        }
+        for (let p of this.self_marked_posts) {
+          console.log(p)
+          if (id === p.id)
+            return true
+        }
+        return false
       }
     },
     computed: {
@@ -311,6 +385,9 @@
       },
       promo_posts () {
         return this.$store.getters.promo_posts
+      },
+      self_marked_posts () {
+        return this.$store.getters.self_marked_posts
       },
       login_status () {
         return this.$store.getters.login_status
@@ -322,17 +399,19 @@
     beforeCreate () {
       this.$store.dispatch('listPosts')
         .then(() => {
-          this.loaded = true
+          this.list_loaded = true
         })
         .catch(() => {
         })
 
       this.$store.dispatch('listPromoPosts')
         .then(() => {
-          this.loaded = true
+          this.promotion_loaded = true
         })
         .catch(() => {
         })
+
+      this.$store.dispatch('getSelfMarkedPost')
     },
     mounted () {
       /* global particlesJS:true */
