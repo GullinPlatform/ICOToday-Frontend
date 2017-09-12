@@ -15,16 +15,23 @@
                     </div>
                 </div>
                 <div class="col-md-4 text-center pt-2">
-                    <button class="btn btn-outline-danger btn-sm">
-                        <span><i class="fa fa-star-o"></i> Mark for me</span>
+                    <button class="btn btn-outline-danger btn-sm" v-if="!marked" @click="markPost()">
+                        <span><i class="fa fa-star-o"></i> Subscribe</span>
                     </button>
+                    <button class="btn btn-danger btn-sm" v-else @click="unmarkPost()"
+                            @mouseover="unsubscribe=true" @mouseleave="unsubscribe=false">
+                        <span v-if="unsubscribe">unsubscribe</span>
+                        <span v-else><i class="fa fa-check"></i> Subscribed</span>
+
+                    </button>
+
                 </div>
             </div>
 
             <div class="row post-modal">
                 <div class="col-lg-8 pl-0">
                     <div class="embed-responsive embed-responsive-16by9">
-                        <iframe src="http://www.youtube.com/embed/bwj2s_5e12U"
+                        <iframe :src="post.video_link"
                                 class="embed-responsive-item"
                                 allowfullscreen>
                         </iframe>
@@ -82,7 +89,7 @@
                 <div class="col-lg-8 pl-0 pl-0">
                     <section>
                         <h3 class="text-left">Description</h3>
-                        <p>{{post.description_full}}</p>
+                        <vue-markdown>{{post.description_full}}</vue-markdown>
                     </section>
                 </div>
                 <!-- Financial -->
@@ -324,16 +331,16 @@
         // UI Control
         reply_comment_box_show: false,
         reply_comment_box_index: -1,
+        marked: false,
+        unsubscribe: false,
 
         // Data Load Trigger
         team_loaded: false,
         comments_loaded: false
+
       }
     },
     methods: {
-      mark () {
-        this.$store.dispatch('markPost', this.$route.params.id)
-      },
       formatTime (start, end) {
         /* global moment:true */
         // Haven't start
@@ -385,6 +392,28 @@
             this.new_comment = ''
           })
       },
+      markPost () {
+        this.$store.dispatch('markPost', this.post.id)
+          .then(() => {
+            this.marked = true
+            this.$store.dispatch('toastr', {
+              type: 'success',
+              title: 'Success',
+              message: 'The selected ICO is added to your subscription list, you\'ll receive free updates from now on'
+            })
+          })
+      },
+      unmarkPost () {
+        this.$store.dispatch('markPost', this.post.id)
+          .then(() => {
+            this.marked = false
+            this.$store.dispatch('toastr', {
+              type: 'success',
+              title: 'Success',
+              message: 'The selected ICO is removed from your subscription list'
+            })
+          })
+      },
     },
     computed: {
       post () {
@@ -412,11 +441,20 @@
           }
         }
         return false
-      }
+      },
+      self_marked_posts () {
+        return this.$store.getters.self_marked_posts
+
+      },
     },
-    beforeCreate () {
+    beforeMount () {
       this.team_loaded = false
       this.comments_loaded = false
+
+      for (let p of this.self_marked_posts) {
+        if (this.post.id === p.id)
+          this.marked = true
+      }
 
       this.$store.dispatch('getComments', this.$store.getters.current_post.id)
         .then(() => {
@@ -427,6 +465,6 @@
         .then(() => {
           this.team_loaded = true
         })
-    }
+    },
   }
 </script>

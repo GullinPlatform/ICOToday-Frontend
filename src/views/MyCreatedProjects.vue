@@ -137,6 +137,7 @@
           .catch(() => {
           })
       },
+
       timeCounter (start, end) {
         /* global moment:true */
         // Haven't start
@@ -188,6 +189,7 @@
           return moment(end).format('MM/DD, hh:mm')
         }
       },
+
       postModal (id) {
         /* global $:true */
         this.$store.dispatch('getPost', id)

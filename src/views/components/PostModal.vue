@@ -16,11 +16,11 @@
 
                     <p class="mb-0">
                         <button class="btn btn-outline-danger btn-sm">
-                            <span><i class="fa fa-star-o"></i> Mark for me</span>
+                            <span><i class="fa fa-star-o"></i> Subscribe</span>
                         </button>
                         <router-link :to="{name:'post', params:{id:post.id}}" data-dismiss="modal"
                                      class="btn btn-outline-primary btn-sm mr-2">
-                            Go To Full Page
+                            Full Page
                         </router-link>
                     </p>
                 </div>
@@ -28,20 +28,20 @@
                     <div class="row post-modal ml-3 mr-3 mb-3">
                         <div class="col-lg-8 pl-0">
                             <div class="embed-responsive embed-responsive-16by9">
-                                <iframe src="http://www.youtube.com/embed/bwj2s_5e12U"
+                                <iframe :src="post.video_link"
                                         class="embed-responsive-item"
                                         allowfullscreen>
                                 </iframe>
 
                             </div>
                             <p class="text-center">
-                                <a class="social-button shape-circle" href="javascript:void(0)"><i
+                                <a class="social-button shape-circle" :href="post.slack" v-if="post.slack"><i
                                         class="fa fa-slack"></i></a>
-                                <a class="social-button shape-circle" href="javascript:void(0)"><i
+                                <a class="social-button shape-circle" :href="post.twitter" v-if="post.twitter"><i
                                         class="socicon-twitter"></i></a>
-                                <a class="social-button shape-circle" href="javascript:void(0)"><i
+                                <a class="social-button shape-circle" :href="post.telegram" v-if="post.telegram"><i
                                         class="socicon-telegram"></i></a>
-                                <a class="social-button shape-circle" href="javascript:void(0)"><i
+                                <a class="social-button shape-circle" :href="post.medium" v-if="post.medium"><i
                                         class="socicon-medium"></i></a>
                             </p>
                         </div>
@@ -92,7 +92,7 @@
                         <div class="col-lg-8 pl-0">
                             <section>
                                 <h3 class="text-left">Description</h3>
-                                <p>{{post.description_full}}</p>
+                                <vue-markdown>{{post.description_full}}</vue-markdown>
                             </section>
                         </div>
                         <!-- Financial -->
@@ -107,23 +107,23 @@
                                     </tr>
                                     <tr>
                                         <td class="text-bold pl-1">Soft Cap</td>
-                                        <td>{{post.minimum_goal}}</td>
+                                        <td>{{post.minimum_goal}} {{post.coin_type}}</td>
                                     </tr>
                                     <tr>
                                         <td class="text-bold pl-1">Hard Cap</td>
-                                        <td>{{post.maximum_goal}}</td>
+                                        <td>{{post.maximum_goal}} {{post.coin_type}}</td>
                                     </tr>
+                                    <!--<tr>-->
+                                    <!--<td class="text-bold pl-1">Bonus</td>-->
+                                    <!--<td></td>-->
+                                    <!--</tr>-->
                                     <tr>
-                                        <td class="text-bold pl-1">Bonus</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-bold pl-1">Equity on offer</td>
-                                        <td>Thornton</td>
+                                        <td class="text-bold pl-1">Tokens for Sale</td>
+                                        <td>{{post.equality_on_offer}}%</td>
                                     </tr>
                                     <tr>
                                         <td class="text-bold pl-1">Accepting</td>
-                                        <td>Thornton</td>
+                                        <td>{{post.coin_type}}</td>
                                     </tr>
 
                                     </tbody>
