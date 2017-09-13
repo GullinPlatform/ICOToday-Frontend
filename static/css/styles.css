@@ -7736,3 +7736,11 @@ video {
     padding-top: 15px;
     padding-bottom: 15px;
 }
+
+.light-grey{
+  background-color: #f6f6f6;
+}
+
+.big-icon {
+    font-size: 175px;
+}
