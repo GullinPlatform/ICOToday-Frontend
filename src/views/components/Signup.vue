@@ -21,7 +21,6 @@
                                         ICO Company</a>
                                     <a class="btn btn-primary  text-white" @click="type=0" v-show="type===0">
                                         ICO Company</a>
-
                                 </div>
                                 <div class="col-sm-6">
                                     <a class="btn btn-outline-primary" @click="type=1" v-show="type===0">
@@ -32,7 +31,6 @@
                             </div>
                         </div>
                         <hr>
-
                         <h5>
                             Account Info
                         </h5>
@@ -67,7 +65,8 @@
                         <div class="form-check">
                             <label class="form-check-label">
                                 <input type="checkbox" id="check" name="check" required class="form-check-input">
-                                I Agree with <a href="">ICOToday User Contract.</a>
+                                I Agree with
+                                <router-link :to="{name:'terms', query:{type:'terms'}}">ICOToday User Contract.</router-link>
                             </label>
                         </div>
                         <hr/>

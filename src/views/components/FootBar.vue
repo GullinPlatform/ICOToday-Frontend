@@ -17,7 +17,7 @@
                         <a class="social-button shape-circle sb-reddit sb-light-skin"  target="_blank" href="https://www.reddit.com/user/icotoday/ "><i class="socicon-reddit"></i></a>
                         <br>
                         <a class="social-button shape-circle sb-telegram sb-light-skin" target="_blank" href="https://t.me/joinchat/DDHesUIRiVuAx6Sne4XgLw"><i class="socicon-telegram"></i></a>
-                        <a class="social-button shape-circle sb-telegram sb-light-skin" target="_blank" href="https://icotoday.slack.com/messages/@slackbot/team/ico_today/"><i class="fa fa-slack"></i></a>
+                        <a class="social-button shape-circle sb-telegram sb-light-skin" target="_blank" href="https://join.slack.com/t/icotoday/shared_invite/MjQxMzE2MTgxMzE4LTE1MDUzMDQyMjItZjU0NGI4YzA1ZQ)"><i class="fa fa-slack"></i></a>
                         <a class="social-button shape-circle sb-medium sb-light-skin" target="_blank" href="https://medium.com/@icotoday"><i class="socicon-medium"></i></a>
 
                     </section>

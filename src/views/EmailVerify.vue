@@ -51,6 +51,7 @@
           .then(() => {
             this.loaded = true
             this.token_valid = true
+            this.$store.dispatch('getSelf')
           })
           .catch((error) => {
             this.loaded = true

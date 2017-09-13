@@ -361,34 +361,8 @@
 
         this.$store.dispatch('postNewPost', formData)
           .then(() => {
-            this.title = ''
-            this.description_full = ''
-            this.description_short = ''
-            this.category = ''
-
-            this.type = ''
-            this.maximum_goal = null
-            this.minimum_goal = null
-            this.coin_type = ''
-            this.coin_name = ''
-            this.equality_on_offer = ''
-            this.ratio = ''
-
-            this.start_datetime = ''
-            this.end_datetime = ''
-
-            this.white_paper = null
-
-            this.video_link = ''
-            this.website = ''
-
-            this.medium = ''
-            this.twitter = ''
-            this.slack = ''
-            this.telegram = ''
-
             this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'Your project is submitted!'})
-            //  this.$router.push({name: 'me_created'})
+            this.$router.push({name: 'me_created'})
           })
           .catch((error) => {
             console.log(error)
