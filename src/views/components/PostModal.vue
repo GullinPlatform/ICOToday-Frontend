@@ -15,9 +15,6 @@
                     </div>
 
                     <p class="mb-0">
-                        <button class="btn btn-outline-danger btn-sm">
-                            <span><i class="fa fa-star-o"></i> Subscribe</span>
-                        </button>
                         <router-link :to="{name:'post', params:{id:post.id}}" data-dismiss="modal"
                                      class="btn btn-outline-primary btn-sm mr-2">
                             Full Page
@@ -47,34 +44,34 @@
                         </div>
                         <div class="col-lg-4 pr-0">
                             <section>
-                                <h3 class="widget-title mb-2">Rating
-                                    <span>
-                                    <router-link :to="{name:'post_rating_detail', params:{id:post.id}}"
-                                                 data-dismiss="modal">
-                                        <i class="fa fa-question-circle"></i>
-                                    </router-link>
-                                    </span>
+                                <h3 class="widget-title mb-2">Rating <span class="text-sm text-black" data-dismiss="modal">
+                            <router-link :to="{name:'post_rating_detail', params:{id:post.id}}">
+                                <i class="fa fa-question-circle"></i></router-link>
+                            </span>
                                 </h3>
-
                                 <h2 class="text-bold text-info text-center" v-if="post.rating">{{post.rating}}/100</h2>
-                                <h2 class="text-bold text-info text-center" v-else>None</h2>
+                                <h2 class="text-bold text-info text-center" v-else>No Score</h2>
                             </section>
                             <section>
-                                <h3 class="widget-title mb-2">Start Time</h3>
-                                <h3>
-                                    {{formatTime(post.start_datetime, post.end_datetime)}}
-                                </h3>
+                                <h3 class="widget-title mb-2">Time</h3>
+                                <h2 class="text-center mb-0">
+                                    {{timeCounter(post.start_datetime, post.end_datetime)}}
+                                </h2>
+                                <p class="text-center"> {{formatTime(post.start_datetime, post.end_datetime)}}</p>
                             </section>
-                            <section>
-                                <h3 class="widget-title mb-2">Progress</h3>
-                                200/5000 ETH Raised
-                                <div class="progress mb-3">
-                                    <div class="progress-bar bg-info" role="progressbar"
-                                         style="width: 70%; height: 5px;"
-                                         aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </section>
-                            <section class="mt-5">
+                            <section class="mt-4">
+                                <hr class="mb-2">
+
+                                <button class="btn btn-outline-danger btn-sm btn-block" v-if="!marked" @click="markPost()">
+                                    <span><i class="fa fa-star-o"></i> Subscribe</span>
+                                </button>
+                                <button class="btn btn-danger btn-sm btn-block" v-else @click="unmarkPost()"
+                                        @mouseover="unsubscribe=true" @mouseleave="unsubscribe=false">
+                                    <span v-if="unsubscribe">unsubscribe</span>
+                                    <span v-else><i class="fa fa-check"></i> Subscribed</span>
+
+                                </button>
+
                                 <a class="btn btn-outline-primary btn-sm btn-block text-primary"
                                    :href="post.white_paper">
                                     <i class="fa fa-file-o"></i>
@@ -339,6 +336,8 @@
         // UI Control
         reply_comment_box_show: false,
         reply_comment_box_index: -1,
+        marked: false,
+        unsubscribe: false,
 
         // Data Load Trigger
         team_loaded: false,
@@ -346,20 +345,27 @@
       }
     },
     methods: {
-      apply () {
-        this.$store.dispatch('applyQuestion', this.$route.params.id)
+      markPost () {
+        this.$store.dispatch('markPost', this.post.id)
+          .then(() => {
+            this.marked = true
+            this.$store.dispatch('toastr', {
+              type: 'success',
+              title: 'Success',
+              message: 'The selected ICO is added to your subscription list, you\'ll receive free updates from now on'
+            })
+          })
       },
-      mark () {
-        this.$store.dispatch('markQuestion', this.$route.params.id)
-      },
-      formatTime (start, end) {
-        /* global moment:true */
-        // Haven't start
-        if (moment().diff(start, 'minutes') < 0) {
-          return moment(start).format('MMM DD hh:mm')
-        } else {
-          return moment(end).format('MMM DD hh:mm')
-        }
+      unmarkPost () {
+        this.$store.dispatch('markPost', this.post.id)
+          .then(() => {
+            this.marked = false
+            this.$store.dispatch('toastr', {
+              type: 'success',
+              title: 'Success',
+              message: 'The selected ICO is removed from your subscription list'
+            })
+          })
       },
       commentCreatorName (creator) {
         if (creator.info.first_name && creator.info.last_name) {
@@ -402,6 +408,57 @@
             this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'You removed your comment!'})
             this.new_comment = ''
           })
+      },
+      timeCounter (start, end) {
+        /* global moment:true */
+        // Haven't start
+        if (moment().diff(start, 'minutes') < 0) {
+          let rest = -moment().diff(start, 'days') + ' days '
+
+          if (rest === '0 days ') {
+            rest = -moment().diff(start, 'hours') + ' hours '
+          }
+          if (rest === '0 hours ') {
+            rest = -moment().diff(start, 'minutes') + ' minutes '
+          }
+          return 'Start in ' + rest
+        }
+        // Started
+        else if (moment().diff(end, 'minutes') < 0) {
+          let rest = -moment().diff(end, 'days') + ' days '
+
+          if (rest === '0 days ') {
+            rest = -moment().diff(end, 'hours') + ' hours '
+          }
+          if (rest === '0 hours ') {
+            rest = -moment().diff(end, 'minutes') + ' minutes '
+          }
+
+          return 'End in ' + rest
+        }
+        // Ended
+        else {
+          let rest = moment().diff(end, 'days') + ' days '
+
+          if (rest === '0 days ') {
+            rest = moment().diff(end, 'hours') + ' hours '
+          }
+          if (rest === '0 hours ') {
+            rest = moment().diff(end, 'minutes') + ' minutes '
+          }
+
+          return 'Ended ' + rest + 'ago'
+        }
+      },
+      formatTime (start, end) {
+        if (moment().diff(start, 'minutes') < 0) {
+
+          return moment(start).format('YYYY/MM/DD, hh:mm a')
+        }
+        else {
+
+          return moment(end).format('YYYY/MM/DD, hh:mm a')
+        }
       },
     },
     computed: {

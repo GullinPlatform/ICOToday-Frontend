@@ -136,7 +136,7 @@
                                 <span class="text-muted text-sm"> {{project.description_short}}</span>
                                 <span class="float-right text-bold text-primary ml-2"
                                       v-if="project.rating">{{project.rating}}/100</span>
-                                <span class="float-right text-bold text-primary ml-2" v-else>None</span>
+                                <span class="float-right text-bold text-primary ml-2" v-else>No Score</span>
                             </h3>
 
                             <div class="row" @click="postModal(project.id)">
