@@ -36,6 +36,27 @@ export default {
       .catch((error) => Promise.reject(error))
   },
 
+  searchPosts (formData) {
+    let query = '/?'
+
+    if (formData.status) {
+      query = query + 'status=' + formData.status + '&'
+    }
+    if (formData.category) {
+      query = query + 'category=' + formData.category + '&'
+    }
+    if (formData.type) {
+      query = query + 'type=' + formData.type + '&'
+    }
+    if (formData.keyword) {
+      query = query + 'keyword=' + formData.keyword + '&'
+    }
+
+    return Vue.http.get(API_ROOT + 'post/search/' + formData.page + query)
+      .then((response) => Promise.resolve(response.data))
+      .catch((error) => Promise.reject(error))
+  },
+
   markPost (id) {
     return Vue.http.post(API_ROOT + 'post/' + id + '/mark/', {}, {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
       .then((response) => Promise.resolve(response.data))
@@ -46,7 +67,7 @@ export default {
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
-  getPostRatingDetail(id) {
+  getPostRatingDetail (id) {
     return Vue.http.get(API_ROOT + 'post/' + id + '/rating/')
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))

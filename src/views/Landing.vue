@@ -75,13 +75,16 @@
                 <div class="col-lg-12">
                     <ul class="nav nav-tabs md-4" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" role="tab" aria-expanded="true">Active</a>
+                            <a class="nav-link" @click="status='active'" :class="{active:status==='active'}"
+                               aria-expanded="true">Active</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" role="tab" aria-expanded="false">Upcoming</a>
+                            <a class="nav-link" @click="status='upcoming'" :class="{active:status==='upcoming'}"
+                               aria-expanded="false">Upcoming</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" role="tab" aria-expanded="false">Passed</a>
+                            <a class="nav-link" @click="status='passed'" :class="{active:status==='passed'}"
+                               aria-expanded="false">Passed</a>
                         </li>
                     </ul>
                 </div>
@@ -143,9 +146,12 @@
                         </section>
                         <section class="widget widget-tags mb-3">
                             <hr class="mb-3">
-                            <a class="tag" href="javascript:void(0)" v-if="category">#{{category}}</a>
-                            <a class="tag" href="javascript:void(0)" v-if="keyword">#{{keyword}}</a>
-                            <a class="tag" href="javascript:void(0)" v-if="type">#{{type}}</a>
+                            <a class="tag" href="javascript:void(0)" @click="category=''"
+                               v-if="category">#{{category}}</a>
+                            <a class="tag" href="javascript:void(0)" @click="keyword=''" v-if="keyword">#{{keyword}}</a>
+                            <a class="tag" href="javascript:void(0)" @click="type=''" v-if="type==='0'">#Pre-ICO</a>
+                            <a class="tag" href="javascript:void(0)" @click="type=''" v-if="type==='1'">#ICO</a>
+                            <a class="tag" href="javascript:void(0)" @click="status=''" v-if="status">#{{status}}</a>
                         </section>
                     </div>
                 </div>
@@ -153,7 +159,6 @@
                 <div class="col-lg-9">
                     <div class="product-card product-list"
                          v-for="project in posts"
-                         v-if="list_loaded"
                          @mouseover="subscribe_show=project.id" @mouseleave="subscribe_show=false">
                         <a class="product-thumb" href="javascript:void(0)" @click="postModal(project.id)">
                             <img :src="project.logo_image" alt="Logo">
@@ -222,7 +227,6 @@
         </div>
     </div>
 </template>
-
 <script>
   export default {
     name: 'Landing',
@@ -236,7 +240,7 @@
       return {
         upcoming: false,
         current: true,
-        list_loaded: false,
+//        list_loaded: false,
         promotion_loaded: false,
 
         subscribe_show: false,
@@ -250,6 +254,7 @@
         page: 1,
 
         // Search
+        status: 'active',
         keyword: '',
         category: '',
         type: ''
@@ -257,13 +262,26 @@
     },
     methods: {
       loadMore () {
-        this.$store.dispatch('listPostsByPage')
-          .then(() => {
-            this.page += 1
-          })
-          .catch(() => {
-          })
+        this.page += 1
+        const formData = {
+          page: this.page,
+          status: this.status,
+          keyword: this.keyword,
+          category: this.category,
+        }
+        this.$store.dispatch('searchPostsByPage', formData)
       },
+      /* global _:true */
+      search: _.debounce(
+        function () {
+          const formData = {
+            page: this.page,
+            status: this.status,
+            keyword: this.keyword,
+            category: this.category,
+          }
+          this.$store.dispatch('searchPosts', formData)
+        }, 500),
 
       timeCounter (start, end) {
         /* global moment:true */
@@ -397,7 +415,7 @@
             return true
         }
         return false
-      }
+      },
     },
     computed: {
       posts () {
@@ -416,19 +434,12 @@
         return this.$store.getters.self
       }
     },
-    beforeCreate () {
-      this.$store.dispatch('listPosts')
-        .then(() => {
-          this.list_loaded = true
-        })
-        .catch(() => {
-        })
+    beforeMount () {
+      this.search()
 
       this.$store.dispatch('listPromoPosts')
         .then(() => {
           this.promotion_loaded = true
-        })
-        .catch(() => {
         })
 
       this.$store.dispatch('getSelfMarkedPost')
@@ -545,6 +556,23 @@
         },
         'retina_detect': true
       })
+    },
+    watch: {
+      keyword () {
+        this.search()
+      },
+      category () {
+        this.search()
+      },
+      type () {
+        this.search()
+      },
+      status () {
+        this.search()
+      },
+      page () {
+        this.loadMore()
+      }
     },
     directives: {
       'scroll-at': {

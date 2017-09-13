@@ -70,8 +70,27 @@ const actions = {
       })
   },
 
-  listPostByFilter({commit}, page) {
-
+  searchPosts({commit}, formData) {
+    return postApi.searchPosts(formData)
+      .then((response) => {
+        commit(types.LIST_POSTS, response)
+        return Promise.resolve()
+      })
+      .catch((error) => {
+        console.log(error)
+        return Promise.reject(error)
+      })
+  },
+  searchPostsByPage({commit}, formData) {
+    return postApi.searchPosts(formData)
+      .then((response) => {
+        commit(types.APPEND_POSTS, response)
+        return Promise.resolve()
+      })
+      .catch((error) => {
+        console.log(error)
+        return Promise.reject(error)
+      })
   },
 
   getPost ({commit}, pk) {

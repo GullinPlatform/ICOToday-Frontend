@@ -1,6 +1,6 @@
 <template>
     <!-- ======== @Region: #footer ======== -->
-    <footer class="site-footer">
+    <footer class="site-footer mt-5">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-6">
