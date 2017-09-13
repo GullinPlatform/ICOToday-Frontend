@@ -35,6 +35,16 @@
                     </div>
                 </div>
                 <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Category <span class="text-danger">*</span></label>
+                    <div class="col-sm-10">
+                        <select class="form-control" v-model="category" required>
+                            <option value="" selected>-- Choose Category --</option>
+                            <option value="0">Pre-ICO</option>
+                            <option value="1">ICO</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Description Short <span
                             class="text-danger">*</span></label>
                     <div class="col-sm-10">
@@ -227,6 +237,8 @@
         icon: null,
         description_short: '',
         description_full: '',
+
+        category: '',
 
         type: '',
         maximum_goal: null,

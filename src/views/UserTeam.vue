@@ -37,23 +37,19 @@
                                     <span class="text-muted text-sm mb-2">{{member.title}}</span></h6>
                                 <p>{{member.description}}</p>
                                 <div class="social-bar">
-                                    <a :href="member.facebook" target="_blank"
-                                       class="social-button shape-circle branding-facebook"
+                                    <a :href="member.facebook" class="social-link branding-facebook"
                                        v-if="member.facebook">
                                         <i class="fa fa-facebook"></i>
                                     </a>
-                                    <a :href="member.twitter" target="_blank"
-                                       class="social-button shape-circle branding-twitter"
+                                    <a :href="member.twitter" class="social-link branding-twitter"
                                        v-if="member.twitter">
                                         <i class="fa fa-twitter"></i>
                                     </a>
-                                    <a :href="member.linkedin" target="_blank"
-                                       class="social-button shape-circle branding-linkedin"
+                                    <a :href="member.linkedin" class="social-link branding-linkedin"
                                        v-if="member.linkedin">
                                         <i class="fa fa-linkedin-square"></i>
                                     </a>
-                                    <a :href="member.telegram" target="_blank"
-                                       class="social-button shape-circle branding-linkedin"
+                                    <a :href="member.telegram" class="social-link branding-linkedin"
                                        v-if="member.telegram">
                                         <i class="fa fa-telegram"></i>
                                     </a>
@@ -83,23 +79,19 @@
                                     <span class="text-muted text-sm mb-2">{{member.title}}</span></h6>
                                 <p>{{member.description}}</p>
                                 <div class="social-bar">
-                                    <a :href="member.facebook" target="_blank"
-                                       class="social-button shape-circle branding-facebook"
+                                    <a :href="member.facebook" class="social-link branding-facebook"
                                        v-if="member.facebook">
                                         <i class="fa fa-facebook"></i>
                                     </a>
-                                    <a :href="member.twitter" target="_blank"
-                                       class="social-button shape-circle branding-twitter"
+                                    <a :href="member.twitter" class="social-link branding-twitter"
                                        v-if="member.twitter">
                                         <i class="fa fa-twitter"></i>
                                     </a>
-                                    <a :href="member.linkedin" target="_blank"
-                                       class="social-button shape-circle branding-linkedin"
+                                    <a :href="member.linkedin" class="social-link branding-linkedin"
                                        v-if="member.linkedin">
                                         <i class="fa fa-linkedin-square"></i>
                                     </a>
-                                    <a :href="member.telegram" target="_blank"
-                                       class="social-button shape-circle branding-linkedin"
+                                    <a :href="member.telegram" class="social-link branding-linkedin"
                                        v-if="member.telegram">
                                         <i class="fa fa-telegram"></i>
                                     </a>

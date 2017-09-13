@@ -32,7 +32,7 @@
                             <ul class="toolbar-dropdown">
                                 <li>
                                     <router-link :to="{name:'me_new_project'}" class="dropdown-item" v-if="me.type===0">
-                                        <i class="fa fa-chevron-up" aria-hidden="true"></i>Launch New ICO
+                                        <i class="fa fa-chevron-up" aria-hidden="true"></i>Submit New ICO
                                     </router-link>
                                 </li>
                                 <li>

@@ -16,13 +16,13 @@ import MyNewProject from 'views/MyNewProject'
 
 import Post from 'views/Post'
 import PostRatingDetail from 'views/PostRatingDetail'
-import Team from 'views/Team'
 
 import UserCreatedProjects from 'views/UserCreatedProjects'
 import UserMarkedProjects from 'views/UserMarkedProjects'
 import UserTeam from 'views/UserTeam'
 
 import WhitePaperPage from 'views/WhitePaperPage'
+import TermsAndPolicy from 'views/TermsAndPolicy'
 
 Vue.use(Router)
 Vue.use(Resource)
@@ -44,10 +44,6 @@ export default new Router({
       path: '/project/:id/rating',
       component: PostRatingDetail,
       name: 'post_rating_detail'
-    }, {
-      path: '/team/:id',
-      component: Team,
-      name: 'team'
     }, {
       path: '/me/created',
       component: MyCreatedProjects,
@@ -92,6 +88,10 @@ export default new Router({
       path: '/white-paper',
       component: WhitePaperPage,
       name: 'white_paper'
+    }, {
+      path: '/terms',
+      component: TermsAndPolicy,
+      name: 'terms'
     }
 
     ]

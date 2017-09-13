@@ -1,28 +1,27 @@
 <template>
     <!-- Page Content-->
-    <div class="container pl-3 pr-3">
+    <div class="container padding-bottom-3x mb-2 mt-md-3 pl-3 pr-3">
         <div class="row">
-            <div class="col-md-8 pl-0 pr-0">
+            <div class="col-md-8 pl-md-0 pr-md-0">
                 <div class="post-header">
                     <img class="d-flex rounded mr-3" :src="post.logo_image" width="75" alt="Media">
                     <div class="media-body">
                         <h3 class="mt-0 mb-1 text-bold">{{post.title}}</h3>
                         <span class="d-block text-sm text-muted">
                                 {{post.description_short}}
-                            </span>
+                        </span>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="row post-modal">
-            <div class="col-lg-8 pl-0">
+            <div class="col-lg-8 pl-0 pr-0">
                 <div class="embed-responsive embed-responsive-16by9">
                     <iframe :src="post.video_link"
                             class="embed-responsive-item"
                             allowfullscreen>
                     </iframe>
-
                 </div>
                 <p class="text-center">
                     <a class="social-button shape-circle" href="javascript:void(0)"><i class="fa fa-slack"></i></a>
@@ -33,15 +32,17 @@
                             class="socicon-medium"></i></a>
                 </p>
             </div>
-            <div class="col-lg-4 pr-0">
+            <div class="col-lg-4 pr-md-0">
                 <section>
                     <h3 class="widget-title mb-2">Rating <span class="text-sm text-black">
-                            <router-link :to="{name:'post_rating_detail', params:{id:post.id}}">
+                            <router-link :to="{name:'terms', query:{type:'rating'}}">
                                 <i class="fa fa-question-circle"></i></router-link>
                             </span>
                     </h3>
-                    <h2 class="text-bold text-info text-center" v-if="post.rating">{{post.rating}}/100</h2>
-                    <h2 class="text-bold text-info text-center" v-else>No Score</h2>
+                    <router-link :to="{name:'post_rating_detail', params:{id:post.id}}">
+                        <h2 class="text-bold text-info text-center" v-if="post.rating">{{post.rating}}/100</h2>
+                    </router-link>
+                    <h2 class="text-bold text-info text-center" v-if="!post.rating">No Score</h2>
                 </section>
                 <section>
                     <h3 class="widget-title mb-2">Time</h3>
@@ -52,7 +53,6 @@
                 </section>
                 <section class="mt-4">
                     <hr class="mb-2">
-
                     <button class="btn btn-outline-danger btn-sm btn-block" v-if="!marked" @click="markPost()">
                         <span><i class="fa fa-star-o"></i> Subscribe</span>
                     </button>
@@ -60,9 +60,7 @@
                             @mouseover="unsubscribe=true" @mouseleave="unsubscribe=false">
                         <span v-if="unsubscribe">unsubscribe</span>
                         <span v-else><i class="fa fa-check"></i> Subscribed</span>
-
                     </button>
-
                     <a class="btn btn-outline-primary btn-sm btn-block text-primary"
                        :href="post.white_paper">
                         <i class="fa fa-file-o"></i>
@@ -77,18 +75,23 @@
 
         <div class="row">
             <!-- Description -->
-            <div class="col-lg-8 pl-0 pl-0">
+            <div class="col-lg-8 pl-md-0 pl-md-0">
                 <section>
                     <h3 class="text-left">Description</h3>
                     <vue-markdown>{{post.description_full}}</vue-markdown>
                 </section>
             </div>
             <!-- Financial -->
-            <div class="col-lg-4 pr-0 pl-0">
+            <div class="col-lg-4 pr-md-0 ">
                 <h3 class="text-left">Financial</h3>
                 <div class="table-responsive">
                     <table class="table">
                         <tbody>
+                        <tr>
+                            <td class="text-bold pl-1">ICO Type</td>
+                            <td v-if="post.type===0">Pre-ICO</td>
+                            <td v-else>ICO</td>
+                        </tr>
                         <tr>
                             <td class="text-bold pl-1">Token Name</td>
                             <td>{{post.coin_name}}</td>
@@ -121,12 +124,8 @@
         </div>
         <div class="row">
             <!-- Team -->
-            <div class="col-lg-12 pl-0 pr-0">
-                <h3 class="text-left">Team
-                    <router-link :to="{name:'team', params:{id:current_team.id}}"
-                                 class="text-sm text-primary">DETAIL
-                    </router-link>
-                </h3>
+            <div class="col-lg-12 pl-md-0 pr-md-0">
+                <h3 class="text-left">Team</h3>
 
                 <div class="row" v-if="team_loaded">
                     <div class="col-md-3 col-sm-6 col-xs-6 mb-3 text-center"
@@ -163,7 +162,7 @@
         </div>
         <div class="row">
             <!-- Advisors -->
-            <div class="col-lg-12 pl-0 pr-0">
+            <div class="col-lg-12 pl-md-0 pr-md-0">
                 <h3 class="text-left">Advisors
                 </h3>
                 <div class="row" v-if="team_loaded">
@@ -201,7 +200,7 @@
         </div>
         <div class="row">
             <!-- Comments -->
-            <div class="col-lg-12 pl-0 pr-0">
+            <div class="col-lg-12 pl-md-0 pr-md-0">
                 <h3 class="text-left">Comments</h3>
                 <ul class="comment mt-3 pl-3" v-if="comments_loaded">
                     <li class="media mb-3 pos-relative" v-for="comment in current_post_comments">

@@ -40,7 +40,7 @@
         <nav class="list-group">
             <router-link :to="{name:'me_new_project'}" class="list-group-item" v-if="me.type===0"
                          :class="{active: $route.name==='me_new_project'}">
-                <i class="fa fa-angle-right"></i>New ICO Application
+                <i class="fa fa-angle-right"></i>Submit New ICO
             </router-link>
             <router-link :to="{name:'me_created'}" class="list-group-item with-badge" v-if="me.type===0"
                          :class="{active: $route.name==='me_created'}">

@@ -44,7 +44,8 @@
                         </div>
                         <div class="col-lg-4 pr-0">
                             <section>
-                                <h3 class="widget-title mb-2">Rating <span class="text-sm text-black" data-dismiss="modal">
+                                <h3 class="widget-title mb-2">Rating <span class="text-sm text-black"
+                                                                           data-dismiss="modal">
                             <router-link :to="{name:'post_rating_detail', params:{id:post.id}}">
                                 <i class="fa fa-question-circle"></i></router-link>
                             </span>
@@ -62,7 +63,8 @@
                             <section class="mt-4">
                                 <hr class="mb-2">
 
-                                <button class="btn btn-outline-danger btn-sm btn-block" v-if="!marked" @click="markPost()">
+                                <button class="btn btn-outline-danger btn-sm btn-block" v-if="!marked"
+                                        @click="markPost()">
                                     <span><i class="fa fa-star-o"></i> Subscribe</span>
                                 </button>
                                 <button class="btn btn-danger btn-sm btn-block" v-else @click="unmarkPost()"
@@ -89,7 +91,7 @@
                         <div class="col-lg-8 pl-0">
                             <section>
                                 <h3 class="text-left">Description</h3>
-                                <vue-markdown>{{post.description_full}}</vue-markdown>
+                                <vue-markdown :source="post.description_full"></vue-markdown>
                             </section>
                         </div>
                         <!-- Financial -->
@@ -98,6 +100,11 @@
                             <div class="table-responsive">
                                 <table class="table">
                                     <tbody>
+                                    <tr>
+                                        <td class="text-bold pl-1">ICO Type</td>
+                                        <td v-if="post.type===0">Pre-ICO</td>
+                                        <td v-else>ICO</td>
+                                    </tr>
                                     <tr>
                                         <td class="text-bold pl-1">Token Name</td>
                                         <td>{{post.coin_name}}</td>
@@ -131,11 +138,7 @@
                     <div class="row ml-3 mr-3">
                         <!-- Team -->
                         <div class="col-lg-12 pl-0 pr-0">
-                            <h3 class="text-left">Team
-                                <router-link :to="{name:'team', params:{id:current_team.id}}" data-dismiss="modal"
-                                             class="text-sm text-primary">DETAIL
-                                </router-link>
-                            </h3>
+                            <h3 class="text-left">Team</h3>
                             <div class="row" v-if="team_loaded">
                                 <div class="col-md-3 col-sm-6 mb-3 text-center"
                                      v-for="member in current_team_members"

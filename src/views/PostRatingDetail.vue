@@ -18,13 +18,13 @@
                 <h3 class="text-left">Ratings By Advisors</h3>
                 <ul class="comment mt-3 pl-3" v-if="loaded">
                     <li class="media mb-3 pos-relative" v-for="detail in post_rating_details">
-                        <img :src="detail.rater.info.avatar"
-                             class="d-flex rounded-circle align-self-start mr-4" width="55">
+                        <router-link :to="{name:'user_created', params:{id:detail.rater.id}}">
+                            <img :src="detail.rater.info.avatar"
+                                 class="d-flex rounded-circle align-self-start mr-4" width="55">
+                        </router-link>
                         <div class="media-body">
-                            <h5 class="comment-title">{{raterName(detail.rater)}}
+                            <h5 class="comment-title mb-0">{{raterName(detail.rater)}}
                                 <span class="text-muted">{{detail.rater.info.title}}</span>
-                                <h2 class="text-bold text-info text-center" v-if="post.rating">{{post.rating}}/100</h2>
-                                <h2 class="text-bold text-info text-center" v-else>No Score</h2>
                             </h5>
                             <div class="social-bar">
                                 <a :href="detail.rater.info.facebook" target="_blank"
@@ -45,8 +45,13 @@
                                     <i class="fa fa-telegram"></i>
                                 </a>
                             </div>
+                            <span class="text-bold">
+                                Score:
+                                <span class="text-info mb-0" v-if="post.rating">{{post.rating}}/100</span>
+                                <span class="text-info mb-0" v-else>No Score</span>
+                            </span>
                             <span class="d-block">
-                                {{detail.detail}}
+                                <vue-markdown>{{detail.detail}}</vue-markdown>
                             </span>
                         </div>
                     </li>
@@ -102,7 +107,7 @@
   import VueMarkdown from 'vue-markdown'
 
   export default {
-    name: 'Post',
+    name: 'PostRatingDetail',
     components: {
       'vue-markdown': VueMarkdown
     },
