@@ -8,7 +8,9 @@
                     <section class="widget widget-light-skin">
                         <h3 class="widget-title">Get In Touch With Us</h3>
 
-                        <p><a class="navi-link-light" href="#">team@icotoday.io</a></p>
+                        <p><i class="fa fa-envelope"></i>
+                            <a class="navi-link-light" href="mailto:team@icotoday.io" target="_top">team@icotoday.io</a>
+                        </p>
 
                         <a class="social-button shape-circle sb-facebook sb-light-skin"target="_blank" href="https://www.facebook.com/ICOToday/ "><i class="socicon-facebook"></i></a>
                         <a class="social-button shape-circle sb-twitter sb-light-skin" target="_blank" href="https://twitter.com/ICO_Today?lang=en "><i class="socicon-twitter"></i></a>
@@ -41,10 +43,22 @@
                     <section class="widget widget-links widget-light-skin">
                         <h3 class="widget-title">Account</h3>
                         <ul>
-                            <li><a href="#">Your Account</a></li>
-                            <li><a href="#">Your ICOs</a></li>
-                            <li><a href="#">Login</a></li>
-                            <li><a target="_blank" href="#">Register</a></li>
+                            <li>
+                                <router-link :to="{name:'me_settings'}">Your Account</router-link>
+                            </li>
+                            <li v-if="me.type===0">
+                                <router-link :to="{name:'me_created'}">Your ICOs</router-link>
+                            </li>
+                            <li v-else>
+                                <router-link :to="{name:'me_marked'}">Your ICOs</router-link>
+                            </li>
+                            <li v-if="!login_status">
+                                <a href="javascript:void(0)" data-toggle="modal" data-target="#login-modal">Login</a>
+                            </li>
+                            <li v-if="!login_status">
+                                <a href="javascript:void(0)" data-toggle="modal"
+                                   data-target="#signup-modal">Register</a>
+                            </li>
                         </ul>
                     </section>
                 </div>
@@ -56,6 +70,14 @@
 </template>
 <script>
   export default {
-    name: 'Footer'
+    name: 'Footer',
+    computed: {
+      me () {
+        return this.$store.getters.self
+      },
+      login_status () {
+        return this.$store.getters.login_status
+      }
+    }
   }
 </script>

@@ -4,18 +4,31 @@
             <div class="site-branding">
                 <div class="inner">
                     <!-- Site Logo-->
-                    <router-link :to="{name:'landing'}" class="site-logo">
-                        <h1 class="text-black text-bold mt-2">ICO<span class="text-primary">Today</span></h1>
+                    <router-link :to="{name:'landing'}" >
+                        <img src="../../../static/img/logo/icotoday.png" width="180" class="m-3 ml-4"/>
                     </router-link>
-
                 </div>
             </div>
             <!-- Main Navigation-->
             <nav class="site-menu">
                 <ul>
-                    <li><a href="../index.html" class="hidden-sm-down"><span>Publish Your ICO</span></a></li>
                     <li>
-                        <router-link :to="{name:'white_paper'}" class="hidden-sm-down"><span>White paper</span></router-link>
+                        <a href="javascript:void(0)" data-toggle="modal" data-target="#signup-modal"
+                           v-if="!login_status" class="hidden-sm-down">
+                            <span>Publish Your ICO</span>
+                        </a>
+                        <router-link :to="{name:'me_new_project'}" v-if="login_status&&me.type===0"
+                                     class="hidden-sm-down">
+                            <span>Publish Your ICO</span>
+                        </router-link>
+                        <router-link :to="{name:'me_new_project'}" v-if="login_status&&me.type===1"
+                                     class="hidden-sm-down">
+                            <span>Apply to be an Expert</span>
+                        </router-link>
+                    </li>
+                    <li>
+                        <router-link :to="{name:'white_paper'}" class="hidden-sm-down"><span>White paper</span>
+                        </router-link>
                     </li>
                     <li><a target="_blank" href="https://trello.com/b/JxFOIC9x" class="hidden-sm-down"><span>Upcoming Releases</span></a>
                     </li>
@@ -62,7 +75,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <span class="ml-1 text-bold" v-if="login_status">{{self_name}}</span>
+                        <span class="ml-1 text-bold hidden-sm-down" v-if="login_status">{{self_name}}</span>
                         <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#signup-modal"
                                 v-if="!login_status">SIGN UP
                         </button>

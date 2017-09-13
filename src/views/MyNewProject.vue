@@ -39,8 +39,28 @@
                     <div class="col-sm-10">
                         <select class="form-control" v-model="category" required>
                             <option value="" selected>-- Choose Category --</option>
-                            <option value="0">Pre-ICO</option>
-                            <option value="1">ICO</option>
+                            <option value="Platform">Platform</option>
+                            <option value="Cryptocurrency">Cryptocurrency</option>
+                            <option value="Businessservices">Businessservices</option>
+                            <option value="Internet">Internet</option>
+                            <option value="Investment">Investment</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Banking">Banking</option>
+                            <option value="Software">Software</option>
+                            <option value="Realestate">Realestate</option>
+                            <option value="Casino&Gambling">Casino&Gambling</option>
+                            <option value="Communication">Communication</option>
+                            <option value="Tourism">Tourism</option>
+                            <option value="Media">Media</option>
+                            <option value="Health">Health</option>
+                            <option value="Retail">Retail</option>
+                            <option value="Sports">Sports</option>
+                            <option value="Infrastructure">Infrastructure</option>
+                            <option value="Energy">Energy</option>
+                            <option value="Charity">Charity</option>
+                            <option value="Education">Education</option>
+                            <option value="Manufacturing">Manufacturing</option>
+                            <option value="Other">Other</option>
                         </select>
                     </div>
                 </div>
@@ -324,6 +344,8 @@
         formData.append('minimum_goal', this.minimum_goal)
         formData.append('coin_type', this.coin_type)
         formData.append('coin_name', this.coin_name)
+        formData.append('category', this.category)
+
         formData.append('ratio', this.ratio)
         formData.append('type', this.type)
         formData.append('start_datetime', this.start_datetime.format('YYYY-MM-DD HH:mmZ'))
@@ -341,6 +363,8 @@
           .then(() => {
             this.title = ''
             this.description_full = ''
+            this.description_short = ''
+            this.category = ''
 
             this.type = ''
             this.maximum_goal = null

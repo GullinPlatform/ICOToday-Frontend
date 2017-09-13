@@ -65,8 +65,7 @@
                                 </h4>
                             </div>
                         </div>
-
-                        <span class="badge badge-sm badge-default">Real estate</span>
+                        <span class="badge badge-sm badge-default">{{project.category}}</span>
                         <a href="javascript:void(0)">
                             <span class="badge badge-sm badge-outline-primary float-right"
                                   @click="getEditProjectAndShowModal(project.id)"
