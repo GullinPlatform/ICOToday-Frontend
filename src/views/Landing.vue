@@ -168,7 +168,7 @@
                                     </h4>
                                 </div>
                             </div>
-                            <span class="badge badge-sm badge-default">Real estate</span>
+                            <span class="badge badge-sm badge-default">{{project.category}}</span>
                             <a href="javascript:void(0)" @click="markPost(project.id)">
                                 <span class="badge badge-sm badge-outline-danger float-right"
                                       v-show="showSubscribe(project.id)"

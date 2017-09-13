@@ -11,6 +11,7 @@
                             <span class="d-block text-sm text-muted">
                                 {{post.description_short}}
                             </span>
+                            <span class="badge badge-sm badge-default">{{post.category}}</span>
                         </div>
                     </div>
 
@@ -44,14 +45,18 @@
                         </div>
                         <div class="col-lg-4 pr-0">
                             <section>
-                                <h3 class="widget-title mb-2">Rating <span class="text-sm text-black"
-                                                                           data-dismiss="modal">
-                            <router-link :to="{name:'post_rating_detail', params:{id:post.id}}">
-                                <i class="fa fa-question-circle"></i></router-link>
-                            </span>
+                                <h3 class="widget-title mb-2">Rating
+                                    <span class="text-sm text-black">
+                                       <router-link :to="{name:'terms', query:{type:'rating'}}" data-dismiss="modal">
+                                           <i class="fa fa-question-circle"></i>
+                                       </router-link>
+                                    </span>
                                 </h3>
-                                <h2 class="text-bold text-info text-center" v-if="post.rating">{{post.rating}}/100</h2>
-                                <h2 class="text-bold text-info text-center" v-else>No Score</h2>
+                                <router-link :to="{name:'post_rating_detail', params:{id:post.id}}">
+                                    <h2 class="text-bold text-info text-center" v-if="post.rating">
+                                        {{post.rating}}/100</h2>
+                                </router-link>
+                                <h2 class="text-bold text-info text-center" v-if="!post.rating">No Score</h2>
                             </section>
                             <section>
                                 <h3 class="widget-title mb-2">Time</h3>
@@ -156,15 +161,15 @@
                                            v-if="member.facebook">
                                             <i class="fa fa-facebook"></i>
                                         </a>
-                                        <a :href="member.twitter" class="social-link branding-twitter"
+                                        <a :href="member.twitter" class="social-link branding-twitter" target="_blank"
                                            v-if="member.twitter">
                                             <i class="fa fa-twitter"></i>
                                         </a>
-                                        <a :href="member.linkedin" class="social-link branding-linkedin"
+                                        <a :href="member.linkedin" class="social-link branding-linkedin" target="_blank"
                                            v-if="member.linkedin">
                                             <i class="fa fa-linkedin-square"></i>
                                         </a>
-                                        <a :href="member.telegram" class="social-link branding-linkedin"
+                                        <a :href="member.telegram" class="social-link branding-linkedin" target="_blank"
                                            v-if="member.telegram">
                                             <i class="fa fa-telegram"></i>
                                         </a>
@@ -195,15 +200,15 @@
                                            v-if="member.facebook">
                                             <i class="fa fa-facebook"></i>
                                         </a>
-                                        <a :href="member.twitter" class="social-link branding-twitter"
+                                        <a :href="member.twitter" class="social-link branding-twitter" target="_blank"
                                            v-if="member.twitter">
                                             <i class="fa fa-twitter"></i>
                                         </a>
-                                        <a :href="member.linkedin" class="social-link branding-linkedin"
+                                        <a :href="member.linkedin" class="social-link branding-linkedin" target="_blank"
                                            v-if="member.linkedin">
                                             <i class="fa fa-linkedin-square"></i>
                                         </a>
-                                        <a :href="member.telegram" class="social-link branding-linkedin"
+                                        <a :href="member.telegram" class="social-link branding-linkedin" target="_blank"
                                            v-if="member.telegram">
                                             <i class="fa fa-telegram"></i>
                                         </a>

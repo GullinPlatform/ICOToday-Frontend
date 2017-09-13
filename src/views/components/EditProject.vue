@@ -42,6 +42,36 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Category <span class="text-danger">*</span></label>
+                        <div class="col-sm-10">
+                            <select class="form-control" v-model="category" required>
+                                <option value="" selected>-- Choose Category --</option>
+                                <option value="Platform">Platform</option>
+                                <option value="Cryptocurrency">Cryptocurrency</option>
+                                <option value="Businessservices">Businessservices</option>
+                                <option value="Internet">Internet</option>
+                                <option value="Investment">Investment</option>
+                                <option value="Entertainment">Entertainment</option>
+                                <option value="Banking">Banking</option>
+                                <option value="Software">Software</option>
+                                <option value="Realestate">Realestate</option>
+                                <option value="Casino&Gambling">Casino&Gambling</option>
+                                <option value="Communication">Communication</option>
+                                <option value="Tourism">Tourism</option>
+                                <option value="Media">Media</option>
+                                <option value="Health">Health</option>
+                                <option value="Retail">Retail</option>
+                                <option value="Sports">Sports</option>
+                                <option value="Infrastructure">Infrastructure</option>
+                                <option value="Energy">Energy</option>
+                                <option value="Charity">Charity</option>
+                                <option value="Education">Education</option>
+                                <option value="Manufacturing">Manufacturing</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Description Short
                             <span class="text-danger">*</span>
                         </label>
@@ -129,7 +159,8 @@
                         <div class="col-sm-3"><p>{{coin_name}} = 1 {{coin_type}}</p></div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">% of Token for Sale <span class="text-danger">*</span></label>
+                        <label class="col-sm-2 col-form-label">% of Token for Sale <span
+                                class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <input class="form-control" v-model="equality_on_offer" placeholder="Ex: 30" required
                                    type="text">
@@ -234,6 +265,7 @@
         icon: null,
         description_short: '',
         description_full: '',
+        category: '',
 
         type: '',
         maximum_goal: null,
@@ -310,6 +342,7 @@
         formData.append('title', this.title)
         formData.append('description_short', this.description_short)
         formData.append('description_full', this.description_full)
+        formData.append('category', this.category)
         formData.append('maximum_goal', this.maximum_goal)
         formData.append('minimum_goal', this.minimum_goal)
         formData.append('equality_on_offer', this.equality_on_offer)
@@ -372,6 +405,7 @@
         this.title = this.current_post.title
         this.description_short = this.current_post.description_short
         this.description_full = this.current_post.description_full
+        this.category = this.current_post.category
 
         this.maximum_goal = this.current_post.maximum_goal
         this.minimum_goal = this.current_post.minimum_goal

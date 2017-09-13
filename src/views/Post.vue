@@ -10,6 +10,7 @@
                         <span class="d-block text-sm text-muted">
                                 {{post.description_short}}
                         </span>
+                        <span class="badge badge-sm badge-default">{{post.category}}</span>
                     </div>
                 </div>
             </div>
@@ -35,9 +36,9 @@
             <div class="col-lg-4 pr-md-0">
                 <section>
                     <h3 class="widget-title mb-2">Rating <span class="text-sm text-black">
-                            <router-link :to="{name:'terms', query:{type:'rating'}}">
-                                <i class="fa fa-question-circle"></i></router-link>
-                            </span>
+                        <router-link :to="{name:'terms', query:{type:'rating'}}" target="_blank">
+                            <i class="fa fa-question-circle"></i></router-link>
+                        </span>
                     </h3>
                     <router-link :to="{name:'post_rating_detail', params:{id:post.id}}">
                         <h2 class="text-bold text-info text-center" v-if="post.rating">{{post.rating}}/100</h2>
