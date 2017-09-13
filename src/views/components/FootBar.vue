@@ -12,23 +12,13 @@
                             <a class="navi-link-light" href="mailto:team@icotoday.io" target="_top">team@icotoday.io</a>
                         </p>
 
-                        <a class="social-button shape-circle sb-facebook sb-light-skin" href="#"><i
-                                class="socicon-facebook"></i></a>
-                        <a class="social-button shape-circle sb-twitter sb-light-skin" href="#"><i
-                                class="socicon-twitter"></i></a>
-                        <a class="social-button shape-circle sb-instagram sb-light-skin" href="#"><i
-                                class="socicon-instagram"></i></a>
-                        <a class="social-button shape-circle sb-reddit sb-light-skin" href="#"><i
-                                class="socicon-reddit"></i></a>
+                        <a class="social-button shape-circle sb-facebook sb-light-skin"target="_blank" href="https://www.facebook.com/ICOToday/ "><i class="socicon-facebook"></i></a>
+                        <a class="social-button shape-circle sb-twitter sb-light-skin" target="_blank" href="https://twitter.com/ICO_Today?lang=en "><i class="socicon-twitter"></i></a>
+                        <a class="social-button shape-circle sb-reddit sb-light-skin"  target="_blank" href="https://www.reddit.com/user/icotoday/ "><i class="socicon-reddit"></i></a>
                         <br>
-                        <a class="social-button shape-circle sb-telegram sb-light-skin" href="#"><i
-                                class="socicon-telegram"></i></a>
-                        <a class="social-button shape-circle sb-telegram sb-light-skin" href="javascript:void(0)"><i
-                                class="fa fa-slack"></i></a>
-                        <a class="social-button shape-circle sb-medium sb-light-skin" href="#"><i
-                                class="socicon-medium"></i></a>
-                        <a class="social-button shape-circle sb-github sb-light-skin" href="#"><i
-                                class="socicon-github"></i></a>
+                        <a class="social-button shape-circle sb-telegram sb-light-skin" target="_blank" href="https://t.me/joinchat/DDHesUIRiVuAx6Sne4XgLw"><i class="socicon-telegram"></i></a>
+                        <a class="social-button shape-circle sb-telegram sb-light-skin" target="_blank" href="https://icotoday.slack.com/messages/@slackbot/team/ico_today/"><i class="fa fa-slack"></i></a>
+                        <a class="social-button shape-circle sb-medium sb-light-skin" target="_blank" href="https://medium.com/@icotoday"><i class="socicon-medium"></i></a>
 
                     </section>
                 </div>
@@ -39,8 +29,12 @@
                         <h3 class="widget-title">About Us</h3>
                         <ul>
                             <li><a target="_blank" href="https://trello.com/b/JxFOIC9x">Upcoming Releases</a></li>
-                            <li><a target="_blank" href="http://tokensale.icotoday.io">White Paper</a></li>
-                            <li><a target="_blank" href="https://medium.com/@icotoday">Blog</a></li>
+                            <li><a href="/white-paper">White Paper</a></li>
+                            <li><a href="/terms?type=terms">Terms and Services</a></li>
+                            <li><a href="/terms?type=privacy">Privacy Policy</a></li>
+                            <li><a href="/terms?type=token">Token Sale Agreement</a></li>
+                            <li><a href="/terms?type=rating">Expert Rating Guidelines</a></li>
+
                         </ul>
                     </section>
                 </div>
