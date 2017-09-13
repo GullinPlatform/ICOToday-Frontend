@@ -74,11 +74,14 @@
                 <!-- Main content -->
                 <div class="col-lg-12">
                     <ul class="nav nav-tabs md-4" role="tablist">
-                        <li class="nav-item"><a class="nav-link active" data-toggle="tab" role="tab"
-                                                aria-expanded="true">Active</a></li>
-                        <li class="nav-item"><a class="nav-link" data-toggle="tab" role="tab" aria-expanded="false">Upcoming</a>
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" role="tab" aria-expanded="true">Active</a>
                         </li>
-                        <li class="nav-item"><a class="nav-link" data-toggle="tab" role="tab" aria-expanded="false">Passed</a>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" role="tab" aria-expanded="false">Upcoming</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" role="tab" aria-expanded="false">Passed</a>
                         </li>
                     </ul>
                 </div>
@@ -86,41 +89,63 @@
             <div class="row mt-4">
                 <div class="col-lg-3">
                     <div class="card p-3 mb-3">
-                        <section class="widget widget-links">
-                            <h3 class="widget-title">Search Widget</h3>
-                            <form class="input-group form-group" method="get"><span class="input-group-btn">
-                                <button type="submit"><i class="icon-search"></i></button></span>
-                                <input class="form-control" type="search" placeholder="Search site">
-                            </form>
+                        <section class="widget widget-links mb-3">
+                            <h3 class="widget-title">Search </h3>
+                            <div class="input-group form-group">
+                                <span class="input-group-btn">
+                                <button>
+                                    <i class="icon-search"></i>
+                                </button>
+                                </span>
+                                <input class="form-control" v-model="keyword" placeholder="Search by Keyword">
+                            </div>
                         </section>
-                        <section class="widget widget-categories">
-                            <h3 class="widget-title">Price Range Widget</h3>
-                            <form class="price-range-slider" method="post" data-start-min="250" data-start-max="650"
-                                  data-min="0" data-max="1000" data-step="1">
-                                <div class="ui-range-slider noUi-target noUi-ltr noUi-horizontal noUi-background">
+                        <section class="widget widget-links mb-3">
+                            <h3 class="widget-title">Category </h3>
+                            <div class="input-group form-group">
+                                <select class="form-control" v-model="category" required>
+                                    <option value="" selected>-- Choose Category --</option>
+                                    <option value="Platform">Platform</option>
+                                    <option value="Cryptocurrency">Cryptocurrency</option>
+                                    <option value="Businessservices">Businessservices</option>
+                                    <option value="Internet">Internet</option>
+                                    <option value="Investment">Investment</option>
+                                    <option value="Entertainment">Entertainment</option>
+                                    <option value="Banking">Banking</option>
+                                    <option value="Software">Software</option>
+                                    <option value="Realestate">Realestate</option>
+                                    <option value="Casino&Gambling">Casino&Gambling</option>
+                                    <option value="Communication">Communication</option>
+                                    <option value="Tourism">Tourism</option>
+                                    <option value="Media">Media</option>
+                                    <option value="Health">Health</option>
+                                    <option value="Retail">Retail</option>
+                                    <option value="Sports">Sports</option>
+                                    <option value="Infrastructure">Infrastructure</option>
+                                    <option value="Energy">Energy</option>
+                                    <option value="Charity">Charity</option>
+                                    <option value="Education">Education</option>
+                                    <option value="Manufacturing">Manufacturing</option>
+                                    <option value="Other">Other</option>
+                                </select>
 
-                                </div>
-                                <footer class="ui-range-slider-footer">
-                                    <div class="column">
-                                        <button class="btn btn-outline-primary btn-sm" type="submit">Filter</button>
-                                    </div>
-                                    <div class="column">
-                                        <div class="ui-range-values">
-                                            <div class="ui-range-value-min">$<span>250</span>
-                                                <input type="hidden" value="250">
-                                            </div>&nbsp;-&nbsp;
-                                            <div class="ui-range-value-max">$<span>650</span>
-                                                <input type="hidden" value="650">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </footer>
-                            </form>
+                            </div>
                         </section>
-                        <section class="widget widget-tags">
-                            <h3 class="widget-title">Tags Widget</h3><a class="tag" href="#">#design</a><a
-                                class="tag" href="#">#fashion</a><a class="tag" href="#">#travelling</a><span
-                                class="tag active">#active tag</span><a class="tag" href="#">#shopping</a>
+                        <section class="widget widget-links mb-3">
+                            <h3 class="widget-title">Type </h3>
+                            <div class="input-group form-group">
+                                <select class="form-control" v-model="type" required>
+                                    <option value="" selected>-- Choose Type --</option>
+                                    <option value="0">Pre-ICO</option>
+                                    <option value="1">ICO</option>
+                                </select>
+                            </div>
+                        </section>
+                        <section class="widget widget-tags mb-3">
+                            <hr class="mb-3">
+                            <a class="tag" href="javascript:void(0)" v-if="category">#{{category}}</a>
+                            <a class="tag" href="javascript:void(0)" v-if="keyword">#{{keyword}}</a>
+                            <a class="tag" href="javascript:void(0)" v-if="type">#{{type}}</a>
                         </section>
                     </div>
                 </div>
@@ -128,7 +153,7 @@
                 <div class="col-lg-9">
                     <div class="product-card product-list"
                          v-for="project in posts"
-                         v-if="list_loaded&&project.status===1"
+                         v-if="list_loaded"
                          @mouseover="subscribe_show=project.id" @mouseleave="subscribe_show=false">
                         <a class="product-thumb" href="javascript:void(0)" @click="postModal(project.id)">
                             <img :src="project.logo_image" alt="Logo">
@@ -192,14 +217,6 @@
                         </div>
                     </div>
                     <!-- Call to action -->
-                    <!--<div v-scroll-at="loadMore"></div>-->
-                    <div class="row">
-                        <div class="col-md-12 text-md-center">
-                            <a class="btn btn-primary btn-md btn-rounded text-white">
-                                + More
-                            </a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -230,14 +247,15 @@
 
         email: '',
 
-        page: 1
+        page: 1,
+
+        // Search
+        keyword: '',
+        category: '',
+        type: ''
       }
     },
     methods: {
-      getMonth () {
-        /* global moment:true */
-        return moment().format('MMM YYYY')
-      },
       loadMore () {
         this.$store.dispatch('listPostsByPage')
           .then(() => {

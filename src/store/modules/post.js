@@ -69,6 +69,11 @@ const actions = {
         return Promise.reject(error)
       })
   },
+
+  listPostByFilter({commit}, page) {
+
+  },
+
   getPost ({commit}, pk) {
     return postApi.getPost(pk)
       .then((response) => {
