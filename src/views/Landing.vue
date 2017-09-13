@@ -4,7 +4,7 @@
         <div id="home" class="jumbotron jumbotron-register">
             <div id="particles-js"></div><!-- /.particles div -->
             <div class="container center-vertically-holder">
-                <div class="center-vertically ">
+                <div class="center-vertically">
                     <div class="row">
                         <div class="col-md-7 mt40-xs">
                             <h1 class="text-white">
@@ -14,7 +14,6 @@
                                 Seamless Platform for Launching and Investing in ICOs on Ethereum Blockchain
                             </h4>
                         </div>
-
                         <div class="col-md-5 float-right">
                             <div class="register-form pb-0 pt-3">
                                 <h3 class="no-margin-top">Sign up for our WhiteList</h3>
@@ -37,28 +36,32 @@
         </div>
 
         <!-- Featured Products Carousel-->
-        <section class="container padding-top-3x padding-bottom-3x">
-            <h1 class="text-left mb-30">Today's Top ICOs</h1>
-
+        <section class="container pt-5 pb-5">
+            <h1 class="text-left">Today's Top ICOs</h1>
             <div class="row">
                 <div class="col-lg-3 col-md-4 col-sm-6"
                      v-if="promotion_loaded"
                      v-for="project in promo_posts">
                     <div class="product-card">
                         <a class="product-thumb" href="javascript:void(0)" @click="postModal(project.id)">
-                            <img :src="project.logo_image" alt="Logo">
+                            <img :src="project.promote_image" alt="Logo">
                         </a>
-                        <h3 class="product-price">
+                        <h3 class="product-title text-bold text-left mb-0">
                             {{project.title}}
+                            <span class="badge badge-primary" v-if="project.rating">{{project.rating}}/100</span>
+                            <span class="badge badge-primary" v-else>No Score</span>
                         </h3>
-                        <h4 class="product-title">
+                        <span class="text-muted">
                             {{project.description_short}}
-                        </h4>
-                        <div class="product-buttons">
-                            <button class="btn btn-outline-danger btn-sm ">
-                                <span><i class="fa fa-star-o"></i> SUBSCRIBE</span>
-                            </button>
-                        </div>
+                        </span>
+                        <br>
+                        <span class="text-bold">
+                            <i class="fa fa-clock-o"></i> {{timeCounter(project.start_datetime, project.end_datetime)}}
+                        </span>
+
+                        <button class="btn btn-outline-danger btn-sm btn-block mb-0">
+                            <span><i class="fa fa-star-o"></i> SUBSCRIBE</span>
+                        </button>
                     </div>
                 </div>
             </div>

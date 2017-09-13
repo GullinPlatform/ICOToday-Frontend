@@ -233,7 +233,7 @@
                                             {{comment.content}}
                                         </p>
                                         <p>
-                                            <i class="fa fa-calendar"></i> {{comment.created}}
+                                            <i class="fa fa-calendar"></i> {{formatTime(comment.created)}}
                                             <a class="reply-link float-right" href="javascript:void(0)"
                                                v-if="login_status"
                                                @click="reply_comment_box_index=comment.id;reply_comment_box_show=true">
@@ -285,7 +285,7 @@
                                                     {{reply.content}}
                                                 </p>
                                                 <p>
-                                                    <i class="fa fa-calendar"></i> {{reply.created}}
+                                                    <i class="fa fa-calendar"></i> {{formatTime(reply.created)}}
                                                     <a class="reply-link float-right mr-3" href="javascript:void(0)"
                                                        v-if="reply.creator.id===me.id"
                                                        @click="preDeleteComment(reply.id)">
@@ -459,6 +459,9 @@
         }
       },
       formatTime (start, end) {
+        if (!end) {
+          return moment(start).format('MMM DD [at] hh:mma')
+        }
         if (moment().diff(start, 'minutes') < 0) {
 
           return moment(start).format('YYYY/MM/DD, hh:mm a')
