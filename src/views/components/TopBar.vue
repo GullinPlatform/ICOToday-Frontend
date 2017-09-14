@@ -78,10 +78,10 @@
                             </ul>
                         </div>
                         <span class="ml-1 text-bold hidden-sm-down" v-if="login_status">{{self_name}}</span>
-                        <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#signup-modal"
+                        <button class="btn btn-sm btn-primary pl-3 pr-3" data-toggle="modal" data-target="#signup-modal"
                                 v-if="!login_status">SIGN UP
                         </button>
-                        <button class="btn btn-sm btn-link" data-toggle="modal" data-target="#login-modal"
+                        <button class="btn btn-sm btn-link p-0" data-toggle="modal" data-target="#login-modal"
                                 v-if="!login_status">LOG IN
                         </button>
                     </div>

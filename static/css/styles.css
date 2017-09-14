@@ -6107,6 +6107,13 @@ video {
     margin-left: -100px;
 }
 
+@media (max-width: 768px) {
+    .toolbar .account > .toolbar-dropdown {
+        left: auto;
+        right: 0;
+    }
+}
+
 .toolbar .cart > .toolbar-dropdown {
     right: 0;
     left: auto;
@@ -6771,8 +6778,9 @@ video {
     }
 
     .product-card.product-list .product-info {
-         padding: 20px 22px;
-     }
+        padding: 20px 22px;
+    }
+
     .product-card.product-list .product-info.active {
         background-color: #f9f9f9;
     }
@@ -7737,8 +7745,8 @@ video {
     padding-bottom: 15px;
 }
 
-.light-grey{
-  background-color: #f6f6f6;
+.light-grey {
+    background-color: #f6f6f6;
 }
 
 .big-icon {

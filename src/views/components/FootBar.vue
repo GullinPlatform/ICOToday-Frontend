@@ -29,7 +29,7 @@
                         <h3 class="widget-title">About Us</h3>
                         <ul>
                             <li><a target="_blank" href="https://trello.com/b/JxFOIC9x">Upcoming Releases</a></li>
-                            <li><a href="/white-paper">White Paper</a></li>
+                            <li><a href="/tokensale">Token Sale</a></li>
                             <li><a href="/terms?type=terms">Terms and Services</a></li>
                             <li><a href="/terms?type=privacy">Privacy Policy</a></li>
                             <li><a href="/terms?type=token">Token Sale Agreement</a></li>
