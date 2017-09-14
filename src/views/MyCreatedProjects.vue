@@ -206,6 +206,11 @@
       }
     },
     beforeCreate () {
+      // redirect non ico company user
+      if (this.$store.getters.self.type !== 0) {
+        this.route.push({name: 'landing'})
+      }
+
       // My ICO Projects
       this.$store.dispatch('getSelfCreatedPost')
         .then(() => {

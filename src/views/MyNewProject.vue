@@ -290,11 +290,9 @@
       }
     },
     head: {
-      title () {
-        return {
-          inner: 'ICOToday',
-          complement: 'New ICO'
-        }
+      title: {
+        inner: 'ICOToday',
+        complement: 'New ICO'
       }
     },
     components: {
@@ -386,6 +384,12 @@
     computed: {
       self () {
         return this.$store.getters.self
+      }
+    },
+    beforeCreate () {
+      // redirect non ico company user
+      if (this.$store.getters.self.type !== 0) {
+        this.route.push({name: 'landing'})
       }
     }
   }

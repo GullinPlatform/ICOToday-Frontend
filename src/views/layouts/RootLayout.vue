@@ -4,8 +4,6 @@
         <top-bar></top-bar>
         <div class="offcanvas-wrapper">
             <router-view></router-view>
-
-
         </div>
         <!-- ======== @Region: #footer ======== -->
         <foot-bar></foot-bar>
@@ -13,8 +11,8 @@
         <login-modal v-if="!login_status"></login-modal>
         <signup-modal v-if="!login_status"></signup-modal>
         <add-team-member v-if="login_status"></add-team-member>
-        <edit-project v-if="login_status&&me.type==0"></edit-project>
-        <update-project v-if="login_status&&me.type==0"></update-project>
+        <post-edit v-if="login_status&&me.type==0"></post-edit>
+        <post-update v-if="login_status&&me.type==0"></post-update>
         <post-modal></post-modal>
         <!-- Modal End-->
     </div>
@@ -23,12 +21,12 @@
 <script>
   import TopBar from 'components/TopBar'
   import FootBar from 'components/FootBar'
-  import SignupModal from 'components/Signup'
-  import LoginModal from 'components/Login'
-  import AddTeamMember from 'components/AddTeamMember'
-  import EditProject from 'components/EditProject'
-  import UpdateProject from 'components/UpdateProject'
-  import PostModal from 'components/PostModal'
+  import SignupModal from 'modals/Signup'
+  import LoginModal from 'modals/Login'
+  import AddTeamMember from 'modals/AddTeamMember'
+  import PostEdit from 'modals/PostEdit'
+  import PostUpdate from 'modals/PostUpdate'
+  import PostModal from 'modals/PostModal'
 
   export default {
     name: 'RootLayout',
@@ -39,8 +37,8 @@
       LoginModal,
       SignupModal,
       AddTeamMember,
-      EditProject,
-      UpdateProject,
+      PostEdit,
+      PostUpdate,
     },
     computed: {
       login_status () {

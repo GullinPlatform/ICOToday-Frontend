@@ -3837,7 +3837,7 @@ a.list-group-item {
     color: #ff5252;
 }
 
-.badge.badge-outline-danger.active {
+.badge.badge-outline-danger:hover {
     background-color: #ff5252;
     color: #ffffff !important;
 }
@@ -6781,7 +6781,7 @@ video {
         padding: 20px 22px;
     }
 
-    .product-card.product-list .product-info.active {
+    .product-card.product-list .product-info:hover {
         background-color: #f9f9f9;
     }
 

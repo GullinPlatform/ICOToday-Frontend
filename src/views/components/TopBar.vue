@@ -42,8 +42,7 @@
                     <div class="tools">
                         <div class="account" v-if="login_status">
                             <img :src="me.info.avatar" class="rounded-circle">
-                            <router-link v-if="me.type===0" :to="{name:'me_created'}"></router-link>
-                            <router-link v-else :to="{name:'me_marked'}"></router-link>
+                            <a href="javascript:void(0)"></a>
                             <ul class="toolbar-dropdown">
                                 <li>
                                     <router-link :to="{name:'me_new_project'}" class="dropdown-item" v-if="me.type===0">
@@ -96,8 +95,8 @@
     </div>
 </template>
 <script>
-  import SignupModal from 'components/Signup'
-  import LoginModal from 'components/Login'
+  import SignupModal from 'modals/Signup'
+  import LoginModal from 'modals/Login'
 
   export default {
     name: 'Header',
