@@ -12,7 +12,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <h6 class="text-muted text-normal text-uppercase ">Avatar</h6>
+                    <h6 class="text-muted text-normal text-uppercase" :class="{'text-danger':avatar_missing}">Avatar</h6>
                     <hr class="mb-3 mt-2">
                     <div class="row">
                         <div class="col-sm-4 text-center">
@@ -28,10 +28,10 @@
                         <div class="col-sm-8 text-center">
                             <!--<div class="row">-->
                             <avatar-editor :width=150 :height=150 ref="member_avatar"
-                                           @vue-avatar-editor:image-ready="onMemberImageReady">
+                                           @vue-avatar-editor:image-ready="onImageReady">
                             </avatar-editor>
                             <avatar-editor-scale :width=200 :min=1 :max=3 :step=0.02 ref="member_avatar_scale"
-                                                 @vue-avatar-editor-scale:change-scale="onMemberChangeScale">
+                                                 @vue-avatar-editor-scale:change-scale="onImageChangeScale">
                             </avatar-editor-scale>
                         </div>
                     </div>
@@ -76,9 +76,11 @@
                     <div class="form-group">
                         <input v-model="telegram" type="text" class="form-control"
                                placeholder="Telegram">
-                        <p class="text-danger">{{errorMsg}}</p>
                     </div>
-                    <a @click="postTeamAdvisor($event)" class="btn btn-block btn-primary text-white">Add Team Member</a>
+                    <a @click="addTeamMember($event)" class="btn btn-block btn-primary text-white" :disabled="uploading">
+                        SUBMIT<span v-if="uploading">ING</span>
+                    </a>
+                    <p class="text-danger">{{error_message}}</p>
                 </div>
                 <div class="modal-footer">
                     <small>
@@ -106,29 +108,47 @@
     },
     data () {
       return {
+        // avatar
         avatar_cropped: false,
-        avatar_img: '',
-
+        avatar_img: null,
+        // form data
         first_name: '',
         last_name: '',
-
         email: '',
         title: '',
         description: '',
-
         linkedin: '',
         twitter: '',
         facebook: '',
         telegram: '',
-
-        errorMsg: '',
+        // error message
+        error_message: '',
+        // UI control
+        avatar_missing: false,
+        uploading: false,
       }
     },
     methods: {
-      postTeamAdvisor () {
+      addTeamMember () {
+        // If upload is in process, don't do anything
+        if (this.uploading)
+          return
+        // Disable button
+        this.uploading = true
+
+        // Post with img or without img
+        if (this.avatar_img)
+          this.performPost()
+        else {
+          this.avatar_missing = true
+          this.error_message = 'Avatar is required!'
+          this.uploading = false
+        }
+      },
+
+      performPost () {
         /* global FormData:true $:true */
         const formData = new FormData()
-
         this.avatar_img.toBlob((blob) => {
           formData.append('avatar', blob, 'avatar.time' + Date.now() + '.png')
           formData.append('pk', this.$store.getters.self.info.team.id)
@@ -146,51 +166,32 @@
           this.$store.dispatch('addTeamMember', formData)
             .then(() => {
               this.$store.dispatch('getTeam', this.$store.getters.self.info.team.id).then(() => {
-                this.avatar_cropped = false
-                this.avatar_img = ''
-
-                this.first_name = ''
-                this.last_name = ''
-
-                this.email = ''
-                this.title = ''
-                this.description = ''
-
-                this.linkedin = ''
-                this.twitter = ''
-                this.facebook = ''
-                this.telegram = ''
-
-                this.errorMsg = ''
-
-                $('#add-member-modal').modal('hide')
+                this.dataReset()
                 this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'Team member added.'})
+                $('#add-member-modal').modal('hide')
               })
             })
             .catch((error) => {
+              this.uploading = false
+              this.error_message = error.body.detail
               console.log(error)
             })
         })
       },
-      onMemberImageReady (scale) {
+
+      onImageReady (scale) {
         this.$refs.member_avatar_scale.setScale(scale)
         this.avatar_cropped = true
         this.avatar_img = this.$refs.member_avatar.getImageScaled()
       },
-      onMemberChangeScale (scale) {
+      onImageChangeScale (scale) {
         this.$refs.member_avatar.changeScale(scale)
         this.avatar_img = this.$refs.member_avatar.getImageScaled()
       },
-    },
-    computed: {
-      is_advisor () {
-        return this.$store.getters.is_advisor
-      }
-    },
-    watch: {
-      is_advisor () {
+
+      dataReset () {
         this.avatar_cropped = false
-        this.avatar_img = ''
+        this.avatar_img = null
 
         this.first_name = ''
         this.last_name = ''
@@ -204,7 +205,19 @@
         this.facebook = ''
         this.telegram = ''
 
-        this.errorMsg = ''
+        this.error_message = ''
+        this.uploading = false
+        this.avatar_missing = false
+      }
+    },
+    computed: {
+      is_advisor () {
+        return this.$store.getters.is_advisor
+      }
+    },
+    watch: {
+      is_advisor () {
+        this.dataReset()
       }
     }
   }

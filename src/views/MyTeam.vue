@@ -6,12 +6,7 @@
             <!--main content-->
             <div class="col-md-8" v-if="me.type===0">
 
-                <h6 class="text-muted text-normal text-uppercase ">Basic Info
-                    <router-link :to="{name:'team', params:{id:me.info.team.id}}"
-                                 class="text-sm text-primary float-right">
-                        <i class="fa fa-external-link"></i> Preview
-                    </router-link>
-                </h6>
+                <h6 class="text-muted text-normal text-uppercase ">Basic Info</h6>
                 <hr class="mb-3 mt-2">
 
                 <div class="form-group row">
@@ -51,38 +46,48 @@
 
                 <div class="team team-grid mt-4">
                     <div class="row">
-                        <div class="col-md-3 col-sm-6 mb-3 text-center" v-for="member in team_members"
-                             v-if="!member.is_advisor">
-                            <router-link :to="{name:'user_created', params:{id:member.account}}">
-                                <img class="img-thumbnail rounded-circle mb-2" height="100" width="100"
-                                     :src="member.avatar" alt="Team Member">
-                            </router-link>
-                            <h6>{{member.first_name}} {{member.last_name}}</h6>
-                            <p class="text-muted mb-2">{{member.title}}</p>
-                            <div class="social-bar">
-                                <a :href="member.twitter" class="social-link branding-twitter"
-                                   v-if="member.twitter">
-                                    <i class="fa fa-twitter"></i>
-                                </a>
-                                <a :href="member.linkedin" class="social-link branding-linkedin"
-                                   v-if="member.linkedin">
-                                    <i class="fa fa-linkedin-square"></i>
-                                </a>
-                                <a :href="member.telegram" class="social-link branding-linkedin"
-                                   v-if="member.telegram">
-                                    <i class="fa fa-telegram"></i>
-                                </a>
+                        <div class="col-md-6 mb-4" v-for="member in team_members" v-if="!member.is_advisor">
+                            <div class="d-table">
+                                <router-link :to="{name:'user_created', params:{id:member.account}}">
+                                    <img class="d-block mx-auto img-thumbnail rounded-circle d-table-cell align-middle"
+                                         width="100" :src="member.avatar" alt="Team">
+                                </router-link>
+                                <div class="pl-3 d-table-cell align-middle">
+                                    <h6>{{member.first_name}} {{member.last_name}}
+                                        <span class="text-muted text-sm mb-2">{{member.title}}</span></h6>
+                                    <p>{{member.description}}</p>
+                                    <div class="social-bar">
+                                        <a :href="member.facebook" class="social-link branding-facebook"
+                                           v-if="member.facebook">
+                                            <i class="fa fa-facebook"></i>
+                                        </a>
+                                        <a :href="member.twitter" class="social-link branding-twitter"
+                                           v-if="member.twitter">
+                                            <i class="fa fa-twitter"></i>
+                                        </a>
+                                        <a :href="member.linkedin" class="social-link branding-linkedin"
+                                           v-if="member.linkedin">
+                                            <i class="fa fa-linkedin-square"></i>
+                                        </a>
+                                        <a :href="member.telegram" class="social-link branding-linkedin"
+                                           v-if="member.telegram">
+                                            <i class="fa fa-telegram"></i>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-3 col-sm-6 mb-3 text-center">
-                            <div>
+                        <div class="col-md-6 mb-4">
+                            <div class="d-table">
                                 <a href="javascript:void(0)" @click="popUpModal(false)">
                                     <img class="rounded-circle mb-2" height="100" width="100"
                                          src="../../static/img/services/add.png" alt="Team Member">
                                 </a>
-                                <h6>
-                                    New Member
-                                </h6>
+                                <div class="pl-3 d-table-cell align-middle">
+                                    <h6>
+                                       Add New Member
+                                    </h6>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -92,42 +97,48 @@
 
                 <div class="team team-grid mt-4">
                     <div class="row">
-                        <div class="col-md-3 col-sm-6 mb-3 text-center" v-for="member in team_members"
-                             v-if="member.is_advisor">
-                            <router-link :to="{name:'user_created', params:{id:member.account}}">
-                                <img class="img-thumbnail rounded-circle mb-2" height="100" width="100"
-                                     :src="member.avatar" alt="Team Member">
-                            </router-link>
-                            <h6>{{member.first_name}} {{member.last_name}}</h6>
-                            <p class="text-muted mb-2">{{member.title}}</p>
-                            <div class="social-bar">
-                                <a :href="member.facebook" class="social-link branding-facebook"
-                                   v-if="member.facebook">
-                                    <i class="fa fa-facebook"></i>
-                                </a>
-                                <a :href="member.twitter" class="social-link branding-twitter"
-                                   v-if="member.twitter">
-                                    <i class="fa fa-twitter"></i>
-                                </a>
-                                <a :href="member.linkedin" class="social-link branding-linkedin"
-                                   v-if="member.linkedin">
-                                    <i class="fa fa-linkedin-square"></i>
-                                </a>
-                                <a :href="member.telegram" class="social-link branding-linkedin"
-                                   v-if="member.telegram">
-                                    <i class="fa fa-telegram"></i>
-                                </a>
+                        <div class="col-md-6 mb-4" v-for="member in team_members" v-if="member.is_advisor">
+                            <div class="d-table">
+                                <router-link :to="{name:'user_created', params:{id:member.account}}">
+                                    <img class="d-block mx-auto img-thumbnail rounded-circle d-table-cell align-middle"
+                                         width="100" :src="member.avatar" alt="Team">
+                                </router-link>
+                                <div class="pl-3 d-table-cell align-middle">
+                                    <h6>{{member.first_name}} {{member.last_name}}
+                                        <span class="text-muted text-sm mb-2">{{member.title}}</span></h6>
+                                    <p>{{member.description}}</p>
+                                    <div class="social-bar">
+                                        <a :href="member.facebook" class="social-link branding-facebook"
+                                           v-if="member.facebook">
+                                            <i class="fa fa-facebook"></i>
+                                        </a>
+                                        <a :href="member.twitter" class="social-link branding-twitter"
+                                           v-if="member.twitter">
+                                            <i class="fa fa-twitter"></i>
+                                        </a>
+                                        <a :href="member.linkedin" class="social-link branding-linkedin"
+                                           v-if="member.linkedin">
+                                            <i class="fa fa-linkedin-square"></i>
+                                        </a>
+                                        <a :href="member.telegram" class="social-link branding-linkedin"
+                                           v-if="member.telegram">
+                                            <i class="fa fa-telegram"></i>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-3 col-sm-6 mb-3 text-center">
-                            <div class="team-member">
+                        <div class="col-md-6 mb-4">
+                            <div class="d-table">
                                 <a href="javascript:void(0)" @click="popUpModal(true)">
                                     <img class="rounded-circle mb-2" height="100" width="100"
                                          src="../../static/img/services/add.png" alt="Team Advisor">
                                 </a>
-                                <h6>
-                                    New Advisor
-                                </h6>
+                                <div class="pl-3 d-table-cell align-middle">
+                                    <h6>
+                                       Add New Member
+                                    </h6>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -144,13 +155,12 @@
     name: 'UserTeam',
     data () {
       return {
-
         edit: false,
 
         name: '',
         description: '',
 
-        message: ''
+        message: '',
       }
     },
     head: {
