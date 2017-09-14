@@ -11,7 +11,7 @@
                     </h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" v-if="me.is_verified">
                     <h6 class="text-muted text-normal text-uppercase" :class="{'text-danger':avatar_missing}">Avatar</h6>
                     <hr class="mb-3 mt-2">
                     <div class="row">
@@ -81,6 +81,12 @@
                         SUBMIT<span v-if="uploading">ING</span>
                     </a>
                     <p class="text-danger">{{error_message}}</p>
+                </div>
+                <div class="modal-body text-center" v-else="">
+                    <h4 class="mt-3">
+                        You have to verify your email first
+                    </h4>
+                    <a href="javascript:void(0)" @click="" class="btn btn-primary mt-2">Resend Email</a>
                 </div>
                 <div class="modal-footer">
                     <small>
@@ -213,6 +219,9 @@
     computed: {
       is_advisor () {
         return this.$store.getters.is_advisor
+      },
+      me () {
+        return this.$store.getters.self
       }
     },
     watch: {

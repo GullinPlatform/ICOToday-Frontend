@@ -21,7 +21,7 @@ import UserCreatedProjects from 'views/UserCreatedProjects'
 import UserMarkedProjects from 'views/UserMarkedProjects'
 import UserTeam from 'views/UserTeam'
 
-import WhitePaperPage from 'views/WhitePaperPage'
+import TokenSalse from 'views/TokenSale'
 import TermsAndPolicy from 'views/TermsAndPolicy'
 
 Vue.use(Router)
@@ -85,9 +85,9 @@ export default new Router({
       component: InvitedRegister,
       name: 'invited_register'
     }, {
-      path: '/white-paper',
-      component: WhitePaperPage,
-      name: 'white_paper'
+      path: '/tokensale',
+      component: TokenSalse,
+      name: 'tokensale'
     }, {
       path: '/terms',
       component: TermsAndPolicy,

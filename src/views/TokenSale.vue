@@ -223,11 +223,11 @@
 
 <script>
   export default {
-    name: 'WhitePaper',
+    name: 'TokenSale',
     head: {
       title: {
         inner: 'ICOToday',
-        complement: 'White Papper',
+        complement: 'Token Sale',
       }
     },
     mounted () {

@@ -17,20 +17,22 @@
                            v-if="!login_status" class="hidden-sm-down">
                             <span>Publish Your ICO</span>
                         </a>
-                        <router-link :to="{name:'me_new_project'}" v-if="login_status&&me.type===0"
-                                     class="hidden-sm-down">
+                        <router-link :to="{name:'me_new_project'}" v-if="login_status&&me.type===0" class="hidden-sm-down">
                             <span>Publish Your ICO</span>
                         </router-link>
-                        <router-link :to="{name:'me_new_project'}" v-if="login_status&&me.type===1"
-                                     class="hidden-sm-down">
+                        <router-link :to="{name:'me_new_project'}" v-if="login_status&&me.type===1" class="hidden-sm-down">
                             <span>Apply to be an Expert</span>
                         </router-link>
                     </li>
                     <li>
-                        <router-link :to="{name:'white_paper'}" class="hidden-sm-down"><span>Token Sale</span>
+                        <router-link :to="{name:'tokensale'}" class="hidden-sm-down">
+                            <span>Token Sale</span>
                         </router-link>
                     </li>
-                    <li><a target="_blank" href="https://trello.com/b/JxFOIC9x" class="hidden-sm-down"><span>Upcoming Releases</span></a>
+                    <li>
+                        <a target="_blank" href="https://trello.com/b/JxFOIC9x" class="hidden-sm-down">
+                            <span>Upcoming Releases</span>
+                        </a>
                     </li>
                 </ul>
             </nav>
@@ -116,7 +118,6 @@
     },
     methods: {
       logout () {
-        console.log('logout-methods')
         this.$store.dispatch('logout')
       }
     }
