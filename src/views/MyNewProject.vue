@@ -5,12 +5,15 @@
             <my-header></my-header>
             <!--main content-->
             <div class="col-md-8" v-if="self.is_verified">
+                <h6 class="text-muted">
+                    <i class="fa fa-lightbulb-o"></i> Tips: The more information you provide, the faster your ICO gets approved
+                </h6>
                 <h6 class="text-muted text-normal text-uppercase ">Basic info</h6>
                 <hr class="mb-3 mt-2">
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Title <span class="text-danger">*</span></label>
                     <div class="col-sm-10">
-                        <input class="form-control" v-model="title" required type="text">
+                        <input class="form-control" v-model="title" type="text">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -21,15 +24,15 @@
                                 <i class="fa fa-cloud-upload"> </i>
                                 <span>Drag file here or click to upload file</span>
                             </div>
-                            <input type="file" required @change="onIconChange">
+                            <input type="file" @change="onIconChange">
                         </div>
 
                         <div v-else>
                             <button type="button" class="mb-1 btn btn-secondary">{{icon.name}}</button>
                             <button type="button" class="mb-1 btn btn-secondary" @click="removeFile('i')">
-                                        <span>
-                                            <i class="fa fa-times"></i> Remove
-                                        </span>
+                                <span>
+                                    <i class="fa fa-times"></i> Remove
+                                </span>
                             </button>
                         </div>
                     </div>
@@ -37,7 +40,7 @@
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Category <span class="text-danger">*</span></label>
                     <div class="col-sm-10">
-                        <select class="form-control" v-model="category" required>
+                        <select class="form-control" v-model="category">
                             <option value="" selected>-- Choose Category --</option>
                             <option value="Platform">Platform</option>
                             <option value="Cryptocurrency">Cryptocurrency</option>
@@ -65,19 +68,17 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Description Short <span
-                            class="text-danger">*</span></label>
+                    <label class="col-sm-2 col-form-label">Short Description <span class="text-danger">*</span></label>
                     <div class="col-sm-10">
                         <input class="form-control" v-model="description_short" type="text"
                                placeholder="Short description in one sentence (100 characters).">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Description Full <span
-                            class="text-danger">*</span></label>
+                    <label class="col-sm-2 col-form-label">Full  Description<span class="text-danger">*</span></label>
                     <div class="col-sm-10">
-                                <textarea class="form-control" v-model="description_full" type="text"
-                                          placeholder="( Markdown Support Enabled )" required rows="10"></textarea>
+                        <textarea class="form-control" v-model="description_full" type="text"
+                                  placeholder="( Markdown Support Enabled )" rows="10"></textarea>
                     </div>
                 </div>
                 <h6 class="text-muted text-normal text-uppercase ">ICO Detail</h6>
@@ -85,7 +86,7 @@
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">ICO Type <span class="text-danger">*</span></label>
                     <div class="col-sm-10">
-                        <select class="form-control" v-model="type" required>
+                        <select class="form-control" v-model="type">
                             <option value="" selected>-- Choose Type --</option>
                             <option value="0">Pre-ICO</option>
                             <option value="1">ICO</option>
@@ -93,16 +94,15 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Token Name <span class="text-danger">*</span></label>
+                    <label class="col-sm-2 col-form-label">Token Name </label>
                     <div class="col-sm-10">
-                        <input class="form-control" v-model="coin_name" placeholder="Token Name" required
-                               type="text">
+                        <input class="form-control" v-model="coin_name" placeholder="Token Name" type="text">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">ICO Unit <span class="text-danger">*</span></label>
+                    <label class="col-sm-2 col-form-label">ICO Unit </label>
                     <div class="col-sm-10">
-                        <select class="form-control" v-model="coin_type" required>
+                        <select class="form-control" v-model="coin_type">
                             <option value="" selected>-- Choose Unit --</option>
                             <option value="BTC">BTC - Bitcoin</option>
                             <option value="ETH">ETH - Ethereum</option>
@@ -110,19 +110,19 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">ICO Goals <span class="text-danger">*</span></label>
+                    <label class="col-sm-2 col-form-label">ICO Goals </label>
                     <div class="col-sm-5">
-                        <input class="form-control" placeholder="Soft Cap" v-model="minimum_goal" required
+                        <input class="form-control" placeholder="Soft Cap" v-model="minimum_goal"
                                type="number">
                     </div>
                     <div class="col-sm-5">
-                        <input class="form-control" placeholder="Hard Cap" v-model="maximum_goal" required
+                        <input class="form-control" placeholder="Hard Cap" v-model="maximum_goal"
                                type="number">
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Start Date <span class="text-danger">*</span></label>
+                    <label class="col-sm-2 col-form-label">Start Date </label>
                     <div class="col-sm-10">
                         <vue-datetime-picker class="vue-start-picker" id="start-picker"
                                              ref="startPicker"
@@ -133,7 +133,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">End Date <span class="text-danger">*</span></label>
+                    <label class="col-sm-2 col-form-label">End Date </label>
                     <div class="col-sm-10">
                         <vue-datetime-picker class="vue-end-picker" id="end-picker"
                                              ref="endPicker"
@@ -144,32 +144,31 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Ratio <span class="text-danger">*</span></label>
+                    <label class="col-sm-2 col-form-label">Ratio </label>
                     <div class="col-sm-7">
-                        <input class="form-control" placeholder="Ex: 5000" v-model="ratio" required
+                        <input class="form-control" placeholder="Ex: 5000" v-model="ratio"
                                type="number">
                     </div>
                     <div class="col-sm-3"><p>{{coin_name}} = 1 {{coin_type}}</p></div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">% of Token for Sale <span
-                            class="text-danger">*</span></label>
+                    <label class="col-sm-2 col-form-label">% of Token for Sale</label>
                     <div class="col-sm-10">
-                        <input class="form-control" v-model="equality_on_offer" placeholder="Ex: 30" required
+                        <input class="form-control" v-model="equality_on_offer" placeholder="Ex: 30"
                                type="text">
                     </div>
                 </div>
                 <h6 class="text-muted text-normal text-uppercase ">Supplement</h6>
                 <hr class="mb-3 mt-2">
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">White Paper <span class="text-danger">*</span></label>
+                    <label class="col-sm-2 col-form-label">White Paper </label>
                     <div class="col-sm-10">
                         <div class="dropzone-area" v-if="!white_paper_loaded">
                             <div class="dropzone-text">
                                 <i class="fa fa-cloud-upload"> </i>
                                 <span>Drag file here or click to upload file</span>
                             </div>
-                            <input type="file" required @change="onWhitePaperChange">
+                            <input type="file" @change="onWhitePaperChange">
                         </div>
 
                         <div v-else>
@@ -183,15 +182,15 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Video Link <span class="text-danger">*</span></label>
+                    <label class="col-sm-2 col-form-label">Video Link </label>
                     <div class="col-sm-10">
                         <input class="form-control" v-model="video_link" placeholder="Youtube Video Link">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Website <span class="text-danger">*</span></label>
+                    <label class="col-sm-2 col-form-label">Website </label>
                     <div class="col-sm-10">
-                        <input class="form-control" v-model="website" required
+                        <input class="form-control" v-model="website"
                                placeholder="https://example.com">
                     </div>
                 </div>
@@ -226,10 +225,13 @@
                 <div class="form-group row justify-content-md-center">
                     <div class="col-md-2"></div>
                     <div class="col-md-10">
-                        <button type="button" @click="postNewPost()" class="mb-1 btn btn-block btn-primary">
-                            Submit
+                        <button type="button" @click="postNewPost()" class="mb-1 btn btn-block btn-primary" :disabled="uploading">
+                            SUBMIT<span v-if="uploading">ING</span>
                         </button>
-                        <p class="text-danger">{{message}}</p>
+                        <p class="text-danger">{{error_message}}</p>
+                        <h6 class="text-muted">
+                            <i class="fa fa-lightbulb-o"></i> Tips: The more information you provide, the faster your ICO gets approved
+                        </h6>
                     </div>
                 </div>
             </div>
@@ -253,40 +255,38 @@
     data () {
       return {
         // -- form info start --
+        // Basic Info
         title: '',
         icon: null,
+        category: '',
         description_short: '',
         description_full: '',
-
-        category: '',
-
+        // ICO info
         type: '',
-        maximum_goal: null,
-        minimum_goal: null,
+        coin_name: '',
         coin_type: '',
-
+        maximum_goal: '',
+        minimum_goal: '',
         start_datetime: '',
         end_datetime: '',
-        white_paper: null,
-
-        coin_name: '',
         ratio: '',
         equality_on_offer: '',
-
+        // Supplement
+        white_paper: null,
         video_link: '',
         website: '',
-
+        // Social Media
         medium: '',
         twitter: '',
         slack: '',
         telegram: '',
         // -- form info end --
 
+        // UI control
         white_paper_loaded: false,
         icon_loaded: false,
-        large_icon_loaded: false,
-
-        message: ''
+        uploading: false,
+        error_message: '',
       }
     },
     head: {
@@ -323,20 +323,32 @@
           this.icon_loaded = false
         }
       },
+      onStartDatetimeChanged (newStart) {
+        const endPicker = this.$refs.endPicker.control
+        endPicker.minDate(newStart)
+      },
+      onEndDatetimeChanged (newEnd) {
+        const startPicker = this.$refs.startPicker.control
+        startPicker.maxDate(newEnd)
+      },
 
       postNewPost () {
-        /* global FormData */
-        let formData = new FormData()
-
-        if (!(this.title && this.description_full &&
-            this.maximum_goal && this.minimum_goal &&
-            this.coin_type && this.start_datetime &&
-            this.end_datetime && this.icon && this.website)) {
-          this.message = 'Please Make Sure Fill Out Required Fields'
+        // return if required fields left empty
+        if (!(this.title && this.description_short && this.icon && this.category && this.description_full && this.type)) {
+          this.error_message = 'Please Make Sure Fill Out Required Fields'
           return
         }
+        // return if still uploading
+        if (this.uploading)
+          return
 
+        // start uploading
+        this.uploading = true
+        /* global FormData */
+        let formData = new FormData()
         formData.append('title', this.title)
+        formData.append('logo_image', this.icon)
+        formData.append('category', this.category)
         formData.append('description_short', this.description_short)
         formData.append('description_full', this.description_full)
         formData.append('equality_on_offer', this.equality_on_offer)
@@ -344,14 +356,13 @@
         formData.append('minimum_goal', this.minimum_goal)
         formData.append('coin_type', this.coin_type)
         formData.append('coin_name', this.coin_name)
-        formData.append('category', this.category)
-
         formData.append('ratio', this.ratio)
         formData.append('type', this.type)
-        formData.append('start_datetime', this.start_datetime.format('YYYY-MM-DD HH:mmZ'))
-        formData.append('end_datetime', this.end_datetime.format('YYYY-MM-DD HH:mmZ'))
+        if (this.start_datetime)
+          formData.append('start_datetime', this.start_datetime.format('YYYY-MM-DD HH:mmZ'))
+        if (this.end_datetime)
+          formData.append('end_datetime', this.end_datetime.format('YYYY-MM-DD HH:mmZ'))
         formData.append('white_paper', this.white_paper)
-        formData.append('logo_image', this.icon)
         formData.append('video_link', this.video_link)
         formData.append('website', this.website)
         formData.append('medium', this.medium)
@@ -361,21 +372,16 @@
 
         this.$store.dispatch('postNewPost', formData)
           .then(() => {
+            this.uploading = false
             this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'Your project is submitted!'})
             this.$router.push({name: 'me_created'})
           })
           .catch((error) => {
+            this.uploading = false
+            this.error_message = error.body
             console.log(error)
           })
       },
-      onStartDatetimeChanged (newStart) {
-        const endPicker = this.$refs.endPicker.control
-        endPicker.minDate(newStart)
-      },
-      onEndDatetimeChanged (newEnd) {
-        const startPicker = this.$refs.startPicker.control
-        startPicker.maxDate(newEnd)
-      }
     },
     computed: {
       self () {

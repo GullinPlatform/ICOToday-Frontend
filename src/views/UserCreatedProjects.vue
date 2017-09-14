@@ -228,7 +228,6 @@
             return false
         }
         for (let p of this.self_marked_posts) {
-          console.log(p)
           if (id === p.id)
             return true
         }
