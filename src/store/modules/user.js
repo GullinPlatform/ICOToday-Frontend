@@ -282,6 +282,7 @@ const mutations = {
     cookie.setCookie('token', response.token)
     state.token = response.token
     state.login_status = true
+    router.push({name: 'landing'})
   },
   [types.LOGOUT] (state) {
     cookie.delCookie('token')
@@ -294,6 +295,7 @@ const mutations = {
     cookie.setCookie('token', response.token)
     state.token = response.token
     state.login_status = true
+    router.push({name: 'landing'})
   },
   [types.LOGIN_FAILED] (state, error) {
     state.login_status = false

@@ -4,7 +4,8 @@
             <div class="col-md-8">
                 <div class="padding-top-3x hidden-md-up"></div>
                 <h3 class="margin-bottom-1x">Welcome to ICOToday! {{user_name}}</h3>
-                <p>Your ICO Project is Listed on ICOToday, Join Us to Communicate with Your Investors Directly!</p>
+                <p>Your ICO <span class="text-bold" v-if="user.info&&user.info.team">{{user.info.team.name}}</span>
+                    is Listed on ICOToday, Join Us to Communicate with Your Investors Directly!</p>
                 <div class="row">
                     <div class="col-sm-12">
                         <h6 class="text-muted text-normal text-uppercase ">MY ACCOUNT</h6>
@@ -93,16 +94,14 @@
         err_msg: ''
       }
     },
-    method: {
+    methods: {
       invitedSignup () {
         if (this.password1 === this.password2) {
           const formData = {
+            token: this.$route.query.token,
             password: this.password1
           }
           this.$store.dispatch('invitedSignup', formData)
-            .then(() => {
-              this.$route.push({name: 'landing'})
-            })
             .catch((error) => {
               this.loaded = true
               this.err_msg = error.body.detail
