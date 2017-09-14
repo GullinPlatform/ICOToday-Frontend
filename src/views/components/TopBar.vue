@@ -27,7 +27,7 @@
                         </router-link>
                     </li>
                     <li>
-                        <router-link :to="{name:'white_paper'}" class="hidden-sm-down"><span>White paper</span>
+                        <router-link :to="{name:'white_paper'}" class="hidden-sm-down"><span>Token Sale</span>
                         </router-link>
                     </li>
                     <li><a target="_blank" href="https://trello.com/b/JxFOIC9x" class="hidden-sm-down"><span>Upcoming Releases</span></a>

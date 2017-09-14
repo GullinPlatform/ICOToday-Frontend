@@ -13,6 +13,10 @@
                             <h4 class="text-white">
                                 Seamless Platform for Launching and Investing in ICOs on Ethereum Blockchain
                             </h4>
+                            <a target="_blank"
+                               href="https://s3.us-east-2.amazonaws.com/icotoday/ICOToday+White+paper.pdf">
+                                Read the White Paper
+                            </a>
                         </div>
                         <div class="col-md-5 float-right">
                             <div class="register-form pb-0 pt-3">
