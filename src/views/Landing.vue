@@ -63,8 +63,13 @@
                             <i class="fa fa-clock-o"></i> {{timeCounter(project.start_datetime, project.end_datetime)}}
                         </span>
 
-                        <button class="btn btn-outline-danger btn-sm btn-block mb-0">
+                        <button class="btn btn-outline-danger btn-sm btn-block mb-0"
+                                @click="markPost(project.id, true)" v-if="!inSubscribeList(project.id)">
                             <span><i class="fa fa-star-o"></i> SUBSCRIBE</span>
+                        </button>
+                        <button class="btn btn-danger btn-sm btn-block mb-0"
+                                @click="markPost(project.id, false)" v-else>
+                            <span><i class="fa fa-check"></i> SUBSCRIBED</span>
                         </button>
                     </div>
                 </div>
@@ -79,16 +84,16 @@
                 <div class="col-lg-12">
                     <ul class="nav nav-tabs md-4" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link" @click="status='active'" :class="{active:status==='active'}"
-                               aria-expanded="true">Active</a>
+                            <a class="nav-link" href="javascript:void(0)" @click="status='active'" :class="{active:status==='active'}">Active</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" @click="status='upcoming'" :class="{active:status==='upcoming'}"
-                               aria-expanded="false">Upcoming</a>
+                            <a class="nav-link" href="javascript:void(0)" @click="status='upcoming'" :class="{active:status==='upcoming'}">Upcoming</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" @click="status='passed'" :class="{active:status==='passed'}"
-                               aria-expanded="false">Passed</a>
+                            <a class="nav-link" href="javascript:void(0)" @click="status='passed'" :class="{active:status==='passed'}">Passed</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="javascript:void(0)" @click="status=''" :class="{active:status===''}">All</a>
                         </li>
                     </ul>
                 </div>
@@ -97,7 +102,7 @@
                 <div class="col-lg-3">
                     <div class="card p-3 mb-3">
                         <section class="widget widget-links mb-3">
-                            <h3 class="widget-title">Search </h3>
+                            <h3 class="widget-title">Search</h3>
                             <div class="input-group form-group">
                                 <span class="input-group-btn">
                                 <button>
@@ -184,21 +189,25 @@
     },
     data () {
       return {
+        // loading track
         list_loaded: false,
         promotion_loaded: false,
 
+        // for whitelist register
         email: '',
 
+        // For auto reload
         page: 1,
 
         // Search
         status: 'active',
         keyword: '',
         category: '',
-        type: ''
+        type: '',
       }
     },
     methods: {
+      /* global _:true */
       loadMore () {
         this.page += 1
         const formData = {
@@ -209,8 +218,6 @@
         }
         this.$store.dispatch('searchPostsByPage', formData)
       },
-
-      /* global _:true */
       search: _.debounce(
         function () {
           this.list_loaded = false
@@ -226,19 +233,45 @@
             })
         }, 500),
 
-      whiteListSubmit (e) {
-        e.preventDefault()
+      // For promotion list
+      markPost (id, mark) {
         if (!this.login_status) {
-          this.$store.dispatch('whiteListEmail', this.email)
+          $('#signup-modal').modal('show')
+          return
         }
-        else {
-          this.$store.dispatch('toastr', {
-            type: 'success',
-            title: 'Success',
-            message: 'By being one of the first users to register, you were already added to our white list!'
+        this.$store.dispatch('markPost', id)
+          .then(() => {
+            if (mark) {
+              this.$store.dispatch('toastr', {
+                type: 'success',
+                title: 'Success',
+                message: 'The selected ICO is added to your subscription list, you\'ll receive free updates from now on'
+              })
+            } else {
+              this.$store.dispatch('toastr', {
+                type: 'success',
+                title: 'Success',
+                message: 'The selected ICO is removed from your subscription list, you\'ll no longer receive updates from this project'
+              })
+            }
           })
-        }
       },
+      inSubscribeList (id) {
+        for (let p of this.self_marked_posts) {
+          if (id === p.id)
+            return true
+        }
+        return false
+      },
+      postModal (id) {
+        /* global $:true */
+        this.$store.dispatch('getPost', id)
+          .then(() => {
+            $('#post-modal').modal('show')
+          })
+      },
+
+      // Until
       timeCounter (start, end) {
         /* global moment:true */
         // Haven't start
@@ -281,6 +314,20 @@
         }
       },
 
+      // white list submit
+      whiteListSubmit (e) {
+        e.preventDefault()
+        if (!this.login_status) {
+          this.$store.dispatch('whiteListEmail', this.email)
+        }
+        else {
+          this.$store.dispatch('toastr', {
+            type: 'success',
+            title: 'Success',
+            message: 'By being one of the first users to register, you were already added to our white list!'
+          })
+        }
+      },
     },
     computed: {
       posts () {
@@ -292,13 +339,15 @@
       login_status () {
         return this.$store.getters.login_status
       },
+      self_marked_posts () {
+        return this.$store.getters.self_marked_posts
+      },
       me () {
         return this.$store.getters.self
       }
     },
     beforeMount () {
       this.search()
-
       this.$store.dispatch('listPromoPosts')
         .then(() => {
           this.promotion_loaded = true

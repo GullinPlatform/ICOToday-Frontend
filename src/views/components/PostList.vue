@@ -34,7 +34,7 @@
                     <div class="col-sm-4">
                         Soft Cap / Hard Cap
                         <h4 class="product-price">
-                            {{project.minimum_goal}} /  {{project.maximum_goal}} {{project.coin_type}}
+                            {{project.minimum_goal}} / {{project.maximum_goal}} {{project.coin_type}}
                         </h4>
                     </div>
                     <div class="col-sm-3">
@@ -45,20 +45,13 @@
                     </div>
                 </div>
                 <span class="badge badge-sm badge-default">{{project.category}}</span>
-                <a href="javascript:void(0)" @click="markPost(project.id)">
-                                <span class="badge badge-sm badge-outline-danger float-right"
-                                      v-show="showSubscribe(project.id)"
-                                      @mouseover="subscribe_hover=true" @mouseleave="subscribe_hover=false">
-                                    <i class="fa fa-star-o"></i> SUBSCRIBE
-                               </span>
-                </a>
-                <a href="javascript:void(0)" @click="unmarkPost(project.id)">
-                                <span class="badge badge-sm badge-danger float-right"
-                                      v-show="alreadySubscribed(project.id)"
-                                      @mouseover="subscribe_hover=true" @mouseleave="subscribe_hover=false">
-                                    <span v-if="subscribe_hover&&subscribe_show===project.id">UNSUBSCRIBE</span>
-                                    <span v-else><i class="fa fa-check"></i> SUBSCRIBED</span>
-                               </span>
+                <a href="javascript:void(0)">
+                    <span class="badge badge-sm badge-outline-danger float-right" @click="markPost(project.id, true)" v-if="!inSubscribeList(project.id)">
+                        <i class="fa fa-star-o"></i> SUBSCRIBE
+                   </span>
+                    <span class="badge badge-sm badge-danger float-right" @click="markPost(project.id, false)" v-else>
+                        <span ><i class="fa fa-check"></i> SUBSCRIBED</span>
+                   </span>
                 </a>
             </div>
         </div>
@@ -78,15 +71,6 @@
         type: Boolean,
         default: false
       },
-    },
-    data () {
-      return {
-        subscribe_show: false,
-        subscribe_hover: false,
-
-        marked: [],
-        unmarked: [],
-      }
     },
     methods: {
       timeCounter (start, end) {
@@ -149,60 +133,30 @@
           })
       },
 
-      markPost (id) {
-        this.$store.dispatch('markPost', id)
-          .then(() => {
-            this.marked.push(id)
-            this.unmarked.pop(id)
+      markPost (id, mark) {
+        if (!this.login_status) {
+          $('#signup-modal').modal('show')
+          return
+        }
 
-            this.$store.dispatch('toastr', {
-              type: 'success',
-              title: 'Success',
-              message: 'The selected ICO is added to your subscription list, you\'ll receive free updates from now on'
-            })
-          })
-      },
-      unmarkPost (id) {
         this.$store.dispatch('markPost', id)
           .then(() => {
-            this.unmarked.push(id)
-            this.marked.pop(id)
-            this.$store.dispatch('toastr', {
-              type: 'success',
-              title: 'Success',
-              message: 'The selected ICO is removed from your subscription list'
-            })
+            if (mark) {
+              this.$store.dispatch('toastr', {
+                type: 'success',
+                title: 'Success',
+                message: 'The selected ICO is added to your subscription list, you\'ll receive free updates from now on'
+              })
+            } else {
+              this.$store.dispatch('toastr', {
+                type: 'success',
+                title: 'Success',
+                message: 'The selected ICO is removed from your subscription list, you\'ll no longer receive updates from this project'
+              })
+            }
           })
       },
-      showSubscribe (id) {
-        // order matters here
-        if (!this.subscribe_show) return false
-        for (let uid of this.unmarked) {
-          if (id === uid)
-            return true
-        }
-        for (let mid of this.marked) {
-          if (id === mid)
-            return false
-        }
-        for (let p of this.self_marked_posts) {
-          if (id === p.id)
-            return false
-        }
-        if (this.subscribe_show === id) {
-          return true
-        }
-      },
-      alreadySubscribed (id) {
-        // order matters here
-        for (let mid of this.marked) {
-          if (id === mid)
-            return true
-        }
-        for (let uid of this.unmarked) {
-          if (id === uid)
-            return false
-        }
+      inSubscribeList (id) {
         for (let p of this.self_marked_posts) {
           if (id === p.id)
             return true

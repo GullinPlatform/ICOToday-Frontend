@@ -4,7 +4,7 @@
         <div class="row">
             <my-header></my-header>
             <!--main content-->
-            <div class="col-md-8" v-if="self.is_verified">
+            <div class="col-md-8" v-if="me.is_verified">
                 <h6 class="text-muted">
                     <i class="fa fa-lightbulb-o"></i> Tips: The more information you provide, the faster your ICO gets approved
                 </h6>
@@ -382,14 +382,14 @@
       },
     },
     computed: {
-      self () {
+      me () {
         return this.$store.getters.self
       }
     },
     beforeCreate () {
       // redirect non ico company user
       if (this.$store.getters.self.type !== 0) {
-        this.route.push({name: 'landing'})
+        this.$route.push({name: 'landing'})
       }
     }
   }

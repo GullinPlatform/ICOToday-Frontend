@@ -104,9 +104,6 @@
             <hr class="margin-bottom-1x">
 
             <div class="container">
-                <div class="row">
-
-                </div><!-- /.row -->
                 <div class="row mb15">
                     <div class="col-sm-6 leftReveal">
                         <div>
@@ -144,44 +141,54 @@
                         src="../../static/img/team/joe_pic.png" alt="Team">
                     <h6>Joseph Kitonga</h6>
                     <p class="text-muted mb-2">CEO</p>
-                    <div class="social-bar"><a target="_blank" class="social-button shape-circle sb-linkedin"
-                                               href="https://www.linkedin.com/in/joseph-kitonga-69702811b/"
-                                               data-toggle="tooltip" data-placement="top" title="Linkedin"><i
-                            class="socicon-linkedin"></i></a></div>
+                    <div class="social-bar">
+                        <a target="_blank" class="social-button shape-circle sb-linkedin"
+                           href="https://www.linkedin.com/in/joseph-kitonga-69702811b/"
+                           data-toggle="tooltip" data-placement="top" title="Linkedin">
+                            <i class="socicon-linkedin"></i></a>
+                    </div>
                 </div>
                 <div class="col-md-3 col-sm-6 mb-30 text-center"><img
                         class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2"
                         src="../../static/img/team/john_pic2.png" alt="Team">
                     <h6>John Worthley</h6>
                     <p class="text-muted mb-2">CFO</p>
-                    <div class="social-bar"><a target="_blank" class="social-button shape-circle sb-linkedin"
-                                               href="https://www.linkedin.com/in/john-worthley-b6597295//"
-                                               data-toggle="tooltip" data-placement="top" title="Linkedin"><i
-                            class="socicon-linkedin"></i></a></div>
-
+                    <div class="social-bar">
+                        <a target="_blank" class="social-button shape-circle sb-linkedin"
+                           href="https://www.linkedin.com/in/john-worthley-b6597295//"
+                           data-toggle="tooltip" data-placement="top" title="Linkedin">
+                            <i class="socicon-linkedin"></i>
+                        </a>
+                    </div>
                 </div>
                 <div class="col-md-3 col-sm-6 mb-30 text-center"><img
                         class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2"
                         src="../../static/img/team/nader_pic2.png" alt="Team">
                     <h6>Nader Sadek</h6>
                     <p class="text-muted mb-2">CIO</p>
-                    <div class="social-bar"><a target="_blank" class="social-button shape-circle sb-linkedin"
-                                               href="https://www.linkedin.com/in/nader-sadek-82a081a8/"
-                                               data-toggle="tooltip" data-placement="top" title="Linkedin"><i
-                            class="socicon-linkedin"></i></a></div>
+                    <div class="social-bar">
+                        <a target="_blank" class="social-button shape-circle sb-linkedin"
+                           href="https://www.linkedin.com/in/nader-sadek-82a081a8/"
+                           data-toggle="tooltip" data-placement="top" title="Linkedin">
+                            <i class="socicon-linkedin"></i>
+                        </a>
+                    </div>
 
                 </div>
-                <div class="col-md-3 col-sm-6 mb-30 text-center"><img target="_blank"
-                                                                      class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2"
-                                                                      src="../../static/img/team/elorm_pic.jpg"
-                                                                      alt="Team">
+                <div class="col-md-3 col-sm-6 mb-30 text-center">
+                    <img target="_blank"
+                         class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2"
+                         src="../../static/img/team/elorm_pic.jpg"
+                         alt="Team">
                     <h6>Elorm Koto</h6>
                     <p class="text-muted mb-2">CTO</p>
-                    <div class="social-bar"><a target="_blank" class="social-button shape-circle sb-linkedin"
-                                               href="https://www.linkedin.com/in/elorm-koto-7a6537131/"
-                                               data-toggle="tooltip" data-placement="top" title="Linkedin"><i
-                            class="socicon-linkedin"></i></a></div>
-
+                    <div class="social-bar">
+                        <a target="_blank" class="social-button shape-circle sb-linkedin"
+                           href="https://www.linkedin.com/in/elorm-koto-7a6537131/"
+                           data-toggle="tooltip" data-placement="top" title="Linkedin">
+                            <i class="socicon-linkedin"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -230,11 +237,38 @@
         complement: 'Token Sale',
       }
     },
+    data () {
+      return {
+        // for whitelist register
+        email: '',
+      }
+    },
+    methods: {
+      whiteListSubmit (e) {
+        console.log('123')
+        e.preventDefault()
+        if (!this.login_status) {
+          this.$store.dispatch('whiteListEmail', this.email)
+        }
+        else {
+          this.$store.dispatch('toastr', {
+            type: 'success',
+            title: 'Success',
+            message: 'By being one of the first users to register, you were already added to our white list!'
+          })
+        }
+      },
+    },
+    computed: {
+      login_status () {
+        return this.$store.getters.login_status
+      },
+    },
     mounted () {
       /* global particlesJS:true Chart:true */
       // Pie Chart
-      var ctx = document.getElementById('pie_chart').getContext('2d')
-      var pie_chart = new Chart(ctx, {
+      const ctx = document.getElementById('pie_chart').getContext('2d')
+      const pie_chart = new Chart(ctx, {
         type: 'doughnut',
         data: {
           labels: ['Crowdsale', 'Community Incentivization', 'ICOToday'],
@@ -249,7 +283,6 @@
         }
       })
       pie_chart
-
       // Particles JS
       particlesJS('particles-js', {
         'particles': {

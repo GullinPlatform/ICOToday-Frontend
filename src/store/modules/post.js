@@ -104,10 +104,11 @@ const actions = {
         return Promise.reject(error)
       })
   },
-  markPost ({commit}, id) {
+  markPost ({dispatch, commit}, id) {
     return postApi.markPost(id)
       .then((response) => {
         commit(types.MARK_POST, response)
+        dispatch('getSelfMarkedPost')
         return Promise.resolve(response)
       })
       .catch((error) => {
