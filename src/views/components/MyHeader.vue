@@ -40,27 +40,31 @@
         <nav class="list-group">
             <router-link :to="{name:'me_new_project'}" class="list-group-item" v-if="me.type===0"
                          :class="{active: $route.name==='me_new_project'}">
-                <i class="fa fa-angle-right"></i>Submit New ICO
+                <i class="fa fa-angle-right"></i> Submit New ICO
             </router-link>
             <router-link :to="{name:'me_created'}" class="list-group-item with-badge" v-if="me.type===0"
                          :class="{active: $route.name==='me_created'}">
-                <i class="fa fa-angle-right"></i>My ICO Projects
+                <i class="fa fa-angle-right"></i> My ICO Projects
             </router-link>
             <router-link :to="{name:'me_marked'}" class="list-group-item"
                          :class="{active: $route.name==='me_marked'}">
-                <i class="fa fa-angle-right"></i>Subscribed ICO Projects
+                <i class="fa fa-angle-right"></i> Subscribed ICO Projects
             </router-link>
 
             <router-link :to="{name:'me_team'}" class="list-group-item" v-if="me.type===0"
                          :class="{active: $route.name==='me_team'}">
-                <i class="fa fa-angle-right"></i>My Team
+                <i class="fa fa-angle-right"></i> My Team
+            </router-link>
+
+            <router-link :to="{name:'me_expert_apply'}" class="list-group-item" v-if="me.type===1&&!me.info.is_expert"
+                         :class="{active: $route.name==='me_expert_apply'}">
+                <i class="fa fa-angle-right"></i> Apply To Be An Expert
             </router-link>
 
             <router-link :to="{name:'me_settings'}" class="list-group-item"
                          :class="{active: $route.name==='me_settings'}">
-                <i class="fa fa-angle-right"></i>Account Settings
+                <i class="fa fa-angle-right"></i> Account Settings
             </router-link>
-
         </nav>
     </div>
 </template>

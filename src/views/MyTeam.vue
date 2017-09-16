@@ -196,21 +196,24 @@
         $('#add-member-modal').modal('show')
       }
     },
-    mounted () {
-      this.name = this.me.info.team.name
-      this.description = this.me.info.team.description
-    },
-    beforeCreate () {
-      this.$store.dispatch('getTeam', this.$store.getters.self.info.team.id)
-    },
     computed: {
       me () {
         return this.$store.getters.self
       },
       team_members () {
         return this.$store.getters.current_team_members
-
       }
     },
+    mounted () {
+      this.name = this.me.info.team.name
+      this.description = this.me.info.team.description
+    },
+    beforeCreate () {
+      // redirect non ico company user
+      if (this.$store.getters.self.type !== 0) {
+        this.$router.push({name: 'landing'})
+      }
+      this.$store.dispatch('getTeam', this.$store.getters.self.info.team.id)
+    }
   }
 </script>

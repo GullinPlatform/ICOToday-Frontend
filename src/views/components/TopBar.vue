@@ -13,14 +13,13 @@
             <nav class="site-menu">
                 <ul>
                     <li>
-                        <a href="javascript:void(0)" data-toggle="modal" data-target="#signup-modal"
-                           v-if="!login_status" class="hidden-sm-down">
+                        <a href="javascript:void(0)" data-toggle="modal" data-target="#signup-modal" v-if="!login_status" class="hidden-sm-down">
                             <span>Publish Your ICO</span>
                         </a>
                         <router-link :to="{name:'me_new_project'}" v-if="login_status&&me.type===0" class="hidden-sm-down">
                             <span>Publish Your ICO</span>
                         </router-link>
-                        <router-link :to="{name:'me_new_project'}" v-if="login_status&&me.type===1" class="hidden-sm-down">
+                        <router-link :to="{name:'me_expert_apply'}" v-if="login_status&&me.type===1" class="hidden-sm-down">
                             <span>Apply to be an Expert</span>
                         </router-link>
                     </li>
@@ -62,6 +61,11 @@
                                 <li>
                                     <router-link :to="{name:'me_team'}" class="dropdown-item" v-if="me.type===0">
                                         <i class="fa fa-user" aria-hidden="true"></i> My Team
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link :to="{name:'me_expert_apply'}" class="dropdown-item" v-if="me.type===1">
+                                        <i class="fa fa-id-badge" aria-hidden="true"></i> Apply to be an Expert
                                     </router-link>
                                 </li>
                                 <li>

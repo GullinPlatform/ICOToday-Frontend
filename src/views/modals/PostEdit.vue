@@ -35,7 +35,7 @@
 
                             <div v-if="icon_change&&icon_loaded">
                                 <button type="button" class="mb-1 btn btn-secondary">{{icon.name}}</button>
-                                <button type="button" class="mb-1 btn btn-secondary" @click="removeFile('i')">
+                                <button type="button" class="mb-1 btn btn-secondary" @click="removeFile()">
                                     <span><i class="fa fa-times"></i> Remove</span>
                                 </button>
                             </div>
@@ -171,25 +171,8 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">White Paper<span class="text-red">*</span></label>
                         <div class="col-sm-10">
-                            <button type="button" class="mb-1 btn btn-secondary btn-sm"
-                                    v-if="!white_paper_change&&!white_paper_loaded"
-                                    @click="icon_change=true">
-                                <span><i class="fa fa-refresh"></i> Change</span>
-                            </button>
-                            <div class="dropzone-area" v-if="white_paper_change&&!white_paper_loaded">
-                                <div class="dropzone-text">
-                                    <i class="fa fa-cloud-upload"> </i>
-                                    <span>Drag file here or click to upload file</span>
-                                </div>
-                                <input type="file" required @change="onWhitePaperChange">
-                            </div>
-
-                            <div v-if="white_paper_change&&white_paper_loaded">
-                                <button type="button" class="mb-1 btn btn-secondary">{{white_paper.name}}</button>
-                                <button type="button" class="mb-1 btn btn-secondary" @click="removeFile('w')">
-                                    <span> <i class="fa fa-times"></i> Remove</span>
-                                </button>
-                            </div>
+                            <input class="form-control" v-model="white_paper" required
+                                   placeholder="https://example.com/white-paper.pdf">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -274,7 +257,7 @@
 
         start_datetime: '',
         end_datetime: '',
-        white_paper: null,
+        white_paper: '',
         equality_on_offer: '',
 
         coin_name: '',
@@ -288,10 +271,8 @@
         twitter: '',
         slack: '',
         telegram: '',
-        // -- form info end --
 
-        white_paper_change: false,
-        white_paper_loaded: false,
+        // -- form info end --
         icon_change: false,
         icon_loaded: false,
       }
@@ -300,26 +281,15 @@
       'vue-datetime-picker': VueDatetimePicker
     },
     methods: {
-      onWhitePaperChange (e) {
-        var file = e.target.files || e.dataTransfer.files
-        if (!file.length) return
-        this.white_paper = file[0]
-        this.white_paper_loaded = true
-      },
       onIconChange (e) {
         var file = e.target.files || e.dataTransfer.files
         if (!file.length) return
         this.icon = file[0]
         this.icon_loaded = true
       },
-      removeFile (name) {
-        if (name === 'w') {
-          this.white_paper = null
-          this.white_paper_loaded = false
-        } else if (name === 'i') {
+      removeFile () {
           this.icon = null
           this.icon_loaded = false
-        }
       },
 
       editPost () {

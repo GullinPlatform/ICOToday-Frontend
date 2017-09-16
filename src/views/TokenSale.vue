@@ -165,7 +165,7 @@
                         class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2"
                         src="../../static/img/team/nader_pic2.png" alt="Team">
                     <h6>Nader Sadek</h6>
-                    <p class="text-muted mb-2">CIO</p>
+                    <p class="text-muted mb-2">COO</p>
                     <div class="social-bar">
                         <a target="_blank" class="social-button shape-circle sb-linkedin"
                            href="https://www.linkedin.com/in/nader-sadek-82a081a8/"

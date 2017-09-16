@@ -29,7 +29,7 @@
 
                         <div v-else>
                             <button type="button" class="mb-1 btn btn-secondary">{{icon.name}}</button>
-                            <button type="button" class="mb-1 btn btn-secondary" @click="removeFile('i')">
+                            <button type="button" class="mb-1 btn btn-secondary" @click="removeFile()">
                                 <span>
                                     <i class="fa fa-times"></i> Remove
                                 </span>
@@ -70,21 +70,21 @@
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Short Description <span class="text-danger">*</span></label>
                     <div class="col-sm-10">
-                        <input class="form-control" v-model="description_short" type="text"
+                        <input class="form-control" v-model="description_short"
                                placeholder="Short description in one sentence (100 characters).">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Full  Description<span class="text-danger">*</span></label>
                     <div class="col-sm-10">
-                        <textarea class="form-control" v-model="description_full" type="text"
+                        <textarea class="form-control" v-model="description_full"
                                   placeholder="( Markdown Support Enabled )" rows="10"></textarea>
                     </div>
                 </div>
                 <h6 class="text-muted text-normal text-uppercase ">ICO Detail</h6>
                 <hr class="mb-3 mt-2">
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">ICO Type <span class="text-danger">*</span></label>
+                    <label class="col-sm-2 col-form-label">ICO Type<span class="text-danger">*</span></label>
                     <div class="col-sm-10">
                         <select class="form-control" v-model="type">
                             <option value="" selected>-- Choose Type --</option>
@@ -163,22 +163,8 @@
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">White Paper </label>
                     <div class="col-sm-10">
-                        <div class="dropzone-area" v-if="!white_paper_loaded">
-                            <div class="dropzone-text">
-                                <i class="fa fa-cloud-upload"> </i>
-                                <span>Drag file here or click to upload file</span>
-                            </div>
-                            <input type="file" @change="onWhitePaperChange">
-                        </div>
-
-                        <div v-else>
-                            <button type="button" class="mb-1 btn btn-secondary">{{white_paper.name}}</button>
-                            <button type="button" class="mb-1 btn btn-secondary" @click="removeFile('w')">
-                                        <span>
-                                            <i class="fa fa-times"></i> Remove
-                                        </span>
-                            </button>
-                        </div>
+                        <input class="form-control" v-model="white_paper"
+                               placeholder="https://example.com/white-paper.pdf">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -272,8 +258,8 @@
         ratio: '',
         equality_on_offer: '',
         // Supplement
-        white_paper: null,
-        video_link: '',
+        white_paper: '',
+        video_link: 'https://youtube.com/embed/',
         website: '',
         // Social Media
         medium: '',
@@ -283,7 +269,6 @@
         // -- form info end --
 
         // UI control
-        white_paper_loaded: false,
         icon_loaded: false,
         uploading: false,
         error_message: '',
@@ -312,14 +297,9 @@
         this.icon = file[0]
         this.icon_loaded = true
       },
-      removeFile (name) {
-        if (name === 'w') {
-          this.white_paper = null
-          this.white_paper_loaded = false
-        } else if (name === 'i') {
+      removeFile () {
           this.icon = null
           this.icon_loaded = false
-        }
       },
       onStartDatetimeChanged (newStart) {
         const endPicker = this.$refs.endPicker.control
@@ -389,7 +369,7 @@
     beforeCreate () {
       // redirect non ico company user
       if (this.$store.getters.self.type !== 0) {
-        this.$route.push({name: 'landing'})
+        this.$router.push({name: 'landing'})
       }
     }
   }
