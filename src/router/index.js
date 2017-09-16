@@ -8,11 +8,12 @@ import Landing from 'views/Landing'
 import EmailVerify from 'views/EmailVerify'
 import InvitedRegister from 'views/InvitedRegister'
 
+import MyNewProject from 'views/MyNewProject'
 import MyCreatedProjects from 'views/MyCreatedProjects'
 import MyMarkedProjects from 'views/MyMarkedProjects'
 import MyTeam from 'views/MyTeam'
 import MySettings from 'views/MySettings'
-import MyNewProject from 'views/MyNewProject'
+import MyExpertApplication from 'views/MyExpertApplication'
 
 import Post from 'views/Post'
 import PostRatingDetail from 'views/PostRatingDetail'
@@ -64,6 +65,10 @@ export default new Router({
       path: '/me/new',
       component: MyNewProject,
       name: 'me_new_project'
+    }, {
+      path: '/me/expert/application',
+      component: MyExpertApplication,
+      name: 'me_expert_apply'
     }, {
       path: '/user/:id/created',
       component: UserCreatedProjects,

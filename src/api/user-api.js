@@ -84,12 +84,24 @@ export default {
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
-  // Change User
   updateSelf (formData) {
     return Vue.http.put(API_ROOT + 'account/me/', formData, {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
-  // Change Team
-
+  getMyExpertApplication () {
+    return Vue.http.get(API_ROOT + 'account/expert_apply/', {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
+      .then((response) => Promise.resolve(response.data))
+      .catch((error) => Promise.reject(error))
+  },
+  postMyExpertApplication (formData) {
+    return Vue.http.post(API_ROOT + 'account/expert_apply/', formData, {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
+      .then((response) => Promise.resolve(response.data))
+      .catch((error) => Promise.reject(error))
+  },
+  updateMyExpertApplication (formData) {
+    return Vue.http.put(API_ROOT + 'account/expert_apply/', formData, {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
+      .then((response) => Promise.resolve(response.data))
+      .catch((error) => Promise.reject(error))
+  },
 }

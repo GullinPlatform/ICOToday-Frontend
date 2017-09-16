@@ -10,6 +10,8 @@ const state = {
   self: {},
   self_marked_posts: [],
   self_created_posts: [],
+  self_expert_application: {},
+
   // loaded user
   user: {},
   user_marked_posts: [],
@@ -17,9 +19,9 @@ const state = {
 
   login_status: false,
   token: null,
-  upload_file: null,
 
   white_list_email: ''
+
 }
 
 // getters
@@ -55,6 +57,7 @@ const getters = {
       }
     }
   },
+  self_expert_application: state => { return state.self_expert_application },
 
   user: state => {
     return state.user
@@ -78,7 +81,7 @@ const getters = {
 
   white_list_email: state => {
     return state.white_list_email
-  }
+  },
 }
 
 // actions
@@ -115,6 +118,17 @@ const actions = {
       })
       .catch((error) => {
         console.log(error)
+        commit(types.LOG_ERROR, error)
+        return Promise.reject(error)
+      })
+  },
+  updateSelf ({commit}, formData) {
+    return userApi.updateSelf(formData)
+      .then(() => {
+        commit(types.UPDATE_SELF)
+        return Promise.resolve()
+      })
+      .catch((error) => {
         commit(types.LOG_ERROR, error)
         return Promise.reject(error)
       })
@@ -161,12 +175,12 @@ const actions = {
     return userApi.signup(formData)
       .then((response) => {
         $('#signup-modal').modal('hide')
-        commit(types.REGSITER_SUCCESS, response)
+        commit(types.REGISTER_SUCCESS, response)
         dispatch('getSelf')
       })
       .catch((error) => {
         console.log(error)
-        // commit(types.REGSITER_FAILED, error)
+        // commit(types.REGISTER_FAILED, error)
         return Promise.reject(error)
       })
   },
@@ -181,6 +195,10 @@ const actions = {
         commit(types.LOGIN_FAILED, error)
         return Promise.reject(error)
       })
+  },
+  logout ({commit}) {
+    console.log('logout')
+    commit(types.LOGOUT)
   },
   confirmEmail ({dispatch}, token) {
     return userApi.confirmEmail(token)
@@ -223,7 +241,7 @@ const actions = {
   invitedSignup ({dispatch, commit}, formData) {
     return userApi.invitedSignup(formData)
       .then((response) => {
-        commit(types.REGSITER_SUCCESS, response)
+        commit(types.REGISTER_SUCCESS, response)
         dispatch('getSelf')
         return Promise.resolve()
       })
@@ -245,7 +263,7 @@ const actions = {
         commit(types.LOG_ERROR, error)
       })
   },
-  tokenRefresh ({rootState, commit, dispatch}, formData) {
+  tokenRefresh ({commit, dispatch}, formData) {
     userApi.tokenRefresh(formData)
       .then((response) => {
         commit(types.REFRESH_SUCCESS, response)
@@ -257,22 +275,36 @@ const actions = {
       })
   },
 
-  logout ({commit}) {
-    console.log('logout')
-    commit(types.LOGOUT)
-  },
-
-  updateSelf ({commit}, formData) {
-    return userApi.updateSelf(formData)
-      .then(() => {
-        commit(types.UPDATE_SELF)
+  getMyExpertApplication ({commit}, formData) {
+    return userApi.getMyExpertApplication(formData)
+      .then((response) => {
+        commit(types.GET_SELF_EXPERT_APPLICATION, response)
         return Promise.resolve()
       })
       .catch((error) => {
-        commit(types.LOG_ERROR, error)
         return Promise.reject(error)
       })
   },
+  updateMyExpertApplication ({commit}, formData) {
+    return userApi.updateMyExpertApplication(formData)
+      .then((response) => {
+        commit(types.UPDATE_SELF_EXPERT_APPLICATION, response)
+        return Promise.resolve()
+      })
+      .catch((error) => {
+        return Promise.reject(error)
+      })
+  },
+  postMyExpertApplication ({commit}, formData) {
+    return userApi.postMyExpertApplication(formData)
+      .then(() => {
+        commit(types.POST_SELF_EXPERT_APPLICATION, formData.detail)
+        return Promise.resolve()
+      })
+      .catch((error) => {
+        return Promise.reject(error)
+      })
+  }
 }
 
 // mutations
@@ -291,7 +323,7 @@ const mutations = {
     state.self = {}
     router.push({name: 'landing'})
   },
-  [types.REGSITER_SUCCESS] (state, response) {
+  [types.REGISTER_SUCCESS] (state, response) {
     cookie.setCookie('token', response.token)
     state.token = response.token
     state.login_status = true
@@ -302,7 +334,7 @@ const mutations = {
     state.token = null
     state.error_msg = error
   },
-  [types.REGSITER_FAILED] (state, error) {
+  [types.REGISTER_FAILED] (state, error) {
     state.login_status = false
     state.token = null
     state.error_msg = error
@@ -347,13 +379,22 @@ const mutations = {
   [types.WHITE_LIST_EMAIL] (state, email) {
     state.white_list_email = email
   },
-  [types.CLEAN_WHITE_LIST_EMAIL] (state, email) {
+  [types.CLEAN_WHITE_LIST_EMAIL] (state) {
     state.white_list_email = ''
   },
 
   // post change
   [types.UPDATE_SELF] (state) {},
 
+  [types.GET_SELF_EXPERT_APPLICATION] (state, response) {
+    state.self_expert_application = response
+  },
+  [types.UPDATE_SELF_EXPERT_APPLICATION] (state, response) {
+    state.self_expert_application = response
+  },
+  [types.POST_SELF_EXPERT_APPLICATION] (state, formData) {
+    state.self_expert_application = formData
+  },
 }
 
 export default {
