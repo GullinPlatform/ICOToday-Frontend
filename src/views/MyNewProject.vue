@@ -100,24 +100,22 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">ICO Unit </label>
-                    <div class="col-sm-10">
-                        <select class="form-control" v-model="coin_type">
-                            <option value="" selected>-- Choose Unit --</option>
-                            <option value="BTC">BTC - Bitcoin</option>
-                            <option value="ETH">ETH - Ethereum</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row">
                     <label class="col-sm-2 col-form-label">ICO Goals </label>
-                    <div class="col-sm-5">
+                    <div class="col-sm-3">
                         <input class="form-control" placeholder="Soft Cap" v-model="minimum_goal"
                                type="number">
                     </div>
-                    <div class="col-sm-5">
+                    <div class="col-sm-3">
                         <input class="form-control" placeholder="Hard Cap" v-model="maximum_goal"
                                type="number">
+                    </div>
+                    <div class="col-sm-4">
+                        <select class="form-control" v-model="coin_unit">
+                            <option value="" selected>-- Choose Unit --</option>
+                            <option value="BTC">BTC - Bitcoin</option>
+                            <option value="ETH">ETH - Ethereum</option>
+                            <option value="USD">USD - US Dollar</option>
+                        </select>
                     </div>
                 </div>
 
@@ -149,12 +147,19 @@
                         <input class="form-control" placeholder="Ex: 5000" v-model="ratio"
                                type="number">
                     </div>
-                    <div class="col-sm-3"><p>{{coin_name}} = 1 {{coin_type}}</p></div>
+                    <div class="col-sm-3"><p>{{coin_name}} = 1 {{coin_unit}}</p></div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">% of Token for Sale</label>
                     <div class="col-sm-10">
                         <input class="form-control" v-model="equality_on_offer" placeholder="Ex: 30"
+                               type="text">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Accept</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" v-model="accept" placeholder="Ex: ETH, BTC"
                                type="text">
                     </div>
                 </div>
@@ -250,13 +255,14 @@
         // ICO info
         type: '',
         coin_name: '',
-        coin_type: '',
-        maximum_goal: '',
         minimum_goal: '',
+        maximum_goal: '',
+        coin_unit: '',
         start_datetime: '',
         end_datetime: '',
         ratio: '',
         equality_on_offer: '',
+        accept: '',
         // Supplement
         white_paper: '',
         video_link: 'https://youtube.com/embed/',
@@ -298,8 +304,8 @@
         this.icon_loaded = true
       },
       removeFile () {
-          this.icon = null
-          this.icon_loaded = false
+        this.icon = null
+        this.icon_loaded = false
       },
       onStartDatetimeChanged (newStart) {
         const endPicker = this.$refs.endPicker.control
@@ -324,25 +330,30 @@
         this.uploading = true
         /* global FormData */
         let formData = new FormData()
+
         formData.append('title', this.title)
         formData.append('logo_image', this.icon)
         formData.append('category', this.category)
         formData.append('description_short', this.description_short)
         formData.append('description_full', this.description_full)
-        formData.append('equality_on_offer', this.equality_on_offer)
-        formData.append('maximum_goal', this.maximum_goal)
-        formData.append('minimum_goal', this.minimum_goal)
-        formData.append('coin_type', this.coin_type)
-        formData.append('coin_name', this.coin_name)
-        formData.append('ratio', this.ratio)
+
         formData.append('type', this.type)
+        formData.append('coin_name', this.coin_name)
+        formData.append('minimum_goal', this.minimum_goal)
+        formData.append('maximum_goal', this.maximum_goal)
+        formData.append('coin_unit', this.coin_unit)
         if (this.start_datetime)
           formData.append('start_datetime', this.start_datetime.format('YYYY-MM-DD HH:mmZ'))
         if (this.end_datetime)
           formData.append('end_datetime', this.end_datetime.format('YYYY-MM-DD HH:mmZ'))
+        formData.append('ratio', this.ratio)
+        formData.append('equality_on_offer', this.equality_on_offer)
+        formData.append('accept', this.accept)
+
         formData.append('white_paper', this.white_paper)
         formData.append('video_link', this.video_link)
         formData.append('website', this.website)
+
         formData.append('medium', this.medium)
         formData.append('twitter', this.twitter)
         formData.append('slack', this.slack)

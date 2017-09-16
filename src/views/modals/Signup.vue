@@ -55,7 +55,6 @@
                             <input v-model="team_name" type="text" class="form-control" name="team_name"
                                    placeholder="Company/Team Name *"
                                    required>
-                            <p class="text-danger font-bold">{{team_msg}}</p>
                         </div>
                         <div class="form-group">
                             <input v-model="password" type="password" class="form-control" name="password"
@@ -64,13 +63,14 @@
 
                         <div class="form-check">
                             <label class="form-check-label">
-                                <input type="checkbox" id="check" name="check" required class="form-check-input">
+                                <input type="checkbox" id="check" name="check" v-model="check" required class="form-check-input">
                                 I Agree with
                                 <router-link :to="{name:'terms', query:{type:'terms'}}">ICOToday User Contract.</router-link>
                             </label>
                         </div>
                         <hr/>
                         <a @click="getToken()" class="btn btn-primary  text-white">Register</a>
+                        <p class="text-danger font-bold">{{error_msg}}</p>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -95,8 +95,6 @@
     name: 'SignUp',
     data () {
       return {
-        checked: false,
-
         first_name: '',
         last_name: '',
 
@@ -106,15 +104,15 @@
         password: '',
         type: 1,
 
+        check: false,
+
         email_msg: '',
-        select_msg: '',
-        team_msg: ''
+        error_msg: ''
       }
     },
     methods: {
       getToken () {
         this.email_msg = ''
-        this.select_msg = ''
         this.team_msg = ''
         const formData = {
           email: this.email.replace(' ', ''),
@@ -124,7 +122,17 @@
           last_name: this.last_name,
           team_name: this.team_name,
         }
-        if (this.select_msg === -1) { this.select_msg = 'This field cannot be null' }
+
+        if (!(this.first_name && this.last_name && this.email &&
+            this.team_name && this.password) && this.type === 0) {
+          this.error_msg = 'Please make sure filled all required fields'
+        }
+        else if (!(this.email && this.team_name && this.password) && this.type === 1) {
+          this.error_msg = 'Please make sure filled all required fields'
+        }
+        else if (!this.check) {
+          this.error_msg = 'Please check the user contract'
+        }
         else {
           this.$store.dispatch('signup', formData)
             .then(() => {

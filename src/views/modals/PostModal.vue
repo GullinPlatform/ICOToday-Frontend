@@ -116,11 +116,11 @@
                                     </tr>
                                     <tr>
                                         <td class="text-bold pl-1">Soft Cap</td>
-                                        <td>{{post.minimum_goal}} {{post.coin_type}}</td>
+                                        <td>{{post.minimum_goal}} {{post.coin_unit}}</td>
                                     </tr>
                                     <tr>
                                         <td class="text-bold pl-1">Hard Cap</td>
-                                        <td>{{post.maximum_goal}} {{post.coin_type}}</td>
+                                        <td>{{post.maximum_goal}} {{post.coin_unit}}</td>
                                     </tr>
                                     <!--<tr>-->
                                     <!--<td class="text-bold pl-1">Bonus</td>-->
@@ -132,7 +132,7 @@
                                     </tr>
                                     <tr>
                                         <td class="text-bold pl-1">Accepting</td>
-                                        <td>{{post.coin_type}}</td>
+                                        <td>{{post.coin_unit}}</td>
                                     </tr>
 
                                     </tbody>

@@ -55,7 +55,7 @@
                             <div class="col-sm-4">
                                 Soft Cap / Hard Cap
                                 <h4 class="product-price">
-                                    {{project.minimum_goal}} /  {{project.maximum_goal}} {{project.coin_type}}
+                                    {{project.minimum_goal}} /  {{project.maximum_goal}} {{project.coin_unit}}
                                 </h4>
                             </div>
                             <div class="col-sm-3">

@@ -102,7 +102,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">ICO Unit <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
-                            <select class="form-control" v-model="coin_type" required>
+                            <select class="form-control" v-model="coin_unit" required>
                                 <option value="" selected>-- Choose Unit --</option>
                                 <option value="BTC">BTC - Bitcoin</option>
                                 <option value="ETH">ETH - Ethereum</option>
@@ -156,13 +156,20 @@
                             <input class="form-control" placeholder="Ex: 5000" v-model="ratio" required
                                    type="number">
                         </div>
-                        <div class="col-sm-3"><p>{{coin_name}} = 1 {{coin_type}}</p></div>
+                        <div class="col-sm-3"><p>{{coin_name}} = 1 {{coin_unit}}</p></div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">% of Token for Sale <span
                                 class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <input class="form-control" v-model="equality_on_offer" placeholder="Ex: 30" required
+                                   type="text">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Accept</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" v-model="accept" placeholder="Ex: ETH, BTC"
                                    type="text">
                         </div>
                     </div>
@@ -253,8 +260,8 @@
         type: '',
         maximum_goal: null,
         minimum_goal: null,
-        coin_type: '',
-
+        coin_unit: '',
+        accept: '',
         start_datetime: '',
         end_datetime: '',
         white_paper: '',
@@ -288,8 +295,8 @@
         this.icon_loaded = true
       },
       removeFile () {
-          this.icon = null
-          this.icon_loaded = false
+        this.icon = null
+        this.icon_loaded = false
       },
 
       editPost () {
@@ -298,7 +305,7 @@
 
         if (!(this.title && this.description_full && this.description_full &&
             this.maximum_goal && this.minimum_goal &&
-            this.coin_type && this.start_datetime &&
+            this.coin_unit && this.start_datetime &&
             this.end_datetime && this.website)) {
           this.$store.dispatch('toastr', {
             type: 'danger',
@@ -308,31 +315,34 @@
           return
         }
 
-        formData.append('id', this.current_post.id)
         formData.append('title', this.title)
+        if (this.icon)
+          formData.append('logo_image', this.icon)
+        formData.append('category', this.category)
         formData.append('description_short', this.description_short)
         formData.append('description_full', this.description_full)
-        formData.append('category', this.category)
-        formData.append('maximum_goal', this.maximum_goal)
-        formData.append('minimum_goal', this.minimum_goal)
-        formData.append('equality_on_offer', this.equality_on_offer)
-        formData.append('coin_type', this.coin_type)
-        formData.append('ratio', this.ratio)
+
         formData.append('type', this.type)
-        formData.append('start_datetime', this.start_datetime.format('YYYY-MM-DD HH:mmZ'))
-        formData.append('end_datetime', this.end_datetime.format('YYYY-MM-DD HH:mmZ'))
         formData.append('coin_name', this.coin_name)
+        formData.append('minimum_goal', this.minimum_goal)
+        formData.append('maximum_goal', this.maximum_goal)
+        formData.append('coin_unit', this.coin_unit)
+        if (this.start_datetime)
+          formData.append('start_datetime', this.start_datetime.format('YYYY-MM-DD HH:mmZ'))
+        if (this.end_datetime)
+          formData.append('end_datetime', this.end_datetime.format('YYYY-MM-DD HH:mmZ'))
         formData.append('ratio', this.ratio)
+        formData.append('equality_on_offer', this.equality_on_offer)
+        formData.append('accept', this.accept)
+
+        formData.append('white_paper', this.white_paper)
+        formData.append('video_link', this.video_link)
+        formData.append('website', this.website)
+
         formData.append('medium', this.medium)
         formData.append('twitter', this.twitter)
         formData.append('slack', this.slack)
         formData.append('telegram', this.telegram)
-
-        if (this.white_paper)
-          formData.append('white_paper', this.white_paper)
-
-        if (this.icon)
-          formData.append('logo_image', this.icon)
 
         formData.append('video_link', this.video_link)
         formData.append('website', this.website)
@@ -379,9 +389,10 @@
 
         this.maximum_goal = this.current_post.maximum_goal
         this.minimum_goal = this.current_post.minimum_goal
-        this.coin_type = this.current_post.coin_type
+        this.coin_unit = this.current_post.coin_unit
         this.type = this.current_post.type
         this.equality_on_offer = this.current_post.equality_on_offer
+        this.accpet = this.current_post.accpet
 
         this.start_datetime = moment(this.current_post.start_datetime)
         this.end_datetime = moment(this.current_post.end_datetime)
