@@ -219,6 +219,35 @@ const actions = {
         return Promise.reject(error)
       })
   },
+  resendTeamInviteEmail () {},
+
+  forgetPasswordSendEmail ({commit}, email) {
+    return userApi.forgetPasswordSendEmail(email)
+      .then(() => {
+        return Promise.resolve()
+      })
+      .catch((error) => {
+        return Promise.reject(error)
+      })
+  },
+  forgetPasswordVerifyToken ({commit}, token) {
+    return userApi.forgetPasswordVerifyToken(token)
+      .then(() => {
+        return Promise.resolve()
+      })
+      .catch((error) => {
+        return Promise.reject(error)
+      })
+  },
+  forgetPasswordChangePassword ({commit}, formData) {
+    return userApi.forgetPasswordChangePassword(formData)
+      .then(() => {
+        return Promise.resolve()
+      })
+      .catch((error) => {
+        return Promise.reject(error)
+      })
+  },
 
   whiteListEmail ({commit}, email) {
     commit(types.WHITE_LIST_EMAIL, email)

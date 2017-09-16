@@ -7,6 +7,8 @@ import Landing from 'views/Landing'
 
 import EmailVerify from 'views/EmailVerify'
 import InvitedRegister from 'views/InvitedRegister'
+import ForgetPassword from 'views/ForgetPassword'
+import ResetPassword from 'views/ResetPassword'
 
 import MyNewProject from 'views/MyNewProject'
 import MyCreatedProjects from 'views/MyCreatedProjects'
@@ -22,7 +24,7 @@ import UserCreatedProjects from 'views/UserCreatedProjects'
 import UserMarkedProjects from 'views/UserMarkedProjects'
 import UserTeam from 'views/UserTeam'
 
-import TokenSalse from 'views/TokenSale'
+import TokenSale from 'views/TokenSale'
 import TermsAndPolicy from 'views/TermsAndPolicy'
 
 Vue.use(Router)
@@ -90,8 +92,16 @@ export default new Router({
       component: InvitedRegister,
       name: 'invited_register'
     }, {
+      path: '/forget',
+      component: ForgetPassword,
+      name: 'forget_password'
+    }, {
+      path: '/reset',
+      component: ResetPassword,
+      name: 'reset_password'
+    }, {
       path: '/tokensale',
-      component: TokenSalse,
+      component: TokenSale,
       name: 'tokensale'
     }, {
       path: '/terms',

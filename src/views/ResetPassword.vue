@@ -1,37 +1,10 @@
 <template>
     <div class="container padding-bottom-3x mb-2 mt-5 pl-3 pr-3" v-if="loaded">
-        <div class="row justify-content-center" v-if="token_valid">
+        <div class="row justify-content-center" v-if="token_valid&&!success">
             <div class="col-md-8">
                 <div class="padding-top-3x hidden-md-up"></div>
-                <h3 class="margin-bottom-1x">Welcome to ICOToday! {{user_name}}</h3>
-                <p>Your ICO <span class="text-bold" v-if="user.info&&user.info.team">{{user.info.team.name}}</span>
-                    is Listed on ICOToday, Join Us to Gain Control of your ICO and Communicate Securely with Your Investors Directly!</p>
+                <h3 class="margin-bottom-1x">Password Reset</h3>
                 <div class="row">
-                    <div class="col-sm-12">
-                        <h6 class="text-muted text-normal text-uppercase ">MY ACCOUNT</h6>
-                        <hr class="mb-3 mt-2">
-                        <div class="row">
-                            <div class="col-sm-4 text-center">
-                                <img :src="user.info.avatar"
-                                     class="img-thumbnail rounded-circle mb-2"
-                                     width="100" height="100">
-                            </div>
-                            <div class="col-sm-8">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <input :value="user.info.last_name + ' ' +user.info.first_name" disabled
-                                               class="form-control">
-                                    </div>
-                                </div>
-                                <div class="row mt-3">
-                                    <div class="col-sm-12">
-                                        <input :value="user.email" disabled class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="col-sm-12 mt-2">
                         <h6 class="text-muted text-normal text-uppercase ">Set Password</h6>
                         <hr class="mb-3 mt-2">
@@ -51,22 +24,31 @@
                                 </div>
                             </div>
                             <p class="text-danger">{{err_msg}}</p>
-
                         </div>
                     </div>
                     <div class="col-12 text-center text-sm-right">
-                        <button class="btn btn-primary margin-bottom-none" @click="invitedSignup()">Register</button>
+                        <button class="btn btn-primary margin-bottom-none" @click="forgetPasswordChangePassword()">Reset</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row justify-content-center" v-else>
+        <div class="row justify-content-center" v-if="!token_valid">
             <div class="col-sm-8">
                 <div class="card text-center">
                     <div class="card-body">
                         <h3 class="card-title"><i class="fa fa-times"></i> Ooops, Something went wrong</h3>
                         <p class="text-danger">Error Message: {{err_msg}}</p>
                         <p>Tips: Did you use the right URL?</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center" v-if="success">
+            <div class="col-sm-8">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h3 class="card-title"><i class="fa fa-times"></i> Password Reset Successful!</h3>
+                        <a href="javascript:void(0)" data-toggle="modal" data-target="#login-modal">Login using new password</a>
                     </div>
                 </div>
             </div>
@@ -80,13 +62,15 @@
     head: {
       title: {
         inner: 'ICOToday',
-        complement: 'Invited Register',
+        complement: 'Reset Password',
       }
     },
     data () {
       return {
         loaded: false,
         token_valid: false,
+        success: false,
+
         password1: '',
         password2: '',
 
@@ -95,13 +79,16 @@
       }
     },
     methods: {
-      invitedSignup () {
+      forgetPasswordChangePassword () {
         if (this.password1 === this.password2) {
           const formData = {
             token: this.$route.query.token,
             password: this.password1
           }
-          this.$store.dispatch('invitedSignup', formData)
+          this.$store.dispatch('forgetPasswordChangePassword', formData)
+            .then(() => {
+              this.success = true
+            })
             .catch((error) => {
               this.loaded = true
               this.err_msg = error.body.detail
@@ -114,15 +101,6 @@
       }
     },
     computed: {
-      user () {
-        return this.$store.getters.user
-      },
-      user_name () {
-        return this.$store.getters.user_name
-      },
-      me () {
-        return this.$store.getters.self
-      },
       login_status () {
         return this.$store.getters.login_status
       },
@@ -132,7 +110,7 @@
         this.loaded = true
         this.err_msg = 'Token Not Found'
       } else {
-        this.$store.dispatch('invitedGetUser', this.$route.query.token)
+        this.$store.dispatch('forgetPasswordVerifyToken', this.$route.query.token)
           .then(() => {
             this.loaded = true
             this.token_valid = true

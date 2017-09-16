@@ -53,6 +53,21 @@ export default {
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
+  forgetPasswordSendEmail (email) {
+    return Vue.http.post(API_ROOT + 'account/forget/', {'email': email})
+      .then((response) => Promise.resolve(response.data))
+      .catch((error) => Promise.reject(error))
+  },
+  forgetPasswordVerifyToken (token) {
+    return Vue.http.get(API_ROOT + 'account/forget/' + token + '/')
+      .then((response) => Promise.resolve(response.data))
+      .catch((error) => Promise.reject(error))
+  },
+  forgetPasswordChangePassword (formData) {
+    return Vue.http.put(API_ROOT + 'account/forget/' + formData.token + '/', formData)
+      .then((response) => Promise.resolve(response.data))
+      .catch((error) => Promise.reject(error))
+  },
   // Load User Data
   getSelf () {
     return Vue.http.get(API_ROOT + 'account/me/', {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
