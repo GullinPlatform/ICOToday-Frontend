@@ -74,11 +74,11 @@
                                 </button>
 
                                 <a class="btn btn-outline-primary btn-sm btn-block text-primary"
-                                   :href="post.white_paper">
+                                   :href="post.white_paper" target="_blank">
                                     <i class="fa fa-file-o"></i>
                                     White paper
                                 </a>
-                                <a class="btn btn-outline-secondary btn-sm btn-block" :href="post.website">
+                                <a class="btn btn-outline-secondary btn-sm btn-block" :href="post.website" target="_blank">
                                     <a><i class="fa fa-globe"></i> Website</a>
                                 </a>
                             </section>
