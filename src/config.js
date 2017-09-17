@@ -1,5 +1,5 @@
 export const API_ROOT = (process.env.NODE_ENV === 'production') ?
-    'http://api.icotoday.io/' :
+    'https://api.icotoday.io/' :
     'http://localhost:8000/'
 
 export const COOKIE_DOMAIN = (process.env.NODE_ENV === 'production') ?

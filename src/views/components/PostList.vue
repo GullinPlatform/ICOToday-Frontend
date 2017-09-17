@@ -38,7 +38,7 @@
                         </h4>
                     </div>
                     <div class="col-sm-3">
-                        Token for Sale
+                        Tokens for Sale
                         <h4 class="product-price">
                             {{project.equality_on_offer}}%
                         </h4>
@@ -85,7 +85,7 @@
           if (rest === '0 hours ') {
             rest = -moment().diff(start, 'minutes') + ' minutes '
           }
-          return 'Start in ' + rest
+          return 'Starts in ' + rest
         }
         // Started
         else if (moment().diff(end, 'minutes') < 0) {
@@ -98,7 +98,7 @@
             rest = -moment().diff(end, 'minutes') + ' minutes '
           }
 
-          return 'End in ' + rest
+          return 'Ends in ' + rest
         }
         // Ended
         else {

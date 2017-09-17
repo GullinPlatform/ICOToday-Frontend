@@ -14,10 +14,8 @@
                             <span class="badge badge-sm badge-default">{{post.category}}</span>
                         </div>
                     </div>
-
                     <p class="mb-0">
-                        <router-link :to="{name:'post', params:{id:post.id}}" data-dismiss="modal"
-                                     class="btn btn-outline-primary btn-sm mr-2">
+                        <router-link :to="{name:'post', params:{id:post.id}}" data-dismiss="modal" class="btn btn-outline-primary btn-sm mr-2">
                             Full Page
                         </router-link>
                     </p>
@@ -26,11 +24,7 @@
                     <div class="row post-modal ml-3 mr-3 mb-3">
                         <div class="col-lg-8 pl-0">
                             <div class="embed-responsive embed-responsive-16by9">
-                                <iframe :src="post.video_link"
-                                        class="embed-responsive-item"
-                                        allowfullscreen>
-                                </iframe>
-
+                                <iframe :src="post.video_link" class="embed-responsive-item" allowfullscreen></iframe>
                             </div>
                             <p class="text-center">
                                 <a class="social-button shape-circle" :href="post.slack" v-if="post.slack"><i

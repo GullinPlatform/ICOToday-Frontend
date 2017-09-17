@@ -6,6 +6,7 @@ import user from './modules/user'
 import post from './modules/post'
 import team from './modules/team'
 import discussion from './modules/discussion'
+import notification from './modules/notification'
 
 Vue.use(Vuex)
 
@@ -17,7 +18,8 @@ const store = new Vuex.Store({
     user,
     post,
     discussion,
-    team
+    team,
+    notification
   }
 })
 export default store

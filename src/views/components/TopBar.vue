@@ -39,6 +39,22 @@
             <div class="toolbar">
                 <div class="inner">
                     <div class="tools">
+                        <div class="account"><a href="account-orders.html"></a><i class="fa fa-bell-o"></i>
+                            <ul class="toolbar-dropdown">
+                                <li class="sub-menu-user">
+                                    <div class="user-ava"><img src="img/account/user-ava-sm.jpg" alt="Daniel Adams">
+                                    </div>
+                                    <div class="user-info">
+                                        <h6 class="user-name">Daniel Adams</h6><span class="text-xs text-muted">290 Reward points</span>
+                                    </div>
+                                </li>
+                                <li><a href="account-profile.html">My Profile</a></li>
+                                <li><a href="account-orders.html">Orders List</a></li>
+                                <li><a href="account-wishlist.html">Wishlist</a></li>
+                                <li class="sub-menu-separator"></li>
+                                <li><a href="#"> <i class="icon-unlock"></i>Logout</a></li>
+                            </ul>
+                        </div>
                         <div class="account" v-if="login_status">
                             <img :src="me.info.avatar" class="rounded-circle">
                             <a href="javascript:void(0)"></a>
@@ -122,7 +138,24 @@
     methods: {
       logout () {
         this.$store.dispatch('logout')
-      }
+      },
+      getNotifications () {
+        this.$store.dispatch('getNotifications')
+      },
+      readNotification (pk) {
+        this.$store.dispatch('readNotification', pk)
+      },
+    },
+    mounted () {
+      this.getNotifications()
+
+      this.interval = setInterval(function () {
+        this.getNotifications()
+        this.getPendingFriends()
+      }.bind(this), 30000)
+    },
+    beforeDestroy () {
+      clearInterval(this.interval)
     }
   }
 
