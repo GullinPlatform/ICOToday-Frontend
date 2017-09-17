@@ -2,97 +2,85 @@
 
 
     <div v-if="loaded">
-      <div class="product-column product-list">
-        <div class="product-info">
-          <div class="row">
-            <div class="col-sm-4">
-              Company
-            </div>
-            <div class="col-sm-1">
-              Type
-            </div>
-            <div class="col-sm-2">
-              Time
-            </div>
+        <div class="product-column product-list">
+            <div class="row">
+                <div class="col-sm-4">
+                    Company
+                </div>
+                <div class="col-sm-1 pl-0">
+                    Type
+                </div>
+                <div class="col-sm-2">
+                    Time
+                </div>
+                <div class="col-sm-2">
+                    Hard Cap
+                </div>
+                <div class="col-sm-1 pl-0">
+                    Tokens
+                </div>
+                <div class="col-sm-2">
+                    Score
+                </div>
 
-            <div class="col-sm-2">
-             Hard Cap
             </div>
-            <div class="col-sm-2">
-              Token for sale
-            </div>
-            <div class="col-sm-1">
-              Score
-            </div>
-
-          </div>
         </div>
-      </div>
         <div class="product-card product-list"
              v-for="project in posts"
              @mouseover="subscribe_show=project.id" @mouseleave="subscribe_show=false">
-
-
             <div class="product-info">
-                <h3 class="product-title" @click="postModal(project.id)">
-
-
-                </h3>
                 <div class="row" @click="postModal(project.id)">
-                  <div class="col-sm-1">
-                  <a class="product-thumb" href="javascript:void(0)" @click="postModal(project.id)">
-                      <img :src="project.logo_image" alt="Logo">
-                  </a>
-                </div>
+                    <div class="col-sm-1 pl-2 pr-2">
+                        <a class="product-thumb" href="javascript:void(0)" @click="postModal(project.id)">
+                            <img :src="project.logo_image" alt="Logo">
+                        </a>
+                    </div>
 
-                  <div class="col-sm-3">
-                    <div class="row">
-                       <div class="col-sm-5" style="padding-left:0"><h6>{{project.title}}</h6> </div>
-                       <div class="col-sm-7"><span class="badge badge-sm badge-default">{{project.category}}</span>
-                       </div>
-                     </div>
-                     <div class="row">
-                    <span style="font-size:13px"> {{project.description_short}}</span>
-                  </div>
-                  </div>
-                    <div class="col-sm-1">
-
-                        <h4 class="product-price" v-if="project.type===0">
+                    <div class="col-sm-3">
+                        <div class="row">
+                            <div class="col-sm-5" style="padding-left:0"><h6>{{project.title}}</h6></div>
+                            <div class="col-sm-7"><span class="badge badge-sm badge-default">{{project.category}}</span>
+                            </div>
+                        </div>
+                        <div class="row product-short-descr">
+                            {{project.description_short}}
+                        </div>
+                    </div>
+                    <div class="col-sm-1 pl-0">
+                        <p class="product-price" v-if="project.type===0">
                             Pre-ICO
-                        </h4>
-                        <h4 class="product-price" v-else>
+                        </p>
+                        <p class="product-price" v-else>
                             ICO
-                        </h4>
+                        </p>
                     </div>
                     <div class="col-sm-2">
-
-                        <h4 class="product-price">
+                        <p class="product-price">
                             {{timeCounter(project.start_datetime, project.end_datetime)}}
-                        </h4>
+                        </p>
                     </div>
 
                     <div class="col-sm-2">
-                        <h4 class="product-price">
-                       {{project.maximum_goal}} {{project.coin_unit}}
-                        </h4>
+                        <p class="product-price">
+                            {{project.maximum_goal}} {{project.coin_unit}}
+                        </p>
+                    </div>
+                    <div class="col-sm-1 pl-2">
+                        <p class="product-price">
+                            <span>{{project.equality_on_offer}}%</span>
+                        </p>
                     </div>
                     <div class="col-sm-2">
-                        <h4 class="product-price">
-                            <span >{{project.equality_on_offer}}%</span>
-                        </h4>
-                    </div>
-                    <div class="col-sm-1">
                     <span class="text-bold text-primary ml-2"
                           v-if="project.rating">{{project.rating}}/100</span>
-                    <span class="text-bold text-primary ml-2" v-else>No Score</span>
-                  </div>
+                        <span class="text-bold text-primary ml-2" v-else>No Score</span>
+                    </div>
                 </div>
-
 
 
             </div>
         </div>
-        </div>
+    </div>
     </div>
 </template>
 

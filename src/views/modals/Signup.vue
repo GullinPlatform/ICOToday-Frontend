@@ -127,7 +127,7 @@
             this.team_name && this.password) && this.type === 0) {
           this.error_msg = 'Please make sure filled all required fields'
         }
-        else if (!(this.email && this.team_name && this.password) && this.type === 1) {
+        else if (!(this.email && this.password) && this.type === 1) {
           this.error_msg = 'Please make sure filled all required fields'
         }
         else if (!this.check) {

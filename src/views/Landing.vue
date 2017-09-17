@@ -50,7 +50,7 @@
                         <a class="product-thumb" href="javascript:void(0)" @click="postModal(project.id)">
                             <img :src="project.promote_image" alt="Logo">
                         </a>
-                        <h3 class="product-title text-bold text-left mb-0">
+                        <h3 class="product-title text-bold text-left mb-0 mt-2">
                             {{project.title}}
                             <span class="badge badge-primary" v-if="project.rating">{{project.rating}}/100</span>
                             <span class="badge badge-primary" v-else>No Score</span>

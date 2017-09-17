@@ -4,7 +4,7 @@
             <div class="site-branding">
                 <div class="inner">
                     <!-- Site Logo-->
-                    <router-link :to="{name:'landing'}" >
+                    <router-link :to="{name:'landing'}">
                         <img src="../../../static/img/logo/icotoday.png" width="180" class="m-3 ml-4"/>
                     </router-link>
                 </div>
@@ -39,11 +39,10 @@
             <div class="toolbar">
                 <div class="inner">
                     <div class="tools">
-                        <div class="account"><a href="account-orders.html"></a><i class="fa fa-bell-o"></i>
+                        <div class="account" v-if="login_status">
+                            <a href="account-orders.html"></a><i class="fa fa-bell-o"></i>
                             <ul class="toolbar-dropdown">
                                 <li class="sub-menu-user">
-                                    <div class="user-ava"><img src="img/account/user-ava-sm.jpg" alt="Daniel Adams">
-                                    </div>
                                     <div class="user-info">
                                         <h6 class="user-name">Daniel Adams</h6><span class="text-xs text-muted">290 Reward points</span>
                                     </div>
@@ -124,6 +123,18 @@
       LoginModal,
       SignupModal
     },
+    methods: {
+      logout () {
+        this.$store.dispatch('logout')
+      },
+      getNotifications () {
+        if (this.login_status)
+          this.$store.dispatch('getNotifications')
+      },
+      readNotification (pk) {
+        this.$store.dispatch('readNotification', pk)
+      },
+    },
     computed: {
       me () {
         return this.$store.getters.self
@@ -135,23 +146,11 @@
         return this.$store.getters.login_status
       },
     },
-    methods: {
-      logout () {
-        this.$store.dispatch('logout')
-      },
-      getNotifications () {
-        this.$store.dispatch('getNotifications')
-      },
-      readNotification (pk) {
-        this.$store.dispatch('readNotification', pk)
-      },
-    },
     mounted () {
       this.getNotifications()
 
       this.interval = setInterval(function () {
         this.getNotifications()
-        this.getPendingFriends()
       }.bind(this), 30000)
     },
     beforeDestroy () {
