@@ -3,7 +3,7 @@
 
     <div v-if="loaded">
       <div class="product-column product-list">
-        <div class="product-info pt-2 pb-2">
+        <div class="product-info">
           <div class="row">
             <div class="col-sm-4">
               Company
@@ -33,7 +33,7 @@
              @mouseover="subscribe_show=project.id" @mouseleave="subscribe_show=false">
 
 
-            <div class="product-info pt-2 pb-2">
+            <div class="product-info">
                 <h3 class="product-title" @click="postModal(project.id)">
 
 
