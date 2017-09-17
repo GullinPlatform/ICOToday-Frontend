@@ -75,11 +75,11 @@
                 </div>
                 <div class="modal-footer">
                     <small>Already Have Account？
-                        <a href="" data-toggle="modal" data-target="#login-modal" data-dismiss="modal" class="signup">Login Here！</a>
+                        <a href="javascript:void(0)" data-toggle="modal" data-target="#login-modal" data-dismiss="modal" class="signup">Login Here！</a>
                     </small>
                     <br/>
                     <small>
-                        <a href="">Forgot Password?</a>
+                        <router-link :to="{name:'forget_password'}" data-dismiss="modal" >Forget Password?</router-link>
                     </small>
                 </div>
             </div>

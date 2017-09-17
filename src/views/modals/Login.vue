@@ -22,11 +22,11 @@
         </div>
         <div class="modal-footer">
           <small>Do not have an account yet?
-            <a href="" data-toggle="modal" data-target="#signup-modal" data-dismiss="modal" class="signup">Register Now！</a>
+            <a href="javascript:void(0)" data-toggle="modal" data-target="#signup-modal" data-dismiss="modal" class="signup">Register Now！</a>
           </small>
           <br />
           <small>
-            <a href="#">Forget Password?</a>
+            <router-link :to="{name:'forget_password'}" data-dismiss="modal" >Forget Password?</router-link>
           </small>
         </div>
       </div>
