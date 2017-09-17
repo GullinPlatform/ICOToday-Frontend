@@ -175,6 +175,7 @@
 </template>
 <script>
   import PostList from 'components/PostList'
+  import _ from 'lodash'
 
   export default {
     name: 'Landing',
@@ -207,7 +208,6 @@
       }
     },
     methods: {
-      /* global _:true */
       loadMore () {
         this.page += 1
         const formData = {

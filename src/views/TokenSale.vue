@@ -229,6 +229,8 @@
 
 
 <script>
+  import Chart from 'chart.js'
+
   export default {
     name: 'TokenSale',
     head: {
@@ -245,7 +247,6 @@
     },
     methods: {
       whiteListSubmit (e) {
-        console.log('123')
         e.preventDefault()
         if (!this.login_status) {
           this.$store.dispatch('whiteListEmail', this.email)
@@ -265,7 +266,7 @@
       },
     },
     mounted () {
-      /* global particlesJS:true Chart:true */
+      /* global particlesJS:true */
       // Pie Chart
       const ctx = document.getElementById('pie_chart').getContext('2d')
       const pie_chart = new Chart(ctx, {
