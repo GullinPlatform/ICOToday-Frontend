@@ -6011,7 +6011,7 @@ video {
     vertical-align: middle;
 }
 
-.toolbar .search, .toolbar .account, .toolbar .cart {
+.toolbar .search, .toolbar .account, .toolbar .notification {
     display: inline-block;
     position: relative;
     width: 44px;
@@ -6028,11 +6028,11 @@ video {
     text-decoration: none;
 }
 
-.toolbar .search > i, .toolbar .account > i, .toolbar .cart > i {
+.toolbar .search > i, .toolbar .account > i, .toolbar .notification > i {
     line-height: 39px;
 }
 
-.toolbar .search > a, .toolbar .account > a, .toolbar .cart > a {
+.toolbar .search > a, .toolbar .account > a, .toolbar .notification > a {
     display: block;
     position: absolute;
     top: 0;
@@ -6042,11 +6042,11 @@ video {
     border-radius: 50%;
 }
 
-.toolbar .search:hover, .toolbar .account:hover, .toolbar .cart:hover {
+.toolbar .search:hover, .toolbar .account:hover, .toolbar .notification:hover {
     background-color: #f5f5f5;
 }
 
-.toolbar .account > a::after, .toolbar .cart > a::after {
+.toolbar .account > a::after, .toolbar .notification > a::after {
     display: block;
     position: absolute;
     top: 100%;
@@ -6060,39 +6060,39 @@ video {
     line-height: 40px;
 }
 
-.toolbar .cart {
+.toolbar .notification {
     width: auto;
     padding: 0 16px;
     border-radius: 22px;
 }
 
-.toolbar .cart > a {
+.toolbar .notification > a {
     border-radius: 22px;
 }
 
-.toolbar .cart > .count, .toolbar .cart > .subtotal {
+.toolbar .notification > .count, .toolbar .notification > .subtotal {
     display: inline-block;
     margin-top: 2px;
     font-size: 14px;
     vertical-align: middle;
 }
 
-.toolbar .cart > .count {
+.toolbar .notification > .count {
     margin-left: 5px;
 }
 
-.toolbar .cart > .subtotal {
+.toolbar .notification > .subtotal {
     margin-left: 11px;
     padding: 1px 0 1px 12px;
     border-left: 1px solid #e1e7ec;
 }
 
 @media (max-width: 1200px) {
-    .toolbar .cart {
+    .toolbar .notification {
         padding: 0 14px;
     }
 
-    .toolbar .cart > .subtotal {
+    .toolbar .notification > .subtotal {
         display: none;
     }
 }
@@ -6114,40 +6114,39 @@ video {
     }
 }
 
-.toolbar .cart > .toolbar-dropdown {
+.toolbar .notification > .toolbar-dropdown {
     right: 0;
     left: auto;
-    width: 260px;
+    width: 300px;
     padding-right: 18px !important;
     padding-left: 18px !important;
 }
 
-.toolbar .cart > .toolbar-dropdown > .toolbar-dropdown-group {
+.toolbar .notification > .toolbar-dropdown > .toolbar-dropdown-group {
     display: table;
     width: 100%;
     padding-top: 9px;
     padding-bottom: 9px;
-    border-top: 1px solid #e1e7ec;
 }
 
-.toolbar .cart > .toolbar-dropdown > .toolbar-dropdown-group:last-child {
+.toolbar .notification > .toolbar-dropdown > .toolbar-dropdown-group:last-child {
     border-top: 0;
 }
 
-.toolbar .cart > .toolbar-dropdown > .toolbar-dropdown-group > .column {
+.toolbar .notification > .toolbar-dropdown > .toolbar-dropdown-group > .column {
     display: table-cell;
     vertical-align: top;
 }
 
-.toolbar .cart > .toolbar-dropdown > .toolbar-dropdown-group > .column:first-child {
+.toolbar .notification > .toolbar-dropdown > .toolbar-dropdown-group > .column:first-child {
     padding-right: 6px;
 }
 
-.toolbar .cart > .toolbar-dropdown > .toolbar-dropdown-group > .column:last-child {
+.toolbar .notification > .toolbar-dropdown > .toolbar-dropdown-group > .column:last-child {
     padding-left: 6px;
 }
 
-.toolbar .cart > .toolbar-dropdown > .toolbar-dropdown-group .btn {
+.toolbar .notification > .toolbar-dropdown > .toolbar-dropdown-group .btn {
     margin: 0;
 }
 
@@ -6180,21 +6179,19 @@ video {
     width: 100%;
 }
 
-.dropdown-product-item > .dropdown-product-remove {
+.dropdown-product-remove {
     display: block;
     position: absolute;
-    top: 12px;
+    bottom: 12px;
     right: 0;
-    color: #ff5252;
     font-size: 13px;
-    line-height: 1;
     cursor: pointer;
 }
 
-.dropdown-product-item > .dropdown-product-info {
-    padding-right: 15px;
-    padding-left: 12px;
-}
+/*.dropdown-product-item > .dropdown-product-info {*/
+    /*padding-right: 15px;*/
+    /*padding-left: 0;*/
+/*}*/
 
 .dropdown-product-item .dropdown-product-title {
     display: block;
@@ -6216,7 +6213,7 @@ video {
 }
 
 .toolbar .account:hover > .toolbar-dropdown,
-.toolbar .cart:hover > .toolbar-dropdown {
+.toolbar .notification:hover > .toolbar-dropdown {
     display: block;
     -webkit-animation: submenu-show 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     animation: submenu-show 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);

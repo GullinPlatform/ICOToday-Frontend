@@ -39,20 +39,28 @@
             <div class="toolbar">
                 <div class="inner">
                     <div class="tools">
-                        <div class="account" v-if="login_status">
-                            <a href="account-orders.html"></a><i class="fa fa-bell-o"></i>
-                            <ul class="toolbar-dropdown">
-                                <li class="sub-menu-user">
-                                    <div class="user-info">
-                                        <h6 class="user-name">Daniel Adams</h6><span class="text-xs text-muted">290 Reward points</span>
+                        <div class="notification" v-if="login_status"><a href="javascript:void(0)"></a>
+                            <i class="icon-bell"></i>
+                            <span class="count" v-if="notifications.length">{{notifications.length}}</span>
+                            <div class="toolbar-dropdown" v-if="notifications.length">
+                                <div class="toolbar-dropdown-group">
+                                    <a class="btn btn-sm btn-block btn-secondary">Mark all as read</a>
+                                </div>
+                                <div class="dropdown-product-item">
+                                    <div class="dropdown-product-info">
+                                        <a class="dropdown-product-title" href="shop-single.html">Unionbay Park</a>
+                                        <span class="dropdown-product-details">Time</span>
+                                        <span class="dropdown-product-remove float-right">
+                                            <i class="icon-cross"></i>
+                                        </span>
                                     </div>
-                                </li>
-                                <li><a href="account-profile.html">My Profile</a></li>
-                                <li><a href="account-orders.html">Orders List</a></li>
-                                <li><a href="account-wishlist.html">Wishlist</a></li>
-                                <li class="sub-menu-separator"></li>
-                                <li><a href="#"> <i class="icon-unlock"></i>Logout</a></li>
-                            </ul>
+                                </div>
+                            </div>
+                            <div class="toolbar-dropdown" v-else>
+                                <div class="dropdown-product-item  text-center">
+                                    <h3 class="dropdown-product-title"><i class="fa fa-bell-slash-o"></i> Nothing Here, yet</h3>
+                                </div>
+                            </div>
                         </div>
                         <div class="account" v-if="login_status">
                             <img :src="me.info.avatar" class="rounded-circle">
@@ -60,7 +68,7 @@
                             <ul class="toolbar-dropdown">
                                 <li>
                                     <router-link :to="{name:'me_new_project'}" class="dropdown-item" v-if="me.type===0">
-                                        <i class="fa fa-chevron-up" aria-hidden="true"></i>Submit New ICO
+                                        <i class="icon-plus" aria-hidden="true"></i>Submit New ICO
                                     </router-link>
                                 </li>
                                 <li>
@@ -75,7 +83,7 @@
                                 </li>
                                 <li>
                                     <router-link :to="{name:'me_team'}" class="dropdown-item" v-if="me.type===0">
-                                        <i class="fa fa-user" aria-hidden="true"></i> My Team
+                                        <i class="glyphicon glyphicon-user" aria-hidden="true"></i> My Team
                                     </router-link>
                                 </li>
                                 <li>
@@ -145,6 +153,9 @@
       login_status () {
         return this.$store.getters.login_status
       },
+      notifications () {
+        return this.$store.getters.notifications
+      }
     },
     mounted () {
       this.getNotifications()

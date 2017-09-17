@@ -40,6 +40,20 @@
                         </button>
                     </div>
                 </div>
+                <h6 class="text-muted text-normal text-uppercase ">Auth</h6>
+                <hr class="mb-3 mt-2">
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" :value="self.email" disabled>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-sm-4" v-if="!avatar_change">
+                        <button class="btn btn-secondary mr-3" @click="avatar_change = true">Change</button>
+                    </div>
+                </div>
                 <h6 class="text-muted text-normal text-uppercase ">Basic Info</h6>
                 <hr class="mb-3 mt-2">
                 <div class="form-group row">
