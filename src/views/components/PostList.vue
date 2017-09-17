@@ -1,23 +1,62 @@
 <template>
+
+
     <div v-if="loaded">
+      <div class="product-column product-list">
+        <div class="product-info pt-2 pb-2">
+          <div class="row">
+            <div class="col-sm-4">
+              Company
+            </div>
+            <div class="col-sm-1">
+              Type
+            </div>
+            <div class="col-sm-2">
+              Time
+            </div>
+
+            <div class="col-sm-2">
+             Hard Cap
+            </div>
+            <div class="col-sm-2">
+              Token for sale
+            </div>
+            <div class="col-sm-1">
+              Score
+            </div>
+
+          </div>
+        </div>
+      </div>
         <div class="product-card product-list"
              v-for="project in posts"
              @mouseover="subscribe_show=project.id" @mouseleave="subscribe_show=false">
-            <a class="product-thumb" href="javascript:void(0)" @click="postModal(project.id)">
-                <img :src="project.logo_image" alt="Logo">
-            </a>
+
+
             <div class="product-info pt-2 pb-2">
                 <h3 class="product-title" @click="postModal(project.id)">
-                    {{project.title}}
-                    <span class="text-muted text-sm"> {{project.description_short}}</span>
-                    <span class="float-right text-bold text-primary ml-2"
-                          v-if="project.rating">{{project.rating}}/100</span>
-                    <span class="float-right text-bold text-primary ml-2" v-else>No Score</span>
-                </h3>
 
+
+                </h3>
                 <div class="row" @click="postModal(project.id)">
-                    <div class="col-sm-2">
-                        Type
+                  <div class="col-sm-1">
+                  <a class="product-thumb" href="javascript:void(0)" @click="postModal(project.id)">
+                      <img :src="project.logo_image" alt="Logo">
+                  </a>
+                </div>
+
+                  <div class="col-sm-3">
+                    <div class="row">
+                       <div class="col-sm-5" style="padding-left:0"><h6>{{project.title}}</h6> </div>
+                       <div class="col-sm-7"><span class="badge badge-sm badge-default">{{project.category}}</span>
+                       </div>
+                     </div>
+                     <div class="row">
+                    <span style="font-size:13px"> {{project.description_short}}</span>
+                  </div>
+                  </div>
+                    <div class="col-sm-1">
+
                         <h4 class="product-price" v-if="project.type===0">
                             Pre-ICO
                         </h4>
@@ -25,38 +64,36 @@
                             ICO
                         </h4>
                     </div>
-                    <div class="col-sm-3">
-                        Time
+                    <div class="col-sm-2">
+
                         <h4 class="product-price">
                             {{timeCounter(project.start_datetime, project.end_datetime)}}
                         </h4>
                     </div>
-                    <div class="col-sm-4">
-                        Soft Cap / Hard Cap
+
+                    <div class="col-sm-2">
                         <h4 class="product-price">
-                            {{project.minimum_goal}} / {{project.maximum_goal}} {{project.coin_unit}}
+                       {{project.maximum_goal}} {{project.coin_unit}}
                         </h4>
                     </div>
-                    <div class="col-sm-3">
-                        Tokens for Sale
+                    <div class="col-sm-2">
                         <h4 class="product-price">
-                            {{project.equality_on_offer}}%
+                            <span >{{project.equality_on_offer}}%</span>
                         </h4>
                     </div>
+                    <div class="col-sm-1">
+                    <span class="text-bold text-primary ml-2"
+                          v-if="project.rating">{{project.rating}}/100</span>
+                    <span class="text-bold text-primary ml-2" v-else>No Score</span>
+                  </div>
                 </div>
-                <span class="badge badge-sm badge-default">{{project.category}}</span>
-                <a href="javascript:void(0)">
-                    <span class="badge badge-sm badge-outline-danger float-right" @click="markPost(project.id, true)" v-if="!inSubscribeList(project.id)">
-                        <i class="fa fa-star-o"></i> SUBSCRIBE
-                   </span>
-                    <span class="badge badge-sm badge-danger float-right" @click="markPost(project.id, false)" v-else>
-                        <span ><i class="fa fa-check"></i> SUBSCRIBED</span>
-                   </span>
-                </a>
+
+
+
             </div>
         </div>
+        </div>
     </div>
-
 </template>
 
 <script>

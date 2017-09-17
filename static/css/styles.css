@@ -6666,21 +6666,32 @@ video {
 .user-info-wrapper + .list-group .list-group-item:first-child {
     border-radius: 0;
 }
-
-.product-card {
+.product-column {
     display: block;
     position: relative;
     width: 100%;
     padding: 18px;
     border: 1px solid #e1e7ec;
     border-radius: 7px;
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px;
+    background-color: #ffffff;
+    margin-bottom: -1px;
+}
+.product-card {
+    display: block;
+    position: relative;
+    width: 100%;
+    padding: 18px;
+    border: 1px solid #e1e7ec;
+    border-radius: 2px;
     background-color: #ffffff;
 }
 
 .product-card .product-thumb {
     display: block;
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
 }
 
 .product-card .product-thumb > img {
@@ -6708,8 +6719,8 @@ video {
 .product-card .product-price {
     margin-bottom: 10px;
     color: #606975;
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 14px;
+    font-weight: 400;
     text-align: center;
 }
 
@@ -6773,8 +6784,7 @@ video {
     .product-card.product-list .product-thumb {
         position: relative;
         width: 100px;
-        padding: 5px;
-        border-right: 1px solid #e1e7ec;
+        padding: 0px;
     }
 
     .product-card.product-list .product-info {
@@ -6803,7 +6813,7 @@ video {
     }
 
     .product-card.product-list .product-title {
-        font-size: 18px;
+        font-size: 16px;
     }
 }
 
@@ -7733,7 +7743,33 @@ video {
     margin-bottom: 30px !important;
     color: #fff;
 }
+.g-lockup{
+  display: table;
+  table-layout: fixed;
 
+}
+.ico-text{
+  margin-left: 49px;
+  width: 100%;
+  vertical-align: middle;
+  display: table-cell;
+
+}
+.ico-logo{
+  box-shadow: 0 1px 4px rgba(0,0,0,.05);
+  width: 37px;
+  height: 37px;
+  line-height: 35px;
+  vertical-align: middle;
+  border-radius: 4px;
+  overflow: hidden;
+  border-bottom: 1px solid #eee;
+  border-right: 1px solid #e9eaec;
+  border-left: 1px solid #e9eaec;
+  border-top: 1px solid #f7f8f9;
+  margin-right: 12px;
+
+}
 .post-header {
     display: -ms-flexbox;
     display: flex;
