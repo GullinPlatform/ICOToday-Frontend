@@ -53,6 +53,16 @@ export default {
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
+  sendTwoFactorEmail () {
+    return Vue.http.post(API_ROOT + 'account/2factor/', {}, {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
+      .then((response) => Promise.resolve(response.data))
+      .catch((error) => Promise.reject(error))
+  },
+  verifyTwoFactorToken (token) {
+    return Vue.http.get(API_ROOT + 'account/2factor/', token, {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
+      .then((response) => Promise.resolve(response.data))
+      .catch((error) => Promise.reject(error))
+  },
   forgetPasswordSendEmail (email) {
     return Vue.http.post(API_ROOT + 'account/forget/', {'email': email})
       .then((response) => Promise.resolve(response.data))

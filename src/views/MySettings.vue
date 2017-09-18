@@ -50,8 +50,8 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Password</label>
-                    <div class="col-sm-4" v-if="!avatar_change">
-                        <button class="btn btn-secondary mr-3" @click="avatar_change = true">Change</button>
+                    <div class="col-sm-4">
+                        <button class="btn btn-secondary mr-3" @click="changePassword()">Change</button>
                     </div>
                 </div>
                 <h6 class="text-muted text-normal text-uppercase ">Basic Info</h6>
@@ -192,6 +192,9 @@
           .catch((error) => {
             this.message = error.body.detail
           })
+      },
+      changePassword() {
+        this.$store.dispatch('sendTwoFactorEmail')
       }
     },
     computed: {

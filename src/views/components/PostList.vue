@@ -49,12 +49,12 @@
                         </div>
                     </div>
                     <div class="col-sm-1 pl-0">
-                        <p class="product-price" v-if="project.type===0">
+                        <span class="product-price" v-if="project.type===0">
                             Pre-ICO
-                        </p>
-                        <p class="product-price" v-else>
+                        </span>
+                        <span class="product-price" v-else>
                             ICO
-                        </p>
+                        </span>
                     </div>
                     <div class="col-sm-2">
                         <p class="product-price">

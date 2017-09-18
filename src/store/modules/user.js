@@ -248,6 +248,24 @@ const actions = {
         return Promise.reject(error)
       })
   },
+  sendTwoFactorEmail ({commit}) {
+    return userApi.sendTwoFactorEmail()
+      .then(() => {
+        return Promise.resolve()
+      })
+      .catch((error) => {
+        return Promise.reject(error)
+      })
+  },
+  verifyTwoFactorToken ({commit}, token) {
+    return userApi.verifyTwoFactorToken(token)
+      .then(() => {
+        return Promise.resolve()
+      })
+      .catch((error) => {
+        return Promise.reject(error)
+      })
+  },
 
   whiteListEmail ({commit}, email) {
     commit(types.WHITE_LIST_EMAIL, email)
