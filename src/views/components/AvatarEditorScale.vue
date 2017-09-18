@@ -1,12 +1,12 @@
 <template>
-    <input
-            v-model="scale"
-            type="range"
-            :min="min"
-            :max="max"
-            :step="step"
-            :style="{ width:width +'px'}"
-    />
+  <input
+    v-model="scale"
+    type="range"
+    :min="min"
+    :max="max"
+    :step="step"
+    :style="{ width:width +'px'}"
+  />
 </template>
 <script>
   export default {

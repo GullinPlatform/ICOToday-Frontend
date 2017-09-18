@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="navbar-padding">
     <header class="navbar navbar-stuck">
       <!-- Main Navigation-->
       <nav class="site-menu">
@@ -8,7 +8,7 @@
             <!-- Site Logo-->
             <div class="logo">
               <router-link :to="{name:'landing'}">
-                <img src="../../../static/img/logo/icotoday.png" width="190"/>
+                <img src="../../../static/img/logo/icotoday.png" width="185"/>
               </router-link>
             </div>
           </div>
@@ -131,6 +131,7 @@
     </div>
   </div>
 </template>
+
 <script>
   import SignupModal from 'modals/Signup'
   import LoginModal from 'modals/Login'
@@ -151,7 +152,7 @@
       },
       readNotification (pk) {
         this.$store.dispatch('readNotification', pk)
-      },
+      }
     },
     computed: {
       me () {
@@ -169,7 +170,6 @@
     },
     mounted () {
       this.getNotifications()
-
       this.interval = setInterval(function () {
         this.getNotifications()
       }.bind(this), 30000)
@@ -185,5 +185,9 @@
   .logo {
     display: table-cell;
     vertical-align: middle;
+  }
+
+  .navbar-padding {
+    padding-bottom: 84px;
   }
 </style>

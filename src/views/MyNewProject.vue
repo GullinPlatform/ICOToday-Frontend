@@ -1,240 +1,240 @@
 <template>
-    <!-- Page Content-->
-    <div class="container padding-bottom-3x mb-2 mt-5">
-        <div class="row">
-            <my-header></my-header>
-            <!--main content-->
-            <div class="col-md-8" v-if="me.is_verified">
-                <h6 class="text-muted">
-                    <i class="fa fa-lightbulb-o"></i> Tips: The more information you provide, the faster your ICO gets approved
-                </h6>
-                <h6 class="text-muted text-normal text-uppercase ">Basic info</h6>
-                <hr class="mb-3 mt-2">
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Title <span class="text-danger">*</span></label>
-                    <div class="col-sm-10">
-                        <input class="form-control" v-model="title" type="text">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Icon <span class="text-danger">*</span></label>
-                    <div class="col-sm-10">
-                        <div class="dropzone-area" v-if="!icon_loaded">
-                            <div class="dropzone-text">
-                                <i class="fa fa-cloud-upload"> </i>
-                                <span>Drag file here or click to upload file</span>
-                            </div>
-                            <input type="file" @change="onIconChange">
-                        </div>
+  <!-- Page Content-->
+  <div class="container container-padding">
+    <div class="row">
+      <my-header></my-header>
+      <!--main content-->
+      <div class="col-md-8" v-if="me.is_verified">
+        <h6 class="text-muted">
+          <i class="fa fa-lightbulb-o"></i> Tips: The more information you provide, the faster your ICO gets approved
+        </h6>
+        <h6 class="text-muted text-normal text-uppercase ">Basic info</h6>
+        <hr class="mb-3 mt-2">
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Title <span class="text-danger">*</span></label>
+          <div class="col-sm-10">
+            <input class="form-control" v-model="title" type="text">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Icon <span class="text-danger">*</span></label>
+          <div class="col-sm-10">
+            <div class="dropzone-area" v-if="!icon_loaded">
+              <div class="dropzone-text">
+                <i class="fa fa-cloud-upload"> </i>
+                <span>Drag file here or click to upload file</span>
+              </div>
+              <input type="file" @change="onIconChange">
+            </div>
 
-                        <div v-else>
-                            <button type="button" class="mb-1 btn btn-secondary">{{icon.name}}</button>
-                            <button type="button" class="mb-1 btn btn-secondary" @click="removeFile()">
+            <div v-else>
+              <button type="button" class="mb-1 btn btn-secondary">{{icon.name}}</button>
+              <button type="button" class="mb-1 btn btn-secondary" @click="removeFile()">
                                 <span>
                                     <i class="fa fa-times"></i> Remove
                                 </span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Category <span class="text-danger">*</span></label>
-                    <div class="col-sm-10">
-                        <select class="form-control" v-model="category">
-                            <option value="" selected>-- Choose Category --</option>
-                            <option value="Platform">Platform</option>
-                            <option value="Cryptocurrency">Cryptocurrency</option>
-                            <option value="Businessservices">Businessservices</option>
-                            <option value="Internet">Internet</option>
-                            <option value="Investment">Investment</option>
-                            <option value="Entertainment">Entertainment</option>
-                            <option value="Banking">Banking</option>
-                            <option value="Software">Software</option>
-                            <option value="Realestate">Realestate</option>
-                            <option value="Casino&Gambling">Casino&Gambling</option>
-                            <option value="Communication">Communication</option>
-                            <option value="Tourism">Tourism</option>
-                            <option value="Media">Media</option>
-                            <option value="Health">Health</option>
-                            <option value="Retail">Retail</option>
-                            <option value="Sports">Sports</option>
-                            <option value="Infrastructure">Infrastructure</option>
-                            <option value="Energy">Energy</option>
-                            <option value="Charity">Charity</option>
-                            <option value="Education">Education</option>
-                            <option value="Manufacturing">Manufacturing</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Short Description <span class="text-danger">*</span></label>
-                    <div class="col-sm-10">
-                        <input class="form-control" v-model="description_short"
-                               placeholder="Short description in one sentence (100 characters).">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Full  Description<span class="text-danger">*</span></label>
-                    <div class="col-sm-10">
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Category <span class="text-danger">*</span></label>
+          <div class="col-sm-10">
+            <select class="form-control" v-model="category">
+              <option value="" selected>-- Choose Category --</option>
+              <option value="Platform">Platform</option>
+              <option value="Cryptocurrency">Cryptocurrency</option>
+              <option value="Businessservices">Businessservices</option>
+              <option value="Internet">Internet</option>
+              <option value="Investment">Investment</option>
+              <option value="Entertainment">Entertainment</option>
+              <option value="Banking">Banking</option>
+              <option value="Software">Software</option>
+              <option value="Realestate">Realestate</option>
+              <option value="Casino&Gambling">Casino&Gambling</option>
+              <option value="Communication">Communication</option>
+              <option value="Tourism">Tourism</option>
+              <option value="Media">Media</option>
+              <option value="Health">Health</option>
+              <option value="Retail">Retail</option>
+              <option value="Sports">Sports</option>
+              <option value="Infrastructure">Infrastructure</option>
+              <option value="Energy">Energy</option>
+              <option value="Charity">Charity</option>
+              <option value="Education">Education</option>
+              <option value="Manufacturing">Manufacturing</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Short Description <span class="text-danger">*</span></label>
+          <div class="col-sm-10">
+            <input class="form-control" v-model="description_short"
+                   placeholder="Short description in one sentence (100 characters).">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Full  Description<span class="text-danger">*</span></label>
+          <div class="col-sm-10">
                         <textarea class="form-control" v-model="description_full"
                                   placeholder="( Markdown Support Enabled )" rows="10"></textarea>
-                    </div>
-                </div>
-                <h6 class="text-muted text-normal text-uppercase ">ICO Detail</h6>
-                <hr class="mb-3 mt-2">
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">ICO Type<span class="text-danger">*</span></label>
-                    <div class="col-sm-10">
-                        <select class="form-control" v-model="type">
-                            <option value="" selected>-- Choose Type --</option>
-                            <option value="0">Pre-ICO</option>
-                            <option value="1">ICO</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Token Name </label>
-                    <div class="col-sm-10">
-                        <input class="form-control" v-model="coin_name" placeholder="Token Name" type="text">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">ICO Goals </label>
-                    <div class="col-sm-3">
-                        <input class="form-control" placeholder="Soft Cap" v-model="minimum_goal"
-                               type="number">
-                    </div>
-                    <div class="col-sm-3">
-                        <input class="form-control" placeholder="Hard Cap" v-model="maximum_goal"
-                               type="number">
-                    </div>
-                    <div class="col-sm-4">
-                        <select class="form-control" v-model="coin_unit">
-                            <option value="" selected>-- Choose Unit --</option>
-                            <option value="BTC">BTC - Bitcoin</option>
-                            <option value="ETH">ETH - Ethereum</option>
-                            <option value="USD">USD - US Dollar</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Start Date </label>
-                    <div class="col-sm-10">
-                        <vue-datetime-picker class="vue-start-picker" id="start-picker"
-                                             ref="startPicker"
-                                             placeholder="Start Time"
-                                             v-model="start_datetime"
-                                             @change="onStartDatetimeChanged">
-                        </vue-datetime-picker>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">End Date </label>
-                    <div class="col-sm-10">
-                        <vue-datetime-picker class="vue-end-picker" id="end-picker"
-                                             ref="endPicker"
-                                             placeholder="End Time"
-                                             v-model="end_datetime"
-                                             @change="onEndDatetimeChanged">
-                        </vue-datetime-picker>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Ratio </label>
-                    <div class="col-sm-7">
-                        <input class="form-control" placeholder="Ex: 5000" v-model="ratio"
-                               type="number">
-                    </div>
-                    <div class="col-sm-3"><p>{{coin_name}} = 1 {{coin_unit}}</p></div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">% of Token for Sale</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" v-model="equality_on_offer" placeholder="Ex: 30"
-                               type="text">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Accept</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" v-model="accept" placeholder="Ex: ETH, BTC"
-                               type="text">
-                    </div>
-                </div>
-                <h6 class="text-muted text-normal text-uppercase ">Supplement</h6>
-                <hr class="mb-3 mt-2">
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">White Paper </label>
-                    <div class="col-sm-10">
-                        <input class="form-control" v-model="white_paper"
-                               placeholder="https://example.com/white-paper.pdf">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Video Link </label>
-                    <div class="col-sm-10">
-                        <input class="form-control" v-model="video_link" placeholder="Youtube Video Link">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Website </label>
-                    <div class="col-sm-10">
-                        <input class="form-control" v-model="website"
-                               placeholder="https://example.com">
-                    </div>
-                </div>
-                <h6 class="text-muted text-normal text-uppercase ">Social Media</h6>
-                <hr class="mb-3 mt-2">
-
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Medium</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" v-model="medium" type="text">
-                    </div>
-
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Twitter</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" v-model="twitter" type="text">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Slack</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" v-model="slack" type="text">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Telegram</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" v-model="telegram" type="text">
-                    </div>
-                </div>
-                <div class="form-group row justify-content-md-center">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-10">
-                        <button type="button" @click="postNewPost()" class="mb-1 btn btn-block btn-primary" :disabled="uploading">
-                            SUBMIT<span v-if="uploading">ING</span>
-                        </button>
-                        <p class="text-danger">{{error_message}}</p>
-                        <h6 class="text-muted">
-                            <i class="fa fa-lightbulb-o"></i> Tips: The more information you provide, the faster your ICO gets approved
-                        </h6>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-8 text-center" v-else>
-                <h4 class="mt-3">
-                    You have to verify your email first
-                </h4>
-                <a href="javascript:void(0)" @click="" class="btn btn-primary mt-2">Resend Email</a>
-            </div>
+          </div>
         </div>
+        <h6 class="text-muted text-normal text-uppercase ">ICO Detail</h6>
+        <hr class="mb-3 mt-2">
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">ICO Type<span class="text-danger">*</span></label>
+          <div class="col-sm-10">
+            <select class="form-control" v-model="type">
+              <option value="" selected>-- Choose Type --</option>
+              <option value="0">Pre-ICO</option>
+              <option value="1">ICO</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Token Name </label>
+          <div class="col-sm-10">
+            <input class="form-control" v-model="coin_name" placeholder="Token Name" type="text">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">ICO Goals </label>
+          <div class="col-sm-3">
+            <input class="form-control" placeholder="Soft Cap" v-model="minimum_goal"
+                   type="number">
+          </div>
+          <div class="col-sm-3">
+            <input class="form-control" placeholder="Hard Cap" v-model="maximum_goal"
+                   type="number">
+          </div>
+          <div class="col-sm-4">
+            <select class="form-control" v-model="coin_unit">
+              <option value="" selected>-- Choose Unit --</option>
+              <option value="BTC">BTC - Bitcoin</option>
+              <option value="ETH">ETH - Ethereum</option>
+              <option value="USD">USD - US Dollar</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Start Date </label>
+          <div class="col-sm-10">
+            <vue-datetime-picker class="vue-start-picker" id="start-picker"
+                                 ref="startPicker"
+                                 placeholder="Start Time"
+                                 v-model="start_datetime"
+                                 @change="onStartDatetimeChanged">
+            </vue-datetime-picker>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">End Date </label>
+          <div class="col-sm-10">
+            <vue-datetime-picker class="vue-end-picker" id="end-picker"
+                                 ref="endPicker"
+                                 placeholder="End Time"
+                                 v-model="end_datetime"
+                                 @change="onEndDatetimeChanged">
+            </vue-datetime-picker>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Ratio </label>
+          <div class="col-sm-7">
+            <input class="form-control" placeholder="Ex: 5000" v-model="ratio"
+                   type="number">
+          </div>
+          <div class="col-sm-3"><p>{{coin_name}} = 1 {{coin_unit}}</p></div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">% of Token for Sale</label>
+          <div class="col-sm-10">
+            <input class="form-control" v-model="equality_on_offer" placeholder="Ex: 30"
+                   type="text">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Accept</label>
+          <div class="col-sm-10">
+            <input class="form-control" v-model="accept" placeholder="Ex: ETH, BTC"
+                   type="text">
+          </div>
+        </div>
+        <h6 class="text-muted text-normal text-uppercase ">Supplement</h6>
+        <hr class="mb-3 mt-2">
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">White Paper </label>
+          <div class="col-sm-10">
+            <input class="form-control" v-model="white_paper"
+                   placeholder="https://example.com/white-paper.pdf">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Video Link </label>
+          <div class="col-sm-10">
+            <input class="form-control" v-model="video_link" placeholder="Youtube Video Link">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Website </label>
+          <div class="col-sm-10">
+            <input class="form-control" v-model="website"
+                   placeholder="https://example.com">
+          </div>
+        </div>
+        <h6 class="text-muted text-normal text-uppercase ">Social Media</h6>
+        <hr class="mb-3 mt-2">
+
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Medium</label>
+          <div class="col-sm-10">
+            <input class="form-control" v-model="medium" type="text">
+          </div>
+
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Twitter</label>
+          <div class="col-sm-10">
+            <input class="form-control" v-model="twitter" type="text">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Slack</label>
+          <div class="col-sm-10">
+            <input class="form-control" v-model="slack" type="text">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Telegram</label>
+          <div class="col-sm-10">
+            <input class="form-control" v-model="telegram" type="text">
+          </div>
+        </div>
+        <div class="form-group row justify-content-md-center">
+          <div class="col-md-2"></div>
+          <div class="col-md-10">
+            <button type="button" @click="postNewPost()" class="mb-1 btn btn-block btn-primary" :disabled="uploading">
+              SUBMIT<span v-if="uploading">ING</span>
+            </button>
+            <p class="text-danger">{{error_message}}</p>
+            <h6 class="text-muted">
+              <i class="fa fa-lightbulb-o"></i> Tips: The more information you provide, the faster your ICO gets approved
+            </h6>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-8 text-center" v-else>
+        <h4 class="mt-3">
+          You have to verify your email first
+        </h4>
+        <a href="javascript:void(0)" @click="" class="btn btn-primary mt-2">Resend Email</a>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -387,5 +387,5 @@
 </script>
 
 <style scoped>
-    @import url("/static/css/glyphicons.css");
+  @import url("/static/css/glyphicons.css");
 </style>

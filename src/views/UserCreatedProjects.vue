@@ -1,24 +1,24 @@
 <template>
-    <!-- Page Content-->
-    <div class="container padding-bottom-3x mb-2 mt-5">
-        <div class="row">
-            <user-header></user-header>
-            <!--main content-->
-            <div class="col-md-8">
-                <h6 class="text-muted text-normal text-uppercase ">
-                    User ICO Projects
-                </h6>
-                <hr class="mb-3 mt-2">
-                <post-list :loaded="loaded" :posts="user_created_posts"></post-list>
+  <!-- Page Content-->
+  <div class="container container-padding">
+    <div class="row">
+      <user-header></user-header>
+      <!--main content-->
+      <div class="col-md-8">
+        <h6 class="text-muted text-normal text-uppercase ">
+          User ICO Projects
+        </h6>
+        <hr class="mb-3 mt-2">
+        <post-list :loaded="loaded" :posts="user_created_posts"></post-list>
 
-                <div class="mt-5" v-if="loaded && user_created_posts.length===0">
-                    <div class="text-center">
-                        <h3 class="product-title">This user doesn't have any ICO projects right now</h3>
-                    </div>
-                </div>
-            </div>
+        <div class="mt-5" v-if="loaded && user_created_posts.length===0">
+          <div class="text-center">
+            <h3 class="product-title">This user doesn't have any ICO projects right now</h3>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>

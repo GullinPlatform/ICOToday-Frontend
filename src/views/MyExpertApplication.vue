@@ -1,6 +1,6 @@
 <template>
     <!-- Page Content-->
-    <div class="container padding-bottom-3x mb-2 mt-5">
+    <div class="container container-padding">
         <div class="row">
             <my-header></my-header>
             <!--main content-->

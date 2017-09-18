@@ -1,177 +1,177 @@
 <template>
-    <div>
-        <!-- Begin Jumbotron -->
-        <div id="home" class="jumbotron jumbotron-register">
-            <div id="particles-js"></div><!-- /.particles div -->
-            <div class="container center-vertically-holder">
-                <div class="center-vertically">
-                    <div class="row">
-                        <div class="col-md-7 mt40-xs">
-                            <h1 class="text-white">
-                                <strong>ICOToday</strong>
-                            </h1>
-                            <h4 class="text-white">
-                                Seamless Platform for Launching and Investing in ICOs on Ethereum Blockchain
-                            </h4>
-                            <a target="_blank"
-                               href="https://s3.us-east-2.amazonaws.com/icotoday/ICOToday+White+paper.pdf">
-                                Read the White Paper
-                            </a>
-                        </div>
-                        <div class="col-md-5 float-right">
-                            <div class="register-form pb-0 pt-3">
-                                <h3 class="no-margin-top">Sign up for our WhiteList</h3>
-                                <div class="row">
-                                    <div class="form-group col-sm-12 mb-3">
-                                        <input class="form-control" placeholder="Email Address" v-model="email"
-                                               @keydown.enter="whiteListSubmit($event)">
-                                    </div>
-                                    <div class="form-group col-sm-4 mb-2">
-                                        <button class="btn btn-primary mt-0"
-                                                @click="whiteListSubmit($event)">Subscribe
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  <div>
+    <!-- Begin Jumbotron -->
+    <div id="home" class="jumbotron jumbotron-register">
+      <div id="particles-js"></div><!-- /.particles div -->
+      <div class="container center-vertically-holder">
+        <div class="center-vertically">
+          <div class="row">
+            <div class="col-md-7">
+              <h1 class="text-white">
+                <strong>ICOToday</strong>
+              </h1>
+              <h4 class="text-white">
+                Seamless Platform for Launching and Investing in ICOs on Blockchain
+              </h4>
+              <a target="_blank"
+                 href="https://s3.us-east-2.amazonaws.com/icotoday/ICOToday+White+paper.pdf">
+                Read the White Paper
+              </a>
             </div>
+            <div class="col-md-5 float-right">
+              <div class="register-form pb-0 pt-3">
+                <h3 class="no-margin-top">Sign up for our WhiteList</h3>
+                <div class="row">
+                  <div class="form-group col-sm-12 mb-3">
+                    <input class="form-control" placeholder="Email Address" v-model="email"
+                           @keydown.enter="whiteListSubmit($event)">
+                  </div>
+                  <div class="form-group col-sm-4 mb-2">
+                    <button class="btn btn-primary mt-0"
+                            @click="whiteListSubmit($event)">Subscribe
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+    </div>
 
-        <!-- Featured Products Carousel-->
-        <section class="container pt-5 pb-5">
-            <h1 class="text-left">Today's Top ICOs</h1>
-            <div class="row">
-                <div class="col-lg-3 col-md-4 col-sm-6"
-                     v-if="promotion_loaded"
-                     v-for="project in promo_posts">
-                    <div class="product-card">
-                        <a class="product-thumb" href="javascript:void(0)" @click="postModal(project.id)">
-                            <img :src="project.promote_image" alt="Logo">
-                        </a>
-                        <h3 class="product-title text-bold text-left mb-0 mt-2">
-                            {{project.title}}
-                            <span class="badge badge-primary" v-if="project.rating">{{project.rating}}/100</span>
-                            <span class="badge badge-primary" v-else>No Score</span>
-                        </h3>
-                        <span class="text-muted">
+    <!-- Featured Products Carousel-->
+    <section class="container pt-5 pb-5">
+      <h1 class="text-left">Today's Top ICOs</h1>
+      <div class="row">
+        <div class="col-lg-3 col-md-4 col-sm-6"
+             v-if="promotion_loaded"
+             v-for="project in promo_posts">
+          <div class="product-card">
+            <a class="product-thumb" href="javascript:void(0)" @click="postModal(project.id)">
+              <img :src="project.promote_image" alt="Logo">
+            </a>
+            <h3 class="product-title text-bold text-left mb-0 mt-2">
+              {{project.title}}
+              <span class="badge badge-primary" v-if="project.rating">{{project.rating}}/100</span>
+              <span class="badge badge-primary" v-else>No Score</span>
+            </h3>
+            <span class="text-muted">
                             {{project.description_short}}
                         </span>
-                        <br>
-                        <span class="text-bold">
+            <br>
+            <span class="text-bold">
                             <i class="fa fa-clock-o"></i> {{timeCounter(project.start_datetime, project.end_datetime)}}
                         </span>
 
-                        <button class="btn btn-outline-danger btn-sm btn-block mb-0"
-                                @click="markPost(project.id, true)" v-if="!inSubscribeList(project.id)">
-                            <span><i class="fa fa-star-o"></i> SUBSCRIBE</span>
-                        </button>
-                        <button class="btn btn-danger btn-sm btn-block mb-0"
-                                @click="markPost(project.id, false)" v-else>
-                            <span><i class="fa fa-check"></i> SUBSCRIBED</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
+            <button class="btn btn-outline-danger btn-sm btn-block mb-0"
+                    @click="markPost(project.id, true)" v-if="!inSubscribeList(project.id)">
+              <span><i class="fa fa-star-o"></i> SUBSCRIBE</span>
+            </button>
+            <button class="btn btn-danger btn-sm btn-block mb-0"
+                    @click="markPost(project.id, false)" v-else>
+              <span><i class="fa fa-check"></i> SUBSCRIBED</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
 
+    <!-- Main content -->
+    <div class="container pb-6">
+      <h1 class="text-left mb-30">ICO Projects</h1>
+      <div class="row">
         <!-- Main content -->
-        <div class="container pb-6">
-            <h1 class="text-left mb-30">ICO Projects</h1>
-            <div class="row">
-                <!-- Main content -->
-                <div class="col-lg-12">
-                    <ul class="nav nav-tabs md-4" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link" href="javascript:void(0)" @click="status='active'" :class="{active:status==='active'}">Active</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="javascript:void(0)" @click="status='upcoming'" :class="{active:status==='upcoming'}">Upcoming</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="javascript:void(0)" @click="status='passed'" :class="{active:status==='passed'}">Passed</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="javascript:void(0)" @click="status=''" :class="{active:status===''}">All</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="row mt-4">
-                <div class="col-lg-3">
-                    <div class="card p-3 mb-3">
-                        <section class="widget widget-links mb-3">
-                            <h3 class="widget-title">Search</h3>
-                            <div class="input-group form-group">
+        <div class="col-lg-12">
+          <ul class="nav nav-tabs md-4" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link" href="javascript:void(0)" @click="status='active'" :class="{active:status==='active'}">Active</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="javascript:void(0)" @click="status='upcoming'" :class="{active:status==='upcoming'}">Upcoming</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="javascript:void(0)" @click="status='passed'" :class="{active:status==='passed'}">Passed</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="javascript:void(0)" @click="status=''" :class="{active:status===''}">All</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-lg-3">
+          <div class="card p-3 mb-3">
+            <section class="widget widget-links mb-3">
+              <h3 class="widget-title">Search</h3>
+              <div class="input-group form-group">
                                 <span class="input-group-btn">
                                 <button>
                                     <i class="icon-search"></i>
                                 </button>
                                 </span>
-                                <input class="form-control" v-model="keyword" placeholder="Search by Keyword">
-                            </div>
-                        </section>
-                        <section class="widget widget-links mb-3">
-                            <h3 class="widget-title">Category </h3>
-                            <div class="input-group form-group">
-                                <select class="form-control" v-model="category" required>
-                                    <option value="" selected>-- Choose Category --</option>
-                                    <option value="Platform">Platform</option>
-                                    <option value="Cryptocurrency">Cryptocurrency</option>
-                                    <option value="Businessservices">Businessservices</option>
-                                    <option value="Internet">Internet</option>
-                                    <option value="Investment">Investment</option>
-                                    <option value="Entertainment">Entertainment</option>
-                                    <option value="Banking">Banking</option>
-                                    <option value="Software">Software</option>
-                                    <option value="Realestate">Realestate</option>
-                                    <option value="Casino&Gambling">Casino&Gambling</option>
-                                    <option value="Communication">Communication</option>
-                                    <option value="Tourism">Tourism</option>
-                                    <option value="Media">Media</option>
-                                    <option value="Health">Health</option>
-                                    <option value="Retail">Retail</option>
-                                    <option value="Sports">Sports</option>
-                                    <option value="Infrastructure">Infrastructure</option>
-                                    <option value="Energy">Energy</option>
-                                    <option value="Charity">Charity</option>
-                                    <option value="Education">Education</option>
-                                    <option value="Manufacturing">Manufacturing</option>
-                                    <option value="Other">Other</option>
-                                </select>
+                <input class="form-control" v-model="keyword" placeholder="Search by Keyword">
+              </div>
+            </section>
+            <section class="widget widget-links mb-3">
+              <h3 class="widget-title">Category </h3>
+              <div class="input-group form-group">
+                <select class="form-control" v-model="category" required>
+                  <option value="" selected>-- Choose Category --</option>
+                  <option value="Platform">Platform</option>
+                  <option value="Cryptocurrency">Cryptocurrency</option>
+                  <option value="Businessservices">Businessservices</option>
+                  <option value="Internet">Internet</option>
+                  <option value="Investment">Investment</option>
+                  <option value="Entertainment">Entertainment</option>
+                  <option value="Banking">Banking</option>
+                  <option value="Software">Software</option>
+                  <option value="Realestate">Realestate</option>
+                  <option value="Casino&Gambling">Casino&Gambling</option>
+                  <option value="Communication">Communication</option>
+                  <option value="Tourism">Tourism</option>
+                  <option value="Media">Media</option>
+                  <option value="Health">Health</option>
+                  <option value="Retail">Retail</option>
+                  <option value="Sports">Sports</option>
+                  <option value="Infrastructure">Infrastructure</option>
+                  <option value="Energy">Energy</option>
+                  <option value="Charity">Charity</option>
+                  <option value="Education">Education</option>
+                  <option value="Manufacturing">Manufacturing</option>
+                  <option value="Other">Other</option>
+                </select>
 
-                            </div>
-                        </section>
-                        <section class="widget widget-links mb-3">
-                            <h3 class="widget-title">Type </h3>
-                            <div class="input-group form-group">
-                                <select class="form-control" v-model="type" required>
-                                    <option value="" selected>-- Choose Type --</option>
-                                    <option value="0">Pre-ICO</option>
-                                    <option value="1">ICO</option>
-                                </select>
-                            </div>
-                        </section>
-                        <section class="widget widget-tags mb-3">
-                            <hr class="mb-3">
-                            <a class="tag" href="javascript:void(0)" @click="category=''"
-                               v-if="category">#{{category}}</a>
-                            <a class="tag" href="javascript:void(0)" @click="keyword=''" v-if="keyword">#{{keyword}}</a>
-                            <a class="tag" href="javascript:void(0)" @click="type=''" v-if="type==='0'">#Pre-ICO</a>
-                            <a class="tag" href="javascript:void(0)" @click="type=''" v-if="type==='1'">#ICO</a>
-                            <a class="tag" href="javascript:void(0)" @click="status=''" v-if="status">#{{status}}</a>
-                        </section>
-                    </div>
-                </div>
-
-                <div class="col-lg-9">
-                    <post-list :loaded="list_loaded" :posts="posts"></post-list>
-                    <!-- Call to action -->
-                </div>
-            </div>
+              </div>
+            </section>
+            <section class="widget widget-links mb-3">
+              <h3 class="widget-title">Type </h3>
+              <div class="input-group form-group">
+                <select class="form-control" v-model="type" required>
+                  <option value="" selected>-- Choose Type --</option>
+                  <option value="0">Pre-ICO</option>
+                  <option value="1">ICO</option>
+                </select>
+              </div>
+            </section>
+            <section class="widget widget-tags mb-3">
+              <hr class="mb-3">
+              <a class="tag" href="javascript:void(0)" @click="category=''"
+                 v-if="category">#{{category}}</a>
+              <a class="tag" href="javascript:void(0)" @click="keyword=''" v-if="keyword">#{{keyword}}</a>
+              <a class="tag" href="javascript:void(0)" @click="type=''" v-if="type==='0'">#Pre-ICO</a>
+              <a class="tag" href="javascript:void(0)" @click="type=''" v-if="type==='1'">#ICO</a>
+              <a class="tag" href="javascript:void(0)" @click="status=''" v-if="status">#{{status}}</a>
+            </section>
+          </div>
         </div>
+
+        <div class="col-lg-9">
+          <post-list :loaded="list_loaded" :posts="posts"></post-list>
+          <!-- Call to action -->
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 <script>
   import PostList from 'components/PostList'

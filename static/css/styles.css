@@ -480,6 +480,10 @@ figure figcaption {
   padding-right: 0;
 }
 
+.container-padding {
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
 
 @media (max-width: 1240px) {
   .container {
@@ -6370,7 +6374,7 @@ video {
 
 .offcanvas-wrapper {
   position: relative;
-  min-height: 100vh;
+  min-height: 50vh;
   background-color: #ffffff;
   z-index: 10;
 }
@@ -7787,22 +7791,6 @@ video {
 
 }
 
-.ico-logo {
-  box-shadow: 0 1px 4px rgba(0, 0, 0, .05);
-  width: 37px;
-  height: 37px;
-  line-height: 35px;
-  vertical-align: middle;
-  border-radius: 4px;
-  overflow: hidden;
-  border-bottom: 1px solid #eee;
-  border-right: 1px solid #e9eaec;
-  border-left: 1px solid #e9eaec;
-  border-top: 1px solid #f7f8f9;
-  margin-right: 12px;
-
-}
-
 .post-header {
   display: -ms-flexbox;
   display: flex;
@@ -7822,5 +7810,5 @@ video {
   font-size: 175px;
 }
 
-/* Customized */
+
 

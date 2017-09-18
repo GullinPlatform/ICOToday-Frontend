@@ -1,31 +1,31 @@
 <template>
-    <div>
-        <canvas :width="canvasWidth" :height="canvasHeight" ref="canvas" @dragover.prevent @drop="onDrop"
-                @mousedown="onDragStart" @mouseup="onDragEnd" @mousemove="onMouseMove" @click="clicked"
-                v-bind:class="cursor">
-        </canvas>
-        <input type="file" id='ab-1' @change="fileSelected" style="display:none;">
-    </div>
+  <div>
+    <canvas :width="canvasWidth" :height="canvasHeight" ref="canvas" @dragover.prevent @drop="onDrop"
+            @mousedown="onDragStart" @mouseup="onDragEnd" @mousemove="onMouseMove" @click="clicked"
+            v-bind:class="cursor">
+    </canvas>
+    <input type="file" id='ab-1' @change="fileSelected" style="display:none;">
+  </div>
 </template>
 <style type="text/css">
-    .cursorPointer {
-        cursor: pointer;
-        border-radius: 22px;
-    }
+  .cursorPointer {
+    cursor: pointer;
+    border-radius: 22px;
+  }
 
-    .cursorGrab {
-        cursor: grab;
-        cursor: -webkit-grab;
-        cursor: -moz-grab;
-        border-radius: 22px;
-    }
+  .cursorGrab {
+    cursor: grab;
+    cursor: -webkit-grab;
+    cursor: -moz-grab;
+    border-radius: 22px;
+  }
 
-    .cursorGrabbing {
-        cursor: grabbing;
-        cursor: -webkit-grabbing;
-        cursor: -moz-grabbing;
-        border-radius: 22px;
-    }
+  .cursorGrabbing {
+    cursor: grabbing;
+    cursor: -webkit-grabbing;
+    cursor: -moz-grabbing;
+    border-radius: 22px;
+  }
 </style>
 <script>
   const drawRoundedRect = (context, x, y, width, height, borderRadius) => {
