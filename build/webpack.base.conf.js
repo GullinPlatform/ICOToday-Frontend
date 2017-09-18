@@ -1,29 +1,27 @@
-var path = require('path')
-var config = require('../config')
-var utils = require('./utils')
-var projectRoot = path.resolve(__dirname, '../')
+const path = require('path')
+const utils = require('./utils')
+const config = require('../config')
+const vueLoaderConfig = require('./vue-loader.conf')
 
-var env = process.env.NODE_ENV
-// check env & config/index.js to decide whether to enable CSS source maps for the
-// various preprocessor loaders added to vue-loader at the end of this file
-var cssSourceMapDev = (env === 'development' && config.dev.cssSourceMap)
-var cssSourceMapProd = (env === 'production' && config.build.productionSourceMap)
-var useCssSourceMap = cssSourceMapDev || cssSourceMapProd
+function resolve (dir) {
+  return path.join(__dirname, '..', dir)
+}
 
 module.exports = {
   entry: {
-    app: './src/index.js'
+    app: './src/app.js'
   },
   output: {
     path: config.build.assetsRoot,
-    publicPath: process.env.NODE_ENV === 'production' ? config.build.assetsPublicPath : config.dev.assetsPublicPath,
-    filename: '[name].js'
+    filename: '[name].js',
+    publicPath: process.env.NODE_ENV === 'production'
+      ? config.build.assetsPublicPath
+      : config.dev.assetsPublicPath
   },
   resolve: {
-    extensions: ['', '.js', '.vue', '.json', '.css'],
-    fallback: [path.join(__dirname, '../node_modules')],
+    extensions: ['.js', '.vue', '.json'],
     alias: {
-      'vue$': 'vue/dist/vue.common.js',
+      'vue$': 'vue/dist/vue.esm.js',
       'src': path.resolve(__dirname, '../src'),
       'views': path.join(__dirname, '../src/views'),
       'layouts': path.join(__dirname, '../src/views/layouts'),
@@ -37,72 +35,51 @@ module.exports = {
       'utils': path.join(__dirname, '../src/utils'),
     }
   },
-  resolveLoader: {
-    fallback: [path.join(__dirname, '../node_modules')]
-  },
   module: {
-    preLoaders: [{
-      test: /\.vue$/,
-      loader: 'eslint',
-      include: [
-        path.join(projectRoot, 'src')
-      ],
-      exclude: /node_modules/
-    },
+    rules: [
       {
-        test: /\.js$/,
-        loader: 'eslint',
-        include: [
-          path.join(projectRoot, 'src')
+        test: /\.vue$/,
+        exclude: [
+          path.resolve(__dirname, '../node_modules'),
+          path.resolve(__dirname, '../static')
         ],
-        exclude: /node_modules/
-      }
-    ],
-    loaders: [{
-      test: /\.vue$/,
-      loader: 'vue'
-    },
-      {
+        include: [path.resolve(__dirname, '../src')],
+        loader: 'vue-loader',
+        options: vueLoaderConfig
+      }, {
         test: /\.js$/,
-        loader: 'babel',
-        include: [
-          path.join(projectRoot, 'src')
-        ],
-        exclude: /node_modules/
-      },
-      {
+        exclude: /node_modules|vue\/dist|vue-hot-reload-api|vue-router\/|vue-loader/,
+        include: [path.resolve(__dirname, '../src')],
+        loader: 'babel-loader?cacheDirectory'
+      }, {
         test: /\.json$/,
-        loader: 'json'
-      },
-      {
+        exclude: /node_modules|vue\/dist|vue-hot-reload-api|vue-router\/|vue-loader/,
+        loader: 'json-loader'
+      }, {
+        test: /\.html$/,
+        exclude: /node_modules|vue\/dist|vue-hot-reload-api|vue-router\/|vue-loader/,
+        loader: 'vue-html-loader'
+      }, {
+        test: /\.s[a|c]ss$/,
+        exclude: /node_modules|vue\/dist|vue-hot-reload-api|vue-router\/|vue-loader/,
+        loader: 'style!css!sass'
+      }, {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        loader: 'url',
+        exclude: /node_modules|vue\/dist|vue-hot-reload-api|vue-router\/|vue-loader/,
+        loader: 'url-loader',
         query: {
-          limit: 10000,
-          name: utils.assetsPath('img/[name].[hash:7].[ext]')
+          limit: 5000,
+          name: utils.assetsPath('img/[name].[ext]')
         }
-      },
-      {
+      }, {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        loader: 'url',
+        exclude: /node_modules|vue\/dist|vue-hot-reload-api|vue-router\/|vue-loader/,
+        loader: 'url-loader',
         query: {
           limit: 10000,
-          name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
+          name: utils.assetsPath('fonts/[name].[ext]')	// fonts/[name].[hash:7].[ext]
         }
-      }
-    ]
-  },
-  eslint: {
-    formatter: require('eslint-friendly-formatter')
-  },
-  vue: {
-    loaders: utils.cssLoaders({
-      sourceMap: useCssSourceMap
-    }),
-    postcss: [
-      require('autoprefixer')({
-        browsers: ['last 2 versions']
-      })
-    ]
+      }],
+    noParse: /node_modules\/(jquey|moment|chart|iconfont\.js)/
   }
 }
