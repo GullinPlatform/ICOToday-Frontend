@@ -30,7 +30,7 @@
   import PostList from 'components/PostList'
 
   export default {
-    name: 'UserMarkedProjects',
+    name: 'MyMarkedProjects',
     data () {
       return {
         loaded: false,

@@ -6,7 +6,7 @@
             <!--main content-->
             <div class="col-md-8" v-if="me.type===0">
 
-                <h6 class="text-muted text-normal text-uppercase ">Basic Info</h6>
+                <h6 class="text-muted text-normal text-uppercase ">My TEAM</h6>
                 <hr class="mb-3 mt-2">
 
                 <div class="form-group row">
@@ -152,7 +152,7 @@
   import MyHeader from 'components/MyHeader'
 
   export default {
-    name: 'UserTeam',
+    name: 'MyTeam',
     data () {
       return {
         edit: false,

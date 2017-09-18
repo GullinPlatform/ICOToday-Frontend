@@ -14,6 +14,7 @@ import MyNewProject from 'views/MyNewProject'
 import MyCreatedProjects from 'views/MyCreatedProjects'
 import MyMarkedProjects from 'views/MyMarkedProjects'
 import MyTeam from 'views/MyTeam'
+import MyWallet from 'views/MyWallet'
 import MySettings from 'views/MySettings'
 import MyExpertApplication from 'views/MyExpertApplication'
 
@@ -67,6 +68,10 @@ export default new Router({
       path: '/me/new',
       component: MyNewProject,
       name: 'me_new_project'
+    }, {
+      path: '/me/wallet',
+      component: MyWallet,
+      name: 'me_wallet'
     }, {
       path: '/me/expert/application',
       component: MyExpertApplication,

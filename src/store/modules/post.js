@@ -163,7 +163,6 @@ const actions = {
 
 const mutations = {
   [types.ADD_POST] (state, response) {},
-  [types.APPLY_POST] (state, response) {},
   [types.MARK_POST] (state, response) {},
   [types.UPDATE_POST] (state, response) {},
 

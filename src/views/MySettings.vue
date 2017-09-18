@@ -73,7 +73,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Description</label>
+                    <label class="col-sm-2 col-form-label">About Me</label>
                     <div class="col-sm-10">
                         <textarea class="form-control" v-model="me.description" placeholder=""></textarea>
                     </div>
@@ -123,7 +123,7 @@
   import AvatarEditorScale from 'components/AvatarEditorScale'
 
   export default {
-    name: 'UserSettings',
+    name: 'MySettings',
     head: {
       title: {
         inner: 'ICOToday',

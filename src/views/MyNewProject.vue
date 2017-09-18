@@ -242,7 +242,7 @@
   import VueDatetimePicker from 'vue-bootstrap-datetimepicker'
 
   export default {
-    name: 'UserNewProject',
+    name: 'MyNewProject',
     data () {
       return {
         // -- form info start --
@@ -387,5 +387,5 @@
 </script>
 
 <style scoped>
-    @import url("../../static/css/glyphicons.css");
+    @import url("/static/css/glyphicons.css");
 </style>

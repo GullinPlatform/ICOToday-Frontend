@@ -7,6 +7,7 @@ import post from './modules/post'
 import team from './modules/team'
 import discussion from './modules/discussion'
 import notification from './modules/notification'
+import wallet from './modules/wallet'
 
 Vue.use(Vuex)
 
@@ -19,7 +20,8 @@ const store = new Vuex.Store({
     post,
     discussion,
     team,
-    notification
+    notification,
+    wallet
   }
 })
 export default store

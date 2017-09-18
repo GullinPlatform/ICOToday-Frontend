@@ -69,3 +69,6 @@ export const REMOVE_COMMENT_LOCALLY = 'REMOVE_COMMENT_LOCALLY'
 // ----- Notifications ----
 export const LOAD_NOTIFICATIONS = 'LOAD_NOTIFICATIONS'
 export const READ_NOTIFICATION = 'READ_NOTIFICATION'
+
+// ----- Wallet ----
+export const LOAD_WALLET = 'LOAD_WALLET'

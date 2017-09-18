@@ -66,7 +66,7 @@
   import MyHeader from 'components/MyHeader'
 
   export default {
-    name: 'UserMarkedProjects',
+    name: 'MyExpertApplication',
     data () {
       return {
         loaded: false,
