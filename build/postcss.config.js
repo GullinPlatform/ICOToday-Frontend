@@ -1,3 +1,4 @@
+'use strict'
 // postcss 配置项
 module.exports = {
   plugins: [
