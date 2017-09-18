@@ -42,52 +42,58 @@
         <!-- end jumbotron -->
 
         <!-- begin cards group -->
-        <div class="container padding-bottom-2x mb-2">
-            <h6 class="text-muted text-normal text-uppercase padding-top-2x">Our Focus</h6>
-            <hr class="margin-bottom-1x">
-            <div class="card-group">
-                <div class="card margin-bottom-1x light-grey">
-                    <div class="text-center mt-5 mb-5 light-grey">
-                        <i class="fa fa-shield fa-5x big-icon" aria-hidden="true"></i>
-                    </div>
-
-                    <div class="card-body" style="background-color:#fff;">
-                        <h4 class="card-title">INVESTOR SECURITY</h4>
-                        <p class="card-text">
-                            We protect investors' money by providing a platform with direct information releases from the ICO launch team, secured with two factor authentication therefore, attracting new users to ICOs.</p>
-                    </div>
-
+        <div class="container padding-bottom-1x mb-2">
+                <div class="text-center padding-top-2x mb-30">
+                    <h2>Our Focus</h2>
                 </div>
-                <div class="card margin-bottom-1x light-grey">
-                    <div class="text-center mt-5 mb-5">
-                        <i class="fa fa-users fa-5x big-icon" aria-hidden="true"></i>
-                    </div>
-                    <div class="card-body" style="background-color:#fff;">
-                        <h4 class="card-title">COMMUNITY DRIVEN</h4>
-                        <p class="card-text">
-                            ICOtoday is a community driven platform where new investors can follow and learn from experienced investors and community experts. In addition, quality ICO’s are chosen by experts and experts are chosen by investors</p>
-                    </div>
-                </div>
-                <div class="card margin-bottom-1x light-grey">
+            <hr>
 
-                    <div class="text-center mt-5 mb-5">
-                        <i class="fa fa-bolt fa-5x big-icon" aria-hidden="true"></i>
-                    </div>
 
-                    <div class="card-body" style="background-color:#fff;">
-                        <h4 class="card-title">EASE OF USE</h4>
-                        <p class="card-text">
-                            The current process of investing in ICOs is tedious and intimidating for new investors. We designed our platform to create an easy and intuitive process for ICO investing.</p>
-                    </div>
+            <div class="row align-items-center padding-top-2x padding-bottom-2x tokensale-focus">
+                <div class="col-md-2"></div>
+                <div class="col-md-3"><img src="../../static/img/tokensale/community.png" alt="Community"></div>
+                <div class="col-md-5 text-md-left text-center">
+                    <div class="mt-30 hidden-md-up"></div>
+                    <h2>Build the Community</h2>
+                    <p class="mb-4">ICOtoday is a community driven platform where new investors can follow and learn from experienced investors and community experts. In addition, quality ICO’s are chosen by experts and experts are chosen by investors.</p>
                 </div>
+                <div class="col-md-2"></div>
             </div>
+            <hr>
+            <div class="row align-items-center padding-top-2x padding-bottom-2x">
+                <div class="col-md-3 order-md-2"><img src="../../static/img/tokensale/security_t.png" alt="Security"></div>
+                <div class="col-md-6 order-md-1 text-md-left text-center">
+                    <div class="mt-30 hidden-md-up"></div>
+                    <h2>INVESTOR SECURITY
+                    </h2>
+                    <p>We protect investors' funds by providing a platform with direct information releases from the ICO launch team, secured with two factor authentication therefore, attracting new users to ICOs.</p><a class="text-medium text-decoration-none" href="https://s3.us-east-2.amazonaws.com/icotoday/ICOToday+White+paper.pdf">See more details&nbsp;<i class="icon-arrow-right"></i></a>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+            <hr>
+            <div class="row align-items-center padding-top-2x padding-bottom-2x">
+                <div class="col-md-2"></div>
+                <div class="col-md-3"><img src="../../static/img/tokensale/easy_t.png" alt="Delivery"></div>
+                <div class="col-md-5 text-md-left text-center">
+                    <div class="mt-30 hidden-md-up"></div>
+                    <h2>EASE OF USE</h2>
+                    <p class="mb-4">The current process of investing in ICOs is tedious and intimidating for new investors. We designed our platform to create an easy and intuitive process for ICO investing.</p>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+            <hr>
+
         </div>
 
 
         <!-- begin cards group -->
         <div class="container padding-bottom-2x mb-2">
-            <h6 class="text-muted text-normal text-uppercase padding-top-2x">How it Works</h6>
+            <div class="text-center padding-top-0x mb-30">
+                <h2>How it works</h2>
+            </div>
+
             <hr class="margin-bottom-1x">
+            <div class="text-md-left">
             <p>1. Company submits ICO Application </p>
             <p>2. Community selected experts review and rate ICO Application </p>
             <p>3. Secure and direct communication between investors and ICO companies</p>
@@ -95,44 +101,67 @@
             <p>5. Easily invest in ICOs <strong> automatically </strong>
                 with either USD or Ether through our smart contract </p>
             <p>6. Post ICO market and price data provided to keep track of gains </p>
-        </div>
+            </div>
 
+        </div>
+        <!--
+        <div class="countdown" data-date-time="11/30/2017 12:00:00">
+            <div class="item">
+                <div class="days">00</div><span class="days_ref">Days</span>
+            </div>
+            <div class="item">
+                <div class="hours">00</div><span class="hours_ref">Hours</span>
+            </div>
+            <div class="item">
+                <div class="minutes">00</div><span class="minutes_ref">Mins</span>
+            </div>
+            <div class="item">
+                <div class="seconds">00</div><span class="seconds_ref">Secs</span>
+            </div>
+        </div>
+        -->
 
         <!-- begin cards group -->
         <div class="container padding-bottom-2x mb-2">
-            <h6 class="text-muted text-normal text-uppercase padding-top-2x">Token Sale Details</h6>
             <hr class="margin-bottom-1x">
+            <div class="container padding-bottom-2x mb-2">
+                <div class="text-center padding-top-0x mb-30">
+                    <h2>Token sale details</h2>
+                </div>
+                <hr class="margin-bottom-1x">
+                <div class="container">
+                    <div class="row mb15">
+                        <div class="col-sm-6 leftReveal">
+                            <div>
+                                <canvas id="pie_chart"></canvas>
+                            </div>
+                        </div><!-- /.column -->
+                        <div class="col-sm-5 mt30-xs rightReveal">
+                            <h5 class="heading-1 mb20">Tokens</h5>
+                            <p>20 million tokens issued
+                                <br>
+                                50% tokens issued for crowdsale<br>
+                                20% will be retained for community Incentivization<br>
+                                30% will be retained by ICOToday
+                            </p>
+                            <h5 class="heading-1 mb20">Logistics</h5>
+                            <p>Our Token Sale dates have not yet been announced. We will keep you posted.</p>
+                            <p> Follow along <a target="_blank" href="https://trello.com/b/JxFOIC9x">here</a>
+                                for our upcoming product releases</p>
+                            <p>
+                                We want to prove we can deliver the secure platform you deserve by building and releasing most of it before our crowdsale and we are close.</p>
+                        </div><!-- /.column -->
+                    </div><!-- /.row -->
 
-            <div class="container">
-                <div class="row mb15">
-                    <div class="col-sm-6 leftReveal">
-                        <div>
-                            <canvas id="pie_chart"></canvas>
-                        </div>
-                    </div><!-- /.column -->
-                    <div class="col-sm-5 mt30-xs rightReveal">
-                        <h5 class="heading-1 mb20">Tokens</h5>
-                        <p>20 million tokens issued
-                            <br>
-                            50% tokens issued for crowdsale<br>
-                            20% will be retained for community Incentivization<br>
-                            30% will be retained by ICOToday
-                        </p>
-                        <h5 class="heading-1 mb20">Logistics</h5>
-                        <p>Our Token Sale dates have not yet been announced. We will keep you posted.</p>
-                        <p> Follow along <a target="_blank" href="https://trello.com/b/JxFOIC9x">here</a>
-                            for our upcoming product releases</p>
-                        <p>
-                            We want to prove we can deliver the secure platform you deserve by building and releasing most of it before our crowdsale and we are close.</p>
-                    </div><!-- /.column -->
-                </div><!-- /.row -->
+                </div><!-- /.column -->
+            </div>
 
-            </div><!-- /.column -->
         </div>
 
         <div class="container padding-bottom-2x mb-2 mt-5">
-
-            <h6 class="text-muted text-normal text-uppercase">Our Team</h6>
+            <div class="text-center padding-top-0x mb-30">
+                <h2>Our Team</h2>
+            </div>
             <hr class="margin-bottom-1x">
 
             <div class="row">
@@ -229,8 +258,6 @@
 
 
 <script>
-  import Chart from 'chart.js'
-
   export default {
     name: 'TokenSale',
     head: {
@@ -247,6 +274,7 @@
     },
     methods: {
       whiteListSubmit (e) {
+        console.log('123')
         e.preventDefault()
         if (!this.login_status) {
           this.$store.dispatch('whiteListEmail', this.email)
@@ -266,7 +294,7 @@
       },
     },
     mounted () {
-      /* global particlesJS:true */
+      /* global particlesJS:true Chart:true */
       // Pie Chart
       const ctx = document.getElementById('pie_chart').getContext('2d')
       const pie_chart = new Chart(ctx, {
@@ -399,3 +427,9 @@
   }
 
 </script>
+
+<style type="text/css">
+    p {
+        font-size: 17px;
+    }
+</style>

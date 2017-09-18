@@ -1,6 +1,4 @@
 <template>
-
-
     <div v-if="loaded">
         <div class="product-column product-list">
             <div class="row">
@@ -29,6 +27,10 @@
              v-for="project in posts"
              @mouseover="subscribe_show=project.id" @mouseleave="subscribe_show=false">
             <div class="product-info">
+                <h3 class="product-title" @click="postModal(project.id)">
+
+
+                </h3>
                 <div class="row" @click="postModal(project.id)">
                     <div class="col-sm-1 pl-2 pr-2">
                         <a class="product-thumb" href="javascript:void(0)" @click="postModal(project.id)">
@@ -80,7 +82,6 @@
 
             </div>
         </div>
-    </div>
     </div>
 </template>
 

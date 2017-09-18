@@ -63,11 +63,11 @@
                         <span v-else><i class="fa fa-check"></i> Subscribed</span>
                     </button>
                     <a class="btn btn-outline-primary btn-sm btn-block text-primary"
-                       :href="post.white_paper" target="_blank">
+                       :href="post.white_paper">
                         <i class="fa fa-file-o"></i>
                         White paper
                     </a>
-                    <a class="btn btn-outline-secondary btn-sm btn-block" :href="post.website" target="_blank">
+                    <a class="btn btn-outline-secondary btn-sm btn-block" :href="post.website">
                         <a><i class="fa fa-globe"></i> Website</a>
                     </a>
                 </section>
