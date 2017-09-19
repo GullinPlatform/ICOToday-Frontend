@@ -5879,46 +5879,15 @@ video {
   min-height: 100%;
 }
 
-.site-logo,
-.offcanvas-toggle {
+.site-logo{
   display: table-cell;
   vertical-align: middle;
 }
 
-.site-logo {
-  width: 132px;
-  padding: 10px 0 14px 30px;
-  text-decoration: none;
-}
 
 .site-logo > img {
   display: block;
   width: 100%;
-}
-
-.offcanvas-toggle {
-  width: 74px;
-  transition: color .3s;
-  border-right: 1px solid #e1e7ec;
-  color: #606975;
-  font-size: 20px;
-  line-height: 1;
-  text-align: center;
-  cursor: pointer;
-}
-
-.offcanvas-toggle::before {
-  display: inline-block;
-  font-family: feather;
-  content: '\e120';
-}
-
-.offcanvas-toggle:hover {
-  color: #0da9ef;
-}
-
-.offcanvas-toggle.menu-toggle {
-  display: none;
 }
 
 .site-menu {
@@ -6252,20 +6221,10 @@ video {
   animation: submenu-show 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-@media (max-width: 1070px) {
-  .offcanvas-toggle.menu-toggle {
-    display: table-cell;
-  }
-}
-
 @media (max-width: 576px) {
   .topbar {
     padding-right: 15px;
     padding-left: 15px;
-  }
-
-  .offcanvas-toggle {
-    width: 56px;
   }
 }
 

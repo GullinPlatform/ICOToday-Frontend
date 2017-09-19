@@ -25,8 +25,9 @@ import UserCreatedProjects from 'views/UserCreatedProjects'
 import UserMarkedProjects from 'views/UserMarkedProjects'
 import UserTeam from 'views/UserTeam'
 
-import TokenSale from 'views/TokenSale'
-import TermsAndPolicy from 'views/TermsAndPolicy'
+import TokenSale from 'views/static_pages/TokenSale'
+import UserGuide from 'views/static_pages/UserGuide'
+import TermsAndPolicy from 'views/static_pages/TermsAndPolicy'
 
 Vue.use(Router)
 Vue.use(Resource)
@@ -112,8 +113,11 @@ export default new Router({
       path: '/terms',
       component: TermsAndPolicy,
       name: 'terms'
+    }, {
+      path: '/faq',
+      component: UserGuide,
+      name: 'faq'
     }
-
     ]
   }]
 })
