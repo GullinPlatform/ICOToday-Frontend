@@ -1,12 +1,12 @@
 <template>
   <div>
-    <header class="navbar navbar-stuck navbar-padding">
+    <header class="navbar">
       <!-- Main Navigation-->
       <nav class="site-menu">
         <div class="site-branding">
           <div class="inner">
             <!-- Site Logo-->
-            <div class="logo">
+            <div class="site-logo">
               <router-link :to="{name:'landing'}">
                 <img src="../../../static/img/logo/icotoday.png" width="185"/>
               </router-link>
@@ -15,14 +15,8 @@
         </div>
         <ul>
           <li>
-            <a href="javascript:void(0)" data-toggle="modal" data-target="#signup-modal" v-if="!login_status" class="hidden-sm-down">
-              <span>Publish Your ICO</span>
-            </a>
-            <router-link :to="{name:'me_new_project'}" v-if="login_status&&me.type===0" class="hidden-sm-down">
-              <span>Publish Your ICO</span>
-            </router-link>
-            <router-link :to="{name:'me_expert_apply'}" v-if="login_status&&me.type===1" class="hidden-sm-down">
-              <span>Apply to be an Expert</span>
+            <router-link :to="{name:'faq'}" class="hidden-sm-down">
+              <span>User Guide</span>
             </router-link>
           </li>
           <li>
@@ -124,10 +118,11 @@
       </nav>
       <!-- Toolbar-->
     </header>
-    <div class="alert alert-warning alert-dismissible alert-top fade show text-center" v-if="login_status && !me.is_verified">
+    <div class="alert alert-warning alert-dismissible alert-top text-center text-lg" v-if="login_status && !me.is_verified">
       <span class="alert-close" data-dismiss="alert"></span>
       <i class="icon-bell"></i>&nbsp;&nbsp;<strong>Account Unverified:</strong>
       Please verify your account to have fully access to ICOToday's great features.
+      <a href="javascript:void(0)" @click="resendConfirmEmail()" :class="{'text-muted':!able_to_resend}">RESEND <span v-show="!able_to_resend">(Retry Later)</span></a>
     </div>
   </div>
 </template>
@@ -152,7 +147,11 @@
       },
       readNotification (pk) {
         this.$store.dispatch('readNotification', pk)
-      }
+      },
+      resendConfirmEmail () {
+        if (this.able_to_resend)
+          this.$store.dispatch('resendConfirmEmail')
+      },
     },
     computed: {
       me () {
@@ -166,6 +165,9 @@
       },
       notifications () {
         return this.$store.getters.notifications
+      },
+      able_to_resend () {
+        return this.$store.getters.able_to_resend
       }
     },
     mounted () {
@@ -186,13 +188,4 @@
     display: table-cell;
     vertical-align: middle;
   }
-
-  .navbar-padding {
-    padding-bottom: 84px;
-  }
-
-  .alert-top {
-    margin-top: 84px;
-  }
-
 </style>

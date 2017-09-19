@@ -62,7 +62,7 @@
       <hr>
       <div class="row align-items-center padding-top-2x padding-bottom-2x tokensale-focus">
         <div class="col-md-2"></div>
-        <div class="col-md-3"><img src="../../static/img/tokensale/community.png" alt="Community"></div>
+        <div class="col-md-3"><img src="../../../static/img/tokensale/community.png" alt="Community"></div>
         <div class="col-md-5 text-md-left text-center">
           <div class="mt-30 hidden-md-up"></div>
           <h2>Community</h2>
@@ -72,7 +72,7 @@
       </div>
       <hr>
       <div class="row align-items-center padding-top-2x padding-bottom-2x">
-        <div class="col-md-3 order-md-2"><img src="../../static/img/tokensale/security_t.png" alt="Security"></div>
+        <div class="col-md-3 order-md-2"><img src="../../../static/img/tokensale/security_t.png" alt="Security"></div>
         <div class="col-md-6 order-md-1 text-md-left text-center">
           <div class="mt-30 hidden-md-up"></div>
           <h2>Security
@@ -87,7 +87,7 @@
       <hr>
       <div class="row align-items-center padding-top-2x padding-bottom-2x">
         <div class="col-md-2"></div>
-        <div class="col-md-3"><img src="../../static/img/tokensale/easy_t.png" alt="Delivery"></div>
+        <div class="col-md-3"><img src="../../../static/img/tokensale/easy_t.png" alt="Delivery"></div>
         <div class="col-md-5 text-md-left text-center">
           <div class="mt-30 hidden-md-up"></div>
           <h2>Ease of Use</h2>
@@ -221,7 +221,7 @@
       <div class="row">
         <div class="col-md-3 col-sm-6 mb-30 text-center"><img
           class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2"
-          src="../../static/img/team/joe_pic.png" alt="Team">
+          src="../../../static/img/team/joe_pic.png" alt="Team">
           <h6>Joseph Kitonga</h6>
           <p class="text-muted mb-2">CEO</p>
           <div class="social-bar">
@@ -233,7 +233,7 @@
         </div>
         <div class="col-md-3 col-sm-6 mb-30 text-center"><img
           class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2"
-          src="../../static/img/team/john_pic2.png" alt="Team">
+          src="../../../static/img/team/john_pic2.png" alt="Team">
           <h6>John Worthley</h6>
           <p class="text-muted mb-2">CFO</p>
           <div class="social-bar">
@@ -246,7 +246,7 @@
         </div>
         <div class="col-md-3 col-sm-6 mb-30 text-center"><img
           class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2"
-          src="../../static/img/team/nader_pic2.png" alt="Team">
+          src="../../../static/img/team/nader_pic2.png" alt="Team">
           <h6>Nader Sadek</h6>
           <p class="text-muted mb-2">COO</p>
           <div class="social-bar">
@@ -261,7 +261,7 @@
         <div class="col-md-3 col-sm-6 mb-30 text-center">
           <img target="_blank"
                class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2"
-               src="../../static/img/team/elorm_pic.jpg"
+               src="../../../static/img/team/elorm_pic.jpg"
                alt="Team">
           <h6>Elorm Koto</h6>
           <p class="text-muted mb-2">CTO</p>
