@@ -20,12 +20,14 @@
                         </router-link>
                     </p>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body light-grey">
                     <div class="row post-modal ml-3 mr-3 mb-3">
                         <div class="col-lg-8 pl-0">
+                          <div  class="card-new-layout">
                             <div class="embed-responsive embed-responsive-16by9">
                                 <iframe :src="post.video_link" class="embed-responsive-item" allowfullscreen></iframe>
                             </div>
+                          </div>
                             <p class="text-center">
                                 <a class="social-button shape-circle" :href="post.slack" v-if="post.slack"><i
                                         class="fa fa-slack"></i></a>
@@ -38,7 +40,7 @@
                             </p>
                         </div>
                         <div class="col-lg-4 pr-0">
-                            <section>
+                            <section class="card-new-layout">
                                 <h3 class="widget-title mb-2">Rating
                                     <span class="text-sm text-black">
                                        <router-link :to="{name:'terms', query:{type:'rating'}}" data-dismiss="modal">
@@ -52,6 +54,7 @@
                                 </router-link>
                                 <h2 class="text-bold text-info text-center" v-if="!post.rating">No Score</h2>
                             </section>
+                          <div class="card-new-layout">
                             <section>
                                 <h3 class="widget-title mb-2">Time</h3>
                                 <h2 class="text-center mb-0">
@@ -83,20 +86,21 @@
                                 </a>
                             </section>
                         </div>
+                      </div>
                     </div>
 
-                    <div class="row ml-3 mr-3">
+                    <div class="row post-modal ml-3 mr-3 mb-3">
                         <!-- Description -->
                         <div class="col-lg-8 pl-0">
-                            <section>
-                                <h3 class="text-left">Description</h3>
-                                <vue-markdown :source="post.description_full"></vue-markdown>
+                          <h3 class="text-left card-new-heading">Description</h3>
+                          <section class="card-new-layout">
+                              <vue-markdown class="card-new-text text-left" :source="post.description_full"></vue-markdown>
                             </section>
                         </div>
                         <!-- Financial -->
-                        <div class="col-lg-4 pr-0 pl-0">
-                            <h3 class="text-left">Financial</h3>
-                            <div class="table-responsive">
+                        <div class="col-lg-4 pr-0">
+                            <h3 class="text-left card-new-heading">Financial</h3>
+                            <section class="table-responsive  card-new-layout">
                                 <table class="table">
                                     <tbody>
                                     <tr>
@@ -131,13 +135,15 @@
 
                                     </tbody>
                                 </table>
-                            </div>
+                            </section>
                         </div>
                     </div>
                     <div class="row ml-3 mr-3">
                         <!-- Team -->
-                        <div class="col-lg-12 pl-0 pr-0">
-                            <h3 class="text-left">Team</h3>
+                          <div class="col-lg-8 pl-md-0 pl-md-0 " >
+                          <h3 class="text-left card-new-heading">Team</h3>
+
+                          <div class="card-new-layout">
                             <div class="row" v-if="team_loaded">
                                 <div class="col-md-3 col-sm-6 mb-3 text-center"
                                      v-for="member in current_team_members"
@@ -170,14 +176,16 @@
                                     </div>
                                 </div>
                             </div>
+                          </div>
                         </div>
                     </div>
                     <div class="row ml-3 mr-3">
                         <!-- Advisors -->
-                        <div class="col-lg-12 pl-0 pr-0">
-                            <h3 class="text-left">Advisors
-                            </h3>
-                            <div class="row" v-if="team_loaded">
+                        <div class="col-lg-8 pl-md-0 pl-md-0 " >
+                            <h3 class="text-left card-new-heading">Advisors</h3>
+
+                            <div class="card-new-layout" v-if="team_loaded">
+                              <div class="row">
                                 <div class="col-md-3 col-sm-6 mb-3 text-center"
                                      v-for="member in current_team_members"
                                      v-if="member.is_advisor">
@@ -209,12 +217,13 @@
                                     </div>
                                 </div>
                             </div>
+                          </div>
                         </div>
                     </div>
                     <div class="row ml-3 mr-3">
                         <!-- Comments -->
-                        <div class="col-lg-12 pl-0 pr-0">
-                            <h3 class="text-left">Comments</h3>
+                        <div class="col-lg-8 pl-md-0 pl-md-0 " >
+                            <h3 class="text-left card-new-heading">Comments</h3>
                             <ul class="comment mt-3 pl-3" v-if="comments_loaded">
                                 <li class="media mb-3 pos-relative" v-for="comment in current_post_comments">
                                     <img :src="comment.creator.info.avatar"
@@ -309,7 +318,7 @@
                             <button @click="newComment()" v-if="login_status" class="btn btn-primary float-right">
                                 Submit
                             </button>
-                            <button class="btn btn-sm btn-outline-secondary float-right" data-toggle="modal"
+                            <button class="btn btn-sm btn-outline-secondary" data-toggle="modal"
                                     data-dismiss="modal" data-target="#login-modal"
                                     v-if="!login_status">Login to leave comment
                             </button>
@@ -321,9 +330,7 @@
     </div>
 </template>
 <script>
-
   import VueMarkdown from 'vue-markdown'
-
   export default {
     name: 'PostModal',
     components: {
@@ -334,13 +341,11 @@
         new_reply: '',
         new_comment: '',
         delete_comment_id: 0,
-
         // UI Control
         reply_comment_box_show: false,
         reply_comment_box_index: -1,
         marked: false,
         unsubscribe: false,
-
         // Data Load Trigger
         team_loaded: false,
         comments_loaded: false
@@ -416,7 +421,6 @@
         // Haven't start
         if (moment().diff(start, 'minutes') < 0) {
           let rest = -moment().diff(start, 'days') + ' days '
-
           if (rest === '0 days ') {
             rest = -moment().diff(start, 'hours') + ' hours '
           }
@@ -428,27 +432,23 @@
         // Started
         else if (moment().diff(end, 'minutes') < 0) {
           let rest = -moment().diff(end, 'days') + ' days '
-
           if (rest === '0 days ') {
             rest = -moment().diff(end, 'hours') + ' hours '
           }
           if (rest === '0 hours ') {
             rest = -moment().diff(end, 'minutes') + ' minutes '
           }
-
           return 'End in ' + rest
         }
         // Ended
         else {
           let rest = moment().diff(end, 'days') + ' days '
-
           if (rest === '0 days ') {
             rest = moment().diff(end, 'hours') + ' hours '
           }
           if (rest === '0 hours ') {
             rest = moment().diff(end, 'minutes') + ' minutes '
           }
-
           return 'Ended ' + rest + 'ago'
         }
       },
@@ -457,11 +457,9 @@
           return moment(start).format('MMM DD [at] hh:mma')
         }
         if (moment().diff(start, 'minutes') < 0) {
-
           return moment(start).format('YYYY/MM/DD, hh:mm a')
         }
         else {
-
           return moment(end).format('YYYY/MM/DD, hh:mm a')
         }
       },
@@ -498,12 +496,10 @@
       'post': function () {
         this.team_loaded = false
         this.comments_loaded = false
-
         this.$store.dispatch('getComments', this.$store.getters.current_post.id)
           .then(() => {
             this.comments_loaded = true
           })
-
         this.$store.dispatch('getTeam', this.$store.getters.current_post.team.id)
           .then(() => {
             this.team_loaded = true
