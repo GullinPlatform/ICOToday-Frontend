@@ -26,10 +26,7 @@
          v-for="project in posts"
          @mouseover="subscribe_show=project.id" @mouseleave="subscribe_show=false">
       <div class="product-info">
-        <h3 class="product-title" @click="postModal(project.id)">
-
-
-        </h3>
+        <h3 class="product-title" @click="postModal(project.id)"></h3>
         <div class="row" @click="postModal(project.id)">
           <div class="col-sm-1 pl-2 pr-2">
             <a class="product-thumb" href="javascript:void(0)" @click="postModal(project.id)">
@@ -97,6 +94,11 @@
         default: false
       },
     },
+    data () {
+      return {
+        window_width: 0,
+      }
+    },
     methods: {
       timeCounter (start, end) {
         /* global moment:true */
@@ -152,10 +154,15 @@
 
       postModal (id) {
         /* global $:true */
-        this.$store.dispatch('getPost', id)
-          .then(() => {
-            $('#post-modal').modal('show')
-          })
+        if (this.window_width <= 768) {
+          this.$router.push({name: 'post', params: {id: id}})
+        }
+        else {
+          this.$store.dispatch('getPost', id)
+            .then(() => {
+              $('#post-modal').modal('show')
+            })
+        }
       },
 
       markPost (id, mark) {
@@ -188,6 +195,9 @@
         }
         return false
       },
+      getWindowWidth (event) {
+        this.window_width = document.documentElement.clientWidth
+      },
     },
     computed: {
       login_status () {
@@ -197,6 +207,17 @@
         return this.$store.getters.self_marked_posts
       }
     },
+    mounted () {
+      this.$nextTick(function () {
+        window.addEventListener('resize', this.getWindowWidth)
+
+        //Init
+        this.getWindowWidth()
+      })
+    },
+    beforeDestroy () {
+      window.removeEventListener('resize', this.getWindowWidth)
+    }
   }
 
 </script>

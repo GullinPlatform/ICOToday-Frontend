@@ -7,20 +7,18 @@
         <div class="center-vertically">
           <div class="row">
             <div class="col-md-7">
-              <h1 class="text-white">
-                <strong>ICOToday</strong>
+              <h1 class="text-white text-bold mb-2">
+                ICOToday
               </h1>
-              <h4 class="text-white">
-                Seamless Platform for Launching and Investing in ICOs on Blockchain
-              </h4>
-              <a target="_blank"
-                 href="https://s3.us-east-2.amazonaws.com/icotoday/ICOToday+White+paper.pdf">
-                Read the White Paper
-              </a>
+              <h2 class="text-white text-thin text-uppercase">
+                Seamless Platform<br>
+                for Launching and Investing<br>
+                on Blockchain
+              </h2>
             </div>
             <div class="col-md-5 float-right">
               <div class="register-form pb-0 pt-3">
-                <h3 class="no-margin-top">Sign up for our WhiteList</h3>
+                <h3 class="no-margin-top">Sign Up for our Whitelist</h3>
                 <div class="row">
                   <div class="form-group col-sm-12 mb-3">
                     <input class="form-control" placeholder="Email Address" v-model="email"
