@@ -206,6 +206,11 @@
       }
     },
     beforeCreate () {
+      // redirect non login user
+      if (!this.$store.getters.login_status) {
+        this.$router.push({name: 'landing'})
+      }
+
       // redirect non ico company user
       if (this.$store.getters.self.type !== 0) {
         this.route.push({name: 'landing'})

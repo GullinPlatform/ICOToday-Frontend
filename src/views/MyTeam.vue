@@ -209,10 +209,16 @@
       this.description = this.me.info.team.description
     },
     beforeCreate () {
+      // redirect non login user
+      if (!this.$store.getters.login_status) {
+        this.$router.push({name: 'landing'})
+      }
+
       // redirect non ico company user
       if (this.$store.getters.self.type !== 0) {
         this.$router.push({name: 'landing'})
       }
+
       this.$store.dispatch('getTeam', this.$store.getters.self.info.team.id)
     }
   }

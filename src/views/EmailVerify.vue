@@ -58,6 +58,12 @@
             this.err_msg = error.body.detail
           })
       }
+    },
+    beforeCreate () {
+      // redirect login user
+      if (this.$store.getters.login_status) {
+        this.$router.push({name: 'landing'})
+      }
     }
   }
 </script>

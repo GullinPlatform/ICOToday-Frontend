@@ -69,7 +69,7 @@
     },
     beforeCreate () {
       // redirect login user
-      if (this.$store.login_status) {
+      if (this.$store.getters.login_status) {
         this.$router.push({name: 'landing'})
       }
     }

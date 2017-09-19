@@ -39,7 +39,7 @@ export default {
       .catch((error) => Promise.reject(error))
   },
   resendConfirmEmail () {
-    return Vue.http.get(API_ROOT + 'account/email_verify/', {}, {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
+    return Vue.http.post(API_ROOT + 'account/email_verify/', {}, {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
@@ -50,6 +50,11 @@ export default {
   },
   invitedGetUser (token) {
     return Vue.http.get(API_ROOT + 'account/invited_signup/' + token + '/')
+      .then((response) => Promise.resolve(response.data))
+      .catch((error) => Promise.reject(error))
+  },
+  invitedResendEmail (token) {
+    return Vue.http.post(API_ROOT + 'account/invited_resend/' + token + '/')
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
@@ -73,11 +78,17 @@ export default {
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
-  forgetPasswordChangePassword (formData) {
+  forgetPasswordResetPassword (formData) {
     return Vue.http.put(API_ROOT + 'account/forget/' + formData.token + '/', formData)
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
+  changePassword () {
+    return Vue.http.get(API_ROOT + 'account/change_pass/', {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
+      .then((response) => Promise.resolve(response.data))
+      .catch((error) => Promise.reject(error))
+  },
+
   // Load User Data
   getSelf () {
     return Vue.http.get(API_ROOT + 'account/me/', {headers: {Authorization: 'TOKEN ' + getCookie('token')}})

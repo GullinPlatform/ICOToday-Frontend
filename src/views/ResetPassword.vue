@@ -27,7 +27,7 @@
             </div>
           </div>
           <div class="col-12 text-center text-sm-right">
-            <button class="btn btn-primary margin-bottom-none" @click="forgetPasswordChangePassword()">Reset</button>
+            <button class="btn btn-primary margin-bottom-none" @click="forgetPasswordResetPassword()">Reset</button>
           </div>
         </div>
       </div>
@@ -79,13 +79,13 @@
       }
     },
     methods: {
-      forgetPasswordChangePassword () {
+      forgetPasswordResetPassword () {
         if (this.password1 === this.password2) {
           const formData = {
             token: this.$route.query.token,
             password: this.password1
           }
-          this.$store.dispatch('forgetPasswordChangePassword', formData)
+          this.$store.dispatch('forgetPasswordResetPassword', formData)
             .then(() => {
               this.success = true
             })

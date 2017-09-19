@@ -20,8 +20,8 @@ const state = {
   login_status: false,
   token: null,
 
-  white_list_email: ''
-
+  white_list_email: '',
+  resend_email_until: ''
 }
 
 // getters
@@ -82,6 +82,15 @@ const getters = {
   white_list_email: state => {
     return state.white_list_email
   },
+  able_to_resend: state => {
+    if (!state.resend_email_until)
+      return true
+    else if (moment().isAfter(state.resend_email_until))
+      return true
+    else
+      return false
+
+  }
 }
 
 // actions
@@ -210,7 +219,8 @@ const actions = {
         return Promise.reject(error)
       })
   },
-  resendConfirmEmail () {
+  resendConfirmEmail ({commit}) {
+    commit(types.SET_RESEND_EMAIL_TIME_LIMIT)
     return userApi.resendConfirmEmail()
       .then(() => {
         return Promise.resolve()
@@ -219,7 +229,26 @@ const actions = {
         return Promise.reject(error)
       })
   },
-  resendTeamInviteEmail () {},
+  invitedResendEmail ({commit}, token) {
+    commit(types.SET_RESEND_EMAIL_TIME_LIMIT)
+    return userApi.invitedResendEmail(token)
+      .then(() => {
+        return Promise.resolve()
+      })
+      .catch((error) => {
+        return Promise.reject(error)
+      })
+  },
+
+  changePassword ({commit}, formData) {
+    return userApi.changePassword(formData)
+      .then(() => {
+        return Promise.resolve()
+      })
+      .catch((error) => {
+        return Promise.reject(error)
+      })
+  },
 
   forgetPasswordSendEmail ({commit}, email) {
     return userApi.forgetPasswordSendEmail(email)
@@ -239,8 +268,8 @@ const actions = {
         return Promise.reject(error)
       })
   },
-  forgetPasswordChangePassword ({commit}, formData) {
-    return userApi.forgetPasswordChangePassword(formData)
+  forgetPasswordResetPassword ({commit}, formData) {
+    return userApi.forgetPasswordResetPassword(formData)
       .then(() => {
         return Promise.resolve()
       })
@@ -248,6 +277,7 @@ const actions = {
         return Promise.reject(error)
       })
   },
+
   sendTwoFactorEmail ({commit}) {
     return userApi.sendTwoFactorEmail()
       .then(() => {
@@ -428,6 +458,10 @@ const mutations = {
   },
   [types.CLEAN_WHITE_LIST_EMAIL] (state) {
     state.white_list_email = ''
+  },
+
+  [types.SET_RESEND_EMAIL_TIME_LIMIT] (state) {
+    state.resend_email_until = moment().add(1, 'minutes')
   },
 
   // post change

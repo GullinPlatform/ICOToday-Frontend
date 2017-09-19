@@ -19,7 +19,7 @@
               <div class="col-sm-8">
                 <div class="row">
                   <div class="col-sm-12">
-                    <input :value="user.info.last_name + ' ' +user.info.first_name" disabled
+                    <input :value="user.info.last_name + ' ' + user.info.first_name" disabled
                            class="form-control">
                   </div>
                 </div>
@@ -65,7 +65,15 @@
           <div class="card-body">
             <h3 class="card-title"><i class="fa fa-times"></i> Ooops, Something went wrong</h3>
             <p class="text-danger">Error Message: {{err_msg}}</p>
-            <p>Tips: Did you use the right URL?</p>
+            <p v-if="err_msg!='Token Expired'">Tips: Did you use the right URL?</p>
+            <button class="btn btn-primary"
+                    @click="invitedResendEmail()"
+                    :disabled="sending || !able_to_resend"
+                    v-if="err_msg==='Token Expired'">
+              <span v-if="!sending && able_to_resend">Resend Invitation Email</span>
+              <span v-else-if="sending && able_to_resend">Sending</span>
+              <span v-else-if="!able_to_resend">Sent</span>
+            </button>
           </div>
         </div>
       </div>
@@ -90,7 +98,8 @@
         password2: '',
 
         pass_mismatch: false,
-        err_msg: ''
+        err_msg: '',
+        sending: false
       }
     },
     methods: {
@@ -110,6 +119,22 @@
           this.pass_mismatch = true
           this.err_msg = 'Password Mismatch'
         }
+      },
+      invitedResendEmail () {
+        if (this.sending || !this.able_to_resend)
+          return
+
+        this.sending = true
+        this.$store.dispatch('invitedResendEmail', this.$route.query.token)
+          .then(() => {
+            this.sending = false
+            this.$store.dispatch('toastr', {type: 'success', title: 'Email Sent', message: 'Please check your inbox.'})
+          })
+          .catch((error) => {
+            this.sending = false
+            this.loaded = true
+            this.err_msg = error.body.detail
+          })
       }
     },
     computed: {
@@ -125,6 +150,9 @@
       login_status () {
         return this.$store.getters.login_status
       },
+      able_to_resend () {
+        return this.$store.getters.able_to_resend
+      }
     },
     created () {
       if (!this.$route.query.hasOwnProperty('token')) {
@@ -144,7 +172,7 @@
     },
     beforeCreate () {
       // redirect login user
-      if (this.$store.login_status) {
+      if (this.$store.getters.login_status) {
         this.$router.push({name: 'landing'})
       }
     }
