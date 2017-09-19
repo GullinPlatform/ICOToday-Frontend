@@ -7806,16 +7806,20 @@ video {
   font-size: 175px;
 }
 
-.card-new-layout {
+.card-new-layout{
   background-color: #fff;
-  border: .5px solid #f0f0f0;
-  border-radius: 5px;
   padding: 20px;
+  border: 1px solid #f0f0f0;
+  border-radius: 5px;
   margin-bottom: 20px;
 }
 
-.card-new-text {
+.card-new-text{
   padding: 20px;
   font-size: 15px;
 }
 
+.card-new-heading{
+  font-size: 15px;
+  text-transform: uppercase;
+}
