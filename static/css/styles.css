@@ -6026,11 +6026,11 @@ video {
 }
 
 .toolbar {
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 100%;
-  z-index: 5;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    z-index: 5;
 }
 
 .toolbar .inner {
@@ -6253,9 +6253,9 @@ video {
 }
 
 @media (max-width: 1070px) {
-  .offcanvas-toggle.menu-toggle {
-    display: table-cell;
-  }
+    .offcanvas-toggle.menu-toggle {
+        display: table-cell;
+    }
 }
 
 @media (max-width: 576px) {
@@ -6264,9 +6264,9 @@ video {
     padding-left: 15px;
   }
 
-  .offcanvas-toggle {
-    width: 56px;
-  }
+    .offcanvas-toggle {
+        width: 56px;
+    }
 }
 
 .page-title {
@@ -6369,10 +6369,10 @@ video {
 }
 
 .offcanvas-wrapper {
-  position: relative;
-  min-height: 50vh;
-  background-color: #ffffff;
-  z-index: 10;
+    position: relative;
+    min-height: 50vh;
+    background-color: #ffffff;
+    z-index: 10;
 }
 
 .offcanvas-container {
