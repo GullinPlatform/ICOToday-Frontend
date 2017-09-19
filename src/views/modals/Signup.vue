@@ -63,7 +63,7 @@
 
                         <div class="form-check">
                             <label class="form-check-label">
-                                <input type="checkbox" id="check" name="check" v-model="check" required class="form-check-input">
+                                <input type="checkbox" id="check" @keyup.enter="getToken($event)" name="check" v-model="check" required class="form-check-input">
                                 I Agree with
                                 <router-link :to="{name:'terms', query:{type:'terms'}}">ICOToday User Contract.</router-link>
                             </label>

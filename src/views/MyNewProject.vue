@@ -30,9 +30,9 @@
             <div v-else>
               <button type="button" class="mb-1 btn btn-secondary">{{icon.name}}</button>
               <button type="button" class="mb-1 btn btn-secondary" @click="removeFile()">
-                                <span>
-                                    <i class="fa fa-times"></i> Remove
-                                </span>
+                <span>
+                    <i class="fa fa-times"></i> Remove
+                </span>
               </button>
             </div>
           </div>
@@ -43,14 +43,13 @@
             <select class="form-control" v-model="category">
               <option value="" selected>-- Choose Category --</option>
               <option value="Platform">Platform</option>
-              <option value="Cryptocurrency">Cryptocurrency</option>
-              <option value="Businessservices">Businessservices</option>
+              <option value="Business Services">Business Services</option>
               <option value="Internet">Internet</option>
               <option value="Investment">Investment</option>
               <option value="Entertainment">Entertainment</option>
               <option value="Banking">Banking</option>
               <option value="Software">Software</option>
-              <option value="Realestate">Realestate</option>
+              <option value="Real Estate">Real Estate</option>
               <option value="Casino&Gambling">Casino&Gambling</option>
               <option value="Communication">Communication</option>
               <option value="Tourism">Tourism</option>

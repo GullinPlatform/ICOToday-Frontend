@@ -6,16 +6,16 @@
           <h4 class="modal-title">
             Login
           </h4>
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <button type="button" class="close"  data-dismiss="modal" aria-hidden="true">&times;</button>
         </div>
         <div class="modal-body">
           <div>
             <div class="form-group">
-              <input type="email" v-model="email" class="form-control email" placeholder="Email" required>
+              <input type="email" v-model="email" @change="error_message=''" class="form-control email" placeholder="Email" required>
             </div>
             <div class="form-group">
-              <input type="password" @keyup.enter="login($event)" v-model="password" class="form-control password" placeholder="Password" required>
-              <p class="text-danger">{{errorMsg}}</p>
+              <input type="password" @keyup.enter="login($event)" v-model="password" @change="error_message=''" class="form-control password" placeholder="Password" required>
+              <p class="text-danger">{{error_message}}</p>
             </div>
             <a @click="login($event)" class="btn btn-primary text-white">Login</a>
           </div>
@@ -44,7 +44,7 @@ export default {
     return {
       email: '',
       password: '',
-      errorMsg: '',
+      error_message: '',
     }
   },
   methods: {
@@ -56,7 +56,8 @@ export default {
       }
       this.$store.dispatch('login', formData)
         .catch(() => {
-          this.errorMsg = 'Unable to login using provided email and password'
+          this.error_message = 'Unable to login using provided email and password'
+          this.password = ''
         })
 
     },

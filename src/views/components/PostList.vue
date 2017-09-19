@@ -6,7 +6,7 @@
           Company
         </div>
         <div class="col-sm-1 pl-0">
-          Type
+          Category
         </div>
         <div class="col-sm-2">
           Time
@@ -37,7 +37,7 @@
           <div class="col-sm-3">
             <div class="row">
               <div class="col-sm-5" style="padding-left:0"><h6>{{project.title}}</h6></div>
-              <div class="col-sm-7"><span class="badge badge-sm badge-default">{{project.category}}</span>
+              <div class="col-sm-7">
               </div>
             </div>
             <div class="row product-short-descr">
@@ -45,12 +45,7 @@
             </div>
           </div>
           <div class="col-sm-1 pl-0">
-                        <span class="product-price" v-if="project.type===0">
-                            Pre-ICO
-                        </span>
-            <span class="product-price" v-else>
-                            ICO
-                        </span>
+            <span class="badge badge-sm badge-default">{{project.category}}</span>
           </div>
           <div class="col-sm-2">
             <p class="product-price">
@@ -69,8 +64,8 @@
             </p>
           </div>
           <div class="col-sm-2">
-                    <span class="text-bold text-primary ml-2"
-                          v-if="project.rating">{{project.rating}}/100</span>
+            <span class="text-bold text-primary ml-2"
+                  v-if="project.rating">{{project.rating}}/100</span>
             <span class="text-bold text-primary ml-2" v-else>No Score</span>
           </div>
         </div>

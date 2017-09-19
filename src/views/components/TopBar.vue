@@ -1,6 +1,6 @@
 <template>
-  <div class="navbar-padding">
-    <header class="navbar navbar-stuck">
+  <div>
+    <header class="navbar navbar-stuck navbar-padding">
       <!-- Main Navigation-->
       <nav class="site-menu">
         <div class="site-branding">
@@ -51,8 +51,8 @@
                       <a class="dropdown-product-title" href="shop-single.html">Unionbay Park</a>
                       <span class="dropdown-product-details">Time</span>
                       <span class="dropdown-product-remove float-right">
-                                            <i class="icon-cross"></i>
-                                        </span>
+                          <i class="icon-cross"></i>
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -85,7 +85,7 @@
                     </router-link>
                   </li>
                   <li>
-                    <router-link :to="{name:'me_marked'}" class="dropdown-item">
+                    <router-link :to="{name:'me_marked'}" class="dropdown-item" v-if="me.type===1">
                       <i class="fa fa-bitcoin"></i> Subscribed ICOs
                     </router-link>
                   </li>
@@ -124,7 +124,7 @@
       </nav>
       <!-- Toolbar-->
     </header>
-    <div class="alert alert-warning alert-dismissible fade show text-center" v-if="login_status && !me.is_verified">
+    <div class="alert alert-warning alert-dismissible alert-top fade show text-center" v-if="login_status && !me.is_verified">
       <span class="alert-close" data-dismiss="alert"></span>
       <i class="icon-bell"></i>&nbsp;&nbsp;<strong>Account Unverified:</strong>
       Please verify your account to have fully access to ICOToday's great features.
@@ -190,4 +190,9 @@
   .navbar-padding {
     padding-bottom: 84px;
   }
+
+  .alert-top {
+    margin-top: 84px;
+  }
+
 </style>
