@@ -44,55 +44,37 @@
         <div class="col-lg-3 col-md-4 col-sm-6"
              v-if="promotion_loaded"
              v-for="project in promo_posts">
-          <!--<div class="product-card">-->
-          <!--<a class="product-thumb" href="javascript:void(0)" @click="postModal(project.id)">-->
-          <!--<img :src="project.promote_image" alt="Logo">-->
-          <!--</a>-->
-          <!--<h3 class="product-title text-bold text-left mb-0 mt-2">-->
-          <!--{{project.title}}-->
-          <!--<span class="badge badge-primary" v-if="project.rating">{{project.rating}}/100</span>-->
-          <!--<span class="badge badge-primary" v-else>No Score</span>-->
-          <!--</h3>-->
-          <!--<span class="text-muted">-->
-          <!--{{project.description_short}}-->
-          <!--</span>-->
-          <!--<br>-->
-          <!--<span class="text-bold">-->
-          <!--<i class="fa fa-clock-o"></i> {{timeCounter(project.start_datetime, project.end_datetime)}}-->
-          <!--</span>-->
+          <div class="product-card-radius fixed-height box-shadow">
+            <a class="post-thumb" href="javascript:void(0)" @click="postModal(project.id)">
+              <img :src="project.promote_image" alt="Logo">
+              <div class="post-categories-top font-family-nav"><span class="badge badge-sm badge-default">cryptocurrency</span></div>
 
-          <!--<button class="btn btn-outline-danger btn-sm btn-block mb-0"-->
-          <!--@click="markPost(project.id, true)" v-if="!inSubscribeList(project.id)">-->
-          <!--<span><i class="fa fa-star-o"></i> SUBSCRIBE</span>-->
-          <!--</button>-->
-          <!--<button class="btn btn-danger btn-sm btn-block mb-0"-->
-          <!--@click="markPost(project.id, false)" v-else>-->
-          <!--<span><i class="fa fa-check"></i> SUBSCRIBED</span>-->
-          <!--</button>-->
-          <!--</div>-->
+            </a>
+
+            <h3 class="product-title text-bold text-left mb-0 mt-2 font-18">
+              {{project.title}}
+              <span class="badge badge-primary" v-if="project.rating">{{project.rating}}/100</span>
+              <span class="badge badge-primary" v-else>No Score</span>
+            </h3>
+            <div class="text-box-short">
+            <span class="text-muted">
+                            {{project.description_short}}
+                        </span>
+            </div>
+            <br>
+            <span class="text-bold">
+                            <i class="fa fa-clock-o"></i> {{timeCounter(project.start_datetime, project.end_datetime)}}
+                        </span>
+            <button class="btn btn-outline-danger btn-sm btn-block mb-0"
+                    @click="markPost(project.id, true)" v-if="!inSubscribeList(project.id)">
+              <span class="text-gray"><i class="fa fa-star-o"></i> SUBSCRIBE</span>
+            </button>
+            <button class="btn btn-outline-danger btn-sm btn-block mb-0"
+                    @click="markPost(project.id, false)" v-else>
+              <span><i class="fa fa-check"></i> SUBSCRIBED</span>
+            </button>
 
 
-          <div class="article promo-project-tile promo-project-border-default has-promo-project-thumbnail format-image">
-            <div class="header promo-project-header"><a class="promo-project-thumb" href="singlePostRightSidebar.html"><img src="../../static/img/team/john_pic3.png" alt=""></a>
-              <div class="promo-project-categories font-family-nav"><span class="text-gray"></span><a href="#" style="background-color: #ff542c; color: #ffffff;">Marketing</a></div>
-              <span class="promo-project-format">
-                <i class="fa fa-star"></i>
-              </span>
-              <div class="svg-bg promo-project-border-default-right">
-                <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-                  <path d="m 0 100 l 100 -100, 0 100, -100 0 z" fill="white"></path>
-                </svg>
-              </div>
-            </div>
-            <div class="promo-project-body">
-              <h3 class="promo-project-title">GoodCOin</h3>
-              Curabitur egestas pharetra augue quis tristique. Proin nec urna ultricies
-            </div>
-            <div class="footer promo-project-footer font-family-nav"><a class="promo-project-author navi-link-hover-color" href="#"><span class="promo-project-author-ava"><img src="../../static/img/team/john_pic2.png" alt=""></span><span class="promo-project-author-name">John Dorian</span></a>
-              <div class="promo-project-meta font-family-nav"><a class="promo-project-comments navi-link-hover-color" href="#"><i class="si si-comment"></i> 0</a><a class="promo-project-date navi-link-hover-color" href="#"><i class="si si-time"></i> May 25, 2017</a><a
-                class="edit-link navi-link-hover-color" href="#"><i
-                class="si si-edit"></i></a></div>
-            </div>
           </div>
 
         </div>
@@ -554,57 +536,41 @@
 
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
-  .promo-project-tile {
-    margin-bottom: 30px;
+  .fixed-height {
+    height: 440px;
+
+  }
+
+  .text-box-short{
+
+    text-overflow:ellipsis;
+    height:110px;
+    overflow:scroll;
+
+
+  }
+
+  .box-shadow{
+
     transition: box-shadow .4s;
-    border-radius: 5px;
-    background-color: #fff;
+
   }
 
-  .promo-project-border-default {
-    border: 1px solid #e7e7e7;
+  .product-card:hover {
+    box-shadow: 0 0 11px rgba(33,33,33,.2);
   }
-
-  .has-promo-project-thumbnail .promo-project-header {
-    position: relative;
-    margin: -1px;
-  }
-
-  .promo-project-header {
-    position: relative;
-  }
-
-  .promo-project-body {
-    padding: 24px;
-  }
-
-  .promo-project-footer {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-flow: row wrap;
-    flex-flow: row wrap;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    -ms-flex-line-pack: center;
-    align-items: center;
-    padding: 0 24px 20px;
-  }
-
-  .promo-project-title > a {
-    font-weight: bold;
-    text-decoration: none;
-  }
-
-  .promo-project-thumb {
+  .post-thumb{
     display: block;
     position: relative;
-    border-radius: 5px 5px 0 0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
     overflow: hidden;
   }
-
-  .has-promo-project-thumbnail .promo-project-header .promo-project-categories {
+  .post-categories{
     position: absolute;
     top: 0;
     left: 0;
@@ -613,100 +579,325 @@
     padding-right: 70px;
     padding-left: 24px;
   }
-
-  .has-promo-project-thumbnail .promo-project-format {
-    top: auto;
-    bottom: 10px;
-  }
-
-  .has-promo-project-thumbnail .promo-project-format {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: #fff;
-    color: #404040;
-    line-height: 40px;
-    box-shadow: 0 5px 9px 0 rgba(0, 0, 0, 0.2);
-  }
-
-  .promo-project-format {
-    display: block;
+  .post-categories-top{
     position: absolute;
-    top: 24px;
-    right: 24px;
-    font-size: 24px;
-    text-align: center;
-    z-index: 4;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-top: 12px;
+    padding-right: 80px;
+    padding-left: 12px;
   }
 
-  .promo-project-header .svg-bg {
+  .btn-block-small{
     display: block;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    height: 30px;
-    overflow: hidden;
-    z-index: 3;
-    -moz-border-right-colors: #e7e7e7;
-  }
-
-  .promo-project-border-default-right {
-    border-right: 1px solid #e7e7e7;
-  }
-
-  .promo-project-header .svg-bg svg {
-    width: 100%;
-    height: 100%;
-  }
-
-  .promo-project-categories > a {
-    display: inline-block;
-    margin-right: 12px;
+    width: 55%;
+    margin-top: 0px;
+    margin-right: 0 !important;
     margin-bottom: 12px;
-    padding: 0 12px;
-    transition: all .3s;
-    border-radius: 11px;
-    font-size: 10px;
-    font-weight: bold;
-    letter-spacing: .1em;
-    line-height: 21px;
-    text-transform: uppercase;
-    text-decoration: none;
+    margin-left: 0 !important;
+    padding-right: 1px !important;
+    padding-left: 1px !important;
   }
 
-  .promo-project-footer .promo-project-author {
-    color: #999;
+  .btn-outline-danger-red{
+    border-color: #ff5252;
+    background-color: #ff5252;
+    color: #ff5252;
+
+
+  }
+
+  .btn-sm-top {
+    height: 30px;
+    padding: 0 18px;
+    border-radius: 2px;
     font-size: 12px;
-    text-decoration: none;
+    line-height: 20px;
+
+
+  .text-gray{
+    color: #FFFFFF !important;
   }
 
-  .promo-project-footer .promo-project-author .promo-project-author-ava {
-    width: 42px;
-    height: 42px;
-    margin-right: 5px;
-    border-radius: 50%;
-    overflow: hidden;
+
+  .fw-section {
+    position: relative;
+    width: 100%;
+    background: {
+      position: 50% 50%;
+      repeat: no-repeat;
+      size: cover;
+    }
+
+    // Overlay
+
+    // Content
+    > .container,
+    > .container-fluid {
+      position: relative;
+      z-index: 5;
+    }
+  }
+  .container-fluid {
+    padding: {
+      right: 30px;
+      left: 30px;
+    }
+
+    // Full height
+    .full-height { height: 100vh; }
   }
 
-  .promo-project-footer .promo-project-author .promo-project-author-ava, .promo-projectt-footer .promo-project-author .promo-project-author-name {
-    display: inline-block;
-    vertical-align: middle;
+  // Equal Height Columns
+  .layout-boxed-equal,
+  .layout-full-equal {
+    .row {
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      flex: 1 1 auto;
+      -webkit-flex-flow: row wrap;
+      flex-flow: row wrap;
+      align-content: flex-start;
+      flex: 0;
+      &::before { display: none; } // Safari fix
+    }
   }
 
-  .promo-project-meta {
-    padding: 5px 0;
-    font-size: 12px;
+  // No Gap Version
+  .section-no-gap {
+    > .container,
+    > .container-fluid {
+      padding: {
+        right: 0;
+        right: 0;
+        left: 0;
+      }
+      > .row {
+        margin: {
+          right: 0 !important;
+          left: 0 !important;
+        }
+      }
+      > .row  > [class^='col-'] {
+        padding: {
+          right: 0 !important;
+          left: 0 !important;
+        }
+      }
+      > .row  > [class^='col-'] > .row {
+        margin: {
+          right: 0 !important;
+          left: 0 !important;
+        }
+      }
+    }
   }
 
-  .promo-project-meta a:first-child {
-    margin-left: 0;
+
+  // Masonry Grid
+  // -----------------------------------------------------
+  .masonry-grid {
+    position: relative;
+
+    // Gap Width
+    .gutter-sizer { width: 30px; }
+
+    // Items
+    .grid-item {
+      margin-bottom: 30px;
+      .post-tile,
+      .portfolio-tile { margin-bottom: 0; }
+    }
+
+    // 1 Column
+    &.col-1 {
+      .gutter-sizer { width: 0; }
+      .grid-sizer,
+      .grid-item { width: 100%; }
+    }
+
+    // 2 Columns
+    &.col-2 {
+      .grid-sizer,
+      .grid-item { width: calc((100% / 2) - 15px); }
+    }
+
+    // 3 Columns
+    &.col-3 {
+      .grid-sizer,
+      .grid-item { width: calc((100% / 3) - 20px); }
+    }
+
+    // 4 Columns
+    &.col-4 {
+      .grid-sizer,
+      .grid-item { width: calc((100% / 4) - 22.5px); }
+    }
+
+    // 5 Columns
+    &.col-5 {
+      .grid-sizer,
+      .grid-item { width: calc((100% / 5) - 24px); }
+    }
+
+    // 6 Columns
+    &.col-6 {
+      .grid-sizer,
+      .grid-item { width: calc((100% / 6) - 25px); }
+    }
+
+    // Media Queries
+    @media screen and (max-width: 1100px) {
+      &.col-6,
+      &.col-5,
+      &.col-4 {
+        .grid-sizer,
+        .grid-item { width: calc((100% / 3) - 20px); }
+      }
+    }
+    @media screen and (max-width: 820px) {
+      &.col-6,
+      &.col-5,
+      &.col-4,
+      &.col-3 {
+        .grid-sizer,
+        .grid-item { width: calc((100% / 2) - 15px); }
+      }
+    }
+    @media screen and (max-width: 560px) {
+      &.col-6,
+      &.col-5,
+      &.col-4,
+      &.col-3,
+      &.col-2 {
+        .gutter-sizer { width: 0; }
+        .grid-sizer,
+        .grid-item { width: 100%; }
+      }
+    }
+
+    // No Gap Version
+    &.grid-no-gap {
+      .gutter-sizer { width: 0; }
+      .grid-item { margin-bottom: 0; }
+      &.col-2 {
+        .grid-sizer,
+        .grid-item { width: (100% / 2); }
+      }
+      &.col-3 {
+        .grid-sizer,
+        .grid-item { width: (100% / 3); }
+      }
+      &.col-4 {
+        .grid-sizer,
+        .grid-item { width: (100% / 4); }
+      }
+      &.col-5 {
+        .grid-sizer,
+        .grid-item { width: (100% / 5); }
+      }
+      &.col-6 {
+        .grid-sizer,
+        .grid-item { width: (100% / 6); }
+      }
+      @media screen and (max-width: 1100px) {
+        &.col-6,
+        &.col-5,
+        &.col-4 {
+          .grid-sizer,
+          .grid-item { width: (100% / 3); }
+        }
+      }
+      @media screen and (max-width: 820px) {
+        &.col-6,
+        &.col-5,
+        &.col-4,
+        &.col-3 {
+          .grid-sizer,
+          .grid-item { width: (100% / 2); }
+        }
+      }
+      @media screen and (max-width: 560px) {
+        &.col-6,
+        &.col-5,
+        &.col-4,
+        &.col-3,
+        &.col-2 {
+          .grid-sizer,
+          .grid-item { width: 100%; }
+        }
+      }
+    }
   }
 
-  .promo-project-meta a {
-    display: inline-block;
-    margin-left: 10px;
-    color: #999;
-    text-decoration: none;
+  // Justified Grid
+    .si-justified-row {
+      display: -ms-flexbox;
+      display: flex;
+      &:first-child .si-justified-item {
+        @media only screen and (min-width: 991px) {
+          border-top: 0;
+        }
+      }
+    }
+    .si-justified-item {
+      width: 25%;
+      &:first-child {
+        border-left: 0;
+      }
+    }
+      .si-justified-item {
+        width: 50%;
+        &:nth-child(3) { border-left: 0; }
+      }
+      .si-justified-row {
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        &:first-child {
+          .si-justified-item {
+            &:first-child { border-top: 0; }
+            @media only screen and (min-width: 768px) {
+              &:nth-child(2) { border-top: 0; }
+            }
+          }
+        }
+      }
+    }
+      .si-justified-item {
+        width: 100%;
+        border-left: 0;
+      }
+
+  .masonry-grid.blog-posts {
+    .has-post-thumbnail .svg-bg { display: block; }
+    &.col-1 .has-post-thumbnail .svg-bg { display: none; }
+    &:not(.col-1) .has-post-thumbnail .post-format {
+      top: auto;
+      bottom: 10px;
+      @media screen and (max-width: 560px) { bottom: 10px; }
+      @media screen and (max-width: 360px) { bottom: 5px; }
+    }
   }
+
+  .product-card-radius{
+    display: block;
+    position: relative;
+    width: 100%;
+    padding: 18px;
+    border: 1px solid #e1e7ec;
+    border-radius: 7px;
+    background-color: #ffffff;
+  }
+
+
+
+.font-18{
+  font-size:19px;
+}
+
+
 </style>
