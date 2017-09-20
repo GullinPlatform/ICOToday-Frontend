@@ -2,7 +2,7 @@
 <template >
     <div class="light-grey">
     <!-- Page Content-->
-    <div class="container padding-bottom-3x mb-2 mt-md-3 pl-3 pr-3 " style="padding-top:60px;">
+    <div class="container padding-bottom-top-3x pl-3 pr-3">
         <div class="row card-new-layout">
             <div class="col-md-8 pl-md-0 pr-md-0">
 
@@ -493,3 +493,10 @@
     },
   }
 </script>
+
+<style lang="scss" scoped>
+  .padding-bottom-top-3x {
+    padding-bottom: 48px !important;
+    padding-top:20px !important;
+  }
+</style>
