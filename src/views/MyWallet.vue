@@ -7,7 +7,7 @@
       <div class="col-md-8 margin-bottom-2x">
         <h6 class="text-muted text-normal text-uppercase">My Wallet</h6>
         <hr class="margin-bottom-1x">
-        <div class="table-responsive">
+        <div class="table-responsive table-wrapper">
           <table class="table">
             <thead class="thead-default">
             <tr>
@@ -138,4 +138,16 @@
     vertical-align: middle;
     text-align: center !important;
   }
+
+  .table, .table th {
+    margin: 0;
+    border-top: 0;
+  }
+
+  .table-wrapper {
+    overflow: hidden;
+    border-radius: 7px;
+    border: 1px solid #e9ecef !important;
+  }
+
 </style>

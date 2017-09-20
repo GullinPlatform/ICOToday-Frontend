@@ -50,7 +50,10 @@
                    :class="{active: $route.name==='me_marked'}">
         <i class="fa fa-angle-right"></i> Subscribed ICO Projects
       </router-link>
-
+      <router-link :to="{name:'me_wallet'}" class="list-group-item"
+                   :class="{active: $route.name==='me_wallet'}">
+        <i class="fa fa-angle-right"></i> My Wallet
+      </router-link>
       <router-link :to="{name:'me_team'}" class="list-group-item" v-if="me.type===0"
                    :class="{active: $route.name==='me_team'}">
         <i class="fa fa-angle-right"></i> My Team

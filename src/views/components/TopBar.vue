@@ -34,20 +34,26 @@
           <div class="inner">
             <div class="tools">
               <div class="notification" v-if="login_status"><a href="javascript:void(0)"></a>
-                <i class="fa fa-bell-o"></i>
+                <i class="icon-bell"></i>
                 <span class="count" v-if="notifications.length">{{notifications.length}}</span>
                 <div class="toolbar-dropdown" v-if="notifications.length">
-                  <div class="toolbar-dropdown-group">
-                    <a class="btn btn-sm btn-block btn-secondary">Mark all as read</a>
-                  </div>
-                  <div class="dropdown-product-item">
-                    <div class="dropdown-product-info">
-                      <a class="dropdown-product-title" href="shop-single.html">Unionbay Park</a>
-                      <span class="dropdown-product-details">Time</span>
-                      <span class="dropdown-product-remove float-right">
-                          <i class="icon-cross"></i>
+                  <div class="dropdown-notification-item" v-for="notification in notifications">
+                    <div class="dropdown-notification-thumb">
+                      <img src="../../../static/img/account/default.jpg">
+                    </div>
+                    <div class="dropdown-notification-info">
+                      <p class="dropdown-notification-content"> <span class="text-bold">ICOToday </span>
+                        <router-link :to="{name:'user', params:{}}">{{notification.content}}</router-link>
+                      </p>
+                      <span class="dropdown-notification-time float-left">2 days ago</span>
+                      <span class="badge badge-default badge-pill dropdown-notification-remove">
+                         Dismiss
                       </span>
                     </div>
+                  </div>
+                  <div class="toolbar-dropdown-group">
+                    <a class="dropdown-notification-button float-left">Mark all as read</a>
+                    <a class="dropdown-notification-button float-right">See all</a>
                   </div>
                 </div>
                 <div class="toolbar-dropdown" v-else>
