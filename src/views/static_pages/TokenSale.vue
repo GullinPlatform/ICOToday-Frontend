@@ -1,5 +1,5 @@
 <template>
-  <div class="light-grey">
+  <div class="light-grey-fixed">
     <!-- Begin Jumbotron -->
     <div id="home" class="jumbotron jumbotron-register">
       <div id="particles-js"></div><!-- /.particles div -->
@@ -704,6 +704,10 @@
         }
       }
     }
+  }
+  .light-grey-fixed{
+    background-color: #f6f6f6;
+    margin-bottom: -50px;
   }
 
 </style>
