@@ -124,8 +124,8 @@
             <vue-datetime-picker class="vue-start-picker" id="start-picker"
                                  ref="startPicker"
                                  placeholder="Start Time"
-                                 v-model="start_datetime"
-                                 @change="onStartDatetimeChanged">
+                                 :config="{sideBySide:true}"
+                                 v-model="start_datetime">
             </vue-datetime-picker>
           </div>
         </div>
@@ -135,8 +135,8 @@
             <vue-datetime-picker class="vue-end-picker" id="end-picker"
                                  ref="endPicker"
                                  placeholder="End Time"
-                                 v-model="end_datetime"
-                                 @change="onEndDatetimeChanged">
+                                 :config="{sideBySide:true}"
+                                 v-model="end_datetime">
             </vue-datetime-picker>
           </div>
         </div>
@@ -291,13 +291,13 @@
     },
     methods: {
       onWhitePaperChange (e) {
-        var file = e.target.files || e.dataTransfer.files
+        const file = e.target.files || e.dataTransfer.files
         if (!file.length) return
         this.white_paper = file[0]
         this.white_paper_loaded = true
       },
       onIconChange (e) {
-        var file = e.target.files || e.dataTransfer.files
+        const file = e.target.files || e.dataTransfer.files
         if (!file.length) return
         this.icon = file[0]
         this.icon_loaded = true
@@ -306,15 +306,6 @@
         this.icon = null
         this.icon_loaded = false
       },
-      onStartDatetimeChanged (newStart) {
-        const endPicker = this.$refs.endPicker.control
-        endPicker.minDate(newStart)
-      },
-      onEndDatetimeChanged (newEnd) {
-        const startPicker = this.$refs.startPicker.control
-        startPicker.maxDate(newEnd)
-      },
-
       postNewPost () {
         // return if required fields left empty
         if (!(this.title && this.description_short && this.icon && this.category && this.description_full && this.type)) {
@@ -392,4 +383,39 @@
 
 <style scoped>
   @import url("/static/css/glyphicons.css");
+  .dropzone-area {
+    display: block;
+    width: 100%;
+    font-size: 1rem;
+    line-height: 1.25;
+    color: #464a4c;
+    height: 100px;
+    border: 1px dashed #464a4c;
+    border-radius: 22px;
+  }
+
+  .dropzone-area input {
+    position: absolute;
+    cursor: pointer;
+    top: 0px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+  }
+
+  .dropzone-text {
+    position: absolute;
+    top: 50%;
+    text-align: center;
+    transform: translate(0, -50%);
+    width: 100%;
+  }
+
+  .dropzone-text span {
+    display: block;
+    line-height: 1.9;
+  }
 </style>

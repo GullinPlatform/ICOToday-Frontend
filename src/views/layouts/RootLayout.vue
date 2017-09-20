@@ -53,41 +53,4 @@
     },
   }
 </script>
-<style>
-    .dropzone-area {
-        display: block;
-        width: 100%;
-        font-size: 1rem;
-        line-height: 1.25;
-        color: #464a4c;
-        height: 100px;
-        border: 1px dashed #464a4c;
-        border-radius: 22px;
-    }
 
-    .dropzone-area input {
-        position: absolute;
-        cursor: pointer;
-        top: 0px;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        opacity: 0;
-    }
-
-    .dropzone-text {
-        position: absolute;
-        top: 50%;
-        text-align: center;
-        transform: translate(0, -50%);
-        width: 100%;
-    }
-
-    .dropzone-text span {
-        display: block;
-        font-family: Arial, Helvetica;
-        line-height: 1.9;
-    }
-</style>
