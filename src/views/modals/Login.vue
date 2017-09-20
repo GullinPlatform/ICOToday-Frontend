@@ -11,7 +11,7 @@
         <div class="modal-body">
           <div>
             <div class="form-group">
-              <input type="email" v-model="email" @change="error_message=''" class="form-control email" placeholder="Email" required>
+              <input type="email" v-model.trim="email" @change="error_message=''" class="form-control email" placeholder="Email" required>
             </div>
             <div class="form-group">
               <input type="password" @keyup.enter="login($event)" v-model="password" @change="error_message=''" class="form-control password" placeholder="Password" required>

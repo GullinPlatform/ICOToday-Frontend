@@ -19,13 +19,13 @@
                                 <div class="col-sm-6">
                                     <a class="btn btn-outline-primary" @click="type=0" v-show="type===1">
                                         ICO Company</a>
-                                    <a class="btn btn-primary  text-white" @click="type=0" v-show="type===0">
+                                    <a class="btn btn-primary text-white" @click="type=0" v-show="type===0">
                                         ICO Company</a>
                                 </div>
                                 <div class="col-sm-6">
                                     <a class="btn btn-outline-primary" @click="type=1" v-show="type===0">
                                         ICO Investor</a>
-                                    <a class="btn btn-primary  text-white" @click="type=1" v-show="type===1">
+                                    <a class="btn btn-primary text-white" @click="type=1" v-show="type===1">
                                         ICO Investor</a>
                                 </div>
                             </div>
@@ -47,7 +47,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <input v-model="email" type="text" class="form-control" name="email" placeholder="Email *"
+                            <input v-model.trim="email" type="text" class="form-control" name="email" placeholder="Email *"
                                    required>
                             <p class="text-danger font-bold">{{email_msg}}</p>
                         </div>

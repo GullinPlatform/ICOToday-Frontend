@@ -3891,6 +3891,11 @@ a.list-group-item {
   background-color: #ff5252;
 }
 
+.badge.badge-pill {
+  border: 1px solid #e1e7ec;
+  border-radius: 14px;
+}
+
 .list-group-item.active {
   border-color: #0da9ef;
   background-color: #0da9ef;
@@ -6156,12 +6161,8 @@ video {
   display: table;
   position: relative;
   width: 100%;
-  padding: 9px 0;
-  border-top: 1px dashed #d8e0e6;
-}
-
-.dropdown-product-item:first-child {
-  border-top: 0;
+  padding-bottom: 5px;
+  border-bottom: 1px dashed #d8e0e6;
 }
 
 .dropdown-product-item > .dropdown-product-thumb,
