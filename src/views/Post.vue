@@ -1,6 +1,6 @@
 
 <template >
-    <div class="light-grey">
+    <div class="light-grey-fixed">
     <!-- Page Content-->
     <div class="container padding-bottom-top-3x pl-3 pr-3">
         <div class="row card-new-layout">
@@ -498,5 +498,12 @@
   .padding-bottom-top-3x {
     padding-bottom: 48px !important;
     padding-top:20px !important;
+  }
+  .mt-5 {
+    margin-top: 3rem!important;  }
+
+  .light-grey-fixed{
+    background-color: #f9f9f9;
+    margin-bottom: -50px;
   }
 </style>
