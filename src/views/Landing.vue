@@ -44,32 +44,57 @@
         <div class="col-lg-3 col-md-4 col-sm-6"
              v-if="promotion_loaded"
              v-for="project in promo_posts">
-          <div class="product-card">
-            <a class="product-thumb" href="javascript:void(0)" @click="postModal(project.id)">
-              <img :src="project.promote_image" alt="Logo">
-            </a>
-            <h3 class="product-title text-bold text-left mb-0 mt-2">
-              {{project.title}}
-              <span class="badge badge-primary" v-if="project.rating">{{project.rating}}/100</span>
-              <span class="badge badge-primary" v-else>No Score</span>
-            </h3>
-            <span class="text-muted">
-                            {{project.description_short}}
-                        </span>
-            <br>
-            <span class="text-bold">
-                            <i class="fa fa-clock-o"></i> {{timeCounter(project.start_datetime, project.end_datetime)}}
-                        </span>
+          <!--<div class="product-card">-->
+          <!--<a class="product-thumb" href="javascript:void(0)" @click="postModal(project.id)">-->
+          <!--<img :src="project.promote_image" alt="Logo">-->
+          <!--</a>-->
+          <!--<h3 class="product-title text-bold text-left mb-0 mt-2">-->
+          <!--{{project.title}}-->
+          <!--<span class="badge badge-primary" v-if="project.rating">{{project.rating}}/100</span>-->
+          <!--<span class="badge badge-primary" v-else>No Score</span>-->
+          <!--</h3>-->
+          <!--<span class="text-muted">-->
+          <!--{{project.description_short}}-->
+          <!--</span>-->
+          <!--<br>-->
+          <!--<span class="text-bold">-->
+          <!--<i class="fa fa-clock-o"></i> {{timeCounter(project.start_datetime, project.end_datetime)}}-->
+          <!--</span>-->
 
-            <button class="btn btn-outline-danger btn-sm btn-block mb-0"
-                    @click="markPost(project.id, true)" v-if="!inSubscribeList(project.id)">
-              <span><i class="fa fa-star-o"></i> SUBSCRIBE</span>
-            </button>
-            <button class="btn btn-danger btn-sm btn-block mb-0"
-                    @click="markPost(project.id, false)" v-else>
-              <span><i class="fa fa-check"></i> SUBSCRIBED</span>
-            </button>
+          <!--<button class="btn btn-outline-danger btn-sm btn-block mb-0"-->
+          <!--@click="markPost(project.id, true)" v-if="!inSubscribeList(project.id)">-->
+          <!--<span><i class="fa fa-star-o"></i> SUBSCRIBE</span>-->
+          <!--</button>-->
+          <!--<button class="btn btn-danger btn-sm btn-block mb-0"-->
+          <!--@click="markPost(project.id, false)" v-else>-->
+          <!--<span><i class="fa fa-check"></i> SUBSCRIBED</span>-->
+          <!--</button>-->
+          <!--</div>-->
+
+
+          <div class="article promo-project-tile promo-project-border-default has-promo-project-thumbnail format-image">
+            <div class="header promo-project-header"><a class="promo-project-thumb" href="singlePostRightSidebar.html"><img src="../../static/img/team/john_pic3.png" alt=""></a>
+              <div class="promo-project-categories font-family-nav"><span class="text-gray"></span><a href="#" style="background-color: #ff542c; color: #ffffff;">Marketing</a></div>
+              <span class="promo-project-format">
+                <i class="fa fa-star"></i>
+              </span>
+              <div class="svg-bg promo-project-border-default-right">
+                <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+                  <path d="m 0 100 l 100 -100, 0 100, -100 0 z" fill="white"></path>
+                </svg>
+              </div>
+            </div>
+            <div class="promo-project-body">
+              <h3 class="promo-project-title">GoodCOin</h3>
+              Curabitur egestas pharetra augue quis tristique. Proin nec urna ultricies
+            </div>
+            <div class="footer promo-project-footer font-family-nav"><a class="promo-project-author navi-link-hover-color" href="#"><span class="promo-project-author-ava"><img src="../../static/img/team/john_pic2.png" alt=""></span><span class="promo-project-author-name">John Dorian</span></a>
+              <div class="promo-project-meta font-family-nav"><a class="promo-project-comments navi-link-hover-color" href="#"><i class="si si-comment"></i> 0</a><a class="promo-project-date navi-link-hover-color" href="#"><i class="si si-time"></i> May 25, 2017</a><a
+                class="edit-link navi-link-hover-color" href="#"><i
+                class="si si-edit"></i></a></div>
+            </div>
           </div>
+
         </div>
       </div>
     </section>
@@ -78,99 +103,96 @@
     <div class="container pb-6">
       <h1 class="text-left mb-30">ICO Projects</h1>
       <div class="row">
-        <!-- Main content -->
-        <div class="col-lg-12">
-          <ul class="nav nav-tabs md-4" role="tablist">
-            <li class="nav-item">
-              <a class="nav-link" href="javascript:void(0)" @click="status='active'" :class="{active:status==='active'}">Active</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="javascript:void(0)" @click="status='upcoming'" :class="{active:status==='upcoming'}">Upcoming</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="javascript:void(0)" @click="status='passed'" :class="{active:status==='passed'}">Passed</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="javascript:void(0)" @click="status=''" :class="{active:status===''}">All</a>
-            </li>
-          </ul>
+        <div class="col-lg-2">
+          <nav class="list-group">
+            <a class="list-group-item">IN TREND</a>
+            <a class="list-group-item" href="javascript:void(0)" @click="status='active'" :class="{active:status==='active'}">ACTIVE</a>
+            <a class="list-group-item" href="javascript:void(0)" @click="status='upcoming'" :class="{active:status==='upcoming'}">UPCOMING</a>
+            <a class="list-group-item" href="javascript:void(0)" @click="status='passed'" :class="{active:status==='passed'}">PASSED</a>
+            <a class="list-group-item" href="javascript:void(0)" @click="status=''" :class="{active:status===''}">ALL</a>
+          </nav>
         </div>
-      </div>
-      <div class="row mt-4">
-        <div class="col-lg-3">
-          <div class="card p-3 mb-3">
-            <section class="widget widget-links mb-3">
-              <h3 class="widget-title">Search</h3>
-              <div class="input-group form-group">
+        <div class="col-lg-10">
+          <div class="row">
+            <div class="col-lg-4">
+              <section class="widget widget-links mb-3">
+                <div class="input-group form-group">
                                 <span class="input-group-btn">
                                 <button>
                                     <i class="icon-search"></i>
                                 </button>
                                 </span>
-                <input class="form-control" v-model="keyword" placeholder="Search by Keyword">
-              </div>
-            </section>
-            <section class="widget widget-links mb-3">
-              <h3 class="widget-title">Category </h3>
-              <div class="input-group form-group">
-                <select class="form-control" v-model="category" required>
-                  <option value="" selected>-- Choose Category --</option>
-                  <option value="Platform">Platform</option>
-                  <option value="Cryptocurrency">Cryptocurrency</option>
-                  <option value="Businessservices">Businessservices</option>
-                  <option value="Internet">Internet</option>
-                  <option value="Investment">Investment</option>
-                  <option value="Entertainment">Entertainment</option>
-                  <option value="Banking">Banking</option>
-                  <option value="Software">Software</option>
-                  <option value="Realestate">Realestate</option>
-                  <option value="Casino&Gambling">Casino&Gambling</option>
-                  <option value="Communication">Communication</option>
-                  <option value="Tourism">Tourism</option>
-                  <option value="Media">Media</option>
-                  <option value="Health">Health</option>
-                  <option value="Retail">Retail</option>
-                  <option value="Sports">Sports</option>
-                  <option value="Infrastructure">Infrastructure</option>
-                  <option value="Energy">Energy</option>
-                  <option value="Charity">Charity</option>
-                  <option value="Education">Education</option>
-                  <option value="Manufacturing">Manufacturing</option>
-                  <option value="Other">Other</option>
-                </select>
+                  <input class="form-control" v-model="keyword" placeholder="Search by Keyword">
+                </div>
+              </section>
+            </div>
+            <div class="col-lg-4">
+              <section class="widget widget-links mb-3">
+                <div class="input-group form-group">
+                  <select class="form-control" v-model="category" required>
+                    <option value="" selected>-- Choose Category --</option>
+                    <option value="Platform">Platform</option>
+                    <option value="Cryptocurrency">Cryptocurrency</option>
+                    <option value="Businessservices">Businessservices</option>
+                    <option value="Internet">Internet</option>
+                    <option value="Investment">Investment</option>
+                    <option value="Entertainment">Entertainment</option>
+                    <option value="Banking">Banking</option>
+                    <option value="Software">Software</option>
+                    <option value="Realestate">Realestate</option>
+                    <option value="Casino&Gambling">Casino&Gambling</option>
+                    <option value="Communication">Communication</option>
+                    <option value="Tourism">Tourism</option>
+                    <option value="Media">Media</option>
+                    <option value="Health">Health</option>
+                    <option value="Retail">Retail</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Infrastructure">Infrastructure</option>
+                    <option value="Energy">Energy</option>
+                    <option value="Charity">Charity</option>
+                    <option value="Education">Education</option>
+                    <option value="Manufacturing">Manufacturing</option>
+                    <option value="Other">Other</option>
+                  </select>
 
-              </div>
-            </section>
-            <section class="widget widget-links mb-3">
-              <h3 class="widget-title">Type </h3>
-              <div class="input-group form-group">
-                <select class="form-control" v-model="type" required>
-                  <option value="" selected>-- Choose Type --</option>
-                  <option value="0">Pre-ICO</option>
-                  <option value="1">ICO</option>
-                </select>
-              </div>
-            </section>
-            <section class="widget widget-tags mb-3">
-              <hr class="mb-3">
+                </div>
+              </section>
+            </div>
+            <div class="col-lg-4">
+              <section class="widget widget-links mb-3">
+                <div class="input-group form-group">
+                  <select class="form-control" v-model="type" required>
+                    <option value="" selected>-- Choose Type --</option>
+                    <option value="0">Pre-ICO</option>
+                    <option value="1">ICO</option>
+                  </select>
+                </div>
+              </section>
+            </div>
+          </div>
+          <div class="row mb-4">
+            <div class="col-lg-12">
               <a class="tag" href="javascript:void(0)" @click="category=''"
                  v-if="category">#{{category}}</a>
               <a class="tag" href="javascript:void(0)" @click="keyword=''" v-if="keyword">#{{keyword}}</a>
               <a class="tag" href="javascript:void(0)" @click="type=''" v-if="type==='0'">#Pre-ICO</a>
               <a class="tag" href="javascript:void(0)" @click="type=''" v-if="type==='1'">#ICO</a>
               <a class="tag" href="javascript:void(0)" @click="status=''" v-if="status">#{{status}}</a>
-            </section>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <post-list :loaded="list_loaded" :posts="posts"></post-list>
+            </div>
           </div>
         </div>
-
-        <div class="col-lg-9">
-          <post-list :loaded="list_loaded" :posts="posts"></post-list>
-          <!-- Call to action -->
-        </div>
       </div>
+
     </div>
   </div>
+
 </template>
+
 <script>
   import PostList from 'components/PostList'
   import _ from 'lodash'
@@ -531,3 +553,160 @@
   }
 
 </script>
+
+<style scoped>
+
+  .promo-project-tile {
+    margin-bottom: 30px;
+    transition: box-shadow .4s;
+    border-radius: 5px;
+    background-color: #fff;
+  }
+
+  .promo-project-border-default {
+    border: 1px solid #e7e7e7;
+  }
+
+  .has-promo-project-thumbnail .promo-project-header {
+    position: relative;
+    margin: -1px;
+  }
+
+  .promo-project-header {
+    position: relative;
+  }
+
+  .promo-project-body {
+    padding: 24px;
+  }
+
+  .promo-project-footer {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -ms-flex-line-pack: center;
+    align-items: center;
+    padding: 0 24px 20px;
+  }
+
+  .promo-project-title > a {
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  .promo-project-thumb {
+    display: block;
+    position: relative;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+  }
+
+  .has-promo-project-thumbnail .promo-project-header .promo-project-categories {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-top: 24px;
+    padding-right: 70px;
+    padding-left: 24px;
+  }
+
+  .has-promo-project-thumbnail .promo-project-format {
+    top: auto;
+    bottom: 10px;
+  }
+
+  .has-promo-project-thumbnail .promo-project-format {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #fff;
+    color: #404040;
+    line-height: 40px;
+    box-shadow: 0 5px 9px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .promo-project-format {
+    display: block;
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    font-size: 24px;
+    text-align: center;
+    z-index: 4;
+  }
+
+  .promo-project-header .svg-bg {
+    display: block;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 30px;
+    overflow: hidden;
+    z-index: 3;
+    -moz-border-right-colors: #e7e7e7;
+  }
+
+  .promo-project-border-default-right {
+    border-right: 1px solid #e7e7e7;
+  }
+
+  .promo-project-header .svg-bg svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .promo-project-categories > a {
+    display: inline-block;
+    margin-right: 12px;
+    margin-bottom: 12px;
+    padding: 0 12px;
+    transition: all .3s;
+    border-radius: 11px;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: .1em;
+    line-height: 21px;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  .promo-project-footer .promo-project-author {
+    color: #999;
+    font-size: 12px;
+    text-decoration: none;
+  }
+
+  .promo-project-footer .promo-project-author .promo-project-author-ava {
+    width: 42px;
+    height: 42px;
+    margin-right: 5px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .promo-project-footer .promo-project-author .promo-project-author-ava, .promo-projectt-footer .promo-project-author .promo-project-author-name {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .promo-project-meta {
+    padding: 5px 0;
+    font-size: 12px;
+  }
+
+  .promo-project-meta a:first-child {
+    margin-left: 0;
+  }
+
+  .promo-project-meta a {
+    display: inline-block;
+    margin-left: 10px;
+    color: #999;
+    text-decoration: none;
+  }
+</style>
