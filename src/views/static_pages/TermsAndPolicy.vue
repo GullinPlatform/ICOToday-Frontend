@@ -5,19 +5,19 @@
         <!-- Docs Side Menu-->
         <div class="padding-top-2x hidden-md-up"></div>
         <nav class="list-group">
-          <router-link class="list-group-item list-group-item-action"
+          <router-link class="list-group-item"
                        :to="{name:'terms', query:{type:'terms'}}"
                        :class="{active:type==='terms'}">Terms and Services
           </router-link>
-          <router-link class="list-group-item list-group-item-action"
+          <router-link class="list-group-item"
                        :to="{name:'terms', query:{type:'privacy'}}"
                        :class="{active:type==='privacy'}">Privacy Policy
           </router-link>
-          <router-link class="list-group-item list-group-item-action"
+          <router-link class="list-group-item"
                        :to="{name:'terms', query:{type:'token'}}"
                        :class="{active:type==='token'}">Token Sale Agreement
           </router-link>
-          <router-link class="list-group-item list-group-item-action"
+          <router-link class="list-group-item"
                        :to="{name:'terms', query:{type:'rating'}}"
                        :class="{active:type==='rating'}">Expert Rating Guidelines
           </router-link>
@@ -663,3 +663,10 @@
     }
   }
 </script>
+
+<style scoped>
+  a.list-group-item:hover, a.list-group-item:focus, a.list-group-item:active {
+    background-color: #0da9ef !important;
+    color: white !important;
+  }
+</style>

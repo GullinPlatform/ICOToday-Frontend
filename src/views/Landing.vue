@@ -671,43 +671,8 @@
     text-decoration: none;
   }
 
-  a.list-group-item-fixed:hover, a.list-group-item-fixed:focus, a.list-group-item-fixed:active,
-  .list-group-item-action-fixed:hover,
-  .list-group-item-action-fixed:focus,
-  .list-group-item-action-fixed:active {
-    background-color: #0da9ef;
-    color: white;
-
-  }
-
-  a.list-group-item-fixed {
-    padding-top: .87rem;
-    padding-bottom: .87rem;
-  }
-
-  a.list-group-item-fixed, .list-group-item-action-fixed {
-    transition: all 0.6s;
-    color: #606975;
-    font-weight: 500;
-  }
-
-  .list-group-item-fixed {
-    border-color: #e1e7ec;
-    background-color: #ffffff;
-    text-decoration: none;
-  }
-
-  .list-group-item-fixed {
-    position: relative;
-    display: block;
-    padding: .75rem 1.25rem;
-    margin-bottom: -1px;
-    background-color: #fff;
-    border: 1px solid rgba(0, 0, 0, .125);
-  }
-
-  .list-group-item-action-fixed {
-    width: 100%;
-    text-align: inherit;
+  a.list-group-item:hover, a.list-group-item:focus, a.list-group-item:active {
+    background-color: #0da9ef !important;
+    color: white !important;
   }
 </style>
