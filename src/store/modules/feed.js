@@ -1,4 +1,4 @@
-import discussionApi from '../../api/discussion-api'
+import discussionApi from '../../api/feed-api'
 
 import * as types from '../mutation-types'
 
@@ -113,11 +113,6 @@ const mutations = {
   [types.EDIT_COMMENT] (state, response) {},
   [types.DELETE_COMMENT] (state, response) {},
   [types.REPLY_COMMENT] (state, response) {},
-
-  [types.LOG_ERROR] (state, error) {
-    state.error_msg = error
-    // TODO, need to handle errors
-  },
 }
 
 export default {

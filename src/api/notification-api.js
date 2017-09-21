@@ -1,19 +1,24 @@
-import Vue from 'vue'
-import Resource from 'vue-resource'
+import axios from 'axios'
 
-import { API_ROOT } from '../config.js'
+import { API_ROOT } from '../config'
 import { getCookie } from '../utils/cookie'
 
-Vue.use(Resource)
+const client = axios.create({
+  baseURL: API_ROOT + '/nt/',
+  withCredentials: true,
+  headers: {
+    'X-CSRF-TOKEN': getCookie('csrftoken'),
+  },
+})
 
 export default {
   getNotifications () {
-    return Vue.http.get(API_ROOT + 'notification/fetch/', {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
+    return client.get('fetch/')
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
   readNotification (pk) {
-    return Vue.http.post(API_ROOT + 'notification/read/' + pk + '/', {}, {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
+    return client.post('read/' + pk + '/', {})
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   }

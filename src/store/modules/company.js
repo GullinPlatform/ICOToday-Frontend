@@ -1,4 +1,4 @@
-import teamApi from '../../api/team-api'
+import teamApi from '../../api/company-api'
 import * as types from '../mutation-types'
 
 // initial state

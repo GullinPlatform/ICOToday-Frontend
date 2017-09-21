@@ -1,4 +1,4 @@
-import userApi from '../../api/user-api'
+import userApi from '../../api/account-api.js'
 import * as cookie from '../../utils/cookie'
 import * as types from '../mutation-types'
 import router from '../../router/index'
@@ -18,7 +18,6 @@ const state = {
   user_created_posts: [],
 
   login_status: false,
-  token: null,
 
   white_list_email: '',
   resend_email_until: ''
@@ -103,7 +102,7 @@ const actions = {
       })
       .catch((error) => {
         console.log(error)
-        commit(types.LOG_ERROR, error)
+
         return Promise.reject(error)
       })
   },
@@ -115,7 +114,7 @@ const actions = {
       })
       .catch((error) => {
         console.log(error)
-        commit(types.LOG_ERROR, error)
+
         return Promise.reject(error)
       })
   },
@@ -127,7 +126,7 @@ const actions = {
       })
       .catch((error) => {
         console.log(error)
-        commit(types.LOG_ERROR, error)
+
         return Promise.reject(error)
       })
   },
@@ -138,7 +137,7 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-        commit(types.LOG_ERROR, error)
+        console.log(error)
         return Promise.reject(error)
       })
   },
@@ -151,7 +150,7 @@ const actions = {
       })
       .catch((error) => {
         console.log(error)
-        commit(types.LOG_ERROR, error)
+
         return Promise.reject(error)
       })
   },
@@ -163,7 +162,7 @@ const actions = {
       })
       .catch((error) => {
         console.log(error)
-        commit(types.LOG_ERROR, error)
+
         return Promise.reject(error)
       })
   },
@@ -175,7 +174,7 @@ const actions = {
       })
       .catch((error) => {
         console.log(error)
-        commit(types.LOG_ERROR, error)
+
         return Promise.reject(error)
       })
   },
@@ -327,29 +326,18 @@ const actions = {
       })
   },
 
-  tokenVerify ({rootState, commit, dispatch}, formData) {
-    userApi.tokenVerify(formData)
-      .then((response) => {
-        commit(types.VERIFY_SUCCESS, response)
-        dispatch('getSelf')
-      })
-      .catch((error) => {
-        if (rootState.route.name !== 'register') {
-          dispatch('tokenRefresh', formData)
-        }
-        commit(types.LOG_ERROR, error)
-      })
-  },
-  tokenRefresh ({commit, dispatch}, formData) {
-    userApi.tokenRefresh(formData)
-      .then((response) => {
-        commit(types.REFRESH_SUCCESS, response)
-        dispatch('getSelf')
-      })
-      .catch((error) => {
-        commit(types.LOGIN_FAILED)
-        commit(types.LOG_ERROR, error)
-      })
+  tokenVerify ({commit, dispatch}, token) {
+    if (token) {
+      userApi.tokenRefresh({token: token})
+        .then((response) => {
+          commit(types.REFRESH_SUCCESS, response)
+          dispatch('getSelf')
+        })
+        .catch((error) => {
+          commit(types.LOGIN_FAILED)
+          console.log(error)
+        })
+    }
   },
 
   getMyExpertApplication ({commit}, formData) {
@@ -388,47 +376,35 @@ const actions = {
 const mutations = {
   // auth
   [types.LOGIN_SUCCESS] (state, response) {
-    cookie.setCookie('token', response.token)
-    state.token = response.token
+    cookie.setCookie('icotodaytoken', response.token)
     state.login_status = true
     router.push({name: 'landing'})
   },
   [types.LOGOUT] (state) {
-    cookie.delCookie('token')
     state.login_status = false
-    state.token = null
     state.self = {}
     router.push({name: 'landing'})
   },
   [types.REGISTER_SUCCESS] (state, response) {
-    cookie.setCookie('token', response.token)
-    state.token = response.token
+    cookie.setCookie('icotodaytoken', response.token)
     state.login_status = true
     router.push({name: 'landing'})
   },
   [types.LOGIN_FAILED] (state, error) {
+    cookie.delCookie('icotodaytoken')
     state.login_status = false
-    state.token = null
-    state.error_msg = error
   },
   [types.REGISTER_FAILED] (state, error) {
     state.login_status = false
-    state.token = null
-    state.error_msg = error
-  },
-  [types.LOG_ERROR] (state, error) {
-    state.error_msg = error
-    // TODO, need to handle errors
   },
 
   [types.VERIFY_SUCCESS] (state, response) {
-    state.token = response.token
-    // state.login_status = true
+    cookie.setCookie('icotodaytoken', response.token)
+    state.login_status = true
   },
   [types.REFRESH_SUCCESS] (state, response) {
-    cookie.setCookie('token', response.token)
-    state.token = response.token
-    // state.login_status = true
+    cookie.setCookie('icotodaytoken', response.token)
+    state.login_status = true
   },
 
   // load data

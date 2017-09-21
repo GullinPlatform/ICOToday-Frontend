@@ -1,4 +1,4 @@
-import postApi from '../../api/post-api'
+import postApi from '../../api/project-api'
 import * as types from '../mutation-types'
 
 // initial state

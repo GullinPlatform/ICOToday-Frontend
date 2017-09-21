@@ -1,37 +1,42 @@
-import Vue from 'vue'
-import Resource from 'vue-resource'
+import axios from 'axios'
 
-import { API_ROOT } from '../config.js'
+import { API_ROOT } from '../config'
 import { getCookie } from '../utils/cookie'
 
-Vue.use(Resource)
+const client = axios.create({
+  baseURL: API_ROOT,
+  withCredentials: true,
+  headers: {
+    'X-CSRF-TOKEN': getCookie('csrftoken'),
+  },
+})
 
 export default {
   postPost (formData) {
-    return Vue.http.post(API_ROOT + 'post/', formData, {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
+    return client.post(API_ROOT + 'post/', formData)
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
   getPost (id) {
-    return Vue.http.get(API_ROOT + 'post/' + id + '/')
+    return client.get(API_ROOT + 'post/' + id + '/')
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
 
   listPosts () {
-    return Vue.http.get(API_ROOT + 'post/')
+    return client.get(API_ROOT + 'post/')
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
 
   listPromoPosts () {
-    return Vue.http.get(API_ROOT + 'post/promo/')
+    return client.get(API_ROOT + 'post/promo/')
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
 
   listPostsByPage (page) {
-    return Vue.http.get(API_ROOT + 'post/p/' + page + '/')
+    return client.get(API_ROOT + 'post/p/' + page + '/')
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
@@ -52,23 +57,23 @@ export default {
       query = query + 'keyword=' + formData.keyword + '&'
     }
 
-    return Vue.http.get(API_ROOT + 'post/search/' + formData.page + query)
+    return client.get(API_ROOT + 'post/search/' + formData.page + query)
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
 
   markPost (id) {
-    return Vue.http.post(API_ROOT + 'post/' + id + '/mark/', {}, {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
+    return client.post(API_ROOT + 'post/' + id + '/mark/', {})
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
   updatePost (formData) {
-    return Vue.http.patch(API_ROOT + 'post/' + formData.get('id') + '/', formData, {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
+    return client.patch(API_ROOT + 'post/' + formData.get('id') + '/', formData)
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
   getPostRatingDetail (id) {
-    return Vue.http.get(API_ROOT + 'post/' + id + '/rating/')
+    return client.get(API_ROOT + 'post/' + id + '/rating/')
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   }

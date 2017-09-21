@@ -1,14 +1,19 @@
-import Vue from 'vue'
-import Resource from 'vue-resource'
+import axios from 'axios'
 
-import { API_ROOT } from '../config.js'
+import { API_ROOT } from '../config'
 import { getCookie } from '../utils/cookie'
 
-Vue.use(Resource)
+const client = axios.create({
+  baseURL: API_ROOT,
+  withCredentials: true,
+  headers: {
+    'X-CSRF-TOKEN': getCookie('csrftoken'),
+  },
+})
 
 export default {
   getWallet () {
-    return Vue.http.get(API_ROOT + 'wallet/', {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
+    return client.get(API_ROOT + 'wallet/')
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },

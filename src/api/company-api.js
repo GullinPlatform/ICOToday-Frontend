@@ -1,32 +1,37 @@
-import Vue from 'vue'
-import Resource from 'vue-resource'
+import axios from 'axios'
 
 import { API_ROOT } from '../config'
 import { getCookie } from '../utils/cookie'
 
-Vue.use(Resource)
+const client = axios.create({
+  baseURL: API_ROOT,
+  withCredentials: true,
+  headers: {
+    'X-CSRF-TOKEN': getCookie('csrftoken'),
+  },
+})
 
 export default {
   // Authorization
   getTeam (pk) {
-    return Vue.http.get(API_ROOT + 'account/team/' + pk + '/')
+    return client.get('/cp/' + pk + '/')
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
   // Change User
   updateTeam (formData) {
-    return Vue.http.put(API_ROOT + 'account/team/' + formData.pk + '/', formData, {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
+    return client.put('/cp/' + formData.pk + '/', formData)
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
   // Change Team
   addTeamMember (formData) {
-    return Vue.http.patch(API_ROOT + 'account/team/' + formData.get('pk') + '/', formData, {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
+    return client.patch('/cp/' + formData.get('pk') + '/', formData)
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
   remTeamMember (pk) {
-    return Vue.http.delete(API_ROOT + 'account/team/' + pk + '/', {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
+    return client.delete('/cp/' + pk + '/')
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },

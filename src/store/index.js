@@ -1,12 +1,12 @@
-// vue
 import Vue from 'vue'
 import Vuex from 'vuex'
 import PersistedState from 'vuex-persistedstate'
-import user from './modules/user'
-import post from './modules/post'
-import team from './modules/team'
-import discussion from './modules/discussion'
+import account from './modules/account'
+import company from './modules/company'
+import feed from './modules/feed'
+import message from './modules/message'
 import notification from './modules/notification'
+import project from './modules/project'
 import wallet from './modules/wallet'
 
 Vue.use(Vuex)
@@ -16,11 +16,12 @@ const store = new Vuex.Store({
   // state,
   // actions
   modules: {
-    user,
-    post,
-    discussion,
-    team,
+    account,
+    company,
+    feed,
+    message,
     notification,
+    project,
     wallet
   }
 })

@@ -1,6 +1,3 @@
-// -------COMMON ---------
-export const LOG_ERROR = 'LOG_ERROR'
-
 // ------- USER --------
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_FAILED = 'LOGIN_FAILED'
