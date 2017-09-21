@@ -28,6 +28,7 @@ import UserTeam from 'views/UserTeam'
 import TokenSale from 'views/static_pages/TokenSale'
 import UserGuide from 'views/static_pages/UserGuide'
 import TermsAndPolicy from 'views/static_pages/TermsAndPolicy'
+import CompanyPage from 'views/CompanyPage'
 
 Vue.use(Router)
 Vue.use(Resource)
@@ -117,6 +118,10 @@ export default new Router({
       path: '/faq',
       component: UserGuide,
       name: 'faq'
+    }, {
+      path: '/company',
+      component: CompanyPage,
+      name: 'company'
     }
     ]
   }]

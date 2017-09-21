@@ -176,8 +176,12 @@
 </template>
 
 <script>
+  import Vue from 'vue';
+  import VueIntercom from 'vue-intercom';
   import PostList from 'components/PostList'
   import _ from 'lodash'
+
+  Vue.use(VueIntercom, { appId: 'rvgar4pm' });
 
   export default {
     name: 'Landing',
@@ -207,6 +211,10 @@
         keyword: '',
         category: '',
         type: '',
+
+        userId: 1,
+        name: 'Landing',
+        email: 'team@icotoday.io',
       }
     },
     methods: {
@@ -485,7 +493,20 @@
       },
       page () {
         this.loadMore()
-      }
+      },
+
+      '$intercom.ready': function ready() {
+      this.$intercom.boot({
+        user_id: this.userId,
+        name: this.name,
+        email: this.email,
+      });
+      this.$intercom.show();
+    },
+
+    email(email) {
+      this.$intercom.update({ email });
+    },
     },
     directives: {
       'scroll-at': {

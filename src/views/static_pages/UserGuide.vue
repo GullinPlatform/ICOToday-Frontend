@@ -351,6 +351,9 @@
 
 
 <script>
+  import Vue from 'vue';
+  import VueIntercom from 'vue-intercom';
+  Vue.use(VueIntercom, { appId: 'rvgar4pm' });
 
   import VueMarkdown from 'vue-markdown'
 
@@ -366,6 +369,14 @@
     },
     components: {
       'vue-markdown': VueMarkdown
+    },
+
+    data () {
+      return {
+        userId: 1,
+        name: 'UserGuide',
+        email: 'team@icotoday.io',
+      }
     },
     methods: {},
     computed: {
@@ -502,7 +513,20 @@
         },
         'retina_detect': true
       })
-    }
+    },
+    watch: {
+    '$intercom.ready': function ready() {
+      this.$intercom.boot({
+        user_id: this.userId,
+        name: this.name,
+        email: this.email,
+      });
+      this.$intercom.show();
+    },
+    email(email) {
+      this.$intercom.update({ email });
+    },
+  }
 
 
   }
@@ -565,5 +589,3 @@
     text-align: inherit;
   }
 </style>
-
-

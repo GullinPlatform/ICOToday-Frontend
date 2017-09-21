@@ -15,9 +15,9 @@
         </div>
         <ul>
           <li>
-            <router-link :to="{name:'faq'}" class="hidden-sm-down">
+            <a href="/faq?type=faq">
               <span>User Guide</span>
-            </router-link>
+            </a>
           </li>
           <li>
             <router-link :to="{name:'tokensale'}" class="hidden-sm-down">
