@@ -2,23 +2,26 @@
 
   <div class="offcanvas-wrapper">
        <!-- Page Title-->
-       <div class="page-title">
-         <div class="container">
-           <div class="column">
-             <h1>Help / FAQ</h1>
-           </div>
-           <div class="column">
-             <ul class="breadcrumbs">
-               <li><a href="index.html">Home</a>
-               </li>
-               <li class="separator">&nbsp;</li>
-               <li>Help / FAQ</li>
-             </ul>
-           </div>
-         </div>
-       </div>
+    <div id="home" class="jumbotron jumbotron-register-fixed">
+      <div id="particles-js"></div><!-- /.particles div -->
+      <div class="container center-vertically-holder">
+        <div class="center-vertically ">
+          <div class="row">
+            <div class="col-md-12 mt-3">
+              <h2 class="text-white text-uppercase text-center">
+                User Guide/FAQ<br>
+
+              </h2>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
        <!-- Page Content-->
-       <div class="container padding-bottom-3x">
+       <div class="container padding-bottom-3x padding-top-2x">
          <div class="row">
            <!-- Side Menu-->
            <div class="col-lg-3 col-md-4">
@@ -355,7 +358,7 @@
   export default {
     name: 'UserGuide',
     head: {
-      title () {
+      title() {
         return {
           inner: 'ICOToday',
           complement: this.type_formal
@@ -367,12 +370,12 @@
     },
     methods: {},
     computed: {
-      type () {
+      type() {
         if (this.$route.query.hasOwnProperty('type'))
           return this.$route.query.type
         return false
       },
-      type_formal () {
+      type_formal() {
         if (this.type === 'faq')
           return 'Popular Questions'
         else if (this.type === 'ico')
@@ -388,6 +391,143 @@
         else if (this.type === 'smart_contract')
           return 'What is a Smart Contract?'
       }
+    },
+    mounted(){
+      particlesJS('particles-js', {
+        'particles': {
+          'number': {
+            'value': 100,
+            'density': {
+              'enable': true,
+              'value_area': 800
+            }
+          },
+          'color': {
+            'value': '#ffffff'
+          },
+          'shape': {
+            'type': 'circle',
+            'stroke': {
+              'width': 0,
+              'color': '#000000'
+            },
+            'polygon': {
+              'nb_sides': 5
+            },
+            'image': {
+              'src': 'img/github.svg',
+              'width': 100,
+              'height': 100
+            }
+          },
+          'opacity': {
+            'value': 0.5,
+            'random': false,
+            'anim': {
+              'enable': false,
+              'speed': 1,
+              'opacity_min': 0.1,
+              'sync': false
+            }
+          },
+          'size': {
+            'value': 3,
+            'random': true,
+            'anim': {
+              'enable': false,
+              'speed': 40,
+              'size_min': 0.1,
+              'sync': false
+            }
+          },
+          'line_linked': {
+            'enable': true,
+            'distance': 150,
+            'color': '#ffffff',
+            'opacity': 0.4,
+            'width': 1
+          },
+          'move': {
+            'enable': true,
+            'speed': 6,
+            'direction': 'none',
+            'random': false,
+            'straight': false,
+            'out_mode': 'out',
+            'bounce': false,
+            'attract': {
+              'enable': false,
+              'rotateX': 600,
+              'rotateY': 1200
+            }
+          }
+        },
+        'interactivity': {
+          'detect_on': 'canvas',
+          'events': {
+            'onhover': {
+              'enable': true,
+              'mode': 'grab'
+            },
+            'onclick': {
+              'enable': true,
+              'mode': 'push'
+            },
+            'resize': true
+          },
+          'modes': {
+            'grab': {
+              'distance': 140,
+              'line_linked': {
+                'opacity': 1
+              }
+            },
+            'bubble': {
+              'distance': 400,
+              'size': 40,
+              'duration': 2,
+              'opacity': 8,
+              'speed': 3
+            },
+            'repulse': {
+              'distance': 200,
+              'duration': 0.4
+            },
+            'push': {
+              'particles_nb': 4
+            },
+            'remove': {
+              'particles_nb': 2
+            }
+          }
+        },
+        'retina_detect': true
+      })
     }
+
+
   }
+
+
+
+
+
+
+
+
+
 </script>
+<style lang="scss" scoped>
+  .jumbotron-register-fixed {
+    height: 200px;
+    width: 100%;
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
+    padding-top: 0;
+    padding-bottom: 0;
+    position: relative;
+    margin: 0;
+  }
+</style>
+
+
