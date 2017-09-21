@@ -26,7 +26,7 @@
           </li>
           <li>
             <a target="_blank" href="https://trello.com/b/JxFOIC9x" class="hidden-sm-down">
-              <span>Upcoming Releases</span>
+              <span>Roadmap</span>
             </a>
           </li>
         </ul>
@@ -85,8 +85,13 @@
                     </router-link>
                   </li>
                   <li>
+                    <router-link :to="{name:'me_wallet'}" class="dropdown-item" v-if="me.type===1">
+                      <i class="fa fa-bitcoin"></i> My Wallet
+                    </router-link>
+                  </li>
+                  <li>
                     <router-link :to="{name:'me_marked'}" class="dropdown-item" v-if="me.type===1">
-                      <i class="fa fa-bitcoin"></i> Subscribed ICOs
+                      <i class="fa fa-star"></i> Subscribed ICOs
                     </router-link>
                   </li>
                   <li>
@@ -188,10 +193,3 @@
   }
 
 </script>
-
-<style>
-  .logo {
-    display: table-cell;
-    vertical-align: middle;
-  }
-</style>

@@ -3690,6 +3690,10 @@ a.list-group-item {
   border-radius: 14px;
 }
 
+.badge.badge-pill-o {
+  border-radius: 14px;
+}
+
 .list-group-item.active {
   border-color: #0da9ef;
   background-color: #0da9ef;

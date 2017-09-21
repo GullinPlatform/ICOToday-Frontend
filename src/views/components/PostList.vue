@@ -1,65 +1,58 @@
 <template>
   <div v-if="loaded">
     <div class="project-list project-list-header">
-
       <div class="column project">
         Company
       </div>
-      <div class="column project-score">
+      <div class="column project-data">
         Score
       </div>
-      <div class="column project-time">
+      <div class="column project-data">
         Time
       </div>
       <div class="column project-data">
         Hard Cap
       </div>
       <div class="column project-data">
-        Tokens
+        Tokens On Sale
       </div>
 
     </div>
-    <div>
-      <div class="project-list"
-           v-for="project in posts"
-           @mouseover="subscribe_show=project.id" @mouseleave="subscribe_show=false">
-        <div class="column project">
-          <div class="project-wrapper">
-            <div class="project-icon">
-              <a href="javascript:void(0)" @click="postModal(project.id)">
-                <img :src="project.logo_image" alt="Logo">
+    <div class="project-list"
+         v-for="project in posts"
+         @mouseover="subscribe_show=project.id" @mouseleave="subscribe_show=false">
+      <div class="column project">
+        <div class="project-info-wrapper">
+          <div class="project-icon">
+            <a href="javascript:void(0)" @click="postModal(project.id)">
+              <img :src="project.logo_image" alt="Logo">
+            </a>
+          </div>
+          <div class="project-info">
+            <div class="project-name">
+              <a>{{project.title}}
+                <span class="badge badge-sm badge-default">{{project.category}}</span>
               </a>
             </div>
+            <div class="project-descr">
+              {{project.description_short}}
 
-            <div class="project-info">
-              <div class="project-name">
-                <a>{{project.title}}
-                  <span class="badge badge-sm badge-default">{{project.category}}</span>
-                </a>
-              </div>
-              <div class="project-descr">
-                {{project.description_short}}
-
-              </div>
             </div>
-
           </div>
         </div>
-        <div class="column project-score">
-            <span class="text-bold text-primary ml-2"
-                  v-if="project.rating">{{project.rating}}/100</span>
-          <span class="text-bold text-primary ml-2" v-else>No Score</span>
-        </div>
-
-        <div class="column project-time">
-          {{timeCounter(project.start_datetime, project.end_datetime)}}
-        </div>
-        <div class="column project-data">
-          {{project.maximum_goal}} {{project.coin_unit}}
-        </div>
-        <div class="column project-data">
-          <span>{{project.equality_on_offer}}%</span>
-        </div>
+      </div>
+      <div class="column project-data">
+        <span class="text-bold text-primary" v-if="project.rating">{{project.rating}}/100</span>
+        <span class="text-bold text-primary" v-else>No Score</span>
+      </div>
+      <div class="column project-data">
+        <b>{{timeCounter(project.start_datetime, project.end_datetime)}}</b>
+      </div>
+      <div class="column project-data">
+        {{project.maximum_goal}} {{project.coin_unit}}
+      </div>
+      <div class="column project-data">
+        <span>{{project.equality_on_offer}}%</span>
       </div>
     </div>
   </div>
@@ -212,22 +205,21 @@
     width: 100%;
     position: relative;
     border: 1px solid #e1e7ec;
-    border-top: 0;
+    border-bottom: 0;
     border-radius: 2px;
     background-color: #ffffff;
     box-sizing: border-box;
   }
 
-  .project-list.project-list-header {
+  .project-list-header {
     background-color: #f8f9fa;
-    font-size: 14px;
+    font-size: 16px;
     border-top-left-radius: 7px;
     border-top-right-radius: 7px;
-    margin-bottom: -1px;
   }
 
-  .project-list:first-child {
-    border-top: 1px solid #e1e7ec;
+  .project-list:last-child {
+    border-bottom: 1px solid #e1e7ec;
   }
 
   .project-list .column {
@@ -235,30 +227,34 @@
     vertical-align: middle;
   }
 
-  .project-list .column.project {
+  .project-list.project-list-header .column.project {
     position: relative;
-    width: 250px;
+    width: 286px;
     padding: 10px;
   }
 
-  .project-wrapper {
+  .project-list .column.project {
+    position: relative;
+    width: 250px;
+    padding: 12px;
+  }
+
+  .project-info-wrapper {
     display: table;
     table-layout: fixed;
   }
 
-  .project-wrapper > .project-icon {
-    box-shadow: 0 1px 4px rgba(0, 0, 0, .05);
+  .project-info-wrapper > .project-icon {
     width: 50px;
     height: 50px;
     line-height: 50px;
     vertical-align: middle;
-    border-radius: 4px;
     overflow: hidden;
     margin-right: 12px;
     float: left;
   }
 
-  .project-wrapper > .project-info {
+  .project-info-wrapper > .project-info {
     font-size: 17px;
     margin-left: 49px;
     width: 100%;
@@ -266,40 +262,20 @@
     vertical-align: middle;
   }
 
-  .project-wrapper > .project-info > .project-name {
+  .project-info-wrapper > .project-info > .project-name {
     font-weight: 700;
     color: #333;
   }
 
-  .project-wrapper > .project-info > .project-descr {
+  .project-info-wrapper > .project-info > .project-descr {
     width: 200px;
     white-space: nowrap;
     text-overflow: ellipsis;
     font-size: 13px;
     overflow: hidden;
     color: #666;
-    font-weight: 300;
   }
 
-  .project-list .column.project-time {
-    width: 150px;
-    max-width: 150px;
-    box-sizing: border-box;
-    padding: 2px;
-    text-align: left;
-    font-size: 16px;
-    font-weight: 600;
-  }
-
-  .project-list .column.project-score {
-    width: 150px;
-    max-width: 150px;
-    box-sizing: border-box;
-    padding: 2px;
-    text-align: left;
-    font-size: 16px;
-    font-weight: 600;
-  }
 
   .project-list .column.project-data {
     width: 150px;
@@ -308,7 +284,6 @@
     padding: 2px;
     text-align: center;
     font-size: 16px;
-    font-weight: 300;
   }
 
   html.ms .base .column {

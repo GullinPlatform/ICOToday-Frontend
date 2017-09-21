@@ -44,37 +44,88 @@
         <div class="col-lg-3 col-md-4 col-sm-6"
              v-if="promotion_loaded"
              v-for="project in promo_posts">
-          <div class="product-card-radius fixed-height box-shadow">
-            <a class="post-thumb" href="javascript:void(0)" @click="postModal(project.id)">
-              <img :src="project.promote_image" alt="Logo">
-              <div class="post-categories-top font-family-nav"><span class="badge badge-sm badge-default">cryptocurrency</span></div>
+          <!--<div class="product-card">-->
+          <!--<a class="product-thumb" href="javascript:void(0)" @click="postModal(project.id)">-->
+          <!--<img :src="project.promote_image" alt="Logo">-->
+          <!--</a>-->
+          <!--<h3 class="product-title text-bold text-left mb-0 mt-2">-->
+          <!--{{project.title}}-->
+          <!--<span class="badge badge-primary" v-if="project.rating">{{project.rating}}/100</span>-->
+          <!--<span class="badge badge-primary" v-else>No Score</span>-->
+          <!--</h3>-->
+          <!--<span class="text-muted">-->
+          <!--{{project.description_short}}-->
+          <!--</span>-->
+          <!--<br>-->
+          <!--<span class="text-bold">-->
+          <!---->
+          <!--</span>-->
 
-            </a>
+          <!--<button class="btn btn-outline-danger btn-sm btn-block mb-0"-->
+          <!-->
+          <!--<span> SUBSCRIBE</span>-->
+          <!--</button>-->
+          <!--<button class="btn btn-danger btn-sm btn-block mb-0"-->
+          <!--@click="markPost(project.id, false)" v-else>-->
+          <!--<span><i class="fa fa-check"></i> SUBSCRIBED</span>-->
+          <!--</button>-->
+          <!--</div>-->
 
-            <h3 class="product-title text-bold text-left mb-0 mt-2 font-18">
-              {{project.title}}
-              <span class="badge badge-primary" v-if="project.rating">{{project.rating}}/100</span>
-              <span class="badge badge-primary" v-else>No Score</span>
-            </h3>
-            <div class="text-box-short">
+          <h3 class="product-title text-bold text-left mb-0 mt-2 font-18">
+            {{project.title}}
+            <span class="badge badge-primary" v-if="project.rating">{{project.rating}}/100</span>
+            <span class="badge badge-primary" v-else>No Score</span>
+          </h3>
+          <div class="text-box-short">
             <span class="text-muted">
                             {{project.description_short}}
                         </span>
-            </div>
-            <br>
-            <span class="text-bold">
+          </div>
+          <br>
+          <span class="text-bold">
                             <i class="fa fa-clock-o"></i> {{timeCounter(project.start_datetime, project.end_datetime)}}
                         </span>
-            <button class="btn btn-outline-danger btn-sm btn-block mb-0"
-                    @click="markPost(project.id, true)" v-if="!inSubscribeList(project.id)">
-              <span class="text-gray"><i class="fa fa-star-o"></i> SUBSCRIBE</span>
-            </button>
-            <button class="btn btn-outline-danger btn-sm btn-block mb-0"
-                    @click="markPost(project.id, false)" v-else>
-              <span><i class="fa fa-check"></i> SUBSCRIBED</span>
-            </button>
+          <button class="btn btn-outline-danger btn-sm btn-block mb-0"
+                  @click="markPost(project.id, true)" v-if="!inSubscribeList(project.id)">
+            <span class="text-gray"><i class="fa fa-star-o"></i> SUBSCRIBE</span>
+          </button>
+          <button class="btn btn-outline-danger btn-sm btn-block mb-0"
+                  @click="markPost(project.id, false)" v-else>
+            <span><i class="fa fa-check"></i> SUBSCRIBED</span>
+          </button>
 
-
+          <div class="article promo-project-tile promo-project-border-default has-promo-project-thumbnail format-image">
+            <div class="header promo-project-header">
+              <a class="promo-project-thumb" @click="postModal(project.id)" href="javascript:void(0)">
+                <img :src="project.promote_image">
+              </a>
+              <div class="promo-project-score">
+                <span v-if="project.rating">{{project.rating}}/100</span>
+                <span v-else>No Score</span>
+              </div>
+              <span class="promo-project-format">
+                <a class="text-warning" href="javascript:void(0)" @click="markPost(project.id, true)" v-if="!inSubscribeList(project.id)">
+                  <i class="fa fa-star-o"></i>
+                </a>
+                   <a class="text-warning" href="javascript:void(0)" @click="markPost(project.id, false)" v-else>
+                  <i class="fa fa-star"></i>
+                </a>
+              </span>
+              <div class="svg-bg promo-project-border-default-right">
+                <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+                  <path d="m 0 100 l 100 -100, 0 100, -100 0 z" fill="white"></path>
+                </svg>
+              </div>
+            </div>
+            <div class="promo-project-body">
+              <h3 class="promo-project-title mb-0">{{project.title}}</h3>
+              {{project.description_short}}
+            </div>
+            <div class="footer promo-project-footer">
+              <div class="promo-project-time">
+                <i class="fa fa-clock-o"></i> {{timeCounter(project.start_datetime, project.end_datetime)}}
+              </div>
+            </div>
           </div>
 
         </div>
@@ -87,11 +138,10 @@
       <div class="row">
         <div class="col-lg-2">
           <nav class="list-group">
-            <a class="list-group-item-fixed">IN TREND</a>
-            <a class="list-group-item-fixed" href="javascript:void(0)" @click="status='active'" :class="{active:status==='active'}">ACTIVE</a>
-            <a class="list-group-item-fixed" href="javascript:void(0)" @click="status='upcoming'" :class="{active:status==='upcoming'}">UPCOMING</a>
-            <a class="list-group-item-fixed" href="javascript:void(0)" @click="status='passed'" :class="{active:status==='passed'}">PASSED</a>
-            <a class="list-group-item-fixed" href="javascript:void(0)" @click="status=''" :class="{active:status===''}">ALL</a>
+            <a class="list-group-item" href="javascript:void(0)" @click="status='active'" :class="{active:status==='active'}">ACTIVE</a>
+            <a class="list-group-item" href="javascript:void(0)" @click="status='upcoming'" :class="{active:status==='upcoming'}">UPCOMING</a>
+            <a class="list-group-item" href="javascript:void(0)" @click="status='passed'" :class="{active:status==='passed'}">PASSED</a>
+            <a class="list-group-item" href="javascript:void(0)" @click="status=''" :class="{active:status===''}">ALL</a>
           </nav>
         </div>
         <div class="col-lg-10">
@@ -176,12 +226,12 @@
 </template>
 
 <script>
-  import Vue from 'vue';
-  import VueIntercom from 'vue-intercom';
+  import Vue from 'vue'
+  import VueIntercom from 'vue-intercom'
   import PostList from 'components/PostList'
   import _ from 'lodash'
 
-  Vue.use(VueIntercom, { appId: 'rvgar4pm' });
+  Vue.use(VueIntercom, {appId: 'rvgar4pm'})
 
   export default {
     name: 'Landing',
@@ -495,18 +545,18 @@
         this.loadMore()
       },
 
-      '$intercom.ready': function ready() {
-      this.$intercom.boot({
-        user_id: this.userId,
-        name: this.name,
-        email: this.email,
-      });
-      this.$intercom.show();
-    },
+      '$intercom.ready': function ready () {
+        this.$intercom.boot({
+          user_id: this.userId,
+          name: this.name,
+          email: this.email,
+        })
+        this.$intercom.show()
+      },
 
-    email(email) {
-      this.$intercom.update({ email });
-    },
+      email (email) {
+        this.$intercom.update({email})
+      },
     },
     directives: {
       'scroll-at': {
@@ -561,37 +611,36 @@
 
   .fixed-height {
     height: 440px;
-
   }
 
-  .text-box-short{
-
-    text-overflow:ellipsis;
-    height:110px;
-    overflow:scroll;
-
-
+  .text-box-short {
+    text-overflow: ellipsis;
+    height: 110px;
+    overflow: scroll;
   }
 
-  .box-shadow{
-
-    transition: box-shadow .4s;
-
+  .promo-project-body {
+    padding: 10px 20px 0;
   }
 
-  .product-card:hover {
-    box-shadow: 0 0 11px rgba(33,33,33,.2);
+  .promo-project-footer {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -ms-flex-line-pack: center;
+    align-items: center;
+    padding: 0 20px 10px;
   }
-  .post-thumb{
-    display: block;
-    position: relative;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-    overflow: hidden;
+
+  .promo-project-title {
+    font-weight: bold;
+    text-decoration: none;
   }
-  .post-categories{
+
+  .has-promo-project-thumbnail .promo-project-header .promo-project-score {
     position: absolute;
     top: 0;
     left: 0;
@@ -600,7 +649,8 @@
     padding-right: 70px;
     padding-left: 24px;
   }
-  .post-categories-top{
+
+  .post-categories-top {
     position: absolute;
     top: 0;
     left: 0;
@@ -610,10 +660,10 @@
     padding-left: 12px;
   }
 
-  .btn-block-small{
+  .btn-block-small {
     display: block;
     width: 55%;
-    margin-top: 0px;
+    margin-top: 0;
     margin-right: 0 !important;
     margin-bottom: 12px;
     margin-left: 0 !important;
@@ -621,306 +671,39 @@
     padding-left: 1px !important;
   }
 
-  .btn-outline-danger-red{
+  .btn-outline-danger-red {
     border-color: #ff5252;
     background-color: #ff5252;
     color: #ff5252;
-
-
   }
 
-  .btn-sm-top {
-    height: 30px;
-    padding: 0 18px;
-    border-radius: 2px;
-    font-size: 12px;
-    line-height: 20px;
-
-
-  .text-gray{
-    color: #FFFFFF !important;
+  .promo-project-score > span {
+    transition: all .3s;
+    background: #0da9ef;
+    color: #ffffff;
+    display: inline-block;
+    padding: 0 12px;
+    border-radius: 14px;
+    font-size: 90%;
+    font-weight: 500;
+    line-height: 21px;
   }
 
-
-  .fw-section {
-    position: relative;
-    width: 100%;
-    background: {
-      position: 50% 50%;
-      repeat: no-repeat;
-      size: cover;
-    }
-
-    // Overlay
-
-    // Content
-    > .container,
-    > .container-fluid {
-      position: relative;
-      z-index: 5;
-    }
-  }
-  .container-fluid {
-    padding: {
-      right: 30px;
-      left: 30px;
-    }
-
-    // Full height
-    .full-height { height: 100vh; }
+  .promo-project-time {
+    padding: 5px 0;
+    font-size: 16px;
+    font-weight: bolder;
   }
 
-  // Equal Height Columns
-  .layout-boxed-equal,
-  .layout-full-equal {
-    .row {
-      display: -webkit-box;
-      display: -moz-box;
-      display: -ms-flexbox;
-      display: -webkit-flex;
-      display: flex;
-      flex: 1 1 auto;
-      -webkit-flex-flow: row wrap;
-      flex-flow: row wrap;
-      align-content: flex-start;
-      flex: 0;
-      &::before { display: none; } // Safari fix
-    }
+  .promo-project-time a:first-child {
+    margin-left: 0;
   }
 
-  // No Gap Version
-  .section-no-gap {
-    > .container,
-    > .container-fluid {
-      padding: {
-        right: 0;
-        right: 0;
-        left: 0;
-      }
-      > .row {
-        margin: {
-          right: 0 !important;
-          left: 0 !important;
-        }
-      }
-      > .row  > [class^='col-'] {
-        padding: {
-          right: 0 !important;
-          left: 0 !important;
-        }
-      }
-      > .row  > [class^='col-'] > .row {
-        margin: {
-          right: 0 !important;
-          left: 0 !important;
-        }
-      }
-    }
+  .promo-project-time a {
+    display: inline-block;
+    margin-left: 10px;
+    color: #606975;
   }
-
-
-  // Masonry Grid
-  // -----------------------------------------------------
-  .masonry-grid {
-    position: relative;
-
-    // Gap Width
-    .gutter-sizer { width: 30px; }
-
-    // Items
-    .grid-item {
-      margin-bottom: 30px;
-      .post-tile,
-      .portfolio-tile { margin-bottom: 0; }
-    }
-
-    // 1 Column
-    &.col-1 {
-      .gutter-sizer { width: 0; }
-      .grid-sizer,
-      .grid-item { width: 100%; }
-    }
-
-    // 2 Columns
-    &.col-2 {
-      .grid-sizer,
-      .grid-item { width: calc((100% / 2) - 15px); }
-    }
-
-    // 3 Columns
-    &.col-3 {
-      .grid-sizer,
-      .grid-item { width: calc((100% / 3) - 20px); }
-    }
-
-    // 4 Columns
-    &.col-4 {
-      .grid-sizer,
-      .grid-item { width: calc((100% / 4) - 22.5px); }
-    }
-
-    // 5 Columns
-    &.col-5 {
-      .grid-sizer,
-      .grid-item { width: calc((100% / 5) - 24px); }
-    }
-
-    // 6 Columns
-    &.col-6 {
-      .grid-sizer,
-      .grid-item { width: calc((100% / 6) - 25px); }
-    }
-
-    // Media Queries
-    @media screen and (max-width: 1100px) {
-      &.col-6,
-      &.col-5,
-      &.col-4 {
-        .grid-sizer,
-        .grid-item { width: calc((100% / 3) - 20px); }
-      }
-    }
-    @media screen and (max-width: 820px) {
-      &.col-6,
-      &.col-5,
-      &.col-4,
-      &.col-3 {
-        .grid-sizer,
-        .grid-item { width: calc((100% / 2) - 15px); }
-      }
-    }
-    @media screen and (max-width: 560px) {
-      &.col-6,
-      &.col-5,
-      &.col-4,
-      &.col-3,
-      &.col-2 {
-        .gutter-sizer { width: 0; }
-        .grid-sizer,
-        .grid-item { width: 100%; }
-      }
-    }
-
-    // No Gap Version
-    &.grid-no-gap {
-      .gutter-sizer { width: 0; }
-      .grid-item { margin-bottom: 0; }
-      &.col-2 {
-        .grid-sizer,
-        .grid-item { width: (100% / 2); }
-      }
-      &.col-3 {
-        .grid-sizer,
-        .grid-item { width: (100% / 3); }
-      }
-      &.col-4 {
-        .grid-sizer,
-        .grid-item { width: (100% / 4); }
-      }
-      &.col-5 {
-        .grid-sizer,
-        .grid-item { width: (100% / 5); }
-      }
-      &.col-6 {
-        .grid-sizer,
-        .grid-item { width: (100% / 6); }
-      }
-      @media screen and (max-width: 1100px) {
-        &.col-6,
-        &.col-5,
-        &.col-4 {
-          .grid-sizer,
-          .grid-item { width: (100% / 3); }
-        }
-      }
-      @media screen and (max-width: 820px) {
-        &.col-6,
-        &.col-5,
-        &.col-4,
-        &.col-3 {
-          .grid-sizer,
-          .grid-item { width: (100% / 2); }
-        }
-      }
-      @media screen and (max-width: 560px) {
-        &.col-6,
-        &.col-5,
-        &.col-4,
-        &.col-3,
-        &.col-2 {
-          .grid-sizer,
-          .grid-item { width: 100%; }
-        }
-      }
-    }
-  }
-
-  // Justified Grid
-    .si-justified-row {
-      display: -ms-flexbox;
-      display: flex;
-      &:first-child .si-justified-item {
-        @media only screen and (min-width: 991px) {
-          border-top: 0;
-        }
-      }
-    }
-    .si-justified-item {
-      width: 25%;
-      &:first-child {
-        border-left: 0;
-      }
-    }
-      .si-justified-item {
-        width: 50%;
-        &:nth-child(3) { border-left: 0; }
-      }
-      .si-justified-row {
-        -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-        &:first-child {
-          .si-justified-item {
-            &:first-child { border-top: 0; }
-            @media only screen and (min-width: 768px) {
-              &:nth-child(2) { border-top: 0; }
-            }
-          }
-        }
-      }
-    }
-      .si-justified-item {
-        width: 100%;
-        border-left: 0;
-      }
-
-  .masonry-grid.blog-posts {
-    .has-post-thumbnail .svg-bg { display: block; }
-    &.col-1 .has-post-thumbnail .svg-bg { display: none; }
-    &:not(.col-1) .has-post-thumbnail .post-format {
-      top: auto;
-      bottom: 10px;
-      @media screen and (max-width: 560px) { bottom: 10px; }
-      @media screen and (max-width: 360px) { bottom: 5px; }
-    }
-  }
-
-  .product-card-radius{
-    display: block;
-    position: relative;
-    width: 100%;
-    padding: 18px;
-    border: 1px solid #e1e7ec;
-    border-radius: 7px;
-    background-color: #ffffff;
-  }
-
-
-
-.font-18{
-  font-size:19px;
-}
-
-
 
   a.list-group-item-fixed:hover, a.list-group-item-fixed:focus, a.list-group-item-fixed:active,
   .list-group-item-action-fixed:hover,
@@ -929,13 +712,13 @@
     background-color: #0da9ef;
     color: white;
 
-
-
   }
+
   a.list-group-item-fixed {
     padding-top: .87rem;
     padding-bottom: .87rem;
   }
+
   a.list-group-item-fixed, .list-group-item-action-fixed {
     transition: all 0.6s;
     color: #606975;
@@ -947,14 +730,16 @@
     background-color: #ffffff;
     text-decoration: none;
   }
+
   .list-group-item-fixed {
     position: relative;
     display: block;
     padding: .75rem 1.25rem;
     margin-bottom: -1px;
     background-color: #fff;
-    border: 1px solid rgba(0,0,0,.125);
+    border: 1px solid rgba(0, 0, 0, .125);
   }
+
   .list-group-item-action-fixed {
     width: 100%;
     text-align: inherit;
