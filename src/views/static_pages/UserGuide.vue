@@ -28,35 +28,34 @@
 
              <nav class="list-group">
 
-               <router-link class="list-group-item list-group-item-action"
+               <router-link class="list-group-item-fixed list-group-item-action-fixed"
                             :to="{name:'faq', query:{type:'faq'}}"
                             :class="{active:type==='faq'}">Popular Questions
                </router-link>
-               <router-link class="list-group-item list-group-item-action"
+               <router-link class="list-group-item-fixed list-group-item-action-fixed"
                             :to="{name:'faq', query:{type:'ico'}}"
                             :class="{active:type==='ico'}">What is an ICO?
                </router-link>
-               <router-link class="list-group-item list-group-item-action"
+               <router-link class="list-group-item-fixed list-group-item-action-fixed"
                             :to="{name:'faq', query:{type:'investing'}}"
                             :class="{active:type==='investing'}">How to Get Started Investing in ICOs
                </router-link>
-               <router-link class="list-group-item list-group-item-action"
+               <router-link class="list-group-item-fixed list-group-item-action-fixed"
                             :to="{name:'faq', query:{type:'blockchain'}}"
                             :class="{active:type==='blockchain'}">What is Blockchain?
                </router-link>
-               <router-link class="list-group-item list-group-item-action"
+               <router-link class="list-group-item-fixed list-group-item-action-fixed"
                             :to="{name:'faq', query:{type:'bitcoin'}}"
                             :class="{active:type==='bitcoin'}">What is Bitcoin?
                </router-link>
-               <router-link class="list-group-item list-group-item-action"
+               <router-link class="list-group-item-fixed list-group-item-action-fixed"
                             :to="{name:'faq', query:{type:'ethereum'}}"
                             :class="{active:type==='ethereum'}">What is Ethereum?
                </router-link>
-               <router-link class="list-group-item list-group-item-action"
+               <router-link class="list-group-item-fixed list-group-item-action-fixed"
                             :to="{name:'faq', query:{type:'smart_contract'}}"
                             :class="{active:type==='smart_contract'}">What is a Smart Contract?
                </router-link>
-               <a class="list-group-item"</a>
 
                </nav>
 
@@ -527,6 +526,43 @@
     padding-bottom: 0;
     position: relative;
     margin: 0;
+  }
+  a.list-group-item-fixed:hover, a.list-group-item-fixed:focus, a.list-group-item-fixed:active,
+  .list-group-item-action-fixed:hover,
+  .list-group-item-action-fixed:focus,
+  .list-group-item-action-fixed:active {
+    background-color: #0da9ef;
+    color: white;
+
+
+
+  }
+  a.list-group-item-fixed {
+    padding-top: .87rem;
+    padding-bottom: .87rem;
+  }
+  a.list-group-item-fixed, .list-group-item-action-fixed {
+    transition: all 0.6s;
+    color: #606975;
+    font-weight: 500;
+  }
+
+  .list-group-item-fixed {
+    border-color: #e1e7ec;
+    background-color: #ffffff;
+    text-decoration: none;
+  }
+  .list-group-item-fixed {
+    position: relative;
+    display: block;
+    padding: .75rem 1.25rem;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.125);
+  }
+  .list-group-item-action-fixed {
+    width: 100%;
+    text-align: inherit;
   }
 </style>
 

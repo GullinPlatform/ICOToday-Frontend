@@ -87,11 +87,11 @@
       <div class="row">
         <div class="col-lg-2">
           <nav class="list-group">
-            <a class="list-group-item">IN TREND</a>
-            <a class="list-group-item" href="javascript:void(0)" @click="status='active'" :class="{active:status==='active'}">ACTIVE</a>
-            <a class="list-group-item" href="javascript:void(0)" @click="status='upcoming'" :class="{active:status==='upcoming'}">UPCOMING</a>
-            <a class="list-group-item" href="javascript:void(0)" @click="status='passed'" :class="{active:status==='passed'}">PASSED</a>
-            <a class="list-group-item" href="javascript:void(0)" @click="status=''" :class="{active:status===''}">ALL</a>
+            <a class="list-group-item-fixed">IN TREND</a>
+            <a class="list-group-item-fixed" href="javascript:void(0)" @click="status='active'" :class="{active:status==='active'}">ACTIVE</a>
+            <a class="list-group-item-fixed" href="javascript:void(0)" @click="status='upcoming'" :class="{active:status==='upcoming'}">UPCOMING</a>
+            <a class="list-group-item-fixed" href="javascript:void(0)" @click="status='passed'" :class="{active:status==='passed'}">PASSED</a>
+            <a class="list-group-item-fixed" href="javascript:void(0)" @click="status=''" :class="{active:status===''}">ALL</a>
           </nav>
         </div>
         <div class="col-lg-10">
@@ -899,5 +899,44 @@
   font-size:19px;
 }
 
+
+
+  a.list-group-item-fixed:hover, a.list-group-item-fixed:focus, a.list-group-item-fixed:active,
+  .list-group-item-action-fixed:hover,
+  .list-group-item-action-fixed:focus,
+  .list-group-item-action-fixed:active {
+    background-color: #0da9ef;
+    color: white;
+
+
+
+  }
+  a.list-group-item-fixed {
+    padding-top: .87rem;
+    padding-bottom: .87rem;
+  }
+  a.list-group-item-fixed, .list-group-item-action-fixed {
+    transition: all 0.6s;
+    color: #606975;
+    font-weight: 500;
+  }
+
+  .list-group-item-fixed {
+    border-color: #e1e7ec;
+    background-color: #ffffff;
+    text-decoration: none;
+  }
+  .list-group-item-fixed {
+    position: relative;
+    display: block;
+    padding: .75rem 1.25rem;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.125);
+  }
+  .list-group-item-action-fixed {
+    width: 100%;
+    text-align: inherit;
+  }
 
 </style>
