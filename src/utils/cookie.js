@@ -1,22 +1,16 @@
-import Cookie from 'js-cookie'
-import { COOKIE_EXPIRE } from '../config.js'
-
-
-let cookieConfig = {}
-if (COOKIE_EXPIRE !== '') {
-    cookieConfig = { expires: COOKIE_EXPIRE }
-}
+import Cookies from 'js-cookie'
+import { COOKIE_CONFIG } from '../config.js'
 
 export const setCookie = (name, value) => {
-    Cookie.set(name, value, cookieConfig)
+  Cookies.set(name, value, COOKIE_CONFIG)
 }
 
 export const getCookie = (name) => {
-    if (Cookie.get(name))
-        return Cookie.get(name)
-    else return 'None'
+  if (Cookies.get(name))
+    return Cookies.get(name)
+  else return null
 }
 
 export const delCookie = (name) => {
-    Cookie.remove(name)
+  Cookies.remove(name, COOKIE_CONFIG)
 }

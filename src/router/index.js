@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Resource from 'vue-resource'
-import RootLayout from 'layouts/RootLayout'
 
+
+import RootLayout from 'layouts/RootLayout'
 import Landing from 'views/Landing'
 
 import EmailVerify from 'views/EmailVerify'
@@ -31,7 +31,6 @@ import TermsAndPolicy from 'views/static_pages/TermsAndPolicy'
 import CompanyPage from 'views/CompanyPage'
 
 Vue.use(Router)
-Vue.use(Resource)
 
 export default new Router({
   mode: 'history',

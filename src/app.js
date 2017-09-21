@@ -1,25 +1,20 @@
 import Vue from 'vue'
-import Resource from 'vue-resource'
 import Router from 'vue-router'
-import { sync } from 'vuex-router-sync'
+import VueHead from 'vue-head'
 
+import { sync } from 'vuex-router-sync'
 import router from './router'
 import store from './store'
 
-import RootLayout from 'views/layouts/RootLayout'
+import RootLayout from './views/layouts/RootLayout.vue'
 import * as cookie from './utils/cookie'
 
-import VueHead from 'vue-head'
-
 Vue.use(Router)
-Vue.use(Resource)
 Vue.use(VueHead)
 
 sync(store, router)
 
-// set csrf token for django
-Vue.http.headers.common['X-CSRFToken'] = cookie.getCookie('csrftoken')
-
+// Move page to top after every url change
 router.beforeEach(function (to, from, next) {
   window.scrollTo(0, 0)
   next()
@@ -29,8 +24,9 @@ export const app = new Vue({
   el: '#app',
   data: {},
   beforeCreate () {
-    const formData = {token: cookie.getCookie('token')}
-    this.$store.dispatch('tokenVerify', formData)
+    const token = cookie.getCookie('icotodaytoken')
+    console.log(token)
+    this.$store.dispatch('tokenVerify', token)
   },
   router,
   store,
