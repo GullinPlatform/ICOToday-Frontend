@@ -29,6 +29,8 @@ import TokenSale from 'views/static_pages/TokenSale'
 import UserGuide from 'views/static_pages/UserGuide'
 import TermsAndPolicy from 'views/static_pages/TermsAndPolicy'
 import CompanyPage from 'views/CompanyPage'
+import NotificationsFeed from 'views/NotificationsFeed'
+
 
 Vue.use(Router)
 Vue.use(Resource)
@@ -122,6 +124,11 @@ export default new Router({
       path: '/company',
       component: CompanyPage,
       name: 'company'
+    },
+    {
+      path: '/notifications',
+      component: NotificationsFeed,
+      name: 'notifications'
     }
     ]
   }]
