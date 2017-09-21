@@ -15,6 +15,7 @@
                 for Launching and Investing<br>
                 on Blockchain
               </h2>
+              
             </div>
             <div class="col-md-5 float-right">
               <div class="register-form pb-0 pt-3">

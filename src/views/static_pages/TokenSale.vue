@@ -28,8 +28,9 @@
                 </div>
               </div>
               <h5 class="text-white text-thin text-uppercase">
-                Our ICO Date Is To Be Announced
+                Our ICO Date Is Yet To Be Announced
               </h5>
+              <a  target="_blank"  href="https://s3.us-east-2.amazonaws.com/icotoday/ICOToday+White+paper.pdf"> Read the white paper</a>
             </div>
             <div class="col-sm-5 float-right">
               <div class="register-form pb-0 pt-3">
@@ -78,7 +79,7 @@
           <h2>Security
           </h2>
           <p>We protect investors' funds by providing a platform with direct information releases from the ICO launch team, secured with two factor authentication therefore, attracting new users to ICOs.</p>
-          <a class="text-medium text-decoration-none"
+          <a class="text-medium text-decoration-none" target="_blank"
              href="https://s3.us-east-2.amazonaws.com/icotoday/ICOToday+White+paper.pdf">See more details&nbsp;<i
             class="icon-arrow-right"></i></a>
         </div>
@@ -111,8 +112,8 @@
           <div class="step step-hover step-dark">
             <h3 class="step-digit">01</h3>
             <div class="step-body">
-              <h3 class="step-title">Concept</h3>
-              <p class="step-text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam</p>
+              <h3 class="step-title">Company</h3>
+              <p class="step-text">Company submits an ICO application and community selected experts review and rate ICO. Applications with a less than 50% will not be approved to ensure only the best ICOs are listed.</p>
             </div>
           </div>
         </div>
@@ -120,8 +121,8 @@
           <div class="step step-hover step-dark">
             <h3 class="step-digit">02</h3>
             <div class="step-body">
-              <h3 class="step-title">Design</h3>
-              <p class="step-text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam</p>
+              <h3 class="step-title">Communication </h3>
+              <p class="step-text">Approved ICOs will have secure and direct communication with investors. Every update will be secured through two factor auntentication to keep hackers out.</p>
             </div>
           </div>
         </div>
@@ -129,8 +130,8 @@
           <div class="step step-hover step-dark">
             <h3 class="step-digit">03</h3>
             <div class="step-body">
-              <h3 class="step-title">Develop</h3>
-              <p class="step-text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam</p>
+              <h3 class="step-title">Community</h3>
+              <p class="step-text">Investors will be able to follow other investors and experts and subscribe to ICOs to receive all important updates from the company during the ICO and post-ICO.</p>
             </div>
           </div>
         </div>
@@ -138,8 +139,8 @@
           <div class="step step-hover step-dark">
             <h3 class="step-digit">04</h3>
             <div class="step-body">
-              <h3 class="step-title">Result</h3>
-              <p class="step-text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam</p>
+              <h3 class="step-title">Auto Investment</h3>
+              <p class="step-text">Investors will be able to easily support upcoming ICOs through our auto investment feature with either Ether or BTC and eventually USD through our smart contract.</p>
             </div>
           </div>
         </div>
@@ -175,12 +176,12 @@
             <div class="col-sm-3">
               <div class="card token-sale-card">
                 <div class="card-body text-left">
-                  <p class="card-text">Symbol: <span class="text-bold">ICC</span></p>
+                  <p class="card-text">Symbol: <span class="text-bold">ICT</span></p>
                   <p class="card-text">Token price: <span class="text-bold">0.001 ETH</span></p>
-                  <p class="card-text">Hard Cap: <span class="text-bold">22 Million ICCs</span></p>
+                  <p class="card-text">Tokens: <span class="text-bold">173 Million ICT</span></p>
                   <p class="card-text">Platform: <span class="text-bold">ERC20</span></p>
                   <p class=" text-center">
-                    <a class="btn btn-outline-primary btn-sm" href="#">Detail</a>
+                    <a class="btn btn-outline-primary btn-sm" target="_blank" href="https://s3.us-east-2.amazonaws.com/icotoday/ICOToday+White+paper.pdf">Detail</a>
                   </p>
                 </div>
               </div>
@@ -194,7 +195,7 @@
       <hr class="margin-bottom-1x">
       <div class="container padding-bottom-2x mb-2">
         <div class="text-center padding-top-0x mb-30">
-          <h1>TOKEN SALE PLAN</h1>
+          <h1>TOKEN SALE PLAN (To be Announced)</h1>
         </div>
         <hr class="margin-bottom-1x">
         <div class="container">
@@ -202,8 +203,8 @@
             <div class="col-sm-12">
               <div class="progress">
                 <div class="progress-bar" role="progressbar" style="width: 15%;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-                <div class="progress-bar bg-success" role="progressbar" style="width: 30%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                <div class="progress-bar bg-warning" role="progressbar" style="width: 20%;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar bg-success" role="progressbar" style="width: 40%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar bg-warning" role="progressbar" style="width: 45%;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
             </div>
           </div>
