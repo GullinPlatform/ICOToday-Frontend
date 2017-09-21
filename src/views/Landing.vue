@@ -44,56 +44,6 @@
         <div class="col-lg-3 col-md-4 col-sm-6"
              v-if="promotion_loaded"
              v-for="project in promo_posts">
-          <!--<div class="product-card">-->
-          <!--<a class="product-thumb" href="javascript:void(0)" @click="postModal(project.id)">-->
-          <!--<img :src="project.promote_image" alt="Logo">-->
-          <!--</a>-->
-          <!--<h3 class="product-title text-bold text-left mb-0 mt-2">-->
-          <!--{{project.title}}-->
-          <!--<span class="badge badge-primary" v-if="project.rating">{{project.rating}}/100</span>-->
-          <!--<span class="badge badge-primary" v-else>No Score</span>-->
-          <!--</h3>-->
-          <!--<span class="text-muted">-->
-          <!--{{project.description_short}}-->
-          <!--</span>-->
-          <!--<br>-->
-          <!--<span class="text-bold">-->
-          <!---->
-          <!--</span>-->
-
-          <!--<button class="btn btn-outline-danger btn-sm btn-block mb-0"-->
-          <!-->
-          <!--<span> SUBSCRIBE</span>-->
-          <!--</button>-->
-          <!--<button class="btn btn-danger btn-sm btn-block mb-0"-->
-          <!--@click="markPost(project.id, false)" v-else>-->
-          <!--<span><i class="fa fa-check"></i> SUBSCRIBED</span>-->
-          <!--</button>-->
-          <!--</div>-->
-
-          <h3 class="product-title text-bold text-left mb-0 mt-2 font-18">
-            {{project.title}}
-            <span class="badge badge-primary" v-if="project.rating">{{project.rating}}/100</span>
-            <span class="badge badge-primary" v-else>No Score</span>
-          </h3>
-          <div class="text-box-short">
-            <span class="text-muted">
-                            {{project.description_short}}
-                        </span>
-          </div>
-          <br>
-          <span class="text-bold">
-                            <i class="fa fa-clock-o"></i> {{timeCounter(project.start_datetime, project.end_datetime)}}
-                        </span>
-          <button class="btn btn-outline-danger btn-sm btn-block mb-0"
-                  @click="markPost(project.id, true)" v-if="!inSubscribeList(project.id)">
-            <span class="text-gray"><i class="fa fa-star-o"></i> SUBSCRIBE</span>
-          </button>
-          <button class="btn btn-outline-danger btn-sm btn-block mb-0"
-                  @click="markPost(project.id, false)" v-else>
-            <span><i class="fa fa-check"></i> SUBSCRIBED</span>
-          </button>
-
           <div class="article promo-project-tile promo-project-border-default has-promo-project-thumbnail format-image">
             <div class="header promo-project-header">
               <a class="promo-project-thumb" @click="postModal(project.id)" href="javascript:void(0)">
@@ -226,12 +176,8 @@
 </template>
 
 <script>
-  import Vue from 'vue'
-  import VueIntercom from 'vue-intercom'
   import PostList from 'components/PostList'
   import _ from 'lodash'
-
-  Vue.use(VueIntercom, {appId: 'rvgar4pm'})
 
   export default {
     name: 'Landing',
@@ -261,10 +207,6 @@
         keyword: '',
         category: '',
         type: '',
-
-        userId: 1,
-        name: 'Landing',
-        email: 'team@icotoday.io',
       }
     },
     methods: {
@@ -543,20 +485,7 @@
       },
       page () {
         this.loadMore()
-      },
-
-      '$intercom.ready': function ready () {
-        this.$intercom.boot({
-          user_id: this.userId,
-          name: this.name,
-          email: this.email,
-        })
-        this.$intercom.show()
-      },
-
-      email (email) {
-        this.$intercom.update({email})
-      },
+      }
     },
     directives: {
       'scroll-at': {
@@ -607,20 +536,30 @@
 
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 
-  .fixed-height {
-    height: 440px;
+  .promo-project-tile {
+    margin-bottom: 30px;
+    transition: box-shadow .4s;
+    border-radius: 5px;
+    background-color: #fff;
   }
 
-  .text-box-short {
-    text-overflow: ellipsis;
-    height: 110px;
-    overflow: scroll;
+  .promo-project-border-default {
+    border: 1px solid #e7e7e7;
+  }
+
+  .has-promo-project-thumbnail .promo-project-header {
+    position: relative;
+    margin: -1px;
+  }
+
+  .promo-project-header {
+    position: relative;
   }
 
   .promo-project-body {
-    padding: 10px 20px 0;
+    padding: 10px 20px 0px;
   }
 
   .promo-project-footer {
@@ -640,6 +579,13 @@
     text-decoration: none;
   }
 
+  .promo-project-thumb {
+    display: block;
+    position: relative;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+  }
+
   .has-promo-project-thumbnail .promo-project-header .promo-project-score {
     position: absolute;
     top: 0;
@@ -650,31 +596,50 @@
     padding-left: 24px;
   }
 
-  .post-categories-top {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding-top: 12px;
-    padding-right: 80px;
-    padding-left: 12px;
+  .has-promo-project-thumbnail .promo-project-format {
+    top: auto;
+    bottom: 10px;
   }
 
-  .btn-block-small {
+  .has-promo-project-thumbnail .promo-project-format {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #fff;
+    color: #404040;
+    line-height: 40px;
+    box-shadow: 0 5px 9px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .promo-project-format {
     display: block;
-    width: 55%;
-    margin-top: 0;
-    margin-right: 0 !important;
-    margin-bottom: 12px;
-    margin-left: 0 !important;
-    padding-right: 1px !important;
-    padding-left: 1px !important;
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    font-size: 24px;
+    text-align: center;
+    z-index: 4;
   }
 
-  .btn-outline-danger-red {
-    border-color: #ff5252;
-    background-color: #ff5252;
-    color: #ff5252;
+  .promo-project-header .svg-bg {
+    display: block;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 30px;
+    overflow: hidden;
+    z-index: 3;
+    -moz-border-right-colors: #e7e7e7;
+  }
+
+  .promo-project-border-default-right {
+    border-right: 1px solid #e7e7e7;
+  }
+
+  .promo-project-header .svg-bg svg {
+    width: 100%;
+    height: 100%;
   }
 
   .promo-project-score > span {
@@ -703,6 +668,7 @@
     display: inline-block;
     margin-left: 10px;
     color: #606975;
+    text-decoration: none;
   }
 
   a.list-group-item-fixed:hover, a.list-group-item-fixed:focus, a.list-group-item-fixed:active,
@@ -744,5 +710,4 @@
     width: 100%;
     text-align: inherit;
   }
-
 </style>
