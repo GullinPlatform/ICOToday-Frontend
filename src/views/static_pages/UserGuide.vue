@@ -521,7 +521,7 @@
         name: this.name,
         email: this.email,
       });
-      this.$intercom.show();
+      this.$intercom.hide();
     },
     email(email) {
       this.$intercom.update({ email });
