@@ -28,6 +28,10 @@
   import PostUpdate from 'modals/PostUpdate'
   import PostModal from 'modals/PostModal'
 
+  import Vue from 'vue';
+  import VueIntercom from 'vue-intercom';
+  Vue.use(VueIntercom, { appId: 'rvgar4pm' });
+
   export default {
     name: 'RootLayout',
     components: {
@@ -40,6 +44,13 @@
       PostEdit,
       PostUpdate,
     },
+    data () {
+      return {
+        userId: 1,
+        name: 'UserGuide',
+        email: 'team@icotoday.io',
+      }
+    },
     computed: {
       login_status () {
         return this.$store.getters.login_status
@@ -51,5 +62,19 @@
         return this.$store.getters.self
       },
     },
+
+    watch: {
+    '$intercom.ready': function ready() {
+      this.$intercom.boot({
+        user_id: this.userId,
+        name: this.name,
+        email: this.email,
+      });
+      this.$intercom.hide();
+    },
+    email(email) {
+      this.$intercom.update({ email });
+    },
+  }
   }
 </script>
