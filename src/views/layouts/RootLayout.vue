@@ -65,15 +65,8 @@
 
     watch: {
     '$intercom.ready': function ready() {
-      this.$intercom.boot({
-        user_id: this.userId,
-        name: this.name,
-        email: this.email,
-      });
+      this.$intercom.boot();
       this.$intercom.hide();
-    },
-    email(email) {
-      this.$intercom.update({ email });
     },
   }
   }

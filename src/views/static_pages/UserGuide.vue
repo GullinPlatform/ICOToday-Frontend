@@ -86,7 +86,7 @@
               <div class="card-header" role="tab">
                 <h6><a href="#collapseOne" data-toggle="collapse" data-parent="#accordion">How do I participate in a project's ICO?</a></h6>
               </div>
-              <div class="collapse show" id="collapseOne" role="tabpanel">
+              <div class="collapse" id="collapseOne" role="tabpanel">
                 <div class="card-body">
                   <p>
                     Every project's page has a right-hand sidebar that shows the total amount the project is looking to raise, and what types of cryptocurrencies are accepted. All you have to do is press the "Contribute" button next to the type of cryptocurrency you intend to use!
