@@ -354,8 +354,8 @@
         .then(() => {
           this.promotion_loaded = true
         })
-
-      this.$store.dispatch('getSelfMarkedPost')
+      if (this.login_status)
+        this.$store.dispatch('getSelfMarkedPost')
     },
     mounted () {
       /* global particlesJS:true */
