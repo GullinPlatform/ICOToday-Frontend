@@ -16,20 +16,54 @@ const apiCall = (method, url, form_data, params) => {
 }
 
 export default {
-  // Authorization
-  getTeam (pk) {
-    return apiCall('get', pk + '/')
+  // Everyone accessible
+  getCompany (id) {
+    return apiCall('get', id + '/')
   },
-  // Change User
-  updateTeam (form_data) {
-    return apiCall('put', form_data.pk + '/', form_data)
+  getCompanyMembers (id) {
+    return apiCall('get', id + '/members/')
   },
-  // Change Team
-  addTeamMember (form_data) {
-    return apiCall('patch', form_data.get('pk') + '/', form_data)
+  applyCompany (id) {
+    return apiCall('get', id + '/apply/')
   },
-  remTeamMember (pk) {
-    return apiCall('delete', pk + '/')
+  searchCompany (search) {
+    return apiCall('get', 'search/', {}, search)
+  },
+
+  // New Registered User Only
+  createCompany () {
+    return apiCall('post', '')
+  },
+
+  // Company Admin Operations
+  updateCompany (form_data) {
+    return apiCall('put', form_data.get('id') + '/', form_data)
+  },
+  createCompanyMember (form_data) {
+    return apiCall('post', 'member/', form_data)
+  },
+  addCompanyMember (id) {
+    return apiCall('post', 'member/' + id + '/')
+  },
+  removeCompanyMember (id) {
+    return apiCall('delete', 'member/' + id + '/')
+  },
+  approveCompanyMember (id) {
+    return apiCall('post', 'member/approve/' + id + '/')
+  },
+  rejectCompanyMember (id) {
+    return apiCall('delete', 'member/approve/' + id + '/')
+  },
+  addCompanyAdmin (id) {
+    return apiCall('post', 'member/admin/' + id + '/')
+  },
+
+  // Company Member Operations
+  leaveCompany () {
+    return apiCall('delete', 'leave/')
+  },
+  getCompanyAdminList (id) {
+    return apiCall('get', 'member/admins/')
   },
 }
 
