@@ -7,6 +7,7 @@ import feed from './modules/feed'
 import message from './modules/message'
 import notification from './modules/notification'
 import project from './modules/project'
+import utils from './modules/utils'
 import wallet from './modules/wallet'
 
 Vue.use(Vuex)
@@ -22,7 +23,8 @@ const store = new Vuex.Store({
     message,
     notification,
     project,
-    wallet
+    utils,
+    wallet,
   }
 })
 export default store

@@ -6,8 +6,6 @@ export const LOGOUT = 'LOGOUT'
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS'
 export const REGISTER_FAILED = 'REGISTER_FAILED'
 
-export const VERIFY_SUCCESS = 'VERIFY_SUCCESS'
-
 export const REFRESH_SUCCESS = 'REFRESH_SUCCESS'
 
 export const LOAD_SELF = 'LOAD_SELF'
@@ -38,6 +36,7 @@ export const LIST_PROMO_POSTS = 'LIST_PROMO_POSTS'
 export const APPEND_POSTS = 'APPEND_POSTS'
 export const MARK_POST = 'MARK_POST'
 export const UPDATE_POST = 'UPDATE_POST'
+export const GET_POST_TAGS = 'GET_POST_TAGS'
 
 // ----- TEAM -----
 export const GET_TEAM = 'GET_TEAM'

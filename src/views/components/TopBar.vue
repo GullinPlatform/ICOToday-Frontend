@@ -15,9 +15,9 @@
         </div>
         <ul>
           <li>
-            <a href="/faq?type=faq">
+            <router-link :to="{name:'faq', query:{type:'faq'}}" class="hidden-sm-down">
               <span>User Guide</span>
-            </a>
+            </router-link>
           </li>
           <li>
             <router-link :to="{name:'tokensale'}" class="hidden-sm-down">
@@ -42,7 +42,7 @@
                       <img src="../../../static/img/account/default.jpg">
                     </div>
                     <div class="dropdown-notification-info">
-                      <p class="dropdown-notification-content"> <span class="text-bold">ICOToday </span>
+                      <p class="dropdown-notification-content"><span class="text-bold">ICOToday </span>
                         <router-link :to="{name:'user', params:{}}">{{notification.content}}</router-link>
                       </p>
                       <span class="dropdown-notification-time float-left">2 days ago</span>
@@ -57,13 +57,13 @@
                   </div>
                 </div>
                 <div class="toolbar-dropdown" v-else>
-                  <div class="dropdown-product-item  text-center">
+                  <div class="dropdown-product-item text-center">
                     <h3 class="dropdown-product-title"><i class="fa fa-bell-slash-o"></i> Nothing Here, yet</h3>
                   </div>
                 </div>
               </div>
               <div class="account" v-if="login_status">
-                <img :src="me.info.avatar" class="rounded-circle">
+                <img v-if="me.info" :src="me.info.avatar" class="rounded-circle">
                 <a href="javascript:void(0)"></a>
                 <ul class="toolbar-dropdown">
                   <li class="sub-menu-user">
@@ -129,7 +129,7 @@
       </nav>
       <!-- Toolbar-->
     </header>
-    <div class="alert alert-warning alert-dismissible alert-top text-center text-lg" v-if="login_status && !me.is_verified">
+    <div class="alert alert-warning alert-dismissible alert-top text-center text-lg" v-if="login_status && !me.info.is_verified">
       <span class="alert-close" data-dismiss="alert"></span>
       <i class="icon-bell"></i>&nbsp;&nbsp;<strong>Account Unverified:</strong>
       Please verify your account to have fully access to ICOToday's great features.
@@ -193,3 +193,23 @@
   }
 
 </script>
+
+<style scoped>
+  .dropdown-product-item {
+    display: table;
+    position: relative;
+    width: 100%;
+    padding: 9px 0;
+    border-top: 1px dashed #d8e0e6;
+  }
+
+  .dropdown-product-item .dropdown-product-title {
+    display: block;
+    padding-top: 2px;
+    transition: color .3s;
+    color: #606975;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+  }
+</style>
