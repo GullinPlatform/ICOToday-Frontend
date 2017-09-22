@@ -1,20 +1,22 @@
 import axios from 'axios'
 
 import { API_ROOT } from '../config'
-import { getCookie } from '../utils/cookie'
 
-const client = axios.create({
-  baseURL: API_ROOT,
-  withCredentials: true,
-  headers: {
-    'X-CSRF-TOKEN': getCookie('csrftoken'),
-  },
-})
+const apiCall = (method, url, form_data, params) => {
+  return axios({
+    method: method,
+    url: url,
+    data: form_data ? form_data : {},
+    params: params ? params : {},
+    baseURL: API_ROOT + '/wl/',
+    withCredentials: true,
+  })
+    .then((response) => Promise.resolve(response.data))
+    .catch((error) => Promise.reject(error.response.data))
+}
 
 export default {
   getWallet () {
-    return client.get(API_ROOT + 'wallet/')
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
+    return apiCall('get', '')
   },
 }

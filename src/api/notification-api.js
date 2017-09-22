@@ -1,25 +1,25 @@
 import axios from 'axios'
 
 import { API_ROOT } from '../config'
-import { getCookie } from '../utils/cookie'
 
-const client = axios.create({
-  baseURL: API_ROOT + '/nt/',
-  withCredentials: true,
-  headers: {
-    'X-CSRF-TOKEN': getCookie('csrftoken'),
-  },
-})
+const apiCall = (method, url, form_data, params) => {
+  return axios({
+    method: method,
+    url: url,
+    data: form_data ? form_data : {},
+    params: params ? params : {},
+    baseURL: API_ROOT + '/nt/',
+    withCredentials: true,
+  })
+    .then((response) => Promise.resolve(response.data))
+    .catch((error) => Promise.reject(error.response.data))
+}
 
 export default {
   getNotifications () {
-    return client.get('fetch/')
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
+    return apiCall('get', 'fetch/')
   },
   readNotification (pk) {
-    return client.post('read/' + pk + '/', {})
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
+    return apiCall('post', 'read/' + pk + '/')
   }
 }

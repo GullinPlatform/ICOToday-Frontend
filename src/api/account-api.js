@@ -1,149 +1,111 @@
 import axios from 'axios'
 
 import { API_ROOT } from '../config'
-import { getCookie } from '../utils/cookie'
 
-const client = axios.create({
-  baseURL: API_ROOT + '/ac/',
-  withCredentials: true,
-  headers: {
-    'X-CSRF-TOKEN': getCookie('csrftoken'),
-  },
-})
+const apiCall = (method, url, form_data, params) => {
+  return axios({
+    method: method,
+    url: url,
+    data: form_data ? form_data : {},
+    params: params ? params : {},
+    baseURL: API_ROOT + '/ac/',
+    withCredentials: true,
+  })
+    .then((response) => Promise.resolve(response.data))
+    .catch((error) => Promise.reject(error.response.data))
+}
 
 export default {
-  // Authorization
-  login (formData) {
-    return client.post('login/', formData)
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
+  // Login Signup and Stay Login
+  login (form_data) {
+    return apiCall('post', 'login/', form_data)
   },
-  signup (formData) {
-    return client.post('signup/', formData)
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
+  logout () {
+    return apiCall('post', 'logout/')
+  },
+  signup (form_data) {
+    return apiCall('post', 'signup/', form_data)
+  },
+  tokenRefresh () {
+    return apiCall('post', 'refresh_login_status/')
   },
 
-  passwordReset (formData) {
-    return client.post('change_pass/', formData)
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
+  // Account Detail
+  getSelf () {
+    return apiCall('get', 'me/')
   },
-  tokenVerify (formData) {
-    return client.post('check_login_status/', formData)
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
+  updateSelf (form_data) {
+    return apiCall('put', 'me/', form_data)
   },
-  tokenRefresh (formData) {
-    return client.post('check_login_status/', formData)
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
+  getUser (pk) {
+    return apiCall('get', pk + '/')
   },
-  confirmEmail (token) {
-    return client.get('email_verify/' + token + '/')
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
-  },
-  resendConfirmEmail () {
-    return client.post('email_verify/', {})
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
-  },
-  invitedSignup (formData) {
-    return client.post('invited_signup/' + formData.token + '/', formData)
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
+
+  // Verification email
+  invitedSignup (form_data) {
+    return apiCall('post', 'invited_signup/' + form_data.token + '/', form_data)
   },
   invitedGetUser (token) {
-    return client.get('invited_signup/' + token + '/')
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
+    return apiCall('get', 'invited_signup/' + token + '/')
   },
   invitedResendEmail (token) {
-    return client.post('invited_resend/' + token + '/')
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
+    return apiCall('post', 'invited_resend/' + token + '/')
   },
-  sendTwoFactorEmail () {
-    return client.post('2factor/', {})
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
+  confirmEmail (token) {
+    return apiCall('get', 'email_verify/' + token + '/')
   },
-  verifyTwoFactorToken (token) {
-    return client.get('2factor/', token)
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
+  resendConfirmEmail () {
+    return apiCall('post', 'email_verify/')
+  },
+
+  // Change Password
+  changePassword () {
+    return apiCall('get', 'change_pass/')
   },
   forgetPasswordSendEmail (email) {
-    return client.post('forget/', {'email': email})
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
+    return apiCall('post', 'forget/', {'email': email})
   },
   forgetPasswordVerifyToken (token) {
-    return client.get('forget/' + token + '/')
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
+    return apiCall('get', 'forget/' + token + '/')
   },
-  forgetPasswordResetPassword (formData) {
-    return client.put('forget/' + formData.token + '/', formData)
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
+  forgetPasswordResetPassword (form_data) {
+    return apiCall('put', 'forget/' + form_data.token + '/', form_data)
   },
-  changePassword () {
-    return client.get('change_pass/')
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
+
+  // 2 Factor Authentication
+  sendTwoFactorEmail () {
+    return apiCall('post', '2factor/')
+  },
+  verifyTwoFactorToken (token) {
+    return apiCall('get', '2factor/', token)
   },
 
   // Load User Data
-  getSelf () {
-    return client.get('me/')
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
-  },
-  getUser (pk) {
-    return client.get('' + pk + '/')
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
-  },
-  getSelfCreatedPost () {
-    return client.get('me/created_posts/')
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
-  },
-  getUserCreatedPost (pk) {
-    return client.get('' + pk + '/created_posts/')
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
-  },
   getSelfMarkedPost () {
-    return client.get('me/marked_posts/')
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
+    return apiCall('get', 'me/marked_projects/')
   },
   getUserMarkedPost (pk) {
-    return client.get('' + pk + '/marked_posts/')
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
+    return apiCall('get', pk + '/marked_projects/')
   },
-  updateSelf (formData) {
-    return client.put('me/', formData)
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
+
+  // Search User
+  searchUser (search_token) {
+    return apiCall('get', 'search/', {}, search_token)
   },
+
+  // Add Interests to user
+  addInterests (form_data) {
+    return apiCall('post', 'me/interests/', form_data)
+  },
+
+  // Expert Application
   getMyExpertApplication () {
-    return client.get('expert_apply/')
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
+    return apiCall('get', 'expert_apply/')
   },
-  postMyExpertApplication (formData) {
-    return client.post('expert_apply/', formData)
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
+  postMyExpertApplication (form_data) {
+    return apiCall('post', 'expert_apply/', form_data)
   },
-  updateMyExpertApplication (formData) {
-    return client.put('expert_apply/', formData)
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
+  updateMyExpertApplication (form_data) {
+    return apiCall('put', 'expert_apply/', form_data)
   },
 }

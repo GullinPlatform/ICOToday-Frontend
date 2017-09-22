@@ -1,44 +1,35 @@
 import axios from 'axios'
 
 import { API_ROOT } from '../config'
-import { getCookie } from '../utils/cookie'
 
-const client = axios.create({
-  baseURL: API_ROOT + '/ms/',
-  withCredentials: true,
-  headers: {
-    'X-CSRF-TOKEN': getCookie('csrftoken'),
-  },
-})
+const apiCall = (method, url, form_data, params) => {
+  return axios({
+    method: method,
+    url: url,
+    data: form_data ? form_data : {},
+    params: params ? params : {},
+    baseURL: API_ROOT + '/ms/',
+    withCredentials: true,
+  })
+    .then((response) => Promise.resolve(response.data))
+    .catch((error) => Promise.reject(error.response.data))
+}
 
 export default {
-  getComments (pk) {
-    return client.get(pk + '/')
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
+  sendMessage (pk) {
+    return apiCall('post', pk + '/')
+  },
+  loadMessages (pk) {
+    return apiCall('get', pk + '/')
   },
 
-  postComment (formData) {
-    return client.post(formData.pk + '/', formData)
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
+  loadMoreMessages (pk) {
+    return apiCall('get', pk + '/more/')
   },
-
-  replyComment (formData) {
-    return client.post(formData.pk + '/reply/', formData)
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
+  readMoreMessages (pk) {
+    return apiCall('get', pk + '/read/')
   },
-
-  editComment (formData) {
-    return client.patch(formData.pk + '/edit/', formData)
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
-  },
-
-  deleteComment (pk) {
-    return client.delete(pk + '/edit/')
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
-  },
+  getConversation (pk) {
+    return apiCall('post', 'ac/' + pk + '/')
+  }
 }

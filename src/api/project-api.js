@@ -1,80 +1,54 @@
 import axios from 'axios'
 
 import { API_ROOT } from '../config'
-import { getCookie } from '../utils/cookie'
 
-const client = axios.create({
-  baseURL: API_ROOT,
-  withCredentials: true,
-  headers: {
-    'X-CSRF-TOKEN': getCookie('csrftoken'),
-  },
-})
+const apiCall = (method, url, form_data, params) => {
+  return axios({
+    method: method,
+    url: url,
+    data: form_data ? form_data : {},
+    params: params ? params : {},
+    baseURL: API_ROOT + '/pj/',
+    withCredentials: true,
+  })
+    .then((response) => Promise.resolve(response.data))
+    .catch((error) => Promise.reject(error.response.data))
+}
 
 export default {
-  postPost (formData) {
-    return client.post(API_ROOT + 'post/', formData)
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
+  listPosts () {
+    return apiCall('get', '')
+  },
+  postPost (form_data) {
+    return apiCall('post', '', form_data)
   },
   getPost (id) {
-    return client.get(API_ROOT + 'post/' + id + '/')
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
-  },
-
-  listPosts () {
-    return client.get(API_ROOT + 'post/')
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
+    return apiCall('get', id + '/')
   },
 
   listPromoPosts () {
-    return client.get(API_ROOT + 'post/promo/')
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
+    return apiCall('get', 'promo/')
   },
-
   listPostsByPage (page) {
-    return client.get(API_ROOT + 'post/p/' + page + '/')
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
+    return apiCall('get', 'p/' + page + '/')
   },
-
-  searchPosts (formData) {
-    let query = '/?'
-
-    if (formData.status) {
-      query = query + 'status=' + formData.status + '&'
-    }
-    if (formData.category) {
-      query = query + 'category=' + formData.category + '&'
-    }
-    if (formData.type) {
-      query = query + 'type=' + formData.type + '&'
-    }
-    if (formData.keyword) {
-      query = query + 'keyword=' + formData.keyword + '&'
-    }
-
-    return client.get(API_ROOT + 'post/search/' + formData.page + query)
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
+  searchPosts (form_data) {
+    return apiCall('get', 'search/' + form_data.page + '/', {}, form_data)
   },
 
   markPost (id) {
-    return client.post(API_ROOT + 'post/' + id + '/mark/', {})
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
+    return apiCall('post', id + '/mark/')
   },
-  updatePost (formData) {
-    return client.patch(API_ROOT + 'post/' + formData.get('id') + '/', formData)
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
+  updatePost (form_data) {
+    return apiCall('patch', form_data.get('id') + '/', form_data)
   },
   getPostRatingDetail (id) {
-    return client.get(API_ROOT + 'post/' + id + '/rating/')
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
+    return apiCall('get', id + '/rating/')
+  },
+
+  getAllProjectTags () {
+    return apiCall('get', '/tags/')
+
   }
+
 }

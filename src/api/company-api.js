@@ -1,39 +1,35 @@
 import axios from 'axios'
 
 import { API_ROOT } from '../config'
-import { getCookie } from '../utils/cookie'
 
-const client = axios.create({
-  baseURL: API_ROOT,
-  withCredentials: true,
-  headers: {
-    'X-CSRF-TOKEN': getCookie('csrftoken'),
-  },
-})
+const apiCall = (method, url, form_data, params) => {
+  return axios({
+    method: method,
+    url: url,
+    data: form_data ? form_data : {},
+    params: params ? params : {},
+    baseURL: API_ROOT + '/cp/',
+    withCredentials: true,
+  })
+    .then((response) => Promise.resolve(response.data))
+    .catch((error) => Promise.reject(error.response.data))
+}
 
 export default {
   // Authorization
   getTeam (pk) {
-    return client.get('/cp/' + pk + '/')
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
+    return apiCall('get', pk + '/')
   },
   // Change User
-  updateTeam (formData) {
-    return client.put('/cp/' + formData.pk + '/', formData)
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
+  updateTeam (form_data) {
+    return apiCall('put', form_data.pk + '/', form_data)
   },
   // Change Team
-  addTeamMember (formData) {
-    return client.patch('/cp/' + formData.get('pk') + '/', formData)
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
+  addTeamMember (form_data) {
+    return apiCall('patch', form_data.get('pk') + '/', form_data)
   },
   remTeamMember (pk) {
-    return client.delete('/cp/' + pk + '/')
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
+    return apiCall('delete', pk + '/')
   },
 }
 
