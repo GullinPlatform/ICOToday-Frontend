@@ -6,7 +6,8 @@ const state = {
   posts: [],
   promo_posts: [],
   current_post: {},
-  current_post_rating_detail: ''
+  current_post_rating_detail: '',
+  tags: []
 }
 
 const getters = {
@@ -21,7 +22,10 @@ const getters = {
   },
   promo_posts: state => {
     return state.promo_posts
-  }
+  },
+  tags: state => {
+    return state.tags
+  },
 }
 
 const actions = {
@@ -70,7 +74,7 @@ const actions = {
       })
   },
 
-  searchPosts({commit}, formData) {
+  searchPosts ({commit}, formData) {
     return postApi.searchPosts(formData)
       .then((response) => {
         commit(types.LIST_POSTS, response)
@@ -81,7 +85,7 @@ const actions = {
         return Promise.reject(error)
       })
   },
-  searchPostsByPage({commit}, formData) {
+  searchPostsByPage ({commit}, formData) {
     return postApi.searchPosts(formData)
       .then((response) => {
         commit(types.APPEND_POSTS, response)
@@ -141,24 +145,14 @@ const actions = {
       })
   },
 
-  toastr ({commit}, data) {
-    let toastOptions = {
-      class: 'iziToast-' + data.type || '',
-      title: data.title,
-      message: data.message,
-      animateInside: false,
-      position: 'topRight',
-      progressBar: false,
-      icon: 'icon-bell',
-      timeout: 3200,
-      transitionIn: 'fadeInLeft',
-      transitionOut: 'fadeOut',
-      transitionInMobile: 'fadeIn',
-      transitionOutMobile: 'fadeOut'
-    }
-    /* global iziToast:true */
-    iziToast.show(toastOptions)
+  getAllProjectTags ({commit}) {
+    return postApi.getAllProjectTags()
+      .then((response) => {
+        commit(types.GET_POST_TAGS, response)
+        return Promise.resolve()
+      })
   }
+
 }
 
 const mutations = {
@@ -185,6 +179,9 @@ const mutations = {
   },
   [types.GET_POST_RATING_DETAIL] (state, response) {
     state.current_post_rating_detail = response
+  },
+  [types.GET_POST_TAGS] (state, response) {
+    state.tags = response
   },
 }
 

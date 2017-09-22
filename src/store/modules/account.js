@@ -1,5 +1,4 @@
 import userApi from '../../api/account-api.js'
-import * as cookie from '../../utils/cookie'
 import * as types from '../mutation-types'
 import router from '../../router/index'
 /* global $:true */
@@ -19,8 +18,6 @@ const state = {
 
   login_status: false,
 
-  white_list_email: '',
-  resend_email_until: ''
 }
 
 // getters
@@ -78,18 +75,6 @@ const getters = {
     }
   },
 
-  white_list_email: state => {
-    return state.white_list_email
-  },
-  able_to_resend: state => {
-    if (!state.resend_email_until)
-      return true
-    else if (moment().isAfter(state.resend_email_until))
-      return true
-    else
-      return false
-
-  }
 }
 
 // actions
@@ -130,8 +115,8 @@ const actions = {
         return Promise.reject(error)
       })
   },
-  updateSelf ({commit}, formData) {
-    return userApi.updateSelf(formData)
+  updateSelf ({commit}, form_data) {
+    return userApi.updateSelf(form_data)
       .then(() => {
         commit(types.UPDATE_SELF)
         return Promise.resolve()
@@ -179,8 +164,8 @@ const actions = {
       })
   },
 
-  signup ({commit, dispatch}, formData) {
-    return userApi.signup(formData)
+  signup ({commit, dispatch}, form_data) {
+    return userApi.signup(form_data)
       .then((response) => {
         $('#signup-modal').modal('hide')
         commit(types.REGISTER_SUCCESS, response)
@@ -192,8 +177,8 @@ const actions = {
         return Promise.reject(error)
       })
   },
-  login ({commit, dispatch}, formData) {
-    return userApi.login(formData)
+  login ({commit, dispatch}, form_data) {
+    return userApi.login(form_data)
       .then((response) => {
         $('#login-modal').modal('hide')
         commit(types.LOGIN_SUCCESS, response)
@@ -205,7 +190,7 @@ const actions = {
       })
   },
   logout ({commit}) {
-    console.log('logout')
+    userApi.logout()
     commit(types.LOGOUT)
   },
   confirmEmail ({dispatch}, token) {
@@ -239,8 +224,8 @@ const actions = {
       })
   },
 
-  changePassword ({commit}, formData) {
-    return userApi.changePassword(formData)
+  changePassword ({commit}, form_data) {
+    return userApi.changePassword(form_data)
       .then(() => {
         return Promise.resolve()
       })
@@ -267,8 +252,8 @@ const actions = {
         return Promise.reject(error)
       })
   },
-  forgetPasswordResetPassword ({commit}, formData) {
-    return userApi.forgetPasswordResetPassword(formData)
+  forgetPasswordResetPassword ({commit}, form_data) {
+    return userApi.forgetPasswordResetPassword(form_data)
       .then(() => {
         return Promise.resolve()
       })
@@ -296,14 +281,6 @@ const actions = {
       })
   },
 
-  whiteListEmail ({commit}, email) {
-    commit(types.WHITE_LIST_EMAIL, email)
-    $('#signup-modal').modal('show')
-  },
-  cleanWhiteListEmail ({commit}) {
-    commit(types.CLEAN_WHITE_LIST_EMAIL)
-  },
-
   invitedGetUser ({commit}, token) {
     return userApi.invitedGetUser(token)
       .then((response) => {
@@ -314,8 +291,8 @@ const actions = {
         return Promise.reject(error)
       })
   },
-  invitedSignup ({dispatch, commit}, formData) {
-    return userApi.invitedSignup(formData)
+  invitedSignup ({dispatch, commit}, form_data) {
+    return userApi.invitedSignup(form_data)
       .then((response) => {
         commit(types.REGISTER_SUCCESS, response)
         dispatch('getSelf')
@@ -326,22 +303,40 @@ const actions = {
       })
   },
 
-  tokenVerify ({commit, dispatch}, token) {
-    if (token) {
-      userApi.tokenRefresh({token: token})
-        .then((response) => {
-          commit(types.REFRESH_SUCCESS, response)
-          dispatch('getSelf')
-        })
-        .catch((error) => {
-          commit(types.LOGIN_FAILED)
-          console.log(error)
-        })
-    }
+  tokenVerify ({commit, dispatch}) {
+    userApi.tokenRefresh()
+      .then((response) => {
+        commit(types.REFRESH_SUCCESS, response)
+        dispatch('getSelf')
+      })
+      .catch((error) => {
+        commit(types.LOGIN_FAILED)
+        console.log(error)
+      })
   },
 
-  getMyExpertApplication ({commit}, formData) {
-    return userApi.getMyExpertApplication(formData)
+  searchUser ({commit}, search_token) {
+    return userApi.searchUser(search_token)
+      .then((response) => {
+        return Promise.resolve(response)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  },
+
+  addInterests (form_data) {
+    return userApi.addInterests(form_data)
+      .then(() => {
+        return Promise.resolve()
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  },
+
+  getMyExpertApplication ({commit}, form_data) {
+    return userApi.getMyExpertApplication(form_data)
       .then((response) => {
         commit(types.GET_SELF_EXPERT_APPLICATION, response)
         return Promise.resolve()
@@ -350,8 +345,8 @@ const actions = {
         return Promise.reject(error)
       })
   },
-  updateMyExpertApplication ({commit}, formData) {
-    return userApi.updateMyExpertApplication(formData)
+  updateMyExpertApplication ({commit}, form_data) {
+    return userApi.updateMyExpertApplication(form_data)
       .then((response) => {
         commit(types.UPDATE_SELF_EXPERT_APPLICATION, response)
         return Promise.resolve()
@@ -360,10 +355,10 @@ const actions = {
         return Promise.reject(error)
       })
   },
-  postMyExpertApplication ({commit}, formData) {
-    return userApi.postMyExpertApplication(formData)
+  postMyExpertApplication ({commit}, form_data) {
+    return userApi.postMyExpertApplication(form_data)
       .then(() => {
-        commit(types.POST_SELF_EXPERT_APPLICATION, formData.detail)
+        commit(types.POST_SELF_EXPERT_APPLICATION, form_data.detail)
         return Promise.resolve()
       })
       .catch((error) => {
@@ -376,7 +371,6 @@ const actions = {
 const mutations = {
   // auth
   [types.LOGIN_SUCCESS] (state, response) {
-    cookie.setCookie('icotodaytoken', response.token)
     state.login_status = true
     router.push({name: 'landing'})
   },
@@ -386,24 +380,17 @@ const mutations = {
     router.push({name: 'landing'})
   },
   [types.REGISTER_SUCCESS] (state, response) {
-    cookie.setCookie('icotodaytoken', response.token)
     state.login_status = true
     router.push({name: 'landing'})
   },
-  [types.LOGIN_FAILED] (state, error) {
-    cookie.delCookie('icotodaytoken')
+  [types.LOGIN_FAILED] (state) {
     state.login_status = false
   },
-  [types.REGISTER_FAILED] (state, error) {
+  [types.REGISTER_FAILED] (state) {
     state.login_status = false
   },
 
-  [types.VERIFY_SUCCESS] (state, response) {
-    cookie.setCookie('icotodaytoken', response.token)
-    state.login_status = true
-  },
   [types.REFRESH_SUCCESS] (state, response) {
-    cookie.setCookie('icotodaytoken', response.token)
     state.login_status = true
   },
 
@@ -436,10 +423,6 @@ const mutations = {
     state.white_list_email = ''
   },
 
-  [types.SET_RESEND_EMAIL_TIME_LIMIT] (state) {
-    state.resend_email_until = moment().add(1, 'minutes')
-  },
-
   // post change
   [types.UPDATE_SELF] (state) {},
 
@@ -449,8 +432,8 @@ const mutations = {
   [types.UPDATE_SELF_EXPERT_APPLICATION] (state, response) {
     state.self_expert_application = response
   },
-  [types.POST_SELF_EXPERT_APPLICATION] (state, formData) {
-    state.self_expert_application = formData
+  [types.POST_SELF_EXPERT_APPLICATION] (state, form_data) {
+    state.self_expert_application = form_data
   },
 }
 
