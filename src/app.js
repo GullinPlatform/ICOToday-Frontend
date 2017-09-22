@@ -7,7 +7,6 @@ import router from './router'
 import store from './store'
 
 import RootLayout from './views/layouts/RootLayout.vue'
-import * as cookie from './utils/cookie'
 
 Vue.use(Router)
 Vue.use(VueHead)
@@ -24,9 +23,7 @@ export const app = new Vue({
   el: '#app',
   data: {},
   beforeCreate () {
-    const token = cookie.getCookie('icotodaytoken')
-    console.log(token)
-    this.$store.dispatch('tokenVerify', token)
+    this.$store.dispatch('tokenVerify')
   },
   router,
   store,
