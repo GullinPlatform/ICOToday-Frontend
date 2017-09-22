@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-
 import RootLayout from 'layouts/RootLayout'
 import Landing from 'views/Landing'
 
+import RegisterFollowUp from 'views/RegisterFollowUp'
 import EmailVerify from 'views/EmailVerify'
 import InvitedRegister from 'views/InvitedRegister'
 import ForgetPassword from 'views/ForgetPassword'
@@ -41,6 +41,10 @@ export default new Router({
       path: '/',
       component: Landing,
       name: 'landing'
+    }, {
+      path: '/register/followup',
+      component: RegisterFollowUp,
+      name: 'register_followup'
     }, {
       path: '/project/:id',
       component: Post,
