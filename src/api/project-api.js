@@ -12,7 +12,12 @@ const apiCall = (method, url, form_data, params) => {
     withCredentials: true,
   })
     .then((response) => Promise.resolve(response.data))
-    .catch((error) => Promise.reject(error.response.data))
+    .catch((error) => {
+      if (error)
+        return Promise.reject(error.response.data)
+      else
+        return Promise.reject({})
+    })
 }
 
 export default {
