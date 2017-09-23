@@ -17,12 +17,16 @@ const state = {
   user_created_posts: [],
 
   login_status: false,
-
 }
 
 // getters
 const getters = {
   login_status: state => state.login_status,
+  is_verified: state => {
+    if (!state.self || !state.self.info)
+      return false
+    else return state.self.info.is_verified
+  },
 
   self: state => {
     if (state.login_status && state.self)
@@ -159,7 +163,6 @@ const actions = {
       })
       .catch((error) => {
         console.log(error)
-
         return Promise.reject(error)
       })
   },
@@ -192,6 +195,17 @@ const actions = {
   logout ({commit}) {
     userApi.logout()
     commit(types.LOGOUT)
+  },
+  logIP ({commit}, form_data) {
+    userApi.logIP(form_data)
+      .then((response) => {
+        commit(types.LOG_IP)
+        return Promise.resolve(response)
+      })
+      .catch((error) => {
+        console.log(error)
+        return Promise.reject(error)
+      })
   },
   confirmEmail ({dispatch}, token) {
     return userApi.confirmEmail(token)
@@ -325,7 +339,7 @@ const actions = {
       })
   },
 
-  addInterests (form_data) {
+  addInterests ({commit}, form_data) {
     return userApi.addInterests(form_data)
       .then(() => {
         return Promise.resolve()
@@ -393,6 +407,7 @@ const mutations = {
   [types.REFRESH_SUCCESS] (state, response) {
     state.login_status = true
   },
+  [types.LOG_IP] (state) {},
 
   // load data
   [types.LOAD_SELF] (state, response) {
