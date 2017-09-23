@@ -242,6 +242,12 @@
 
   export default {
     name: 'MyNewProject',
+    head: {
+      title: {
+        inner: 'ICOToday',
+        complement: 'New ICO'
+      }
+    },
     data () {
       return {
         // -- form info start --
@@ -277,12 +283,6 @@
         icon_loaded: false,
         uploading: false,
         error_message: '',
-      }
-    },
-    head: {
-      title: {
-        inner: 'ICOToday',
-        complement: 'New ICO'
       }
     },
     components: {

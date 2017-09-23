@@ -1,70 +1,53 @@
-
-<template >
-    <div class="light-grey">
+<template>
+  <div class="light-grey">
     <!-- Page Content-->
     <div class="container padding-bottom-3x mb-2 mt-md-3 pl-3 pr-3 " style="padding-top:60px;">
-
-
-
-        <div class="row post-modal">
-          <div class="col-lg-3 ml-5">
-
-              <div>
-
-              <section>
-                  <h3 class="widget-title mb-2">Unread</h3>
-                  <h3 class="widget-title mb-2">Read</h3>
-                  <h3 class="widget-title mb-2">All</h3>
-              </section>
-          </div>
+      <div class="row post-modal">
+        <div class="col-lg-3 ml-5">
+            <section>
+              <h3 class="widget-title mb-2">Unread</h3>
+              <h3 class="widget-title mb-2">Read</h3>
+              <h3 class="widget-title mb-2">All</h3>
+            </section>
         </div>
-
         <!-- Description -->
-        <div class="col-lg-6 pl-md-0 pl-md-0 ml-5 " >
+        <div class="col-lg-6 pl-md-0 pl-md-0 ml-5 ">
           <h3 class="text-left card-new-heading">Notifications</h3>
-            <section class="card-new-layout">
-              <div class="post-header">
-
-                  <img class="d-flex rounded mr-3 ml-3" :src="post.logo_image" width="50" alt="Media">
-
-                  <div class="media-body">
-                      <p class="mt-0 mb-1">{{post.title}} <span style="color:#030303;font-size:12px; font-weight: normal;">has subsribed to your account</span></p>
-                  </div>
+          <section class="card-new-layout">
+            <div class="post-header">
+              <img class="d-flex rounded mr-3 ml-3" :src="post.logo_image" width="50" alt="Media">
+              <div class="media-body">
+                <p class="mt-0 mb-1">{{post.title}} <span style="color:#030303;font-size:12px; font-weight: normal;">has subsribed to your account</span></p>
               </div>
-            </section>
-
-            <section class="card-new-layout">
-              <div class="post-header">
-
-                  <img class="d-flex rounded mr-3 ml-3" :src="post.logo_image" width="50" alt="Media">
-
-                  <div class="media-body">
-                      <h4 class="mt-0 mb-1">{{post.title}}</h4>
-                  </div>
+            </div>
+          </section>
+          <section class="card-new-layout">
+            <div class="post-header">
+              <img class="d-flex rounded mr-3 ml-3" :src="post.logo_image" width="50" alt="Media">
+              <div class="media-body">
+                <h4 class="mt-0 mb-1">{{post.title}}</h4>
               </div>
-                <vue-markdown class="card-new-text">{{post.description_full}}</vue-markdown>
-            </section>
-
-            <section class="card-new-layout">
-              <div class="post-header">
-
-                  <img class="d-flex rounded mr-3 ml-3" :src="post.logo_image" width="50" alt="Media">
-
-                  <div class="media-body">
-                      <h4 class="mt-0 mb-1">{{post.title}}</h4>
-                  </div>
+            </div>
+            <vue-markdown class="card-new-text">{{post.description_full}}</vue-markdown>
+          </section>
+          <section class="card-new-layout">
+            <div class="post-header">
+              <img class="d-flex rounded mr-3 ml-3" :src="post.logo_image" width="50" alt="Media">
+              <div class="media-body">
+                <h4 class="mt-0 mb-1">{{post.title}}</h4>
               </div>
-                <vue-markdown class="card-new-text">{{post.description_full}}</vue-markdown>
-            </section>
-        </div>
-
+            </div>
+            <vue-markdown class="card-new-text">{{post.description_full}}</vue-markdown>
+          </section>
         </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
   import VueMarkdown from 'vue-markdown'
+
   export default {
     name: 'CompanyPage',
     components: {

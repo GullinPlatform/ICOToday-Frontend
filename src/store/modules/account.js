@@ -8,13 +8,14 @@ const state = {
   // self
   self: {},
   self_marked_posts: [],
-  self_created_posts: [],
   self_expert_application: {},
 
   // loaded user
   user: {},
   user_marked_posts: [],
-  user_created_posts: [],
+
+  // icotoday official user
+  icotoday_user: {},
 
   login_status: false,
 }
@@ -40,13 +41,6 @@ const getters = {
       return []
     }
   },
-  self_created_posts: state => {
-    if (state.login_status && state.self) {
-      return state.self_created_posts
-    } else {
-      return []
-    }
-  },
   self_name: state => {
     if (state.login_status && state.self.info) {
       if (state.self.info.first_name && state.self.info.last_name) {
@@ -64,9 +58,6 @@ const getters = {
   },
   user_marked_posts: state => {
     return state.user_marked_posts
-  },
-  user_created_posts: state => {
-    return state.user_created_posts
   },
   user_name: state => {
     if (state.user.info) {
@@ -186,6 +177,7 @@ const actions = {
         $('#login-modal').modal('hide')
         commit(types.LOGIN_SUCCESS, response)
         dispatch('getSelf')
+        return Promise.resolve()
       })
       .catch((error) => {
         commit(types.LOGIN_FAILED, error)
@@ -195,6 +187,17 @@ const actions = {
   logout ({commit}) {
     userApi.logout()
     commit(types.LOGOUT)
+  },
+  tokenRefresh ({commit, dispatch}) {
+    userApi.tokenRefresh()
+      .then((response) => {
+        commit(types.REFRESH_SUCCESS, response)
+        dispatch('getSelf')
+      })
+      .catch((error) => {
+        commit(types.LOGIN_FAILED)
+        console.log(error)
+      })
   },
   logIP ({commit}, form_data) {
     userApi.logIP(form_data)
@@ -317,18 +320,6 @@ const actions = {
       })
   },
 
-  tokenVerify ({commit, dispatch}) {
-    userApi.tokenRefresh()
-      .then((response) => {
-        commit(types.REFRESH_SUCCESS, response)
-        dispatch('getSelf')
-      })
-      .catch((error) => {
-        commit(types.LOGIN_FAILED)
-        console.log(error)
-      })
-  },
-
   searchUser ({commit}, search_token) {
     return userApi.searchUser(search_token)
       .then((response) => {
@@ -415,13 +406,6 @@ const mutations = {
   },
   [types.LOAD_USER] (state, response) {
     state.user = response
-  },
-
-  [types.LOAD_SELF_CREATED_POST] (state, response) {
-    state.self_created_posts = response
-  },
-  [types.LOAD_USER_CREATED_POST] (state, response) {
-    state.user_created_posts = response
   },
 
   [types.LOAD_SELF_MARKED_POST] (state, response) {
