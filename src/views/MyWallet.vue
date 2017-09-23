@@ -4,7 +4,7 @@
     <div class="row">
       <my-header></my-header>
       <!--main content-->
-      <div class="col-md-8 margin-bottom-2x">
+      <div class="col-md-8 margin-bottom-2x" v-if="me.info.is_verified">
         <h6 class="text-muted text-normal text-uppercase">My Wallet</h6>
         <hr class="margin-bottom-1x">
         <div class="table-responsive table-wrapper">
@@ -66,7 +66,7 @@
         </div>
       </div>
 
-      <div class="col-md-8 text-center" v-if="!me.is_verified">
+      <div class="col-md-8 text-center" v-else>
         <h4 class="mt-3">
           You have to verify your email first
         </h4>

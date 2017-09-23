@@ -61,18 +61,26 @@
           email: this.email,
           password: SHA256(this.password),
         }
-
         this.$store.dispatch('login', form_data)
+          .then(() => {
+            // Log IP
+            getIP().then((response) => {
+              this.$store.dispatch('logIP', response)
+            })
+          })
           .catch(() => {
             this.error_message = 'Unable to login using provided email and password'
             this.password = ''
           })
 
-        // Log IP
-        getIP().then((response) => {
-          this.$store.dispatch('logIP', response)
-        })
+        // Clean up
+        this.resetState()
       },
+      resetState () {
+        this.email = ''
+        this.password = ''
+        this.error_message = ''
+      }
     }
   }
 
