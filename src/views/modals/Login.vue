@@ -10,25 +10,25 @@
         </div>
         <div class="modal-body">
           <div class="form-group">
-            <input type="email" v-model.trim="email" class="form-control email" placeholder="Email" required>
+            <input type="email" name="email" v-model="email" v-validate="'required|email'" class="form-control" placeholder="Email">
+            <span v-show="errors.has('email')" class="text-danger"><i class="fa fa-warning"></i> {{ errors.first('email') }}</span>
           </div>
           <div class="form-group">
-            <input type="password" @keyup.enter="login($event)" v-model="password" class="form-control password" placeholder="Password" required>
+            <input type="password" name="password" v-model="password" v-validate="'required'" class="form-control" placeholder="Password" @keyup.enter="login($event)">
+            <span v-show="errors.has('password')" class="text-danger"><i class="fa fa-warning"></i> {{ errors.first('password') }}</span>
           </div>
+          <span v-show="error_message" class="text-danger"><i class="fa fa-warning"></i> {{ error_message }}</span>
 
           <div class="row justify-content-center">
-            <div class="col-sm-8">
-              <a @click="login($event)" class="btn btn-primary btn-block text-white">Login</a>
+            <div class="col-sm-6">
+              <a href="javascript:void(0)" @click="login($event)" :disabled="errors.any()" class="btn btn-primary btn-block text-white">Login</a>
             </div>
           </div>
-          <p class="text-danger font-bold" v-show="error_message">{{error_message}}</p>
-
         </div>
         <div class="modal-footer">
           <small class="float-left">
             <router-link :to="{name:'forget_password'}" data-dismiss="modal" class="sign-up-link">Forget Password?</router-link>
           </small>
-
           <small>Do not have an account yet?
             <a href="javascript:void(0)" data-toggle="modal" data-target="#signup-modal" data-dismiss="modal" class="sign-up-link">Register Now!</a>
           </small>
@@ -54,6 +54,8 @@
     methods: {
       login (e) {
         e.preventDefault()
+        if (this.errors.any())
+          return
 
         const form_data = {
           email: this.email,

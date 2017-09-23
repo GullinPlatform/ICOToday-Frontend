@@ -10,37 +10,37 @@
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         </div>
         <div class="modal-body">
+
           <div class="form-group">
             <div class="row">
               <div class="col-sm-6">
-                <input v-model="first_name" type="text" class="form-control" name="first-name"
-                       placeholder="First Name *">
+                <input name="first_name" v-model="first_name" v-validate="'required|alpha'" class="form-control" placeholder="First Name *">
+                <span v-show="errors.has('first_name')" class="text-danger"><i class="fa fa-warning"></i> {{ errors.first('first_name') }}</span>
               </div>
               <div class="col-sm-6">
-                <input v-model="last_name" type="text" class="form-control" name="last-name"
-                       placeholder="Last Name *">
+                <input name="last_name" v-model="last_name" v-validate="'required|alpha'" class="form-control" placeholder="Last Name *">
+                <span v-show="errors.has('last_name')" class="text-danger"><i class="fa fa-warning"></i> {{ errors.first('last_name') }}</span>
               </div>
             </div>
           </div>
+
           <div class="form-group">
-            <input v-model.trim="email" type="text" class="form-control" name="email" placeholder="Email *"
-                   required>
-            <p class="text-danger font-bold">{{email_msg}}</p>
+            <input type="email" name="email" v-model="email" v-validate="'required|email'" class="form-control" placeholder="Email *">
+            <span v-show="errors.has('email')" class="text-danger"><i class="fa fa-warning"></i> {{ errors.first('email') }}</span>
+            <span v-show="email_msg" class="text-danger"><i class="fa fa-warning"></i> {{ email_msg }}</span>
           </div>
+
           <div class="form-group">
-            <input v-model="password" type="password" class="form-control" name="password"
-                   placeholder="Password *" required>
+            <input name="password" v-model="password" v-validate="'required'" type="password" class="form-control" placeholder="Password *">
+            <span v-show="errors.has('password')" class="text-danger"><i class="fa fa-warning"></i> {{ errors.first('password') }}</span>
           </div>
+
           <div class="card capcha-card form-group">
-            <vue-recaptcha align="center"
-                           ref="recaptcha"
-                           :sitekey="sitekey"
-                           @verify="onVerify"
-                           @expired="onExpired">
-            </vue-recaptcha>
+            <vue-recaptcha align="center" ref="recaptcha" :sitekey="sitekey" @verify="onVerify" @expired="onExpired"></vue-recaptcha>
           </div>
+
           <label class="custom-control custom-checkbox d-block">
-            <input class="custom-control-input" type="checkbox" @keyup.enter="getToken($event)" v-model="check">
+            <input name="check" v-model="check" v-validate.initial="'required'" type="checkbox" class="custom-control-input" @keyup.enter="getToken($event)">
             <span class="custom-control-indicator"></span>
             <span class="custom-control-description"> I certify that I agree to the
               <router-link class="sign-up-link" :to="{name:'terms', query:{type:'terms'}}">ICOToday Terms and Services </router-link>
@@ -50,12 +50,13 @@
           </label>
 
           <div class="row justify-content-center">
-            <div class="col-sm-8">
-              <a @click="register()" class="btn btn-primary btn-block text-white">Register</a>
+            <div class="col-sm-6">
+              <a href="javascript:void(0)" @click="register()" :disabled="errors.any() || loading" class="btn btn-primary btn-block text-white">
+                Register<span v-if="loading">ing</span>
+              </a>
+              <spinner v-show="loading"></spinner>
             </div>
           </div>
-          <p class="text-danger font-bold" v-show="error_msg">{{error_msg}}</p>
-
         </div>
         <div class="modal-footer">
           <small class="float-left">
@@ -72,6 +73,7 @@
 </template>
 <script>
   import VueRecaptcha from 'vue-recaptcha'
+  import Spinner from 'components/Spinner'
   import { SHA256 } from '../../config'
   import getIP from '../../api/ip.js'
 
@@ -89,43 +91,46 @@
         ip: '',
 
         email_msg: '',
-        error_msg: '',
         sitekey: '6LervDEUAAAAANhKYg5MAXNtNGe84zeCnmsc0d1A',
+        loading: false
       }
     },
-    components: {VueRecaptcha},
+    components: {VueRecaptcha, Spinner},
     methods: {
       register () {
+        this.loading = true
         this.email_msg = ''
 
-        getIP().then((response) => {
-          this.ip = response.ip
-          const form_data = {
-            email: this.email,
-            password: SHA256(this.password),
-            first_name: this.first_name,
-            last_name: this.last_name,
-            verified: this.verified,
-            last_login_ip: this.response.ip
+        this.$validator.validateAll().then((result) => {
+          // If Invalid
+          if (!result){
+            this.loading = false
+            return
           }
 
-          if (!(this.first_name && this.last_name && this.email && this.password)) {
-            this.error_msg = 'Please make sure you filled all required fields'
-          }
-          else if (!this.check) {
-            this.error_msg = 'Please check the user contract'
-          }
-          else {
+          // Valid
+          getIP().then((response) => {
+            const form_data = {
+              email: this.email,
+              password: SHA256(this.password),
+              first_name: this.first_name,
+              last_name: this.last_name,
+              verified: this.verified,
+              last_login_ip: response.ip
+            }
+
             this.$store.dispatch('signup', form_data)
               .then(() => {
                 this.$store.dispatch('cleanWhiteListEmail')
+                this.loading = false
               })
               .catch((error) => {
                 for (let e in error.data) {
                   if (e === 'email') this.email_msg = error.data[e][0]
                 }
+                this.loading = false
               })
-          }
+          })
         })
       },
       onVerify (response) {

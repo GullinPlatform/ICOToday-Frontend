@@ -1,5 +1,5 @@
 <template>
-  <div class="sl-spinner" v-show="status" :style="spinnerStyle"></div>
+  <div class="vue-spinner" v-show="status" :style="spinnerStyle"></div>
 </template>
 
 <script>
@@ -60,8 +60,8 @@
 </script>
 
 <style lang="scss">
-
-  .sl-spinner {
+  .vue-spinner {
+    margin: 0 auto;
     border-style: solid;
     -webkit-transform: translateZ(0);
     -ms-transform: translateZ(0);
