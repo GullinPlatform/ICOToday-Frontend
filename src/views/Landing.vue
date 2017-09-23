@@ -10,7 +10,7 @@
               <h1 class="text-white text-bold mb-2">
                 ICOToday
               </h1>
-              <h2 class="text-white text-thin text-uppercase">
+              <h2 class="text-white text-uppercase">
                 Seamless Platform<br>
                 for Launching and Investing<br>
                 on Blockchain

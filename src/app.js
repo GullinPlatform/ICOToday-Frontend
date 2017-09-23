@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import VueHead from 'vue-head'
+import VueIntercom from 'vue-intercom'
 import VeeValidate from 'vee-validate'
 
 import { sync } from 'vuex-router-sync'
@@ -9,6 +10,7 @@ import store from './store'
 
 import RootLayout from './views/layouts/RootLayout.vue'
 
+Vue.use(VueIntercom, { appId: 'rvgar4pm' })
 Vue.use(Router)
 Vue.use(VueHead)
 
@@ -44,7 +46,7 @@ export const app = new Vue({
   el: '#app',
   data: {},
   beforeCreate () {
-    this.$store.dispatch('tokenVerify')
+    this.$store.dispatch('tokenRefresh')
   },
   router,
   store,

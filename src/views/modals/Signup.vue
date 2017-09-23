@@ -103,7 +103,7 @@
 
         this.$validator.validateAll().then((result) => {
           // If Invalid
-          if (!result){
+          if (!result) {
             this.loading = false
             return
           }
@@ -122,16 +122,16 @@
             this.$store.dispatch('signup', form_data)
               .then(() => {
                 this.$store.dispatch('cleanWhiteListEmail')
-                this.loading = false
               })
               .catch((error) => {
                 for (let e in error.data) {
                   if (e === 'email') this.email_msg = error.data[e][0]
                 }
-                this.loading = false
               })
           })
         })
+        // Clean up
+        this.resetState()
       },
       onVerify (response) {
         this.verified = response
@@ -139,6 +139,18 @@
       onExpired () {
         this.$refs.recaptcha.reset()
       },
+      resetState () {
+        this.first_name = ''
+        this.last_name = ''
+        this.email = ''
+        this.password = ''
+        this.check = false
+        this.verified = ''
+        this.ip = ''
+        this.email_msg = ''
+        this.sitekey = '6LervDEUAAAAANhKYg5MAXNtNGe84zeCnmsc0d1A'
+        this.loading = false
+      }
     },
     computed: {
       white_list_email () {
