@@ -45,6 +45,9 @@ export default {
   updateSelf (form_data) {
     return apiCall('put', 'me/', form_data)
   },
+  setSelfType (form_data) {
+    return apiCall('put', 'me/set_type/', form_data)
+  },
   getUser (pk) {
     return apiCall('get', pk + '/')
   },

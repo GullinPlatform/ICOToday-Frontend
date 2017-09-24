@@ -69,7 +69,6 @@ const getters = {
       }
     }
   },
-
 }
 
 // actions
@@ -98,22 +97,21 @@ const actions = {
         return Promise.reject(error)
       })
   },
-  getSelfCreatedPost ({commit}) {
-    return userApi.getSelfCreatedPost()
-      .then((response) => {
-        commit(types.LOAD_SELF_CREATED_POST, response)
-        return Promise.resolve()
-      })
-      .catch((error) => {
-        console.log(error)
-
-        return Promise.reject(error)
-      })
-  },
   updateSelf ({commit}, form_data) {
     return userApi.updateSelf(form_data)
       .then(() => {
         commit(types.UPDATE_SELF)
+        return Promise.resolve()
+      })
+      .catch((error) => {
+        console.log(error)
+        return Promise.reject(error)
+      })
+  },
+  setSelfType({commit}, form_data) {
+    return userApi.setSelfType(form_data)
+      .then(() => {
+        commit(types.SET_SELF_TYPE)
         return Promise.resolve()
       })
       .catch((error) => {
@@ -143,17 +141,6 @@ const actions = {
       .catch((error) => {
         console.log(error)
 
-        return Promise.reject(error)
-      })
-  },
-  getUserCreatedPost ({commit}, pk) {
-    return userApi.getUserCreatedPost(pk)
-      .then((response) => {
-        commit(types.LOAD_USER_CREATED_POST, response)
-        return Promise.resolve()
-      })
-      .catch((error) => {
-        console.log(error)
         return Promise.reject(error)
       })
   },

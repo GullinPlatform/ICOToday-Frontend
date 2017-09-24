@@ -44,7 +44,7 @@ const actions = {
   },
 
   // Register Follow Up Global Step
-  followUpStep ({commit}, step_move) {
+  setFollowUpStep ({commit}, step_move) {
     commit(types.FOLLOW_UP_STEP, step_move)
   },
 
@@ -80,6 +80,8 @@ const mutations = {
   },
   // Register Follow Up Global Step
   [types.FOLLOW_UP_STEP] (state, step_move) {
+    if (step_move === 0)
+      state.register_follow_up_step = 1
     state.register_follow_up_step += step_move
   },
 }

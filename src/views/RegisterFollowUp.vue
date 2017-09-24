@@ -73,13 +73,24 @@
     <div v-if="step===3">
       <div v-if="account_type===0 && loaded">
         <h2 class="text-center">
-          We found some companies with similar name, is those yours?
+          Complete Company Creation
         </h2>
         <div class="row justify-content-center mt-5">
           <div class="col-10">
-            <nav class="list-group">
-              <a class="list-group-item" href="#" v-for="result in search_result">{{result}}</a>
-            </nav>
+            <div class="form-group row">
+              <p class="col-sm-2 col-form-label">Name
+                <span class="text-danger">*</span>
+              </p>
+              <div class="col-sm-8">
+                <input class="form-control" v-model="name" type="text">
+              </div>
+            </div>
+            <div class="form-group row">
+              <p class="col-sm-2 col-form-label">Description</p>
+              <div class="col-sm-8">
+                <textarea class="form-control" rows="4" v-model="description"></textarea>
+              </div>
+            </div>
           </div>
         </div>
         <div class="row justify-content-center mt-3">
@@ -91,7 +102,7 @@
     <div v-if="step===4">
 
     </div>
-    <div v-if="step===10">
+    <div v-if="step>=10">
       <h2 class="text-center">
         You are all set
       </h2>
@@ -129,37 +140,40 @@
         // Page Control
         loaded: false,
         account_type: 1,
-        step: 1,
 
         // User data
         selected_tags: [],
-        company_name: ''
+
+        company_name: '',
+        company_icon: '',
+        company_avatar: ''
+
       }
     },
     methods: {
       nextStep () {
-        // add
-        this.step += 1
-
         // Investor
-        if (this.step === 2 && this.account_type === 1) // Investor Chose Tags
+        if (this.step === 1 && this.account_type === 1) { // Investor Chose Tags
           this.getAllProjectTags()
-
-        else if (this.step === 3 && this.account_type === 1) { // Investor Finished
-          this.step = 10
+          // add
+          this.$store.dispatch('setFollowUpStep', 1)
+        }
+        else if (this.step === 2 && this.account_type === 1) { // Investor Finished
           this.addInterests()
+          this.setAccountType()
+          this.$store.dispatch('setFollowUpStep', 10)
         }
         // Company
-        else if (this.step === 3 && this.account_type === 0) { // Company input and search
+        else if (this.step === 2 && this.account_type === 0) { // Company input and search
           this.searchCompany()
         }
-        else if (this.step === 5 && this.account_type === 0) { // Company input detail data
+        else if (this.step === 3 && this.account_type === 0) { // Company input detail data
           this.searchCompany()
+          this.$store.dispatch('setFollowUpStep', 1)
         }
-
       },
       prevStep () {
-        this.step -= 1
+        this.$store.dispatch('setFollowUpStep', -1)
       },
       tagSelected (tag) {
         for (let t of this.selected_tags) {
@@ -175,6 +189,14 @@
         }
         else
           this.selected_tags.push(tag)
+      },
+
+      setAccountType () {
+        const form_data = {
+          type: this.account_type
+        }
+        this.$store.dispatch('searchCompany', form_data)
+
       },
 
       getAllProjectTags () {
@@ -200,10 +222,13 @@
           .then(() => {
             this.loaded = true
             if (!this.search_result.length)
-              this.step += 1
+              this.$store.dispatch('setFollowUpStep', 1)
             else
               $('#similar-company-modal').modal('show')
           })
+      },
+      createCompany(){
+        const form_data = new FormData()
       }
     },
     computed: {
@@ -211,7 +236,7 @@
         tags: 'tags',
         search_result: 'current_company_search_result',
         login_status: 'login_status',
-        register_follow_up_step: 'register_follow_up_step'
+        step: 'register_follow_up_step'
       })
     },
     beforeCreate () {
@@ -223,6 +248,8 @@
       if (this.$store.getters.self.info.type !== -1) {
         this.$router.push({name: 'landing'})
       }
+      // Clean up
+      this.$store.dispatch('setFollowUpStep', 0)
     }
   }
 </script>

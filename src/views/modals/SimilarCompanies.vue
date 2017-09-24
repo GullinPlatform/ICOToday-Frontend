@@ -9,27 +9,40 @@
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         </div>
         <div class="modal-body">
-          <h6 class="modal-title">
+          <h6 class="modal-title mb-3">
             If you believe you belong to one of those companies, click it and send a apply request instead of create a new company
           </h6>
-          <section class="widget widget-featured-posts">
-            <!-- Entry-->
-            <div class="entry">
-              <div class="entry-thumb"><a href="#"><img src="../../../static/img/404_art.jpg" alt="Post"></a></div>
-              <div class="entry-content">
-                <h4 class="entry-title"><a href="#">Trending Winter Boots</a></h4><span class="entry-meta">by Olivia Reyes</span>
-              </div>
-            </div>
-            <!-- Entry-->
-            <div class="entry">
-              <div class="entry-thumb"><a href="#"><img src="../../../static/img/404_art.jpg" alt="Post"></a></div>
-              <div class="entry-content">
-                <h4 class="entry-title"><a href="#">Hoop Earrings A Style From History</a></h4><span class="entry-meta">by Cynthia Gomez</span>
-              </div>
-            </div>
-          </section>
-          <a class="btn btn-primary text-white">Send Team Member Request</a>
-          <a class="btn btn-secondary text-white">No, Continue Company Creation</a>
+          <div class="table-responsive shopping-cart">
+            <table class="table">
+              <tbody>
+              <tr v-for="company in company_result">
+                <td>
+                  <div class="product-item">
+                    <router-link class="product-thumb" :to="{name:'company', params:{id:company.id}}">
+                      <img :src="company.company_icon">
+                    </router-link>
+                    <div class="product-info">
+                      <h4 class="product-title">
+                        <router-link :to="{name:'company', params:{id:company.id}}">
+                          <small>{{company.description}}</small>
+                        </router-link>
+                      </h4>
+                    </div>
+                  </div>
+                </td>
+                <td class="text-center">
+                  <router-link class="btn btn-outline-primary btn-sm" :to="{name:'company', params:{id:company.id}}">
+                    Detail
+                  </router-link>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <hr class="mb-4">
+          <div class="row justify-content-center">
+            <a class="btn btn-secondary" @click="nextStep()">No, Continue Company Creation</a>
+          </div>
         </div>
       </div>
     </div>
@@ -38,6 +51,8 @@
 
 
 <script>
+  import { mapGetters } from 'vuex'
+
   export default {
     name: 'SimilarCompanies',
     data () {
@@ -48,10 +63,22 @@
       }
     },
     methods: {
-      applyCompany(id){
+      applyCompany (id) {
         this.$store.dispatch('applyCompany', id)
-      }
-    }
+          .then(() => {
+            this.$store.dispatch('setFollowUpStep', 100)
+          })
+      },
+      nextStep () {
+        $('#similar-company-modal').modal('hide')
+        this.$store.dispatch('setFollowUpStep', 1)
+      },
+    },
+    computed: {
+      ...mapGetters({
+        company_result: 'current_company_search_result'
+      })
+    },
   }
 
 </script>
