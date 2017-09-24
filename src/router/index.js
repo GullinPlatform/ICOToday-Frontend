@@ -31,7 +31,6 @@ import TermsAndPolicy from 'views/static_pages/TermsAndPolicy'
 import CompanyPage from 'views/CompanyPage'
 import NotificationsFeed from 'views/NotificationsFeed'
 
-
 Vue.use(Router)
 
 export default new Router({
@@ -124,11 +123,10 @@ export default new Router({
       component: UserGuide,
       name: 'faq'
     }, {
-      path: '/company',
+      path: '/company/:id',
       component: CompanyPage,
       name: 'company'
-    },
-    {
+    }, {
       path: '/notifications',
       component: NotificationsFeed,
       name: 'notifications'

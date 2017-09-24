@@ -22,7 +22,7 @@
           <p class="col-sm-2 col-form-label">Description</p>
           <div class="col-sm-8">
             <p class="mt-2 ml-2 text-bold" v-show="!edit">{{description}}</p>
-            <textarea class="form-control" rows="4" v-model="description" type="date"
+            <textarea class="form-control" rows="4" v-model="description"
                       v-show="edit"></textarea>
           </div>
         </div>
