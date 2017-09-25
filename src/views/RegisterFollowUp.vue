@@ -71,7 +71,7 @@
         </h2>
         <div class="row justify-content-center mt-5">
           <div class="col-10">
-            <textarea class="form-control" v-model="expert_application" placeholder="Company Name"></textarea>
+            <textarea class="form-control" v-model="expert_application" placeholder="Expert Application" rows="25"></textarea>
           </div>
         </div>
       </div>
@@ -88,35 +88,34 @@
         <div class="row justify-content-center mt-5">
           <div class="col-10">
             <div class="form-group row">
-              <p class="col-sm-2 col-form-label">Name</p>
+              <p class="col-sm-2 col-form-label">Name<span class="text-danger text-small">*</span></p>
               <div class="col-sm-8">
-                <input name="name" class="form-control" v-validate="'required'" v-model="company_name">
-                <span v-show="errors.has('name')" class="text-danger">
-                  <i class="fa fa-warning"></i> {{ errors.first('name') }}
-                </span>
+                <input name="name" class="form-control" :value="company_name" disabled>
               </div>
             </div>
             <div class="form-group row">
-              <p class="col-sm-2 col-form-label">Icon</p>
-
+              <p class="col-sm-2 col-form-label">Icon<span class="text-danger text-small">*</span></p>
               <div class="col-sm-8">
-                <div class="dropzone-area" v-if="!company_icon_loaded">
-                  <div class="dropzone-text">
-                    <i class="fa fa-cloud-upload"> </i>
-                    <span>Drag file here or click to upload file</span>
+                <div class="form-group row">
+                  <div class="col-sm-6">
+                    <avatar-editor :width=150 :height=150 ref="icon"
+                                   @vue-avatar-editor:image-ready="onImageReady">
+                    </avatar-editor>
+                    <avatar-editor-scale :width=200 :min=1 :max=3 :step=0.02 ref="icon_scale"
+                                         @vue-avatar-editor-scale:change-scale="onImageChangeScale">
+                    </avatar-editor-scale>
                   </div>
-                  <input name="icon" class="form-control" @change="onCompanyIconChange()" type="file">
-                </div>
-                <div v-else>
-                  <button type="button" class="mb-1 btn btn-secondary">{{company_icon.name}}</button>
-                  <button type="button" class="mb-1 btn btn-secondary" @click="removeCompanyIcon()">
-                    <span><i class="fa fa-times"></i> Remove</span>
-                  </button>
+                  <div class="col-sm-4 text-center">
+                    <img :src="company_icon.toDataURL()"
+                         class="img-thumbnail mb-2"
+                         width="100" height="100" v-if="company_icon">
+                    <h6 class="text-normal text-uppercase pt-2">Preview</h6>
+                  </div>
                 </div>
               </div>
             </div>
             <div class="form-group row">
-              <p class="col-sm-2 col-form-label">Description</p>
+              <p class="col-sm-2 col-form-label">Description<span class="text-danger text-small">*</span></p>
               <div class="col-sm-8">
                 <textarea name="description" class="form-control" v-validate="'required'" rows="4" v-model="company_description"></textarea>
                 <span v-show="errors.has('description')" class="text-danger">
@@ -128,12 +127,11 @@
         </div>
         <div class="row justify-content-center mt-3">
           <button class="btn btn-secondary" @click="prevStep()">Prev</button>
-          <button class="btn btn-primary" @click="nextStep()">Next</button>
+          <button class="btn btn-primary" @click="nextStep()" v-if="loaded">Create</button>
+          <button class="btn btn-primary" v-else>Creating</button>
+          <spinner v-if="!loaded"></spinner>
         </div>
       </div>
-    </div>
-    <div v-if="step===4">
-
     </div>
     <div v-if="step>=10">
       <h2 class="text-center">
@@ -159,6 +157,9 @@
 
 <script>
   import { mapGetters } from 'vuex'
+  import AvatarEditor from 'components/AvatarEditor'
+  import AvatarEditorScale from 'components/AvatarEditorScale'
+  import Spinner from 'components/Spinner'
 
   export default {
     name: 'RegisterFollowUp',
@@ -167,6 +168,11 @@
         inner: 'ICOToday',
         complement: 'Register'
       }
+    },
+    components: {
+      AvatarEditor,
+      AvatarEditorScale,
+      Spinner
     },
     data () {
       return {
@@ -203,7 +209,9 @@
           this.searchCompany()
         }
         else if (this.step === 3 && this.account_type === 0) { // Company input detail data
-          this.searchCompany()
+          this.createCompany()
+        }
+        else {
           this.$store.dispatch('setFollowUpStep', 1)
         }
       },
@@ -226,15 +234,14 @@
           this.selected_tags.push(tag)
       },
 
-      onCompanyIconChange (e) {
-        const file = e.target.files || e.dataTransfer.files
-        if (!file.length) return
-        this.company_icon = file[0]
-        this.company_icon_loaded = true
+      onImageReady (scale) {
+        this.$refs.icon_scale.setScale(scale)
+        this.avatar_cropped = true
+        this.company_icon = this.$refs.icon.getImageScaled()
       },
-      removeCompanyIcon () {
-        this.company_icon = null
-        this.company_icon_loaded = false
+      onImageChangeScale (scale) {
+        this.$refs.icon.changeScale(scale)
+        this.company_icon = this.$refs.icon.getImageScaled()
       },
 
       setAccountType () {
@@ -274,23 +281,35 @@
           })
       },
       createCompany () {
-        const form_data = new FormData()
-        form_data.append('name', this.company_name)
-        form_data.append('icon', this.company_icon)
-        form_data.append('description', this.company_description)
-        this.$store.dispatch('createCompany', form_data)
-          .then(() => {
-            this.$store.dispatch('setFollowUpStep', 10)
+        this.loading = true
+        this.$validator.validateAll().then((result) => {
+          // If Invalid
+          if (!result || !this.company_icon) {
+            this.loading = false
+            return
+          }
+
+          this.company_icon.toBlob((blob) => {
+            const form_data = new FormData()
+            form_data.append('name', this.company_name)
+            form_data.append('icon', blob, 'company_icon.time.png')
+            form_data.append('description', this.company_description)
+            this.$store.dispatch('createCompany', form_data)
+              .then(() => {
+                this.$store.dispatch('setFollowUpStep', 10)
+                this.loading = false
+              })
           })
+        })
       },
 
       postMyExpertApplication () {
         const form_data = {
           detail: this.expert_application
         }
-
         this.$store.dispatch('postMyExpertApplication', form_data)
           .then(() => {
+            this.setAccountType()
             this.$store.dispatch('setFollowUpStep', 10)
           })
       }
