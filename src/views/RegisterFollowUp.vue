@@ -65,6 +65,16 @@
           </div>
         </div>
       </div>
+      <div v-if="account_type===2">
+        <h2 class="text-center">
+          Expert Application
+        </h2>
+        <div class="row justify-content-center mt-5">
+          <div class="col-10">
+            <textarea class="form-control" v-model="expert_application" placeholder="Company Name"></textarea>
+          </div>
+        </div>
+      </div>
       <div class="row justify-content-center mt-3">
         <button class="btn btn-secondary" @click="prevStep()">Prev</button>
         <button class="btn btn-primary" @click="nextStep()">Next</button>
@@ -78,17 +88,40 @@
         <div class="row justify-content-center mt-5">
           <div class="col-10">
             <div class="form-group row">
-              <p class="col-sm-2 col-form-label">Name
-                <span class="text-danger">*</span>
-              </p>
+              <p class="col-sm-2 col-form-label">Name</p>
               <div class="col-sm-8">
-                <input class="form-control" v-model="name" type="text">
+                <input name="name" class="form-control" v-validate="'required'" v-model="company_name">
+                <span v-show="errors.has('name')" class="text-danger">
+                  <i class="fa fa-warning"></i> {{ errors.first('name') }}
+                </span>
+              </div>
+            </div>
+            <div class="form-group row">
+              <p class="col-sm-2 col-form-label">Icon</p>
+
+              <div class="col-sm-8">
+                <div class="dropzone-area" v-if="!company_icon_loaded">
+                  <div class="dropzone-text">
+                    <i class="fa fa-cloud-upload"> </i>
+                    <span>Drag file here or click to upload file</span>
+                  </div>
+                  <input name="icon" class="form-control" @change="onCompanyIconChange()" type="file">
+                </div>
+                <div v-else>
+                  <button type="button" class="mb-1 btn btn-secondary">{{company_icon.name}}</button>
+                  <button type="button" class="mb-1 btn btn-secondary" @click="removeCompanyIcon()">
+                    <span><i class="fa fa-times"></i> Remove</span>
+                  </button>
+                </div>
               </div>
             </div>
             <div class="form-group row">
               <p class="col-sm-2 col-form-label">Description</p>
               <div class="col-sm-8">
-                <textarea class="form-control" rows="4" v-model="description"></textarea>
+                <textarea name="description" class="form-control" v-validate="'required'" rows="4" v-model="company_description"></textarea>
+                <span v-show="errors.has('description')" class="text-danger">
+                  <i class="fa fa-warning"></i> {{ errors.first('description') }}
+                </span>
               </div>
             </div>
           </div>
@@ -145,9 +178,11 @@
         selected_tags: [],
 
         company_name: '',
-        company_icon: '',
-        company_avatar: ''
+        company_icon: null,
+        company_description: '',
+        company_icon_loaded: false,
 
+        expert_application: ''
       }
     },
     methods: {
@@ -191,6 +226,17 @@
           this.selected_tags.push(tag)
       },
 
+      onCompanyIconChange (e) {
+        const file = e.target.files || e.dataTransfer.files
+        if (!file.length) return
+        this.company_icon = file[0]
+        this.company_icon_loaded = true
+      },
+      removeCompanyIcon () {
+        this.company_icon = null
+        this.company_icon_loaded = false
+      },
+
       setAccountType () {
         const form_data = {
           type: this.account_type
@@ -227,8 +273,26 @@
               $('#similar-company-modal').modal('show')
           })
       },
-      createCompany(){
+      createCompany () {
         const form_data = new FormData()
+        form_data.append('name', this.company_name)
+        form_data.append('icon', this.company_icon)
+        form_data.append('description', this.company_description)
+        this.$store.dispatch('createCompany', form_data)
+          .then(() => {
+            this.$store.dispatch('setFollowUpStep', 10)
+          })
+      },
+
+      postMyExpertApplication () {
+        const form_data = {
+          detail: this.expert_application
+        }
+
+        this.$store.dispatch('postMyExpertApplication', form_data)
+          .then(() => {
+            this.$store.dispatch('setFollowUpStep', 10)
+          })
       }
     },
     computed: {
@@ -322,4 +386,39 @@
     }
   }
 
+  .dropzone-area {
+    display: block;
+    width: 100%;
+    font-size: 1rem;
+    line-height: 1.25;
+    color: #464a4c;
+    height: 100px;
+    border: 1px dashed #464a4c;
+    border-radius: 22px;
+  }
+
+  .dropzone-area input {
+    position: absolute;
+    cursor: pointer;
+    top: 0px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+  }
+
+  .dropzone-text {
+    position: absolute;
+    top: 50%;
+    text-align: center;
+    transform: translate(0, -50%);
+    width: 100%;
+  }
+
+  .dropzone-text span {
+    display: block;
+    line-height: 1.9;
+  }
 </style>

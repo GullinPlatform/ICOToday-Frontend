@@ -76,8 +76,8 @@
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Full  Description<span class="text-danger">*</span></label>
           <div class="col-sm-10">
-                        <textarea class="form-control" v-model="description_full"
-                                  placeholder="( Markdown Support Enabled )" rows="10"></textarea>
+            <textarea class="form-control" v-model="description_full"
+                      placeholder="( Markdown Support Enabled )" rows="10"></textarea>
           </div>
         </div>
         <h6 class="text-muted text-normal text-uppercase ">ICO Detail</h6>

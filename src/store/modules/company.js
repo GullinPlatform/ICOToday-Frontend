@@ -126,8 +126,8 @@ const actions = {
   },
 
   // New Registered User Only
-  createCompany ({commit},) {
-    return companyApi.createCompany()
+  createCompany ({commit}, form_data) {
+    return companyApi.createCompany(form_data)
       .then((response) => {
         commit(types.CREATE_COMPANY, response)
         return Promise.resolve()

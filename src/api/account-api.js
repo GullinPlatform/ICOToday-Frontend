@@ -111,12 +111,12 @@ export default {
 
   // Expert Application
   getMyExpertApplication () {
-    return apiCall('get', 'expert_apply/')
+    return apiCall('get', 'me/expert_apply/')
   },
   postMyExpertApplication (form_data) {
-    return apiCall('post', 'expert_apply/', form_data)
+    return apiCall('post', 'me/expert_apply/', form_data)
   },
   updateMyExpertApplication (form_data) {
-    return apiCall('put', 'expert_apply/', form_data)
+    return apiCall('put', 'me/expert_apply/', form_data)
   },
 }
