@@ -23,10 +23,8 @@
                                  class="img-thumbnail rounded-circle mb-2"
                                  width="100" height="100" v-else>
                             <h6 class="text-normal text-uppercase pt-2">Preview</h6>
-
                         </div>
                         <div class="col-sm-8 text-center">
-                            <!--<div class="row">-->
                             <avatar-editor :width=150 :height=150 ref="member_avatar"
                                            @vue-avatar-editor:image-ready="onImageReady">
                             </avatar-editor>

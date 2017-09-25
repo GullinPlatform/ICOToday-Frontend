@@ -200,6 +200,7 @@
         if (this.state.drag) {
           this.state.drag = false
           this.cursor = 'cursorPointer'
+          this.$emit('vue-avatar-editor:image-ready', this.scale)
         }
       },
       onMouseMove: function (e) {
@@ -230,7 +231,7 @@
         this.state.mx = newState.mx
         this.state.my = newState.my
         this.state.image = imageState
-        // this.setState(newState)
+//         this.setState(newState)
       },
       loadImage: function (imageURL) {
         var imageObj = new Image()

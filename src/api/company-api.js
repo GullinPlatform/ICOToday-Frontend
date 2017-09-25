@@ -14,7 +14,7 @@ const apiCall = (method, url, form_data, params) => {
     .then((response) => Promise.resolve(response.data))
     .catch((error) => {
       if (error)
-        return Promise.reject(error.response.data)
+        return Promise.reject(error)
       else
         return Promise.reject({})
     })
@@ -36,8 +36,8 @@ export default {
   },
 
   // New Registered User Only
-  createCompany () {
-    return apiCall('post', '')
+  createCompany (form_data) {
+    return apiCall('post', '', form_data)
   },
 
   // Company Admin Operations
