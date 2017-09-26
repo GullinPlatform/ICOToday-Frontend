@@ -1,12 +1,11 @@
 <template>
-  <div class="vue-spinner" v-show="status" :style="spinnerStyle"></div>
+  <div class="vue-spinner" :style="spinnerStyle"></div>
 </template>
 
 <script>
   export default {
     data() {
       return{
-        status: true,
         size: 30,
         depth: 6,
         speed: 1.0,

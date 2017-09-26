@@ -21,10 +21,29 @@ const apiCall = (method, url, form_data, params) => {
 }
 
 export default {
-  getNotifications () {
-    return apiCall('get', 'fetch/')
+  getNotifications (page) {
+    if (page)
+      return apiCall('get', 'fetch/' + page + '/')
+    else
+      return apiCall('get', 'fetch/')
   },
+  getReadNotifications (page) {
+    if (page)
+      return apiCall('get', 'fetch/read/' + page + '/')
+    else
+      return apiCall('get', 'fetch/read/')
+  },
+  getAllNotifications (page) {
+    if (page)
+      return apiCall('get', 'fetch/all/' + page + '/')
+    else
+      return apiCall('get', 'fetch/all/')
+  },
+
   readNotification (pk) {
     return apiCall('post', 'read/' + pk + '/')
+  },
+  readAllNotification () {
+    return apiCall('post', 'read/all/')
   }
 }

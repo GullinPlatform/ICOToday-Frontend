@@ -37,28 +37,39 @@
                 <i class="icon-bell"></i>
                 <span class="count" v-if="notifications.length">{{notifications.length}}</span>
                 <div class="toolbar-dropdown" v-if="notifications.length">
-                  <div class="dropdown-notification-item" v-for="notification in notifications">
+                  <div class="dropdown-notification-item" v-for="notify in notifications">
                     <div class="dropdown-notification-thumb">
-                      <img src="../../../static/img/account/default.jpg">
+                      <router-link :to="{name:'user', params:{id:notify.sender.id}}">
+                        <img :src="notify.sender.avatar">
+                      </router-link>
                     </div>
                     <div class="dropdown-notification-info">
-                      <p class="dropdown-notification-content"><span class="text-bold">ICOToday </span>
-                        <router-link :to="{name:'user', params:{}}">{{notification.content}}</router-link>
+                      <p class="dropdown-notification-content">
+                        <router-link class="text-bold" :to="{name:'user', params:{id:notify.sender.id}}">{{notify.sender.full_name}}:</router-link>
+                        {{notify.content}}
                       </p>
                       <span class="dropdown-notification-time float-left">2 days ago</span>
-                      <span class="badge badge-default badge-pill dropdown-notification-remove">
-                         Dismiss
-                      </span>
+                      <button class="btn btn-xm btn-secondary float-right" @click="readNotification(notify.id)">
+                        Dismiss
+                      </button>
+                      <button class="btn btn-xm btn-outline-primary float-right mr-3" @click="notificationDetail(notify)">
+                        Detail
+                      </button>
                     </div>
                   </div>
                   <div class="toolbar-dropdown-group">
-                    <a class="dropdown-notification-button float-left">Mark all as read</a>
-                    <a class="dropdown-notification-button float-right">See all</a>
+                    <a class="dropdown-notification-button float-left" href="javascript:void(0)" @click="readAllNotification()">Mark all as read</a>
+                    <router-link :to="{name:'notifications'}" class="dropdown-notification-button float-right">See all</router-link>
                   </div>
                 </div>
                 <div class="toolbar-dropdown" v-else>
-                  <div class="dropdown-product-item text-center">
-                    <h3 class="dropdown-product-title"><i class="fa fa-bell-slash-o"></i> Nothing Here, yet</h3>
+                  <div class="text-center">
+                    <h6 class="dropdown-product-title mt-3">
+                      <i class="fa fa-bell-slash-o"></i> Nothing Here, yet
+                    </h6>
+                  </div>
+                  <div class="toolbar-dropdown-group">
+                    <router-link :to="{name:'notifications'}" class="dropdown-notification-button float-right">See all</router-link>
                   </div>
                 </div>
               </div>
@@ -75,32 +86,17 @@
                   </li>
                   <li class="sub-menu-separator"></li>
                   <li>
-                    <router-link :to="{name:'me_new_project'}" class="dropdown-item" v-if="me.type===0">
-                      <i class="icon-plus"></i>Submit New ICO
-                    </router-link>
-                  </li>
-                  <li>
-                    <router-link :to="{name:'me_created'}" class="dropdown-item" v-if="me.type===0">
-                      <i class="fa fa-bitcoin"></i> My ICO Projects
-                    </router-link>
-                  </li>
-                  <li>
-                    <router-link :to="{name:'me_wallet'}" class="dropdown-item" v-if="me.type===1">
+                    <router-link :to="{name:'me_wallet'}" class="dropdown-item">
                       <i class="fa fa-bitcoin"></i> My Wallet
                     </router-link>
                   </li>
                   <li>
-                    <router-link :to="{name:'me_marked'}" class="dropdown-item" v-if="me.type===1">
-                      <i class="fa fa-star"></i> Subscribed ICOs
+                    <router-link :to="{name:'me_marked'}" class="dropdown-item">
+                      <i class="fa fa-star"></i>Subscribed ICOs
                     </router-link>
                   </li>
                   <li>
-                    <router-link :to="{name:'me_team'}" class="dropdown-item" v-if="me.type===0">
-                      <i class="fa fa-users"></i> My Team
-                    </router-link>
-                  </li>
-                  <li>
-                    <router-link :to="{name:'me_expert_apply'}" class="dropdown-item" v-if="me.type===1">
+                    <router-link :to="{name:'me_expert_apply'}" class="dropdown-item" v-if="self_type===1">
                       <i class="fa fa-id-badge"></i> Apply to be an Expert
                     </router-link>
                   </li>
@@ -109,6 +105,27 @@
                       <i class="fa fa-gear"></i>Account Settings
                     </router-link>
                   </li>
+                  <li class="sub-menu-separator" v-if="self_type===0"></li>
+                  <li>
+                    <router-link :to="{name:'me_new_project'}" class="dropdown-item" v-if="self_type===0">
+                      <i class="fa fa-building-o"></i>Company: {{me.info.company.name}}
+                    </router-link>
+                  </li>
+                  <!--<li>-->
+                  <!--<router-link :to="{name:'me_new_project'}" class="dropdown-item" v-if="self_type===0">-->
+                  <!--<i class="icon-plus"></i>Submit New ICO-->
+                  <!--</router-link>-->
+                  <!--</li>-->
+                  <!--<li>-->
+                  <!--<router-link :to="{name:'me_created'}" class="dropdown-item" v-if="self_type===0">-->
+                  <!--<i class="fa fa-bitcoin"></i> My ICO Projects-->
+                  <!--</router-link>-->
+                  <!--</li>-->
+                  <!--<li>-->
+                  <!--<router-link :to="{name:'me_team'}" class="dropdown-item" v-if="self_type===0">-->
+                  <!--<i class="fa fa-users"></i> My Team-->
+                  <!--</router-link>-->
+                  <!--</li>-->
                   <li class="sub-menu-separator"></li>
                   <li>
                     <a href="" @click="logout()" class="dropdown-item">
@@ -139,6 +156,8 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
+
   import SignupModal from 'modals/Signup'
   import LoginModal from 'modals/Login'
 
@@ -159,27 +178,40 @@
       readNotification (pk) {
         this.$store.dispatch('readNotification', pk)
       },
+      readAllNotification () {
+        this.$store.dispatch('readAllNotification')
+          .then(() => {
+            this.$store.dispatch('toastr', {
+              type: 'success',
+              title: 'Success',
+              message: 'All notifications are marked as read.'
+            })
+          })
+      },
       resendConfirmEmail () {
         if (this.able_to_resend)
           this.$store.dispatch('resendConfirmEmail')
       },
+
+      readNotification (pk) {
+        this.$store.dispatch('readNotification', pk)
+          .then(() => {
+            this.getNotifications()
+          })
+      },
+      notificationDetail (notify) {
+        this.$store.dispatch('notificationDetail', notify)
+      }
     },
     computed: {
-      me () {
-        return this.$store.getters.self
-      },
-      self_name () {
-        return this.$store.getters.self_name
-      },
-      login_status () {
-        return this.$store.getters.login_status
-      },
-      notifications () {
-        return this.$store.getters.notifications
-      },
-      able_to_resend () {
-        return this.$store.getters.able_to_resend
-      }
+      ...mapGetters({
+        me: 'self',
+        self_name: 'self_name',
+        login_status: 'login_status',
+        notifications: 'notifications',
+        able_to_resend: 'able_to_resend',
+        self_type: 'self_type'
+      })
     },
     mounted () {
       this.getNotifications()
