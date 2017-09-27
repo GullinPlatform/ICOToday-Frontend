@@ -120,7 +120,6 @@
       },
       formatTime (start, end) {
         if (moment().diff(start, 'minutes') < 0) {
-
           return moment(start).format('MM/DD, hh:mm')
         }
         else {

@@ -30,7 +30,7 @@
                     {{notify.content}}
                   </h4>
                   <div class="entry-meta">
-                    {{notify.created}}
+                    {{timeFromNow(notify.created)}}
                     <button class="btn btn-xm btn-secondary float-right" v-if="!notify.read" @click="readNotification(notify.id)">
                       Dismiss
                     </button>
@@ -115,6 +115,10 @@
 
       notificationDetail (notify) {
         this.$store.dispatch('notificationDetail', notify)
+      },
+
+      timeFromNow (time) {
+        return  moment(time).fromNow()
       }
     },
     computed: {

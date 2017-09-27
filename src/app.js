@@ -14,13 +14,13 @@ Vue.use(VueIntercom, { appId: 'rvgar4pm' })
 Vue.use(Router)
 Vue.use(VueHead)
 
-const config = {
+const validate_config = {
   errorBagName: 'errors',
   fieldsBagName: 'fields',
   locale: 'en',
   dictionary: null,
   strict: true,
-  delay: 500,
+  delay: 700,
   classes: true,
   classNames: {
     valid: 'form-control-success', // model is valid
@@ -32,7 +32,7 @@ const config = {
   aria: true
 }
 
-Vue.use(VeeValidate, config)
+Vue.use(VeeValidate, validate_config)
 
 sync(store, router)
 

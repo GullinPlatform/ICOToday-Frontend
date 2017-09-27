@@ -14,7 +14,7 @@
     <post-edit v-if="login_status&&me.type==0"></post-edit>
     <post-update v-if="login_status&&me.type==0"></post-update>
     <post-modal></post-modal>
-    <similar-companies v-if="me.info.type===-1"></similar-companies>
+    <similar-companies v-if="login_status&&me.info.type===-1"></similar-companies>
     <!-- Modal End-->
   </div>
 </template>
@@ -45,13 +45,6 @@
       PostUpdate,
       SimilarCompanies
     },
-    data () {
-      return {
-        userId: 1,
-        name: 'UserGuide',
-        email: 'team@icotoday.io',
-      }
-    },
     computed: {
       ...mapGetters({
         login_status: 'login_status',
@@ -59,7 +52,6 @@
         me: 'self',
       })
     },
-
     watch: {
       '$intercom.ready': function ready () {
         this.$intercom.boot()

@@ -79,6 +79,7 @@
 
   export default {
     name: 'SignUp',
+    components: {VueRecaptcha, Spinner},
     data () {
       return {
         first_name: '',
@@ -95,7 +96,6 @@
         loading: false
       }
     },
-    components: {VueRecaptcha, Spinner},
     methods: {
       register () {
         this.loading = true

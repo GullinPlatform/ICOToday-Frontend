@@ -48,7 +48,7 @@
                         <router-link class="text-bold" :to="{name:'user', params:{id:notify.sender.id}}">{{notify.sender.full_name}}:</router-link>
                         {{notify.content}}
                       </p>
-                      <span class="dropdown-notification-time float-left">2 days ago</span>
+                      <span class="dropdown-notification-time float-left">{{timeFromNow(notify.created)}}</span>
                       <button class="btn btn-xm btn-secondary float-right" @click="readNotification(notify.id)">
                         Dismiss
                       </button>
@@ -80,7 +80,7 @@
                   <li class="sub-menu-user">
                     <div class="user-info">
                       <h6 class="user-name">{{self_name}}</h6>
-                      <span class="text-xs text-muted" v-if="me.info.title && me.info.team.name">{{me.info.title}} @ {{me.info.team.name}}</span>
+                      <span class="text-xs text-muted" v-if="me.info.title && me.info.company">{{me.info.title}} @{{me.info.company.name}}</span>
                       <span class="text-xs text-muted" v-else>{{me.email}}</span>
                     </div>
                   </li>
@@ -101,13 +101,18 @@
                     </router-link>
                   </li>
                   <li>
+                    <router-link :to="{name:'me_profile'}" class="dropdown-item">
+                      <i class="fa fa-user"></i> Profile
+                    </router-link>
+                  </li>
+                  <li>
                     <router-link :to="{name:'me_settings'}" class="dropdown-item">
-                      <i class="fa fa-gear"></i>Account Settings
+                      <i class="fa fa-gear"></i>Settings
                     </router-link>
                   </li>
                   <li class="sub-menu-separator" v-if="self_type===0"></li>
                   <li>
-                    <router-link :to="{name:'me_new_project'}" class="dropdown-item" v-if="self_type===0">
+                    <router-link :to="{name:'company', params:{id:me.info.company.id}}" class="dropdown-item" v-if="self_type===0">
                       <i class="fa fa-building-o"></i>Company: {{me.info.company.name}}
                     </router-link>
                   </li>
@@ -158,15 +163,8 @@
 <script>
   import { mapGetters } from 'vuex'
 
-  import SignupModal from 'modals/Signup'
-  import LoginModal from 'modals/Login'
-
   export default {
     name: 'Header',
-    components: {
-      LoginModal,
-      SignupModal
-    },
     methods: {
       logout () {
         this.$store.dispatch('logout')
@@ -188,20 +186,19 @@
             })
           })
       },
+      notificationDetail (notify) {
+        this.$store.dispatch('notificationDetail', notify)
+      },
+
       resendConfirmEmail () {
         if (this.able_to_resend)
           this.$store.dispatch('resendConfirmEmail')
       },
 
-      readNotification (pk) {
-        this.$store.dispatch('readNotification', pk)
-          .then(() => {
-            this.getNotifications()
-          })
-      },
-      notificationDetail (notify) {
-        this.$store.dispatch('notificationDetail', notify)
+      timeFromNow (time) {
+        return  moment(time).fromNow()
       }
+
     },
     computed: {
       ...mapGetters({
