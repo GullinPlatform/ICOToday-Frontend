@@ -1,70 +1,61 @@
 <template>
-    <!-- Page Content-->
-    <div class="container container-padding">
-        <div class="row">
-            <my-header></my-header>
-            <!--main content-->
-            <div class="col-md-8" v-if="loaded && me.is_verified && !self_expert_application">
-                <h6 class="text-muted text-normal text-uppercase ">
-                    ICOToday Expert Application
-                </h6>
-                <hr class="mb-3 mt-2">
-                <div class="form-group row">
-                    <div class="col-sm-12">
-                        <textarea class="form-control" v-model="detail" placeholder="( Markdown Support Enabled )" rows="20"></textarea>
-                    </div>
-                </div>
-                <div class="form-group row justify-content-md-center">
-                    <div class="col-md-12">
-                        <button type="button" @click="newExpertApplication()" class="mb-1 btn btn-block btn-primary" :disabled="uploading">
-                            SUBMIT<span v-if="uploading">ING</span>
-                        </button>
-                        <p class="text-danger">{{error_message}}</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-8" v-if="loaded && me.is_verified && self_expert_application">
-                <h6 class="text-muted text-normal text-uppercase ">
-                    ICOToday Expert Application
-                </h6>
-                <hr class="mb-3 mt-2">
-                <div class="form-group row">
-                    <div class="col-sm-12">
-                        <textarea class="form-control" v-model="detail" :disabled="!edit" placeholder="( Markdown Support Enabled )" rows="20"></textarea>
-                    </div>
-                </div>
-                <div class="form-group row justify-content-md-center">
-                    <div class="col-md-6">
-                        <button type="button" @click="edit=true" class="mb-1 btn btn-block btn-secondary">
-                           EDIT
-                        </button>
-                    </div>
-                    <div class="col-md-6">
-                        <button type="button" @click="updateExpertApplication()" class="mb-1 btn btn-block btn-primary" :disabled="uploading">
-                            UPDAT<span v-if="uploading">ING</span><span v-else>E</span>
-                        </button>
-                        <p class="text-danger">{{error_message}}</p>
-                    </div>
-                    <h6 class="text-muted">
-                        <i class="fa fa-lightbulb-o"></i> Your application is under review
-                    </h6>
-                </div>
-            </div>
-
-            <div class="col-md-8 text-center" v-if="!me.is_verified">
-                <h4 class="mt-3">
-                    You have to verify your email first
-                </h4>
-                <a href="javascript:void(0)" @click="" class="btn btn-primary mt-2">Resend Email</a>
-            </div>
-        </div>
+  <div class="col-md-8" v-if="loaded && me.is_verified && !self_expert_application">
+    <h6 class="text-muted text-normal text-uppercase ">
+      ICOToday Expert Application
+    </h6>
+    <hr class="mb-3 mt-2">
+    <div class="form-group row">
+      <div class="col-sm-12">
+        <textarea class="form-control" v-model="detail" placeholder="( Markdown Support Enabled )" rows="20"></textarea>
+      </div>
     </div>
+    <div class="form-group row justify-content-md-center">
+      <div class="col-md-12">
+        <button type="button" @click="newExpertApplication()" class="mb-1 btn btn-block btn-primary" :disabled="uploading">
+          SUBMIT<span v-if="uploading">ING</span>
+        </button>
+        <p class="text-danger">{{error_message}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-8" v-else-if="loaded && me.is_verified && self_expert_application">
+    <h6 class="text-muted text-normal text-uppercase ">
+      ICOToday Expert Application
+    </h6>
+    <hr class="mb-3 mt-2">
+    <div class="form-group row">
+      <div class="col-sm-12">
+        <textarea class="form-control" v-model="detail" :disabled="!edit" placeholder="( Markdown Support Enabled )" rows="20"></textarea>
+      </div>
+    </div>
+    <div class="form-group row justify-content-md-center">
+      <div class="col-md-6">
+        <button type="button" @click="edit=true" class="mb-1 btn btn-block btn-secondary">
+          EDIT
+        </button>
+      </div>
+      <div class="col-md-6">
+        <button type="button" @click="updateExpertApplication()" class="mb-1 btn btn-block btn-primary" :disabled="uploading">
+          UPDAT<span v-if="uploading">ING</span><span v-else>E</span>
+        </button>
+        <p class="text-danger">{{error_message}}</p>
+      </div>
+      <h6 class="text-muted">
+        <i class="fa fa-lightbulb-o"></i> Your application is under review
+      </h6>
+    </div>
+  </div>
+
+  <div class="col-md-8 text-center" v-else-if="!me.is_verified">
+    <h4 class="mt-3">
+      You have to verify your email first
+    </h4>
+    <a href="javascript:void(0)" @click="" class="btn btn-primary mt-2">Resend Email</a>
+  </div>
 </template>
 
 <script>
-  import MyHeader from 'components/MyHeader'
-
   export default {
     name: 'MyExpertApplication',
     data () {
@@ -83,9 +74,6 @@
         inner: 'ICOToday',
         complement: 'Apply To Be An Expert'
       }
-    },
-    components: {
-      MyHeader,
     },
     methods: {
       newExpertApplication () {

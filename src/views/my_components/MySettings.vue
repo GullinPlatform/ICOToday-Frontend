@@ -1,43 +1,31 @@
 <template>
-  <!-- Page Content-->
-  <div class="container container-padding">
-    <div class="row">
-      <my-header></my-header>
-      <!--main content-->
-      <div class="mt-5 hidden-md"></div>
-      <div class="col-md-8 card-new-layout">
-        <h6 class="text-muted text-normal text-uppercase ">Auth</h6>
-        <hr class="mb-3 mt-2">
-        <div class="form-group row">
-          <label class="col-sm-2 col-form-label">Email</label>
-          <div class="col-sm-10">
-            <input class="form-control" :value="self.email" disabled>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-2 col-form-label">Password</label>
-          <div class="col-sm-4">
-            <button class="btn btn-secondary mr-3" @click="changePassword()">Change</button>
-          </div>
-        </div>
-        <div class="row justify-content-end">
-          <div class="col-md-10">
-            <button type="button" @click="updateSelf()" class="mb-1 btn btn-block btn-primary">
-              Submit Change
-            </button>
-            <p class="text-green">{{message}}</p>
-          </div>
-        </div>
+  <div class="col-md-8 card-new-layout">
+    <h6 class="text-muted text-normal text-uppercase ">Auth</h6>
+    <hr class="mb-3 mt-2">
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Email</label>
+      <div class="col-sm-10">
+        <input class="form-control" :value="self.email" disabled>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Password</label>
+      <div class="col-sm-4">
+        <button class="btn btn-secondary mr-3" @click="changePassword()">Change</button>
+      </div>
+    </div>
+    <div class="row justify-content-end">
+      <div class="col-md-10">
+        <button type="button" @click="updateSelf()" class="mb-1 btn btn-block btn-primary">
+          Submit Change
+        </button>
+        <p class="text-green">{{message}}</p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  import MyHeader from 'components/MyHeader'
-  import AvatarEditor from 'components/AvatarEditor'
-  import AvatarEditorScale from 'components/AvatarEditorScale'
-
   export default {
     name: 'MySettings',
     head: {
@@ -57,12 +45,6 @@
         message: ''
       }
     },
-    components: {
-      AvatarEditor,
-      AvatarEditorScale,
-      MyHeader
-    },
-
     methods: {
       onChangeScale (scale) {
         this.$refs.vueavatar.changeScale(scale)
