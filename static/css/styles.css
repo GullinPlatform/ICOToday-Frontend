@@ -2011,6 +2011,15 @@ button:focus {
   line-height: 34px;
 }
 
+.btn-xm {
+  height: 20px;
+  padding: 0 9px;
+  margin: 0;
+  border-radius: 9px;
+  font-size: 12px;
+  line-height: 20px;
+}
+
 .btn-rounded {
   border-radius: 5px;
 }
@@ -5914,7 +5923,7 @@ video {
   margin-left: -100px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
   .toolbar .account > .toolbar-dropdown {
     left: auto;
     right: 0;
@@ -6165,7 +6174,6 @@ video {
 .offcanvas-wrapper {
   position: relative;
   min-height: 50vh;
-  background-color: #ffffff;
   z-index: 10;
 }
 
@@ -6337,6 +6345,7 @@ video {
 
 .user-info-wrapper {
   position: relative;
+  background: #ffffff;
   width: 100%;
   margin-bottom: -1px;
   padding-top: 90px;
@@ -7599,7 +7608,8 @@ video {
 .card-new-layout {
   background-color: #fff;
   padding: 20px;
-  border: 1px solid #f0f0f0;
+  /*border: 1px solid #f0f0f0;*/
+  border: 1px solid #e1e7ec;
   border-radius: 5px;
   margin-bottom: 20px;
 }
@@ -7616,4 +7626,10 @@ video {
 
 .mt-20 {
   margin-top: 20px;
+}
+
+
+a.list-group-item:hover, a.list-group-item:focus, a.list-group-item:active {
+  background-color: #0da9ef !important;
+  color: white !important;
 }
