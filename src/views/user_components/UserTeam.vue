@@ -106,7 +106,7 @@
 </template>
 
 <script>
-  import UserHeader from 'components/UserHeader'
+  import UserHeader from 'src/views/components/UserHeader'
 
   export default {
     name: 'UserTeam',

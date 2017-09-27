@@ -34,16 +34,19 @@ const getters = {
       return state.self
     else return {}
   },
-  self_marked_posts: state => {
+  self_expert_application: state => {
+    return state.self_expert_application
+  },
+  self_type: state => {
     if (state.login_status && state.self) {
-      return state.self_marked_posts
+      return state.self.info.type
     } else {
-      return []
+      return -2
     }
   },
   self_name: state => {
     if (state.login_status && state.self.info) {
-      if (state.self.info.first_name && state.self.info.last_name) {
+      if (state.self.info.first_name || state.self.info.last_name) {
         return state.self.info.first_name + ' ' + state.self.info.last_name
       }
       else {
@@ -51,7 +54,23 @@ const getters = {
       }
     }
   },
-  self_expert_application: state => { return state.self_expert_application },
+  self_marked_posts: state => {
+    if (state.login_status && state.self) {
+      return state.self_marked_posts
+    } else {
+      return []
+    }
+  },
+  self_company: state => {
+    if (state.login_status && state.self && state.self.info.type === 0)
+      return state.self.info.company
+    else return ''
+  },
+  self_admin: state => {
+    if (state.login_status && state.self && state.self.info.type === 0)
+      return state.self.info.company_admin
+    else return ''
+  },
 
   user: state => {
     return state.user
@@ -108,7 +127,7 @@ const actions = {
         return Promise.reject(error)
       })
   },
-  setSelfType({commit}, form_data) {
+  setSelfType ({commit}, form_data) {
     return userApi.setSelfType(form_data)
       .then(() => {
         commit(types.SET_SELF_TYPE)

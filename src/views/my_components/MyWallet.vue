@@ -26,11 +26,11 @@
                 <h3 class="text-thin mb-0">{{(wallet.btc_amount).toFixed(2)}}</h3>
               </td>
               <td class="wallet-cell">
-                <a class="btn btn-secondary btn-sm" href="#"><i class="fa fa-lock"></i> Copy Wallet Address</a>
+                <a class="btn btn-secondary btn-sm" href="#" @click="warning()"><i class="fa fa-lock"></i> Copy Wallet Address</a>
               </td>
               <td class="wallet-cell">
-                <a class="btn btn-success btn-sm" href="#">Deposit</a>
-                <a class="btn btn-secondary btn-sm" href="#">Withdraw</a>
+                <a class="btn btn-success btn-sm" href="#" @click="warning()">Deposit</a>
+                <a class="btn btn-secondary btn-sm" href="#" @click="warning()">Withdraw</a>
               </td>
             </tr>
             <tr>
@@ -41,11 +41,11 @@
                 <h3 class="text-thin mb-0">{{(wallet.eth_amount).toFixed(2)}}</h3>
               </td>
               <td class="wallet-cell">
-                <a class="btn btn-secondary btn-sm" href="#"><i class="fa fa-lock"></i> Copy Wallet Address</a>
+                <a class="btn btn-secondary btn-sm" href="#" @click="warning()"><i class="fa fa-lock"></i> Copy Wallet Address</a>
               </td>
               <td class="wallet-cell">
-                <a class="btn btn-success btn-sm" href="#">Deposit</a>
-                <a class="btn btn-secondary btn-sm" href="#">Withdraw</a>
+                <a class="btn btn-success btn-sm" href="#" @click="warning()">Deposit</a>
+                <a class="btn btn-secondary btn-sm" href="#" @click="warning()">Withdraw</a>
               </td>
             </tr>
             <tr>
@@ -54,11 +54,11 @@
               </td>
               <td class="wallet-cell"><h3 class="text-thin mb-0">{{(wallet.icc_amount).toFixed(2)}}</h3></td>
               <td class="wallet-cell">
-                <a class="btn btn-secondary btn-sm" href="#"><i class="fa fa-lock"></i> Copy Wallet Address</a>
+                <a class="btn btn-secondary btn-sm" href="#" @click="warning()"><i class="fa fa-lock"></i> Copy Wallet Address</a>
               </td>
               <td class="wallet-cell">
-                <a class="btn btn-success btn-sm" href="#">Deposit</a>
-                <a class="btn btn-secondary btn-sm" href="#">Withdraw</a>
+                <a class="btn btn-success btn-sm" href="#" @click="warning()">Deposit</a>
+                <a class="btn btn-secondary btn-sm" href="#" @click="warning()">Withdraw</a>
               </td>
             </tr>
             </tbody>
@@ -104,6 +104,9 @@
             this.loaded = true
           })
       },
+      warning () {
+        this.$store.dispatch('toastr', {type: 'warning', title: 'Warning', message: 'This function is locked until our ICO.'})
+      }
     },
     computed: {
       me () {
@@ -143,7 +146,9 @@
     margin: 0;
     border-top: 0;
   }
-
+  .table td{
+    background: #ffffff;
+  }
   .table-wrapper {
     overflow: hidden;
     border-radius: 7px;

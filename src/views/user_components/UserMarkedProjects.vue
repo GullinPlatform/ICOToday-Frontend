@@ -24,8 +24,8 @@
 </template>
 
 <script>
-  import UserHeader from 'components/UserHeader'
-  import PostList from 'components/PostList'
+  import UserHeader from 'src/views/components/UserHeader'
+  import PostList from 'src/views/components/PostList'
 
   export default {
     name: 'UserMarkedProjects',

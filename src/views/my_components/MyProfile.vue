@@ -5,7 +5,7 @@
       <my-header></my-header>
       <!--main content-->
       <div class="mt-5 hidden-md"></div>
-      <div class="col-md-8">
+      <div class="col-md-8 card-new-layout">
         <h6 class="text-muted text-normal text-uppercase">Avatar</h6>
         <hr class="mb-3 mt-2">
         <div class="row">
@@ -22,15 +22,12 @@
             <button class="btn btn-secondary mr-3" @click="avatar_change = true">Change</button>
           </div>
           <div class="col-sm-4" v-if="avatar_change">
-            <!--<div class="row">-->
             <avatar-editor :width=150 :height=150 ref="vueavatar"
                            @vue-avatar-editor:image-ready="onImageReady">
             </avatar-editor>
             <avatar-editor-scale :width=200 :min=1 :max=3 :step=0.02 ref="vueavatarscale"
                                  @vue-avatar-editor-scale:change-scale="onChangeScale">
             </avatar-editor-scale>
-            <br>
-
           </div>
           <div class="col-sm-4" v-if="avatar_change">
             <button class="btn btn-primary mr-3" v-on:click="saveClicked">Update
@@ -38,20 +35,6 @@
             <button class="btn btn-secondary"
                     @click="avatar_cropped=false; avatar_change=false; avatar_img='';">Cancel
             </button>
-          </div>
-        </div>
-        <h6 class="text-muted text-normal text-uppercase ">Auth</h6>
-        <hr class="mb-3 mt-2">
-        <div class="form-group row">
-          <label class="col-sm-2 col-form-label">Email</label>
-          <div class="col-sm-10">
-            <input class="form-control" :value="self.email" disabled>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-2 col-form-label">Password</label>
-          <div class="col-sm-4">
-            <button class="btn btn-secondary mr-3" @click="changePassword()">Change</button>
           </div>
         </div>
         <h6 class="text-muted text-normal text-uppercase ">Basic Info</h6>
@@ -104,8 +87,8 @@
             <input class="form-control" v-model="me.facebook" type="text">
           </div>
         </div>
-        <div class="form-group row justify-content-md-center">
-          <div class="col-md-10 offset-md-2">
+        <div class="row justify-content-end">
+          <div class="col-md-10 ">
             <button type="button" @click="updateSelf()" class="mb-1 btn btn-block btn-primary">
               Submit Change
             </button>
@@ -188,14 +171,12 @@
               this.me = this.self.info
             })
             this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'Your info is updated!'})
+            this.message = ''
           })
           .catch((error) => {
-            this.message = error.body.detail
+            this.message = error.response
           })
       },
-      changePassword () {
-        this.$store.dispatch('sendTwoFactorEmail')
-      }
     },
     computed: {
       self () {
