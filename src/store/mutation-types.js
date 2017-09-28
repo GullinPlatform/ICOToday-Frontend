@@ -1,6 +1,5 @@
 // ------- ACCOUNT --------
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
-export const LOGIN_FAILED = 'LOGIN_FAILED'
 export const LOGOUT = 'LOGOUT'
 export const LOG_IP = 'LOG_IP'
 
@@ -98,5 +97,5 @@ export const SET_IS_ADVISOR = 'SET_IS_ADVISOR'
 export const WHITE_LIST_EMAIL = 'WHITE_LIST_EMAIL'
 export const CLEAN_WHITE_LIST_EMAIL = 'CLEAN_WHITE_LIST_EMAIL'
 export const SET_RESEND_EMAIL_TIME_LIMIT = 'SET_RESEND_EMAIL_TIME_LIMIT'
-export const FOLLOW_UP_STEP = 'SET_RESEND_EMAIL_TIME_LIMIT'
+export const FOLLOW_UP_STEP = 'FOLLOW_UP_STEP'
 

@@ -14,10 +14,9 @@ const state = {
   user: {},
   user_marked_posts: [],
 
-  // icotoday official user
-  icotoday_user: {},
-
+  // other
   login_status: false,
+  resend_email_until: '',
 }
 
 // getters
@@ -87,6 +86,11 @@ const getters = {
         return state.user.email
       }
     }
+  },
+
+  // resend email
+  able_to_resend: state => {
+    return !state.resend_email_until ? true : moment().isAfter(state.resend_email_until)
   },
 }
 
@@ -186,13 +190,16 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-        commit(types.LOGIN_FAILED, error)
-        return Promise.reject(error)
+        commit(types.LOGOUT)
+        console.log(error)
+        return Promise.reject()
       })
   },
   logout ({commit}) {
     userApi.logout()
-    commit(types.LOGOUT)
+      .then(() => {
+        commit(types.LOGOUT)
+      })
   },
   tokenRefresh ({commit, dispatch}) {
     userApi.tokenRefresh()
@@ -201,7 +208,7 @@ const actions = {
         dispatch('getSelf')
       })
       .catch((error) => {
-        commit(types.LOGIN_FAILED)
+        commit(types.LOGOUT)
         console.log(error)
       })
   },
@@ -247,7 +254,7 @@ const actions = {
       })
   },
 
-  changePassword ({commit}, form_data) {
+  changePassword ({}, form_data) {
     return userApi.changePassword(form_data)
       .then(() => {
         return Promise.resolve()
@@ -257,7 +264,7 @@ const actions = {
       })
   },
 
-  forgetPasswordSendEmail ({commit}, email) {
+  forgetPasswordSendEmail ({}, email) {
     return userApi.forgetPasswordSendEmail(email)
       .then(() => {
         return Promise.resolve()
@@ -266,7 +273,7 @@ const actions = {
         return Promise.reject(error)
       })
   },
-  forgetPasswordVerifyToken ({commit}, token) {
+  forgetPasswordVerifyToken ({}, token) {
     return userApi.forgetPasswordVerifyToken(token)
       .then(() => {
         return Promise.resolve()
@@ -275,7 +282,7 @@ const actions = {
         return Promise.reject(error)
       })
   },
-  forgetPasswordResetPassword ({commit}, form_data) {
+  forgetPasswordResetPassword ({}, form_data) {
     return userApi.forgetPasswordResetPassword(form_data)
       .then(() => {
         return Promise.resolve()
@@ -285,7 +292,7 @@ const actions = {
       })
   },
 
-  sendTwoFactorEmail ({commit}) {
+  sendTwoFactorEmail ({}) {
     return userApi.sendTwoFactorEmail()
       .then(() => {
         return Promise.resolve()
@@ -294,7 +301,7 @@ const actions = {
         return Promise.reject(error)
       })
   },
-  verifyTwoFactorToken ({commit}, token) {
+  verifyTwoFactorToken ({}, token) {
     return userApi.verifyTwoFactorToken(token)
       .then(() => {
         return Promise.resolve()
@@ -326,7 +333,7 @@ const actions = {
       })
   },
 
-  searchUser ({commit}, search_token) {
+  searchUser ({}, search_token) {
     return userApi.searchUser(search_token)
       .then((response) => {
         return Promise.resolve(response)
@@ -336,7 +343,7 @@ const actions = {
       })
   },
 
-  addInterests ({commit}, form_data) {
+  addInterests ({}, form_data) {
     return userApi.addInterests(form_data)
       .then(() => {
         return Promise.resolve()
@@ -394,9 +401,7 @@ const mutations = {
     state.login_status = true
     router.push({name: 'landing'})
   },
-  [types.LOGIN_FAILED] (state) {
-    state.login_status = false
-  },
+
   [types.REGISTER_FAILED] (state) {
     state.login_status = false
   },
@@ -439,6 +444,11 @@ const mutations = {
   },
   [types.POST_SELF_EXPERT_APPLICATION] (state, form_data) {
     state.self_expert_application = form_data
+  },
+
+  // resend email
+  [types.SET_RESEND_EMAIL_TIME_LIMIT] (state) {
+    state.resend_email_until = moment().add(1, 'minutes')
   },
 }
 
