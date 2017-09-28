@@ -1,106 +1,99 @@
 <template>
-    <div class="modal fade" id="add-member-modal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" v-if="!is_advisor">
-                        Add Team Member
-                    </h4>
-                    <h4 class="modal-title" v-else>
-                        Add Team Advisor
-                    </h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                </div>
-                <div class="modal-body" v-if="me.is_verified">
-                    <h6 class="text-muted text-normal text-uppercase" :class="{'text-danger':avatar_missing}">Avatar</h6>
-                    <hr class="mb-3 mt-2">
-                    <div class="row">
-                        <div class="col-sm-4 text-center">
-                            <img src="../../../static/img/account/default.jpg" v-if="!avatar_cropped"
-                                 class="img-thumbnail rounded-circle mb-2"
-                                 width="100" height="100">
-                            <img :src="avatar_img.toDataURL()"
-                                 class="img-thumbnail rounded-circle mb-2"
-                                 width="100" height="100" v-else>
-                            <h6 class="text-normal text-uppercase pt-2">Preview</h6>
-                        </div>
-                        <div class="col-sm-8 text-center">
-                            <avatar-editor :width=150 :height=150 ref="member_avatar"
-                                           @vue-avatar-editor:image-ready="onImageReady">
-                            </avatar-editor>
-                            <avatar-editor-scale :width=200 :min=1 :max=3 :step=0.02 ref="member_avatar_scale"
-                                                 @vue-avatar-editor-scale:change-scale="onImageChangeScale">
-                            </avatar-editor-scale>
-                        </div>
-                    </div>
-                    <h6 class="text-muted text-normal text-uppercase ">Basic</h6>
-                    <hr class="mb-3 mt-2">
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <input v-model="first_name" type="text" class="form-control" name="first-name"
-                                       placeholder="First Name *">
-                            </div>
-                            <div class="col-sm-6">
-                                <input v-model="last_name" type="text" class="form-control" name="last-name"
-                                       placeholder="Last Name *">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <input v-model="email" type="text" class="form-control" name="email" placeholder="Email *">
-                    </div>
-                    <div class="form-group">
-                        <input v-model="title" type="text" class="form-control"
-                               placeholder="Title * (Ex. Co-Founder & CEO)">
-                    </div>
-                    <div class="form-group mb-1">
-                            <textarea v-model="description" type="text" class="form-control"
-                                      placeholder="Description"></textarea>
-                    </div>
-                    <h6 class="text-muted text-normal text-uppercase ">Social Media</h6>
-                    <hr class="mb-3 mt-2">
-                    <div class="form-group">
-                        <input v-model="linkedin" type="text" class="form-control"
-                               placeholder="LinkedIn">
-                    </div>
-                    <div class="form-group">
-                        <input v-model="twitter" type="text" class="form-control"
-                               placeholder="Twitter">
-                    </div>
-                    <div class="form-group">
-                        <input v-model="facebook" type="text" class="form-control" placeholder="Facebook">
-                    </div>
-                    <div class="form-group">
-                        <input v-model="telegram" type="text" class="form-control"
-                               placeholder="Telegram">
-                    </div>
-                    <a @click="addTeamMember($event)" class="btn btn-block btn-primary text-white" :disabled="uploading">
-                        SUBMIT<span v-if="uploading">ING</span>
-                    </a>
-                    <p class="text-danger">{{error_message}}</p>
-                </div>
-                <div class="modal-body text-center" v-else="">
-                    <h4 class="mt-3">
-                        You have to verify your email first
-                    </h4>
-                    <a href="javascript:void(0)" @click="" class="btn btn-primary mt-2">Resend Email</a>
-                </div>
-                <div class="modal-footer">
-                    <small>
-                        We'll send a confirmation message to the email address you provided, notice your team member to click the confirmation link
-                    </small>
-                </div>
-            </div>
-            <!-- /.modal-content -->
+  <div class="modal fade" id="add-member-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" v-if="!is_advisor">
+            Add Team Member
+          </h4>
+          <h4 class="modal-title" v-else>
+            Add Team Advisor
+          </h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         </div>
-        <!-- /.modal-dialog -->
+        <div class="modal-body" v-if="is_verified">
+          <h6 class="text-muted text-normal text-uppercase" :class="{'text-danger':avatar_missing}">Avatar</h6>
+          <hr class="mb-3 mt-2">
+          <div class="row">
+            <div class="col-sm-4 text-center">
+              <img src="../../../static/img/account/default.jpg" v-if="!avatar_cropped"
+                   class="img-thumbnail rounded-circle mb-2"
+                   width="100" height="100">
+              <img :src="avatar_img.toDataURL()"
+                   class="img-thumbnail rounded-circle mb-2"
+                   width="100" height="100" v-else>
+              <h6 class="text-normal text-uppercase pt-2">Preview</h6>
+            </div>
+            <div class="col-sm-8 text-center">
+              <avatar-editor :width=150 :height=150 ref="member_avatar" @vue-avatar-editor:image-ready="onImageReady">
+              </avatar-editor>
+              <avatar-editor-scale :width=200 :min=1 :max=3 :step=0.02 ref="member_avatar_scale" @vue-avatar-editor-scale:change-scale="onImageChangeScale">
+              </avatar-editor-scale>
+            </div>
+          </div>
+          <h6 class="text-muted text-normal text-uppercase ">Basic</h6>
+          <hr class="mb-3 mt-2">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-sm-6">
+                <input v-model="first_name" type="text" class="form-control" name="first-name" placeholder="First Name *">
+              </div>
+              <div class="col-sm-6">
+                <input v-model="last_name" type="text" class="form-control" name="last-name" placeholder="Last Name *">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input v-model="email" type="text" class="form-control" name="email" placeholder="Email *">
+          </div>
+          <div class="form-group">
+            <input v-model="title" type="text" class="form-control" placeholder="Title * (Ex. Co-Founder & CEO)">
+          </div>
+          <div class="form-group mb-1">
+            <textarea v-model="description" type="text" class="form-control" placeholder="Description"></textarea>
+          </div>
+          <h6 class="text-muted text-normal text-uppercase ">Social Media</h6>
+          <hr class="mb-3 mt-2">
+          <div class="form-group">
+            <input v-model="linkedin" type="text" class="form-control" placeholder="LinkedIn">
+          </div>
+          <div class="form-group">
+            <input v-model="twitter" type="text" class="form-control" placeholder="Twitter">
+          </div>
+          <div class="form-group">
+            <input v-model="facebook" type="text" class="form-control" placeholder="Facebook">
+          </div>
+          <div class="form-group">
+            <input v-model="telegram" type="text" class="form-control" placeholder="Telegram">
+          </div>
+          <a @click="addTeamMember($event)" class="btn btn-block btn-primary text-white" :disabled="uploading">
+            SUBMIT<span v-if="uploading">ING</span>
+          </a>
+          <p class="text-danger">{{error_message}}</p>
+        </div>
+        <div class="modal-body text-center" v-else="">
+          <h4 class="mt-3">
+            You have to verify your email first
+          </h4>
+          <a href="javascript:void(0)" @click="" class="btn btn-primary mt-2">Resend Email</a>
+        </div>
+        <div class="modal-footer">
+          <small>
+            We'll send a confirmation message to the email address you provided, notice your team member to click the confirmation link
+          </small>
+        </div>
+      </div>
+      <!-- /.modal-content -->
     </div>
-    <!-- /.modal -->
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
 </template>
 
 
 <script>
+  import { mapGetters } from 'vuex'
+
   import AvatarEditor from 'components/AvatarEditor'
   import AvatarEditorScale from 'components/AvatarEditorScale'
 
@@ -215,12 +208,11 @@
       }
     },
     computed: {
-      is_advisor () {
-        return this.$store.getters.is_advisor
-      },
-      me () {
-        return this.$store.getters.self
-      }
+      ...mapGetters({
+        me: 'self',
+        is_verified: 'is_verified',
+        is_advisor: 'is_advisor',
+      })
     },
     watch: {
       is_advisor () {

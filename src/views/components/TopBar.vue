@@ -133,7 +133,7 @@
                   <!--</li>-->
                   <li class="sub-menu-separator"></li>
                   <li>
-                    <a href="" @click="logout()" class="dropdown-item">
+                    <a href="javascript:void(0)" @click="logout()" class="dropdown-item">
                       <i class="fa fa-sign-out dropdown-icon"></i> Logout</a>
                   </li>
                 </ul>
