@@ -17,9 +17,11 @@ import MyMarkedProjects from 'views/my_components/MyMarkedProjects'
 import MyProfile from 'views/my_components/MyProfile'
 import MySettings from 'views/my_components/MySettings'
 import MyWallet from 'views/my_components/MyWallet'
+import NeedVerify from 'views/my_components/NeedVerify'
 
 import CompanyNewProject from 'views/my_components/CompanyNewProject'
 import CompanyProject from 'views/my_components/CompanyProject'
+import CompanyProfile from 'views/my_components/CompanyProfile'
 import CompanyTeam from 'views/my_components/CompanyTeam'
 
 import UserBase from 'views/user_components/UserBase'
@@ -65,41 +67,49 @@ export default new Router({
       component: MyBase,
       children: [
         {
-          path: '/expert/application',
+          path: '/me/expert/application',
           component: MyExpertApplication,
           name: 'me_expert_apply'
         }, {
-          path: '/feed',
+          path: '/me/feed',
           component: MyFeed,
           name: 'me'
         }, {
-          path: '/marked',
+          path: '/me/marked',
           component: MyMarkedProjects,
           name: 'me_marked'
-        },{
-          path: '/profile',
+        }, {
+          path: '/me/profile',
           component: MyProfile,
           name: 'me_profile'
         }, {
-          path: '/settings',
+          path: '/me/settings',
           component: MySettings,
           name: 'me_settings'
         }, {
-          path: '/wallet',
+          path: '/me/wallet',
           component: MyWallet,
           name: 'me_wallet'
-        },  {
-          path: '/company/newproject',
+        }, {
+          path: '/me/company/newproject',
           component: CompanyNewProject,
           name: 'company_new_project'
         }, {
-          path: '/company/project',
+          path: '/me/company/project',
           component: CompanyProject,
           name: 'company_project'
-        },{
-          path: '/company/team',
+        }, {
+          path: '/me/company/profile',
+          component: CompanyProfile,
+          name: 'company_profile'
+        }, {
+          path: '/me/company/team',
           component: CompanyTeam,
           name: 'company_team'
+        }, {
+          path: '/me/unverified',
+          component: NeedVerify,
+          name: 'me_need_verify'
         },
       ]
     }, {

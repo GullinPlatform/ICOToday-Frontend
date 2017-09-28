@@ -42,7 +42,7 @@ export default {
 
   // Company Admin Operations
   updateCompany (form_data) {
-    return apiCall('put', form_data.get('id') + '/', form_data)
+    return apiCall('put', form_data['id'] + '/', form_data)
   },
   createCompanyMember (form_data) {
     return apiCall('post', 'member/', form_data)

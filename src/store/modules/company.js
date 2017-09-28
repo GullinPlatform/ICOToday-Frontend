@@ -45,17 +45,6 @@ const actions = {
         return Promise.reject(error)
       })
   },
-  updateTeam ({commit}, formData) {
-    return teamApi.updateTeam(formData)
-      .then(() => {
-        commit(types.UPDATE_TEAM)
-        return Promise.resolve()
-      })
-      .catch((error) => {
-        console.log(error)
-        return Promise.reject(error)
-      })
-  },
   addTeamMember ({commit}, formData) {
     return teamApi.addTeamMember(formData)
       .then(() => {
@@ -94,7 +83,7 @@ const actions = {
   getCompanyMembers ({commit}, id) {
     return companyApi.getCompanyMembers(id)
       .then((response) => {
-        commit(types.GET_COMPANY, response)
+        commit(types.GET_COMPANY_MEMBERS, response)
         return Promise.resolve()
       })
       .catch((error) => {
