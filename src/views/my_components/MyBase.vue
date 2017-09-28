@@ -64,16 +64,16 @@
         </nav>
         <h6 class="text-muted text-normal text-uppercase mt-4" v-if="type===0">Company</h6>
         <nav class="list-group" v-if="type===0">
-          <router-link :to="{name:'company', params:{id:my_company.id}}" class="list-group-item">
+          <router-link :to="{name:'company_new_project'}" class="list-group-item"
+                       :class="{active: $route.name==='company_new_project'}">
             <i class="fa fa-angle-right"></i> Company Project
           </router-link>
-          <router-link :to="{name:'company', params:{id:my_company.id}}" class="list-group-item">
-            <i class="fa fa-angle-right"></i> Company Page
-          </router-link>
-          <router-link :to="{name:'company', params:{id:my_company.id}}" class="list-group-item">
+          <router-link :to="{name:'company_profile'}" class="list-group-item"
+                       :class="{active: $route.name==='company_profile'}">
             <i class="fa fa-angle-right"></i> Company Profile
           </router-link>
-          <router-link :to="{name:'company', params:{id:my_company.id}}" class="list-group-item">
+          <router-link :to="{name:'company_team'}" class="list-group-item"
+                       :class="{active: $route.name==='company_team'}">
             <i class="fa fa-angle-right"></i> Company Members
           </router-link>
 
@@ -112,6 +112,7 @@
       ...mapGetters({
         me: 'self',
         username: 'self_name',
+        is_verified: 'is_verified',
         type: 'self_type',
         my_company: 'self_company',
         my_admin: 'self_company',
@@ -121,6 +122,10 @@
       // redirect non login user
       if (!this.$store.getters.login_status) {
         this.$router.push({name: 'landing'})
+      }
+      // redirect not verified user
+      if (!this.$store.getters.is_verified) {
+        this.$router.push({name: 'me_need_verify'})
       }
     }
   }

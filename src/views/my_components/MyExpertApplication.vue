@@ -105,13 +105,8 @@
       }
     },
     beforeCreate () {
-      // redirect non login user
-      if (!this.$store.getters.login_status) {
-        this.$router.push({name: 'landing'})
-      }
-
       // redirect non ico investor user
-      if (this.$store.getters.self.type !== 1) {
+      if (this.$store.getters.self_type !== 1) {
         this.$router.push({name: 'landing'})
       }
       this.loaded = false

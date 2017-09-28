@@ -61,11 +61,5 @@
           this.loaded = true
         })
     },
-    beforeCreate () {
-      // redirect non login user
-      if (!this.$store.getters.login_status) {
-        this.$router.push({name: 'landing'})
-      }
-    }
   }
 </script>

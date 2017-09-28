@@ -1,7 +1,5 @@
 <template>
-  <div class="col-md-8 margin-bottom-2x" v-if="me.info.is_verified">
-    <h6 class="text-muted text-normal text-uppercase">My Wallet</h6>
-    <hr class="margin-bottom-1x">
+  <div class="col-md-8">
     <div class="table-responsive table-wrapper">
       <table class="table">
         <thead class="thead-default">
@@ -60,16 +58,10 @@
       </table>
     </div>
   </div>
-
-  <div class="col-md-8 text-center" v-else>
-    <h4 class="mt-3">
-      You have to verify your email first
-    </h4>
-    <a href="javascript:void(0)" @click="" class="btn btn-primary mt-2">Resend Email</a>
-  </div>
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
 
   export default {
     name: 'MyWallet',
@@ -98,29 +90,14 @@
       }
     },
     computed: {
-      me () {
-        return this.$store.getters.self
-      },
-      wallet () {
-        return this.$store.getters.wallet
-      },
-      login_status () {
-        return this.$store.getters.login_status
-      },
+      ...mapGetters({
+        me: 'self',
+        wallet: 'wallet',
+      })
     },
     beforeMount () {
-      // redirect non login user
-      if (!this.login_status) {
-        this.$router.push({name: 'landing'})
-      }
       this.loaded = false
       this.getWallet()
-    },
-    beforeCreate () {
-      // redirect non login user
-      if (!this.$store.getters.login_status) {
-        this.$router.push({name: 'landing'})
-      }
     }
   }
 </script>
@@ -135,9 +112,11 @@
     margin: 0;
     border-top: 0;
   }
-  .table td{
+
+  .table td {
     background: #ffffff;
   }
+
   .table-wrapper {
     overflow: hidden;
     border-radius: 7px;
