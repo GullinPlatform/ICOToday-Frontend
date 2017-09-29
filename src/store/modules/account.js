@@ -103,7 +103,7 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-        console.log(error)
+
 
         return Promise.reject(error)
       })
@@ -115,7 +115,6 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-        console.log(error)
 
         return Promise.reject(error)
       })
@@ -127,7 +126,7 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-        console.log(error)
+
         return Promise.reject(error)
       })
   },
@@ -138,7 +137,7 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-        console.log(error)
+
         return Promise.reject(error)
       })
   },
@@ -150,7 +149,7 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-        console.log(error)
+
 
         return Promise.reject(error)
       })
@@ -162,7 +161,7 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-        console.log(error)
+
 
         return Promise.reject(error)
       })
@@ -176,7 +175,7 @@ const actions = {
         dispatch('getSelf')
       })
       .catch((error) => {
-        console.log(error)
+
         // commit(types.REGISTER_FAILED, error)
         return Promise.reject(error)
       })
@@ -191,7 +190,7 @@ const actions = {
       })
       .catch((error) => {
         commit(types.LOGOUT)
-        console.log(error)
+
         return Promise.reject()
       })
   },
@@ -209,7 +208,7 @@ const actions = {
       })
       .catch((error) => {
         commit(types.LOGOUT)
-        console.log(error)
+
       })
   },
   logIP ({commit}, form_data) {
@@ -219,7 +218,7 @@ const actions = {
         return Promise.resolve(response)
       })
       .catch((error) => {
-        console.log(error)
+
         return Promise.reject(error)
       })
   },
@@ -339,7 +338,7 @@ const actions = {
         return Promise.resolve(response)
       })
       .catch((error) => {
-        console.log(error)
+
       })
   },
 
@@ -349,7 +348,7 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-        console.log(error)
+
       })
   },
 

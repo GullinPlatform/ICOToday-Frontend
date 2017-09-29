@@ -13,7 +13,6 @@ export const LOAD_SELF_MARKED_POST = 'LOAD_SELF_MARKED_POST'
 export const UPDATE_SELF = 'UPDATE_SELF'
 export const SET_SELF_TYPE = 'SET_SELF_TYPE'
 
-
 export const LOAD_USER = 'LOAD_USER'
 export const LOAD_USER_MARKED_POST = 'LOAD_USER_MARKED_POST'
 
@@ -23,16 +22,19 @@ export const UPDATE_SELF_EXPERT_APPLICATION = 'UPDATE_SELF_EXPERT_APPLICATION'
 
 // ----- PROJECT -----
 export const CREATE_PROJECT = 'CREATE_PROJECT'
+export const GET_PROJECT = 'GET_PROJECT'
+export const UPDATE_PROJECT = 'UPDATE_PROJECT'
+export const GET_PROJECT_RATING_DETAIL = 'GET_PROJECT_RATING_DETAIL'
 
-// export const ADD_POST = 'ADD_POST'
-// export const GET_POST = 'GET_POST'
-// export const GET_POST_RATING_DETAIL = 'GET_POST_RATING_DETAIL'
-// export const LIST_POSTS = 'LIST_POSTS'
-// export const LIST_PROMO_POSTS = 'LIST_PROMO_POSTS'
-// export const APPEND_POSTS = 'APPEND_POSTS'
-// export const MARK_POST = 'MARK_POST'
-// export const UPDATE_POST = 'UPDATE_POST'
-// export const GET_POST_TAGS = 'GET_POST_TAGS'
+export const SEARCH_PROJECTS = 'SEARCH_PROJECTS'
+
+export const LIST_PROJECTS = 'LIST_PROJECTS'
+export const PROMO_PROJECTS = 'PROMO_PROJECTS'
+export const APPEND_PROJECTS = 'APPEND_PROJECTS'
+
+export const MARK_PROJECT = 'MARK_PROJECT'
+
+export const GET_PROJECT_TAGS = 'GET_PROJECT_TAGS'
 
 // ----- COMPANY -----
 export const GET_COMPANY = 'GET_COMPANY'
@@ -52,17 +54,6 @@ export const ADD_COMPANY_ADMIN = 'ADD_COMPANY_ADMIN'
 
 export const GET_COMPANY_ADMINS = 'GET_COMPANY_ADMINS'
 export const LEAVE_COMPANY = 'LEAVE_COMPANY'
-
-// ----- POST -----
-export const ADD_POST = 'ADD_POST'
-export const GET_POST = 'GET_POST'
-export const GET_POST_RATING_DETAIL = 'GET_POST_RATING_DETAIL'
-export const LIST_POSTS = 'LIST_POSTS'
-export const LIST_PROMO_POSTS = 'LIST_PROMO_POSTS'
-export const APPEND_POSTS = 'APPEND_POSTS'
-export const MARK_POST = 'MARK_POST'
-export const UPDATE_POST = 'UPDATE_POST'
-export const GET_POST_TAGS = 'GET_POST_TAGS'
 
 // ----- TEAM -----
 export const GET_TEAM = 'GET_TEAM'

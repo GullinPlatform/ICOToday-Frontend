@@ -13,8 +13,10 @@ const apiCall = (method, url, form_data, params) => {
   })
     .then((response) => Promise.resolve(response.data))
     .catch((error) => {
-      if (error)
+      if (error) {
+        console.log(error)
         return Promise.reject(error)
+      }
       else
         return Promise.reject({})
     })
@@ -67,7 +69,7 @@ export default {
   leaveCompany () {
     return apiCall('delete', 'leave/')
   },
-  getCompanyAdminList (id) {
+  getCompanyAdminList () {
     return apiCall('get', 'member/admins/')
   },
 }

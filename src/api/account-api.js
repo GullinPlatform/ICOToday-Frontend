@@ -13,8 +13,10 @@ const apiCall = (method, url, form_data, params) => {
   })
     .then((response) => Promise.resolve(response.data))
     .catch((error) => {
-      if (error)
+      if (error) {
+        console.log(error)
         return Promise.reject(error)
+      }
       else
         return Promise.reject({})
     })

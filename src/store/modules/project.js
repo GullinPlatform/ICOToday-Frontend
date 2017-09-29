@@ -5,6 +5,7 @@ import * as types from '../mutation-types'
 const state = {
   projects: [],
   promo_projects: [],
+  current_project_search_result: {},
   current_project: {},
   current_project_rating_detail: '',
   tags: []
@@ -36,7 +37,7 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-        console.log(error)
+
         return Promise.reject(error)
       })
   },
@@ -47,7 +48,7 @@ const actions = {
         return Promise.resolve(response)
       })
       .catch((error) => {
-        console.log(error)
+
         return Promise.reject(error)
       })
   },
@@ -58,7 +59,7 @@ const actions = {
         return Promise.resolve(response)
       })
       .catch((error) => {
-        console.log(error)
+
         return Promise.reject(error)
       })
   },
@@ -69,11 +70,22 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-        console.log(error)
+
         return Promise.reject(error)
       })
   },
 
+  searchProjects({commit}, formData) {
+    return projectApi.searchProjects(formData)
+      .then((response) => {
+        commit(types.SEARCH_PROJECTS, response)
+        return Promise.resolve()
+      })
+      .catch((error) => {
+
+        return Promise.reject(error)
+      })
+  },
   listProjects ({commit}, formData) {
     return projectApi.searchProjects(formData)
       .then((response) => {
@@ -81,7 +93,7 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-        console.log(error)
+
         return Promise.reject(error)
       })
   },
@@ -92,7 +104,7 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-        console.log(error)
+
         return Promise.reject(error)
       })
   },
@@ -105,7 +117,7 @@ const actions = {
         return Promise.resolve(response)
       })
       .catch((error) => {
-        console.log(error)
+
         return Promise.reject(error)
       })
   },
@@ -132,6 +144,9 @@ const mutations = {
 
   [types.MARK_PROJECT] (state, response) {},
 
+  [types.SEARCH_PROJECTS] (state, response) {
+    state.current_project_search_result = response
+  },
   [types.LIST_PROJECTS] (state, response) {
     state.projects = response
   },

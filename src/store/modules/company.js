@@ -41,7 +41,7 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-        console.log(error)
+
         return Promise.reject(error)
       })
   },
@@ -52,7 +52,7 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-        console.log(error)
+
         return Promise.reject(error)
       })
   },
@@ -63,7 +63,7 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-        console.log(error)
+
         return Promise.reject(error)
       })
   },
@@ -76,7 +76,7 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-        console.log(error)
+
         return Promise.reject(error)
       })
   },
@@ -87,7 +87,7 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-        console.log(error)
+
         return Promise.reject(error)
       })
   },
@@ -98,7 +98,7 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-        console.log(error)
+
         return Promise.reject(error)
       })
   },
@@ -109,7 +109,7 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-        console.log(error)
+
         return Promise.reject(error)
       })
   },
@@ -122,7 +122,7 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-        console.log(error)
+
         return Promise.reject(error)
       })
   },
@@ -135,7 +135,7 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-        console.log(error)
+
         return Promise.reject(error)
       })
   },
@@ -146,7 +146,7 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-        console.log(error)
+
         return Promise.reject(error)
       })
   },
@@ -157,7 +157,7 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-        console.log(error)
+
         return Promise.reject(error)
       })
   },
@@ -168,7 +168,7 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-        console.log(error)
+
         return Promise.reject(error)
       })
   },
@@ -179,7 +179,7 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-        console.log(error)
+
         return Promise.reject(error)
       })
   },
@@ -190,7 +190,7 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-        console.log(error)
+
         return Promise.reject(error)
       })
   },
@@ -201,7 +201,7 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-        console.log(error)
+
         return Promise.reject(error)
       })
   },
@@ -214,7 +214,7 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-        console.log(error)
+
         return Promise.reject(error)
       })
   },
@@ -225,7 +225,7 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-        console.log(error)
+
         return Promise.reject(error)
       })
   }
