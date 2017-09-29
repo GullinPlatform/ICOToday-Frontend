@@ -21,39 +21,34 @@ const apiCall = (method, url, form_data, params) => {
 }
 
 export default {
-  listPosts () {
-    return apiCall('get', '')
-  },
-  postPost (form_data) {
+  createProject (form_data) {
     return apiCall('post', '', form_data)
   },
-  getPost (id) {
+  getProject (id) {
     return apiCall('get', id + '/')
   },
-
-  listPromoPosts () {
-    return apiCall('get', 'promo/')
-  },
-  listPostsByPage (page) {
-    return apiCall('get', 'p/' + page + '/')
-  },
-  searchPosts (form_data) {
-    return apiCall('get', 'search/' + form_data.page + '/', {}, form_data)
-  },
-
-  markPost (id) {
-    return apiCall('post', id + '/mark/')
-  },
-  updatePost (form_data) {
+  updateProject (form_data) {
     return apiCall('patch', form_data.get('id') + '/', form_data)
   },
-  getPostRatingDetail (id) {
+  getProjectRatingDetail (id) {
     return apiCall('get', id + '/rating/')
+  },
+
+  searchProjects (form_data) {
+    return apiCall('get', 'search/' + form_data.page + '/', {}, form_data)
+  },
+  listPromoProjects () {
+    return apiCall('get', 'promo/')
+  },
+  closeOVertimeProjects () {
+    return apiCall('get', 'close/')
+  },
+
+  markProject (id) {
+    return apiCall('post', id + '/mark/')
   },
 
   getAllProjectTags () {
     return apiCall('get', '/tags/')
-
   }
-
 }

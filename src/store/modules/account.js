@@ -108,8 +108,8 @@ const actions = {
         return Promise.reject(error)
       })
   },
-  getSelfMarkedPost ({commit}) {
-    return userApi.getSelfMarkedPost()
+  getSelfMarkedProject ({commit}) {
+    return userApi.getSelfMarkedProject()
       .then((response) => {
         commit(types.LOAD_SELF_MARKED_POST, response)
         return Promise.resolve()
@@ -155,8 +155,8 @@ const actions = {
         return Promise.reject(error)
       })
   },
-  getUserMarkedPost ({commit}, pk) {
-    return userApi.getUserMarkedPost(pk)
+  getUserMarkedProject ({commit}, pk) {
+    return userApi.getUserMarkedProject(pk)
       .then((response) => {
         commit(types.LOAD_USER_MARKED_POST, response)
         return Promise.resolve()
@@ -414,6 +414,9 @@ const mutations = {
   // load data
   [types.LOAD_SELF] (state, response) {
     state.self = response
+    if (state.self.info.type === -1) {
+      router.push({name: 'register_followup'})
+    }
   },
   [types.LOAD_USER] (state, response) {
     state.user = response

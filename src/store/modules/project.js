@@ -1,27 +1,27 @@
-import postApi from '../../api/project-api'
+import projectApi from '../../api/project-api'
 import * as types from '../mutation-types'
 
 // initial state
 const state = {
-  posts: [],
-  promo_posts: [],
-  current_post: {},
-  current_post_rating_detail: '',
+  projects: [],
+  promo_projects: [],
+  current_project: {},
+  current_project_rating_detail: '',
   tags: []
 }
 
 const getters = {
-  current_post: state => {
-    return state.current_post
+  current_project: state => {
+    return state.current_project
   },
-  current_post_rating_detail: state => {
-    return state.current_post_rating_detail
+  current_project_rating_detail: state => {
+    return state.current_project_rating_detail
   },
-  posts: state => {
-    return state.posts
+  projects: state => {
+    return state.projects
   },
-  promo_posts: state => {
-    return state.promo_posts
+  promo_projects: state => {
+    return state.promo_projects
   },
   tags: state => {
     return state.tags
@@ -29,10 +29,10 @@ const getters = {
 }
 
 const actions = {
-  postNewPost ({commit}, formData) {
-    return postApi.postPost(formData)
+  createProject ({commit}, formData) {
+    return projectApi.createProject(formData)
       .then((response) => {
-        commit(types.ADD_POST, response)
+        commit(types.CREATE_PROJECT, response)
         return Promise.resolve()
       })
       .catch((error) => {
@@ -40,67 +40,10 @@ const actions = {
         return Promise.reject(error)
       })
   },
-  listPosts ({commit}) {
-    return postApi.listPosts()
+  updateProject ({commit}, formData) {
+    return projectApi.updateProject(formData)
       .then((response) => {
-        commit(types.LIST_POSTS, response)
-        return Promise.resolve()
-      })
-      .catch((error) => {
-        console.log(error)
-        return Promise.reject(error)
-      })
-  },
-  listPromoPosts ({commit}) {
-    return postApi.listPromoPosts()
-      .then((response) => {
-        commit(types.LIST_PROMO_POSTS, response)
-        return Promise.resolve()
-      })
-      .catch((error) => {
-        console.log(error)
-        return Promise.reject(error)
-      })
-  },
-  listPostsByPage ({commit}, page) {
-    return postApi.listPostsByPage(page)
-      .then((response) => {
-        commit(types.APPEND_POSTS, response)
-        return Promise.resolve()
-      })
-      .catch((error) => {
-        console.log(error)
-        return Promise.reject(error)
-      })
-  },
-
-  searchPosts ({commit}, formData) {
-    return postApi.searchPosts(formData)
-      .then((response) => {
-        commit(types.LIST_POSTS, response)
-        return Promise.resolve()
-      })
-      .catch((error) => {
-        console.log(error)
-        return Promise.reject(error)
-      })
-  },
-  searchPostsByPage ({commit}, formData) {
-    return postApi.searchPosts(formData)
-      .then((response) => {
-        commit(types.APPEND_POSTS, response)
-        return Promise.resolve()
-      })
-      .catch((error) => {
-        console.log(error)
-        return Promise.reject(error)
-      })
-  },
-
-  getPost ({commit}, pk) {
-    return postApi.getPost(pk)
-      .then((response) => {
-        commit(types.GET_POST, response)
+        commit(types.UPDATE_PROJECT, response)
         return Promise.resolve(response)
       })
       .catch((error) => {
@@ -108,11 +51,10 @@ const actions = {
         return Promise.reject(error)
       })
   },
-  markPost ({dispatch, commit}, id) {
-    return postApi.markPost(id)
+  getProject ({commit}, pk) {
+    return projectApi.getProject(pk)
       .then((response) => {
-        commit(types.MARK_POST, response)
-        dispatch('getSelfMarkedPost')
+        commit(types.GET_PROJECT, response)
         return Promise.resolve(response)
       })
       .catch((error) => {
@@ -120,24 +62,47 @@ const actions = {
         return Promise.reject(error)
       })
   },
-
-  updatePost ({commit}, formData) {
-    return postApi.updatePost(formData)
+  getProjectRatingDetail ({commit}, id) {
+    return projectApi.getProjectRatingDetail(id)
       .then((response) => {
-        commit(types.UPDATE_POST, response)
-        return Promise.resolve(response)
-      })
-      .catch((error) => {
-        console.log(error)
-        return Promise.reject(error)
-      })
-  },
-
-  getPostRatingDetail ({commit}, id) {
-    return postApi.getPostRatingDetail(id)
-      .then((response) => {
-        commit(types.GET_POST_RATING_DETAIL, response)
+        commit(types.GET_PROJECT_RATING_DETAIL, response)
         return Promise.resolve()
+      })
+      .catch((error) => {
+        console.log(error)
+        return Promise.reject(error)
+      })
+  },
+
+  listProjects ({commit}, formData) {
+    return projectApi.searchProjects(formData)
+      .then((response) => {
+        commit(types.LIST_PROJECTS, response)
+        return Promise.resolve()
+      })
+      .catch((error) => {
+        console.log(error)
+        return Promise.reject(error)
+      })
+  },
+  listProjectsByPage ({commit}, page) {
+    return projectApi.listProjectsByPage(page)
+      .then((response) => {
+        commit(types.APPEND_PROJECTS, response)
+        return Promise.resolve()
+      })
+      .catch((error) => {
+        console.log(error)
+        return Promise.reject(error)
+      })
+  },
+
+  markProject ({dispatch, commit}, id) {
+    return projectApi.markProject(id)
+      .then((response) => {
+        commit(types.MARK_PROJECT, response)
+        dispatch('getSelfMarkedProject')
+        return Promise.resolve(response)
       })
       .catch((error) => {
         console.log(error)
@@ -146,41 +111,42 @@ const actions = {
   },
 
   getAllProjectTags ({commit}) {
-    return postApi.getAllProjectTags()
+    return projectApi.getAllProjectTags()
       .then((response) => {
-        commit(types.GET_POST_TAGS, response)
+        commit(types.GET_PROJECT_TAGS, response)
         return Promise.resolve()
       })
   }
-
 }
 
 const mutations = {
-  [types.ADD_POST] (state, response) {},
-  [types.MARK_POST] (state, response) {},
-  [types.UPDATE_POST] (state, response) {},
+  [types.CREATE_PROJECT] (state, response) {},
+  [types.GET_PROJECT] (state, response) {
+    state.current_project = response
+  },
+  [types.UPDATE_PROJECT] (state, response) {},
 
-  [types.LIST_POSTS] (state, response) {
-    state.posts = response
+  [types.GET_PROJECT_RATING_DETAIL] (state, response) {
+    state.current_project_rating_detail = response
   },
-  [types.LIST_PROMO_POSTS] (state, response) {
-    state.promo_posts = response
+
+  [types.MARK_PROJECT] (state, response) {},
+
+  [types.LIST_PROJECTS] (state, response) {
+    state.projects = response
   },
-  [types.APPEND_POSTS] (state, response) {
-    // append new posts
-    state.posts = [state.posts, response].reduce(function (r, o) {
+  [types.PROMO_PROJECTS] (state, response) {
+    state.promo_projects = response
+  },
+  [types.APPEND_PROJECTS] (state, response) {
+    // append new projects
+    state.projects = [state.projects, response].reduce(function (r, o) {
       Object.keys(o).forEach(function (k) { r[k] = o[k] })
       return r
     }, {})
+  },
 
-  },
-  [types.GET_POST] (state, response) {
-    state.current_post = response
-  },
-  [types.GET_POST_RATING_DETAIL] (state, response) {
-    state.current_post_rating_detail = response
-  },
-  [types.GET_POST_TAGS] (state, response) {
+  [types.GET_PROJECT_TAGS] (state, response) {
     state.tags = response
   },
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="modal fade" id="similar-company-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal fade" id="similar-project-modal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -70,7 +70,7 @@
           })
       },
       nextStep () {
-        $('#similar-company-modal').modal('hide')
+        $('#similar-project-modal').modal('hide')
         this.$store.dispatch('setFollowUpStep', 1)
       },
     },

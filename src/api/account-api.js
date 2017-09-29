@@ -92,10 +92,10 @@ export default {
   },
 
   // Load User Data
-  getSelfMarkedPost () {
+  getSelfMarkedProject () {
     return apiCall('get', 'me/marked_projects/')
   },
-  getUserMarkedPost (pk) {
+  getUserMarkedProject (pk) {
     return apiCall('get', pk + '/marked_projects/')
   },
 
