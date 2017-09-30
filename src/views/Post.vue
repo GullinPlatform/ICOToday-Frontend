@@ -5,7 +5,6 @@
     <div class="container padding-bottom-top-3x pl-3 pr-3">
         <div class="row card-new-layout">
             <div class="col-md-8 pl-md-0 pr-md-0">
-
                 <div class="post-header">
                     <img class="d-flex rounded mr-3" :src="post.logo_image" width="75" alt="Media">
                     <div class="media-body">
@@ -446,7 +445,7 @@
     },
     computed: {
       post () {
-        return this.$store.getters.current_post
+        return this.$store.getters.current_project
       },
       current_team_members () {
         return this.$store.getters.current_team_members
@@ -482,11 +481,11 @@
         if (this.post.id === p.id)
           this.marked = true
       }
-      this.$store.dispatch('getComments', this.$store.getters.current_post.id)
+      this.$store.dispatch('getComments', this.$store.getters.current_project.id)
         .then(() => {
           this.comments_loaded = true
         })
-      this.$store.dispatch('getTeam', this.$store.getters.current_post.team.id)
+      this.$store.dispatch('getTeam', this.$store.getters.current_project.team.id)
         .then(() => {
           this.team_loaded = true
         })

@@ -180,10 +180,10 @@
     },
     computed: {
       post () {
-        return this.$store.getters.current_post
+        return this.$store.getters.current_project
       },
       post_rating_details () {
-        return this.$store.getters.current_post_rating_detail
+        return this.$store.getters.current_project_rating_detail
       },
       login_status () {
         return this.$store.getters.login_status
@@ -194,7 +194,7 @@
     },
     beforeCreate () {
       this.loaded = false
-      this.$store.dispatch('getPostRatingDetail', this.$store.getters.current_post.id)
+      this.$store.dispatch('getPostRatingDetail', this.$store.getters.current_project.id)
         .then(() => {
           this.loaded = true
         })

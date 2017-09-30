@@ -1,52 +1,62 @@
 <template>
   <div class="light-grey">
     <!-- Page Content-->
-    <div class="container padding-bottom-3x mb-2 mt-md-3 pl-3 pr-3 " style="padding-top:60px;">
-      <div class="row post-modal">
-        <div class="col-lg-3">
-          <div>
+    <div class="container container-padding">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="media  card-new-layout">
+            <img class="d-flex rounded mr-3" src="../../static/img/team/joe_pic.png" width="75" alt="Media">
+            <div class="media-body">
+              <h3 class="mt-0 mb-1 text-bold">Media heading
+              </h3>
+              <span class="d-block text-sm text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>
+
+              <span class="badge badge-sm badge-default">category</span>
+            </div>
+          </div>
+
+          <!--<div class="media mb-4"><img class="d-flex rounded mr-3" src="../../static/img/team/joe_pic.png" alt="Media" width="64">-->
+          <!--<div class="media-body">-->
+          <!--<h6 class="mt-0 mb-1">Media heading</h6>-->
+          <!--<span class="d-block text-sm text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>-->
+          <!--</div>-->
+
+          <!--</div>-->
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-9">
+          <section class="card-new-layout">
             <div class="post-header">
-              <img class="d-flex rounded mr-3" :src="post.logo_image" width="75" alt="Media">
+              <img class="d-flex rounded mr-3 ml-3" :src="post.logo_image" width="50" alt="Media">
               <div class="media-body">
-                <h3 class="mt-0 mb-1 text-bold">{{post.title}}</h3>
-                <span class="d-block text-sm text-muted">
-                                {{post.description_short}}
-                        </span>
-                <span class="badge badge-sm badge-default">{{post.category}}</span>
+                <h4 class="mt-0 mb-1">{{post.title}}</h4>
               </div>
             </div>
-            <section>
-              <h3 class="widget-title mb-2">Home</h3>
-              <h3 class="widget-title mb-2">About</h3>
-              <h3 class="widget-title mb-2">Ratings</h3>
-              <h3 class="widget-title mb-2">Comments</h3>
-            </section>
-          </div>
-        </div>
+            <vue-markdown class="card-new-text">{{post.description_full}}</vue-markdown>
+          </section>
 
-        <div class="col-lg-6 pl-0 pr-0 mr-0">
-
-
-          <div class="card-new-layout mr-3 mb-3">
-            <div class="embed-responsive embed-responsive-16by9">
-              <iframe :src="post.video_link" class="embed-responsive-item" allowfullscreen></iframe>
-            </div>
-          </div>
-          <p class="text-center">
-            <a class="social-button shape-circle" href="javascript:void(0)"><i class="fa fa-slack"></i></a>
-            <a class="social-button shape-circle" href="javascript:void(0)"><i
-              class="socicon-twitter"></i></a>
-            <a class="social-button shape-circle" href="javascript:void(0)"><i class="socicon-telegram"></i></a>
-            <a class="social-button shape-circle" href="javascript:void(0)"><i
-              class="socicon-medium"></i></a>
-          </p>
-        </div>
-        <div class="col-lg-3 pr-md-0  ">
           <section class="card-new-layout">
-            <h3 class="widget-title mb-2">Rating <span class="text-sm text-black">
-                        <router-link :to="{name:'terms', query:{type:'rating'}}" target="_blank">
-                            <i class="fa fa-question-circle"></i></router-link>
-                        </span>
+            <div class="post-header">
+
+              <img class="d-flex rounded mr-3 ml-3" :src="post.logo_image" width="50" alt="Media">
+
+              <div class="media-body">
+                <h4 class="mt-0 mb-1">{{post.title}}</h4>
+              </div>
+            </div>
+            <vue-markdown class="card-new-text">{{post.description_full}}</vue-markdown>
+          </section>
+        </div>
+        <div class="col-lg-3">
+          <section class="card-new-layout">
+            <h3 class="widget-title mb-2">Rating
+              <span class="text-sm text-black">
+              <router-link :to="{name:'terms', query:{type:'rating'}}" target="_blank">
+                  <i class="fa fa-question-circle"></i>
+              </router-link>
+              </span>
             </h3>
             <router-link :to="{name:'post_rating_detail', params:{id:post.id}}">
               <h2 class="text-bold text-info text-center" v-if="post.rating">{{post.rating}}/100</h2>
@@ -81,56 +91,6 @@
               </a>
             </section>
           </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-lg-3 pr-md-0  ">
-        </div>
-        <!-- Description -->
-        <div class="col-lg-6 pl-md-0 pl-md-0 ">
-          <h3 class="text-left card-new-heading">Updates</h3>
-          <section class="card-new-layout">
-            <div class="post-header">
-
-              <img class="d-flex rounded mr-3 ml-3" :src="post.logo_image" width="50" alt="Media">
-
-              <div class="media-body">
-                <h4 class="mt-0 mb-1">{{post.title}}</h4>
-              </div>
-            </div>
-            <vue-markdown class="card-new-text">{{post.description_full}}</vue-markdown>
-            <hr>
-            <br><br>
-          </section>
-
-          <section class="card-new-layout">
-            <div class="post-header">
-
-              <img class="d-flex rounded mr-3 ml-3" :src="post.logo_image" width="50" alt="Media">
-
-              <div class="media-body">
-                <h4 class="mt-0 mb-1">{{post.title}}</h4>
-              </div>
-            </div>
-            <vue-markdown class="card-new-text">{{post.description_full}}</vue-markdown>
-          </section>
-
-          <section class="card-new-layout">
-            <div class="post-header">
-
-              <img class="d-flex rounded mr-3 ml-3" :src="post.logo_image" width="50" alt="Media">
-
-              <div class="media-body">
-                <h4 class="mt-0 mb-1">{{post.title}}</h4>
-              </div>
-            </div>
-            <vue-markdown class="card-new-text">{{post.description_full}}</vue-markdown>
-          </section>
-        </div>
-        <!-- Financial -->
-        <div class="col-lg-3 pr-md-0 ">
-          <h3 class="text-left card-new-heading">Financial</h3>
           <div class="table-responsive card-new-layout">
             <table class="table">
               <tbody>
@@ -210,7 +170,7 @@
           content: this.new_comment
         }
         this.$store.dispatch('postComment', formData)
-          .then(() => {å
+          .then(() => {
             this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'You have posted new comment!'})
             this.new_comment = ''
           })
@@ -240,7 +200,7 @@
           })
       },
       markPost () {
-        this.$store.dispatch('markPost', this.post.id)
+        this.$store.dispatch('markProject', this.post.id)
           .then(() => {
             this.marked = true
             this.$store.dispatch('toastr', {
@@ -251,7 +211,7 @@
           })
       },
       unmarkPost () {
-        this.$store.dispatch('markPost', this.post.id)
+        this.$store.dispatch('markProject', this.post.id)
           .then(() => {
             this.marked = false
             this.$store.dispatch('toastr', {
@@ -311,7 +271,7 @@
     },
     computed: {
       post () {
-        return this.$store.getters.current_post
+        return this.$store.getters.current_project
       },
       current_team_members () {
         return this.$store.getters.current_team_members
@@ -347,11 +307,11 @@
         if (this.post.id === p.id)
           this.marked = true
       }
-      this.$store.dispatch('getComments', this.$store.getters.current_post.id)
+      this.$store.dispatch('getComments', this.$store.getters.current_project.id)
         .then(() => {
           this.comments_loaded = true
         })
-      this.$store.dispatch('getTeam', this.$store.getters.current_post.team.id)
+      this.$store.dispatch('getTeam', this.$store.getters.current_project.team.id)
         .then(() => {
           this.team_loaded = true
         })

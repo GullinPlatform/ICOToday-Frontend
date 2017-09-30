@@ -52,7 +52,7 @@
     beforeMount () {
       // My ICO Projects
       this.loaded = false
-      this.$store.dispatch('getUserMarkedPost', this.$route.params.id)
+      this.$store.dispatch('getUserMarkedProject', this.$route.params.id)
         .then(() => {
           this.loaded = true
         })

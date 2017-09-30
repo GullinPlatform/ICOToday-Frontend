@@ -131,7 +131,7 @@
         if (this.white_paper)
           formData.append('white_paper', this.white_paper)
 
-        formData.append('id', this.current_post.id)
+        formData.append('id', this.current_project.id)
         formData.append('current', this.current)
         formData.append('video_link', this.video_link)
 
@@ -156,7 +156,7 @@
         return this.$store.getters.self
       },
       current_post () {
-        return this.$store.getters.current_post
+        return this.$store.getters.current_project
       }
     },
     watch: {
