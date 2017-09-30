@@ -57,11 +57,11 @@
       </div>
       <div v-if="account_type===0">
         <h2 class="text-center">
-          What's your company name?
+          What's your project name?
         </h2>
         <div class="row justify-content-center mt-5">
           <div class="col-10">
-            <input class="form-control" v-model="company_name" placeholder="Company Name">
+            <input class="form-control" v-model="company_name" v-validate="'required'" placeholder="Project Name">
           </div>
         </div>
       </div>
@@ -80,59 +80,6 @@
         <button class="btn btn-primary" @click="nextStep()">Next</button>
       </div>
     </div>
-    <div v-if="step===3">
-      <div v-if="account_type===0 && loaded">
-        <h2 class="text-center">
-          Complete Company Creation
-        </h2>
-        <div class="row justify-content-center mt-5">
-          <div class="col-10">
-            <div class="form-group row">
-              <p class="col-sm-2 col-form-label">Name<span class="text-danger text-small">*</span></p>
-              <div class="col-sm-8">
-                <input name="name" class="form-control" :value="company_name" disabled>
-              </div>
-            </div>
-            <div class="form-group row">
-              <p class="col-sm-2 col-form-label">Icon<span class="text-danger text-small">*</span></p>
-              <div class="col-sm-8">
-                <div class="form-group row">
-                  <div class="col-sm-6">
-                    <avatar-editor :width=150 :height=150 ref="icon"
-                                   @vue-avatar-editor:image-ready="onImageReady">
-                    </avatar-editor>
-                    <avatar-editor-scale :width=200 :min=1 :max=3 :step=0.02 ref="icon_scale"
-                                         @vue-avatar-editor-scale:change-scale="onImageChangeScale">
-                    </avatar-editor-scale>
-                  </div>
-                  <div class="col-sm-4 text-center">
-                    <img :src="company_icon.toDataURL()"
-                         class="img-thumbnail mb-2"
-                         width="100" height="100" v-if="company_icon">
-                    <h6 class="text-normal text-uppercase pt-2">Preview</h6>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="form-group row">
-              <p class="col-sm-2 col-form-label">Description<span class="text-danger text-small">*</span></p>
-              <div class="col-sm-8">
-                <textarea name="description" class="form-control" v-validate="'required'" rows="4" v-model="company_description"></textarea>
-                <span v-show="errors.has('description')" class="text-danger">
-                  <i class="fa fa-warning"></i> {{ errors.first('description') }}
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row justify-content-center mt-3">
-          <button class="btn btn-secondary" @click="prevStep()">Prev</button>
-          <button class="btn btn-primary" @click="nextStep()" v-if="loaded">Create</button>
-          <button class="btn btn-primary" v-else>Creating</button>
-          <spinner v-if="!loaded"></spinner>
-        </div>
-      </div>
-    </div>
     <div v-if="step>=10">
       <h2 class="text-center">
         You are all set
@@ -146,8 +93,11 @@
         </svg>
       </div>
       <div class="row justify-content-center mt-3">
-        <router-link :to="{name:'landing'}" class="btn btn-outline-primary btn-sm text-primary">
+        <router-link :to="{name:'landing'}" class="btn btn-outline-primary btn-sm text-primary" v-if="account_type===1">
           Explore
+        </router-link>
+        <router-link :to="{name:'company_project'}" class="btn btn-outline-primary btn-sm text-primary" v-if="account_type===0">
+          Continue to My Project
         </router-link>
       </div>
     </div>
@@ -157,8 +107,6 @@
 
 <script>
   import { mapGetters } from 'vuex'
-  import AvatarEditor from 'components/AvatarEditor'
-  import AvatarEditorScale from 'components/AvatarEditorScale'
   import Spinner from 'components/Spinner'
 
   export default {
@@ -169,11 +117,7 @@
         complement: 'Register'
       }
     },
-    components: {
-      AvatarEditor,
-      AvatarEditorScale,
-      Spinner
-    },
+    components: {Spinner},
     data () {
       return {
         // Page Control
@@ -184,9 +128,6 @@
         selected_tags: [],
 
         company_name: '',
-        company_icon: null,
-        company_description: '',
-        company_icon_loaded: false,
 
         expert_application: ''
       }
@@ -206,10 +147,7 @@
         }
         // Company
         else if (this.step === 2 && this.account_type === 0) { // Company input and search
-          this.searchCompany()
-        }
-        else if (this.step === 3 && this.account_type === 0) { // Company input detail data
-          this.createCompany()
+          this.searchProject()
         }
         else {
           this.$store.dispatch('setFollowUpStep', 1)
@@ -234,22 +172,11 @@
           this.selected_tags.push(tag)
       },
 
-      onImageReady (scale) {
-        this.$refs.icon_scale.setScale(scale)
-        this.avatar_cropped = true
-        this.company_icon = this.$refs.icon.getImageScaled()
-      },
-      onImageChangeScale (scale) {
-        this.$refs.icon.changeScale(scale)
-        this.company_icon = this.$refs.icon.getImageScaled()
-      },
-
       setAccountType () {
         const form_data = {
           type: this.account_type
         }
-        this.$store.dispatch('searchCompany', form_data)
-
+        this.$store.dispatch('setSelfType', form_data)
       },
 
       getAllProjectTags () {
@@ -266,41 +193,37 @@
         this.$store.dispatch('addInterests', form_data)
       },
 
-      searchCompany () {
+      searchProject () {
         this.loaded = false
-        const query_data = {
-          token: this.company_name
+        if (!this.company_name) {
+          this.loading = false
+          return
         }
-        this.$store.dispatch('searchCompany', query_data)
+        const query_data = {
+          keyword: this.company_name,
+          page: 1
+        }
+        this.$store.dispatch('searchProjects', query_data)
           .then(() => {
             this.loaded = true
-            if (!this.search_result.length)
-              this.$store.dispatch('setFollowUpStep', 1)
+            if (!this.search_result.length){
+              this.createCompany()
+              this.$store.dispatch('setFollowUpStep', 10)
+            }
             else
               $('#similar-company-modal').modal('show')
           })
       },
       createCompany () {
-        this.loading = true
-        this.$validator.validateAll().then((result) => {
-          // If Invalid
-          if (!result || !this.company_icon) {
-            this.loading = false
-            return
-          }
-
-          this.company_icon.toBlob((blob) => {
-            const form_data = new FormData()
-            form_data.append('name', this.company_name)
-            form_data.append('icon', blob, 'company_icon.time.png')
-            form_data.append('description', this.company_description)
-            this.$store.dispatch('createCompany', form_data)
-              .then(() => {
-                this.$store.dispatch('setFollowUpStep', 10)
-                this.loading = false
-              })
+        this.loaded = false
+        const form_data = new FormData()
+        form_data.append('name', this.company_name)
+        this.$store.dispatch('createCompany', form_data)
+          .then(() => {
+            this.setAccountType()
+            this.$store.dispatch('setFollowUpStep', 10)
+            this.loaded = true
           })
-        })
       },
 
       postMyExpertApplication () {
@@ -317,7 +240,7 @@
     computed: {
       ...mapGetters({
         tags: 'tags',
-        search_result: 'current_company_search_result',
+        search_result: 'current_project_search_result',
         login_status: 'login_status',
         step: 'register_follow_up_step'
       })

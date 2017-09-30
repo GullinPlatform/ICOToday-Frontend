@@ -13,8 +13,8 @@
     <add-team-member v-if="login_status"></add-team-member>
     <post-edit v-if="login_status&&me.type==0"></post-edit>
     <post-update v-if="login_status&&me.type==0"></post-update>
-    <post-modal></post-modal>
-    <similar-companies v-if="login_status&&me.info.type===-1"></similar-companies>
+    <project-modal></project-modal>
+    <similar-company v-if="login_status&&me.info.type===-1"></similar-company>
     <!-- Modal End-->
   </div>
 </template>
@@ -29,13 +29,13 @@
   import AddTeamMember from 'modals/AddTeamMember'
   import PostEdit from 'modals/PostEdit'
   import PostUpdate from 'modals/PostUpdate'
-  import PostModal from 'modals/PostModal'
-  import SimilarCompanies from 'modals/SimilarCompanies'
+  import ProjectModal from 'modals/ProjectModal'
+  import SimilarCompany from 'modals/SimilarCompany'
 
   export default {
     name: 'RootLayout',
     components: {
-      PostModal,
+      ProjectModal,
       TopBar,
       FootBar,
       LoginModal,
@@ -43,12 +43,12 @@
       AddTeamMember,
       PostEdit,
       PostUpdate,
-      SimilarCompanies
+      SimilarCompany
     },
     computed: {
       ...mapGetters({
         login_status: 'login_status',
-        current_post: 'current_post',
+        current_project: 'current_project',
         me: 'self',
       })
     },

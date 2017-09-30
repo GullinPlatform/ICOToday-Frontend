@@ -19,7 +19,7 @@
 
     </div>
     <div class="project-list"
-         v-for="project in posts"
+         v-for="project in projects"
          @mouseover="subscribe_show=project.id" @mouseleave="subscribe_show=false">
       <div class="column project">
         <div class="project-info-wrapper">
@@ -136,7 +136,7 @@
         else {
           this.$store.dispatch('getPost', id)
             .then(() => {
-              $('#post-modal').modal('show')
+              $('#project-modal').modal('show')
             })
         }
       },

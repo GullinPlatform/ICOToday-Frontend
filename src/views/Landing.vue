@@ -44,7 +44,7 @@
       <div class="row">
         <div class="col-lg-3 col-md-4 col-sm-6"
              v-if="promotion_loaded"
-             v-for="project in promo_posts">
+             v-for="project in promo_projects">
           <div class="article promo-project-tile promo-project-border-default has-promo-project-thumbnail format-image">
             <div class="header promo-project-header">
               <a class="promo-project-thumb" @click="postModal(project.id)" href="javascript:void(0)">
@@ -165,7 +165,7 @@
           </div>
           <div class="row">
             <div class="col-lg-12">
-              <post-list :loaded="list_loaded" :posts="posts"></post-list>
+              <post-list :loaded="list_loaded" :posts="projects"></post-list>
             </div>
           </div>
         </div>
@@ -270,7 +270,7 @@
         /* global $:true */
         this.$store.dispatch('getPost', id)
           .then(() => {
-            $('#post-modal').modal('show')
+            $('#project-modal').modal('show')
           })
       },
 
@@ -334,10 +334,10 @@
     },
     computed: {
       posts () {
-        return this.$store.getters.posts
+        return this.$store.getters.projects
       },
       promo_posts () {
-        return this.$store.getters.promo_posts
+        return this.$store.getters.promo_projects
       },
       login_status () {
         return this.$store.getters.login_status
@@ -356,7 +356,7 @@
           this.promotion_loaded = true
         })
       if (this.login_status)
-        this.$store.dispatch('getSelfMarkedPost')
+        this.$store.dispatch('getSelfMarkedProject')
     },
     mounted () {
       /* global particlesJS:true */

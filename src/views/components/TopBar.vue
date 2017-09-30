@@ -80,8 +80,7 @@
                   <li class="sub-menu-user">
                     <div class="user-info">
                       <h6 class="user-name">{{self_name}}</h6>
-                      <span class="text-xs text-muted" v-if="me.info.title && me.info.company">{{me.info.title}} @{{me.info.company.name}}</span>
-                      <span class="text-xs text-muted" v-else>{{me.email}}</span>
+                      <span class="text-xs text-muted">{{me.email}}</span>
                     </div>
                   </li>
                   <li class="sub-menu-separator"></li>
@@ -113,7 +112,7 @@
                   <li class="sub-menu-separator" v-if="self_type===0"></li>
                   <li>
                     <router-link :to="{name:'company', params:{id:me.info.company.id}}" class="dropdown-item" v-if="self_type===0">
-                      <i class="fa fa-building-o"></i>Company: {{me.info.company.name}}
+                      <i class="fa fa-building-o"></i>Project: {{me.info.company.name}}
                     </router-link>
                   </li>
                   <!--<li>-->
