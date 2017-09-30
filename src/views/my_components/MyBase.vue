@@ -62,21 +62,24 @@
             <i class="fa fa-angle-right"></i> Settings
           </router-link>
         </nav>
-        <h6 class="text-muted text-normal text-uppercase mt-4" v-if="type===0">Company</h6>
+        <h6 class="text-muted text-normal text-uppercase mt-4" v-if="type===0">Project</h6>
         <nav class="list-group" v-if="type===0">
           <router-link :to="{name:'company_new_project'}" class="list-group-item"
-                       :class="{active: $route.name==='company_new_project'}">
-            <i class="fa fa-angle-right"></i> Company Project
-          </router-link>
-          <router-link :to="{name:'company_profile'}" class="list-group-item"
-                       :class="{active: $route.name==='company_profile'}">
-            <i class="fa fa-angle-right"></i> Company Profile
+                       :class="{active: $route.name==='company_new_project' || $route.name==='company_project'}">
+            <i class="fa fa-angle-right"></i> Project
           </router-link>
           <router-link :to="{name:'company_team'}" class="list-group-item"
                        :class="{active: $route.name==='company_team'}">
-            <i class="fa fa-angle-right"></i> Company Members
+            <i class="fa fa-angle-right"></i> Project Wallet
           </router-link>
-
+          <router-link :to="{name:'company_team'}" class="list-group-item"
+                       :class="{active: $route.name==='company_team'}">
+            <i class="fa fa-angle-right"></i> Project Members
+          </router-link>
+          <router-link :to="{name:'company_team'}" class="list-group-item"
+                       :class="{active: $route.name==='company_team'}">
+            <i class="fa fa-angle-right"></i> Promotion Application
+          </router-link>
           <!--<router-link :to="{name:'me_team'}" class="list-group-item" v-if="type===0"-->
           <!--:class="{active: $route.name==='me_team'}">-->
           <!--<i class="fa fa-angle-right"></i> My Team-->
@@ -101,7 +104,7 @@
   import { mapGetters } from 'vuex'
 
   export default {
-    name: 'MyCreatedProjects',
+    name: 'MyBase',
     head: {
       title: {
         inner: 'ICOToday',

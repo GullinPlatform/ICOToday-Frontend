@@ -1,205 +1,447 @@
 <template>
   <div class="col-md-8">
-    <h6 class="text-muted text-normal text-uppercase ">
-      My ICO Projects
-    </h6>
-    <hr class="mb-3 mt-2">
-
-    <div class="product-card product-list"
-         v-for="project in projects"
-         v-if="loaded"
-         @mouseover="active=project.id" @mouseleave="active=false">
-      <a href="javascript:void(0)" @click="postModal(project.id)" class="product-thumb">
-        <img :src="project.logo_image" alt="Logo">
-      </a>
-      <div class="product-info pt-2 pb-2" :class="{active:active===project.id}">
-        <h3 class="product-title" @click="postModal(project.id)">
-          {{project.title}}
-          <span v-if="project.status===0" class="badge badge-warning">Verifying</span>
-          <span v-else-if="project.status===1" class="badge badge-primary">Verified</span>
-          <span v-else-if="project.status===2" class="badge badge-success"><i class="fa fa-check"></i> Completed</span>
-          <span v-else-if="project.status===3" class="badge badge-info"><i class="fa fa-star-o"></i> Promoting</span>
-          <span v-else-if="project.status===4" class="badge badge-warning"><i class="fa fa-star-o"></i> Premium</span>
-          <span v-else="project.status===5" class="badge badge-default"><i class="fa fa-check"></i> Closed</span>
-          <span class="text-muted text-sm"> {{project.description_short}}</span>
-          <span class="float-right text-bold text-primary ml-2" v-if="project.rating">{{project.rating}}/100</span>
-          <span class="float-right text-bold text-primary ml-2" v-else>No Score</span>
-        </h3>
-
-        <div class="row" @click="postModal(project.id)">
-          <div class="col-sm-2">
-            Type
-            <h4 class="product-price" v-if="project.type===0">
-              Pre-ICO
-            </h4>
-            <h4 class="product-price" v-else>
-              ICO
-            </h4>
-          </div>
-          <div class="col-sm-3">
-            Time
-            <h4 class="product-price">
-              {{timeCounter(project.start_datetime, project.end_datetime)}}
-            </h4>
-          </div>
-          <div class="col-sm-4">
-            Soft Cap / Hard Cap
-            <h4 class="product-price">
-              {{project.minimum_goal}} /  {{project.maximum_goal}} {{project.coin_unit}}
-            </h4>
-          </div>
-          <div class="col-sm-3">
-            Token for Sale
-            <h4 class="product-price">
-              {{project.equality_on_offer}}%
-            </h4>
-          </div>
+    <div class="card-new-layout">
+      <h6 class="text-muted text-normal text-uppercase ">Basic info</h6>
+      <hr class="mb-3 mt-2">
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Name <span class="text-danger">*</span></label>
+        <div class="col-sm-10">
+          <input class="form-control" v-model="name" type="text">
         </div>
-        <span class="badge badge-sm badge-default">{{project.category}}</span>
-        <a href="javascript:void(0)">
-                            <span class="badge badge-sm badge-outline-primary float-right"
-                                  @click="getEditProjectAndShowModal(project.id)"
-                                  :class="{active:active}"
-                                  v-if="me.info.team&&project.team.id===me.info.team.id&&project.status==0">
-                                    <i class="fa fa-edit"></i> Edit
-                            </span>
-          <span class="badge badge-sm badge-outline-primary float-right"
-                @click="getUpdateProjectAndShowModal(project.id)"
-                :class="{active:active}"
-                v-else-if="me.info.team&&project.team.id===me.info.team.id&&project.status!=0">
-                                    <i class="fa fa-edit"></i> Edit
-                            </span>
-        </a>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Icon <span class="text-danger">*</span></label>
+        <div class="col-sm-10" v-if="!icon_change">
+          <button type="button" class="mb-1 btn btn-secondary btn-sm"
+                  @click="icon_change=true">
+            <span><i class="fa fa-refresh"></i> Change</span>
+          </button>
+        </div>
+        <div class="col-sm-6" v-if="icon_change">
+          <avatar-editor :width=150 :height=150 ref="icon"
+                         @vue-avatar-editor:image-ready="onImageReady">
+          </avatar-editor>
+          <avatar-editor-scale :width=200 :min=1 :max=3 :step=0.02 ref="icon_scale"
+                               @vue-avatar-editor-scale:change-scale="onImageChangeScale">
+          </avatar-editor-scale>
+        </div>
+        <div class="col-sm-4 text-center" v-if="icon_change">
+          <img :src="icon.toDataURL()"
+               class="img-thumbnail mb-2"
+               width="100" height="100" v-if="icon">
+          <h6 class="text-normal text-uppercase pt-2">Preview</h6>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Category <span class="text-danger">*</span></label>
+        <div class="col-sm-10">
+          <select class="form-control" v-model="category">
+            <option value="" selected>-- Choose Category --</option>
+            <option value="Platform">Platform</option>
+            <option value="Business Services">Business Services</option>
+            <option value="Internet">Internet</option>
+            <option value="Investment">Investment</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Banking">Banking</option>
+            <option value="Software">Software</option>
+            <option value="Real Estate">Real Estate</option>
+            <option value="Casino&Gambling">Casino&Gambling</option>
+            <option value="Communication">Communication</option>
+            <option value="Tourism">Tourism</option>
+            <option value="Media">Media</option>
+            <option value="Health">Health</option>
+            <option value="Retail">Retail</option>
+            <option value="Sports">Sports</option>
+            <option value="Infrastructure">Infrastructure</option>
+            <option value="Energy">Energy</option>
+            <option value="Charity">Charity</option>
+            <option value="Education">Education</option>
+            <option value="Manufacturing">Manufacturing</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Short Description <span class="text-danger">*</span></label>
+        <div class="col-sm-10">
+          <input class="form-control" v-model="description_short"
+                 placeholder="Short description in one sentence (100 characters).">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Full  Description<span class="text-danger">*</span></label>
+        <div class="col-sm-10">
+            <textarea class="form-control" v-model="description_full"
+                      placeholder="( Markdown Support Enabled )" rows="10"></textarea>
+        </div>
       </div>
     </div>
 
-    <div class="mt-5" v-if="loaded && projects.length===0">
-      <div class="text-center">
-        <h3 class="product-title">You don't have ICO projects now</h3>
-        <router-link :to="{name:'me_new_project'}"
-                     class="btn btn-outline-primary btn-sm text-primary">
-          Create Now
-        </router-link>
+    <div class="card-new-layout">
+      <h6 class="text-muted text-normal text-uppercase ">ICO Detail</h6>
+      <hr class="mb-3 mt-2">
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">ICO Type<span class="text-danger">*</span></label>
+        <div class="col-sm-10">
+          <select class="form-control" v-model="type">
+            <option value="" selected>-- Choose Type --</option>
+            <option value="0">Pre-ICO</option>
+            <option value="1">ICO</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Token Name </label>
+        <div class="col-sm-10">
+          <input class="form-control" v-model="coin_name" placeholder="Token Name" type="text">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">ICO Goals </label>
+        <div class="col-sm-3">
+          <input class="form-control" placeholder="Soft Cap" v-model="minimum_goal"
+                 type="number">
+        </div>
+        <div class="col-sm-3">
+          <input class="form-control" placeholder="Hard Cap" v-model="maximum_goal"
+                 type="number">
+        </div>
+        <div class="col-sm-4">
+          <select class="form-control" v-model="coin_unit">
+            <option value="" selected>-- Choose Unit --</option>
+            <option value="BTC">BTC - Bitcoin</option>
+            <option value="ETH">ETH - Ethereum</option>
+            <option value="USD">USD - US Dollar</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Start Date </label>
+        <div class="col-sm-10">
+          <vue-datetime-picker class="vue-start-picker" id="start-picker"
+                               ref="startPicker"
+                               placeholder="Start Time"
+                               v-model="start_datetime">
+          </vue-datetime-picker>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">End Date </label>
+        <div class="col-sm-10">
+          <vue-datetime-picker class="vue-end-picker" id="end-picker"
+                               ref="endPicker"
+                               placeholder="End Time"
+                               v-model="end_datetime">
+          </vue-datetime-picker>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Ratio </label>
+        <div class="col-sm-7">
+          <input class="form-control" placeholder="Ex: 5000" v-model="ratio"
+                 type="number">
+        </div>
+        <div class="col-sm-3"><p>{{coin_name}} = 1 {{coin_unit}}</p></div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">% Token for Sale</label>
+        <div class="col-sm-10">
+          <input class="form-control" v-model="equality_on_offer" placeholder="Ex: 30">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Accept</label>
+        <div class="col-sm-10">
+          <input class="form-control" v-model="accept" placeholder="Ex: ETH, BTC"
+                 type="text">
+        </div>
+      </div>
+    </div>
+
+    <div class="card-new-layout">
+      <h6 class="text-muted text-normal text-uppercase ">Supplement</h6>
+      <hr class="mb-3 mt-2">
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">White Paper</label>
+        <div class="col-sm-10">
+          <input class="form-control" v-model="white_paper"
+                 placeholder="https://example.com/white-paper.pdf">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Video Link</label>
+        <div class="col-sm-10">
+          <input class="form-control" v-model="video_link" placeholder="Youtube Video Link">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Website</label>
+        <div class="col-sm-10">
+          <input class="form-control" v-model="website"
+                 placeholder="https://example.com">
+        </div>
+      </div>
+    </div>
+
+    <div class="card-new-layout">
+      <h6 class="text-muted text-normal text-uppercase ">Social Media</h6>
+      <hr class="mb-3 mt-2">
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Medium</label>
+        <div class="col-sm-10">
+          <input class="form-control" v-model="medium" type="text">
+        </div>
+
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Twitter</label>
+        <div class="col-sm-10">
+          <input class="form-control" v-model="twitter" type="text">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Slack</label>
+        <div class="col-sm-10">
+          <input class="form-control" v-model="slack" type="text">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Telegram</label>
+        <div class="col-sm-10">
+          <input class="form-control" v-model="telegram" type="text">
+        </div>
+      </div>
+    </div>
+
+    <div class="card-new-layout">
+      <div class="form-group row m-0 justify-content-center">
+        <div class="col-sm-4 text-center">
+          <button class="btn btn-secondary" @click="projectModal()">
+            Preview
+          </button>
+        </div>
+        <div class="col-sm-4 text-center">
+          <button class="btn btn-primary" @click="updateProject()" v-if="!uploading">
+            Update
+          </button>
+          <button class="btn btn-primary" disabled v-else>
+            Updating
+          </button>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
+  import AvatarEditor from 'components/AvatarEditor'
+  import AvatarEditorScale from 'components/AvatarEditorScale'
+  import VueDatetimePicker from 'vue-bootstrap-datetimepicker'
 
   export default {
     name: 'CompanyProject',
-    data () {
-      return {
-        active: false,
-        loaded: false,
-      }
-    },
     head: {
       title: {
         inner: 'ICOToday',
-        complement: 'My ICO Projects'
+        complement: 'My Project'
+      }
+    },
+    components: {
+      VueDatetimePicker,
+      AvatarEditor,
+      AvatarEditorScale
+    },
+    data () {
+      return {
+        loaded: false,
+        icon_change: false,
+        uploading: false,
+
+        // -- form info start --
+        // Basic Info
+        name: '',
+        icon: null,
+        category: '',
+        description_short: '',
+        description_full: '',
+        // ICO info
+        type: '',
+        coin_name: '',
+        minimum_goal: '',
+        maximum_goal: '',
+        coin_unit: '',
+        start_datetime: '',
+        end_datetime: '',
+        ratio: '',
+        equality_on_offer: '',
+        accept: '',
+        // Supplement
+        white_paper: '',
+        video_link: '',
+        website: '',
+        // Social Media
+        medium: '',
+        twitter: '',
+        slack: '',
+        telegram: '',
+        // -- form info end --
       }
     },
     methods: {
-      getEditProjectAndShowModal (id) {
-        this.$store.dispatch('getPost', id)
-          .then(() => {
-            /* global $:true */
-            $('#edit-project-modal').modal('show')
-          })
-          .catch(() => {
-          })
-      },
-      getUpdateProjectAndShowModal (id) {
-        this.$store.dispatch('getPost', id)
-          .then(() => {
-            /* global $:true */
-            $('#update-project-modal').modal('show')
-          })
-          .catch(() => {
-          })
-      },
-
-      timeCounter (start, end) {
-        /* global moment:true */
-        // Haven't start
-        if (moment().diff(start, 'minutes') < 0) {
-          let rest = -moment().diff(start, 'days') + ' days '
-
-          if (rest === '0 days ') {
-            rest = -moment().diff(start, 'hours') + ' hours '
-          }
-          if (rest === '0 hours ') {
-            rest = -moment().diff(start, 'minutes') + ' minutes '
-          }
-          return 'Start in ' + rest
-        }
-        // Started
-        else if (moment().diff(end, 'minutes') < 0) {
-          let rest = -moment().diff(end, 'days') + ' days '
-
-          if (rest === '0 days ') {
-            rest = -moment().diff(end, 'hours') + ' hours '
-          }
-          if (rest === '0 hours ') {
-            rest = -moment().diff(end, 'minutes') + ' minutes '
-          }
-
-          return 'End in ' + rest
-        }
-        // Ended
-        else {
-          let rest = moment().diff(end, 'days') + ' days '
-
-          if (rest === '0 days ') {
-            rest = moment().diff(end, 'hours') + ' hours '
-          }
-          if (rest === '0 hours ') {
-            rest = moment().diff(end, 'minutes') + ' minutes '
-          }
-
-          return 'Ended ' + rest + 'ago'
-        }
-      },
-      formatTime (start, end) {
-        if (moment().diff(start, 'minutes') < 0) {
-
-          return moment(start).format('MM/DD, hh:mm')
-        }
-        else {
-
-          return moment(end).format('MM/DD, hh:mm')
-        }
-      },
-
-      postModal (id) {
+      projectModal () {
         /* global $:true */
-        this.$store.dispatch('getPost', id)
+        this.$store.dispatch('getProject', this.current_project.id)
           .then(() => {
-            $('#post-modal').modal('show')
+            $('#project-modal').modal('show')
           })
       },
-    },
-    computed: {
-      me () {
-        return this.$store.getters.self
+      onImageReady (scale) {
+        this.$refs.icon_scale.setScale(scale)
+        this.avatar_cropped = true
+        this.icon = this.$refs.icon.getImageScaled()
       },
-      projects () {
-        return this.$store.getters.self_created_posts
+      onImageChangeScale (scale) {
+        this.$refs.icon.changeScale(scale)
+        this.icon = this.$refs.icon.getImageScaled()
+      },
+      attachValue () {
+        /* global moment:true */
+        this.name = this.current_project.name
+        this.description_short = this.current_project.description_short
+        this.description_full = this.current_project.description_full
+        this.category = this.current_project.category
+
+        this.maximum_goal = this.current_project.maximum_goal
+        this.minimum_goal = this.current_project.minimum_goal
+        this.coin_unit = this.current_project.coin_unit
+        this.type = this.current_project.type
+        this.equality_on_offer = this.current_project.equality_on_offer
+        this.accpet = this.current_project.accpet
+
+        this.start_datetime = moment(this.current_project.start_datetime)
+        this.end_datetime = moment(this.current_project.end_datetime)
+
+        this.white_paper = null
+        this.coin_name = this.current_project.coin_name
+        this.ratio = this.current_project.ratio
+
+        this.video_link = this.current_project.video_link
+        this.website = this.current_project.website
+
+        this.medium = this.current_project.medium
+        this.twitter = this.current_project.twitter
+        this.slack = this.current_project.slack
+        this.telegram = this.current_project.telegram
+      },
+      updateProject () {
+        // return if required fields left empty
+        if (!(this.description_short && this.category && this.description_full)) {
+          this.$store.dispatch('toastr', {
+            type: 'danger',
+            title: 'Error',
+            message: 'Please Make Sure Fill Out Required Fields!'
+          })
+          return
+        }
+
+        // return if still uploading
+        if (this.uploading)
+          return
+
+        // start uploading
+        this.uploading = true
+
+        /* global FormData */
+        let formData = new FormData()
+        formData.append('id', this.current_project.id)
+        formData.append('name', this.name)
+        // TODO: logo image should use blob to get
+        if (this.icon)
+          formData.append('logo_image', this.icon)
+        formData.append('category', this.category)
+        formData.append('description_short', this.description_short)
+        formData.append('description_full', this.description_full)
+
+        formData.append('type', this.type)
+        formData.append('coin_name', this.coin_name)
+        formData.append('minimum_goal', this.minimum_goal)
+        formData.append('maximum_goal', this.maximum_goal)
+        formData.append('coin_unit', this.coin_unit)
+
+        if (this.start_datetime)
+          formData.append('start_datetime', this.start_datetime.format('YYYY-MM-DD HH:mmZ'))
+
+        if (this.end_datetime)
+          formData.append('end_datetime', this.end_datetime.format('YYYY-MM-DD HH:mmZ'))
+
+        formData.append('ratio', this.ratio)
+        formData.append('equality_on_offer', this.equality_on_offer)
+        formData.append('accept', this.accept)
+
+        formData.append('white_paper', this.white_paper)
+        formData.append('video_link', this.video_link)
+        formData.append('website', this.website)
+
+        formData.append('medium', this.medium)
+        formData.append('twitter', this.twitter)
+        formData.append('slack', this.slack)
+        formData.append('telegram', this.telegram)
+
+        formData.append('video_link', this.video_link)
+        formData.append('website', this.website)
+
+        this.$store.dispatch('updateProject', formData)
+          .then(() => {
+            this.$store.dispatch('toastr', {
+              type: 'success',
+              title: 'Success',
+              message: 'Your Project Info is updated!'
+            })
+            this.uploading = false
+          })
+          .catch(() => {
+            this.$store.dispatch('toastr', {
+              type: 'danger',
+              title: 'Error',
+              message: 'Something happened, please try again later'
+            })
+            this.uploading = false
+          })
       }
     },
-    beforeCreate () {
+    computed: {
+      ...mapGetters({
+        me: 'self',
+        is_verified: 'is_verified',
+        username: 'self_name',
+        self_type: 'self_type',
+        current_project: 'current_project',
+        current_company: 'current_company'
+      })
+    },
+    watch: {
+      'current_project': function () {
+        this.attachValue()
+      }
+    },
+    beforeMount () {
+      this.loaded = false
       // redirect non ico company user
       if (this.$store.getters.self_type !== 0) {
         this.route.push({name: 'landing'})
       }
 
       // My ICO Projects
-      this.$store.dispatch('getSelfCreatedPost')
+      this.$store.dispatch('getProject', this.current_company.project)
         .then(() => {
           this.loaded = true
         })
     }
   }
 </script>
+
+<style>
+  @import url("/static/css/glyphicons.css");
+
+</style>

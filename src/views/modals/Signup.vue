@@ -92,7 +92,7 @@
         ip: '',
 
         email_msg: '',
-        sitekey: '6LervDEUAAAAANhKYg5MAXNtNGe84zeCnmsc0d1A',
+        sitekey: '6LcRUjIUAAAAAJ8u6wyy3mva4XchIbZ8-4fpyERM',
         loading: false
       }
     },
@@ -103,7 +103,7 @@
 
         this.$validator.validateAll().then((result) => {
           // If Invalid
-          if (!result) {
+          if (!result || !this.verified) {
             this.loading = false
             return
           }
@@ -122,6 +122,8 @@
             this.$store.dispatch('signup', form_data)
               .then(() => {
                 this.$store.dispatch('cleanWhiteListEmail')
+                // Clean up
+                this.resetState()
               })
               .catch((error) => {
                 for (let e in error.data) {
@@ -130,8 +132,6 @@
               })
           })
         })
-        // Clean up
-        this.resetState()
       },
       onVerify (response) {
         this.verified = response
@@ -148,7 +148,7 @@
         this.verified = ''
         this.ip = ''
         this.email_msg = ''
-        this.sitekey = '6LervDEUAAAAANhKYg5MAXNtNGe84zeCnmsc0d1A'
+        this.sitekey = '6LcRUjIUAAAAAJ8u6wyy3mva4XchIbZ8-4fpyERM'
         this.loading = false
       }
     },

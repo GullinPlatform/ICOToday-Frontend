@@ -466,7 +466,7 @@
     },
     computed: {
       post () {
-        return this.$store.getters.current_post
+        return this.$store.getters.current_project
       },
       current_team_members () {
         return this.$store.getters.current_team_members
@@ -496,11 +496,11 @@
       'post': function () {
         this.team_loaded = false
         this.comments_loaded = false
-        this.$store.dispatch('getComments', this.$store.getters.current_post.id)
+        this.$store.dispatch('getComments', this.$store.getters.current_project.id)
           .then(() => {
             this.comments_loaded = true
           })
-        this.$store.dispatch('getTeam', this.$store.getters.current_post.team.id)
+        this.$store.dispatch('getTeam', this.$store.getters.current_project.team.id)
           .then(() => {
             this.team_loaded = true
           })

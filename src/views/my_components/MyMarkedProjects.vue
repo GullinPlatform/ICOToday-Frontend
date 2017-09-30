@@ -39,7 +39,7 @@
       loadProjects () {
         this.loaded = false
         // My Marked Projects
-        this.$store.dispatch('getSelfMarkedPost')
+        this.$store.dispatch('getSelfMarkedProject')
           .then(() => {
             this.loaded = true
           })
@@ -56,7 +56,7 @@
     },
     beforeMount () {
       this.loaded = false
-      this.$store.dispatch('getSelfMarkedPost')
+      this.$store.dispatch('getSelfMarkedProject')
         .then(() => {
           this.loaded = true
         })
