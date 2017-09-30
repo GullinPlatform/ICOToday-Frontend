@@ -7,7 +7,7 @@ const state = {
   promo_projects: [],
   current_project_search_result: {},
   current_project: {},
-  current_project_rating_detail: '',
+  current_project_rating_detail: [],
   tags: []
 }
 
@@ -17,6 +17,9 @@ const getters = {
   },
   current_project_rating_detail: state => {
     return state.current_project_rating_detail
+  },
+  current_project_search_result: state => {
+    return state.current_project_search_result
   },
   projects: state => {
     return state.projects
@@ -37,7 +40,6 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-
         return Promise.reject(error)
       })
   },
@@ -48,7 +50,6 @@ const actions = {
         return Promise.resolve(response)
       })
       .catch((error) => {
-
         return Promise.reject(error)
       })
   },
@@ -59,7 +60,6 @@ const actions = {
         return Promise.resolve(response)
       })
       .catch((error) => {
-
         return Promise.reject(error)
       })
   },
@@ -70,19 +70,17 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-
         return Promise.reject(error)
       })
   },
 
-  searchProjects({commit}, formData) {
+  searchProjects ({commit}, formData) {
     return projectApi.searchProjects(formData)
       .then((response) => {
         commit(types.SEARCH_PROJECTS, response)
         return Promise.resolve()
       })
       .catch((error) => {
-
         return Promise.reject(error)
       })
   },
@@ -93,7 +91,6 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-
         return Promise.reject(error)
       })
   },
@@ -104,7 +101,6 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-
         return Promise.reject(error)
       })
   },
@@ -117,7 +113,6 @@ const actions = {
         return Promise.resolve(response)
       })
       .catch((error) => {
-
         return Promise.reject(error)
       })
   },

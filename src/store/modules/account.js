@@ -104,7 +104,6 @@ const actions = {
       })
       .catch((error) => {
 
-
         return Promise.reject(error)
       })
   },
@@ -130,9 +129,10 @@ const actions = {
         return Promise.reject(error)
       })
   },
-  setSelfType ({commit}, form_data) {
+  setSelfType ({commit, dispatch}, form_data) {
     return userApi.setSelfType(form_data)
       .then(() => {
+        dispatch('getSelf')
         commit(types.SET_SELF_TYPE)
         return Promise.resolve()
       })
@@ -150,7 +150,6 @@ const actions = {
       })
       .catch((error) => {
 
-
         return Promise.reject(error)
       })
   },
@@ -161,7 +160,6 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-
 
         return Promise.reject(error)
       })
