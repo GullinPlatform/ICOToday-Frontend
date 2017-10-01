@@ -21,8 +21,9 @@ import NeedVerify from 'views/my_components/NeedVerify'
 
 import CompanyNewProject from 'views/my_components/CompanyNewProject'
 import CompanyProject from 'views/my_components/CompanyProject'
-import CompanyProfile from 'views/my_components/CompanyProfile'
 import CompanyTeam from 'views/my_components/CompanyTeam'
+import CompanyWallet from 'views/my_components/CompanyWallet'
+import CompanyPromotion from 'views/my_components/CompanyPromotion'
 
 import UserBase from 'views/user_components/UserBase'
 import UserFeed from 'views/user_components/UserFeed'
@@ -99,13 +100,17 @@ export default new Router({
           component: CompanyProject,
           name: 'company_project'
         }, {
-          path: '/me/company/profile',
-          component: CompanyProfile,
-          name: 'company_profile'
-        }, {
           path: '/me/company/team',
           component: CompanyTeam,
           name: 'company_team'
+        }, {
+          path: '/me/company/wallet',
+          component: CompanyWallet,
+          name: 'company_wallet'
+        },{
+          path: '/me/company/promotion',
+          component: CompanyPromotion,
+          name: 'company_promotion'
         }, {
           path: '/me/unverified',
           component: NeedVerify,

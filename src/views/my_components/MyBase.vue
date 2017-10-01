@@ -68,16 +68,16 @@
                        :class="{active: $route.name==='company_new_project' || $route.name==='company_project'}">
             <i class="fa fa-angle-right"></i> Project
           </router-link>
-          <router-link :to="{name:'company_team'}" class="list-group-item"
-                       :class="{active: $route.name==='company_team'}">
+          <router-link :to="{name:'company_wallet'}" class="list-group-item"
+                       :class="{active: $route.name==='company_wallet'}">
             <i class="fa fa-angle-right"></i> Project Wallet
           </router-link>
           <router-link :to="{name:'company_team'}" class="list-group-item"
                        :class="{active: $route.name==='company_team'}">
             <i class="fa fa-angle-right"></i> Project Members
           </router-link>
-          <router-link :to="{name:'company_team'}" class="list-group-item"
-                       :class="{active: $route.name==='company_team'}">
+          <router-link :to="{name:'company_promotion'}" class="list-group-item"
+                       :class="{active: $route.name==='company_promotion'}">
             <i class="fa fa-angle-right"></i> Promotion Application
           </router-link>
           <!--<router-link :to="{name:'me_team'}" class="list-group-item" v-if="type===0"-->

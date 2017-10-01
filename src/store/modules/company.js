@@ -9,6 +9,8 @@ const state = {
   company_members: [],
   company_admins: [],
   company_search_result: [],
+  company_wallet: {},
+  company_promotion_application: {}
 }
 
 const getters = {
@@ -30,7 +32,13 @@ const getters = {
   },
   current_company_search_result: state => {
     return state.company_search_result
-  }
+  },
+  company_wallet: state => {
+    return state.company_wallet
+  },
+  company_promotion_application: state => {
+    return state.company_promotion_application
+  },
 }
 
 const actions = {
@@ -205,6 +213,36 @@ const actions = {
         return Promise.reject(error)
       })
   },
+  getCompanyWallet ({commit}) {
+    return companyApi.getCompanyWallet()
+      .then((response) => {
+        commit(types.GET_COMPANY_WALLET, response)
+        return Promise.resolve()
+      })
+      .catch((error) => {
+        return Promise.reject(error)
+      })
+  },
+  submitPromotionApplication ({commit}, form_data) {
+    return companyApi.submitPromotionApplication(form_data)
+      .then((response) => {
+        commit(types.SUBMIT_COMPANY_PROMOTION_APPLICATION, response)
+        return Promise.resolve()
+      })
+      .catch((error) => {
+        return Promise.reject(error)
+      })
+  },
+  getPromotionApplication () {
+    return companyApi.getPromotionApplication()
+      .then(() => {
+        commit(types.GET_COMPANY_PROMOTION_APPLICATION)
+        return Promise.resolve()
+      })
+      .catch((error) => {
+        return Promise.reject(error)
+      })
+  },
 
   // Company Member Operations
   leaveCompany () {
@@ -241,7 +279,7 @@ const mutations = {
 
   [types.GET_COMPANY] (state, response) {
     state.company = response
-    if (response.members){
+    if (response.members) {
       state.company_members = response.members
     }
   },
@@ -271,10 +309,19 @@ const mutations = {
   [types.ADD_COMPANY_ADMIN] (state, response) {
     state.company_admins.push(response)
   },
+  [types.GET_COMPANY_WALLET] (state, response) {
+    state.company_wallet = response
+  },
+  [types.GET_COMPANY_PROMOTION_APPLICATION] (state, response) {
+    state.company_promotion_application = response
+  },
+  [types.SUBMIT_COMPANY_PROMOTION_APPLICATION] (state, response) {
+    state.company_promotion_application = response
+  },
+
   [types.GET_COMPANY_ADMINS] (state, response) {
     state.company_admins = response
   },
-
 }
 
 export default {

@@ -64,6 +64,15 @@ export default {
   addCompanyAdmin (id) {
     return apiCall('post', 'member/admin/' + id + '/')
   },
+  getCompanyWallet () {
+    return apiCall('get', 'wallet/')
+  },
+  submitPromotionApplication (form_data) {
+    return apiCall('post', 'promotion/', form_data)
+  },
+  getPromotionApplication () {
+    return apiCall('get', 'promotion/')
+  },
 
   // Company Member Operations
   leaveCompany () {

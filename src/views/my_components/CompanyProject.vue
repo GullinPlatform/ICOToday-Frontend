@@ -1,5 +1,29 @@
 <template>
   <div class="col-md-8">
+    <div class="alert alert-primary show text-center mb-4" v-if="current_project.status===0">
+      <i class="fa fa-info-circle"></i> Project Status: <b>Verifying</b>
+    </div>
+
+    <div class="alert alert-success show text-center mb-4" v-else-if="current_project.status===1">
+      <i class="fa fa-info-circle"></i> Project Status: <b>Verified</b>
+    </div>
+
+    <div class="alert alert-success show text-center mb-4" v-else-if="current_project.status===2">
+      <i class="fa fa-info-circle"></i> Project Status: <b>Completed</b>
+    </div>
+
+    <div class="alert alert-warning show text-center mb-4" v-else-if="current_project.status===3">
+      <i class="fa fa-info-circle"></i> Project Status: <b>Promoting</b>
+    </div>
+
+    <div class="alert alert-danger show text-center mb-4" v-else-if="current_project.status===5">
+      <i class="fa fa-info-circle"></i> Project Status: <b>Closed</b>
+    </div>
+
+    <div class="alert alert-danger show text-center mb-4" v-else-if="current_project.status===6">
+      <i class="fa fa-info-circle"></i> Project Status: <b>Rejected</b>
+    </div>
+
     <div class="card-new-layout">
       <h6 class="text-muted text-normal text-uppercase ">Basic info</h6>
       <hr class="mb-3 mt-2">
