@@ -41,6 +41,10 @@
           </div>
         </aside>
         <nav class="list-group">
+          <router-link :to="{name:'me'}" class="list-group-item"
+                       :class="{active: $route.name==='me'}">
+            <i class="fa fa-angle-right"></i> Feed
+          </router-link>
           <router-link :to="{name:'me_marked'}" class="list-group-item"
                        :class="{active: $route.name==='me_marked'}">
             <i class="fa fa-angle-right"></i> Subscribed ICO Projects
@@ -67,6 +71,10 @@
           <router-link :to="{name:'company_new_project'}" class="list-group-item"
                        :class="{active: $route.name==='company_new_project' || $route.name==='company_project'}">
             <i class="fa fa-angle-right"></i> Project
+          </router-link>
+          <router-link :to="{name:'company_new_project'}" class="list-group-item"
+                       :class="{active: $route.name==='company_new_project' || $route.name==='company_project'}">
+            <i class="fa fa-angle-right"></i> Project Feed
           </router-link>
           <router-link :to="{name:'company_wallet'}" class="list-group-item"
                        :class="{active: $route.name==='company_wallet'}">

@@ -48,14 +48,14 @@
       <hr class="mb-3 mt-2">
       <div class="form-group row">
         <p class="col-sm-2 col-form-label">Duration<span class="text-danger text-small">*</span></p>
-        <div class="col-sm-10">
+        <div class="col-sm-10  col-form-label">
           <p v-if="duration===1">1 Day</p>
           <p v-else-if="duration===7">1 Week</p>
         </div>
       </div>
       <div class="form-group row">
         <p class="col-sm-2 col-form-label">Detail<span class="text-danger text-small">*</span></p>
-        <div class="col-sm-10">
+        <div class="col-sm-10  col-form-label">
           <p>{{detail}}</p>
         </div>
       </div>

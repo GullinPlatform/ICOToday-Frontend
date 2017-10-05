@@ -23,23 +23,23 @@ const apiCall = (method, url, form_data, params) => {
 }
 
 export default {
-  getComments (pk) {
-    return apiCall('get', pk + '/')
+  newFeed (form_data) {
+    return apiCall('post', 'new/', form_data)
+  },
+  deleteFeed (id) {
+    return apiCall('delete', id + '/delete/')
+  },
+  replyFeed (form_data) {
+    return apiCall('post', form_data.id + '/reply/', form_data)
   },
 
-  postComment (form_data) {
-    return apiCall('post', form_data.pk + '/', form_data)
+  myFeed () {
+    return apiCall('get', 'my/')
   },
-
-  replyComment (form_data) {
-    return apiCall('post', form_data.pk + '/reply/', form_data)
+  projectFeed () {
+    return apiCall('get', 'project/')
   },
-
-  editComment (form_data) {
-    return apiCall('patch', form_data.pk + '/edit/', form_data)
-  },
-
-  deleteComment (pk) {
-    return apiCall('delete', pk + '/edit/')
+  userFeed () {
+    return apiCall('get', 'user/')
   },
 }
