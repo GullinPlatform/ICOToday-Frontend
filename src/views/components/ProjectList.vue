@@ -211,7 +211,7 @@
   }
 
   .project-list-header {
-    background-color: #f8f9fa;
+    background-color: #f5f5f5;
     font-size: 16px;
     border-top-left-radius: 7px;
     border-top-right-radius: 7px;

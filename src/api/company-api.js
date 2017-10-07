@@ -73,6 +73,9 @@ export default {
   getPromotionApplication () {
     return apiCall('get', 'promotion/')
   },
+  updatePromotionApplication (form_data) {
+    return apiCall('put', 'promotion/', form_data)
+  },
 
   // Company Member Operations
   leaveCompany () {

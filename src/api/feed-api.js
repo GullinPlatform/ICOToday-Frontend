@@ -36,10 +36,10 @@ export default {
   myFeed () {
     return apiCall('get', 'my/')
   },
-  projectFeed () {
-    return apiCall('get', 'project/')
+  companyFeed (id) {
+    return apiCall('get', 'company/' + id + '/')
   },
-  userFeed () {
-    return apiCall('get', 'user/')
+  userFeed (id) {
+    return apiCall('get', 'user/' + id + '/')
   },
 }
