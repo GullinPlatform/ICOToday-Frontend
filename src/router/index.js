@@ -19,6 +19,7 @@ import MySettings from 'views/my_components/MySettings'
 import MyWallet from 'views/my_components/MyWallet'
 import NeedVerify from 'views/my_components/NeedVerify'
 
+import CompanyFeed from 'views/my_components/CompanyFeed'
 import CompanyNewProject from 'views/my_components/CompanyNewProject'
 import CompanyProject from 'views/my_components/CompanyProject'
 import CompanyTeam from 'views/my_components/CompanyTeam'
@@ -30,8 +31,10 @@ import UserFeed from 'views/user_components/UserFeed'
 import UserMarkedProjects from 'views/user_components/UserMarkedProjects'
 import UserTeam from 'views/user_components/UserTeam'
 
-import Post from 'views/Post'
-import PostRatingDetail from 'views/PostRatingDetail'
+import Project from 'views/project_pages/Project'
+import ProjectFeed from 'views/project_pages/ProjectFeed'
+import ProjectRatingDetail from 'views/project_pages/ProjectRatingDetail'
+
 import CompanyPage from 'views/CompanyPage'
 
 import TokenSale from 'views/static_pages/TokenSale'
@@ -57,12 +60,16 @@ export default new Router({
       name: 'register_followup'
     }, {
       path: '/project/:id',
-      component: Post,
-      name: 'post'
+      component: Project,
+      name: 'project'
     }, {
       path: '/project/:id/rating',
-      component: PostRatingDetail,
-      name: 'post_rating_detail'
+      component: ProjectRatingDetail,
+      name: 'project_rating_detail'
+    }, {
+      path: '/project/:id/feed',
+      component: ProjectFeed,
+      name: 'project_feed'
     }, {
       path: '/me',
       component: MyBase,
@@ -100,6 +107,11 @@ export default new Router({
           component: CompanyProject,
           name: 'company_project'
         }, {
+          path: '/me/company/feed',
+          component: CompanyFeed,
+          name: 'company_feed'
+        },
+        {
           path: '/me/company/team',
           component: CompanyTeam,
           name: 'company_team'
@@ -107,7 +119,7 @@ export default new Router({
           path: '/me/company/wallet',
           component: CompanyWallet,
           name: 'company_wallet'
-        },{
+        }, {
           path: '/me/company/promotion',
           component: CompanyPromotion,
           name: 'company_promotion'
