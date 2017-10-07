@@ -103,7 +103,6 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-
         return Promise.reject(error)
       })
   },
@@ -114,7 +113,6 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-
         return Promise.reject(error)
       })
   },
@@ -125,7 +123,6 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-
         return Promise.reject(error)
       })
   },
@@ -137,7 +134,6 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-
         return Promise.reject(error)
       })
   },
@@ -149,7 +145,6 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-
         return Promise.reject(error)
       })
   },
@@ -160,35 +155,35 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-
         return Promise.reject(error)
       })
   },
 
   signup ({commit, dispatch}, form_data) {
     return userApi.signup(form_data)
-      .then((response) => {
-        $('#signup-modal').modal('hide')
-        commit(types.REGISTER_SUCCESS, response)
-        dispatch('getSelf')
+      .then(() => {
+        dispatch('getSelf').then(() => {
+          $('#signup-modal').modal('hide')
+          commit(types.REGISTER_SUCCESS)
+        })
+        return Promise.resolve()
       })
       .catch((error) => {
-
-        // commit(types.REGISTER_FAILED, error)
+        commit(types.LOGOUT)
         return Promise.reject(error)
       })
   },
   login ({commit, dispatch}, form_data) {
     return userApi.login(form_data)
-      .then((response) => {
-        $('#login-modal').modal('hide')
-        commit(types.LOGIN_SUCCESS, response)
-        dispatch('getSelf')
+      .then(() => {
+        dispatch('getSelf').then(() => {
+          $('#login-modal').modal('hide')
+          commit(types.LOGIN_SUCCESS)
+        })
         return Promise.resolve()
       })
-      .catch((error) => {
+      .catch(() => {
         commit(types.LOGOUT)
-
         return Promise.reject()
       })
   },
@@ -204,7 +199,7 @@ const actions = {
         commit(types.REFRESH_SUCCESS, response)
         dispatch('getSelf')
       })
-      .catch((error) => {
+      .catch(() => {
         commit(types.LOGOUT)
 
       })
@@ -320,9 +315,10 @@ const actions = {
   },
   invitedSignup ({dispatch, commit}, form_data) {
     return userApi.invitedSignup(form_data)
-      .then((response) => {
-        commit(types.REGISTER_SUCCESS, response)
-        dispatch('getSelf')
+      .then(() => {
+        dispatch('getSelf').then(() => {
+          commit(types.REGISTER_SUCCESS)
+        })
         return Promise.resolve()
       })
       .catch((error) => {
@@ -385,18 +381,16 @@ const actions = {
 // mutations
 const mutations = {
   // auth
-  [types.LOGIN_SUCCESS] (state, response) {
+  [types.LOGIN_SUCCESS] (state) {
     state.login_status = true
-    router.push({name: 'landing'})
   },
   [types.LOGOUT] (state) {
     state.login_status = false
     state.self = {}
     router.push({name: 'landing'})
   },
-  [types.REGISTER_SUCCESS] (state, response) {
+  [types.REGISTER_SUCCESS] (state) {
     state.login_status = true
-    router.push({name: 'landing'})
   },
 
   [types.REGISTER_FAILED] (state) {
@@ -433,7 +427,6 @@ const mutations = {
     state.white_list_email = ''
   },
 
-  // post change
   [types.UPDATE_SELF] (state) {},
 
   [types.GET_SELF_EXPERT_APPLICATION] (state, response) {

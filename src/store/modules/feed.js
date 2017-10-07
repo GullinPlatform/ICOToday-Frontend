@@ -5,7 +5,7 @@ import * as types from '../mutation-types'
 // initial state
 const state = {
   my_feeds: [],
-  project_feeds: [],
+  company_feeds: [],
   user_feeds: [],
 }
 
@@ -14,8 +14,8 @@ const getters = {
   my_feeds (state) {
     return state.my_feeds
   },
-  project_feeds (state) {
-    return state.project_feeds
+  company_feeds (state) {
+    return state.company_feeds
   },
   user_feeds (state) {
     return state.user_feeds
@@ -47,7 +47,7 @@ const actions = {
   replyFeed ({commit}, form_data) {
     return feedApi.replyFeed(form_data)
       .then((response) => {
-        commit(types.REPLY_FEED, response)
+        commit(types.APPEND_REPLY, response)
         return Promise.resolve(response)
       })
       .catch((error) => {
@@ -65,8 +65,8 @@ const actions = {
         return Promise.reject(error)
       })
   },
-  projectFeed ({commit}, id) {
-    return feedApi.projectFeed(id)
+  companyFeed ({commit}, id) {
+    return feedApi.companyFeed(id)
       .then((response) => {
         commit(types.LOAD_PROJECT_FEEDS, response)
         return Promise.resolve(response)
@@ -156,7 +156,7 @@ const mutations = {
     state.my_feeds = response
   },
   [types.LOAD_PROJECT_FEEDS] (state, response) {
-    state.project_feeds = response
+    state.company_feeds = response
   },
   [types.LOAD_USER_FEEDS] (state, response) {
     state.user_feeds = response
@@ -167,7 +167,7 @@ const mutations = {
         feed.replies.unshift(response)
       }
     }
-    for (let feed of state.project_feeds) {
+    for (let feed of state.company_feeds) {
       if (feed.id === parseInt(response.reply_to_id)) {
         feed.replies.unshift(response)
       }
@@ -179,7 +179,11 @@ const mutations = {
     }
   },
 
-  [types.POST_FEED] (state, response) {},
+  [types.POST_FEED] (state, response) {
+    state.my_feeds.unshift(response)
+    state.company_feeds.unshift(response)
+    state.user_feeds.unshift(response)
+  },
   [types.REPLY_FEED] (state, response) {},
   [types.DELETE_FEED] (state, response) {},
 

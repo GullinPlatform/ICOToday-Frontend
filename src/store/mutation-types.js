@@ -66,6 +66,8 @@ export const REM_TEAM_MEMBER = 'REM_TEAM_MEMBER'
 
 // ----- COMMENT -----
 export const POST_FEED = 'POST_FEED'
+export const POST_USER_FEED = 'POST_USER_FEED'
+export const POST_PROJECT_FEED = 'POST_PROJECT_FEED'
 export const REPLY_FEED = 'REPLY_FEED'
 export const DELETE_FEED = 'DELETE_FEED'
 export const APPEND_REPLY = 'APPEND_REPLY'
@@ -73,16 +75,6 @@ export const APPEND_REPLY = 'APPEND_REPLY'
 export const LOAD_MY_FEEDS = 'LOAD_MY_FEEDS'
 export const LOAD_PROJECT_FEEDS = 'LOAD_PROJECT_FEEDS'
 export const LOAD_USER_FEEDS = 'LOAD_USER_FEEDS'
-
-// export const GET_COMMENTS = 'GET_COMMENTS'
-//
-// export const POST_COMMENT = 'POST_COMMENT'
-// export const REPLY_COMMENT = 'REPLY_COMMENT'
-// export const EDIT_COMMENT = 'EDIT_COMMENT'
-// export const DELETE_COMMENT = 'DELETE_COMMENT'
-//
-// export const APPEND_COMMENT = 'APPEND_COMMENT'
-// export const REMOVE_COMMENT_LOCALLY = 'REMOVE_COMMENT_LOCALLY'
 
 // ----- Notifications ----
 export const LOAD_UNREAD_NOTIFICATIONS = 'LOAD_UNREAD_NOTIFICATIONS'

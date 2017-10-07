@@ -104,6 +104,16 @@ const actions = {
         return Promise.reject(error)
       })
   },
+  listPromoProjects ({commit}) {
+    return projectApi.listPromoProjects()
+      .then((response) => {
+        commit(types.PROMO_PROJECTS, response)
+        return Promise.resolve()
+      })
+      .catch((error) => {
+        return Promise.reject(error)
+      })
+  },
 
   markProject ({dispatch, commit}, id) {
     return projectApi.markProject(id)

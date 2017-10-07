@@ -14,13 +14,6 @@ const state = {
 }
 
 const getters = {
-  current_team: state => {
-    return state.team
-  },
-  current_team_members: state => {
-    return state.team.members
-  },
-
   current_company: state => {
     return state.company
   },
@@ -28,7 +21,7 @@ const getters = {
     return state.company_members
   },
   current_company_admins: state => {
-    return state.company_members
+    return state.company_admins
   },
   current_company_search_result: state => {
     return state.company_search_result
@@ -42,40 +35,6 @@ const getters = {
 }
 
 const actions = {
-  getTeam ({commit}, pk) {
-    return teamApi.getTeam(pk)
-      .then((response) => {
-        commit(types.GET_TEAM, response)
-        return Promise.resolve()
-      })
-      .catch((error) => {
-
-        return Promise.reject(error)
-      })
-  },
-  addTeamMember ({commit}, formData) {
-    return teamApi.addTeamMember(formData)
-      .then(() => {
-        commit(types.ADD_TEAM_MEMBER)
-        return Promise.resolve()
-      })
-      .catch((error) => {
-
-        return Promise.reject(error)
-      })
-  },
-  remTeamMember ({commit}, pk) {
-    return teamApi.remTeamMember(pk)
-      .then(() => {
-        commit(types.REM_TEAM_MEMBER)
-        return Promise.resolve()
-      })
-      .catch((error) => {
-
-        return Promise.reject(error)
-      })
-  },
-
   // Everyone accessible
   getCompany ({commit}, id) {
     return companyApi.getCompany(id)
@@ -233,10 +192,20 @@ const actions = {
         return Promise.reject(error)
       })
   },
-  getPromotionApplication () {
+  getPromotionApplication ({commit}) {
     return companyApi.getPromotionApplication()
-      .then(() => {
-        commit(types.GET_COMPANY_PROMOTION_APPLICATION)
+      .then((response) => {
+        commit(types.GET_COMPANY_PROMOTION_APPLICATION, response)
+        return Promise.resolve()
+      })
+      .catch((error) => {
+        return Promise.reject(error)
+      })
+  },
+  updatePromotionApplication({commit}, form_data) {
+    return companyApi.updatePromotionApplication(form_data)
+      .then((response) => {
+        commit(types.SUBMIT_COMPANY_PROMOTION_APPLICATION, response)
         return Promise.resolve()
       })
       .catch((error) => {
