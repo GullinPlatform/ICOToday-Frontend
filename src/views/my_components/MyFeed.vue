@@ -1,5 +1,7 @@
 <template>
-  <div class="col-md-8" v-if="loaded && is_verified">
+  <div class="col-md-8" v-if="is_verified">
+    <h6 class="text-muted text-normal text-uppercase ">My Feed</h6>
+    <hr class="mb-3 mt-2">
     <div class="card-new-layout">
       <textarea class="form-control form-control-rounded" style="resize:none" v-model="content"
                 rows="4" placeholder="Write your comment here...">
@@ -20,13 +22,14 @@
              class="d-flex rounded-circle align-self-start mr-4" width="55">
         <div class="media-body">
           <h6 class="comment-title">{{feed.creator.full_name}}
+            <span class="text-muted" v-if="feed.creator.company">@ {{feed.creator.company.name}}</span>
             <!--<span class="badge badge-primary" v-if="is_team_member">Team Member</span>-->
           </h6>
           <p class="mb-1">
             {{feed.content}}
           </p>
           <p class="mb-0">
-            <i class="fa fa-calendar"></i> {{timeFromNow(feed.created)}}
+            <i class="fa fa-clock-o"></i> {{timeFromNow(feed.created)}}
             <a class="reply-link float-right" href="javascript:void(0)" v-if="feed.creator.id===me.id"
                @click="deleteID(feed.id)">
               <span v-if="delete_feed_id===feed.id">Cancel</span>
@@ -94,7 +97,7 @@
         </div>
       </div>
     </div>
-    <spinner v-else></spinner>
+    <spinner class="mt-4" v-else></spinner>
   </div>
 </template>
 
@@ -125,7 +128,6 @@
         reply: '',
       }
     },
-
     methods: {
       newFeed () {
         this.uploading = true
@@ -135,6 +137,7 @@
         this.$store.dispatch('newFeed', form_data)
           .then(() => {
             this.uploading = false
+            this.content = ''
           })
       },
       newReply (id) {
@@ -161,7 +164,7 @@
         this.$store.dispatch('deleteFeed', id)
           .then(() => {
             this.loadMyFeed()
-            this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'Your Feed is deleted.'})
+            this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'Your feed is deleted.'})
           })
       },
       deleteID (id) {

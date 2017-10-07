@@ -165,7 +165,7 @@
           </div>
           <div class="row">
             <div class="col-lg-12">
-              <post-list :loaded="list_loaded" :posts="projects"></post-list>
+              <project-list :loaded="list_loaded" :posts="projects"></project-list>
             </div>
           </div>
         </div>
@@ -177,7 +177,9 @@
 </template>
 
 <script>
-  import PostList from 'components/PostList'
+  import { mapGetters } from 'vuex'
+
+  import ProjectList from 'components/ProjectList'
   import _ from 'lodash'
 
   export default {
@@ -189,7 +191,7 @@
       }
     },
     components: {
-      PostList
+      ProjectList
     },
     data () {
       return {
@@ -219,7 +221,7 @@
           keyword: this.keyword,
           category: this.category,
         }
-        this.$store.dispatch('searchPostsByPage', formData)
+        this.$store.dispatch('searchProjectsByPage', formData)
       },
       search: _.debounce(
         function () {
@@ -230,7 +232,7 @@
             keyword: this.keyword,
             category: this.category,
           }
-          this.$store.dispatch('searchPosts', formData)
+          this.$store.dispatch('searchProjects', formData)
             .then(() => {
               this.list_loaded = true
             })
@@ -242,7 +244,7 @@
           $('#signup-modal').modal('show')
           return
         }
-        this.$store.dispatch('markPost', id)
+        this.$store.dispatch('markProject', id)
           .then(() => {
             if (mark) {
               this.$store.dispatch('toastr', {
@@ -268,7 +270,7 @@
       },
       postModal (id) {
         /* global $:true */
-        this.$store.dispatch('getPost', id)
+        this.$store.dispatch('getProject', id)
           .then(() => {
             $('#project-modal').modal('show')
           })
@@ -331,27 +333,40 @@
           })
         }
       },
+      getWindowWidth (event) {
+        this.window_width = document.documentElement.clientWidth
+      },
     },
     computed: {
-      posts () {
-        return this.$store.getters.projects
+      ...mapGetters({
+        me: 'self',
+        is_verified: 'is_verified',
+        login_status: 'login_status',
+        projects: 'projects',
+        self_marked_posts: 'self_marked_posts',
+        promo_projects: 'promo_projects'
+      })
+    },
+    watch: {
+      keyword () {
+        this.search()
       },
-      promo_posts () {
-        return this.$store.getters.promo_projects
+      category () {
+        this.search()
       },
-      login_status () {
-        return this.$store.getters.login_status
+      type () {
+        this.search()
       },
-      self_marked_posts () {
-        return this.$store.getters.self_marked_posts
+      status () {
+        this.search()
       },
-      me () {
-        return this.$store.getters.self
+      page () {
+        this.loadMore()
       }
     },
     beforeMount () {
       this.search()
-      this.$store.dispatch('listPromoPosts')
+      this.$store.dispatch('listPromoProjects')
         .then(() => {
           this.promotion_loaded = true
         })
@@ -470,68 +485,14 @@
         },
         'retina_detect': true
       })
+      this.$nextTick(function () {
+        window.addEventListener('resize', this.getWindowWidth)
+        //Init
+        this.getWindowWidth()
+      })
     },
-    watch: {
-      keyword () {
-        this.search()
-      },
-      category () {
-        this.search()
-      },
-      type () {
-        this.search()
-      },
-      status () {
-        this.search()
-      },
-      page () {
-        this.loadMore()
-      }
-    },
-    directives: {
-      'scroll-at': {
-        /**
-         * @example: <div v-scroll-at.bottom="loadMore"></div>
-         */
-
-        _bind () {
-          this.el.addEventListener('scroll', this.scrollHandler)
-        },
-        _unbind () {
-          this.el.removeEventListener('scroll', this.scrollHandler)
-        },
-        bind () {
-          let loading = false
-          let done = () => { loading = false }
-
-          this.scrollHandler = () => {
-            let triggerTop = this.modifiers.top || false
-            let distance = this.el.scrollTop
-            let scrollMax = this.el.scrollHeight - this.el.clientHeight
-            let trigger = triggerTop ? distance < 10 : distance > scrollMax - 10
-
-            if (this.handler && !loading && trigger) {
-              loading = true
-
-              let result = this.handler()
-
-              if (result === undefined) done()
-              else if (result.then && result.then.call) result.then(done, done)
-              else done()
-            }
-          }
-
-          this._bind()
-        },
-        update (value) {
-          this.handler = value
-          value.unbind = () => this._unbind()
-          value.bind = () => this._bind()
-        },
-        unbind () {
-          this._unbind()
-        }
-      }
+    beforeDestroy () {
+      window.removeEventListener('resize', this.getWindowWidth)
     },
   }
 

@@ -6,8 +6,9 @@
           <div class="media">
             <img class="d-flex rounded mr-3" :src="project.logo_image" width="75" alt="Media">
             <div class="media-body">
-              <h3 class="mt-0 mb-1 text-bold">{{project.name}} <span class="badge badge-sm badge-default text-sm">{{project.category}}</span></h3>
+              <h4 class="mt-0 mb-1 text-bold">{{project.name}} <span v-if="project.status===0" class="badge badge-info">Verifying</span></h4>
               <span class="d-block text-sm text-muted">{{project.description_short}}</span>
+              <span class="badge badge-sm badge-default text-sm">{{project.category}}</span>
             </div>
           </div>
           <p class="mb-0">
@@ -28,7 +29,7 @@
         </div>
         <div class="modal-body light-grey">
           <div class="row project-modal ml-3 mr-3 mb-3">
-            <div class="col-lg-8 pl-md-0">
+            <div class="col-lg-8 pl-md-0" v-if="project_detail">
               <!--Video-->
               <div class="card-new-layout">
                 <div class="embed-responsive embed-responsive-16by9">
@@ -46,34 +47,37 @@
                 <h6 class="text-muted text-normal text-uppercase">Team Members</h6>
                 <hr class="mb-3 mt-2">
                 <div class="row" v-if="team_loaded">
-                  <div class="col-md-3 col-sm-6 mb-3 text-center"
-                       v-for="member in current_team_members"
+                  <div class="col-sm-6 mb-3"
+                       v-for="member in team_members"
                        v-if="!member.is_advisor">
-                    <router-link :to="{name:'user_created', params:{id:member.account}}"
-                                 data-dismiss="modal">
-                      <img class="img-thumbnail rounded-circle mb-2" height="100" width="100"
-                           :src="member.avatar" alt="Team Member">
-                    </router-link>
-                    <h6>{{member.first_name}} {{member.last_name}}</h6>
-                    <p class="text-muted mb-2">{{member.title}}</p>
-                    <div class="social-bar">
-                      <a :href="member.facebook" target="_blank"
-                         class="social-link branding-facebook"
-                         v-if="member.facebook">
-                        <i class="fa fa-facebook"></i>
-                      </a>
-                      <a :href="member.twitter" class="social-link branding-twitter" target="_blank"
-                         v-if="member.twitter">
-                        <i class="fa fa-twitter"></i>
-                      </a>
-                      <a :href="member.linkedin" class="social-link branding-linkedin" target="_blank"
-                         v-if="member.linkedin">
-                        <i class="fa fa-linkedin-square"></i>
-                      </a>
-                      <a :href="member.telegram" class="social-link branding-linkedin" target="_blank"
-                         v-if="member.telegram">
-                        <i class="fa fa-telegram"></i>
-                      </a>
+                    <div class="d-table">
+                      <router-link :to="{name:'user_created', params:{id:member.account}}" data-dismiss="modal">
+                        <img class="d-block mx-auto img-thumbnail rounded-circle d-table-cell align-middle"
+                             width="100" :src="member.avatar">
+                      </router-link>
+                      <div class="pl-3 d-table-cell align-middle">
+                        <h6>{{member.full_name}}
+                          <span class="text-muted text-sm mb-2">{{member.title}}</span></h6>
+                        <p>{{member.description}}</p>
+                        <div class="social-bar">
+                          <a :href="member.facebook" class="social-link branding-facebook" target="_blank"
+                             v-if="member.facebook">
+                            <i class="fa fa-facebook"></i>
+                          </a>
+                          <a :href="member.twitter" class="social-link branding-twitter" target="_blank"
+                             v-if="member.twitter">
+                            <i class="fa fa-twitter"></i>
+                          </a>
+                          <a :href="member.linkedin" class="social-link branding-linkedin" target="_blank"
+                             v-if="member.linkedin">
+                            <i class="fa fa-linkedin-square"></i>
+                          </a>
+                          <a :href="member.telegram" class="social-link branding-linkedin" target="_blank"
+                             v-if="member.telegram">
+                            <i class="fa fa-telegram"></i>
+                          </a>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -83,40 +87,128 @@
                 <h6 class="text-muted text-normal text-uppercase">Advisors</h6>
                 <hr class="mb-3 mt-2">
                 <div class="row" v-if="team_loaded">
-                  <div class="col-md-3 col-sm-6 mb-3 text-center"
-                       v-for="member in current_team_members"
+                  <div class="col-sm-6 mb-3"
+                       v-for="member in team_members"
                        v-if="member.is_advisor">
-                    <router-link :to="{name:'user_created', params:{id:member.account}}"
-                                 data-dismiss="modal">
-                      <img class="img-thumbnail rounded-circle mb-2" height="100" width="100"
-                           :src="member.avatar" alt="Team Member">
-                    </router-link>
-                    <h6>{{member.first_name}} {{member.last_name}}</h6>
-                    <p class="text-muted mb-2">{{member.title}}</p>
-                    <div class="social-bar">
-                      <a :href="member.facebook" target="_blank"
-                         class="social-link branding-facebook"
-                         v-if="member.facebook">
-                        <i class="fa fa-facebook"></i>
-                      </a>
-                      <a :href="member.twitter" class="social-link branding-twitter" target="_blank"
-                         v-if="member.twitter">
-                        <i class="fa fa-twitter"></i>
-                      </a>
-                      <a :href="member.linkedin" class="social-link branding-linkedin" target="_blank"
-                         v-if="member.linkedin">
-                        <i class="fa fa-linkedin-square"></i>
-                      </a>
-                      <a :href="member.telegram" class="social-link branding-linkedin" target="_blank"
-                         v-if="member.telegram">
-                        <i class="fa fa-telegram"></i>
-                      </a>
+                    <div class="d-table">
+                      <router-link :to="{name:'user_created', params:{id:member.account}}" data-dismiss="modal">
+                        <img class="d-block mx-auto img-thumbnail rounded-circle d-table-cell align-middle"
+                             width="100" :src="member.avatar">
+                      </router-link>
+                      <div class="pl-3 d-table-cell align-middle">
+                        <h6>{{member.full_name}}
+                          <span class="text-muted text-sm mb-2">{{member.title}}</span></h6>
+                        <p>{{member.description}}</p>
+                        <div class="social-bar">
+                          <a :href="member.facebook" class="social-link branding-facebook" target="_blank"
+                             v-if="member.facebook">
+                            <i class="fa fa-facebook"></i>
+                          </a>
+                          <a :href="member.twitter" class="social-link branding-twitter" target="_blank"
+                             v-if="member.twitter">
+                            <i class="fa fa-twitter"></i>
+                          </a>
+                          <a :href="member.linkedin" class="social-link branding-linkedin" target="_blank"
+                             v-if="member.linkedin">
+                            <i class="fa fa-linkedin-square"></i>
+                          </a>
+                          <a :href="member.telegram" class="social-link branding-linkedin" target="_blank"
+                             v-if="member.telegram">
+                            <i class="fa fa-telegram"></i>
+                          </a>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
 
             </div>
+            <div class="col-lg-8 pl-md-0" v-else-if="feed_detail">
+              <!--Feeds-->
+              <div class="comment" v-if="feeds_loaded">
+                <div class="media pos-relative card-new-layout" v-for="feed in feeds">
+                  <img :src="feed.creator.avatar"
+                       class="d-flex rounded-circle align-self-start mr-4" width="55">
+                  <div class="media-body">
+                    <h6 class="comment-title">{{feed.creator.full_name}}
+                      <span class="text-muted">@ {{feed.creator.company.name}}</span>
+                      <!--<span class="badge badge-primary" v-if="is_team_member">Team Member</span>-->
+                    </h6>
+                    <p class="mb-1">
+                      {{feed.content}}
+                    </p>
+                    <p class="mb-0">
+                      <i class="fa fa-calendar"></i> {{timeFromNow(feed.created)}}
+                      <a class="reply-link float-right" href="javascript:void(0)" v-if="feed.creator.id===me.id"
+                         @click="deleteID(feed.id)">
+                        <span v-if="delete_feed_id===feed.id">Cancel</span>
+                        <span v-else><i class="fa fa-times"></i> delete</span>
+                      </a>
+                      <a class="reply-link text-danger float-right mr-3" href="javascript:void(0)"
+                         v-if="delete_feed_id===feed.id"
+                         @click="deleteFeed(feed.id)">
+                        <i class="fa fa-times"></i>Confirm
+                      </a>
+                      <a class="reply-link float-right mr-3" href="javascript:void(0)"
+                         v-if="login_status"
+                         @click="reply_feed_box_index=feed.id;reply_feed_box_show=true">
+                        <i class="icon-reply"></i>Reply
+                      </a>
+
+                    </p>
+                    <!-- Nested reply area-->
+                    <div class="row" v-if="reply_feed_box_show&&reply_feed_box_index===feed.id">
+                      <div class="col-md-12 mt-2">
+                        <textarea rows="4" class="form-control" v-model="reply" placeholder="Reply"></textarea>
+                      </div>
+                      <div class="col-md-12">
+                        <button class="btn btn-sm btn-primary float-right"
+                                @click="newReply(feed.id)">
+                          Reply
+                        </button>
+                        <button class="btn btn-sm btn-secondary float-right"
+                                @click="reply_feed_box_show=!reply_feed_box_show">
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+
+                    <!-- Nested media object -->
+                    <div class="media mt-4 pos-relative" v-for="reply in feed.replies">
+                      <img :src="reply.creator.avatar"
+                           class="d-flex rounded-circle align-self-start mr-4"
+                           width="55">
+                      <div class="media-body">
+                        <h6 class="comment-title">{{reply.creator.full_name}}
+                          <!--<span class="badge badge-primary" v-if="is_team_member">Team Member</span>-->
+                        </h6>
+                        <p class="mb-1">
+                          {{reply.content}}
+                        </p>
+                        <p class="mb-0">
+                          <i class="fa fa-calendar"></i> {{timeFromNow(reply.created)}}
+                          <a class="reply-link float-right" href="javascript:void(0)"
+                             v-if="reply.creator.id===me.id"
+                             @click="deleteID(reply.id)">
+                            <i class="fa fa-times"></i>
+                            <span v-if="delete_feed_id===reply.id">Cancel</span>
+                            <span v-else>delete</span>
+                          </a>
+                          <a class="reply-link text-danger float-right mr-3"
+                             href="javascript:void(0)"
+                             v-if="delete_feed_id===reply.id"
+                             @click="deleteFeed(reply.id)">
+                            <i class="fa fa-times"></i>Confirm
+                          </a>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div class="col-lg-4 pr-md-0">
               <!--Score-->
               <div class="card-new-layout">
@@ -146,12 +238,34 @@
                 <p class="text-center"> {{formatTime(project.start_datetime, project.end_datetime)}}</p>
               </div>
               <!--Updates-->
-              <div class="card-new-layout">
+              <div class="card-new-layout widget-featured-posts">
                 <h6 class="text-muted text-normal text-uppercase">
                   Updates
-                  <a class="float-right text-primary">> More</a>
+                  <a class="float-right text-primary" href="javascript:void(0)" v-if="!feed_detail"
+                     @click="project_detail=false;feed_detail=true;rating_derail=false">> More</a>
+                  <a class="float-right text-primary" href="javascript:void(0)" v-else
+                     @click="project_detail=true;feed_detail=false;rating_derail=false">> Back</a>
+
                 </h6>
                 <hr class="mb-3 mt-2">
+                <div class="entry mb-0 mt-3" v-for="(feed, index) in feeds" v-if="!feed_detail&&feeds_loaded&&index<2">
+                  <div class="entry-thumb"><a href="#"><img :src="feed.creator.avatar" alt="Post"></a></div>
+                  <div class="entry-content">
+                    <h4 class="entry-title">{{feed.content}}</h4>
+                    <p class="m-0">
+                      <span class="entry-meta">by {{feed.creator.full_name}}</span>
+                      <span class="entry-meta float-right">{{timeFromNow(feed.created)}}</span>
+                    </p>
+                  </div>
+                </div>
+                <spinner v-if="!feeds_loaded"></spinner>
+                <div class="text-center" v-if="feeds_loaded&&!feeds.length">
+                  Nothing Here~
+                </div>
+                <div class="text-center" v-if="feed_detail">
+                  <button class="btn btn-primary btn-sm"
+                          @click="project_detail=true;feed_detail=false;rating_derail=false">Back</button>
+                </div>
               </div>
               <!--Other-->
               <div class="card-new-layout">
@@ -223,13 +337,14 @@
 </template>
 <script>
   import { mapGetters } from 'vuex'
-
   import VueMarkdown from 'vue-markdown'
+  import Spinner from 'components/Spinner'
 
   export default {
     name: 'ProjectModal',
     components: {
-      'vue-markdown': VueMarkdown
+      VueMarkdown,
+      Spinner
     },
     data () {
       return {
@@ -237,13 +352,17 @@
         new_comment: '',
         delete_comment_id: 0,
         // UI Control
-        reply_comment_box_show: false,
-        reply_comment_box_index: -1,
+        project_detail: true,
+        feed_detail: false,
+        rating_derail: false,
         marked: false,
         unsubscribe: false,
+        reply_feed_box_show: false,
+        reply_feed_box_index: '',
+        delete_feed_id: '',
         // Data Load Trigger
         team_loaded: false,
-        comments_loaded: false
+        feeds_loaded: false
       }
     },
     methods: {
@@ -358,26 +477,43 @@
           return moment(end).format('YYYY/MM/DD, hh:mm a')
         }
       },
+      timeFromNow (time) {
+        return moment(time).fromNow()
+      },
+      deleteFeed (id) {
+        this.$store.dispatch('deleteFeed', id)
+          .then(() => {
+            this.loadMyFeed()
+            this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'Your feed is deleted.'})
+          })
+      },
+      deleteID (id) {
+        if (this.delete_feed_id === id)
+          this.delete_feed_id = ''
+        else
+          this.delete_feed_id = id
+      },
     },
     computed: {
       ...mapGetters({
         me: 'self',
         login_status: 'login_status',
         project: 'current_project',
-        team_members: 'current_team_members',
+        team_members: 'current_company_members',
         self_company: 'self_company',
         self_admin: 'self_admin',
+        feeds: 'company_feeds',
       })
     },
     watch: {
       'project': function () {
         this.team_loaded = false
-        this.comments_loaded = false
-        this.$store.dispatch('getComments', this.$store.getters.current_project.id)
+        this.feeds_loaded = false
+        this.$store.dispatch('companyFeed', this.$store.getters.current_project.company)
           .then(() => {
-            this.comments_loaded = true
+            this.feeds_loaded = true
           })
-        this.$store.dispatch('getTeam', this.$store.getters.current_project.team.id)
+        this.$store.dispatch('getCompanyMembers', this.$store.getters.current_project.company)
           .then(() => {
             this.team_loaded = true
           })
@@ -386,7 +522,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   .table td {
     border-top: 0 !important;
   }
@@ -397,5 +533,9 @@
 
   .table tr:last-child {
     border-bottom: 0 !important;
+  }
+
+  .entry-meta {
+    display: inline !important;
   }
 </style>

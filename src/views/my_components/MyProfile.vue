@@ -1,5 +1,7 @@
 <template>
   <div class="col-md-8">
+    <h6 class="text-muted text-normal text-uppercase ">Profile</h6>
+    <hr class="mb-3 mt-2">
     <div class="card-new-layout">
       <h6 class="text-muted text-normal text-uppercase">Avatar</h6>
       <hr class="mb-3 mt-2">

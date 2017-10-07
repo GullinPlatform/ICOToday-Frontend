@@ -1,6 +1,7 @@
 <template>
   <div class="col-md-8">
-
+    <h6 class="text-muted text-normal text-uppercase ">Members</h6>
+    <hr class="mb-3 mt-2">
     <div class="card-new-layout">
       <h6 class="text-muted text-normal text-uppercase ">Team members</h6>
       <hr class="mb-3 mt-2">
@@ -61,7 +62,7 @@
         <div class="row">
           <div class="col-md-6 mb-4" v-for="member in company_members" v-if="member.is_advisor">
             <div class="d-table">
-              <router-link :to="{name:'user_created', params:{id:member.account}}">
+              <router-link :to="{name:'user', params:{id:member.account}}">
                 <img class="d-block mx-auto img-thumbnail rounded-circle d-table-cell align-middle"
                      width="100" :src="member.avatar" alt="Team">
               </router-link>

@@ -23,7 +23,7 @@
 
 <script>
   import UserHeader from 'src/views/components/UserHeader'
-  import PostList from 'src/views/components/PostList'
+  import PostList from 'src/views/components/ProjectList'
 
   export default {
     name: 'UserCreatedProjects',

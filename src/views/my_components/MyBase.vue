@@ -16,10 +16,9 @@
               <router-link class="edit-avatar" :to="{name:'me_profile'}"></router-link>
               <img :src="me.info.avatar" alt="User"></div>
             <div class="pl-2">
-              <h4 class="mb-0">{{username}}   <span class="text-muted">{{me.info.title}}</span></h4>
+              <h4 class="mb-0">{{username}}</h4>
+              <h6 class="text-muted mb-0 mt-1">{{me.info.title}} <span v-if="me.info.company" class="text-gray-dark">@ {{me.info.company.name}}</span></h6>
 
-              <span v-if="me.info.company">@ {{me.info.company.name}}</span>
-              <br>
               <p>{{me.info.description}}</p>
               <a :href="me.info.facebook" target="_blank"
                  v-if="me.info.facebook">
@@ -66,14 +65,15 @@
             <i class="fa fa-angle-right"></i> Settings
           </router-link>
         </nav>
+
         <h6 class="text-muted text-normal text-uppercase mt-4" v-if="type===0">Project</h6>
         <nav class="list-group" v-if="type===0">
           <router-link :to="{name:'company_new_project'}" class="list-group-item"
                        :class="{active: $route.name==='company_new_project' || $route.name==='company_project'}">
             <i class="fa fa-angle-right"></i> Project
           </router-link>
-          <router-link :to="{name:'company_new_project'}" class="list-group-item"
-                       :class="{active: $route.name==='company_new_project' || $route.name==='company_project'}">
+          <router-link :to="{name:'company_feed'}" class="list-group-item"
+                       :class="{active: $route.name==='company_feed'}">
             <i class="fa fa-angle-right"></i> Project Feed
           </router-link>
           <router-link :to="{name:'company_wallet'}" class="list-group-item"
@@ -88,19 +88,20 @@
                        :class="{active: $route.name==='company_promotion'}">
             <i class="fa fa-angle-right"></i> Promotion Application
           </router-link>
-          <!--<router-link :to="{name:'me_team'}" class="list-group-item" v-if="type===0"-->
-          <!--:class="{active: $route.name==='me_team'}">-->
-          <!--<i class="fa fa-angle-right"></i> My Team-->
-          <!--</router-link>-->
-          <!--<router-link :to="{name:'me_new_project'}" class="list-group-item" v-if="type===0"-->
-          <!--:class="{active: $route.name==='me_new_project'}">-->
-          <!--<i class="fa fa-angle-right"></i> Submit New ICO-->
-          <!--</router-link>-->
-          <!--<router-link :to="{name:'me_created'}" class="list-group-item with-badge" v-if="type===0"-->
-          <!--:class="{active: $route.name==='me_created'}">-->
-          <!--<i class="fa fa-angle-right"></i> My ICO Projects-->
-          <!--</router-link>-->
         </nav>
+
+        <h6 class="text-muted text-normal text-uppercase mt-4" v-if="type===2">Expert Center</h6>
+        <nav class="list-group" v-if="type===2">
+          <router-link :to="{name:'company_new_project'}" class="list-group-item"
+                       :class="{active: $route.name==='company_new_project' || $route.name==='company_project'}">
+            <i class="fa fa-angle-right"></i> My Rated Projects
+          </router-link>
+          <router-link :to="{name:'company_new_project'}" class="list-group-item"
+                       :class="{active: $route.name==='company_new_project' || $route.name==='company_project'}">
+            <i class="fa fa-angle-right"></i> Unrated Projects
+          </router-link>
+        </nav>
+
       </div>
       <!--main content-->
       <router-view></router-view>

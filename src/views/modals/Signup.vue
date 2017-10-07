@@ -126,9 +126,10 @@
                 this.resetState()
               })
               .catch((error) => {
-                for (let e in error.data) {
-                  if (e === 'email') this.email_msg = error.data[e][0]
-                }
+                this.loading = false
+                console.log(error.response)
+                if (error.response.data.hasOwnProperty('email'))
+                  this.email_msg = error.response.data.email[0]
               })
           })
         })

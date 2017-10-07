@@ -1,5 +1,7 @@
 <template>
-  <div class="col-md-8" v-if="loaded && is_verified && !has_project">
+  <div class="col-md-8" v-if="loaded && is_verified">
+    <h6 class="text-muted text-normal text-uppercase ">New Project</h6>
+    <hr class="mb-3 mt-2">
     <div class="checkout-steps">
       <a :class="{active:step===4}" href="javascript:void(0)" @click="step=4">
         <span class="fa fa-check-circle-o text-success" v-show="step>4"></span> 4. Social Media

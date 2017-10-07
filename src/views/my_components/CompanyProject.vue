@@ -1,5 +1,8 @@
 <template>
   <div class="col-md-8">
+    <h6 class="text-muted text-normal text-uppercase ">Project Detail</h6>
+    <hr class="mb-3 mt-2">
+
     <div class="alert alert-primary show text-center mb-4" v-if="current_project.status===0">
       <i class="fa fa-info-circle"></i> Project Status: <b>Verifying</b>
     </div>
@@ -281,7 +284,7 @@
         loaded: false,
         icon_change: false,
         uploading: false,
-
+        window_width: 0,
         // -- form info start --
         // Basic Info
         name: '',
@@ -314,11 +317,17 @@
     },
     methods: {
       projectModal () {
+
         /* global $:true */
-        this.$store.dispatch('getProject', this.current_project.id)
-          .then(() => {
-            $('#project-modal').modal('show')
-          })
+        if (this.window_width <= 1200) {
+          this.$router.push({name: 'project', params: {id: this.current_project.id}})
+        }
+        else {
+          this.$store.dispatch('getProject', this.current_project.id)
+            .then(() => {
+              $('#project-modal').modal('show')
+            })
+        }
       },
       onImageReady (scale) {
         this.$refs.icon_scale.setScale(scale)
@@ -378,61 +387,119 @@
 
         /* global FormData */
         let formData = new FormData()
-        formData.append('id', this.current_project.id)
-        formData.append('name', this.name)
-        // TODO: logo image should use blob to get
-        if (this.icon)
-          formData.append('logo_image', this.icon)
-        formData.append('category', this.category)
-        formData.append('description_short', this.description_short)
-        formData.append('description_full', this.description_full)
 
-        formData.append('type', this.type)
-        formData.append('coin_name', this.coin_name)
-        formData.append('minimum_goal', this.minimum_goal)
-        formData.append('maximum_goal', this.maximum_goal)
-        formData.append('coin_unit', this.coin_unit)
+        console.log(this.current_project.id)
+        if (this.icon) {
+          this.icon.toBlob((blob) => {
+            formData.append('id', this.current_project.id)
+            formData.append('logo_image', blob, 'project.icon.png')
+            formData.append('name', this.name)
+            formData.append('category', this.category)
+            formData.append('description_short', this.description_short)
+            formData.append('description_full', this.description_full)
 
-        if (this.start_datetime)
-          formData.append('start_datetime', this.start_datetime.format('YYYY-MM-DD HH:mmZ'))
+            formData.append('type', this.type)
+            formData.append('coin_name', this.coin_name)
+            formData.append('minimum_goal', this.minimum_goal)
+            formData.append('maximum_goal', this.maximum_goal)
+            formData.append('coin_unit', this.coin_unit)
 
-        if (this.end_datetime)
-          formData.append('end_datetime', this.end_datetime.format('YYYY-MM-DD HH:mmZ'))
+            if (this.start_datetime)
+              formData.append('start_datetime', this.start_datetime.format('YYYY-MM-DD HH:mmZ'))
 
-        formData.append('ratio', this.ratio)
-        formData.append('equality_on_offer', this.equality_on_offer)
-        formData.append('accept', this.accept)
+            if (this.end_datetime)
+              formData.append('end_datetime', this.end_datetime.format('YYYY-MM-DD HH:mmZ'))
 
-        formData.append('white_paper', this.white_paper)
-        formData.append('video_link', this.video_link)
-        formData.append('website', this.website)
+            formData.append('ratio', this.ratio)
+            formData.append('equality_on_offer', this.equality_on_offer)
+            formData.append('accept', this.accept)
 
-        formData.append('medium', this.medium)
-        formData.append('twitter', this.twitter)
-        formData.append('slack', this.slack)
-        formData.append('telegram', this.telegram)
+            formData.append('white_paper', this.white_paper)
+            formData.append('video_link', this.video_link)
+            formData.append('website', this.website)
 
-        formData.append('video_link', this.video_link)
-        formData.append('website', this.website)
+            formData.append('medium', this.medium)
+            formData.append('twitter', this.twitter)
+            formData.append('slack', this.slack)
+            formData.append('telegram', this.telegram)
 
-        this.$store.dispatch('updateProject', formData)
-          .then(() => {
-            this.$store.dispatch('toastr', {
-              type: 'success',
-              title: 'Success',
-              message: 'Your Project Info is updated!'
-            })
-            this.uploading = false
+            formData.append('video_link', this.video_link)
+            formData.append('website', this.website)
+            this.$store.dispatch('updateProject', formData)
+              .then(() => {
+                this.$store.dispatch('toastr', {
+                  type: 'success',
+                  title: 'Success',
+                  message: 'Your Project Info is updated!'
+                })
+                this.uploading = false
+              })
+              .catch(() => {
+                this.$store.dispatch('toastr', {
+                  type: 'danger',
+                  title: 'Error',
+                  message: 'Something happened, please try again later'
+                })
+                this.uploading = false
+              })
           })
-          .catch(() => {
-            this.$store.dispatch('toastr', {
-              type: 'danger',
-              title: 'Error',
-              message: 'Something happened, please try again later'
+        }
+        else {
+          formData.append('id', this.current_project.id)
+          formData.append('name', this.name)
+          formData.append('category', this.category)
+          formData.append('description_short', this.description_short)
+          formData.append('description_full', this.description_full)
+
+          formData.append('type', this.type)
+          formData.append('coin_name', this.coin_name)
+          formData.append('minimum_goal', this.minimum_goal)
+          formData.append('maximum_goal', this.maximum_goal)
+          formData.append('coin_unit', this.coin_unit)
+
+          if (this.start_datetime)
+            formData.append('start_datetime', this.start_datetime.format('YYYY-MM-DD HH:mmZ'))
+
+          if (this.end_datetime)
+            formData.append('end_datetime', this.end_datetime.format('YYYY-MM-DD HH:mmZ'))
+
+          formData.append('ratio', this.ratio)
+          formData.append('equality_on_offer', this.equality_on_offer)
+          formData.append('accept', this.accept)
+
+          formData.append('white_paper', this.white_paper)
+          formData.append('video_link', this.video_link)
+          formData.append('website', this.website)
+
+          formData.append('medium', this.medium)
+          formData.append('twitter', this.twitter)
+          formData.append('slack', this.slack)
+          formData.append('telegram', this.telegram)
+
+          formData.append('video_link', this.video_link)
+          formData.append('website', this.website)
+          this.$store.dispatch('updateProject', formData)
+            .then(() => {
+              this.$store.dispatch('toastr', {
+                type: 'success',
+                title: 'Success',
+                message: 'Your Project Info is updated!'
+              })
+              this.uploading = false
             })
-            this.uploading = false
-          })
-      }
+            .catch(() => {
+              this.$store.dispatch('toastr', {
+                type: 'danger',
+                title: 'Error',
+                message: 'Something happened, please try again later'
+              })
+              this.uploading = false
+            })
+        }
+      },
+      getWindowWidth (event) {
+        this.window_width = document.documentElement.clientWidth
+      },
     },
     computed: {
       ...mapGetters({
@@ -461,8 +528,20 @@
         .then(() => {
           this.loaded = true
         })
+    },
+    mounted () {
+      this.$nextTick(function () {
+        window.addEventListener('resize', this.getWindowWidth)
+
+        //Init
+        this.getWindowWidth()
+      })
+    },
+    beforeDestroy () {
+      window.removeEventListener('resize', this.getWindowWidth)
     }
   }
+
 </script>
 
 <style>

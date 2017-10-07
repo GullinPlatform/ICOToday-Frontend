@@ -4,7 +4,7 @@
       Subscribed ICO Projects
     </h6>
     <hr class="mb-3 mt-2">
-    <post-list :loaded="loaded" :posts="self_marked_posts"></post-list>
+    <project-list :loaded="loaded" :posts="self_marked_posts"></project-list>
     <div class="mt-5" v-if="loaded && self_marked_posts.length===0">
       <div class="text-center">
         <h3 class="product-title">You don't have marked projects right now</h3>
@@ -17,7 +17,8 @@
 </template>
 
 <script>
-  import PostList from 'src/views/components/PostList'
+  import { mapGetters } from 'vuex'
+  import ProjectList from 'src/views/components/ProjectList'
 
   export default {
     name: 'MyMarkedProjects',
@@ -33,7 +34,7 @@
       }
     },
     components: {
-      PostList
+      ProjectList
     },
     methods: {
       loadProjects () {
@@ -44,15 +45,14 @@
             this.loaded = true
           })
       },
-
     },
     computed: {
-      me () {
-        return this.$store.getters.self
-      },
-      self_marked_posts () {
-        return this.$store.getters.self_marked_posts
-      }
+      ...mapGetters({
+        me: 'self',
+        is_verified: 'is_verified',
+        login_status: 'login_status',
+        self_marked_posts: 'self_marked_posts'
+      })
     },
     beforeMount () {
       this.loaded = false

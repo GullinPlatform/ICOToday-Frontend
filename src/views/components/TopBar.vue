@@ -33,9 +33,10 @@
         <div class="toolbar">
           <div class="inner">
             <div class="tools">
-              <div class="notification" v-if="login_status"><a href="javascript:void(0)"></a>
+              <div class="notification" v-if="login_status">
                 <i class="icon-bell"></i>
                 <span class="count" v-if="notifications.length">{{notifications.length}}</span>
+                <a href="javascript:void(0)"></a>
                 <div class="toolbar-dropdown" v-if="notifications.length">
                   <div class="dropdown-notification-item" v-for="notify in notifications">
                     <div class="dropdown-notification-thumb">
@@ -75,7 +76,7 @@
               </div>
               <div class="account" v-if="login_status">
                 <img v-if="me.info" :src="me.info.avatar" class="rounded-circle">
-                <a href="javascript:void(0)"></a>
+                <router-link :to="{name:'me'}"></router-link>
                 <ul class="toolbar-dropdown">
                   <li class="sub-menu-user">
                     <div class="user-info">
@@ -84,6 +85,11 @@
                     </div>
                   </li>
                   <li class="sub-menu-separator"></li>
+                  <li>
+                    <router-link :to="{name:'me'}" class="dropdown-item">
+                      <i class="fa fa-newspaper-o"></i> Feed
+                    </router-link>
+                  </li>
                   <li>
                     <router-link :to="{name:'me_wallet'}" class="dropdown-item">
                       <i class="fa fa-bitcoin"></i> My Wallet
@@ -195,7 +201,7 @@
       },
 
       timeFromNow (time) {
-        return  moment(time).fromNow()
+        return moment(time).fromNow()
       }
 
     },

@@ -1,62 +1,79 @@
 <template>
   <div class="col-md-8">
-    <div class="alert alert-primary show text-center mb-4" v-if="promotion_application.status===0">
-      <i class="fa fa-info-circle"></i> Status: <b>Processing</b>
+    <h6 class="text-muted text-normal text-uppercase ">
+      ICOToday Promotion Application
+    </h6>
+    <hr class="mb-3 mt-2">
+
+    <div v-if="exists">
+      <div class="alert alert-primary show text-center mb-4" v-if="promotion_application.status===0">
+        <i class="fa fa-info-circle"></i> Status: <b>Processing</b>
+      </div>
+      <div class="alert alert-success show text-center mb-4" v-else-if="promotion_application.status===1">
+        <i class="fa fa-info-circle"></i> Status: <b>Approved</b>
+      </div>
+      <div class="alert alert-success show text-center mb-4" v-else-if="promotion_application.status===2">
+        <i class="fa fa-info-circle"></i> Status: <b>Declined</b>
+      </div>
     </div>
 
-    <div class="alert alert-success show text-center mb-4" v-else-if="promotion_application.status===1">
-      <i class="fa fa-info-circle"></i> Status: <b>Approved</b>
-    </div>
-
-    <div class="alert alert-success show text-center mb-4" v-else-if="promotion_application.status===2">
-      <i class="fa fa-info-circle"></i> Status: <b>Declined</b>
-    </div>
-
-    <div class="card-new-layout" v-if="loaded&&!exists">
-      <h6 class="text-muted text-normal text-uppercase ">
-        ICOToday Promotion Application
-      </h6>
-      <hr class="mb-3 mt-2">
-      <div class="form-group row">
-        <p class="col-sm-2 col-form-label">Duration<span class="text-danger text-small">*</span></p>
-        <div class="col-sm-10">
-          <select class="form-control" v-model="duration">
-            <option value="1">1 Day</option>
-            <option value="7">1 Week</option>
-          </select>
+    <div v-if="loaded&&!exists">
+      <div class="card-new-layout">
+        <div class="form-group row">
+          <p class="col-sm-2 col-form-label">Duration<span class="text-danger text-small">*</span></p>
+          <div class="col-sm-10">
+            <select class="form-control" v-model="duration">
+              <option value="1">1 Day</option>
+              <option value="7">1 Week</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <p class="col-sm-2 col-form-label">Detail<span class="text-danger text-small">*</span></p>
+          <div class="col-sm-10">
+            <textarea class="form-control" v-model="detail" placeholder="( Markdown Support Enabled )" rows="20"></textarea>
+          </div>
+        </div>
+        <div class="form-group row justify-content-end">
+          <div class="col-md-10">
+            <button type="button" @click="submitPromotionApplication()" class="mb-1 btn btn-block btn-primary" :disabled="uploading">
+              SUBMIT<span v-if="uploading">ING</span>
+            </button>
+            <p class="text-danger" v-if="error_message">{{error_message}}</p>
+          </div>
         </div>
       </div>
-      <div class="form-group row">
-        <p class="col-sm-2 col-form-label">Detail<span class="text-danger text-small">*</span></p>
-        <div class="col-sm-10">
-          <textarea class="form-control" v-model="detail" placeholder="( Markdown Support Enabled )" rows="20"></textarea>
+    </div>
+
+    <div v-else-if="loaded&&exists">
+      <div class="card-new-layout">
+        <div class="form-group row">
+          <span class="col-sm-2 col-form-label">Duration<span class="text-danger text-small">*</span></span>
+          <div class="col-sm-10">
+            <select class="form-control" v-model="duration" :disabled="!edit">
+              <option value="1">1 Day</option>
+              <option value="7">1 Week</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <p class="col-sm-2 col-form-label">Detail<span class="text-danger text-small">*</span></p>
+          <div class="col-sm-10 col-form-label">
+            <textarea class="form-control" v-model="detail" rows="20" :disabled="!edit"></textarea>
+          </div>
         </div>
       </div>
-      <div class="form-group row justify-content-end">
-        <div class="col-md-10">
-          <button type="button" @click="submitPromotionApplication()" class="mb-1 btn btn-block btn-primary" :disabled="uploading">
-            SUBMIT<span v-if="uploading">ING</span>
+      <div class="form-group row card-new-layout justify-content-center m-0">
+        <div class="col-md-6 m-0">
+          <button type="button" @click="edit=true" class="mb-1 btn btn-block btn-secondary">
+            EDIT
           </button>
-          <p class="text-danger">{{error_message}}</p>
         </div>
-      </div>
-    </div>
-    <div class="card-new-layout" v-else-if="loaded&&exists">
-      <h6 class="text-muted text-normal text-uppercase ">
-        ICOToday Promotion Application
-      </h6>
-      <hr class="mb-3 mt-2">
-      <div class="form-group row">
-        <p class="col-sm-2 col-form-label">Duration<span class="text-danger text-small">*</span></p>
-        <div class="col-sm-10  col-form-label">
-          <p v-if="duration===1">1 Day</p>
-          <p v-else-if="duration===7">1 Week</p>
-        </div>
-      </div>
-      <div class="form-group row">
-        <p class="col-sm-2 col-form-label">Detail<span class="text-danger text-small">*</span></p>
-        <div class="col-sm-10  col-form-label">
-          <p>{{detail}}</p>
+        <div class="col-md-6 m-0">
+          <button type="button" @click="updatePromotionApplication()" class="mb-1 btn btn-block btn-primary" :disabled="uploading">
+            UPDAT<span v-if="uploading">ING</span><span v-else>E</span>
+          </button>
+          <p class="text-danger" v-if="error_message">{{error_message}}</p>
         </div>
       </div>
     </div>
@@ -70,6 +87,7 @@
     name: 'CompanyPromotion',
     data () {
       return {
+        edit: false,
         loaded: false,
         uploading: false,
         exists: false,
@@ -111,8 +129,25 @@
             this.exists = true
             this.duration = this.promotion_application.duration
             this.detail = this.promotion_application.detail
+            this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'Your promotion application is submitted!'})
+          })
+      },
+      updatePromotionApplication () {
+        this.uploading = true
+        const form_data = {
+          duration: this.duration,
+          detail: this.detail
+        }
+        this.$store.dispatch('updatePromotionApplication', form_data)
+          .then(() => {
+            this.uploading = false
+            this.exists = true
+            this.duration = this.promotion_application.duration
+            this.detail = this.promotion_application.detail
+            this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'Your promotion application is updated!'})
           })
       }
+
     },
     computed: {
       ...mapGetters({
@@ -130,7 +165,7 @@
         this.$router.push({name: 'landing'})
       }
 
-      // Load company wallet
+      // Load company promotion application
       this.getPromotionApplication()
     }
   }

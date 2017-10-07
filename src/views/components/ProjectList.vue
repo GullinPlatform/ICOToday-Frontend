@@ -24,7 +24,7 @@
       <div class="column project">
         <div class="project-info-wrapper">
           <div class="project-icon">
-            <a href="javascript:void(0)" @click="postModal(project.id)">
+            <a href="javascript:void(0)" @click="projectModal(project.id)">
               <img :src="project.logo_image" alt="Logo">
             </a>
           </div>
@@ -59,12 +59,14 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
+
   export default {
-    name: 'PostList',
+    name: 'ProjectList',
     props: {
-      posts: {
+      projects: {
         type: Array,
-        default: []
+        default: function () { return [] }
       },
       loaded: {
         type: Boolean,
@@ -128,13 +130,13 @@
         }
       },
 
-      postModal (id) {
+      projectModal (id) {
         /* global $:true */
         if (this.window_width <= 768) {
-          this.$router.push({name: 'post', params: {id: id}})
+          this.$router.push({name: 'project', params: {id: id}})
         }
         else {
-          this.$store.dispatch('getPost', id)
+          this.$store.dispatch('getProject', id)
             .then(() => {
               $('#project-modal').modal('show')
             })
@@ -176,17 +178,16 @@
       },
     },
     computed: {
-      login_status () {
-        return this.$store.getters.login_status
-      },
-      self_marked_posts () {
-        return this.$store.getters.self_marked_posts
-      }
+      ...mapGetters({
+        me: 'self',
+        is_verified: 'is_verified',
+        login_status: 'login_status',
+        marked_projects: 'self_marked_posts'
+      })
     },
     mounted () {
       this.$nextTick(function () {
         window.addEventListener('resize', this.getWindowWidth)
-
         //Init
         this.getWindowWidth()
       })
@@ -274,7 +275,6 @@
     overflow: hidden;
     color: #666;
   }
-
 
   .project-list .column.project-data {
     width: 150px;

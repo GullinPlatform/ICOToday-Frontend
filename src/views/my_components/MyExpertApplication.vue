@@ -1,5 +1,5 @@
 <template>
-  <div class="col-md-8" v-if="loaded && me.is_verified && !self_expert_application">
+  <div class="col-md-8" v-if="loaded && is_verified && !self_expert_application">
     <h6 class="text-muted text-normal text-uppercase ">
       ICOToday Expert Application
     </h6>
@@ -19,35 +19,39 @@
     </div>
   </div>
 
-  <div class="col-md-8" v-else-if="loaded && me.is_verified && self_expert_application">
+  <div class="col-md-8" v-else-if="loaded && is_verified && self_expert_application">
     <h6 class="text-muted text-normal text-uppercase ">
       ICOToday Expert Application
     </h6>
     <hr class="mb-3 mt-2">
-    <div class="form-group row">
-      <div class="col-sm-12">
-        <textarea class="form-control" v-model="detail" :disabled="!edit" placeholder="( Markdown Support Enabled )" rows="20"></textarea>
+    <div class="alert alert-primary show text-center mb-4">
+      <i class="fa fa-info-circle"></i> Your application is under review
+    </div>
+    <div class="card-new-layout">
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <textarea class="form-control" v-model="detail" :disabled="!edit" placeholder="( Markdown Support Enabled )" rows="20"></textarea>
+        </div>
       </div>
     </div>
-    <div class="form-group row justify-content-md-center">
-      <div class="col-md-6">
-        <button type="button" @click="edit=true" class="mb-1 btn btn-block btn-secondary">
-          EDIT
-        </button>
+    <div class="card-new-layout">
+      <div class="form-group row justify-content-center m-0">
+        <div class="col-md-6 m-0">
+          <button type="button" @click="edit=true" class="mb-1 btn btn-block btn-secondary">
+            EDIT
+          </button>
+        </div>
+        <div class="col-md-6 m-0">
+          <button type="button" @click="updateExpertApplication()" class="mb-1 btn btn-block btn-primary" :disabled="uploading">
+            UPDAT<span v-if="uploading">ING</span><span v-else>E</span>
+          </button>
+          <p class="text-danger" v-if="error_message">{{error_message}}</p>
+        </div>
       </div>
-      <div class="col-md-6">
-        <button type="button" @click="updateExpertApplication()" class="mb-1 btn btn-block btn-primary" :disabled="uploading">
-          UPDAT<span v-if="uploading">ING</span><span v-else>E</span>
-        </button>
-        <p class="text-danger">{{error_message}}</p>
-      </div>
-      <h6 class="text-muted">
-        <i class="fa fa-lightbulb-o"></i> Your application is under review
-      </h6>
     </div>
   </div>
 
-  <div class="col-md-8 text-center" v-else-if="!me.is_verified">
+  <div class="col-md-8 text-center" v-else-if="!is_verified">
     <h4 class="mt-3">
       You have to verify your email first
     </h4>
@@ -56,6 +60,8 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
+
   export default {
     name: 'MyExpertApplication',
     data () {
@@ -86,23 +92,25 @@
           })
       },
       updateExpertApplication () {
-        if (!this.detail) return
+        if (!this.detail) {
+          this.$store.dispatch('toastr', {type: 'danger', title: 'Error', message: 'Detail cannot be empty!'})
+          return
+        }
         this.uploading = true
         this.$store.dispatch('updateMyExpertApplication', {detail: this.detail})
           .then(() => {
             this.uploading = false
             this.edit = false
-            this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'Your application is submitted!'})
+            this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'Your application is updated!'})
           })
       }
     },
     computed: {
-      me () {
-        return this.$store.getters.self
-      },
-      self_expert_application () {
-        return this.$store.getters.self_expert_application
-      }
+      ...mapGetters({
+        me: 'self',
+        is_verified: 'is_verified',
+        self_expert_application: 'self_expert_application',
+      })
     },
     beforeCreate () {
       // redirect non ico investor user

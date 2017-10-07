@@ -11,8 +11,7 @@
     <login-modal v-if="!login_status"></login-modal>
     <signup-modal v-if="!login_status"></signup-modal>
     <add-team-member v-if="login_status"></add-team-member>
-    <post-edit v-if="login_status&&me.type==0"></post-edit>
-    <post-update v-if="login_status&&me.type==0"></post-update>
+    <project-update v-if="login_status&&me.type==0"></project-update>
     <project-modal></project-modal>
     <similar-company v-if="login_status&&me.info.type===-1"></similar-company>
     <!-- Modal End-->
@@ -27,9 +26,8 @@
   import SignupModal from 'modals/Signup'
   import LoginModal from 'modals/Login'
   import AddTeamMember from 'modals/AddTeamMember'
-  import PostEdit from 'modals/PostEdit'
-  import PostUpdate from 'modals/PostUpdate'
-  import ProjectModal from 'modals/ProjectModal'
+  import ProjectUpdate from 'modals/ProjectUpdate'
+  import ProjectModal from 'views/project_pages/ProjectModal'
   import SimilarCompany from 'modals/SimilarCompany'
 
   export default {
@@ -41,8 +39,7 @@
       LoginModal,
       SignupModal,
       AddTeamMember,
-      PostEdit,
-      PostUpdate,
+      ProjectUpdate,
       SimilarCompany
     },
     computed: {
