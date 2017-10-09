@@ -1,20 +1,51 @@
-import Vue from 'vue'
-import Resource from 'vue-resource'
+import axios from 'axios'
 
-import { API_ROOT } from '../config.js'
-import { getCookie } from '../utils/cookie'
+import { API_ROOT } from '../config'
 
-Vue.use(Resource)
+const apiCall = (method, url, form_data, params) => {
+  return axios({
+    method: method,
+    url: url,
+    data: form_data ? form_data : {},
+    params: params ? params : {},
+    baseURL: API_ROOT + '/nt/',
+    withCredentials: true,
+  })
+    .then((response) => Promise.resolve(response.data))
+    .catch((error) => {
+      if (error) {
+        console.log(error)
+        return Promise.reject(error)
+      }
+      else
+        return Promise.reject({})
+    })
+}
 
 export default {
-  getNotifications () {
-    return Vue.http.get(API_ROOT + 'notification/fetch/', {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
+  getNotifications (page) {
+    if (page)
+      return apiCall('get', 'fetch/' + page + '/')
+    else
+      return apiCall('get', 'fetch/')
   },
+  getReadNotifications (page) {
+    if (page)
+      return apiCall('get', 'fetch/read/' + page + '/')
+    else
+      return apiCall('get', 'fetch/read/')
+  },
+  getAllNotifications (page) {
+    if (page)
+      return apiCall('get', 'fetch/all/' + page + '/')
+    else
+      return apiCall('get', 'fetch/all/')
+  },
+
   readNotification (pk) {
-    return Vue.http.post(API_ROOT + 'notification/read/' + pk + '/', {}, {headers: {Authorization: 'TOKEN ' + getCookie('token')}})
-      .then((response) => Promise.resolve(response.data))
-      .catch((error) => Promise.reject(error))
+    return apiCall('post', 'read/' + pk + '/')
+  },
+  readAllNotification () {
+    return apiCall('post', 'read/all/')
   }
 }

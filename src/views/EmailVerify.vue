@@ -55,7 +55,8 @@
           })
           .catch((error) => {
             this.loaded = true
-            this.err_msg = error.body.detail
+            this.err_msg = error
+            console.log(error)
           })
       }
     },

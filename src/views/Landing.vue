@@ -10,12 +10,12 @@
               <h1 class="text-white text-bold mb-2">
                 ICOToday
               </h1>
-              <h2 class="text-white text-thin text-uppercase">
+              <h2 class="text-white text-uppercase">
                 Seamless Platform<br>
                 for Launching and Investing<br>
                 on Blockchain
               </h2>
-              
+
             </div>
             <div class="col-md-5 float-right">
               <div class="register-form pb-0 pt-3">
@@ -44,14 +44,14 @@
       <div class="row">
         <div class="col-lg-3 col-md-4 col-sm-6"
              v-if="promotion_loaded"
-             v-for="project in promo_posts">
+             v-for="project in promo_projects">
           <div class="article promo-project-tile promo-project-border-default has-promo-project-thumbnail format-image">
             <div class="header promo-project-header">
               <a class="promo-project-thumb" @click="postModal(project.id)" href="javascript:void(0)">
                 <img :src="project.promote_image">
               </a>
               <div class="promo-project-score">
-                <span v-if="project.rating">{{project.rating}}/100</span>
+                <span v-if="project.rating">{{project.rating}} / 100</span>
                 <span v-else>No Score</span>
               </div>
               <span class="promo-project-format">
@@ -69,7 +69,12 @@
               </div>
             </div>
             <div class="promo-project-body">
-              <h3 class="promo-project-title mb-0">{{project.title}}</h3>
+              <h3 class="promo-project-title mb-0">
+                <a @click="postModal(project.id)" href="javascript:void(0)">
+                  {{project.name}}
+                </a>
+              </h3>
+              <span class="badge badge-sm badge-default">{{project.category}}</span> <br>
               {{project.description_short}}
             </div>
             <div class="footer promo-project-footer">
@@ -89,29 +94,25 @@
       <div class="row">
         <div class="col-lg-2">
           <nav class="list-group">
-            <a class="list-group-item" href="javascript:void(0)" @click="status='active'" :class="{active:status==='active'}">ACTIVE</a>
-            <a class="list-group-item" href="javascript:void(0)" @click="status='upcoming'" :class="{active:status==='upcoming'}">UPCOMING</a>
-            <a class="list-group-item" href="javascript:void(0)" @click="status='passed'" :class="{active:status==='passed'}">PASSED</a>
-            <a class="list-group-item" href="javascript:void(0)" @click="status=''" :class="{active:status===''}">ALL</a>
+            <a class="list-group-item" href="javascript:void(0)" @click="status='active'" :class="{active:status==='active'}">{{project_stat.active}} ACTIVE</a>
+            <a class="list-group-item" href="javascript:void(0)" @click="status='upcoming'" :class="{active:status==='upcoming'}">{{project_stat.upcoming}} UPCOMING</a>
+            <a class="list-group-item" href="javascript:void(0)" @click="status='passed'" :class="{active:status==='passed'}">{{project_stat.passed}} PASSED</a>
+            <a class="list-group-item" href="javascript:void(0)" @click="status=''" :class="{active:status===''}">{{project_stat.all}} TOTAL</a>
           </nav>
         </div>
         <div class="col-lg-10">
-          <div class="row">
-            <div class="col-lg-4">
-              <section class="widget widget-links mb-3">
-                <div class="input-group form-group">
-                                <span class="input-group-btn">
-                                <button>
-                                    <i class="icon-search"></i>
-                                </button>
-                                </span>
+          <div class="card-new-layout">
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="input-group form-group mb-0">
+                  <span class="input-group-btn">
+                  <button><i class="icon-search"></i></button>
+                  </span>
                   <input class="form-control" v-model="keyword" placeholder="Search by Keyword">
                 </div>
-              </section>
-            </div>
-            <div class="col-lg-4">
-              <section class="widget widget-links mb-3">
-                <div class="input-group form-group">
+              </div>
+              <div class="col-lg-4">
+                <div class="input-group form-group mb-0">
                   <select class="form-control" v-model="category" required>
                     <option value="" selected>-- Choose Category --</option>
                     <option value="Platform">Platform</option>
@@ -139,33 +140,28 @@
                   </select>
 
                 </div>
-              </section>
+              </div>
+              <div class="col-lg-4">
+                <select class="form-control mb-0" v-model="type" required>
+                  <option value="" selected>-- Choose Type --</option>
+                  <option value="0">Pre-ICO</option>
+                  <option value="1">ICO</option>
+                </select>
+              </div>
             </div>
-            <div class="col-lg-4">
-              <section class="widget widget-links mb-3">
-                <div class="input-group form-group">
-                  <select class="form-control" v-model="type" required>
-                    <option value="" selected>-- Choose Type --</option>
-                    <option value="0">Pre-ICO</option>
-                    <option value="1">ICO</option>
-                  </select>
-                </div>
-              </section>
-            </div>
-          </div>
-          <div class="row mb-4">
-            <div class="col-lg-12">
-              <a class="tag" href="javascript:void(0)" @click="category=''"
-                 v-if="category">#{{category}}</a>
-              <a class="tag" href="javascript:void(0)" @click="keyword=''" v-if="keyword">#{{keyword}}</a>
-              <a class="tag" href="javascript:void(0)" @click="type=''" v-if="type==='0'">#Pre-ICO</a>
-              <a class="tag" href="javascript:void(0)" @click="type=''" v-if="type==='1'">#ICO</a>
-              <a class="tag" href="javascript:void(0)" @click="status=''" v-if="status">#{{status}}</a>
+            <div class="row">
+              <div class="col-lg-12">
+                <a class="tag mb-0 mt-3" href="javascript:void(0)" @click="category=''" v-if="category">#{{category}}</a>
+                <a class="tag mb-0 mt-3" href="javascript:void(0)" @click="keyword=''" v-if="keyword">#{{keyword}}</a>
+                <a class="tag mb-0 mt-3" href="javascript:void(0)" @click="type=''" v-if="type==='0'">#Pre-ICO</a>
+                <a class="tag mb-0 mt-3" href="javascript:void(0)" @click="type=''" v-if="type==='1'">#ICO</a>
+                <a class="tag mb-0 mt-3" href="javascript:void(0)" @click="status=''" v-if="status">#{{status}}</a>
+              </div>
             </div>
           </div>
           <div class="row">
             <div class="col-lg-12">
-              <post-list :loaded="list_loaded" :posts="posts"></post-list>
+              <project-list :loaded="list_loaded" :projects="projects"></project-list>
             </div>
           </div>
         </div>
@@ -177,7 +173,9 @@
 </template>
 
 <script>
-  import PostList from 'components/PostList'
+  import { mapGetters } from 'vuex'
+
+  import ProjectList from 'components/ProjectList'
   import _ from 'lodash'
 
   export default {
@@ -189,13 +187,14 @@
       }
     },
     components: {
-      PostList
+      ProjectList
     },
     data () {
       return {
         // loading track
         list_loaded: false,
         promotion_loaded: false,
+        stat_loaded: false,
 
         // for whitelist register
         email: '',
@@ -219,18 +218,18 @@
           keyword: this.keyword,
           category: this.category,
         }
-        this.$store.dispatch('searchPostsByPage', formData)
+        this.$store.dispatch('searchProjectsByPage', formData)
       },
       search: _.debounce(
         function () {
           this.list_loaded = false
-          const formData = {
+          const query_data = {
             page: this.page,
             status: this.status,
             keyword: this.keyword,
             category: this.category,
           }
-          this.$store.dispatch('searchPosts', formData)
+          this.$store.dispatch('listProjects', query_data)
             .then(() => {
               this.list_loaded = true
             })
@@ -242,7 +241,7 @@
           $('#signup-modal').modal('show')
           return
         }
-        this.$store.dispatch('markPost', id)
+        this.$store.dispatch('markProject', id)
           .then(() => {
             if (mark) {
               this.$store.dispatch('toastr', {
@@ -268,9 +267,9 @@
       },
       postModal (id) {
         /* global $:true */
-        this.$store.dispatch('getPost', id)
+        this.$store.dispatch('getProject', id)
           .then(() => {
-            $('#post-modal').modal('show')
+            $('#project-modal').modal('show')
           })
       },
 
@@ -331,32 +330,41 @@
           })
         }
       },
+      getWindowWidth (event) {
+        this.window_width = document.documentElement.clientWidth
+      },
     },
     computed: {
-      posts () {
-        return this.$store.getters.posts
-      },
-      promo_posts () {
-        return this.$store.getters.promo_posts
-      },
-      login_status () {
-        return this.$store.getters.login_status
-      },
-      self_marked_posts () {
-        return this.$store.getters.self_marked_posts
-      },
-      me () {
-        return this.$store.getters.self
-      }
+      ...mapGetters({
+        me: 'self',
+        is_verified: 'is_verified',
+        login_status: 'login_status',
+        projects: 'projects',
+        self_marked_posts: 'self_marked_posts',
+        promo_projects: 'promo_projects',
+        project_stat: 'project_stat'
+      })
+    },
+    watch: {
+      keyword () { this.search() },
+      category () { this.search()},
+      type () { this.search() },
+      status () { this.search() },
+      page () { this.loadMore() }
     },
     beforeMount () {
       this.search()
-      this.$store.dispatch('listPromoPosts')
+      this.$store.dispatch('listPromoProjects')
         .then(() => {
           this.promotion_loaded = true
         })
+      this.$store.dispatch('getProjectStat')
+        .then(() => {
+          this.stat_loaded = true
+        })
+      if (this.login_status)
+        this.$store.dispatch('getSelfMarkedProject')
 
-      this.$store.dispatch('getSelfMarkedPost')
     },
     mounted () {
       /* global particlesJS:true */
@@ -470,68 +478,14 @@
         },
         'retina_detect': true
       })
+      this.$nextTick(function () {
+        window.addEventListener('resize', this.getWindowWidth)
+        //Init
+        this.getWindowWidth()
+      })
     },
-    watch: {
-      keyword () {
-        this.search()
-      },
-      category () {
-        this.search()
-      },
-      type () {
-        this.search()
-      },
-      status () {
-        this.search()
-      },
-      page () {
-        this.loadMore()
-      }
-    },
-    directives: {
-      'scroll-at': {
-        /**
-         * @example: <div v-scroll-at.bottom="loadMore"></div>
-         */
-
-        _bind () {
-          this.el.addEventListener('scroll', this.scrollHandler)
-        },
-        _unbind () {
-          this.el.removeEventListener('scroll', this.scrollHandler)
-        },
-        bind () {
-          let loading = false
-          let done = () => { loading = false }
-
-          this.scrollHandler = () => {
-            let triggerTop = this.modifiers.top || false
-            let distance = this.el.scrollTop
-            let scrollMax = this.el.scrollHeight - this.el.clientHeight
-            let trigger = triggerTop ? distance < 10 : distance > scrollMax - 10
-
-            if (this.handler && !loading && trigger) {
-              loading = true
-
-              let result = this.handler()
-
-              if (result === undefined) done()
-              else if (result.then && result.then.call) result.then(done, done)
-              else done()
-            }
-          }
-
-          this._bind()
-        },
-        update (value) {
-          this.handler = value
-          value.unbind = () => this._unbind()
-          value.bind = () => this._bind()
-        },
-        unbind () {
-          this._unbind()
-        }
-      }
+    beforeDestroy () {
+      window.removeEventListener('resize', this.getWindowWidth)
     },
   }
 
@@ -672,8 +626,13 @@
     text-decoration: none;
   }
 
-  a.list-group-item:hover, a.list-group-item:focus, a.list-group-item:active {
+  a.list-group-item:focus, a.list-group-item:active {
     background-color: #0da9ef !important;
     color: white !important;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
   }
 </style>

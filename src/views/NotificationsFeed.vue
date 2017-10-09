@@ -1,247 +1,156 @@
-
-<template >
-    <div class="light-grey">
+<template>
+  <div class="light-grey">
     <!-- Page Content-->
     <div class="container padding-bottom-3x mb-2 mt-md-3 pl-3 pr-3 " style="padding-top:60px;">
-
-
-
-        <div class="row post-modal">
-          <div class="col-lg-3 ml-5">
-
-              <div>
-
-              <section>
-                  <h3 class="widget-title mb-2">Unread</h3>
-                  <h3 class="widget-title mb-2">Read</h3>
-                  <h3 class="widget-title mb-2">All</h3>
-              </section>
-          </div>
+      <div class="row post-modal">
+        <div class="col-md-2">
+          <nav class="list-group" id="components-list">
+            <router-link class="list-group-item list-group-item-action" :class="{active:type==='unread'}" :to="{name:'notifications', query:{type:'unread'}}">Unread</router-link>
+            <router-link class="list-group-item list-group-item-action" :class="{active:type==='read'}" :to="{name:'notifications', query:{type:'read'}}">Read</router-link>
+            <router-link class="list-group-item list-group-item-action" :class="{active:type==='all'}" :to="{name:'notifications', query:{type:'all'}}">All</router-link>
+          </nav>
         </div>
-
         <!-- Description -->
-        <div class="col-lg-6 pl-md-0 pl-md-0 ml-5 " >
-          <h3 class="text-left card-new-heading">Notifications</h3>
-            <section class="card-new-layout">
-              <div class="post-header">
-
-                  <img class="d-flex rounded mr-3 ml-3" :src="post.logo_image" width="50" alt="Media">
-
-                  <div class="media-body">
-                      <p class="mt-0 mb-1 notification_actor_name">{{post.title}} <span style="color:#030303;font-size:12px; font-weight: normal;">has subsribed to your account</span></p>
+        <div class="col-md-10">
+          <h6 class="text-muted text-normal text-uppercase">
+            Notifications
+          </h6>
+          <hr class="mb-3 mt-2">
+          <section class="card-new-layout" v-if="loaded" v-for="notify in current_notifications">
+            <div class="widget-featured-posts">
+              <div class="entry">
+                <div class="entry-thumb">
+                  <router-link :to="{name:'user', params:{id:notify.sender.id}}">
+                    <img :src="notify.sender.avatar">
+                  </router-link>
+                </div>
+                <div class="entry-content">
+                  <h4 class="entry-title">
+                    <router-link class="text-bold" :to="{name:'user', params:{id:notify.sender.id}}">{{notify.sender.full_name}}:</router-link>
+                    {{notify.content}}
+                  </h4>
+                  <div class="entry-meta">
+                    {{timeFromNow(notify.created)}}
+                    <button class="btn btn-xm btn-secondary float-right" v-if="!notify.read" @click="readNotification(notify.id)">
+                      Dismiss
+                    </button>
+                    <button class="btn btn-xm btn-outline-primary float-right mr-3" @click="notificationDetail(notify)">
+                      Detail
+                    </button>
                   </div>
+                </div>
               </div>
-            </section>
-
-            <section class="card-new-layout">
-              <div class="post-header">
-
-                  <img class="d-flex rounded mr-3 ml-3" :src="post.logo_image" width="50" alt="Media">
-
-                  <div class="media-body">
-                      <p class="mt-0 mb-1 notification_actor_name">{{post.title}} <span style="color:#030303;font-size:12px; font-weight: normal;">has subsribed to your account</span></p>
-                  </div>
-              </div>
-            </section>
-
-            <section class="card-new-layout">
-              <div class="post-header">
-
-                  <img class="d-flex rounded mr-3 ml-3" :src="post.logo_image" width="50" alt="Media">
-
-                  <div class="media-body">
-                      <p class="mt-0 mb-1 notification_actor_name">{{post.title}} <span style="color:#030303;font-size:12px; font-weight: normal;">has subsribed to your account</span></p>
-                  </div>
-              </div>
-            </section>
-        </div>
-
+            </div>
+          </section>
+          <spinner v-else></spinner>
+          <section class="card-new-layout" v-if="loaded && !current_notifications.length">
+            <div class="text-center">
+              <h6 class="dropdown-product-title mt-3">
+                <i class="fa fa-bell-slash-o"></i> Nothing Here, yet
+              </h6>
+            </div>
+          </section>
         </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
-  import VueMarkdown from 'vue-markdown'
+  import { mapGetters } from 'vuex'
+  import Spinner from 'components/Spinner'
+
   export default {
-    name: 'CompanyPage',
-    components: {
-      'vue-markdown': VueMarkdown
-    },
+    name: 'NotificationFeed',
+    components: {Spinner},
     data () {
       return {
-        new_reply: '',
-        new_comment: '',
-        delete_comment_id: 0,
-        // UI Control
-        reply_comment_box_show: false,
-        reply_comment_box_index: -1,
-        marked: false,
-        unsubscribe: false,
-        // Data Load Trigger
-        team_loaded: false,
-        comments_loaded: false
+        loaded: false,
+        current_notifications: []
       }
     },
     methods: {
-      commentCreatorName (creator) {
-        if (creator.info.first_name && creator.info.last_name) {
-          return creator.info.first_name + ' ' + creator.info.last_name
-        } else {
-          return creator.email
-        }
+      getNotifications () {
+        if (this.type === 'unread')
+          this.getUnreadNotifications()
+        else if (this.type === 'read')
+          this.getReadNotifications()
+        else if (this.type === 'all')
+          this.getAllNotifications()
       },
-      newComment () {
-        const formData = {
-          pk: this.post.id,
-          content: this.new_comment
-        }
-        this.$store.dispatch('postComment', formData)
-          .then(() => {
-            this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'You have posted new comment!'})
-            this.new_comment = ''
+
+      getUnreadNotifications () {
+        this.loaded = false
+        this.$store.dispatch('getNotifications')
+          .then((response) => {
+            this.current_notifications = response
+            this.loaded = true
           })
       },
-      newReply (comment_id) {
-        const formData = {
-          pk: comment_id,
-          content: this.new_reply
-        }
-        this.$store.dispatch('replyComment', formData)
-          .then(() => {
-            this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'You have posted new comment!'})
-            this.new_reply = ''
-            // UI Control
-            this.reply_comment_box_show = false
-            this.reply_comment_box_index = -1
+      getReadNotifications () {
+        this.loaded = false
+        this.$store.dispatch('getReadNotifications')
+          .then((response) => {
+            this.current_notifications = response
+            this.loaded = true
           })
       },
-      preDeleteComment (comment_id) {
-        this.delete_comment_id === 0 ? this.delete_comment_id = comment_id : this.delete_comment_id = 0
-      },
-      deleteComment (comment_id) {
-        this.$store.dispatch('deleteComment', comment_id)
-          .then(() => {
-            this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'You removed your comment!'})
-            this.new_comment = ''
+      getAllNotifications () {
+        this.loaded = false
+        this.$store.dispatch('getAllNotifications')
+          .then((response) => {
+            this.current_notifications = response
+            this.loaded = true
           })
       },
-      markPost () {
-        this.$store.dispatch('markPost', this.post.id)
+
+      readNotification (id) {
+        this.$store.dispatch('readNotification', id)
           .then(() => {
-            this.marked = true
-            this.$store.dispatch('toastr', {
-              type: 'success',
-              title: 'Success',
-              message: 'The selected ICO is added to your subscription list, you\'ll receive free updates from now on'
-            })
+            this.getNotifications()
           })
       },
-      unmarkPost () {
-        this.$store.dispatch('markPost', this.post.id)
-          .then(() => {
-            this.marked = false
-            this.$store.dispatch('toastr', {
-              type: 'success',
-              title: 'Success',
-              message: 'The selected ICO is removed from your subscription list'
-            })
-          })
+
+      notificationDetail (notify) {
+        this.$store.dispatch('notificationDetail', notify)
       },
-      timeCounter (start, end) {
-        /* global moment:true */
-        // Haven't start
-        if (moment().diff(start, 'minutes') < 0) {
-          let rest = -moment().diff(start, 'days') + ' days '
-          if (rest === '0 days ') {
-            rest = -moment().diff(start, 'hours') + ' hours '
-          }
-          if (rest === '0 hours ') {
-            rest = -moment().diff(start, 'minutes') + ' minutes '
-          }
-          return 'Start in ' + rest
-        }
-        // Started
-        else if (moment().diff(end, 'minutes') < 0) {
-          let rest = -moment().diff(end, 'days') + ' days '
-          if (rest === '0 days ') {
-            rest = -moment().diff(end, 'hours') + ' hours '
-          }
-          if (rest === '0 hours ') {
-            rest = -moment().diff(end, 'minutes') + ' minutes '
-          }
-          return 'End in ' + rest
-        }
-        // Ended
-        else {
-          let rest = moment().diff(end, 'days') + ' days '
-          if (rest === '0 days ') {
-            rest = moment().diff(end, 'hours') + ' hours '
-          }
-          if (rest === '0 hours ') {
-            rest = moment().diff(end, 'minutes') + ' minutes '
-          }
-          return 'Ended ' + rest + 'ago'
-        }
-      },
-      formatTime (start, end) {
-        if (!end) {
-          return moment(start).format('MMM DD [at] hh:mma')
-        }
-        if (moment().diff(start, 'minutes') < 0) {
-          return moment(start).format('YYYY/MM/DD, hh:mm a')
-        }
-        else {
-          return moment(end).format('YYYY/MM/DD, hh:mm a')
-        }
-      },
+
+      timeFromNow (time) {
+        return  moment(time).fromNow()
+      }
     },
     computed: {
-      post () {
-        return this.$store.getters.current_post
-      },
-      current_team_members () {
-        return this.$store.getters.current_team_members
-      },
-      current_team () {
-        return this.$store.getters.current_team
-      },
-      current_post_comments () {
-        return this.$store.getters.current_post_comments
-      },
-      login_status () {
-        return this.$store.getters.login_status
-      },
-      me () {
-        return this.$store.getters.self
-      },
-      is_team_member () {
-        for (let member of this.current_team_members) {
-          if (this.me.info.id === member.id) {
-            return true
-          }
-        }
-        return false
-      },
-      self_marked_posts () {
-        return this.$store.getters.self_marked_posts
-      },
+      ...mapGetters({
+        notifications: 'notifications',
+        read_notifications: 'read_notifications',
+        all_notifications: 'all_notifications',
+        login_status: 'login_status',
+        me: 'self',
+      }),
+      type () {
+        if (this.$route.query.hasOwnProperty('type'))
+          return this.$route.query.type
+        return 'unread'
+      }
     },
     beforeMount () {
-      this.team_loaded = false
-      this.comments_loaded = false
-      for (let p of this.self_marked_posts) {
-        if (this.post.id === p.id)
-          this.marked = true
-      }
-      this.$store.dispatch('getComments', this.$store.getters.current_post.id)
-        .then(() => {
-          this.comments_loaded = true
-        })
-      this.$store.dispatch('getTeam', this.$store.getters.current_post.team.id)
-        .then(() => {
-          this.team_loaded = true
-        })
+      this.getNotifications()
     },
+    watch: {
+      '$route': function () {
+        this.getNotifications()
+      }
+    }
   }
 </script>
+
+<style>
+  a.list-group-item:hover, a.list-group-item:focus, a.list-group-item:active {
+    background-color: #0da9ef !important;
+    color: white !important;
+  }
+
+  .widget-featured-posts > .entry {
+    margin-bottom: 0px;
+  }
+</style>

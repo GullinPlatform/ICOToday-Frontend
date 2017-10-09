@@ -82,6 +82,8 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
+
   export default {
     name: 'InvitedRegister',
     head: {
@@ -110,6 +112,9 @@
             password: this.password1
           }
           this.$store.dispatch('invitedSignup', formData)
+            .then(() => {
+              this.$router.push({name: 'me'})
+            })
             .catch((error) => {
               this.loaded = true
               this.err_msg = error.body.detail
@@ -138,21 +143,11 @@
       }
     },
     computed: {
-      user () {
-        return this.$store.getters.user
-      },
-      user_name () {
-        return this.$store.getters.user_name
-      },
-      me () {
-        return this.$store.getters.self
-      },
-      login_status () {
-        return this.$store.getters.login_status
-      },
-      able_to_resend () {
-        return this.$store.getters.able_to_resend
-      }
+      ...mapGetters({
+        user: 'user',
+        login_status: 'login_status',
+        able_to_resend: 'able_to_resend',
+      })
     },
     created () {
       if (!this.$route.query.hasOwnProperty('token')) {
@@ -170,9 +165,9 @@
           })
       }
     },
-    beforeCreate () {
+    beforeMount () {
       // redirect login user
-      if (this.$store.getters.login_status) {
+      if (this.login_status) {
         this.$router.push({name: 'landing'})
       }
     }

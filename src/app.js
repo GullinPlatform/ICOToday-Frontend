@@ -1,25 +1,42 @@
 import Vue from 'vue'
-import Resource from 'vue-resource'
 import Router from 'vue-router'
-import { sync } from 'vuex-router-sync'
+import VueHead from 'vue-head'
+import VueIntercom from 'vue-intercom'
+import VeeValidate from 'vee-validate'
 
+import { sync } from 'vuex-router-sync'
 import router from './router'
 import store from './store'
 
-import RootLayout from 'views/layouts/RootLayout'
-import * as cookie from './utils/cookie'
+import RootLayout from './views/layouts/RootLayout.vue'
 
-import VueHead from 'vue-head'
-
+Vue.use(VueIntercom, { appId: 'rvgar4pm' })
 Vue.use(Router)
-Vue.use(Resource)
 Vue.use(VueHead)
+
+const validate_config = {
+  errorBagName: 'errors',
+  fieldsBagName: 'fields',
+  locale: 'en',
+  dictionary: null,
+  strict: true,
+  delay: 700,
+  classes: true,
+  classNames: {
+    valid: 'form-control-success', // model is valid
+    invalid: 'form-control-danger', // model is invalid
+  },
+  events: 'input|blur',
+  inject: true,
+  validity: true,
+  aria: true
+}
+
+Vue.use(VeeValidate, validate_config)
 
 sync(store, router)
 
-// set csrf token for django
-Vue.http.headers.common['X-CSRFToken'] = cookie.getCookie('csrftoken')
-
+// Move page to top after every url change
 router.beforeEach(function (to, from, next) {
   window.scrollTo(0, 0)
   next()
@@ -29,8 +46,7 @@ export const app = new Vue({
   el: '#app',
   data: {},
   beforeCreate () {
-    const formData = {token: cookie.getCookie('token')}
-    this.$store.dispatch('tokenVerify', formData)
+    this.$store.dispatch('tokenRefresh')
   },
   router,
   store,

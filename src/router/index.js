@@ -1,39 +1,49 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Resource from 'vue-resource'
-import RootLayout from 'layouts/RootLayout'
 
+import RootLayout from 'layouts/RootLayout'
 import Landing from 'views/Landing'
 
+import RegisterFollowUp from 'views/RegisterFollowUp'
 import EmailVerify from 'views/EmailVerify'
 import InvitedRegister from 'views/InvitedRegister'
+import ReferredRegister from 'views/ReferredRegister'
 import ForgetPassword from 'views/ForgetPassword'
 import ResetPassword from 'views/ResetPassword'
 
-import MyNewProject from 'views/MyNewProject'
-import MyCreatedProjects from 'views/MyCreatedProjects'
-import MyMarkedProjects from 'views/MyMarkedProjects'
-import MyTeam from 'views/MyTeam'
-import MyWallet from 'views/MyWallet'
-import MySettings from 'views/MySettings'
-import MyExpertApplication from 'views/MyExpertApplication'
+import MyBase from 'views/my_components/MyBase'
+import MyExpertApplication from 'views/my_components/MyExpertApplication'
+import MyFeed from 'views/my_components/MyFeed'
+import MyMarkedProjects from 'views/my_components/MyMarkedProjects'
+import MyProfile from 'views/my_components/MyProfile'
+import MySettings from 'views/my_components/MySettings'
+import MyWallet from 'views/my_components/MyWallet'
+import NeedVerify from 'views/my_components/NeedVerify'
 
-import Post from 'views/Post'
-import PostRatingDetail from 'views/PostRatingDetail'
+import CompanyFeed from 'views/my_components/CompanyFeed'
+import CompanyNewProject from 'views/my_components/CompanyNewProject'
+import CompanyProject from 'views/my_components/CompanyProject'
+import CompanyTeam from 'views/my_components/CompanyTeam'
+import CompanyWallet from 'views/my_components/CompanyWallet'
+import CompanyPromotion from 'views/my_components/CompanyPromotion'
 
-import UserCreatedProjects from 'views/UserCreatedProjects'
-import UserMarkedProjects from 'views/UserMarkedProjects'
-import UserTeam from 'views/UserTeam'
+import ExpertRatedProjects from 'views/my_components/ExpertRatedProjects'
+import ExpertUnRatedProjects from 'views/my_components/ExpertUnRatedProjects'
+
+import UserBase from 'views/user_components/UserBase'
+import UserFeed from 'views/user_components/UserFeed'
+import UserMarkedProjects from 'views/user_components/UserMarkedProjects'
+import UserRatedProjects from 'views/user_components/UserRatedProjects'
+
+import Project from 'views/project_pages/Project'
 
 import TokenSale from 'views/static_pages/TokenSale'
 import UserGuide from 'views/static_pages/UserGuide'
 import TermsAndPolicy from 'views/static_pages/TermsAndPolicy'
-import CompanyPage from 'views/CompanyPage'
+
 import NotificationsFeed from 'views/NotificationsFeed'
 
-
 Vue.use(Router)
-Vue.use(Resource)
 
 export default new Router({
   mode: 'history',
@@ -45,53 +55,97 @@ export default new Router({
       component: Landing,
       name: 'landing'
     }, {
+      path: '/register/followup',
+      component: RegisterFollowUp,
+      name: 'register_followup'
+    }, {
       path: '/project/:id',
-      component: Post,
-      name: 'post'
+      component: Project,
+      name: 'project'
     }, {
-      path: '/project/:id/rating',
-      component: PostRatingDetail,
-      name: 'post_rating_detail'
+      path: '/me',
+      component: MyBase,
+      children: [
+        {
+          path: '/me/expert/application',
+          component: MyExpertApplication,
+          name: 'me_expert_apply'
+        }, {
+          path: '/me/feed',
+          component: MyFeed,
+          name: 'me'
+        }, {
+          path: '/me/marked',
+          component: MyMarkedProjects,
+          name: 'me_marked'
+        }, {
+          path: '/me/profile',
+          component: MyProfile,
+          name: 'me_profile'
+        }, {
+          path: '/me/settings',
+          component: MySettings,
+          name: 'me_settings'
+        }, {
+          path: '/me/wallet',
+          component: MyWallet,
+          name: 'me_wallet'
+        }, {
+          path: '/me/company/newproject',
+          component: CompanyNewProject,
+          name: 'company_new_project'
+        }, {
+          path: '/me/company/project',
+          component: CompanyProject,
+          name: 'company_project'
+        }, {
+          path: '/me/company/feed',
+          component: CompanyFeed,
+          name: 'company_feed'
+        }, {
+          path: '/me/company/team',
+          component: CompanyTeam,
+          name: 'company_team'
+        }, {
+          path: '/me/company/wallet',
+          component: CompanyWallet,
+          name: 'company_wallet'
+        }, {
+          path: '/me/company/promotion',
+          component: CompanyPromotion,
+          name: 'company_promotion'
+        }, {
+          path: '/me/unverified',
+          component: NeedVerify,
+          name: 'me_need_verify'
+        }, {
+          path: '/me/expert/rated',
+          component: ExpertRatedProjects,
+          name: 'expert_rated_projects'
+        }, {
+          path: '/me/expert/unrated',
+          component: ExpertUnRatedProjects,
+          name: 'expert_unrated_projects'
+        }
+      ]
     }, {
-      path: '/me/created',
-      component: MyCreatedProjects,
-      name: 'me_created'
-    }, {
-      path: '/me/marked',
-      component: MyMarkedProjects,
-      name: 'me_marked'
-    }, {
-      path: '/me/team',
-      component: MyTeam,
-      name: 'me_team'
-    }, {
-      path: '/me/settings',
-      component: MySettings,
-      name: 'me_settings'
-    }, {
-      path: '/me/new',
-      component: MyNewProject,
-      name: 'me_new_project'
-    }, {
-      path: '/me/wallet',
-      component: MyWallet,
-      name: 'me_wallet'
-    }, {
-      path: '/me/expert/application',
-      component: MyExpertApplication,
-      name: 'me_expert_apply'
-    }, {
-      path: '/user/:id/created',
-      component: UserCreatedProjects,
-      name: 'user_created'
-    }, {
-      path: '/user/:id/makred',
-      component: UserMarkedProjects,
-      name: 'user_marked'
-    }, {
-      path: '/user/:id/team',
-      component: UserTeam,
-      name: 'user_team'
+      path: '/user/:id',
+      component: UserBase,
+      children: [
+        {
+          path: '/user/:id/feed',
+          component: UserFeed,
+          name: 'user'
+        }, {
+          path: '/user/:id/marked',
+          component: UserMarkedProjects,
+          name: 'user_marked'
+        }, {
+          path: '/user/:id/rated',
+          component: UserRatedProjects,
+          name: 'user_rated'
+        }
+      ]
     }, {
       path: '/verify',
       component: EmailVerify,
@@ -100,6 +154,10 @@ export default new Router({
       path: '/invited',
       component: InvitedRegister,
       name: 'invited_register'
+    }, {
+      path: '/register',
+      component: ReferredRegister,
+      name: 'referred_register'
     }, {
       path: '/forget',
       component: ForgetPassword,
@@ -121,11 +179,6 @@ export default new Router({
       component: UserGuide,
       name: 'faq'
     }, {
-      path: '/company',
-      component: CompanyPage,
-      name: 'company'
-    },
-    {
       path: '/notifications',
       component: NotificationsFeed,
       name: 'notifications'

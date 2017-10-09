@@ -43,7 +43,7 @@
             <h3 class="widget-title">Account</h3>
             <ul>
               <li>
-                <router-link :to="{name:'me_settings'}">Your Account</router-link>
+                <router-link :to="{name:'me_profile'}">Your Account</router-link>
               </li>
               <li v-if="me.type===0">
                 <router-link :to="{name:'me_created'}">Your ICOs</router-link>
