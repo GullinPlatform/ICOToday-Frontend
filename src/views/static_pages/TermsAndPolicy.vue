@@ -14,10 +14,6 @@
                        :class="{active:type==='privacy'}">Privacy Policy
           </router-link>
           <router-link class="list-group-item"
-                       :to="{name:'terms', query:{type:'token'}}"
-                       :class="{active:type==='token'}">Token Sale Agreement
-          </router-link>
-          <router-link class="list-group-item"
                        :to="{name:'terms', query:{type:'rating'}}"
                        :class="{active:type==='rating'}">Expert Rating Guidelines
           </router-link>
@@ -521,81 +517,6 @@
         <p><strong>Effective Date</strong></p>
         <p>This Privacy Policy was last updated on September 11, 2017.</p>
 
-
-      </div>
-
-      <div class="col-lg-9 col-md-8" v-else-if="type==='token'">
-        <h2 class="mb-4">Token Sale Agreement</h2>
-        <p>
-          (iv) the User fully understands, realizes and agrees that the ICOCoin digital tokens are created on a blockchain and are designed to be used to make various internal payments through the ICOToday Platform and it does not grant to the User any voting or ownership rights, any return on investment or any profit and passive income from the ownership of the ICOCoin digital tokens;</p>
-        <p>
-          (v) the User will not forge, or otherwise manipulate any personal or non-personal data requested by the ICOToday in the process of the User's registration (will not use the VPN or other means of distorting the data), or after its completion, will provide all necessary personal or non-personal data in the form and format requested by the ICOToday in the event when such necessity arises in connection within the requirements of anti-money laundering and &quot;Know Your Customer&quot; (KYC) frameworks of the ICOToday or in accordance with the applicable law.</p>
-        <p>(vi) the User's purchase of the ICOCoin digital tokens complies with applicable laws and regulations in the User's jurisdiction;</p>
-        <p>
-          (vii) the User is not a citizen or resident of a geographic area in which access to or use of the cryptocurrency or digital tokens is prohibited by applicable law, decree, regulation, treaty, or administrative act; the User is not a citizen or resident of, or located in United States, and do not have a primary residence or domicile in the United States; the User is not a citizen or resident of, or located in Singapore, and do not have a primary residence or domicile in Singapore; the User is not a citizen or resident of, or located in China, and do not have a primary residence or domicile in China;</p>
-        <p>
-          (viii) the User do not intend to hinder, delay or defraud the ICOToday or any other users of the ICOToday Platform or engage in any illegal conduct and or unlawful activity in relation to money laundering, receiving the proceeds of drug trafficking or terrorist activities; receiving the proceeds of criminal activities, terrorist activities or trading with such countries as might from time to time be subject to any embargo imposed by the Security Council of the United Nations, the European Union, or Singapore or in any place of the world.</p>
-        <ol start="8">
-          <li>Purchasing of the ICOCoin digital tokens</li>
-        </ol>
-        <p>The User may purchase the ICOCoin digital token in return for an opportunities to obtain in future the services and goods listed above through the ICOToday Platform.</p>
-        <p>In order to purchase the ICOCoin digital tokens the User must comply with the requirements of Article 7 of the ICOToday Token Sale Agreement.</p>
-        <p>The KICKONOMY shall reserve the right to refuse selling the ICOCoin digital token to anyone who does not meet criteria necessary for their buying, as set out hereunder or by the applicable law.</p>
-        <p>The ICOCoin digital tokens shall be issued in a limited number. All the ICOCoin digital tokens shall be of equal functionality.</p>
-        <p>
-          The User may purchase the ICOCoin digital tokens during the ICO Period by exchanging ethers (ETH) or Bitcoins (BTC) for the ICOCoin digital tokens at the exchange rate 1ETH per 3 000 ICOCoin digital tokens, and other bonuses may be applied in accordance with the rules of the ICOToday Whitepaper.</p>
-        <ol start="9">
-          <li>Taxes</li>
-        </ol>
-        <p>
-          The User shall pay any applicable taxes, including sales, use, personal property, value-added, excise, customs fees, import duties or stamp duties or other taxes and duties imposed by governmental agencies of whatever kind and imposed with respect to the transactions under the ICOToday Token Sale Agreement.</p>
-        <ol start="10">
-          <li>Trademark License and Use</li>
-        </ol>
-        <p>
-          The User acknowledges and agrees that the ICOToday's Trademarks are owned solely by the ICOToday, and agrees to use the ICOToday's Trademarks only in the form and manner prescribed by the ICOToday. The ICOToday acknowledges that all the User's Trademarks are owned solely by the User, and agrees to use the User's Trademarks only in the form and manner prescribed by the User.</p>
-        <ol start="11">
-          <li>Trademark Restrictions</li>
-        </ol>
-        <p>The User shall not remove, modify, adapt, or prepare derivative works of any ICOToday's Trademarks, ICOToday's copyright notices, or other ICOToday's proprietary rights notices.</p>
-        <ol start="12">
-          <li>Proprietary rights</li>
-        </ol>
-        <p>
-          The ICOToday Token Sale Agreement does not convey the title or ownership of the ICOToday Platform, the ICOToday smart-contract from the ICOToday to the User but instead gives the User only the limited rights and abilities to use the ICOCoin digital tokens as set forth above. The ICOToday reserves all rights not expressly granted by the ICOToday Token Sale Agreement.</p>
-        <p>
-          The User acknowledges and agrees that ICOToday Platform and its source code form, all enhancements, corrections and modifications to the ICOToday Platform, all copyrights, patents, trade secrets, or trademarks or other intellectual property rights protecting or pertaining to any aspect of the ICOToday Platform, are and shall remain the sole and exclusive property of the ICOToday.</p>
-        <ol start="13">
-          <li>Liability</li>
-        </ol>
-        <p>The ICOToday Platform and the ICOCoin digital tokens are provided «as is».</p>
-        <p>The User acknowledges and agrees that the ICOToday Platform and the ICOCoin digital tokens may contain bugs or minor mistakes, which the ICOToday promises to correct if possible.</p>
-        <p>The User acknowledges and agrees that the ICOToday does not warrant the User any financial or other type of outcome, which is the result of the use of the ICOToday Platform and the ICOCoin digital tokens.</p>
-        <p>Nevertheless, the Parties shall be responsible for compliance with the terms of the ICOToday Token Sale Agreement, for fulfillment of the User's commitments and guarantees in the manner and in the amount prescribed by the ICOToday Token Sale Agreement, in particular:</p>
-        <p>
-          (i) In case of filing accusations, claims or lawsuits to the ICOToday related to non-compliance by the User of the ICOToday Token Sale Agreement and/or engagements entered by the User during the participation of the ICO, the User agrees to settle such claims or actions on his own and at his own expense, as well as fully compensate the ICOToday documented proven losses, court fees, legal costs, incurred in connection with the refusal of the User or untimely fulfillment of his obligations by the User.</p>
-        <p>
-          (ii) In case of filing accusations, claims or lawsuits against the ICOToday, related to non-compliance by the User with exclusive rights or other rights of third parties, the User agrees to settle such claims or actions on his own and at his own expense, as well as fully compensate the ICOToday documented proven losses, court fees, legal costs, incurred in connection with the refusal of the User or untimely fulfillment of his obligations by the User.</p>
-        <p>
-          (iii) In case of the Users' violation his obligations under Article 7 of the ICOToday Token Sale Agreement, the ICOToday reserves the right to (i) terminate the User's Account, (ii) demand full compensation from the User for losses caused by every violation; (iii) bring a case before a court if the compensation doesn't cover the ICOToday's loss; (iv) release the information relating to the User's identity and location to any authorized officer in accordance with the applicable law.</p>
-        <ol start="14">
-          <li>The ICOToday Token Sale Agreement term &amp; termination</li>
-        </ol>
-        <p>
-          The ICOToday Token Sale Agreement between the ICOToday and the User shall commence upon acceptance by User of all the terms of the ICOToday Token Sale Agreement by clicking the purchase button or by purchasing any amount of the ICOCoin digital tokens and using any part of the ICOToday smart-contract and the ICOToday Platform, and shall continue until terminated in accordance with the terms of the ICOToday Token Sale Agreement.</p>
-        <p>The ICOToday shall have the right at its sole discretion and without any prior written notice terminate the ICOToday Token Sale Agreement if:</p>
-        <p>(a) the User provided invalid data to complete the registration process;</p>
-        <p>(b) the User failed to comply with the requirements of Article 7 of the ICOToday Token Sale Agreement;</p>
-        <p>© the User failed to comply with the other terms and conditions of the ICOToday Token Sale Agreement.</p>
-        <p>Upon termination of the ICOToday Token Sale Agreement, for whatever reason, all licenses granted by the ICOToday to the User under the ICOToday Token Sale Agreement, User' Account, User's ICOCoin digital tokens shall be immediately terminate without any data restoration.</p>
-        <p>Upon termination of the ICOToday Token Sale Agreement, each party will remain liable to the other for any amounts due and owing to the other party as of the date of termination, and such obligation to pay shall survive any termination of the ICOToday Token Sale Agreement.</p>
-        <ol start="15">
-          <li>Miscellaneous</li>
-        </ol>
-        <p>Notices: Any notice or other communication under the ICOToday Token Sale Agreement shall be in writing and shall be considered given and received when sent by email.</p>
-        <p>
-          Competent law and jurisdiction: the laws of the Republic of Singapore govern the ICOToday Token Sale Agreement and the relationship between the Parties. Any disputes and disagreements arising from the ICOToday Token Sale Agreement will be settled by negotiations between the Parties. If the Parties fail to reach an agreement, the disputes shall be settled in accordance with the legislation of the defendant's principal place of business and location.</p>
-        <p>Severability: If any provision of the ICOToday Token Sale Agreement is held by any court of competent jurisdiction to be illegal, null or void, all the remaining provisions of the ICOToday Token Sale Agreement shall remain in full force and effect.</p>
 
       </div>
 
