@@ -28,8 +28,14 @@
     },
     computed: {
       ...mapGetters({
-        able_to_resend: 'able_to_resend'
+        able_to_resend: 'able_to_resend',
+        is_verified: 'is_verified'
       })
+    },
+    beforeMount () {
+      if (this.is_verified) {
+        this.$router.push({name: 'me'})
+      }
     },
   }
 </script>

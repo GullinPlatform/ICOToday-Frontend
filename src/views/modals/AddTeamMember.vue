@@ -148,7 +148,6 @@
         const formData = new FormData()
         this.avatar_img.toBlob((blob) => {
           formData.append('avatar', blob, 'avatar.time' + Date.now() + '.png')
-          formData.append('pk', this.$store.getters.self.info.team.id)
           formData.append('first_name', this.first_name)
           formData.append('last_name', this.last_name)
           formData.append('email', this.email)
@@ -158,11 +157,11 @@
           formData.append('twitter', this.twitter)
           formData.append('facebook', this.facebook)
           formData.append('telegram', this.telegram)
-          formData.append('is_advisor', this.is_advisor)
+          formData.append('type', this.is_advisor ? 3 : 0)
 
-          this.$store.dispatch('addTeamMember', formData)
+          this.$store.dispatch('createCompanyMember', formData)
             .then(() => {
-              this.$store.dispatch('getTeam', this.$store.getters.self.info.team.id).then(() => {
+              this.$store.dispatch('getCompanyMembers', this.self_company.id).then(() => {
                 this.dataReset()
                 this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'Team member added.'})
                 $('#add-member-modal').modal('hide')
@@ -210,6 +209,7 @@
     computed: {
       ...mapGetters({
         me: 'self',
+        self_company: 'self_company',
         is_verified: 'is_verified',
         is_advisor: 'is_advisor',
       })

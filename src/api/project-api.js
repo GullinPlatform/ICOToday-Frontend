@@ -32,17 +32,23 @@ export default {
   updateProject (form_data) {
     return apiCall('patch', form_data.get('id') + '/', form_data)
   },
-  getProjectRatingDetail (id) {
-    return apiCall('get', id + '/rating/')
-  },
 
-  searchProjects (form_data) {
-    return apiCall('get', 'search/' + form_data.page + '/', {}, form_data)
+  projectStat () {
+    return apiCall('get', 'stat/')
+  },
+  searchProjects (query_data) {
+    return apiCall('get', 'search/', {}, query_data)
   },
   listPromoProjects () {
     return apiCall('get', 'promo/')
   },
-  closeOVertimeProjects () {
+  listUnratedProjects () {
+    return apiCall('get', 'unrated/')
+  },
+  listUserRatedProjects (id) {
+    return apiCall('get', 'rated/' + id + '/')
+  },
+  closeOvertimeProjects () {
     return apiCall('get', 'close/')
   },
 
@@ -51,6 +57,18 @@ export default {
   },
 
   getAllProjectTags () {
+    1
     return apiCall('get', '/tags/')
-  }
+  },
+
+  getProjectRatingDetail (id) {
+    return apiCall('get', id + '/rating/')
+  },
+  createProjectRatingDetail (form_data) {
+    return apiCall('post', form_data.id + '/rate/', form_data)
+  },
+  updateProjectRatingDetail (form_data) {
+    return apiCall('put', form_data.id + '/rate/', form_data)
+  },
+
 }

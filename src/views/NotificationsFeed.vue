@@ -106,8 +106,8 @@
           })
       },
 
-      readNotification (pk) {
-        this.$store.dispatch('readNotification', pk)
+      readNotification (id) {
+        this.$store.dispatch('readNotification', id)
           .then(() => {
             this.getNotifications()
           })

@@ -101,11 +101,6 @@
                     </router-link>
                   </li>
                   <li>
-                    <router-link :to="{name:'me_expert_apply'}" class="dropdown-item" v-if="self_type===1">
-                      <i class="fa fa-id-badge"></i> Apply to be an Expert
-                    </router-link>
-                  </li>
-                  <li>
                     <router-link :to="{name:'me_profile'}" class="dropdown-item">
                       <i class="fa fa-user"></i> Profile
                     </router-link>
@@ -115,27 +110,27 @@
                       <i class="fa fa-gear"></i>Settings
                     </router-link>
                   </li>
-                  <li class="sub-menu-separator" v-if="self_type===0"></li>
+                  <li class="sub-menu-separator"></li>
                   <li>
-                    <router-link :to="{name:'company', params:{id:me.info.company.id}}" class="dropdown-item" v-if="self_type===0">
+                    <router-link :to="{name:'company_new_project'}" class="dropdown-item" v-if="self_type===0">
                       <i class="fa fa-building-o"></i>Project: {{me.info.company.name}}
                     </router-link>
                   </li>
-                  <!--<li>-->
-                  <!--<router-link :to="{name:'me_new_project'}" class="dropdown-item" v-if="self_type===0">-->
-                  <!--<i class="icon-plus"></i>Submit New ICO-->
-                  <!--</router-link>-->
-                  <!--</li>-->
-                  <!--<li>-->
-                  <!--<router-link :to="{name:'me_created'}" class="dropdown-item" v-if="self_type===0">-->
-                  <!--<i class="fa fa-bitcoin"></i> My ICO Projects-->
-                  <!--</router-link>-->
-                  <!--</li>-->
-                  <!--<li>-->
-                  <!--<router-link :to="{name:'me_team'}" class="dropdown-item" v-if="self_type===0">-->
-                  <!--<i class="fa fa-users"></i> My Team-->
-                  <!--</router-link>-->
-                  <!--</li>-->
+                  <li>
+                    <router-link :to="{name:'me_expert_apply'}" class="dropdown-item" v-if="self_type===1||self_type===-1">
+                      <i class="fa fa-id-badge"></i> Apply to be an Expert
+                    </router-link>
+                  </li>
+                  <li>
+                    <router-link :to="{name:'expert_unrated_projects'}" class="dropdown-item" v-if="self_type===2">
+                      <i class="fa fa-building-o"></i>Rate projects
+                    </router-link>
+                  </li>
+                  <li>
+                    <router-link :to="{name:'company_feed'}" class="dropdown-item" v-if="self_type===3">
+                      <i class="fa fa-building-o"></i>Project: {{me.info.company.name}}
+                    </router-link>
+                  </li>
                   <li class="sub-menu-separator"></li>
                   <li>
                     <a href="javascript:void(0)" @click="logout()" class="dropdown-item">
@@ -178,8 +173,8 @@
         if (this.login_status)
           this.$store.dispatch('getNotifications')
       },
-      readNotification (pk) {
-        this.$store.dispatch('readNotification', pk)
+      readNotification (id) {
+        this.$store.dispatch('readNotification', id)
       },
       readAllNotification () {
         this.$store.dispatch('readAllNotification')

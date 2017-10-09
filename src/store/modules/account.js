@@ -1,4 +1,5 @@
 import userApi from '../../api/account-api.js'
+import projectApi from '../../api/project-api.js'
 import * as types from '../mutation-types'
 import router from '../../router/index'
 /* global $:true */
@@ -9,10 +10,12 @@ const state = {
   self: {},
   self_marked_posts: [],
   self_expert_application: {},
+  self_rated_projects: [],
 
   // loaded user
   user: {},
   user_marked_posts: [],
+  user_rated_projects: [],
 
   // other
   login_status: false,
@@ -61,14 +64,17 @@ const getters = {
     }
   },
   self_company: state => {
-    if (state.login_status && state.self && state.self.info.type === 0)
+    if (state.login_status && state.self)
       return state.self.info.company
     else return ''
   },
   self_admin: state => {
-    if (state.login_status && state.self && state.self.info.type === 0)
+    if (state.login_status && state.self )
       return state.self.info.company_admin
     else return ''
+  },
+  self_rated_projects: state => {
+    return state.self_rated_projects
   },
 
   user: state => {
@@ -79,13 +85,16 @@ const getters = {
   },
   user_name: state => {
     if (state.user.info) {
-      if (state.user.info.first_name && state.user.info.last_name) {
+      if (state.user.info.first_name || state.user.info.last_name) {
         return state.user.info.first_name + ' ' + state.user.info.last_name
       }
       else {
         return state.user.email
       }
     }
+  },
+  user_rated_projects: state => {
+    return state.user_rated_projects
   },
 
   // resend email
@@ -109,13 +118,24 @@ const actions = {
   getSelfMarkedProject ({commit}) {
     return userApi.getSelfMarkedProject()
       .then((response) => {
-        commit(types.LOAD_SELF_MARKED_POST, response)
+        commit(types.LOAD_SELF_MARKED_PROJECT, response)
         return Promise.resolve()
       })
       .catch((error) => {
         return Promise.reject(error)
       })
   },
+  getSelfRatedProject ({commit, state}) {
+    return projectApi.listUserRatedProjects(state.self.info.id)
+      .then((response) => {
+        commit(types.LOAD_SELF_RATED_PROJECTS, response)
+        return Promise.resolve()
+      })
+      .catch((error) => {
+        return Promise.reject(error)
+      })
+  },
+
   updateSelf ({commit}, form_data) {
     return userApi.updateSelf(form_data)
       .then(() => {
@@ -151,7 +171,17 @@ const actions = {
   getUserMarkedProject ({commit}, pk) {
     return userApi.getUserMarkedProject(pk)
       .then((response) => {
-        commit(types.LOAD_USER_MARKED_POST, response)
+        commit(types.LOAD_USER_MARKED_PROJECT, response)
+        return Promise.resolve()
+      })
+      .catch((error) => {
+        return Promise.reject(error)
+      })
+  },
+  getUserRatedProject ({commit}, id) {
+    return projectApi.listUserRatedProjects(id)
+      .then((response) => {
+        commit(types.LOAD_USER_RATED_PROJECTS, response)
         return Promise.resolve()
       })
       .catch((error) => {
@@ -164,6 +194,7 @@ const actions = {
       .then(() => {
         dispatch('getSelf').then(() => {
           $('#signup-modal').modal('hide')
+          dispatch('toastr', {type: 'info', title: 'New Notification', message: 'Welcome to ICOToday. As one of our early users, we have deposited 5 ICOCoins to your wallet.'})
           commit(types.REGISTER_SUCCESS)
         })
         return Promise.resolve()
@@ -316,6 +347,7 @@ const actions = {
   invitedSignup ({dispatch, commit}, form_data) {
     return userApi.invitedSignup(form_data)
       .then(() => {
+        dispatch('toastr', {type: 'info', title: 'New Notification', message: 'Welcome to ICOToday. As one of our early users, we have deposited 5 ICOCoins to your wallet.'})
         dispatch('getSelf').then(() => {
           commit(types.REGISTER_SUCCESS)
         })
@@ -413,10 +445,10 @@ const mutations = {
     state.user = response
   },
 
-  [types.LOAD_SELF_MARKED_POST] (state, response) {
+  [types.LOAD_SELF_MARKED_PROJECT] (state, response) {
     state.self_marked_posts = response
   },
-  [types.LOAD_USER_MARKED_POST] (state, response) {
+  [types.LOAD_USER_MARKED_PROJECT] (state, response) {
     state.user_marked_posts = response
   },
 
@@ -439,6 +471,13 @@ const mutations = {
     state.self_expert_application = form_data
   },
 
+  [types.LOAD_SELF_RATED_PROJECTS] (state, response) {
+    state.self_rated_projects = response
+  },
+
+  [types.LOAD_USER_RATED_PROJECTS] (state, response) {
+    state.user_rated_projects = response
+  },
   // resend email
   [types.SET_RESEND_EMAIL_TIME_LIMIT] (state) {
     state.resend_email_until = moment().add(1, 'minutes')

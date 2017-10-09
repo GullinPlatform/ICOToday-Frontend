@@ -71,7 +71,7 @@
         </h2>
         <div class="row justify-content-center mt-5">
           <div class="col-10">
-            <textarea class="form-control" v-model="expert_application" placeholder="Expert Application" rows="25"></textarea>
+            <textarea class="form-control" v-model="expert_application" placeholder="Please tell us more about your self" rows="25"></textarea>
           </div>
         </div>
       </div>
@@ -149,6 +149,12 @@
         else if (this.step === 2 && this.account_type === 0) { // Company input and search
           this.searchProject()
         }
+        // Expert
+        else if (this.step === 2 && this.account_type === 2) { // Company input and search
+          this.postMyExpertApplication()
+        }
+
+        // Other
         else {
           this.$store.dispatch('setFollowUpStep', 1)
         }
@@ -206,12 +212,14 @@
         this.$store.dispatch('searchProjects', query_data)
           .then(() => {
             this.loaded = true
-            if (!this.search_result.length){
+            if (!this.search_result.length) {
               this.createCompany()
               this.$store.dispatch('setFollowUpStep', 10)
             }
-            else
-              $('#similar-company-modal').modal('show')
+            else {
+              $('#similar-project-modal').modal('show')
+              this.$store.dispatch('setNewCompanyName', this.company_name)
+            }
           })
       },
       createCompany () {
@@ -235,23 +243,25 @@
             this.setAccountType()
             this.$store.dispatch('setFollowUpStep', 10)
           })
-      }
+      },
+
     },
     computed: {
       ...mapGetters({
         tags: 'tags',
-        search_result: 'current_project_search_result',
         login_status: 'login_status',
+        type: 'self_type',
+        search_result: 'current_project_search_result',
         step: 'register_follow_up_step'
       })
     },
-    beforeCreate () {
+    created () {
       // redirect non login user
-      if (!this.$store.getters.login_status) {
+      if (!this.login_status) {
         this.$router.push({name: 'landing'})
       }
       // redirect set up user
-      if (this.$store.getters.self.info.type !== -1) {
+      if (this.type !== -1) {
         this.$router.push({name: 'landing'})
       }
       // Clean up

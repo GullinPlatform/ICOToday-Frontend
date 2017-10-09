@@ -7,6 +7,7 @@ import Landing from 'views/Landing'
 import RegisterFollowUp from 'views/RegisterFollowUp'
 import EmailVerify from 'views/EmailVerify'
 import InvitedRegister from 'views/InvitedRegister'
+import ReferredRegister from 'views/ReferredRegister'
 import ForgetPassword from 'views/ForgetPassword'
 import ResetPassword from 'views/ResetPassword'
 
@@ -26,16 +27,15 @@ import CompanyTeam from 'views/my_components/CompanyTeam'
 import CompanyWallet from 'views/my_components/CompanyWallet'
 import CompanyPromotion from 'views/my_components/CompanyPromotion'
 
+import ExpertRatedProjects from 'views/my_components/ExpertRatedProjects'
+import ExpertUnRatedProjects from 'views/my_components/ExpertUnRatedProjects'
+
 import UserBase from 'views/user_components/UserBase'
 import UserFeed from 'views/user_components/UserFeed'
 import UserMarkedProjects from 'views/user_components/UserMarkedProjects'
-import UserTeam from 'views/user_components/UserTeam'
+import UserRatedProjects from 'views/user_components/UserRatedProjects'
 
 import Project from 'views/project_pages/Project'
-import ProjectFeed from 'views/project_pages/ProjectFeed'
-import ProjectRatingDetail from 'views/project_pages/ProjectRatingDetail'
-
-import CompanyPage from 'views/CompanyPage'
 
 import TokenSale from 'views/static_pages/TokenSale'
 import UserGuide from 'views/static_pages/UserGuide'
@@ -62,14 +62,6 @@ export default new Router({
       path: '/project/:id',
       component: Project,
       name: 'project'
-    }, {
-      path: '/project/:id/rating',
-      component: ProjectRatingDetail,
-      name: 'project_rating_detail'
-    }, {
-      path: '/project/:id/feed',
-      component: ProjectFeed,
-      name: 'project_feed'
     }, {
       path: '/me',
       component: MyBase,
@@ -110,8 +102,7 @@ export default new Router({
           path: '/me/company/feed',
           component: CompanyFeed,
           name: 'company_feed'
-        },
-        {
+        }, {
           path: '/me/company/team',
           component: CompanyTeam,
           name: 'company_team'
@@ -127,25 +118,33 @@ export default new Router({
           path: '/me/unverified',
           component: NeedVerify,
           name: 'me_need_verify'
-        },
+        }, {
+          path: '/me/expert/rated',
+          component: ExpertRatedProjects,
+          name: 'expert_rated_projects'
+        }, {
+          path: '/me/expert/unrated',
+          component: ExpertUnRatedProjects,
+          name: 'expert_unrated_projects'
+        }
       ]
     }, {
       path: '/user/:id',
       component: UserBase,
       children: [
         {
-          path: '/feed',
+          path: '/user/:id/feed',
           component: UserFeed,
           name: 'user'
         }, {
-          path: '/marked',
+          path: '/user/:id/marked',
           component: UserMarkedProjects,
           name: 'user_marked'
         }, {
-          path: '/team',
-          component: UserTeam,
-          name: 'user_team'
-        },
+          path: '/user/:id/rated',
+          component: UserRatedProjects,
+          name: 'user_rated'
+        }
       ]
     }, {
       path: '/verify',
@@ -155,6 +154,10 @@ export default new Router({
       path: '/invited',
       component: InvitedRegister,
       name: 'invited_register'
+    }, {
+      path: '/register',
+      component: ReferredRegister,
+      name: 'referred_register'
     }, {
       path: '/forget',
       component: ForgetPassword,
@@ -175,10 +178,6 @@ export default new Router({
       path: '/faq',
       component: UserGuide,
       name: 'faq'
-    }, {
-      path: '/company/:id',
-      component: CompanyPage,
-      name: 'company'
     }, {
       path: '/notifications',
       component: NotificationsFeed,

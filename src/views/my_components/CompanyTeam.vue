@@ -7,15 +7,16 @@
       <hr class="mb-3 mt-2">
       <div class="team team-grid mt-4">
         <div class="row">
-          <div class="col-md-6 mb-4" v-for="member in company_members" v-if="!member.is_advisor">
+          <div class="col-md-6 mb-4" v-for="member in company_members" v-if="member.type===0">
             <div class="d-table">
-              <router-link :to="{name:'user_created', params:{id:member.account}}">
+              <router-link :to="{name:'user', params:{id:member.account}}">
                 <img class="d-block mx-auto img-thumbnail rounded-circle d-table-cell align-middle"
                      width="100" :src="member.avatar">
               </router-link>
               <div class="pl-3 d-table-cell align-middle">
                 <h6>{{member.full_name}}
-                  <span class="text-muted text-sm mb-2">{{member.title}}</span></h6>
+                  <span class="text-muted text-sm mb-2">{{member.title}}</span>
+                </h6>
                 <p>{{member.description}}</p>
                 <div class="social-bar">
                   <a :href="member.facebook" class="social-link branding-facebook"
@@ -60,15 +61,16 @@
       <hr class="mb-3 mt-2">
       <div class="team team-grid mt-4">
         <div class="row">
-          <div class="col-md-6 mb-4" v-for="member in company_members" v-if="member.is_advisor">
+          <div class="col-md-6 mb-4" v-for="member in company_members" v-if="member.type===3">
             <div class="d-table">
               <router-link :to="{name:'user', params:{id:member.account}}">
                 <img class="d-block mx-auto img-thumbnail rounded-circle d-table-cell align-middle"
                      width="100" :src="member.avatar" alt="Team">
               </router-link>
               <div class="pl-3 d-table-cell align-middle">
-                <h6>{{member.first_name}} {{member.last_name}}
-                  <span class="text-muted text-sm mb-2">{{member.title}}</span></h6>
+                <h6>{{member.full_name}}
+                  <span class="text-muted text-sm mb-2">{{member.title}}</span>
+                </h6>
                 <p>{{member.description}}</p>
                 <div class="social-bar">
                   <a :href="member.facebook" class="social-link branding-facebook"
@@ -136,12 +138,13 @@
       ...mapGetters({
         me: 'self',
         my_company: 'self_company',
+        self_type: 'self_type',
         company_members: 'current_company_members'
       })
     },
     beforeMount () {
-      // redirect non ico company user
-      if (this.$store.getters.self_type !== 0) {
+      // redirect non ico company
+      if (this.self_type !== 0) {
         this.$router.push({name: 'landing'})
       }
 

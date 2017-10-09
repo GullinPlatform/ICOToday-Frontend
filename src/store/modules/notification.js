@@ -85,6 +85,10 @@ const actions = {
     if(notify.related === 'wallet'){
       router.push({name:'me_wallet'})
     }
+    if(notify.related === 'expert_app'){
+      router.push({name:'me_expert_apply'})
+    }
+
   }
 }
 

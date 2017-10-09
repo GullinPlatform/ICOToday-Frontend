@@ -111,7 +111,7 @@
               </div>
               <div class="collapse" id="collapseThree" role="tabpanel">
                 <div class="card-body">
-                  To make a deposit to your ICOToday Wallet, login to your account and go to account settings. Proceed to your wallet and copy the address of the specific wallet you want to deposit funds into (BTC, ETH, ICC). Go to your exchange or outside wallet and send the funds to that address.
+                  To make a deposit to your ICOToday Wallet, login to your account and go to account settings. Proceed to your wallet and copy the address of the specific wallet you want to deposit funds into (BTC, ETH, ICT). Go to your exchange or outside wallet and send the funds to that address.
                 </div>
               </div>
             </div>

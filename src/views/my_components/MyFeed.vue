@@ -4,33 +4,30 @@
     <hr class="mb-3 mt-2">
     <div class="card-new-layout">
       <textarea class="form-control form-control-rounded" style="resize:none" v-model="content"
-                rows="4" placeholder="Write your comment here...">
+                rows="4" placeholder="What's in your mind?">
       </textarea>
       <div class="row justify-content-between mt-3">
-        <button class="btn btn-sm btn-secondary m-0 ml-3">
-          <i class="fa fa-camera"></i> Photo
-        </button>
-
-        <button @click="newFeed()" class="btn btn-sm btn-primary pull-right m-0 mr-3">
-          Post
-        </button>
+        <button class="btn btn-sm btn-secondary m-0 ml-3"><i class="fa fa-camera"></i> Photo</button>
+        <button @click="newFeed()" class="btn btn-sm btn-primary pull-right m-0 mr-3">Post</button>
       </div>
     </div>
-    <div class="comment" v-if="loaded">
+    <spinner class="mt-4" v-if="!loaded"></spinner>
+
+    <div class="comment" v-else-if="loaded && my_feeds.length">
       <div class="media pos-relative card-new-layout" v-for="feed in my_feeds">
         <img :src="feed.creator.avatar"
              class="d-flex rounded-circle align-self-start mr-4" width="55">
         <div class="media-body">
-          <h6 class="comment-title">{{feed.creator.full_name}}
-            <span class="text-muted" v-if="feed.creator.company">@ {{feed.creator.company.name}}</span>
-            <!--<span class="badge badge-primary" v-if="is_team_member">Team Member</span>-->
+          <h6 class="comment-title">
+            <router-link class="text-decoration-none text-gray-dark" :to="{name:'user', params:{id:feed.creator.id}}" target="_blank">{{feed.creator.full_name}}</router-link>
+            <span class="text-muted" v-if="feed.company_id">@ {{feed.creator.company.name}}</span>
           </h6>
           <p class="mb-1">
             {{feed.content}}
           </p>
           <p class="mb-0">
             <i class="fa fa-clock-o"></i> {{timeFromNow(feed.created)}}
-            <a class="reply-link float-right" href="javascript:void(0)" v-if="feed.creator.id===me.id"
+            <a class="reply-link float-right" href="javascript:void(0)" v-if="feed.creator.account===me.id"
                @click="deleteID(feed.id)">
               <span v-if="delete_feed_id===feed.id">Cancel</span>
               <span v-else><i class="fa fa-times"></i> delete</span>
@@ -70,8 +67,10 @@
                  class="d-flex rounded-circle align-self-start mr-4"
                  width="55">
             <div class="media-body">
-              <h6 class="comment-title">{{reply.creator.full_name}}
-                <!--<span class="badge badge-primary" v-if="is_team_member">Team Member</span>-->
+              <h6 class="comment-title">
+                <router-link class="text-decoration-none text-gray-dark" :to="{name:'user', params:{id:reply.creator.id}}" target="_blank">
+                  {{reply.creator.full_name}}
+                </router-link>
               </h6>
               <p class="mb-1">
                 {{reply.content}}
@@ -79,7 +78,7 @@
               <p class="mb-0">
                 <i class="fa fa-calendar"></i> {{timeFromNow(reply.created)}}
                 <a class="reply-link float-right" href="javascript:void(0)"
-                   v-if="reply.creator.id===me.id"
+                   v-if="reply.creator.account===me.id"
                    @click="deleteID(reply.id)">
                   <i class="fa fa-times"></i>
                   <span v-if="delete_feed_id===reply.id">Cancel</span>
@@ -97,7 +96,14 @@
         </div>
       </div>
     </div>
-    <spinner class="mt-4" v-else></spinner>
+
+    <div class="comment" v-else-if="loaded && !my_feeds.length">
+      <div class="media pos-relative card-new-layout">
+        <div class="media-body text-center">
+          <h6>You have no feeds right now ~</h6>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -129,6 +135,14 @@
       }
     },
     methods: {
+      loadMyFeed () {
+        this.loaded = false
+        this.$store.dispatch('myFeed')
+          .then(() => {
+            this.loaded = true
+          })
+      },
+
       newFeed () {
         this.uploading = true
         const form_data = {
@@ -148,13 +162,6 @@
         this.$store.dispatch('replyFeed', form_data)
           .catch(() => {
             this.$store.dispatch('toastr', {type: 'danger', title: 'Error', message: 'Please try again later.'})
-          })
-      },
-      loadMyFeed () {
-        this.loaded = false
-        this.$store.dispatch('myFeed')
-          .then(() => {
-            this.loaded = true
           })
       },
       timeFromNow (time) {

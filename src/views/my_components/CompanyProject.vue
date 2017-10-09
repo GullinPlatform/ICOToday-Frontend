@@ -523,10 +523,19 @@
         this.route.push({name: 'landing'})
       }
 
-      // My ICO Projects
-      this.$store.dispatch('getProject', this.current_company.project)
+      // load company
+      this.$store.dispatch('getCompany', this.my_company.id)
+      // if company loaded
         .then(() => {
-          this.loaded = true
+          // check if company already has project,  !! can convert '' or {} to true/false
+          this.has_project = !!this.current_company.project
+          // if does not have project
+          if (!this.has_project) {
+            this.$router.push({name: 'company_new_project'})
+          }
+          else {
+            this.loaded = true
+          }
         })
     },
     mounted () {

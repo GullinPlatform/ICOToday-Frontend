@@ -1,10 +1,10 @@
 <template>
   <div class="col-md-8">
     <h6 class="text-muted text-normal text-uppercase">
-      Subscribed ICO Projects
+      Unrated Projects
     </h6>
     <hr class="mb-3 mt-2">
-    <project-list :loaded="loaded" :projects="self_marked_posts"></project-list>
+    <project-list :loaded="loaded" :projects="unrated_projects"></project-list>
   </div>
 </template>
 
@@ -13,7 +13,7 @@
   import ProjectList from 'src/views/components/ProjectList'
 
   export default {
-    name: 'MyMarkedProjects',
+    name: 'ExpertUnratedProjects',
     data () {
       return {
         loaded: false,
@@ -22,7 +22,7 @@
     head: {
       title: {
         inner: 'ICOToday',
-        complement: 'Subscribed ICOs'
+        complement: 'Unrated Projects'
       }
     },
     components: {
@@ -32,7 +32,7 @@
       loadProjects () {
         this.loaded = false
         // My Marked Projects
-        this.$store.dispatch('getSelfMarkedProject')
+        this.$store.dispatch('listUnratedProjects')
           .then(() => {
             this.loaded = true
           })
@@ -41,17 +41,19 @@
     computed: {
       ...mapGetters({
         me: 'self',
+        self_type: 'self_type',
         is_verified: 'is_verified',
         login_status: 'login_status',
-        self_marked_posts: 'self_marked_posts'
+        unrated_projects: 'unrated_projects'
       })
     },
     beforeMount () {
-      this.loaded = false
-      this.$store.dispatch('getSelfMarkedProject')
-        .then(() => {
-          this.loaded = true
-        })
+      // redirect non ico expert user
+      if (this.self_type !== 2) {
+        this.$router.push({name: 'landing'})
+      }
+
+      this.loadProjects()
     },
   }
 </script>

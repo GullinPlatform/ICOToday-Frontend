@@ -35,10 +35,11 @@
             {{feed.content}}
           </p>
           <p class="mb-0">
-            <a class="reply-link float-right" href="javascript:void(0)" v-if="feed.creator.id===me.id"
+
+            <a class="reply-link float-right" href="javascript:void(0)" v-if="feed.creator.account===me.id"
                @click="deleteID(feed.id)">
               <span v-if="delete_feed_id===feed.id">Cancel</span>
-              <span v-else><i class="fa fa-times"></i> delete</span>
+              <span v-else><i class="fa fa-times"></i> DELETE</span>
             </a>
             <a class="reply-link text-danger float-right mr-3" href="javascript:void(0)"
                v-if="delete_feed_id===feed.id"
@@ -83,7 +84,7 @@
               <p class="mb-0">
                 <i class="fa fa-calendar"></i> {{timeFromNow(reply.created)}}
                 <a class="reply-link float-right" href="javascript:void(0)"
-                   v-if="reply.creator.id===me.id"
+                   v-if="reply.creator.account===me.id"
                    @click="deleteID(reply.id)">
                   <i class="fa fa-times"></i>
                   <span v-if="delete_feed_id===reply.id">Cancel</span>
@@ -148,6 +149,8 @@
         this.$store.dispatch('newFeed', form_data)
           .then(() => {
             this.uploading = false
+            this.content = ''
+            this.image = ''
           })
       },
       newReply (id) {
@@ -158,6 +161,7 @@
         this.$store.dispatch('replyFeed', form_data)
           .catch(() => {
             this.$store.dispatch('toastr', {type: 'danger', title: 'Error', message: 'Please try again later.'})
+            this.reply = ''
           })
       },
       loadCompanyFeed () {

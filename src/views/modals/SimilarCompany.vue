@@ -10,7 +10,7 @@
         </div>
         <div class="modal-body">
           <h6 class="modal-title mb-3">
-            If you are in one of the following projects, click it and send a apply request instead of create a new project
+            If you are the member of the following projects, click it and send a apply request instead of create a new project
           </h6>
           <div class="table-responsive shopping-cart">
             <table class="table">
@@ -19,19 +19,20 @@
                 <td>
                   <div class="product-item">
                     <router-link class="product-thumb" :to="{name:'project', params:{id:project.id}}">
-                      <img :src="project.project_icon">
+                      <img :src="project.logo_image">
                     </router-link>
                     <div class="product-info">
                       <h4 class="product-title">
                         <router-link :to="{name:'project', params:{id:project.id}}">
-                          <small>{{project.description}}</small>
+                          {{project.name}}
                         </router-link>
                       </h4>
+                      <small>{{project.description_short}}</small>
                     </div>
                   </div>
                 </td>
                 <td class="text-center">
-                  <button class="btn btn-outline-primary btn-sm" @click="applyCompany(project.company)">
+                  <button class="btn btn-outline-primary btn-sm" @click="applyCompany(project.company.id)">
                     Apply
                   </button>
                 </td>
@@ -70,8 +71,9 @@
           })
       },
       createCompany () {
-        const form_data = new FormData()
-        form_data.append('name', this.company_name)
+        const form_data = {
+          name: this.new_company_name
+        }
         this.$store.dispatch('createCompany', form_data)
           .then(() => {
             this.setAccountType()
@@ -79,10 +81,17 @@
             this.$store.dispatch('setFollowUpStep', 10)
           })
       },
+      setAccountType () {
+        const form_data = {
+          type: 0
+        }
+        this.$store.dispatch('setSelfType', form_data)
+      },
     },
     computed: {
       ...mapGetters({
-        project_result: 'current_project_search_result'
+        project_result: 'current_project_search_result',
+        new_company_name: 'new_company_name'
       })
     },
   }

@@ -10,7 +10,7 @@ import store from './store'
 
 import RootLayout from './views/layouts/RootLayout.vue'
 
-Vue.use(VueIntercom, { appId: 'rvgar4pm' })
+// Vue.use(VueIntercom, { appId: 'rvgar4pm' })
 Vue.use(Router)
 Vue.use(VueHead)
 

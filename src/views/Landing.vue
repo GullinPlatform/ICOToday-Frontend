@@ -51,7 +51,7 @@
                 <img :src="project.promote_image">
               </a>
               <div class="promo-project-score">
-                <span v-if="project.rating">{{project.rating}}/100</span>
+                <span v-if="project.rating">{{project.rating}} / 100</span>
                 <span v-else>No Score</span>
               </div>
               <span class="promo-project-format">
@@ -69,7 +69,12 @@
               </div>
             </div>
             <div class="promo-project-body">
-              <h3 class="promo-project-title mb-0">{{project.title}}</h3>
+              <h3 class="promo-project-title mb-0">
+                <a @click="postModal(project.id)" href="javascript:void(0)">
+                  {{project.name}}
+                </a>
+              </h3>
+              <span class="badge badge-sm badge-default">{{project.category}}</span> <br>
               {{project.description_short}}
             </div>
             <div class="footer promo-project-footer">
@@ -89,29 +94,25 @@
       <div class="row">
         <div class="col-lg-2">
           <nav class="list-group">
-            <a class="list-group-item" href="javascript:void(0)" @click="status='active'" :class="{active:status==='active'}">ACTIVE</a>
-            <a class="list-group-item" href="javascript:void(0)" @click="status='upcoming'" :class="{active:status==='upcoming'}">UPCOMING</a>
-            <a class="list-group-item" href="javascript:void(0)" @click="status='passed'" :class="{active:status==='passed'}">PASSED</a>
-            <a class="list-group-item" href="javascript:void(0)" @click="status=''" :class="{active:status===''}">ALL</a>
+            <a class="list-group-item" href="javascript:void(0)" @click="status='active'" :class="{active:status==='active'}">{{project_stat.active}} ACTIVE</a>
+            <a class="list-group-item" href="javascript:void(0)" @click="status='upcoming'" :class="{active:status==='upcoming'}">{{project_stat.upcoming}} UPCOMING</a>
+            <a class="list-group-item" href="javascript:void(0)" @click="status='passed'" :class="{active:status==='passed'}">{{project_stat.passed}} PASSED</a>
+            <a class="list-group-item" href="javascript:void(0)" @click="status=''" :class="{active:status===''}">{{project_stat.all}} TOTAL</a>
           </nav>
         </div>
         <div class="col-lg-10">
-          <div class="row">
-            <div class="col-lg-4">
-              <section class="widget widget-links mb-3">
-                <div class="input-group form-group">
-                                <span class="input-group-btn">
-                                <button>
-                                    <i class="icon-search"></i>
-                                </button>
-                                </span>
+          <div class="card-new-layout">
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="input-group form-group mb-0">
+                  <span class="input-group-btn">
+                  <button><i class="icon-search"></i></button>
+                  </span>
                   <input class="form-control" v-model="keyword" placeholder="Search by Keyword">
                 </div>
-              </section>
-            </div>
-            <div class="col-lg-4">
-              <section class="widget widget-links mb-3">
-                <div class="input-group form-group">
+              </div>
+              <div class="col-lg-4">
+                <div class="input-group form-group mb-0">
                   <select class="form-control" v-model="category" required>
                     <option value="" selected>-- Choose Category --</option>
                     <option value="Platform">Platform</option>
@@ -139,33 +140,28 @@
                   </select>
 
                 </div>
-              </section>
+              </div>
+              <div class="col-lg-4">
+                <select class="form-control mb-0" v-model="type" required>
+                  <option value="" selected>-- Choose Type --</option>
+                  <option value="0">Pre-ICO</option>
+                  <option value="1">ICO</option>
+                </select>
+              </div>
             </div>
-            <div class="col-lg-4">
-              <section class="widget widget-links mb-3">
-                <div class="input-group form-group">
-                  <select class="form-control" v-model="type" required>
-                    <option value="" selected>-- Choose Type --</option>
-                    <option value="0">Pre-ICO</option>
-                    <option value="1">ICO</option>
-                  </select>
-                </div>
-              </section>
-            </div>
-          </div>
-          <div class="row mb-4">
-            <div class="col-lg-12">
-              <a class="tag" href="javascript:void(0)" @click="category=''"
-                 v-if="category">#{{category}}</a>
-              <a class="tag" href="javascript:void(0)" @click="keyword=''" v-if="keyword">#{{keyword}}</a>
-              <a class="tag" href="javascript:void(0)" @click="type=''" v-if="type==='0'">#Pre-ICO</a>
-              <a class="tag" href="javascript:void(0)" @click="type=''" v-if="type==='1'">#ICO</a>
-              <a class="tag" href="javascript:void(0)" @click="status=''" v-if="status">#{{status}}</a>
+            <div class="row">
+              <div class="col-lg-12">
+                <a class="tag mb-0 mt-3" href="javascript:void(0)" @click="category=''" v-if="category">#{{category}}</a>
+                <a class="tag mb-0 mt-3" href="javascript:void(0)" @click="keyword=''" v-if="keyword">#{{keyword}}</a>
+                <a class="tag mb-0 mt-3" href="javascript:void(0)" @click="type=''" v-if="type==='0'">#Pre-ICO</a>
+                <a class="tag mb-0 mt-3" href="javascript:void(0)" @click="type=''" v-if="type==='1'">#ICO</a>
+                <a class="tag mb-0 mt-3" href="javascript:void(0)" @click="status=''" v-if="status">#{{status}}</a>
+              </div>
             </div>
           </div>
           <div class="row">
             <div class="col-lg-12">
-              <project-list :loaded="list_loaded" :posts="projects"></project-list>
+              <project-list :loaded="list_loaded" :projects="projects"></project-list>
             </div>
           </div>
         </div>
@@ -198,6 +194,7 @@
         // loading track
         list_loaded: false,
         promotion_loaded: false,
+        stat_loaded: false,
 
         // for whitelist register
         email: '',
@@ -226,13 +223,13 @@
       search: _.debounce(
         function () {
           this.list_loaded = false
-          const formData = {
+          const query_data = {
             page: this.page,
             status: this.status,
             keyword: this.keyword,
             category: this.category,
           }
-          this.$store.dispatch('searchProjects', formData)
+          this.$store.dispatch('listProjects', query_data)
             .then(() => {
               this.list_loaded = true
             })
@@ -344,25 +341,16 @@
         login_status: 'login_status',
         projects: 'projects',
         self_marked_posts: 'self_marked_posts',
-        promo_projects: 'promo_projects'
+        promo_projects: 'promo_projects',
+        project_stat: 'project_stat'
       })
     },
     watch: {
-      keyword () {
-        this.search()
-      },
-      category () {
-        this.search()
-      },
-      type () {
-        this.search()
-      },
-      status () {
-        this.search()
-      },
-      page () {
-        this.loadMore()
-      }
+      keyword () { this.search() },
+      category () { this.search()},
+      type () { this.search() },
+      status () { this.search() },
+      page () { this.loadMore() }
     },
     beforeMount () {
       this.search()
@@ -370,8 +358,13 @@
         .then(() => {
           this.promotion_loaded = true
         })
+      this.$store.dispatch('getProjectStat')
+        .then(() => {
+          this.stat_loaded = true
+        })
       if (this.login_status)
         this.$store.dispatch('getSelfMarkedProject')
+
     },
     mounted () {
       /* global particlesJS:true */
@@ -636,5 +629,10 @@
   a.list-group-item:focus, a.list-group-item:active {
     background-color: #0da9ef !important;
     color: white !important;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
   }
 </style>

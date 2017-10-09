@@ -1,5 +1,5 @@
 <template>
-  <div v-if="loaded">
+  <div>
     <div class="project-list project-list-header">
       <div class="column project">
         Company
@@ -16,9 +16,9 @@
       <div class="column project-data">
         Tokens On Sale
       </div>
-
     </div>
-    <div class="project-list"
+    <spinner v-if="!loaded" class="mt-3"></spinner>
+    <div class="project-list" v-else-if="loaded && projects.length"
          v-for="project in projects"
          @mouseover="subscribe_show=project.id" @mouseleave="subscribe_show=false">
       <div class="column project">
@@ -30,13 +30,13 @@
           </div>
           <div class="project-info">
             <div class="project-name">
-              <a>{{project.title}}
+              <a href="javascript:void(0)" @click="projectModal(project.id)" class="text-decoration-none text-gray-dark">
+                {{project.name}}
                 <span class="badge badge-sm badge-default">{{project.category}}</span>
               </a>
             </div>
             <div class="project-descr">
               {{project.description_short}}
-
             </div>
           </div>
         </div>
@@ -55,14 +55,19 @@
         <span>{{project.equality_on_offer}}%</span>
       </div>
     </div>
+    <div class="project-list" v-else-if="loaded && !projects.length">
+     <h6 class="text-center m-4">No matched projects</h6>
+    </div>
   </div>
 </template>
 
 <script>
   import { mapGetters } from 'vuex'
+  import Spinner from 'components/Spinner'
 
   export default {
     name: 'ProjectList',
+    components: {Spinner},
     props: {
       projects: {
         type: Array,
@@ -131,7 +136,6 @@
       },
 
       projectModal (id) {
-        /* global $:true */
         if (this.window_width <= 768) {
           this.$router.push({name: 'project', params: {id: id}})
         }

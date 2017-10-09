@@ -45,9 +45,9 @@
         </tr>
         <tr>
           <td class="wallet-cell">
-            <h3 class="mb-0">ICC </h3>
+            <h3 class="mb-0">ICT </h3>
           </td>
-          <td class="wallet-cell"><h3 class="text-thin mb-0">{{(wallet.icc_amount).toFixed(2)}}</h3></td>
+          <td class="wallet-cell"><h3 class="text-thin mb-0">{{(wallet.ict_amount).toFixed(2)}}</h3></td>
           <td class="wallet-cell">
             <a class="btn btn-secondary btn-sm" href="#" @click="warning()"><i class="fa fa-lock"></i> Copy Wallet Address</a>
           </td>
@@ -58,6 +58,11 @@
         </tr>
         </tbody>
       </table>
+    </div>
+    <div class="card-new-layout mt-4">
+      <h6 class="text-center">Refer your friends to ICOToday using the following link <br>
+        and earn FREE 5 ICTs for each referral!</h6>
+
     </div>
   </div>
 </template>

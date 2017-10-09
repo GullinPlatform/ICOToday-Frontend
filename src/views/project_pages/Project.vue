@@ -47,7 +47,7 @@
             <div class="col-md-3 col-sm-6 mb-3 text-center"
                  v-for="member in current_team_members"
                  v-if="!member.is_advisor">
-              <router-link :to="{name:'user_created', params:{id:member.account}}"
+              <router-link :to="{name:'user', params:{id:member.account}}"
                            data-dismiss="modal">
                 <img class="img-thumbnail rounded-circle mb-2" height="100" width="100"
                      :src="member.avatar" alt="Team Member">
@@ -84,7 +84,7 @@
             <div class="col-md-3 col-sm-6 mb-3 text-center"
                  v-for="member in current_team_members"
                  v-if="member.is_advisor">
-              <router-link :to="{name:'user_created', params:{id:member.account}}"
+              <router-link :to="{name:'user', params:{id:member.account}}"
                            data-dismiss="modal">
                 <img class="img-thumbnail rounded-circle mb-2" height="100" width="100"
                      :src="member.avatar" alt="Team Member">
@@ -273,7 +273,7 @@
       },
       newComment () {
         const formData = {
-          pk: this.project.id,
+          id: this.project.id,
           content: this.new_comment
         }
         this.$store.dispatch('projectComment', formData)
@@ -284,7 +284,7 @@
       },
       newReply (comment_id) {
         const formData = {
-          pk: comment_id,
+          id: comment_id,
           content: this.new_reply
         }
         this.$store.dispatch('replyComment', formData)

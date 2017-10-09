@@ -1,10 +1,10 @@
 <template>
   <div class="col-md-8">
     <h6 class="text-muted text-normal text-uppercase">
-      Subscribed ICO Projects
+      My Rated Projects
     </h6>
     <hr class="mb-3 mt-2">
-    <project-list :loaded="loaded" :projects="self_marked_posts"></project-list>
+    <project-list :loaded="loaded" :projects="user_rated_projects"></project-list>
   </div>
 </template>
 
@@ -13,45 +13,38 @@
   import ProjectList from 'src/views/components/ProjectList'
 
   export default {
-    name: 'MyMarkedProjects',
+    name: 'ExpertRatedProjects',
     data () {
       return {
-        loaded: false,
+        loaded: false
       }
     },
     head: {
       title: {
         inner: 'ICOToday',
-        complement: 'Subscribed ICOs'
+        complement: 'User Rated Projects'
       }
     },
     components: {
       ProjectList
     },
     methods: {
-      loadProjects () {
-        this.loaded = false
-        // My Marked Projects
-        this.$store.dispatch('getSelfMarkedProject')
+      loadRatedProjects () {
+        this.$store.dispatch('getUserRatedProject', this.$route.params.id)
           .then(() => {
             this.loaded = true
           })
-      },
+
+      }
     },
     computed: {
       ...mapGetters({
         me: 'self',
-        is_verified: 'is_verified',
-        login_status: 'login_status',
-        self_marked_posts: 'self_marked_posts'
+        user_rated_projects: 'user_rated_projects'
       })
     },
     beforeMount () {
-      this.loaded = false
-      this.$store.dispatch('getSelfMarkedProject')
-        .then(() => {
-          this.loaded = true
-        })
-    },
+      this.loadRatedProjects()
+    }
   }
 </script>

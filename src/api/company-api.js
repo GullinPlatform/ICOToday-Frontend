@@ -31,7 +31,7 @@ export default {
     return apiCall('get', id + '/members/')
   },
   applyCompany (id) {
-    return apiCall('get', id + '/apply/')
+    return apiCall('post', id + '/apply/')
   },
   searchCompany (search) {
     return apiCall('get', 'search/', {}, search)

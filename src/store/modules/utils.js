@@ -4,7 +4,8 @@ const state = {
   white_list_email: '',
   is_advisor: false,
 
-  register_follow_up_step: 1
+  register_follow_up_step: 1,
+  new_company_name: ''
 }
 
 const getters = {
@@ -19,7 +20,10 @@ const getters = {
   },
   register_follow_up_step: state => {
     return state.register_follow_up_step
-  }
+  },
+  new_company_name: state => {
+    return state.new_company_name
+  },
 }
 
 const actions = {
@@ -42,6 +46,9 @@ const actions = {
     commit(types.FOLLOW_UP_STEP, step_move)
   },
 
+  setNewCompanyName({commit}, new_company_name) {
+    commit(types.NEW_COMPANY_NAME, new_company_name)
+  },
   // Global toastr trigger
   toastr ({commit}, data) {
     let toastOptions = {
@@ -74,6 +81,10 @@ const mutations = {
     if (step_move === 0)
       state.register_follow_up_step = 1
     state.register_follow_up_step += step_move
+  },
+
+  [types.NEW_COMPANY_NAME] (state, new_company_name) {
+    state.new_company_name = new_company_name
   },
 }
 

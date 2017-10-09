@@ -2,7 +2,7 @@
   <div class="modal" id="project-modal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-xlg modal-lg" role="document">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header ml-3 mr-3">
           <div class="media">
             <img class="d-flex rounded mr-3" :src="project.logo_image" width="75" alt="Media">
             <div class="media-body">
@@ -12,19 +12,15 @@
             </div>
           </div>
           <p class="mb-0">
-            <button class="btn btn-outline-danger btn-sm btn-block" v-if="!marked"
-                    @click="markProject()">
+            <button class="btn btn-outline-danger btn-sm btn-block" v-if="!subscribed"
+                    @click="subscribeProject()">
               <span><i class="fa fa-star-o"></i> Subscribe</span>
             </button>
-            <button class="btn btn-danger btn-sm btn-block" v-else @click="unmarkProject()"
+            <button class="btn btn-danger btn-sm btn-block" v-else @click="unsubscribeProject()"
                     @mouseover="unsubscribe=true" @mouseleave="unsubscribe=false">
               <span v-if="unsubscribe">unsubscribe</span>
               <span v-else><i class="fa fa-check"></i> Subscribed</span>
-
             </button>
-            <!--<router-link :to="{name:'project', params:{id:project.id}}" data-dismiss="modal" class="btn btn-outline-primary btn-sm mr-2">-->
-            <!--Full Page-->
-            <!--</router-link>-->
           </p>
         </div>
         <div class="modal-body light-grey">
@@ -51,7 +47,7 @@
                        v-for="member in team_members"
                        v-if="!member.is_advisor">
                     <div class="d-table">
-                      <router-link :to="{name:'user_created', params:{id:member.account}}" data-dismiss="modal">
+                      <router-link :to="{name:'user', params:{id:member.account}}" data-dismiss="modal">
                         <img class="d-block mx-auto img-thumbnail rounded-circle d-table-cell align-middle"
                              width="100" :src="member.avatar">
                       </router-link>
@@ -91,7 +87,7 @@
                        v-for="member in team_members"
                        v-if="member.is_advisor">
                     <div class="d-table">
-                      <router-link :to="{name:'user_created', params:{id:member.account}}" data-dismiss="modal">
+                      <router-link :to="{name:'user', params:{id:member.account}}" data-dismiss="modal">
                         <img class="d-block mx-auto img-thumbnail rounded-circle d-table-cell align-middle"
                              width="100" :src="member.avatar">
                       </router-link>
@@ -127,20 +123,25 @@
             <div class="col-lg-8 pl-md-0" v-else-if="feed_detail">
               <!--Feeds-->
               <div class="comment" v-if="feeds_loaded">
+                <div class="media pos-relative card-new-layout" v-if="!feeds.length">
+                  <div class="media-body text-center">
+                    <h5 class="m-0">No updates right now, try come back later?</h5>
+                  </div>
+                </div>
                 <div class="media pos-relative card-new-layout" v-for="feed in feeds">
                   <img :src="feed.creator.avatar"
                        class="d-flex rounded-circle align-self-start mr-4" width="55">
                   <div class="media-body">
-                    <h6 class="comment-title">{{feed.creator.full_name}}
+                    <h6 class="comment-title">
+                      <router-link :to="{name:'user', params:{id:feed.creator.id}}" class="text-gray-dark" data-dismiss="modal">
+                        {{feed.creator.full_name}}
+                      </router-link>
                       <span class="text-muted">@ {{feed.creator.company.name}}</span>
-                      <!--<span class="badge badge-primary" v-if="is_team_member">Team Member</span>-->
                     </h6>
-                    <p class="mb-1">
-                      {{feed.content}}
-                    </p>
+                    <p class="mb-1">{{feed.content}}</p>
                     <p class="mb-0">
-                      <i class="fa fa-calendar"></i> {{timeFromNow(feed.created)}}
-                      <a class="reply-link float-right" href="javascript:void(0)" v-if="feed.creator.id===me.id"
+                      <i class="fa fa-clock-o"></i> {{timeFromNow(feed.created)}}
+                      <a class="reply-link float-right" href="javascript:void(0)" v-if="feed.creator.account===me.id"
                          @click="deleteID(feed.id)">
                         <span v-if="delete_feed_id===feed.id">Cancel</span>
                         <span v-else><i class="fa fa-times"></i> delete</span>
@@ -160,7 +161,7 @@
                     <!-- Nested reply area-->
                     <div class="row" v-if="reply_feed_box_show&&reply_feed_box_index===feed.id">
                       <div class="col-md-12 mt-2">
-                        <textarea rows="4" class="form-control" v-model="reply" placeholder="Reply"></textarea>
+                        <textarea rows="4" class="form-control" v-model="new_reply" placeholder="Leave your reply here..."></textarea>
                       </div>
                       <div class="col-md-12">
                         <button class="btn btn-sm btn-primary float-right"
@@ -183,13 +184,11 @@
                         <h6 class="comment-title">{{reply.creator.full_name}}
                           <!--<span class="badge badge-primary" v-if="is_team_member">Team Member</span>-->
                         </h6>
-                        <p class="mb-1">
-                          {{reply.content}}
-                        </p>
+                        <p class="mb-1">{{reply.content}}</p>
                         <p class="mb-0">
                           <i class="fa fa-calendar"></i> {{timeFromNow(reply.created)}}
                           <a class="reply-link float-right" href="javascript:void(0)"
-                             v-if="reply.creator.id===me.id"
+                             v-if="reply.creator.account===me.id"
                              @click="deleteID(reply.id)">
                             <i class="fa fa-times"></i>
                             <span v-if="delete_feed_id===reply.id">Cancel</span>
@@ -208,7 +207,73 @@
                 </div>
               </div>
             </div>
+            <div class="col-lg-8 pl-md-0" v-else-if="rating_derail">
+              <div class="comment" v-if="ratings_loaded">
+                <div class="media pos-relative card-new-layout" v-if="!rating_details.length">
+                  <div class="media-body text-center">
 
+                    <h5 class="m-0" v-if="self_type===2">Be the first one to rate this project!</h5>
+
+                    <h5 class="m-0" v-else>No ratings right now, try come back later?</h5>
+                  </div>
+                </div>
+
+                <div class="card-new-layout" v-if="self_type===2 && !selfRated()">
+                  <h6 class="text-muted text-normal text-uppercase ">New Rating</h6>
+                  <hr class="mb-3 mt-2">
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Score</label>
+                    <div class="col-sm-10">
+                      <input class="form-control" v-model="new_rating_detail_score" placeholder="Between 0 and 100">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Pros</label>
+                    <div class="col-sm-10">
+                      <textarea class="form-control"
+                                style="resize:none" rows="4"
+                                placeholder="What's the good part of this project?"
+                                v-model="new_rating_detail_pros">
+                      </textarea>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Cons</label>
+                    <div class="col-sm-10">
+                      <textarea class="form-control"
+                                style="resize:none" rows="4"
+                                placeholder="What's the 'not that good' part of this project?"
+                                v-model="new_rating_detail_cons">
+                      </textarea>
+                    </div>
+                  </div>
+
+                  <div class="row justify-content-end">
+                    <div class="col-sm-10">
+                      <button @click="newRating()" class="btn btn-sm btn-primary btn-block">Post</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="media pos-relative card-new-layout" v-for="detail in rating_details">
+                  <img :src="detail.rater.avatar"
+                       class="d-flex rounded-circle align-self-start mr-4" width="55">
+                  <div class="media-body">
+                    <h6 class="comment-title">
+                      <router-link :to="{name:'user', params:{id:detail.rater.id}}" class="text-gray-dark" data-dismiss="modal">
+                        {{detail.rater.full_name}}
+                      </router-link>
+                      <span class="text-muted" v-if="detail.rater.title">{{detail.rater.title}}</span>
+                      <span class="float-right"><i class="fa fa-clock-o"></i> {{timeFromNow(detail.created)}}</span>
+                    </h6>
+                    <p class="mb-1 rating-detail">{{detail.content}}</p>
+                    <h5 class="mb-0">
+                      Score: <span class="text-bold text-primary">{{detail.score}}</span>
+                    </h5>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="col-lg-4 pr-md-0">
               <!--Score-->
               <div class="card-new-layout">
@@ -216,17 +281,24 @@
                   <router-link :to="{name:'terms', query:{type:'rating'}}" data-dismiss="modal">
                     <i class="fa fa-question-circle"></i>
                   </router-link>
+
+                  <a class="float-right text-primary" href="javascript:void(0)" v-if="!rating_derail"
+                     @click="project_detail=false;feed_detail=false;rating_derail=true">> Detail</a>
+                  <a class="float-right text-primary" href="javascript:void(0)" v-else
+                     @click="project_detail=true;feed_detail=false;rating_derail=false">> Back</a>
                 </h6>
                 <hr class="mb-3 mt-2">
-                <h3>
-                  <span class="text-sm text-black">
-                  </span>
-                </h3>
-                <router-link :to="{name:'project_rating_detail', params:{id:project.id}}">
-                  <h2 class="text-bold text-info text-center" v-if="project.rating">
-                    {{project.rating}}/100</h2>
-                </router-link>
-                <h2 class="text-bold text-info text-center" v-if="!project.rating">No Score</h2>
+                <h2 class="text-bold text-info text-center mb-0" v-if="project.rating">
+                  <a href="javascript:void(0)" @click="rating_derail=true;project_detail=false;feed_detail=false">{{project.rating}}/100</a>
+                </h2>
+                <h2 class="text-bold text-info text-center mb-0" v-else>
+                  <a href="javascript:void(0)" @click="rating_derail=true;project_detail=false;feed_detail=false">No Score</a>
+                </h2>
+                <div class="text-center" v-if="rating_derail">
+                  <button class="btn btn-primary btn-sm"
+                          @click="project_detail=true;feed_detail=false;rating_derail=false">Back
+                  </button>
+                </div>
               </div>
               <!-- Time -->
               <div class="card-new-layout">
@@ -235,7 +307,7 @@
                 <h2 class="text-center mb-0">
                   {{timeCounter(project.start_datetime, project.end_datetime)}}
                 </h2>
-                <p class="text-center"> {{formatTime(project.start_datetime, project.end_datetime)}}</p>
+                <p class="text-center mb-0 mt-2"> {{formatTime(project.start_datetime, project.end_datetime)}}</p>
               </div>
               <!--Updates-->
               <div class="card-new-layout widget-featured-posts">
@@ -245,7 +317,6 @@
                      @click="project_detail=false;feed_detail=true;rating_derail=false">> More</a>
                   <a class="float-right text-primary" href="javascript:void(0)" v-else
                      @click="project_detail=true;feed_detail=false;rating_derail=false">> Back</a>
-
                 </h6>
                 <hr class="mb-3 mt-2">
                 <div class="entry mb-0 mt-3" v-for="(feed, index) in feeds" v-if="!feed_detail&&feeds_loaded&&index<2">
@@ -264,20 +335,9 @@
                 </div>
                 <div class="text-center" v-if="feed_detail">
                   <button class="btn btn-primary btn-sm"
-                          @click="project_detail=true;feed_detail=false;rating_derail=false">Back</button>
+                          @click="project_detail=true;feed_detail=false;rating_derail=false">Back
+                  </button>
                 </div>
-              </div>
-              <!--Other-->
-              <div class="card-new-layout">
-                <h6 class="text-muted text-normal text-uppercase">Link</h6>
-                <hr class="mb-3 mt-2">
-                <a class="btn btn-outline-primary btn-sm btn-block text-primary"
-                   :href="project.white_paper" target="_blank">
-                  <i class="fa fa-file-o"></i> White paper
-                </a>
-                <a class="btn btn-outline-secondary btn-sm btn-block" :href="project.website" target="_blank">
-                  <i class="fa fa-globe"></i> Website
-                </a>
               </div>
               <!-- Financial -->
               <div class="card-new-layout">
@@ -312,6 +372,18 @@
                   </tr>
                   </tbody>
                 </table>
+              </div>
+              <!--Link-->
+              <div class="card-new-layout">
+                <h6 class="text-muted text-normal text-uppercase">Link</h6>
+                <hr class="mb-3 mt-2">
+                <a class="btn btn-outline-primary btn-sm btn-block text-primary"
+                   :href="project.white_paper" target="_blank">
+                  <i class="fa fa-file-o"></i> White paper
+                </a>
+                <a class="btn btn-outline-secondary btn-sm btn-block" :href="project.website" target="_blank">
+                  <i class="fa fa-globe"></i> Website
+                </a>
               </div>
               <!-- Social Media -->
               <div class="card-new-layout">
@@ -348,25 +420,58 @@
     },
     data () {
       return {
-        new_reply: '',
-        new_comment: '',
-        delete_comment_id: 0,
+        // rating
+        new_rating_detail_pros: '',
+        new_rating_detail_cons: '',
+        new_rating_detail_score: null,
+
         // UI Control
         project_detail: true,
         feed_detail: false,
         rating_derail: false,
-        marked: false,
+
+        // Subscription
+        subscribed: false,
         unsubscribe: false,
+
+        // reply
+        new_reply: '',
         reply_feed_box_show: false,
         reply_feed_box_index: '',
         delete_feed_id: '',
+
         // Data Load Trigger
         team_loaded: false,
-        feeds_loaded: false
+        feeds_loaded: false,
+        ratings_loaded: false,
       }
     },
     methods: {
-      markProject () {
+      // Data Loading
+      loadMembers () {
+        this.team_loaded = false
+        this.$store.dispatch('getCompanyMembers', this.$store.getters.current_project.company.id)
+          .then(() => {
+            this.team_loaded = true
+          })
+      },
+      loadFeed () {
+        this.feeds_loaded = false
+        this.$store.dispatch('companyFeed', this.$store.getters.current_project.company.id)
+          .then(() => {
+            this.feeds_loaded = true
+          })
+      },
+      loadRatingDetail () {
+        this.ratings_loaded = false
+        this.$store.dispatch('getProjectRatingDetail', this.$store.getters.current_project.id)
+          .then(() => {
+            this.ratings_loaded = true
+          })
+      },
+
+      // Subscriptions
+      subscribeProject () {
         this.$store.dispatch('markProject', this.project.id)
           .then(() => {
             this.marked = true
@@ -377,7 +482,7 @@
             })
           })
       },
-      unmarkProject () {
+      unsubscribeProject () {
         this.$store.dispatch('markProject', this.project.id)
           .then(() => {
             this.marked = false
@@ -388,48 +493,55 @@
             })
           })
       },
-      commentCreatorName (creator) {
-        if (creator.info.first_name && creator.info.last_name) {
-          return creator.info.first_name + ' ' + creator.info.last_name
-        } else {
-          return creator.email
-        }
-      },
-      newComment () {
-        const formData = {
-          pk: this.project.id,
-          content: this.new_comment
-        }
-        this.$store.dispatch('projectComment', formData)
-          .then(() => {
-            this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'You have projected new comment!'})
-            this.new_comment = ''
-          })
-      },
-      newReply (comment_id) {
-        const formData = {
-          pk: comment_id,
+
+      // Feed features
+      newReply (feed_id) {
+        const form_data = {
+          id: feed_id,
           content: this.new_reply
         }
-        this.$store.dispatch('replyComment', formData)
+        this.$store.dispatch('replyFeed', form_data)
           .then(() => {
             this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'You have projected new comment!'})
             this.new_reply = ''
             // UI Control
-            this.reply_comment_box_show = false
-            this.reply_comment_box_index = -1
+            this.reply_feed_box_show = false
+            this.reply_feed_box_index = -1
           })
       },
-      preDeleteComment (comment_id) {
-        this.delete_comment_id === 0 ? this.delete_comment_id = comment_id : this.delete_comment_id = 0
-      },
-      deleteComment (comment_id) {
-        this.$store.dispatch('deleteComment', comment_id)
+      deleteFeed (id) {
+        this.$store.dispatch('deleteFeed', id)
           .then(() => {
-            this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'You removed your comment!'})
-            this.new_comment = ''
+            this.loadFeed()
+            this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'Your feed is deleted.'})
           })
       },
+      deleteID (id) {
+        if (this.delete_feed_id === id)
+          this.delete_feed_id = ''
+        else
+          this.delete_feed_id = id
+      },
+
+      // Rating Details
+      newRating () {
+        const form_data = {
+          id: this.$store.getters.current_project.id,
+          score: this.new_rating_detail_score,
+          content: 'Pros: \n' + this.new_rating_detail_pros + '\nCons: \n' + this.new_rating_detail_cons
+        }
+        this.$store.dispatch('createProjectRatingDetail', form_data)
+          .catch(() => {
+            this.$store.dispatch('toastr', {
+              type: 'danger',
+              title: 'Error',
+              message: 'Please try again later'
+            })
+
+          })
+      },
+
+      // utils
       timeCounter (start, end) {
         /* global moment:true */
         // Haven't start
@@ -480,43 +592,40 @@
       timeFromNow (time) {
         return moment(time).fromNow()
       },
-      deleteFeed (id) {
-        this.$store.dispatch('deleteFeed', id)
-          .then(() => {
-            this.loadMyFeed()
-            this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'Your feed is deleted.'})
-          })
-      },
-      deleteID (id) {
-        if (this.delete_feed_id === id)
-          this.delete_feed_id = ''
-        else
-          this.delete_feed_id = id
-      },
+      selfRated () {
+        for (let detail of this.rating_details) {
+          if (detail.rater.id === this.me.info.id)
+            return true
+        }
+        return false
+      }
     },
     computed: {
       ...mapGetters({
         me: 'self',
         login_status: 'login_status',
         project: 'current_project',
+        marked_projects: 'self_marked_posts',
         team_members: 'current_company_members',
+        self_type: 'self_type',
         self_company: 'self_company',
         self_admin: 'self_admin',
         feeds: 'company_feeds',
+        rating_details: 'current_project_rating_detail'
       })
     },
     watch: {
       'project': function () {
-        this.team_loaded = false
-        this.feeds_loaded = false
-        this.$store.dispatch('companyFeed', this.$store.getters.current_project.company)
-          .then(() => {
-            this.feeds_loaded = true
-          })
-        this.$store.dispatch('getCompanyMembers', this.$store.getters.current_project.company)
-          .then(() => {
-            this.team_loaded = true
-          })
+        this.loadMembers()
+        this.loadFeed()
+        this.loadRatingDetail()
+        // Check if project is marked
+        this.subscribed = false
+        for (let marked_project of this.marked_projects) {
+          if (marked_project.id === this.project.id) {
+            this.subscribed = true
+          }
+        }
       }
     }
   }
@@ -537,5 +646,13 @@
 
   .entry-meta {
     display: inline !important;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  .rating-detail {
+    white-space: pre-line;
   }
 </style>
