@@ -32,7 +32,6 @@
               <li><a href="/tokensale">Token Sale</a></li>
               <li><a href="/terms?type=terms">Terms and Services</a></li>
               <li><a href="/terms?type=privacy">Privacy Policy</a></li>
-              <li><a href="/terms?type=token">Token Sale Agreement</a></li>
               <li><a href="/terms?type=rating">Expert Rating Guidelines</a></li>
 
             </ul>

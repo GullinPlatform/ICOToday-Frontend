@@ -28,7 +28,7 @@
                   <img class="d-flex rounded mr-3 ml-3" :src="post.logo_image" width="50" alt="Media">
 
                   <div class="media-body">
-                      <p class="mt-0 mb-1">{{post.title}} <span style="color:#030303;font-size:12px; font-weight: normal;">has subsribed to your account</span></p>
+                      <p class="mt-0 mb-1 notification_actor_name">{{post.title}} <span style="color:#030303;font-size:12px; font-weight: normal;">has subsribed to your account</span></p>
                   </div>
               </div>
             </section>
@@ -39,10 +39,9 @@
                   <img class="d-flex rounded mr-3 ml-3" :src="post.logo_image" width="50" alt="Media">
 
                   <div class="media-body">
-                      <h4 class="mt-0 mb-1">{{post.title}}</h4>
+                      <p class="mt-0 mb-1 notification_actor_name">{{post.title}} <span style="color:#030303;font-size:12px; font-weight: normal;">has subsribed to your account</span></p>
                   </div>
               </div>
-                <vue-markdown class="card-new-text">{{post.description_full}}</vue-markdown>
             </section>
 
             <section class="card-new-layout">
@@ -51,10 +50,9 @@
                   <img class="d-flex rounded mr-3 ml-3" :src="post.logo_image" width="50" alt="Media">
 
                   <div class="media-body">
-                      <h4 class="mt-0 mb-1">{{post.title}}</h4>
+                      <p class="mt-0 mb-1 notification_actor_name">{{post.title}} <span style="color:#030303;font-size:12px; font-weight: normal;">has subsribed to your account</span></p>
                   </div>
               </div>
-                <vue-markdown class="card-new-text">{{post.description_full}}</vue-markdown>
             </section>
         </div>
 

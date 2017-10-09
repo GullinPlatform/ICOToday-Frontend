@@ -232,7 +232,7 @@
               <i class="socicon-linkedin"></i></a>
           </div>
         </div>
-        <div class="col-md-3 col-sm-6 mb-30 text-center"><img
+        <div class="col-md-2 col-sm-6 mb-30 text-center"><img
           class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2"
           src="../../../static/img/team/john_pic2.png" alt="Team">
           <h6>John Worthley</h6>
@@ -245,7 +245,7 @@
             </a>
           </div>
         </div>
-        <div class="col-md-3 col-sm-6 mb-30 text-center"><img
+        <div class="col-md-2 col-sm-6 mb-30 text-center"><img
           class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2"
           src="../../../static/img/team/nader_pic2.png" alt="Team">
           <h6>Nader Sadek</h6>
@@ -259,7 +259,7 @@
           </div>
 
         </div>
-        <div class="col-md-3 col-sm-6 mb-30 text-center">
+        <div class="col-md-2 col-sm-6 mb-30 text-center">
           <img target="_blank"
                class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2"
                src="../../../static/img/team/elorm_pic.jpg"
@@ -274,7 +274,74 @@
             </a>
           </div>
         </div>
+
+        <div class="col-md-3 col-sm-6 mb-30 text-center">
+          <img target="_blank"
+               class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2"
+               src="../../../static/img/team/Rounded.png"
+               alt="Team">
+          <h6>Alex Patin</h6>
+          <p class="text-muted mb-2">CPO</p>
+          <div class="social-bar">
+            <a target="_blank" class="social-button shape-circle sb-linkedin"
+               href="https://www.linkedin.com/in/thealexpatin/"
+               data-toggle="tooltip" data-placement="top" title="Linkedin">
+              <i class="socicon-linkedin"></i>
+            </a>
+          </div>
+        </div>
       </div>
+</div>
+
+
+          <div class="container padding-bottom-2x mb-2 mt-5">
+            <div class="text-center padding-top-0x mb-30">
+              <h1>OUR ADVISORS</h1>
+            </div>
+            <hr class="margin-bottom-1x">
+
+            <div class="row">
+              <div class="col-md-4 col-sm-6 mb-30 text-center"><img
+                class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2"
+                src="../../../static/img/team/nitin_gaur.jpg" alt="Team">
+                <h6>Nitin Gaur</h6>
+                <p class="text-muted mb-2">Director IBM Blockchain Labs</p>
+                <div class="social-bar">
+                  <a target="_blank" class="social-button shape-circle sb-linkedin"
+                     href="https://www.linkedin.com/in/nitin-gaur-75571a9/"
+                     data-toggle="tooltip" data-placement="top" title="Linkedin">
+                    <i class="socicon-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-6 mb-30 text-center"><img
+                class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2"
+                src="../../../static/img/team/hoop_somuah.jpg" alt="Team">
+                <h6>Hoop Somuah</h6>
+                <p class="text-muted mb-2">Technical Advisor, Office of CEO, Microsoft</p>
+                <div class="social-bar">
+                  <a target="_blank" class="social-button shape-circle sb-linkedin"
+                     href="https://www.linkedin.com/in/hoopsomuah/"
+                     data-toggle="tooltip" data-placement="top" title="Linkedin">
+                    <i class="socicon-linkedin"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-6 mb-30 text-center"><img
+                class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2"
+                src="../../../static/img/team/ismail_malik.png" alt="Team">
+                <h6>Ismail Malik</h6>
+                <p class="text-muted mb-2">Founder and CEO, Blockchain Lab</p>
+                <div class="social-bar">
+                  <a target="_blank" class="social-button shape-circle sb-linkedin"
+                     href="https://www.linkedin.com/in/blockchain/"
+                     data-toggle="tooltip" data-placement="top" title="Linkedin">
+                    <i class="socicon-linkedin"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
     </div>
 
     <!--
