@@ -89,6 +89,7 @@
         else {
           this.$store.dispatch('getProject', id)
             .then(() => {
+              history.pushState({}, null, '/project/' + id)
               $('#project-modal').modal('show')
             })
         }

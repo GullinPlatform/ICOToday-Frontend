@@ -26,7 +26,7 @@
       </p>
     </div>
     <div class="row">
-      <div class="col-lg-8 pl-md-0" v-if="project_detail">
+      <div class="col-lg-8" v-if="project_detail">
         <!--Video-->
         <div class="card-new-layout">
           <div class="embed-responsive embed-responsive-16by9">
@@ -125,7 +125,7 @@
         </div>
 
       </div>
-      <div class="col-lg-8 pl-md-0" v-else-if="feed_detail">
+      <div class="col-lg-8" v-else-if="feed_detail">
         <!--Feeds-->
         <div class="comment" v-if="feeds_loaded">
           <div class="media pos-relative card-new-layout" v-if="!feeds.length">
@@ -212,7 +212,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-8 pl-md-0" v-else-if="rating_derail">
+      <div class="col-lg-8" v-else-if="rating_derail">
         <div class="comment" v-if="ratings_loaded">
           <div class="media pos-relative card-new-layout" v-if="!rating_details.length">
             <div class="media-body text-center">
@@ -279,7 +279,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-4 pr-md-0">
+      <div class="col-lg-4">
         <!--Score-->
         <div class="card-new-layout">
           <h6 class="text-muted text-normal text-uppercase">Rating
@@ -412,13 +412,12 @@
 
 <script>
   import { mapGetters } from 'vuex'
+  import Spinner from 'components/Spinner'
   import VueMarkdown from 'vue-markdown'
 
   export default {
-    name: 'Post',
-    components: {
-      'vue-markdown': VueMarkdown
-    },
+    name: 'Project',
+    components: {VueMarkdown, Spinner},
     data () {
       return {
         // rating
@@ -631,6 +630,14 @@
 </script>
 
 <style lang="scss" scoped>
+  a {
+    text-decoration: none;
+  }
+
+  .rating-detail {
+    white-space: pre-line;
+  }
+
   .padding-bottom-top-3x {
     padding-bottom: 48px !important;
     padding-top: 20px !important;

@@ -51,6 +51,6 @@
         this.$intercom.boot()
         this.$intercom.hide()
       },
-    }
+    },
   }
 </script>

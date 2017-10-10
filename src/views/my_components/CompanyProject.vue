@@ -317,7 +317,6 @@
     },
     methods: {
       projectModal () {
-
         /* global $:true */
         if (this.window_width <= 1200) {
           this.$router.push({name: 'project', params: {id: this.current_project.id}})
@@ -325,6 +324,7 @@
         else {
           this.$store.dispatch('getProject', this.current_project.id)
             .then(() => {
+              history.pushState({}, null, '/project/' + this.current_project.id)
               $('#project-modal').modal('show')
             })
         }

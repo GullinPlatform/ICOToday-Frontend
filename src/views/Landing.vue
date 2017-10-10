@@ -47,7 +47,7 @@
              v-for="project in promo_projects">
           <div class="article promo-project-tile promo-project-border-default has-promo-project-thumbnail format-image">
             <div class="header promo-project-header">
-              <a class="promo-project-thumb" @click="postModal(project.id)" href="javascript:void(0)">
+              <a class="promo-project-thumb" @click="projecrModal(project.id)" href="javascript:void(0)">
                 <img :src="project.promote_image">
               </a>
               <div class="promo-project-score">
@@ -70,7 +70,7 @@
             </div>
             <div class="promo-project-body">
               <h3 class="promo-project-title mb-0">
-                <a @click="postModal(project.id)" href="javascript:void(0)">
+                <a @click="projecrModal(project.id)" href="javascript:void(0)">
                   {{project.name}}
                 </a>
               </h3>
@@ -265,10 +265,11 @@
         }
         return false
       },
-      postModal (id) {
+      projecrModal (id) {
         /* global $:true */
         this.$store.dispatch('getProject', id)
           .then(() => {
+            history.pushState({}, null, '/project/' + id)
             $('#project-modal').modal('show')
           })
       },

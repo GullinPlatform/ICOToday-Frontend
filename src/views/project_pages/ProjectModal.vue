@@ -631,6 +631,9 @@
           }
         }
       }
+    },
+    mounted () {
+      $('#project-modal').on('hidden.bs.modal', function () {history.back()})
     }
   }
 </script>
