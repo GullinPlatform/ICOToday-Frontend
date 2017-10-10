@@ -46,12 +46,6 @@
               <li>
                 <router-link :to="{name:'me_profile'}">Your Account</router-link>
               </li>
-              <li v-if="me.type===0">
-                <router-link :to="{name:'me_created'}">Your ICOs</router-link>
-              </li>
-              <li v-else>
-                <router-link :to="{name:'me_marked'}">Your ICOs</router-link>
-              </li>
               <li v-if="!login_status">
                 <a href="javascript:void(0)" data-toggle="modal" data-target="#login-modal">Login</a>
               </li>

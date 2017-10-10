@@ -12,6 +12,14 @@
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         </div>
         <div class="modal-body" v-if="is_verified">
+          <h6 class="text-muted text-normal text-uppercase">Email (Optional)</h6>
+          <hr class="mb-3 mt-2">
+          <div class="form-group">
+            <input v-model="email" type="text" class="form-control" name="email" placeholder="Email">
+            <small class="text-muted">
+              We'll send a invitation message to the email address, once the team member registered account, you will get 5 ICTs as reward
+            </small>
+          </div>
           <h6 class="text-muted text-normal text-uppercase" :class="{'text-danger':avatar_missing}">Avatar</h6>
           <hr class="mb-3 mt-2">
           <div class="row">
@@ -31,7 +39,7 @@
               </avatar-editor-scale>
             </div>
           </div>
-          <h6 class="text-muted text-normal text-uppercase ">Basic</h6>
+          <h6 class="text-muted text-normal text-uppercase">Basic</h6>
           <hr class="mb-3 mt-2">
           <div class="form-group">
             <div class="row">
@@ -44,15 +52,12 @@
             </div>
           </div>
           <div class="form-group">
-            <input v-model="email" type="text" class="form-control" name="email" placeholder="Email *">
-          </div>
-          <div class="form-group">
             <input v-model="title" type="text" class="form-control" placeholder="Title * (Ex. Co-Founder & CEO)">
           </div>
           <div class="form-group mb-1">
             <textarea v-model="description" type="text" class="form-control" placeholder="Description"></textarea>
           </div>
-          <h6 class="text-muted text-normal text-uppercase ">Social Media</h6>
+          <h6 class="text-muted text-normal text-uppercase">Social Media</h6>
           <hr class="mb-3 mt-2">
           <div class="form-group">
             <input v-model="linkedin" type="text" class="form-control" placeholder="LinkedIn">
@@ -77,17 +82,9 @@
           </h4>
           <a href="javascript:void(0)" @click="" class="btn btn-primary mt-2">Resend Email</a>
         </div>
-        <div class="modal-footer">
-          <small>
-            We'll send a confirmation message to the email address you provided, notice your team member to click the confirmation link
-          </small>
-        </div>
       </div>
-      <!-- /.modal-content -->
     </div>
-    <!-- /.modal-dialog -->
   </div>
-  <!-- /.modal -->
 </template>
 
 

@@ -14,9 +14,11 @@
                      width="100" :src="member.avatar">
               </router-link>
               <div class="pl-3 d-table-cell align-middle">
-                <h6>{{member.full_name}}
+                <h6>
+                  <router-link class="text-decoration-none text-gray-dark" :to="{name:'user', params:{id:member.account}}">{{member.full_name}}</router-link><i class="fa fa-check text-primary" v-if="member.is_verified"></i>
                   <span class="text-muted text-sm mb-2">{{member.title}}</span>
                 </h6>
+
                 <p>{{member.description}}</p>
                 <div class="social-bar">
                   <a :href="member.facebook" class="social-link branding-facebook"
@@ -68,7 +70,8 @@
                      width="100" :src="member.avatar" alt="Team">
               </router-link>
               <div class="pl-3 d-table-cell align-middle">
-                <h6>{{member.full_name}}
+                <h6>
+                  <router-link class="text-decoration-none text-gray-dark" :to="{name:'user', params:{id:member.account}}">{{member.full_name}}</router-link><i class="fa fa-check text-primary" v-if="member.is_verified"></i>
                   <span class="text-muted text-sm mb-2">{{member.title}}</span>
                 </h6>
                 <p>{{member.description}}</p>
@@ -101,7 +104,7 @@
               </a>
               <div class="pl-3 d-table-cell align-middle">
                 <h6>
-                  Add New Member
+                  Add New Advisor
                 </h6>
               </div>
             </div>

@@ -69,7 +69,7 @@ const getters = {
     else return ''
   },
   self_admin: state => {
-    if (state.login_status && state.self )
+    if (state.login_status && state.self)
       return state.self.info.company_admin
     else return ''
   },
@@ -194,7 +194,6 @@ const actions = {
       .then(() => {
         dispatch('getSelf').then(() => {
           $('#signup-modal').modal('hide')
-          dispatch('toastr', {type: 'info', title: 'New Notification', message: 'Welcome to ICOToday. As one of our early users, we have deposited 5 ICOCoins to your wallet.'})
           commit(types.REGISTER_SUCCESS)
         })
         return Promise.resolve()
@@ -423,6 +422,7 @@ const mutations = {
   },
   [types.REGISTER_SUCCESS] (state) {
     state.login_status = true
+    router.push({name: 'register_followup'})
   },
 
   [types.REGISTER_FAILED] (state) {

@@ -11,7 +11,6 @@
     <login-modal v-if="!login_status"></login-modal>
     <signup-modal v-if="!login_status"></signup-modal>
     <add-team-member v-if="login_status"></add-team-member>
-    <project-update v-if="login_status&&me.type==0"></project-update>
     <project-modal></project-modal>
     <similar-company v-if="login_status&&me.info.type===-1"></similar-company>
     <!-- Modal End-->
@@ -26,7 +25,6 @@
   import SignupModal from 'modals/Signup'
   import LoginModal from 'modals/Login'
   import AddTeamMember from 'modals/AddTeamMember'
-  import ProjectUpdate from 'modals/ProjectUpdate'
   import ProjectModal from 'views/project_pages/ProjectModal'
   import SimilarCompany from 'modals/SimilarCompany'
 
@@ -39,7 +37,6 @@
       LoginModal,
       SignupModal,
       AddTeamMember,
-      ProjectUpdate,
       SimilarCompany
     },
     computed: {
