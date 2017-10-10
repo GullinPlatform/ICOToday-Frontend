@@ -38,7 +38,6 @@
                       Detail
                     </button>
                   </div>
-
                 </div>
               </div>
             </div>
@@ -51,7 +50,6 @@
               </h6>
             </div>
           </section>
-
         </div>
       </div>
     </div>

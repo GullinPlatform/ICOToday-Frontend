@@ -7336,7 +7336,7 @@ video {
   font-size: 13px;
 }
 
-.single-post-meta .meta-link > span {
+.single-post-meta .meta-link > span {car
   margin-right: 4px;
   color: #9da9b9;
 }
@@ -7627,8 +7627,10 @@ video {
   margin-top: 20px;
 }
 
-
 a.list-group-item:hover, a.list-group-item:focus, a.list-group-item:active {
   background-color: #0da9ef !important;
   color: white !important;
+
+.notification_actor_name{
+  color: blue;
 }
