@@ -133,6 +133,11 @@
       }
     },
     methods: {
+      setAccountType () {
+        const form_data = {type: this.account_type}
+        this.$store.dispatch('setSelfType', form_data)
+      },
+
       nextStep () {
         // Investor
         if (this.step === 1 && this.account_type === 1) { // Investor Chose Tags
@@ -162,6 +167,8 @@
       prevStep () {
         this.$store.dispatch('setFollowUpStep', -1)
       },
+
+      // Investor set tags
       tagSelected (tag) {
         for (let t of this.selected_tags) {
           if (t === tag)
@@ -177,14 +184,6 @@
         else
           this.selected_tags.push(tag)
       },
-
-      setAccountType () {
-        const form_data = {
-          type: this.account_type
-        }
-        this.$store.dispatch('setSelfType', form_data)
-      },
-
       getAllProjectTags () {
         this.loaded = false
         this.$store.dispatch('getAllProjectTags')
@@ -193,12 +192,11 @@
           })
       },
       addInterests () {
-        const form_data = {
-          interests: this.selected_tags
-        }
+        const form_data = {interests: this.selected_tags}
         this.$store.dispatch('addInterests', form_data)
       },
 
+      // Company create projects
       searchProject () {
         this.loaded = false
         if (!this.company_name) {
@@ -214,7 +212,6 @@
             this.loaded = true
             if (!this.search_result.length) {
               this.createCompany()
-              this.$store.dispatch('setFollowUpStep', 10)
             }
             else {
               $('#similar-project-modal').modal('show')
@@ -234,17 +231,15 @@
           })
       },
 
+      // Expert Post applications
       postMyExpertApplication () {
-        const form_data = {
-          detail: this.expert_application
-        }
+        const form_data = {detail: this.expert_application}
         this.$store.dispatch('postMyExpertApplication', form_data)
           .then(() => {
             this.setAccountType()
             this.$store.dispatch('setFollowUpStep', 10)
           })
       },
-
     },
     computed: {
       ...mapGetters({

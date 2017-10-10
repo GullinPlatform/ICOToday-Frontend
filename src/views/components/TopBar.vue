@@ -25,8 +25,8 @@
             </router-link>
           </li>
           <li>
-            <a target="_blank" href="https://trello.com/b/JxFOIC9x" class="hidden-sm-down">
-              <span>Roadmap</span>
+            <a target="_blank" href="https://s3.us-east-2.amazonaws.com/icotoday/ICOToday+White+paper.pdf" class="hidden-sm-down">
+              <span>WHITE PAPER</span>
             </a>
           </li>
         </ul>

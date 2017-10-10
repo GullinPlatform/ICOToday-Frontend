@@ -506,6 +506,7 @@
         me: 'self',
         is_verified: 'is_verified',
         username: 'self_name',
+        my_company: 'self_company',
         self_type: 'self_type',
         current_project: 'current_project',
         current_company: 'current_company'
@@ -534,7 +535,10 @@
             this.$router.push({name: 'company_new_project'})
           }
           else {
-            this.loaded = true
+            this.$store.dispatch('getProject', this.my_company.project)
+              .then(() => {
+                this.loaded = true
+              })
           }
         })
     },

@@ -59,10 +59,10 @@
         </tbody>
       </table>
     </div>
-    <div class="card-new-layout mt-4">
-      <h6 class="text-center">Refer your friends to ICOToday using the following link <br>
+    <div class="card-new-layout mt-4 text-center">
+      <h6 class="text-muted">Refer your friends to ICOToday using the following link <br>
         and earn FREE 5 ICTs for each referral!</h6>
-
+      <h6>https://icotoday.io/register?refer={{me.email}}</h6>
     </div>
   </div>
 </template>

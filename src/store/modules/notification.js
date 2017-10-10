@@ -22,9 +22,19 @@ const getters = {
 }
 
 const actions = {
-  getNotifications ({commit}, page) {
+  getNotifications ({commit, dispatch, state}, page) {
     return taskApi.getNotifications(page)
       .then((response) => {
+        for (let new_unread_notification of response) {
+          let match = false
+          for (let old_unread_notification of state.notifications) {
+            if (old_unread_notification.id === new_unread_notification.id)
+              match = true
+          }
+          if (!match) {
+            dispatch('toastr', {type: 'info', title: 'New Notification', message: new_unread_notification.content})
+          }
+        }
         commit(types.LOAD_UNREAD_NOTIFICATIONS, response)
         return Promise.resolve(response)
       })
@@ -81,12 +91,12 @@ const actions = {
       })
   },
 
-  notificationDetail({}, notify){
-    if(notify.related === 'wallet'){
-      router.push({name:'me_wallet'})
+  notificationDetail ({}, notify) {
+    if (notify.related === 'wallet') {
+      router.push({name: 'me_wallet'})
     }
-    if(notify.related === 'expert_app'){
-      router.push({name:'me_expert_apply'})
+    if (notify.related === 'expert_app') {
+      router.push({name: 'me_expert_apply'})
     }
 
   }

@@ -159,7 +159,7 @@
           <input class="form-control" placeholder="Ex: 5000" v-model="ratio"
                  type="number">
         </div>
-        <div class="col-sm-3"><p>{{coin_name}} = 1 {{coin_unit}}</p></div>
+        <label class="col-sm-3 col-form-label">{{coin_name}} = 1 {{coin_unit}}</label>
       </div>
       <div class="form-group row">
         <label class="col-sm-2 col-form-label">% Token for Sale</label>
@@ -366,19 +366,19 @@
           formData.append('twitter', this.twitter)
           formData.append('slack', this.slack)
           formData.append('telegram', this.telegram)
-        })
 
-        this.$store.dispatch('createProject', formData)
-          .then(() => {
-            this.uploading = false
-            this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'Your project is submitted!'})
-            this.$router.push({name: 'me_created'})
-          })
-          .catch((error) => {
-            this.uploading = false
-            this.error_message = error.body
-            console.log(error)
-          })
+          this.$store.dispatch('createProject', formData)
+            .then(() => {
+              this.uploading = false
+              this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'Your project is submitted!'})
+              this.$router.push({name: 'company_project'})
+            })
+            .catch((error) => {
+              this.uploading = false
+              this.error_message = error.body
+              console.log(error)
+            })
+        })
       },
       onImageReady (scale) {
         this.$refs.icon_scale.setScale(scale)

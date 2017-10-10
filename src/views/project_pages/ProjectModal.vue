@@ -45,15 +45,17 @@
                 <div class="row" v-if="team_loaded">
                   <div class="col-sm-6 mb-3"
                        v-for="member in team_members"
-                       v-if="!member.is_advisor">
+                       v-if="member.type!=3">
                     <div class="d-table">
                       <router-link :to="{name:'user', params:{id:member.account}}" data-dismiss="modal">
                         <img class="d-block mx-auto img-thumbnail rounded-circle d-table-cell align-middle"
                              width="100" :src="member.avatar">
                       </router-link>
                       <div class="pl-3 d-table-cell align-middle">
-                        <h6>{{member.full_name}}
-                          <span class="text-muted text-sm mb-2">{{member.title}}</span></h6>
+                        <h6>
+                          {{member.full_name}}<i class="fa fa-check text-primary" v-if="member.is_verified"></i>
+                          <span class="text-muted text-sm mb-2">{{member.title}}</span>
+                        </h6>
                         <p>{{member.description}}</p>
                         <div class="social-bar">
                           <a :href="member.facebook" class="social-link branding-facebook" target="_blank"
@@ -85,15 +87,17 @@
                 <div class="row" v-if="team_loaded">
                   <div class="col-sm-6 mb-3"
                        v-for="member in team_members"
-                       v-if="member.is_advisor">
+                       v-if="member.type===3">
                     <div class="d-table">
                       <router-link :to="{name:'user', params:{id:member.account}}" data-dismiss="modal">
                         <img class="d-block mx-auto img-thumbnail rounded-circle d-table-cell align-middle"
                              width="100" :src="member.avatar">
                       </router-link>
                       <div class="pl-3 d-table-cell align-middle">
-                        <h6>{{member.full_name}}
-                          <span class="text-muted text-sm mb-2">{{member.title}}</span></h6>
+                        <h6>
+                          {{member.full_name}}<i class="fa fa-check text-primary" v-if="member.is_verified"></i>
+                          <span class="text-muted text-sm mb-2">{{member.title}}</span>
+                        </h6>
                         <p>{{member.description}}</p>
                         <div class="social-bar">
                           <a :href="member.facebook" class="social-link branding-facebook" target="_blank"
@@ -474,7 +478,7 @@
       subscribeProject () {
         this.$store.dispatch('markProject', this.project.id)
           .then(() => {
-            this.marked = true
+            this.subscribed = true
             this.$store.dispatch('toastr', {
               type: 'success',
               title: 'Success',
@@ -485,7 +489,7 @@
       unsubscribeProject () {
         this.$store.dispatch('markProject', this.project.id)
           .then(() => {
-            this.marked = false
+            this.subscribed = false
             this.$store.dispatch('toastr', {
               type: 'success',
               title: 'Success',

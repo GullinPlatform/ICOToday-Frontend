@@ -105,9 +105,8 @@
     <spinner class="mt-4" v-else></spinner>
     <div class="card-new-layout text-center" v-if="loaded&&!feeds.length">
       <h5>
-        Nothing Here
+       You have benn quiet recently<br> Why not give your investors some updates?
       </h5>
-      <p class="m-0">Please Check Back Later</p>
     </div>
   </div>
 </template>

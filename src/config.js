@@ -1,4 +1,6 @@
-export const API_ROOT = (process.env.NODE_ENV === 'production') ? 'https://api.icotoday.io' : 'http://localhost:8000'
+// export const API_ROOT = (process.env.NODE_ENV === 'production') ? 'https://api.icotoday.io' : 'http://localhost:8000'
+export const API_ROOT = (process.env.NODE_ENV === 'production') ? 'http://13.58.229.35' : 'http://localhost:8000'
+
 
 export function SHA256 (s) {
   var chrsz = 8
@@ -112,5 +114,3 @@ export function SHA256 (s) {
   s = Utf8Encode(s)
   return binb2hex(core_sha256(str2binb(s), s.length * chrsz))
 }
-
-export const OFFICAL_ACCOUNT_ID = 4

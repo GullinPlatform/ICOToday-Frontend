@@ -13,24 +13,34 @@
                 on Blockchain
               </h2>
 
+              <h5 class="mt-2">
+                <a target="_blank" href="https://s3.us-east-2.amazonaws.com/icotoday/ICOToday+White+paper.pdf"> READ THE WHITE PAPER</a>
+              </h5>
+
               <div class="countdown">
-                <div class="item">
-                  <div class="days">--</div><span class="days_ref">Days</span>
+                <div class="item mb-0">
+                  <div class="days">--</div>
+                  <span class="days_ref">Days</span>
                 </div>
-                <div class="item">
-                  <div class="hours">--</div><span class="hours_ref">Hours</span>
+                <div class="item mb-0">
+                  <div class="hours">--</div>
+                  <span class="hours_ref">Hours</span>
                 </div>
-                <div class="item">
-                  <div class="minutes">--</div><span class="minutes_ref">Mins</span>
+                <div class="item mb-0">
+                  <div class="minutes">--</div>
+                  <span class="minutes_ref">Mins</span>
                 </div>
-                <div class="item">
-                  <div class="seconds">--</div><span class="seconds_ref">Secs</span>
+                <div class="item mb-0">
+                  <div class="seconds">--</div>
+                  <span class="seconds_ref">Secs</span>
                 </div>
               </div>
-              <h5 class="text-white text-thin text-uppercase">
+              <div>
+              <span class="text-white text-uppercase">
                 Our ICO Date Is Yet To Be Announced
-              </h5>
-              <a  target="_blank"  href="https://s3.us-east-2.amazonaws.com/icotoday/ICOToday+White+paper.pdf"> Read the white paper</a>
+              </span>
+              </div>
+
             </div>
             <div class="col-sm-5 float-right">
               <div class="register-form pb-0 pt-3">
@@ -773,7 +783,8 @@
       }
     }
   }
-  .light-grey-fixed{
+
+  .light-grey-fixed {
     background-color: #f6f6f6;
     margin-bottom: -50px;
   }
