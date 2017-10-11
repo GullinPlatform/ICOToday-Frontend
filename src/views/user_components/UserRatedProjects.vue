@@ -13,7 +13,7 @@
   import ProjectList from 'src/views/components/ProjectList'
 
   export default {
-    name: 'ExpertRatedProjects',
+    name: 'AnalystRatedProjects',
     data () {
       return {
         loaded: false

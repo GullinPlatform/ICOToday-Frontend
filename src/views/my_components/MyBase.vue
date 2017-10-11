@@ -52,9 +52,9 @@
                        :class="{active: $route.name==='me_wallet'}">
             <i class="fa fa-angle-right"></i> My Wallet
           </router-link>
-          <router-link :to="{name:'me_expert_apply'}" class="list-group-item" v-if="type===1"
-                       :class="{active: $route.name==='me_expert_apply'}">
-            <i class="fa fa-angle-right"></i> Apply To Be An Expert
+          <router-link :to="{name:'me_analyst_apply'}" class="list-group-item" v-if="type===1"
+                       :class="{active: $route.name==='me_analyst_apply'}">
+            <i class="fa fa-angle-right"></i> Apply To Be ICOToday Analyst
           </router-link>
           <router-link :to="{name:'me_profile'}" class="list-group-item"
                        :class="{active: $route.name==='me_profile'}">
@@ -90,14 +90,14 @@
           </router-link>
         </nav>
 
-        <h6 class="text-muted text-normal text-uppercase mt-4" v-if="type===2">Expert Center</h6>
+        <h6 class="text-muted text-normal text-uppercase mt-4" v-if="type===2">Analyst Center</h6>
         <nav class="list-group" v-if="type===2">
-          <router-link :to="{name:'expert_rated_projects'}" class="list-group-item"
-                       :class="{active: $route.name==='expert_rated_projects'}">
+          <router-link :to="{name:'analyst_rated_projects'}" class="list-group-item"
+                       :class="{active: $route.name==='analyst_rated_projects'}">
             <i class="fa fa-angle-right"></i> My Rated Projects
           </router-link>
-          <router-link :to="{name:'expert_unrated_projects'}" class="list-group-item"
-                       :class="{active: $route.name==='expert_unrated_projects'}">
+          <router-link :to="{name:'analyst_unrated_projects'}" class="list-group-item"
+                       :class="{active: $route.name==='analyst_unrated_projects'}">
             <i class="fa fa-angle-right"></i> Unrated Projects
           </router-link>
         </nav>

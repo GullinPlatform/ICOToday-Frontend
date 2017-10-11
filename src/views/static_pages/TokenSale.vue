@@ -65,7 +65,7 @@
     <!-- end jumbotron -->
 
     <!-- begin cards group -->
-    <div class="container mt-30 mb-2">
+    <div class="container padding-bottom-2x mb-2">
       <hr class="">
       <div class="text-center mt-30 mb-30">
         <h1>OUR FOCUS</h1>
@@ -77,7 +77,7 @@
         <div class="col-md-5 text-md-left text-center">
           <div class="mt-30 hidden-md-up"></div>
           <h2>Community</h2>
-          <p class="mb-4">ICOToday is a community driven platform where new investors can follow and learn from experienced investors and community experts. In addition, quality ICO’s are chosen by experts and experts are chosen by investors.</p>
+          <p class="mb-4">ICOToday is a community driven platform where new investors can follow and learn from experienced investors and community analysts. In addition, quality ICO’s are chosen by experts and experts are chosen by investors.</p>
         </div>
         <div class="col-md-2"></div>
       </div>
@@ -89,9 +89,6 @@
           <h2>Security
           </h2>
           <p>We protect investors' funds by providing a platform with direct information releases from the ICO launch team, secured with two factor authentication therefore, attracting new users to ICOs.</p>
-          <a class="text-medium text-decoration-none" target="_blank"
-             href="https://s3.us-east-2.amazonaws.com/icotoday/ICOToday+White+paper.pdf">See more details&nbsp;<i
-            class="icon-arrow-right"></i></a>
         </div>
         <div class="col-md-2"></div>
       </div>
@@ -106,13 +103,10 @@
         </div>
         <div class="col-md-2"></div>
       </div>
-      <hr>
-
     </div>
-
-
     <!-- begin cards group -->
     <div class="container padding-bottom-2x mb-2">
+      <hr class="mt-3">
       <div class="text-center mt-30 mb-30">
         <h1>HOW IT WORKS</h1>
       </div>
@@ -123,7 +117,7 @@
             <h3 class="step-digit">01</h3>
             <div class="step-body">
               <h3 class="step-title">Company</h3>
-              <p class="step-text">Company submits an ICO application and community selected experts review and rate ICO. Applications with a less than 50% will not be approved to ensure only the best ICOs are listed.</p>
+              <p class="step-text">Company submits an ICO application and community selected analysts review and rate ICO. Applications with a less than 50% will not be approved to ensure only the best ICOs are listed.</p>
             </div>
           </div>
         </div>
@@ -141,7 +135,7 @@
             <h3 class="step-digit">03</h3>
             <div class="step-body">
               <h3 class="step-title">Community</h3>
-              <p class="step-text">Investors will be able to follow other investors and experts and subscribe to ICOs to receive all important updates from the company during the ICO and post-ICO.</p>
+              <p class="step-text">Investors will be able to follow other investors and analysts and subscribe to ICOs to receive all important updates from the company during the ICO and post-ICO.</p>
             </div>
           </div>
         </div>
@@ -166,7 +160,7 @@
           <h1>TOKEN DISTRIBUTION</h1>
         </div>
         <hr class="margin-bottom-1x">
-        <div class="container">
+        <div class="container mt-5">
           <div class="row text-center">
             <div class="col-sm-3">
               <canvas id="crowdsale_pie"></canvas>
@@ -202,15 +196,15 @@
     </div>
 
     <div class="container padding-bottom-2x mb-2">
-      <hr class="margin-bottom-1x">
-      <div class="container padding-bottom-2x mb-2">
+      <hr class="margin-bottom-1x mt-30">
+      <div class="container mb-2">
         <div class="text-center padding-top-0x mb-30">
-          <h1>TOKEN SALE PLAN (To be Announced)</h1>
+          <h1>TOKEN SALE PLAN</h1>
         </div>
-        <hr class="margin-bottom-1x">
+        <hr class="mb-30">
         <div class="container">
-          <div class="row text-center">
-            <div class="col-sm-12">
+          <div class="row text-center mt-30">
+            <div class="col-sm-12 mt-30">
               <div class="progress">
                 <div class="progress-bar" role="progressbar" style="width: 15%;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
                 <div class="progress-bar bg-success" role="progressbar" style="width: 40%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
@@ -218,17 +212,20 @@
               </div>
             </div>
           </div>
+          <div class="mt-5 text-center">
+            <h4>To be Announced</h4>
+          </div>
         </div>
       </div>
     </div>
 
 
-    <div class="container padding-bottom-2x mb-2 mt-5">
-      <div class="text-center padding-top-0x mb-30">
+    <div class="container">
+      <hr class="margin-bottom-1x mt-30">
+      <div class="text-center mb-30">
         <h1>OUR TEAM</h1>
       </div>
       <hr class="margin-bottom-1x">
-
       <div class="row">
         <div class="col-md-3 col-sm-6 mb-30 text-center"><img
           class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2"
@@ -301,90 +298,91 @@
           </div>
         </div>
       </div>
-</div>
+    </div>
 
 
-          <div class="container padding-bottom-2x mb-2 mt-5">
-            <div class="text-center padding-top-0x mb-30">
-              <h1>OUR ADVISORS</h1>
-            </div>
+    <div class="container padding-bottom-2x mb-2 mt-5">
+      <hr class="margin-bottom-1x mt-30">
+      <div class="text-center padding-top-0x mb-30">
+        <h1>OUR ADVISORS</h1>
+      </div>
+      <hr class="margin-bottom-1x">
+
+      <div class="row">
+        <div class="col-md-4 col-sm-6 mb-30 text-center"><img
+          class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2"
+          src="../../../static/img/team/nitin_gaur.jpg" alt="Team">
+          <h6>Nitin Gaur</h6>
+          <p class="text-muted mb-2">Director IBM Blockchain Labs</p>
+          <div class="social-bar">
+            <a target="_blank" class="social-button shape-circle sb-linkedin"
+               href="https://www.linkedin.com/in/nitin-gaur-75571a9/"
+               data-toggle="tooltip" data-placement="top" title="Linkedin">
+              <i class="socicon-linkedin"></i></a>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6 mb-30 text-center"><img
+          class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2"
+          src="../../../static/img/team/hoop_somuah.jpg" alt="Team">
+          <h6>Hoop Somuah</h6>
+          <p class="text-muted mb-2">Technical Advisor, Office of CEO, Microsoft</p>
+          <div class="social-bar">
+            <a target="_blank" class="social-button shape-circle sb-linkedin"
+               href="https://www.linkedin.com/in/hoopsomuah/"
+               data-toggle="tooltip" data-placement="top" title="Linkedin">
+              <i class="socicon-linkedin"></i>
+            </a>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6 mb-30 text-center"><img
+          class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2"
+          src="../../../static/img/team/ismail_malik.png" alt="Team">
+          <h6>Ismail Malik</h6>
+          <p class="text-muted mb-2">Founder and CEO, Blockchain Lab</p>
+          <div class="social-bar">
+            <a target="_blank" class="social-button shape-circle sb-linkedin"
+               href="https://www.linkedin.com/in/blockchain/"
+               data-toggle="tooltip" data-placement="top" title="Linkedin">
+              <i class="socicon-linkedin"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!--
+
+         <div class="container padding-bottom-2x mb-2">
+
+
+            <h6 class="text-muted text-normal text-uppercase">Our Advisors</h6>
             <hr class="margin-bottom-1x">
 
             <div class="row">
-              <div class="col-md-4 col-sm-6 mb-30 text-center"><img
-                class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2"
-                src="../../../static/img/team/nitin_gaur.jpg" alt="Team">
-                <h6>Nitin Gaur</h6>
-                <p class="text-muted mb-2">Director IBM Blockchain Labs</p>
-                <div class="social-bar">
-                  <a target="_blank" class="social-button shape-circle sb-linkedin"
-                     href="https://www.linkedin.com/in/nitin-gaur-75571a9/"
-                     data-toggle="tooltip" data-placement="top" title="Linkedin">
-                    <i class="socicon-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6 mb-30 text-center"><img
-                class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2"
-                src="../../../static/img/team/hoop_somuah.jpg" alt="Team">
-                <h6>Hoop Somuah</h6>
-                <p class="text-muted mb-2">Technical Advisor, Office of CEO, Microsoft</p>
-                <div class="social-bar">
-                  <a target="_blank" class="social-button shape-circle sb-linkedin"
-                     href="https://www.linkedin.com/in/hoopsomuah/"
-                     data-toggle="tooltip" data-placement="top" title="Linkedin">
-                    <i class="socicon-linkedin"></i>
-                  </a>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6 mb-30 text-center"><img
-                class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2"
-                src="../../../static/img/team/ismail_malik.png" alt="Team">
-                <h6>Ismail Malik</h6>
-                <p class="text-muted mb-2">Founder and CEO, Blockchain Lab</p>
-                <div class="social-bar">
-                  <a target="_blank" class="social-button shape-circle sb-linkedin"
-                     href="https://www.linkedin.com/in/blockchain/"
-                     data-toggle="tooltip" data-placement="top" title="Linkedin">
-                    <i class="socicon-linkedin"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-    </div>
-
-    <!--
-
-           <div class="container padding-bottom-2x mb-2">
-
-
-              <h6 class="text-muted text-normal text-uppercase">Our Advisors</h6>
-              <hr class="margin-bottom-1x">
-
-              <div class="row">
-                        <div class="col-md-3 col-sm-6 mb-30 text-center"><img class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2" src="../../static/img/team/01.jpg" alt="Team">
-                          <h6>Grace Wright</h6>
-                          <p class="text-muted mb-2">Founder, CEO</p>
-                          <div class="social-bar"><a class="social-button shape-circle sb-facebook" href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="socicon-facebook"></i></a><a class="social-button shape-circle sb-twitter" href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="socicon-twitter"></i></a><a class="social-button shape-circle sb-google-plus" href="#" data-toggle="tooltip" data-placement="top" title="Google +"><i class="socicon-googleplus"></i></a></div>
-                        </div>
-                        <div class="col-md-3 col-sm-6 mb-30 text-center"><img class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2" src="../../static/img/team/02.jpg" alt="Team">
-                          <h6>Taylor Jackson</h6>
-                          <p class="text-muted mb-2">Financial Director</p>
-                          <div class="social-bar"><a class="social-button shape-circle sb-skype" href="#" data-toggle="tooltip" data-placement="top" title="Skype"><i class="socicon-skype"></i></a><a class="social-button shape-circle sb-facebook" href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="socicon-facebook"></i></a><a class="social-button shape-circle sb-paypal" href="#" data-toggle="tooltip" data-placement="top" title="PayPal"><i class="socicon-paypal"></i></a></div>
-                        </div>
-                        <div class="col-md-3 col-sm-6 mb-30 text-center"><img class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2" src="../../static/img/team/03.jpg" alt="Team">
-                          <h6>Quinton Cross</h6>
-                          <p class="text-muted mb-2">Marketing Director</p>
-                          <div class="social-bar"><a class="social-button shape-circle sb-twitter" href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="socicon-twitter"></i></a><a class="social-button shape-circle sb-google-plus" href="#" data-toggle="tooltip" data-placement="top" title="Google +"><i class="socicon-googleplus"></i></a><a class="social-button shape-circle sb-email" href="#" data-toggle="tooltip" data-placement="top" title="Email"><i class="socicon-mail"></i></a></div>
-                        </div>
-                        <div class="col-md-3 col-sm-6 mb-30 text-center"><img class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2" src="../../static/img/team/04.jpg" alt="Team">
-                          <h6>Liana Mullen</h6>
-                          <p class="text-muted mb-2">Lead Designer</p>
-                          <div class="social-bar"><a class="social-button shape-circle sb-behance" href="#" data-toggle="tooltip" data-placement="top" title="Behance"><i class="socicon-behance"></i></a><a class="social-button shape-circle sb-dribbble" href="#" data-toggle="tooltip" data-placement="top" title="Dribbble"><i class="socicon-dribbble"></i></a><a class="social-button shape-circle sb-instagram" href="#" data-toggle="tooltip" data-placement="top" title="Instagram"><i class="socicon-instagram"></i></a></div>
-                        </div>
+                      <div class="col-md-3 col-sm-6 mb-30 text-center"><img class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2" src="../../static/img/team/01.jpg" alt="Team">
+                        <h6>Grace Wright</h6>
+                        <p class="text-muted mb-2">Founder, CEO</p>
+                        <div class="social-bar"><a class="social-button shape-circle sb-facebook" href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="socicon-facebook"></i></a><a class="social-button shape-circle sb-twitter" href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="socicon-twitter"></i></a><a class="social-button shape-circle sb-google-plus" href="#" data-toggle="tooltip" data-placement="top" title="Google +"><i class="socicon-googleplus"></i></a></div>
                       </div>
-            </div> -->
+                      <div class="col-md-3 col-sm-6 mb-30 text-center"><img class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2" src="../../static/img/team/02.jpg" alt="Team">
+                        <h6>Taylor Jackson</h6>
+                        <p class="text-muted mb-2">Financial Director</p>
+                        <div class="social-bar"><a class="social-button shape-circle sb-skype" href="#" data-toggle="tooltip" data-placement="top" title="Skype"><i class="socicon-skype"></i></a><a class="social-button shape-circle sb-facebook" href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="socicon-facebook"></i></a><a class="social-button shape-circle sb-paypal" href="#" data-toggle="tooltip" data-placement="top" title="PayPal"><i class="socicon-paypal"></i></a></div>
+                      </div>
+                      <div class="col-md-3 col-sm-6 mb-30 text-center"><img class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2" src="../../static/img/team/03.jpg" alt="Team">
+                        <h6>Quinton Cross</h6>
+                        <p class="text-muted mb-2">Marketing Director</p>
+                        <div class="social-bar"><a class="social-button shape-circle sb-twitter" href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="socicon-twitter"></i></a><a class="social-button shape-circle sb-google-plus" href="#" data-toggle="tooltip" data-placement="top" title="Google +"><i class="socicon-googleplus"></i></a><a class="social-button shape-circle sb-email" href="#" data-toggle="tooltip" data-placement="top" title="Email"><i class="socicon-mail"></i></a></div>
+                      </div>
+                      <div class="col-md-3 col-sm-6 mb-30 text-center"><img class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2" src="../../static/img/team/04.jpg" alt="Team">
+                        <h6>Liana Mullen</h6>
+                        <p class="text-muted mb-2">Lead Designer</p>
+                        <div class="social-bar"><a class="social-button shape-circle sb-behance" href="#" data-toggle="tooltip" data-placement="top" title="Behance"><i class="socicon-behance"></i></a><a class="social-button shape-circle sb-dribbble" href="#" data-toggle="tooltip" data-placement="top" title="Dribbble"><i class="socicon-dribbble"></i></a><a class="social-button shape-circle sb-instagram" href="#" data-toggle="tooltip" data-placement="top" title="Instagram"><i class="socicon-instagram"></i></a></div>
+                      </div>
+                    </div>
+          </div> -->
   </div>
 </template>
 

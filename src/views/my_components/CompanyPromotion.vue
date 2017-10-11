@@ -23,8 +23,9 @@
           <p class="col-sm-2 col-form-label">Duration<span class="text-danger text-small">*</span></p>
           <div class="col-sm-10">
             <select class="form-control" v-model="duration">
-              <option value="1">1 Day</option>
-              <option value="7">1 Week</option>
+              <option value="7">1 Week - 1 BTC</option>
+              <option value="14">2 Weeks - 1.5 BTCs</option>
+              <option value="28">4 Weeks - 2 BTCs</option>
             </select>
           </div>
         </div>

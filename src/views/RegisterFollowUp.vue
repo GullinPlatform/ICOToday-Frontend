@@ -23,7 +23,7 @@
             </a>
             <a class="list-group-item flex-column align-items-start" :class="{active:account_type===2}" href="javascript:void(0)" @click="account_type=2">
               <div class="d-flex w-100 justify-content-between">
-                <h4>I'm an Expert</h4>
+                <h4>I'm an Analyst</h4>
               </div>
               <p>Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
               <small class="opacity-60">Donec id elit non mi porta.</small>
@@ -67,11 +67,11 @@
       </div>
       <div v-if="account_type===2">
         <h2 class="text-center">
-          Expert Application
+          Analyst Application
         </h2>
         <div class="row justify-content-center mt-5">
           <div class="col-10">
-            <textarea class="form-control" v-model="expert_application" placeholder="Please tell us more about your self" rows="25"></textarea>
+            <textarea class="form-control" v-model="analyst_application" placeholder="Please tell us more about your self" rows="25"></textarea>
           </div>
         </div>
       </div>
@@ -129,7 +129,7 @@
 
         company_name: '',
 
-        expert_application: ''
+        analyst_application: ''
       }
     },
     methods: {
@@ -154,9 +154,9 @@
         else if (this.step === 2 && this.account_type === 0) { // Company input and search
           this.searchProject()
         }
-        // Expert
+        // Analyst
         else if (this.step === 2 && this.account_type === 2) { // Company input and search
-          this.postMyExpertApplication()
+          this.postMyAnalystApplication()
         }
 
         // Other
@@ -231,10 +231,10 @@
           })
       },
 
-      // Expert Post applications
-      postMyExpertApplication () {
-        const form_data = {detail: this.expert_application}
-        this.$store.dispatch('postMyExpertApplication', form_data)
+      // Analyst Post applications
+      postMyAnalystApplication () {
+        const form_data = {detail: this.analyst_application}
+        this.$store.dispatch('postMyAnalystApplication', form_data)
           .then(() => {
             this.setAccountType()
             this.$store.dispatch('setFollowUpStep', 10)

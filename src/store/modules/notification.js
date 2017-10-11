@@ -27,7 +27,7 @@ const actions = {
       .then((response) => {
         for (let new_unread_notification of response) {
           let match = false
-          for (let old_unread_notification of state.notifications) {
+          for (let old_unread_notification of state.unread_notifications) {
             if (old_unread_notification.id === new_unread_notification.id)
               match = true
           }
@@ -95,8 +95,8 @@ const actions = {
     if (notify.related === 'wallet') {
       router.push({name: 'me_wallet'})
     }
-    if (notify.related === 'expert_app') {
-      router.push({name: 'me_expert_apply'})
+    if (notify.related === 'analyst_app') {
+      router.push({name: 'me_analyst_apply'})
     }
 
   }

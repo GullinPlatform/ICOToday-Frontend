@@ -9,7 +9,7 @@ const state = {
   // self
   self: {},
   self_marked_posts: [],
-  self_expert_application: {},
+  self_analyst_application: {},
   self_rated_projects: [],
 
   // loaded user
@@ -36,8 +36,8 @@ const getters = {
       return state.self
     else return {}
   },
-  self_expert_application: state => {
-    return state.self_expert_application
+  self_analyst_application: state => {
+    return state.self_analyst_application
   },
   self_type: state => {
     if (state.login_status && state.self) {
@@ -231,7 +231,6 @@ const actions = {
       })
       .catch(() => {
         commit(types.LOGOUT)
-
       })
   },
   logIP ({commit}, form_data) {
@@ -377,30 +376,30 @@ const actions = {
       })
   },
 
-  getMyExpertApplication ({commit}, form_data) {
-    return userApi.getMyExpertApplication(form_data)
+  getMyAnalystApplication ({commit}, form_data) {
+    return userApi.getMyAnalystApplication(form_data)
       .then((response) => {
-        commit(types.GET_SELF_EXPERT_APPLICATION, response)
+        commit(types.GET_SELF_ANALYST_APPLICATION, response)
         return Promise.resolve()
       })
       .catch((error) => {
         return Promise.reject(error)
       })
   },
-  updateMyExpertApplication ({commit}, form_data) {
-    return userApi.updateMyExpertApplication(form_data)
+  updateMyAnalystApplication ({commit}, form_data) {
+    return userApi.updateMyAnalystApplication(form_data)
       .then((response) => {
-        commit(types.UPDATE_SELF_EXPERT_APPLICATION, response)
+        commit(types.UPDATE_SELF_ANALYST_APPLICATION, response)
         return Promise.resolve()
       })
       .catch((error) => {
         return Promise.reject(error)
       })
   },
-  postMyExpertApplication ({commit}, form_data) {
-    return userApi.postMyExpertApplication(form_data)
+  postMyAnalystApplication ({commit}, form_data) {
+    return userApi.postMyAnalystApplication(form_data)
       .then(() => {
-        commit(types.POST_SELF_EXPERT_APPLICATION, form_data.detail)
+        commit(types.POST_SELF_ANALYST_APPLICATION, form_data.detail)
         return Promise.resolve()
       })
       .catch((error) => {
@@ -418,7 +417,6 @@ const mutations = {
   [types.LOGOUT] (state) {
     state.login_status = false
     state.self = {}
-    router.push({name: 'landing'})
   },
   [types.REGISTER_SUCCESS] (state) {
     state.login_status = true
@@ -461,14 +459,14 @@ const mutations = {
 
   [types.UPDATE_SELF] (state) {},
 
-  [types.GET_SELF_EXPERT_APPLICATION] (state, response) {
-    state.self_expert_application = response
+  [types.GET_SELF_ANALYST_APPLICATION] (state, response) {
+    state.self_analyst_application = response
   },
-  [types.UPDATE_SELF_EXPERT_APPLICATION] (state, response) {
-    state.self_expert_application = response
+  [types.UPDATE_SELF_ANALYST_APPLICATION] (state, response) {
+    state.self_analyst_application = response
   },
-  [types.POST_SELF_EXPERT_APPLICATION] (state, form_data) {
-    state.self_expert_application = form_data
+  [types.POST_SELF_ANALYST_APPLICATION] (state, form_data) {
+    state.self_analyst_application = form_data
   },
 
   [types.LOAD_SELF_RATED_PROJECTS] (state, response) {

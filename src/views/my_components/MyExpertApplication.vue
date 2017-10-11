@@ -1,7 +1,7 @@
 <template>
-  <div class="col-md-8" v-if="loaded && is_verified && !self_expert_application">
+  <div class="col-md-8" v-if="loaded && is_verified && !self_analyst_application">
     <h6 class="text-muted text-normal text-uppercase ">
-      ICOToday Expert Application
+      ICOToday Analyst Application
     </h6>
     <hr class="mb-3 mt-2">
     <div class="form-group row">
@@ -11,7 +11,7 @@
     </div>
     <div class="form-group row justify-content-md-center">
       <div class="col-md-12">
-        <button type="button" @click="newExpertApplication()" class="mb-1 btn btn-block btn-primary" :disabled="uploading">
+        <button type="button" @click="newAnalystApplication()" class="mb-1 btn btn-block btn-primary" :disabled="uploading">
           SUBMIT<span v-if="uploading">ING</span>
         </button>
         <p class="text-danger">{{error_message}}</p>
@@ -19,9 +19,9 @@
     </div>
   </div>
 
-  <div class="col-md-8" v-else-if="loaded && is_verified && self_expert_application">
+  <div class="col-md-8" v-else-if="loaded && is_verified && self_analyst_application">
     <h6 class="text-muted text-normal text-uppercase ">
-      ICOToday Expert Application
+      ICOToday Analyst Application
     </h6>
     <hr class="mb-3 mt-2">
     <div class="alert alert-primary show text-center mb-4">
@@ -42,7 +42,7 @@
           </button>
         </div>
         <div class="col-md-6 m-0">
-          <button type="button" @click="updateExpertApplication()" class="mb-1 btn btn-block btn-primary" :disabled="uploading">
+          <button type="button" @click="updateAnalystApplication()" class="mb-1 btn btn-block btn-primary" :disabled="uploading">
             UPDAT<span v-if="uploading">ING</span><span v-else>E</span>
           </button>
           <p class="text-danger" v-if="error_message">{{error_message}}</p>
@@ -63,7 +63,7 @@
   import { mapGetters } from 'vuex'
 
   export default {
-    name: 'MyExpertApplication',
+    name: 'MyAnalystApplication',
     data () {
       return {
         loaded: false,
@@ -78,26 +78,26 @@
     head: {
       title: {
         inner: 'ICOToday',
-        complement: 'Apply To Be An Expert'
+        complement: 'Apply To Be ICOToday Analyst'
       }
     },
     methods: {
-      newExpertApplication () {
+      newAnalystApplication () {
         if (!this.detail) return
         this.uploading = true
-        this.$store.dispatch('postMyExpertApplication', {detail: this.detail})
+        this.$store.dispatch('postMyAnalystApplication', {detail: this.detail})
           .then(() => {
             this.uploading = false
             this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'Your application is submitted!'})
           })
       },
-      updateExpertApplication () {
+      updateAnalystApplication () {
         if (!this.detail) {
           this.$store.dispatch('toastr', {type: 'danger', title: 'Error', message: 'Detail cannot be empty!'})
           return
         }
         this.uploading = true
-        this.$store.dispatch('updateMyExpertApplication', {detail: this.detail})
+        this.$store.dispatch('updateMyAnalystApplication', {detail: this.detail})
           .then(() => {
             this.uploading = false
             this.edit = false
@@ -109,7 +109,7 @@
       ...mapGetters({
         me: 'self',
         is_verified: 'is_verified',
-        self_expert_application: 'self_expert_application',
+        self_analyst_application: 'self_analyst_application',
       })
     },
     beforeCreate () {
@@ -118,9 +118,9 @@
         this.$router.push({name: 'landing'})
       }
       this.loaded = false
-      this.$store.dispatch('getMyExpertApplication')
+      this.$store.dispatch('getMyAnalystApplication')
         .then(() => {
-          this.detail = this.$store.getters.self_expert_application.detail
+          this.detail = this.$store.getters.self_analyst_application.detail
           this.loaded = true
         })
     },

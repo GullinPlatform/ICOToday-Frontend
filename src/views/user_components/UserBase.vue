@@ -52,7 +52,7 @@
             <i class="fa fa-angle-right"></i> {{company.name}}
           </a>
         </nav>
-        <h6 class="text-muted text-normal text-uppercase mt-4" v-if="user.info.type===2">Expert Center</h6>
+        <h6 class="text-muted text-normal text-uppercase mt-4" v-if="user.info.type===2">Analyst Center</h6>
         <nav class="list-group" v-if="user.info.type===2">
           <router-link :to="{name:'user_rated', params:{id:user.id}}" class="list-group-item"
                        :class="{active: $route.name==='user_rated'}">

@@ -15,7 +15,7 @@
           </router-link>
           <router-link class="list-group-item"
                        :to="{name:'terms', query:{type:'rating'}}"
-                       :class="{active:type==='rating'}">Expert Rating Guidelines
+                       :class="{active:type==='rating'}">Analyst Rating Guidelines
           </router-link>
         </nav>
       </div>
@@ -521,23 +521,23 @@
       </div>
 
       <div class="col-lg-9 col-md-8" v-else-if="type==='rating'">
-        <h2 class="mb-4">Expert Rating Guidelines</h2>
+        <h2 class="mb-4">Analyst Rating Guidelines</h2>
 
         <p>
-          At ICOToday, our aim is to build a community platform where investors learn from each other and other community selected experts. Therefore, we require each expert to submit a report with each ICO company rating. This will enable new investors from on our platform to learn the ins and outs of the ICO market, thereby making more informed decisions regarding their investments in the future. Furthermore, this policy is meant to create transparency between the experts and the community. Experts will need to diligently rate each ICO since each detailed report will be publicly viewable by other experts and investors.</p>
+          At ICOToday, our aim is to build a community platform where investors learn from each other and other community selected analysts. Therefore, we require each analyst to submit a report with each ICO company rating. This will enable new investors from on our platform to learn the ins and outs of the ICO market, thereby making more informed decisions regarding their investments in the future. Furthermore, this policy is meant to create transparency between the experts and the community. Experts will need to diligently rate each ICO since each detailed report will be publicly viewable by other experts and investors.</p>
         <p><strong>Ratings</strong><br>
-          Although each expert will have autonomy over their rating, there will be a few major considerations that each will take into account.</p>
+          Although each analyst will have autonomy over their rating, there will be a few major considerations that each will take into account.</p>
         <p><strong>Methodology</strong><br>
-          Rating on the ICOToday platform will be a number between 1 - 100. This range will enable experts to take into account as many factors as they so please and allow for more differentiation than a 5 point scale would allow. Moreover, ratings will not be permanent. Experts will continually update their ratings based on new information and team progress. Below are the five main considerations that each expert will take into account.
+          Rating on the ICOToday platform will be a number between 1 - 100. This range will enable analysts to take into account as many factors as they so please and allow for more differentiation than a 5 point scale would allow. Moreover, ratings will not be permanent. Experts will continually update their ratings based on new information and team progress. Below are the five main considerations that each expert will take into account.
         </p>
         <p><strong>Team</strong><br>
-          The team is an important aspect of any successful startup. Therefore, deep analysis and research into every member of the team will be made. Each team will be different, but our experts will be advised to follow Y-Combinator's team analysis process in order to accurately rate each team.
+          The team is an important aspect of any successful startup. Therefore, deep analysis and research into every member of the team will be made. Each team will be different, but our analysts will be advised to follow Y-Combinator's team analysis process in order to accurately rate each team.
         </p>
         <p><strong>Prototype or Demo</strong><br>
-          A lot of companies launching ICOs have no product or prototype. This is extremely risky and leads to ICOs raising insane amounts of money with no intent to deliver a product. At ICOToday, we believe that this is unacceptable. A prototype is an important indicator of the future success of any product. Seldom are startups able to raise any funds from Venture Capitalists without proof of that they have invested a significant amount of time working on their ideas and the same should be true for ICOs. Our experts will examine each company's prototype and rate them accordingly.
+          A lot of companies launching ICOs have no product or prototype. This is extremely risky and leads to ICOs raising insane amounts of money with no intent to deliver a product. At ICOToday, we believe that this is unacceptable. A prototype is an important indicator of the future success of any product. Seldom are startups able to raise any funds from Venture Capitalists without proof of that they have invested a significant amount of time working on their ideas and the same should be true for ICOs. Our analysts will examine each company's prototype and rate them accordingly.
         </p>
         <p><strong>Business Model</strong><br>
-          Blockchain technology has the potential to change any imaginable industry. However, the same business ideologies of the past still hold true. Our experts will analyze the product-market fit of any company's product diligently. They will take into account the perceived market size, the competitors and more importantly, whether a token economy could work for the industry. Also, ICOToday experts will take into account the go to market strategy that each company will employ to launch their product to the masses.
+          Blockchain technology has the potential to change any imaginable industry. However, the same business ideologies of the past still hold true. Our analysts will analyze the product-market fit of any company's product diligently. They will take into account the perceived market size, the competitors and more importantly, whether a token economy could work for the industry. Also, ICOToday experts will take into account the go to market strategy that each company will employ to launch their product to the masses.
         </p>
         <p><strong>Website, White Paper, Video, Legal</strong><br>
           Launching an ICO is not easy nor should it be. The standard needs to be upheld. Each company's ICO marketing material will be analyzed deeply. A company that is not able invest their time and money for a good marketing campaign for investors will not be able to convince consumers to use their product.
@@ -579,7 +579,7 @@
         else if (this.type === 'token')
           return 'Token Sale Agreement'
         else if (this.type === 'rating')
-          return 'Expert Rating Guidelines'
+          return 'Analyst Rating Guidelines'
       }
     }
   }

@@ -48,13 +48,16 @@
                  v-for="member in team_members"
                  v-if="member.type!=3">
               <div class="d-table">
-                <router-link :to="{name:'user', params:{id:member.account}}" data-dismiss="modal">
+                <router-link :to="{name:'user', params:{id:member.account}}" target="_blank">
                   <img class="d-block mx-auto img-thumbnail rounded-circle d-table-cell align-middle"
                        width="100" :src="member.avatar">
                 </router-link>
                 <div class="pl-3 d-table-cell align-middle">
                   <h6>
-                    {{member.full_name}}<i class="fa fa-check text-primary" v-if="member.is_verified"></i>
+                    <router-link class="text-gray-dark" :to="{name:'user', params:{id:member.account}}" target="_blank">
+                      {{member.full_name}}
+                    </router-link>
+                    <i class="fa fa-check text-primary" v-if="member.is_verified"></i>
                     <span class="text-muted text-sm mb-2">{{member.title}}</span>
                   </h6>
                   <p>{{member.description}}</p>
@@ -96,7 +99,10 @@
                 </router-link>
                 <div class="pl-3 d-table-cell align-middle">
                   <h6>
-                    {{member.full_name}}<i class="fa fa-check text-primary" v-if="member.is_verified"></i>
+                    <router-link class="text-gray-dark" :to="{name:'user', params:{id:member.account}}" target="_blank">
+                      {{member.full_name}}
+                    </router-link>
+                    <i class="fa fa-check text-primary" v-if="member.is_verified"></i>
                     <span class="text-muted text-sm mb-2">{{member.title}}</span>
                   </h6>
                   <p>{{member.description}}</p>

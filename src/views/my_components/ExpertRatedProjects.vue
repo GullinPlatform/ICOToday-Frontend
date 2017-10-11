@@ -13,7 +13,7 @@
   import ProjectList from 'src/views/components/ProjectList'
 
   export default {
-    name: 'ExpertRatedProjects',
+    name: 'AnalystRatedProjects',
     data () {
       return {
         loaded: false
@@ -45,7 +45,7 @@
       })
     },
     beforeMount () {
-      // redirect non ico expert user
+      // redirect non ico analyst user
       if (this.self_type !== 2) {
         this.$router.push({name: 'landing'})
       }

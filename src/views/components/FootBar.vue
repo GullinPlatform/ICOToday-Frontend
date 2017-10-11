@@ -30,34 +30,23 @@
             <ul>
               <li><a target="_blank" href="https://trello.com/b/JxFOIC9x">Upcoming Releases</a></li>
               <li><a href="/tokensale">Token Sale</a></li>
-              <li><a href="/terms?type=terms">Terms and Services</a></li>
-              <li><a href="/terms?type=privacy">Privacy Policy</a></li>
-              <li><a href="/terms?type=rating">Expert Rating Guidelines</a></li>
-
+              <li><a href="/terms?type=rating">Analyst Rating Guidelines</a></li>
             </ul>
           </section>
         </div>
         <div class="col-lg-4 col-md-6">
           <!-- Account / Shipping Info-->
           <section class="widget widget-links widget-light-skin">
-            <h3 class="widget-title">Account</h3>
+            <h3 class="widget-title">Terms and Privacy</h3>
             <ul>
-              <li>
-                <router-link :to="{name:'me_profile'}">Your Account</router-link>
-              </li>
-              <li v-if="!login_status">
-                <a href="javascript:void(0)" data-toggle="modal" data-target="#login-modal">Login</a>
-              </li>
-              <li v-if="!login_status">
-                <a href="javascript:void(0)" data-toggle="modal"
-                   data-target="#signup-modal">Register</a>
-              </li>
+              <li><a href="/terms?type=terms">Terms and Services</a></li>
+              <li><a href="/terms?type=privacy">Privacy Policy</a></li>
             </ul>
           </section>
         </div>
       </div>
       <!-- Copyright-->
-      <p class="footer-copyright">© All rights reserved. ICOToday</p>
+      <p class="footer-copyright">© 2017 All rights reserved. ICOToday</p>
     </div>
   </footer>
 </template>

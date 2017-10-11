@@ -1,5 +1,4 @@
-// export const API_ROOT = (process.env.NODE_ENV === 'production') ? 'https://api.icotoday.io' : 'http://localhost:8000'
-export const API_ROOT = (process.env.NODE_ENV === 'production') ? 'http://13.58.229.35' : 'http://localhost:8000'
+export const API_ROOT = (process.env.NODE_ENV === 'production') ? 'https://api.icotoday.io' : 'http://localhost:8000'
 
 
 export function SHA256 (s) {

@@ -111,14 +111,14 @@ export default {
     return apiCall('post', 'me/interests/', form_data)
   },
 
-  // Expert Application
-  getMyExpertApplication () {
-    return apiCall('get', 'me/expert_apply/')
+  // Analyst Application
+  getMyAnalystApplication () {
+    return apiCall('get', 'me/analyst_apply/')
   },
-  postMyExpertApplication (form_data) {
-    return apiCall('post', 'me/expert_apply/', form_data)
+  postMyAnalystApplication (form_data) {
+    return apiCall('post', 'me/analyst_apply/', form_data)
   },
-  updateMyExpertApplication (form_data) {
-    return apiCall('put', 'me/expert_apply/', form_data)
+  updateMyAnalystApplication (form_data) {
+    return apiCall('put', 'me/analyst_apply/', form_data)
   },
 }

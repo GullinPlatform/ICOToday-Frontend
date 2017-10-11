@@ -67,9 +67,9 @@ export default new Router({
       component: MyBase,
       children: [
         {
-          path: '/me/expert/application',
+          path: '/me/analyst/application',
           component: MyExpertApplication,
-          name: 'me_expert_apply'
+          name: 'me_analyst_apply'
         }, {
           path: '/me/feed',
           component: MyFeed,
@@ -119,13 +119,13 @@ export default new Router({
           component: NeedVerify,
           name: 'me_need_verify'
         }, {
-          path: '/me/expert/rated',
+          path: '/me/analyst/rated',
           component: ExpertRatedProjects,
-          name: 'expert_rated_projects'
+          name: 'analyst_rated_projects'
         }, {
-          path: '/me/expert/unrated',
+          path: '/me/analyst/unrated',
           component: ExpertUnRatedProjects,
-          name: 'expert_unrated_projects'
+          name: 'analyst_unrated_projects'
         }
       ]
     }, {
