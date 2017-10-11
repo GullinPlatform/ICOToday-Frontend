@@ -63,6 +63,7 @@
           <div class="col-10">
             <input class="form-control" v-model="company_name" v-validate="'required'" placeholder="Project Name">
           </div>
+          <h6 class="text-danger mt-3" v-if="error_message">{{error_message}}</h6>
         </div>
       </div>
       <div v-if="account_type===2">
@@ -124,6 +125,9 @@
         loaded: false,
         account_type: 1,
 
+        // Utils
+        error_message: '',
+
         // User data
         selected_tags: [],
 
@@ -152,7 +156,7 @@
         }
         // Company
         else if (this.step === 2 && this.account_type === 0) { // Company input and search
-          this.searchProject()
+          this.createCompany()
         }
         // Analyst
         else if (this.step === 2 && this.account_type === 2) { // Company input and search
@@ -204,10 +208,9 @@
           return
         }
         const query_data = {
-          keyword: this.company_name,
-          page: 1
+          token: this.company_name,
         }
-        this.$store.dispatch('searchProjects', query_data)
+        this.$store.dispatch('searchCompany', query_data)
           .then(() => {
             this.loaded = true
             if (!this.search_result.length) {
@@ -229,6 +232,9 @@
             this.$store.dispatch('setFollowUpStep', 10)
             this.loaded = true
           })
+          .catch((error) => {
+            this.error_message = error.response.data.detail
+          })
       },
 
       // Analyst Post applications
@@ -246,7 +252,7 @@
         tags: 'tags',
         login_status: 'login_status',
         type: 'self_type',
-        search_result: 'current_project_search_result',
+        search_result: 'current_company_search_result',
         step: 'register_follow_up_step'
       })
     },

@@ -166,7 +166,7 @@
             })
             .catch((error) => {
               this.uploading = false
-              this.error_message = error.body.detail
+              this.error_message = error
               console.log(error)
             })
         })

@@ -15,24 +15,24 @@
           <div class="table-responsive shopping-cart">
             <table class="table">
               <tbody>
-              <tr v-for="project in project_result">
+              <tr v-for="company in search_result">
                 <td>
                   <div class="product-item">
-                    <router-link class="product-thumb" :to="{name:'project', params:{id:project.id}}">
-                      <img :src="project.logo_image">
+                    <router-link class="product-thumb" :to="{name:'project', params:{id:company.project.id}}">
+                      <img :src="company.project.logo_image">
                     </router-link>
                     <div class="product-info">
                       <h4 class="product-title">
-                        <router-link :to="{name:'project', params:{id:project.id}}">
-                          {{project.name}}
+                        <router-link :to="{name:'project', params:{id:company.project.id}}">
+                          {{company.name}}
                         </router-link>
                       </h4>
-                      <small>{{project.description_short}}</small>
+                      <small>{{company.project.description_short}}</small>
                     </div>
                   </div>
                 </td>
                 <td class="text-center">
-                  <button class="btn btn-outline-primary btn-sm" @click="applyCompany(project.company.id)">
+                  <button class="btn btn-outline-primary btn-sm" @click="applyCompany(company.id)">
                     Apply
                   </button>
                 </td>
@@ -40,6 +40,9 @@
               </tbody>
             </table>
           </div>
+          <h6 class="modal-title mb-3">
+            Or if you believe someone else created your company, please contact us immediately at team@icotoday.io
+          </h6>
           <hr class="mb-4">
           <div class="row justify-content-center">
             <a class="btn btn-secondary" @click="createCompany()">No, Create New Project</a>
@@ -67,6 +70,7 @@
       applyCompany (id) {
         this.$store.dispatch('applyCompany', id)
           .then(() => {
+            $('#similar-project-modal').modal('hide')
             this.$store.dispatch('setFollowUpStep', 10)
           })
       },
@@ -90,7 +94,8 @@
     },
     computed: {
       ...mapGetters({
-        project_result: 'current_project_search_result',
+        search_result: 'current_company_search_result',
+
         new_company_name: 'new_company_name'
       })
     },
