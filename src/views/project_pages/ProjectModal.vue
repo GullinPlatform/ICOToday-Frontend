@@ -52,7 +52,7 @@
                              width="100" :src="member.avatar">
                       </router-link>
                       <div class="pl-3 d-table-cell align-middle">
-                        <h6>
+                        <h6 class="mb-0">
                           <router-link class="text-gray-dark" :to="{name:'user', params:{id:member.account}}" target="_blank">
                             {{member.full_name}}
                           </router-link>
@@ -97,7 +97,7 @@
                              width="100" :src="member.avatar">
                       </router-link>
                       <div class="pl-3 d-table-cell align-middle">
-                        <h6>
+                        <h6 class="mb-0">
                           <router-link class="text-gray-dark" :to="{name:'user', params:{id:member.account}}" target="_blank">
                             {{member.full_name}}
                           </router-link>
@@ -554,7 +554,7 @@
       },
 
       // Auto Investment
-      autoInvest(){
+      autoInvest () {
         this.$store.dispatch('toastr', {
           type: 'warning',
           title: 'Warning',
