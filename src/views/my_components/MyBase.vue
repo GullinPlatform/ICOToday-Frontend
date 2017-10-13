@@ -154,3 +154,10 @@
     }
   }
 </script>
+
+<style scoped>
+  a.list-group-item.router-link-active {
+    background-color: #0da9ef !important;
+    color: white !important;
+  }
+</style>

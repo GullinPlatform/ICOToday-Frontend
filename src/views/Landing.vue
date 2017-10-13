@@ -51,7 +51,7 @@
     <!-- Featured Products Carousel-->
     <section class="container pt-5 pb-5">
       <h2 class="text-muted text-normal text-uppercase mt-4"> Today's Top ICOs</h2>
-      <hr class="mb-3 mt-2">
+      <hr class="mb-3">
       <div class="row">
         <div class="col-lg-3 col-md-4 col-sm-6"
              v-if="promotion_loaded"
@@ -102,7 +102,7 @@
     <!-- Main content -->
     <div class="container pb-6">
       <h2 class="text-muted text-normal text-uppercase mt-4"> ICO Projects</h2>
-      <hr class="mb-3 mt-2">
+      <hr class="mb-3">
       <div class="row">
         <div class="col-lg-2">
           <nav class="list-group">
@@ -178,7 +178,6 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
 

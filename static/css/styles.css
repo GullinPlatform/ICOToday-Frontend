@@ -7646,11 +7646,6 @@ a.list-group-item:hover, a.list-group-item:focus, a.list-group-item:active {
   color: white !important;
 }
 
-a.list-group-item.router-link-active {
-  background-color: #0da9ef !important;
-  color: white !important;
-}
-
 .notification_actor_name {
   color: blue;
 }
