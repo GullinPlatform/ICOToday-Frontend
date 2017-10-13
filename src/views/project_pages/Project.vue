@@ -1,29 +1,29 @@
 <template>
   <div class="container container-padding">
-    <div class="modal-header card-new-layout">
-      <div class="media">
-        <img class="d-flex rounded mr-3" :src="project.logo_image" width="75" alt="Media">
-        <div class="media-body">
-          <h4 class="mt-0 mb-1 text-bold">{{project.name}} <span v-if="project.status===0" class="badge badge-info">Verifying</span></h4>
-          <span class="d-block text-sm text-muted">{{project.description_short}}</span>
-          <span class="badge badge-sm badge-default text-sm">{{project.category}}</span>
+    <div class="card-new-layout">
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="media">
+            <img class="d-flex rounded mr-3" :src="project.logo_image" width="75" alt="Media">
+            <div class="media-body">
+              <h4 class="mt-0 mb-1 text-bold">{{project.name}} <span v-if="project.status===0" class="badge badge-info">Verifying</span></h4>
+              <span class="d-block text-sm text-muted">{{project.description_short}}</span>
+              <span class="badge badge-sm badge-default text-sm">{{project.category}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-1"></div>
+        <div class="col-lg-2">
+          <button class="btn btn-warning btn-block" v-if="!subscribed" @click="subscribeProject()">
+            <span><i class="fa fa-star-o"></i> Subscribe</span>
+          </button>
+          <button class="btn btn-warning btn-block" v-else @click="unsubscribeProject()"
+                  @mouseover="unsubscribe=true" @mouseleave="unsubscribe=false">
+            <span v-if="unsubscribe">unsubscribe</span>
+            <span v-else><i class="fa fa-check"></i> Subscribed</span>
+          </button>
         </div>
       </div>
-      <p class="mb-0">
-        <button class="btn btn-outline-danger btn-sm btn-block" v-if="!subscribed"
-                @click="subscribeProject()">
-          <span><i class="fa fa-star-o"></i> Subscribe</span>
-        </button>
-        <button class="btn btn-danger btn-sm btn-block" v-else @click="unsubscribeProject()"
-                @mouseover="unsubscribe=true" @mouseleave="unsubscribe=false">
-          <span v-if="unsubscribe">unsubscribe</span>
-          <span v-else><i class="fa fa-check"></i> Subscribed</span>
-
-        </button>
-        <!--<router-link :to="{name:'project', params:{id:project.id}}" data-dismiss="modal" class="btn btn-outline-primary btn-sm mr-2">-->
-        <!--Full Page-->
-        <!--</router-link>-->
-      </p>
     </div>
     <div class="row">
       <div class="col-lg-8" v-if="project_detail">
@@ -93,7 +93,7 @@
                  v-for="member in team_members"
                  v-if="member.type===3">
               <div class="d-table">
-                <router-link :to="{name:'user', params:{id:member.account}}" data-dismiss="modal">
+                <router-link :to="{name:'user', params:{id:member.account}}">
                   <img class="d-block mx-auto img-thumbnail rounded-circle d-table-cell align-middle"
                        width="100" :src="member.avatar">
                 </router-link>
@@ -144,7 +144,7 @@
                  class="d-flex rounded-circle align-self-start mr-4" width="55">
             <div class="media-body">
               <h6 class="comment-title">
-                <router-link :to="{name:'user', params:{id:feed.creator.id}}" class="text-gray-dark" data-dismiss="modal">
+                <router-link :to="{name:'user', params:{id:feed.creator.id}}" class="text-gray-dark">
                   {{feed.creator.full_name}}
                 </router-link>
                 <span class="text-muted">@ {{feed.creator.company.name}}</span>
@@ -197,7 +197,7 @@
                   </h6>
                   <p class="mb-1">{{reply.content}}</p>
                   <p class="mb-0">
-                    <i class="fa fa-calendar"></i> {{timeFromNow(reply.created)}}
+                    <i class="fa fa-clock-o"></i> {{timeFromNow(reply.created)}}
                     <a class="reply-link float-right" href="javascript:void(0)"
                        v-if="reply.creator.account===me.id"
                        @click="deleteID(reply.id)">
@@ -271,7 +271,7 @@
                  class="d-flex rounded-circle align-self-start mr-4" width="55">
             <div class="media-body">
               <h6 class="comment-title">
-                <router-link :to="{name:'user', params:{id:detail.rater.id}}" class="text-gray-dark" data-dismiss="modal">
+                <router-link :to="{name:'user', params:{id:detail.rater.id}}" class="text-gray-dark">
                   {{detail.rater.full_name}}
                 </router-link>
                 <span class="text-muted" v-if="detail.rater.title">{{detail.rater.title}}</span>
@@ -289,7 +289,7 @@
         <!--Score-->
         <div class="card-new-layout">
           <h6 class="text-muted text-normal text-uppercase">Rating
-            <router-link :to="{name:'terms', query:{type:'rating'}}" data-dismiss="modal">
+            <router-link :to="{name:'terms', query:{type:'rating'}}">
               <i class="fa fa-question-circle"></i>
             </router-link>
 
@@ -319,6 +319,9 @@
             {{timeCounter(project.start_datetime, project.end_datetime)}}
           </h2>
           <p class="text-center mb-0 mt-2"> {{formatTime(project.start_datetime, project.end_datetime)}}</p>
+          <div class="text-center">
+            <button class="btn btn-danger btn-sm" @click="autoInvest()" v-if="timeNotEnd(project.start_datetime, project.end_datetime)"><i class="fa fa-bitcoin"></i> INVEST NOW</button>
+          </div>
         </div>
         <!--Updates-->
         <div class="card-new-layout widget-featured-posts">
@@ -547,6 +550,15 @@
           })
       },
 
+      // Auto Investment
+      autoInvest () {
+        this.$store.dispatch('toastr', {
+          type: 'warning',
+          title: 'Warning',
+          message: 'The auto investment feature will be released after our ICO!'
+        })
+      },
+
       // utils
       timeCounter (start, end) {
         /* global moment:true */
@@ -597,6 +609,13 @@
       },
       timeFromNow (time) {
         return moment(time).fromNow()
+      },
+      timeNotEnd (start, end) {
+        if (moment().diff(start, 'minutes') < 0 || moment().diff(end, 'minutes') < 0) {
+          return true
+        } else {
+          return false
+        }
       },
       selfRated () {
         for (let detail of this.rating_details) {

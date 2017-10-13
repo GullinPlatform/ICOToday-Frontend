@@ -94,7 +94,7 @@
         </svg>
       </div>
       <div class="row justify-content-center mt-3">
-        <router-link :to="{name:'landing'}" class="btn btn-outline-primary btn-sm text-primary" v-if="account_type===1">
+        <router-link :to="{name:'me'}" class="btn btn-outline-primary btn-sm text-primary" v-if="account_type===1">
           Explore
         </router-link>
         <router-link :to="{name:'company_project'}" class="btn btn-outline-primary btn-sm text-primary" v-if="account_type===0">

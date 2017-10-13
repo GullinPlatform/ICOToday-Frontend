@@ -4,10 +4,10 @@
       <div class="col-md-4 mb-5" v-if="loaded">
         <aside class="user-info-wrapper">
           <div class="user-cover" style="background-image: url(../../../static/img/account/user-cover-img.jpg);">
-            <div class="info-label" v-if="user.info.is_verified"><i class="fa fa-id-badge"></i> Verified
-            </div>
-            <div class="info-label warning-label" data-toggle="tooltip" v-else><i class="fa fa-warning"></i> Unverified
-            </div>
+            <div class="primary-label float-right" v-if="user.info.is_verified"><i class="fa fa-envelope-o mb-01"></i> Verified</div>
+            <div class="warning-label float-right" v-else="!user.info.is_verified"><i class="fa fa-envelope-o mb-01"></i> Unverified</div>
+            <div class="warning-label float-right mr-2" v-if="user.info.type===2"><i class="fa fa-star mb-01"></i> Analyst</div>
+            <div class="info-label float-right mr-2" v-if="user.info.type===0"><i class="fa fa-building-o mb-01"></i> Project Owner</div>
           </div>
           <div class="user-info">
             <div class="user-avatar">

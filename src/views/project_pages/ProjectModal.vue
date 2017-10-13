@@ -12,11 +12,11 @@
             </div>
           </div>
           <p class="mb-0">
-            <button class="btn btn-outline-danger btn-sm btn-block" v-if="!subscribed"
+            <button class="btn btn-warning btn-sm btn-block" v-if="!subscribed"
                     @click="subscribeProject()">
               <span><i class="fa fa-star-o"></i> Subscribe</span>
             </button>
-            <button class="btn btn-danger btn-sm btn-block" v-else @click="unsubscribeProject()"
+            <button class="btn btn-warning btn-sm btn-block" v-else @click="unsubscribeProject()"
                     @mouseover="unsubscribe=true" @mouseleave="unsubscribe=false">
               <span v-if="unsubscribe">unsubscribe</span>
               <span v-else><i class="fa fa-check"></i> Subscribed</span>
@@ -128,7 +128,6 @@
                   </div>
                 </div>
               </div>
-
             </div>
             <div class="col-lg-8 pl-md-0" v-else-if="feed_detail">
               <!--Feeds-->
@@ -143,7 +142,7 @@
                        class="d-flex rounded-circle align-self-start mr-4" width="55">
                   <div class="media-body">
                     <h6 class="comment-title">
-                      <router-link :to="{name:'user', params:{id:feed.creator.id}}" class="text-gray-dark" data-dismiss="modal">
+                      <router-link :to="{name:'user', params:{id:feed.creator.id}}" class="text-gray-dark" target="_blank">
                         {{feed.creator.full_name}}
                       </router-link>
                       <span class="text-muted">@ {{feed.creator.company.name}}</span>
@@ -196,7 +195,7 @@
                         </h6>
                         <p class="mb-1">{{reply.content}}</p>
                         <p class="mb-0">
-                          <i class="fa fa-calendar"></i> {{timeFromNow(reply.created)}}
+                          <i class="fa fa-clock-o"></i> {{timeFromNow(reply.created)}}
                           <a class="reply-link float-right" href="javascript:void(0)"
                              v-if="reply.creator.account===me.id"
                              @click="deleteID(reply.id)">
@@ -270,7 +269,7 @@
                        class="d-flex rounded-circle align-self-start mr-4" width="55">
                   <div class="media-body">
                     <h6 class="comment-title">
-                      <router-link :to="{name:'user', params:{id:detail.rater.id}}" class="text-gray-dark" data-dismiss="modal">
+                      <router-link :to="{name:'user', params:{id:detail.rater.id}}" class="text-gray-dark" target="_blank">
                         {{detail.rater.full_name}}
                       </router-link>
                       <span class="text-muted" v-if="detail.rater.title">{{detail.rater.title}}</span>
@@ -288,7 +287,7 @@
               <!--Score-->
               <div class="card-new-layout">
                 <h6 class="text-muted text-normal text-uppercase">Rating
-                  <router-link :to="{name:'terms', query:{type:'rating'}}" data-dismiss="modal">
+                  <router-link :to="{name:'terms', query:{type:'rating'}}" target="_blank">
                     <i class="fa fa-question-circle"></i>
                   </router-link>
 
@@ -318,6 +317,9 @@
                   {{timeCounter(project.start_datetime, project.end_datetime)}}
                 </h2>
                 <p class="text-center mb-0 mt-2"> {{formatTime(project.start_datetime, project.end_datetime)}}</p>
+                <div class="text-center">
+                  <button class="btn btn-danger btn-sm" @click="autoInvest()" v-if="timeNotEnd(project.start_datetime, project.end_datetime)"><i class="fa fa-bitcoin"></i> INVEST NOW</button>
+                </div>
               </div>
               <!--Updates-->
               <div class="card-new-layout widget-featured-posts">
@@ -551,6 +553,15 @@
           })
       },
 
+      // Auto Investment
+      autoInvest(){
+        this.$store.dispatch('toastr', {
+          type: 'warning',
+          title: 'Warning',
+          message: 'The auto investment feature will be released after our ICO!'
+        })
+      },
+
       // utils
       timeCounter (start, end) {
         /* global moment:true */
@@ -601,6 +612,13 @@
       },
       timeFromNow (time) {
         return moment(time).fromNow()
+      },
+      timeNotEnd (start, end) {
+        if (moment().diff(start, 'minutes') < 0 || moment().diff(end, 'minutes') < 0) {
+          return true
+        } else {
+          return false
+        }
       },
       selfRated () {
         for (let detail of this.rating_details) {

@@ -5,10 +5,11 @@
       <div class="col-md-4 mb-5">
         <aside class="user-info-wrapper">
           <div class="user-cover" style="background-image: url(../../../static/img/account/user-cover-img.jpg);">
-            <div class="info-label" v-if="me.info.is_verified"><i class="fa fa-id-badge"></i> Verified
-            </div>
-            <div class="info-label warning-label" data-toggle="tooltip" v-if="!me.info.is_verified"
-                 data-original-title="Verify Your Email"><i class="fa fa-warning"></i> Unverified
+            <div>
+              <div class="primary-label float-right" v-if="is_verified"><i class="fa fa-envelope-o mb-01"></i> Verified</div>
+              <div class="warning-label float-right" v-else="!is_verified"><i class="fa fa-envelope-o mb-01"></i> Unverified</div>
+              <div class="warning-label float-right mr-2" v-if="type===2"><i class="fa fa-star mb-01"></i> Analyst</div>
+              <div class="info-label float-right mr-2" v-if="type===0"><i class="fa fa-building-o mb-01"></i> Project Owner</div>
             </div>
           </div>
           <div class="user-info">
@@ -48,9 +49,10 @@
                        :class="{active: $route.name==='me_marked'}">
             <i class="fa fa-angle-right"></i> My Subscriptions
           </router-link>
-          <router-link :to="{name:'me_wallet'}" class="list-group-item"
+          <router-link :to="{name:'me_wallet'}"  class="list-group-item with-badge"
                        :class="{active: $route.name==='me_wallet'}">
             <i class="fa fa-angle-right"></i> My Wallet
+            <span class="badge badge-warning badge-pill">NEW!</span>
           </router-link>
           <router-link :to="{name:'me_profile'}" class="list-group-item"
                        :class="{active: $route.name==='me_profile'}">
@@ -86,12 +88,16 @@
           </router-link>
         </nav>
 
-        <h6 class="text-muted text-normal text-uppercase mt-4" v-if="type===2||type===1">Analyst Center</h6>
-        <nav class="list-group" v-if="type===2">
-          <router-link :to="{name:'me_analyst_apply'}" class="list-group-item" v-if="type===1"
+        <h6 class="text-muted text-normal text-uppercase mt-4" v-if="type===1">Analyst</h6>
+        <nav class="list-group" v-if="type===1">
+          <router-link :to="{name:'me_analyst_apply'}" class="list-group-item with-badge"
                        :class="{active: $route.name==='me_analyst_apply'}">
             <i class="fa fa-angle-right"></i> Apply To Be ICOToday Analyst
+            <span class="badge badge-warning badge-pill">NEW!</span>
           </router-link>
+        </nav>
+        <h6 class="text-muted text-normal text-uppercase mt-4" v-if="type===2">Analyst Center</h6>
+        <nav class="list-group" v-if="type===2">
           <router-link :to="{name:'analyst_rated_projects'}" class="list-group-item"
                        :class="{active: $route.name==='analyst_rated_projects'}">
             <i class="fa fa-angle-right"></i> My Rated Projects

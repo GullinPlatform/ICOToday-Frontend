@@ -122,8 +122,8 @@
                     </router-link>
                   </li>
                   <li>
-                    <router-link :to="{name:'expert_unrated_projects'}" class="dropdown-item" v-if="self_type===2">
-                      <i class="fa fa-building-o"></i>Rate projects
+                    <router-link :to="{name:'analyst_unrated_projects'}" class="dropdown-item" v-if="self_type===2">
+                      <i class="fa fa-star-o"></i>Rate projects
                     </router-link>
                   </li>
                   <li>

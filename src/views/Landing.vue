@@ -5,7 +5,7 @@
       <div id="particles-js"></div><!-- /.particles div -->
       <div class="container center-vertically-holder">
         <div class="center-vertically">
-          <div class="row">
+          <div class="row" style="font-family:'Maven Pro'">
             <div class="col-md-7">
               <h1 class="text-white text-bold mb-2">
                 ICOToday
@@ -15,7 +15,6 @@
                 for Launching and Investing<br>
                 on Blockchain
               </h2>
-
             </div>
             <div class="col-md-5 float-right">
               <div class="register-form pb-0 pt-3">

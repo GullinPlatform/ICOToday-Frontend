@@ -4,17 +4,22 @@
       ICOToday Analyst Application
     </h6>
     <hr class="mb-3 mt-2">
-    <div class="form-group row">
-      <div class="col-sm-12">
-        <textarea class="form-control" v-model="detail" placeholder="( Markdown Support Enabled )" rows="20"></textarea>
+    <h6 class="text-muted">
+      <i class="fa fa-lightbulb-o"></i> Tips: Complete your profile before submit your application will help us to review your application faster!
+    </h6>
+    <div class="card-new-layout">
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <textarea class="form-control" v-model="detail" placeholder="Please tell us more about you" rows="20"></textarea>
+        </div>
       </div>
-    </div>
-    <div class="form-group row justify-content-md-center">
-      <div class="col-md-12">
-        <button type="button" @click="newAnalystApplication()" class="mb-1 btn btn-block btn-primary" :disabled="uploading">
-          SUBMIT<span v-if="uploading">ING</span>
-        </button>
-        <p class="text-danger">{{error_message}}</p>
+      <div class="form-group row justify-content-md-center">
+        <div class="col-md-12">
+          <button type="button" @click="newAnalystApplication()" class="mb-1 btn btn-block btn-primary" :disabled="uploading">
+            SUBMIT<span v-if="uploading">ING</span>
+          </button>
+          <p class="text-danger" v-if="error_message">{{error_message}}</p>
+        </div>
       </div>
     </div>
   </div>

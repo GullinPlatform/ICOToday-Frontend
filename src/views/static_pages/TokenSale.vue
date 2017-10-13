@@ -5,7 +5,7 @@
       <div id="particles-js"></div><!-- /.particles div -->
       <div class="container center-vertically-holder">
         <div class="center-vertically ">
-          <div class="row">
+          <div class="row" style="font-family:'Maven Pro'">
             <div class="col-md-7">
               <h2 class="text-white text-uppercase">
                 Seamless Platform<br>

@@ -1080,6 +1080,10 @@ figure figcaption {
   }
 }
 
+.mb-01 {
+  margin-bottom: 0.1rem!important;
+}
+
 .mb-30 {
   margin-bottom: 30px !important;
 }
@@ -5423,7 +5427,7 @@ video {
 
 @supports (-ms-ime-align: auto) {
   .isotope-grid {
-    min-height: auto;
+    min-height: inherit;
     background: none;
   }
 
@@ -6252,7 +6256,6 @@ video {
 
 .site-backdrop {
   display: block;
-  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -6373,9 +6376,9 @@ video {
   padding: 10px 15px;
 }
 
-.user-info-wrapper .info-label {
+.user-info-wrapper .primary-label {
   display: block;
-  position: absolute;
+  position: relative;
   top: 18px;
   right: 18px;
   height: 26px;
@@ -6391,7 +6394,7 @@ video {
 
 .user-info-wrapper .warning-label {
   display: block;
-  position: absolute;
+  position: relative;
   top: 18px;
   right: 18px;
   height: 26px;
@@ -6405,11 +6408,20 @@ video {
   cursor: pointer;
 }
 
-.user-info-wrapper .info-label > i {
-  display: inline-block;
-  margin-right: 3px;
-  font-size: 1.2em;
-  vertical-align: middle;
+.user-info-wrapper .info-label {
+  display: block;
+  position: relative;
+  top: 18px;
+  right: 18px;
+  height: 26px;
+  padding: 0 12px;
+  border-radius: 13px;
+  background-color: #50c6e9;
+  color: #ffffff;
+  font-size: 12px;
+  line-height: 26px;
+  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.18);
+  cursor: pointer;
 }
 
 .user-info-wrapper .user-info {
@@ -7336,7 +7348,7 @@ video {
   font-size: 13px;
 }
 
-.single-post-meta .meta-link > span {car
+.single-post-meta .meta-link > span {
   margin-right: 4px;
   color: #9da9b9;
 }
@@ -7630,7 +7642,8 @@ video {
 a.list-group-item:hover, a.list-group-item:focus, a.list-group-item:active {
   background-color: #0da9ef !important;
   color: white !important;
+}
 
-.notification_actor_name{
+.notification_actor_name {
   color: blue;
 }

@@ -76,7 +76,7 @@
                 {{reply.content}}
               </p>
               <p class="mb-0">
-                <i class="fa fa-calendar"></i> {{timeFromNow(reply.created)}}
+                <i class="fa fa-clock-o"></i> {{timeFromNow(reply.created)}}
                 <a class="reply-link float-right" href="javascript:void(0)"
                    v-if="reply.creator.account===me.id"
                    @click="deleteID(reply.id)">

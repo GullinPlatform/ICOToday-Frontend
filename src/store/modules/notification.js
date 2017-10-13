@@ -95,7 +95,7 @@ const actions = {
     if (notify.related === 'wallet') {
       router.push({name: 'me_wallet'})
     }
-    if (notify.related === 'analyst_app') {
+    if (notify.related === 'expert_app') {
       router.push({name: 'me_analyst_apply'})
     }
 

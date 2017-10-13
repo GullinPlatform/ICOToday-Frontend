@@ -413,6 +413,7 @@ const mutations = {
   // auth
   [types.LOGIN_SUCCESS] (state) {
     state.login_status = true
+    router.push({name: 'me'})
   },
   [types.LOGOUT] (state) {
     state.login_status = false
