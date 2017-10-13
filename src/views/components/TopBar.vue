@@ -118,11 +118,11 @@
                   </li>
                   <li>
                     <router-link :to="{name:'me_analyst_apply'}" class="dropdown-item" v-if="self_type===1||self_type===-1">
-                      <i class="fa fa-id-badge"></i> Apply to be ICOToday Analyst
+                      <i class="fa fa-id-badge"></i> Apply to be Analyst
                     </router-link>
                   </li>
                   <li>
-                    <router-link :to="{name:'analyst_unrated_projects'}" class="dropdown-item" v-if="self_type===2">
+                    <router-link :to="{name:'expert_unrated_projects'}" class="dropdown-item" v-if="self_type===2">
                       <i class="fa fa-building-o"></i>Rate projects
                     </router-link>
                   </li>

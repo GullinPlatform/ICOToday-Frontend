@@ -57,8 +57,8 @@
                             {{member.full_name}}
                           </router-link>
                           <i class="fa fa-check text-primary" v-if="member.is_verified"></i>
-                          <span class="text-muted text-sm mb-2">{{member.title}}</span>
                         </h6>
+                        <span class="text-muted text-sm mb-2">{{member.title}}</span>
                         <p>{{member.description}}</p>
                         <div class="social-bar">
                           <a :href="member.facebook" class="social-link branding-facebook" target="_blank"
@@ -102,8 +102,8 @@
                             {{member.full_name}}
                           </router-link>
                           <i class="fa fa-check text-primary" v-if="member.is_verified"></i>
-                          <span class="text-muted text-sm mb-2">{{member.title}}</span>
                         </h6>
+                        <span class="text-muted text-sm mb-2">{{member.title}}</span>
                         <p>{{member.description}}</p>
                         <div class="social-bar">
                           <a :href="member.facebook" class="social-link branding-facebook" target="_blank"
