@@ -6,7 +6,7 @@
           <div class="media">
             <img class="d-flex rounded mr-3" :src="project.logo_image" width="75" alt="Media">
             <div class="media-body">
-              <h4 class="mt-0 mb-1 text-bold">{{project.name}} <span v-if="project.status===0" class="badge badge-info">Verifying</span></h4>
+              <h4 class="mt-0 mb-1 text-bold">{{project.name}} <span v-if="project.status===0" class="badge badge-info"><i class="fa fa-warning"></i> Verifying</span></h4>
               <span class="d-block text-sm text-muted">{{project.description_short}}</span>
               <span class="badge badge-sm badge-default text-sm">{{project.category}}</span>
             </div>

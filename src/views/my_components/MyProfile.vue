@@ -42,23 +42,23 @@
       <div class="form-group row">
         <label class="col-sm-2 col-form-label">First Name</label>
         <div class="col-sm-4">
-          <input class="form-control" v-model="me.first_name" type="text" id="first_name">
+          <input class="form-control" v-model.lazy="me.first_name" type="text" id="first_name">
         </div>
         <label class="col-sm-2 col-form-label">Last Name</label>
         <div class="col-sm-4">
-          <input class="form-control" v-model="me.last_name" type="text" id="last_name">
+          <input class="form-control" v-model.lazy="me.last_name" type="text" id="last_name">
         </div>
       </div>
       <div class="form-group row">
         <label class="col-sm-2 col-form-label">Title</label>
         <div class="col-sm-10">
-          <input class="form-control" v-model="me.title" type="text" placeholder="ex. CEO">
+          <input class="form-control" v-model.lazy="me.title" type="text" placeholder="ex. CEO">
         </div>
       </div>
       <div class="form-group row">
         <label class="col-sm-2 col-form-label">About Me</label>
         <div class="col-sm-10">
-          <textarea class="form-control" v-model="me.description" placeholder=""></textarea>
+          <textarea class="form-control" v-model.lazy="me.description" placeholder=""></textarea>
         </div>
       </div>
     </div>
@@ -68,25 +68,25 @@
       <div class="form-group row">
         <label class="col-sm-2 col-form-label">LinkedIn</label>
         <div class="col-sm-10">
-          <input class="form-control" v-model="me.linkedin" type="text">
+          <input class="form-control" v-model.lazy="me.linkedin" type="text">
         </div>
       </div>
       <div class="form-group row">
         <label class="col-sm-2 col-form-label">Twitter</label>
         <div class="col-sm-10">
-          <input class="form-control" v-model="me.twitter" type="text">
+          <input class="form-control" v-model.lazy="me.twitter" type="text">
         </div>
       </div>
       <div class="form-group row">
         <label class="col-sm-2 col-form-label">Telegram</label>
         <div class="col-sm-10">
-          <input class="form-control" v-model="me.telegram" type="text">
+          <input class="form-control" v-model.lazy="me.telegram" type="text">
         </div>
       </div>
       <div class="form-group row">
         <label class="col-sm-2 col-form-label">Facebook</label>
         <div class="col-sm-10">
-          <input class="form-control" v-model="me.facebook" type="text">
+          <input class="form-control" v-model.lazy="me.facebook" type="text">
         </div>
       </div>
     </div>
