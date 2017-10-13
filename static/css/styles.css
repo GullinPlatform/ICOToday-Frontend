@@ -7491,13 +7491,11 @@ video {
   }
 }
 
-/* =Jumbotron Register
+/* Jumbotron Register
 -------------------------------------------------------------- */
 .jumbotron.jumbotron-register {
   height: 520px;
   width: 100%;
-  font-family: 'Roboto', sans-serif;
-  color: #fff;
   padding-top: 0;
   padding-bottom: 0;
   position: relative;
@@ -7506,6 +7504,10 @@ video {
 
 .jumbotron.jumbotron-register a {
   color: #fff;
+}
+
+.jumbotron.jumbotron-login {
+  height: 260px;
 }
 
 .register-form {

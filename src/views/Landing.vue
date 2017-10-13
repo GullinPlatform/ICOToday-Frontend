@@ -1,11 +1,11 @@
 <template>
   <div>
     <!-- Begin Jumbotron -->
-    <div id="home" class="jumbotron jumbotron-register">
-      <div id="particles-js"></div><!-- /.particles div -->
+    <div id="home" class="jumbotron jumbotron-register" :class="{'jumbotron-login':login_status}">
+      <div id="particles-js" class="particles-login"></div><!-- /.particles div -->
       <div class="container center-vertically-holder">
         <div class="center-vertically">
-          <div class="row" style="font-family:'Maven Pro'">
+          <div class="row" v-if="!login_status">
             <div class="col-md-7">
               <h1 class="text-white text-bold mb-2">
                 ICOToday
@@ -18,19 +18,30 @@
             </div>
             <div class="col-md-5 float-right">
               <div class="register-form pb-0 pt-3">
-                <h3 class="no-margin-top">Sign Up for our Whitelist</h3>
+                <h3>Sign Up for our Whitelist</h3>
                 <div class="row">
-                  <div class="form-group col-sm-12 mb-3">
+                  <div class="form-group col-sm-8">
                     <input class="form-control" placeholder="Email Address" v-model="email"
                            @keydown.enter="whiteListSubmit($event)">
                   </div>
-                  <div class="form-group col-sm-4 mb-2">
+                  <div class="form-group col-sm-4">
                     <button class="btn btn-primary mt-0"
-                            @click="whiteListSubmit($event)">Subscribe
+                            @click="whiteListSubmit($event)">Sign Up
                     </button>
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+          <div class="row" v-else>
+            <div class="col-md-12 text-center">
+              <h1 class="text-white text-bold mb-2">
+                ICOToday
+              </h1>
+              <h2 class="text-white text-uppercase">
+                Seamless Platform<br>
+                for Launching and Investing on Blockchain
+              </h2>
             </div>
           </div>
         </div>
@@ -39,7 +50,8 @@
 
     <!-- Featured Products Carousel-->
     <section class="container pt-5 pb-5">
-      <h1 class="text-left">Today's Top ICOs</h1>
+      <h2 class="text-muted text-normal text-uppercase mt-4"> Today's Top ICOs</h2>
+      <hr class="mb-3 mt-2">
       <div class="row">
         <div class="col-lg-3 col-md-4 col-sm-6"
              v-if="promotion_loaded"
@@ -89,7 +101,8 @@
 
     <!-- Main content -->
     <div class="container pb-6">
-      <h1 class="text-left mb-30">ICO Projects</h1>
+      <h2 class="text-muted text-normal text-uppercase mt-4"> ICO Projects</h2>
+      <hr class="mb-3 mt-2">
       <div class="row">
         <div class="col-lg-2">
           <nav class="list-group">
@@ -492,7 +505,6 @@
 </script>
 
 <style scoped>
-
   .promo-project-tile {
     margin-bottom: 30px;
     transition: box-shadow .4s;
@@ -514,7 +526,7 @@
   }
 
   .promo-project-body {
-    padding: 10px 20px 0px;
+    padding: 10px 20px 0;
   }
 
   .promo-project-footer {

@@ -1,11 +1,11 @@
 <template>
-  <div class="light-grey-fixed">
+  <div>
     <!-- Begin Jumbotron -->
     <div id="home" class="jumbotron jumbotron-register">
       <div id="particles-js"></div><!-- /.particles div -->
       <div class="container center-vertically-holder">
         <div class="center-vertically ">
-          <div class="row" style="font-family:'Maven Pro'">
+          <div class="row">
             <div class="col-md-7">
               <h2 class="text-white text-uppercase">
                 Seamless Platform<br>
@@ -13,11 +13,7 @@
                 on Blockchain
               </h2>
 
-              <h5 class="mt-2">
-                <a target="_blank" href="https://s3.us-east-2.amazonaws.com/icotoday/ICOToday+White+paper.pdf"> READ THE WHITE PAPER</a>
-              </h5>
-
-              <div class="countdown">
+              <div class="countdown" style="color:#fff;">
                 <div class="item mb-0">
                   <div class="days">--</div>
                   <span class="days_ref">Days</span>
@@ -36,23 +32,22 @@
                 </div>
               </div>
               <div>
-              <span class="text-white text-uppercase">
-                Our ICO Date Is Yet To Be Announced
-              </span>
+                <span class="text-white text-uppercase">
+                  Our ICO Date Is Yet To Be Announced
+                </span>
               </div>
-
             </div>
-            <div class="col-sm-5 float-right">
+            <div class="col-sm-5">
               <div class="register-form pb-0 pt-3">
-                <h3 class="no-margin-top">Sign Up for our Whitelist</h3>
+                <h3>Sign Up for our Whitelist</h3>
                 <div class="row">
-                  <div class="form-group col-sm-12 mb-3">
+                  <div class="form-group col-sm-8">
                     <input class="form-control" placeholder="Email Address" v-model="email"
                            @keydown.enter="whiteListSubmit($event)">
                   </div>
-                  <div class="form-group col-sm-4 mb-2">
+                  <div class="form-group col-sm-4 mb-1">
                     <button class="btn btn-primary mt-0"
-                            @click="whiteListSubmit($event)">Subscribe
+                            @click="whiteListSubmit($event)">Sign Up
                     </button>
                   </div>
                 </div>
@@ -349,40 +344,6 @@
         </div>
       </div>
     </div>
-
-  </div>
-
-  <!--
-
-         <div class="container padding-bottom-2x mb-2">
-
-
-            <h6 class="text-muted text-normal text-uppercase">Our Advisors</h6>
-            <hr class="margin-bottom-1x">
-
-            <div class="row">
-                      <div class="col-md-3 col-sm-6 mb-30 text-center"><img class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2" src="../../static/img/team/01.jpg" alt="Team">
-                        <h6>Grace Wright</h6>
-                        <p class="text-muted mb-2">Founder, CEO</p>
-                        <div class="social-bar"><a class="social-button shape-circle sb-facebook" href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="socicon-facebook"></i></a><a class="social-button shape-circle sb-twitter" href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="socicon-twitter"></i></a><a class="social-button shape-circle sb-google-plus" href="#" data-toggle="tooltip" data-placement="top" title="Google +"><i class="socicon-googleplus"></i></a></div>
-                      </div>
-                      <div class="col-md-3 col-sm-6 mb-30 text-center"><img class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2" src="../../static/img/team/02.jpg" alt="Team">
-                        <h6>Taylor Jackson</h6>
-                        <p class="text-muted mb-2">Financial Director</p>
-                        <div class="social-bar"><a class="social-button shape-circle sb-skype" href="#" data-toggle="tooltip" data-placement="top" title="Skype"><i class="socicon-skype"></i></a><a class="social-button shape-circle sb-facebook" href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="socicon-facebook"></i></a><a class="social-button shape-circle sb-paypal" href="#" data-toggle="tooltip" data-placement="top" title="PayPal"><i class="socicon-paypal"></i></a></div>
-                      </div>
-                      <div class="col-md-3 col-sm-6 mb-30 text-center"><img class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2" src="../../static/img/team/03.jpg" alt="Team">
-                        <h6>Quinton Cross</h6>
-                        <p class="text-muted mb-2">Marketing Director</p>
-                        <div class="social-bar"><a class="social-button shape-circle sb-twitter" href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="socicon-twitter"></i></a><a class="social-button shape-circle sb-google-plus" href="#" data-toggle="tooltip" data-placement="top" title="Google +"><i class="socicon-googleplus"></i></a><a class="social-button shape-circle sb-email" href="#" data-toggle="tooltip" data-placement="top" title="Email"><i class="socicon-mail"></i></a></div>
-                      </div>
-                      <div class="col-md-3 col-sm-6 mb-30 text-center"><img class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2" src="../../static/img/team/04.jpg" alt="Team">
-                        <h6>Liana Mullen</h6>
-                        <p class="text-muted mb-2">Lead Designer</p>
-                        <div class="social-bar"><a class="social-button shape-circle sb-behance" href="#" data-toggle="tooltip" data-placement="top" title="Behance"><i class="socicon-behance"></i></a><a class="social-button shape-circle sb-dribbble" href="#" data-toggle="tooltip" data-placement="top" title="Dribbble"><i class="socicon-dribbble"></i></a><a class="social-button shape-circle sb-instagram" href="#" data-toggle="tooltip" data-placement="top" title="Instagram"><i class="socicon-instagram"></i></a></div>
-                      </div>
-                    </div>
-          </div> -->
   </div>
 </template>
 
@@ -780,11 +741,6 @@
         }
       }
     }
-  }
-
-  .light-grey-fixed {
-    background-color: #f6f6f6;
-    margin-bottom: -50px;
   }
 
 </style>

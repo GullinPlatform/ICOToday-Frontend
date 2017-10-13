@@ -113,7 +113,7 @@
     head: {
       title: {
         inner: 'ICOToday',
-        complement: 'Settings',
+        complement: 'Profile',
       }
     },
     components: {

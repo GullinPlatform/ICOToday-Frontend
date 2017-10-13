@@ -22,7 +22,7 @@
     head: {
       title: {
         inner: 'ICOToday',
-        complement: 'Subscribed ICOs'
+        complement: 'My Subscriptions'
       }
     },
     components: {
