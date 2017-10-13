@@ -241,4 +241,7 @@
     font-weight: 500;
     text-decoration: none;
   }
+  .router-link-active {
+    color: #0da9ef;
+  }
 </style>

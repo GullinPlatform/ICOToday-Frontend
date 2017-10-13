@@ -7506,7 +7506,7 @@ video {
   color: #fff;
 }
 
-.jumbotron.jumbotron-login {
+.jumbotron..jumbotron-login {
   height: 260px;
 }
 
@@ -7642,6 +7642,11 @@ video {
 }
 
 a.list-group-item:hover, a.list-group-item:focus, a.list-group-item:active {
+  background-color: #0da9ef !important;
+  color: white !important;
+}
+
+a.list-group-item.router-link-active {
   background-color: #0da9ef !important;
   color: white !important;
 }

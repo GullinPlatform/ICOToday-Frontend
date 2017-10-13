@@ -41,25 +41,20 @@
           </div>
         </aside>
         <nav class="list-group">
-          <router-link :to="{name:'me'}" class="list-group-item"
-                       :class="{active: $route.name==='me'}">
+          <router-link :to="{name:'me'}" class="list-group-item">
             <i class="fa fa-angle-right"></i> Feed
           </router-link>
-          <router-link :to="{name:'me_marked'}" class="list-group-item"
-                       :class="{active: $route.name==='me_marked'}">
+          <router-link :to="{name:'me_marked'}" class="list-group-item">
             <i class="fa fa-angle-right"></i> My Subscriptions
           </router-link>
-          <router-link :to="{name:'me_wallet'}"  class="list-group-item with-badge"
-                       :class="{active: $route.name==='me_wallet'}">
+          <router-link :to="{name:'me_wallet'}"  class="list-group-item with-badge">
             <i class="fa fa-angle-right"></i> My Wallet
             <span class="badge badge-warning badge-pill">NEW!</span>
           </router-link>
-          <router-link :to="{name:'me_profile'}" class="list-group-item"
-                       :class="{active: $route.name==='me_profile'}">
+          <router-link :to="{name:'me_profile'}" class="list-group-item">
             <i class="fa fa-angle-right"></i> Profile
           </router-link>
-          <router-link :to="{name:'me_settings'}" class="list-group-item"
-                       :class="{active: $route.name==='me_settings'}">
+          <router-link :to="{name:'me_settings'}" class="list-group-item">
             <i class="fa fa-angle-right"></i> Settings
           </router-link>
         </nav>
@@ -70,40 +65,33 @@
                        :class="{active: $route.name==='company_new_project' || $route.name==='company_project'}">
             <i class="fa fa-angle-right"></i> Project
           </router-link>
-          <router-link :to="{name:'company_feed'}" class="list-group-item"
-                       :class="{active: $route.name==='company_feed'}">
+          <router-link :to="{name:'company_feed'}" class="list-group-item">
             <i class="fa fa-angle-right"></i> Project Feed
           </router-link>
-          <router-link :to="{name:'company_wallet'}" class="list-group-item"
-                       :class="{active: $route.name==='company_wallet'}">
+          <router-link :to="{name:'company_wallet'}" class="list-group-item">
             <i class="fa fa-angle-right"></i> Project Wallet
           </router-link>
-          <router-link :to="{name:'company_team'}" class="list-group-item"
-                       :class="{active: $route.name==='company_team'}">
+          <router-link :to="{name:'company_team'}" class="list-group-item">
             <i class="fa fa-angle-right"></i> Project Members
           </router-link>
-          <router-link :to="{name:'company_promotion'}" class="list-group-item"
-                       :class="{active: $route.name==='company_promotion'}">
+          <router-link :to="{name:'company_promotion'}" class="list-group-item">
             <i class="fa fa-angle-right"></i> Promotion Application
           </router-link>
         </nav>
 
         <h6 class="text-muted text-normal text-uppercase mt-4" v-if="type===1">Analyst</h6>
         <nav class="list-group" v-if="type===1">
-          <router-link :to="{name:'me_analyst_apply'}" class="list-group-item with-badge"
-                       :class="{active: $route.name==='me_analyst_apply'}">
+          <router-link :to="{name:'me_analyst_apply'}" class="list-group-item with-badge">
             <i class="fa fa-angle-right"></i> Apply To Be ICOToday Analyst
             <span class="badge badge-warning badge-pill">NEW!</span>
           </router-link>
         </nav>
         <h6 class="text-muted text-normal text-uppercase mt-4" v-if="type===2">Analyst Center</h6>
         <nav class="list-group" v-if="type===2">
-          <router-link :to="{name:'analyst_rated_projects'}" class="list-group-item"
-                       :class="{active: $route.name==='analyst_rated_projects'}">
+          <router-link :to="{name:'analyst_rated_projects'}" class="list-group-item">
             <i class="fa fa-angle-right"></i> My Rated Projects
           </router-link>
-          <router-link :to="{name:'analyst_unrated_projects'}" class="list-group-item"
-                       :class="{active: $route.name==='analyst_unrated_projects'}">
+          <router-link :to="{name:'analyst_unrated_projects'}" class="list-group-item">
             <i class="fa fa-angle-right"></i> Unrated Projects
           </router-link>
         </nav>
@@ -113,8 +101,7 @@
           <a href="javascript:void(0)" @click="projectModal(my_company.project)" class="list-group-item">
             <i class="fa fa-angle-right"></i> Project
           </a>
-          <router-link :to="{name:'company_feed'}" class="list-group-item"
-                       :class="{active: $route.name==='company_feed'}">
+          <router-link :to="{name:'company_feed'}" class="list-group-item">
             <i class="fa fa-angle-right"></i> Project Feed
           </router-link>
         </nav>
