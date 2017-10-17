@@ -83,7 +83,7 @@
     <div class="comment" v-else-if="loaded && !user_feeds.length">
       <div class="media pos-relative card-new-layout">
         <div class="media-body text-center">
-          <h6>{{user.info.full_name}} has been quiet recently, try come back later?</h6>
+          <h6>{{user_info.full_name}} has been quiet recently, try come back later?</h6>
         </div>
       </div>
     </div>
@@ -155,7 +155,7 @@
       ...mapGetters({
         login_status: 'login_status',
         me: 'self',
-        user: 'user',
+        user_info: 'user_info',
         user_feeds: 'user_feeds',
       })
     },

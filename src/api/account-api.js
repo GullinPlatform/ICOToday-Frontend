@@ -50,8 +50,11 @@ export default {
   setSelfType (form_data) {
     return apiCall('put', 'me/set_type/', form_data)
   },
-  getUser (pk) {
-    return apiCall('get', pk + '/')
+  getUser (id) {
+    return apiCall('get', id + '/')
+  },
+  getUserInfo (id) {
+    return apiCall('get', id + '/info/')
   },
 
   // Verification email
@@ -97,8 +100,8 @@ export default {
   getSelfMarkedProject () {
     return apiCall('get', 'me/marked_projects/')
   },
-  getUserMarkedProject (pk) {
-    return apiCall('get', pk + '/marked_projects/')
+  getUserMarkedProject (id) {
+    return apiCall('get', id + '/marked_projects/')
   },
 
   // Search User
@@ -109,6 +112,17 @@ export default {
   // Add Interests to user
   addInterests (form_data) {
     return apiCall('post', 'me/interests/', form_data)
+  },
+
+  // Follow User
+  followUser (id) {
+    return apiCall('post', 'me/follow/' + id + '/')
+  },
+  getSelfFollowers () {
+    return apiCall('get', 'me/follow/', {}, {'followers': true})
+  },
+  getSelfFollowings () {
+    return apiCall('get', 'me/follow/')
   },
 
   // Analyst Application

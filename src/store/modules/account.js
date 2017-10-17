@@ -11,11 +11,16 @@ const state = {
   self_marked_posts: [],
   self_analyst_application: {},
   self_rated_projects: [],
+  self_followings: [],
+  self_followers: [],
 
   // loaded user
   user: {},
+  user_info: {},
   user_marked_posts: [],
   user_rated_projects: [],
+  user_followings: [],
+  user_followers: [],
 
   // other
   login_status: false,
@@ -79,6 +84,9 @@ const getters = {
 
   user: state => {
     return state.user
+  },
+  user_info: state => {
+    return state.user_info
   },
   user_marked_posts: state => {
     return state.user_marked_posts
@@ -158,8 +166,8 @@ const actions = {
       })
   },
 
-  getUser ({commit}, pk) {
-    return userApi.getUser(pk)
+  getUser ({commit}, id) {
+    return userApi.getUser(id)
       .then((response) => {
         commit(types.LOAD_USER, response)
         return Promise.resolve()
@@ -168,8 +176,18 @@ const actions = {
         return Promise.reject(error)
       })
   },
-  getUserMarkedProject ({commit}, pk) {
-    return userApi.getUserMarkedProject(pk)
+  getUserInfo ({commit}, id) {
+    return userApi.getUserInfo(id)
+      .then((response) => {
+        commit(types.LOAD_USER_INFO, response)
+        return Promise.resolve()
+      })
+      .catch((error) => {
+        return Promise.reject(error)
+      })
+  },
+  getUserMarkedProject ({commit}, id) {
+    return userApi.getUserMarkedProject(id)
       .then((response) => {
         commit(types.LOAD_USER_MARKED_PROJECT, response)
         return Promise.resolve()
@@ -356,6 +374,37 @@ const actions = {
       })
   },
 
+  followUser ({commit}, id) {
+    return userApi.followUser(id)
+      .then((response) => {
+        commit(types.FOLLOW_USER, response)
+        return Promise.resolve()
+      })
+      .catch((error) => {
+        return Promise.reject(error)
+      })
+  },
+  getSelfFollowers ({commit}) {
+    return userApi.getSelfFollowers(id)
+      .then((response) => {
+        commit(types.LOAD_SELF_FOLLOWERS, response)
+        return Promise.resolve()
+      })
+      .catch((error) => {
+        return Promise.reject(error)
+      })
+  },
+  getSelfFollowings ({commit}) {
+    return userApi.getSelfFollowings(id)
+      .then((response) => {
+        commit(types.LOAD_SELF_FOLLOWINGS, response)
+        return Promise.resolve()
+      })
+      .catch((error) => {
+        return Promise.reject(error)
+      })
+  },
+
   searchUser ({}, search_token) {
     return userApi.searchUser(search_token)
       .then((response) => {
@@ -442,6 +491,9 @@ const mutations = {
   },
   [types.LOAD_USER] (state, response) {
     state.user = response
+  },
+  [types.LOAD_USER_INFO] (state, response) {
+    state.user_info = response
   },
 
   [types.LOAD_SELF_MARKED_PROJECT] (state, response) {
