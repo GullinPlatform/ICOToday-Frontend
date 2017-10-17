@@ -122,6 +122,11 @@
       if (this.$store.getters.self_type !== 1) {
         this.$router.push({name: 'landing'})
       }
+      // redirect not verified user
+      if (!this.$store.getters.is_verified) {
+        this.$router.push({name: 'me_need_verify'})
+      }
+
       this.loaded = false
       this.$store.dispatch('getMyAnalystApplication')
         .then(() => {

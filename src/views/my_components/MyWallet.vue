@@ -102,6 +102,12 @@
         wallet: 'wallet',
       })
     },
+    beforeCreate () {
+      // redirect not verified user
+      if (!this.$store.getters.is_verified) {
+        this.$router.push({name: 'me_need_verify'})
+      }
+    },
     beforeMount () {
       this.loaded = false
       this.getWallet()

@@ -145,6 +145,12 @@
         company_members: 'current_company_members'
       })
     },
+    beforeCreate () {
+      // redirect not verified user
+      if (!this.$store.getters.is_verified) {
+        this.$router.push({name: 'me_need_verify'})
+      }
+    },
     beforeMount () {
       // redirect non ico company
       if (this.self_type !== 0) {
