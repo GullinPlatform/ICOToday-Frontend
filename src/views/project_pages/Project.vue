@@ -131,9 +131,17 @@
         </div>
 
       </div>
-      <div class="col-lg-8" v-else-if="feed_detail">
+      <div class="col-lg-8 pl-md-0" v-else-if="feed_detail">
+        <!--If user not login-->
+        <div class="card-new-layout text-center" v-if="!login_status">
+          <h4 class="mt-3">
+            <!--TODO: Need change the text-->
+            This information is reserved for our login user
+          </h4>
+          <a href="javascript:void(0)" data-toggle="modal" data-target="#signup-modal" data-dismiss="modal" class="btn btn-primary mt-2">Sign Up</a>
+        </div>
         <!--Feeds-->
-        <div class="comment" v-if="feeds_loaded">
+        <div class="comment" v-else-if="feeds_loaded">
           <div class="media pos-relative card-new-layout" v-if="!feeds.length">
             <div class="media-body text-center">
               <h5 class="m-0">No updates right now, try come back later?</h5>
@@ -144,7 +152,7 @@
                  class="d-flex rounded-circle align-self-start mr-4" width="55">
             <div class="media-body">
               <h6 class="comment-title">
-                <router-link :to="{name:'user', params:{id:feed.creator.id}}" class="text-gray-dark">
+                <router-link :to="{name:'user', params:{id:feed.creator.id}}" class="text-gray-dark" target="_blank">
                   {{feed.creator.full_name}}
                 </router-link>
                 <span class="text-muted">@ {{feed.creator.company.name}}</span>
@@ -218,8 +226,17 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-8" v-else-if="rating_derail">
-        <div class="comment" v-if="ratings_loaded">
+      <div class="col-lg-8 pl-md-0" v-else-if="rating_derail">
+        <!--If user not login-->
+        <div class="card-new-layout text-center" v-if="!login_status">
+          <h4 class="mt-3">
+            <!--TODO: Need change the text-->
+            This information is reserved for our login user
+          </h4>
+          <a href="javascript:void(0)" data-toggle="modal" data-target="#signup-modal" data-dismiss="modal" class="btn btn-primary mt-2">Sign Up</a>
+        </div>
+        <!--Ratings-->
+        <div class="comment" v-else-if="ratings_loaded">
           <div class="media pos-relative card-new-layout" v-if="!rating_details.length">
             <div class="media-body text-center">
 
@@ -271,7 +288,7 @@
                  class="d-flex rounded-circle align-self-start mr-4" width="55">
             <div class="media-body">
               <h6 class="comment-title">
-                <router-link :to="{name:'user', params:{id:detail.rater.id}}" class="text-gray-dark">
+                <router-link :to="{name:'user', params:{id:detail.rater.id}}" class="text-gray-dark" target="_blank">
                   {{detail.rater.full_name}}
                 </router-link>
                 <span class="text-muted" v-if="detail.rater.title">{{detail.rater.title}}</span>
@@ -481,6 +498,10 @@
 
       // Subscriptions
       subscribeProject () {
+        if(!this.login_status){
+          $('#signup-modal').show()
+          return
+        }
         this.$store.dispatch('markProject', this.project.id)
           .then(() => {
             this.subscribed = true
