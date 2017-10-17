@@ -9,13 +9,13 @@
         <div class="row">
           <div class="col-md-6 mb-4" v-for="member in company_members" v-if="member.type===0">
             <div class="d-table">
-              <router-link :to="{name:'user', params:{id:member.account}}">
+              <router-link :to="{name:'user', params:{id:member.id}}">
                 <img class="d-block mx-auto img-thumbnail rounded-circle d-table-cell align-middle"
                      width="100" :src="member.avatar">
               </router-link>
               <div class="pl-3 d-table-cell align-middle">
                 <h6>
-                  <router-link class="text-decoration-none text-gray-dark" :to="{name:'user', params:{id:member.account}}">{{member.full_name}}</router-link><i class="fa fa-check text-primary" v-if="member.is_verified"></i>
+                  <router-link class="text-decoration-none text-gray-dark" :to="{name:'user', params:{id:member.id}}">{{member.full_name}}</router-link><i class="fa fa-check text-primary" v-if="member.is_verified"></i>
                   <span class="text-muted text-sm mb-2">{{member.title}}</span>
                 </h6>
 
@@ -65,13 +65,13 @@
         <div class="row">
           <div class="col-md-6 mb-4" v-for="member in company_members" v-if="member.type===3">
             <div class="d-table">
-              <router-link :to="{name:'user', params:{id:member.account}}">
+              <router-link :to="{name:'user', params:{id:member.id}}">
                 <img class="d-block mx-auto img-thumbnail rounded-circle d-table-cell align-middle"
                      width="100" :src="member.avatar" alt="Team">
               </router-link>
               <div class="pl-3 d-table-cell align-middle">
                 <h6>
-                  <router-link class="text-decoration-none text-gray-dark" :to="{name:'user', params:{id:member.account}}">{{member.full_name}}</router-link><i class="fa fa-check text-primary" v-if="member.is_verified"></i>
+                  <router-link class="text-decoration-none text-gray-dark" :to="{name:'user', params:{id:member.id}}">{{member.full_name}}</router-link><i class="fa fa-check text-primary" v-if="member.is_verified"></i>
                   <span class="text-muted text-sm mb-2">{{member.title}}</span>
                 </h6>
                 <p>{{member.description}}</p>

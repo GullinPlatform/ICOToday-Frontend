@@ -48,13 +48,13 @@
                  v-for="member in team_members"
                  v-if="member.type!=3">
               <div class="d-table">
-                <router-link :to="{name:'user', params:{id:member.account}}" target="_blank">
+                <router-link :to="{name:'user', params:{id:member.id}}" target="_blank">
                   <img class="d-block mx-auto img-thumbnail rounded-circle d-table-cell align-middle"
                        width="100" :src="member.avatar">
                 </router-link>
                 <div class="pl-3 d-table-cell align-middle">
                   <h6 class="mb-0">
-                    <router-link class="text-gray-dark" :to="{name:'user', params:{id:member.account}}" target="_blank">
+                    <router-link class="text-gray-dark" :to="{name:'user', params:{id:member.id}}" target="_blank">
                       {{member.full_name}}
                     </router-link>
                     <span class="text-muted text-sm mb-2">{{member.title}}</span>
@@ -93,13 +93,13 @@
                  v-for="member in team_members"
                  v-if="member.type===3">
               <div class="d-table">
-                <router-link :to="{name:'user', params:{id:member.account}}">
+                <router-link :to="{name:'user', params:{id:member.id}}">
                   <img class="d-block mx-auto img-thumbnail rounded-circle d-table-cell align-middle"
                        width="100" :src="member.avatar">
                 </router-link>
                 <div class="pl-3 d-table-cell align-middle">
                   <h6 class="mb-0">
-                    <router-link class="text-gray-dark" :to="{name:'user', params:{id:member.account}}" target="_blank">
+                    <router-link class="text-gray-dark" :to="{name:'user', params:{id:member.id}}" target="_blank">
                       {{member.full_name}}
                     </router-link>
                     <i class="fa fa-check text-primary" v-if="member.is_verified"></i>
@@ -403,7 +403,7 @@
         <div class="card-new-layout">
           <h6 class="text-muted text-normal text-uppercase">Social Media</h6>
           <hr class="mb-2 mt-2">
-          <p class="text-center">
+          <div class="text-center">
             <a class="social-button shape-circle" :href="project.slack" v-if="project.slack"><i
               class="fa fa-slack"></i></a>
             <a class="social-button shape-circle" :href="project.twitter" v-if="project.twitter"><i
@@ -412,7 +412,7 @@
               class="socicon-telegram"></i></a>
             <a class="social-button shape-circle" :href="project.medium" v-if="project.medium"><i
               class="socicon-medium"></i></a>
-          </p>
+          </div>
         </div>
       </div>
     </div>
