@@ -692,6 +692,18 @@
 </script>
 
 <style lang="scss" scoped>
+  .table td {
+    border-top: 0 !important;
+  }
+
+  .table tr {
+    border-bottom: 1px solid #e9ecef;
+  }
+
+  .table tr:last-child {
+    border-bottom: 0 !important;
+  }
+
   a {
     text-decoration: none;
   }
