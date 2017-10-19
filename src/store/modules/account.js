@@ -256,7 +256,7 @@ const actions = {
         dispatch('getSelf')
       })
       .catch(() => {
-        commit(types.LOGOUT)
+        commit(types.REFRESH_FAILED)
       })
   },
   logIP ({commit}, form_data) {
@@ -476,6 +476,10 @@ const mutations = {
     state.login_status = false
     state.self = {}
     router.push({name: 'landing'})
+  },
+  [types.REFRESH_FAILED] (state) {
+    state.login_status = false
+    state.self = {}
   },
   [types.REGISTER_SUCCESS] (state) {
     state.login_status = true
