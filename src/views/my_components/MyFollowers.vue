@@ -2,7 +2,7 @@
   <div class="col-md-8">
     <h6 class="text-muted text-normal text-uppercase ">My Followers</h6>
     <hr class="mb-3 mt-2">
-    <div class="card-new-layout">
+    <div class="card-new-layout" v-if="loaded&&self_followers.length">
       <div class="team team-grid mt-4">
         <div class="row">
           <div class="col-md-6 mb-4" v-for="follower in self_followers">
@@ -43,6 +43,9 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="card-new-layout" v-else>
+      <h6 class="mb-0 text-center">You have no followers</h6>
     </div>
   </div>
 
@@ -92,3 +95,8 @@
     }
   }
 </script>
+<style scoped>
+  a {
+    text-decoration: none;
+  }
+</style>

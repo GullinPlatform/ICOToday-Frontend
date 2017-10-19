@@ -393,7 +393,7 @@ const actions = {
       })
   },
   getSelfFollowers ({commit}) {
-    return userApi.getSelfFollowers(id)
+    return userApi.getSelfFollowers()
       .then((response) => {
         commit(types.LOAD_SELF_FOLLOWERS, response)
         return Promise.resolve()
@@ -403,7 +403,7 @@ const actions = {
       })
   },
   getSelfFollowings ({commit}) {
-    return userApi.getSelfFollowings(id)
+    return userApi.getSelfFollowings()
       .then((response) => {
         commit(types.LOAD_SELF_FOLLOWINGS, response)
         return Promise.resolve()
@@ -497,6 +497,7 @@ const mutations = {
       router.push({name: 'register_followup'})
     }
   },
+  [types.UPDATE_SELF] () {},
   [types.LOAD_USER] (state, response) {
     state.user = response
   },
@@ -540,14 +541,17 @@ const mutations = {
     state.resend_email_until = moment().add(1, 'minutes')
   },
 
+  // follow
   [types.FOLLOW_USER] (state, response) {
     state.self_followings.unshift(response)
   },
 
-  [types.LOAD_SELF_FOLLOWERS] (state) {
-    state.resend_email_until = moment().add(1, 'minutes')
+  [types.LOAD_SELF_FOLLOWINGS] (state, response) {
+    state.self_followings = response
   },
-
+  [types.LOAD_SELF_FOLLOWERS] (state, response) {
+    state.self_followers = response
+  }
 }
 
 export default {

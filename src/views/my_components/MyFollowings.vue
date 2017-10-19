@@ -2,8 +2,8 @@
   <div class="col-md-8">
     <h6 class="text-muted text-normal text-uppercase ">My Followings</h6>
     <hr class="mb-3 mt-2">
-    <div class="card-new-layout">
-      <div class="team team-grid mt-4">
+    <div class="card-new-layout" v-if="loaded&&self_followings.length">
+      <div class="team team-grid">
         <div class="row">
           <div class="col-md-6 mb-4" v-for="following in self_followings">
             <div class="d-table">
@@ -43,6 +43,9 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="card-new-layout" v-else>
+      <h6 class="mb-0 text-center">You are not following anyone</h6>
     </div>
   </div>
 
@@ -92,3 +95,8 @@
     }
   }
 </script>
+<style scoped>
+  a {
+    text-decoration: none;
+  }
+</style>

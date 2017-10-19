@@ -35,7 +35,7 @@
                   <i class="fa fa-telegram"></i>
                 </a>
               </div>
-              <button class="btn btn-danger btn-sm btn-block">Follow</button>
+              <button class="btn btn-danger btn-sm btn-block" @click="followUser()">Follow</button>
             </div>
           </div>
         </aside>
@@ -97,6 +97,12 @@
             })
         }
       },
+      followUser () {
+        this.$store.dispatch('followUser', this.$route.params.id)
+          .then(() => {
+            this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'Your start following ' + this.user_info.full_name})
+          })
+      }
     },
     computed: {
       ...mapGetters({
