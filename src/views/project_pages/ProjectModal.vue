@@ -38,6 +38,12 @@
                 <hr class="mb-3 mt-2">
                 <vue-markdown class="text-left" :source="project.description_full"></vue-markdown>
               </div>
+              <!--Token Sale Plan-->
+              <div class="card-new-layout" v-if="project.token_sale_plan">
+                <h6 class="text-muted text-normal text-uppercase">Token Sale Plan</h6>
+                <hr class="mb-3 mt-2">
+                <div class="text-left">{{project.token_sale_plan}}</div>
+              </div>
               <!--Team-->
               <div class="card-new-layout">
                 <h6 class="text-muted text-normal text-uppercase">Team Members</h6>
@@ -381,23 +387,33 @@
                   </tr>
                   <tr>
                     <td class="pl-1">Token Name</td>
-                    <td class="text-bold">{{project.coin_name}}</td>
+                    <td class="text-bold" v-if="project.coin_name">{{project.coin_name}}</td>
+                    <td class="text-bold" v-else>-</td>
+                  </tr>
+                  <tr>
+                    <td class="pl-1">Initial Price</td>
+                    <td class="text-bold" v-if="project.initial_price">$ {{project.initial_price}}</td>
+                    <td class="text-bold" v-else>-</td>
                   </tr>
                   <tr>
                     <td class="pl-1">Soft Cap</td>
-                    <td class="text-bold">{{project.minimum_goal}} {{project.coin_unit}}</td>
+                    <td class="text-bold" v-if="project.minimum_goal&&project.coin_unit">{{project.minimum_goal}} {{project.coin_unit}}</td>
+                    <td class="text-bold" v-else>-</td>
                   </tr>
                   <tr>
                     <td class="pl-1">Hard Cap</td>
-                    <td class="text-bold">{{project.maximum_goal}} {{project.coin_unit}}</td>
+                    <td class="text-bold" v-if="project.maximum_goal&&project.coin_unit">{{project.maximum_goal}} {{project.coin_unit}}</td>
+                    <td class="text-bold" v-else>-</td>
                   </tr>
                   <tr>
                     <td class="pl-1">Tokens for Sale</td>
-                    <td class="text-bold">{{project.equality_on_offer}}%</td>
+                    <td class="text-bold" v-if="project.equality_on_offer">{{project.equality_on_offer}}%</td>
+                    <td class="text-bold" v-else>-</td>
                   </tr>
                   <tr>
                     <td class="pl-1">Accepting</td>
-                    <td class="text-bold">{{project.coin_unit}}</td>
+                    <td class="text-bold" v-if="project.coin_unit">{{project.coin_unit}}</td>
+                    <td class="text-bold" v-else>-</td>
                   </tr>
                   </tbody>
                 </table>
@@ -511,7 +527,7 @@
             this.$store.dispatch('toastr', {
               type: 'success',
               title: 'Success',
-              message: 'The selected ICO is added to your subscription list, you\'ll receive free updates from now on'
+              message: 'The selected ICO is added to your subscription list, you\'ll receive updates from now on'
             })
           })
       },
@@ -535,7 +551,6 @@
         }
         this.$store.dispatch('replyFeed', form_data)
           .then(() => {
-            this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'You have projected new comment!'})
             this.new_reply = ''
             // UI Control
             this.reply_feed_box_show = false

@@ -39,6 +39,12 @@
           <hr class="mb-3 mt-2">
           <vue-markdown class="text-left" :source="project.description_full"></vue-markdown>
         </div>
+        <!-- Token Sale Plan-->
+        <div class="card-new-layout" v-if="project.token_sale_plan">
+          <h6 class="text-muted text-normal text-uppercase">Token Sale Plan</h6>
+          <hr class="mb-3 mt-2">
+          <div class="text-left">{{project.token_sale_plan}}</div>
+        </div>
         <!--Team-->
         <div class="card-new-layout">
           <h6 class="text-muted text-normal text-uppercase">Team Members</h6>
@@ -129,9 +135,8 @@
             </div>
           </div>
         </div>
-
       </div>
-      <div class="col-lg-8 pl-md-0" v-else-if="feed_detail">
+      <div class="col-lg-8" v-else-if="feed_detail">
         <!--If user not login-->
         <div class="card-new-layout text-center" v-if="!login_status">
           <h4 class="mt-3">
@@ -226,7 +231,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-8 pl-md-0" v-else-if="rating_derail">
+      <div class="col-lg-8" v-else-if="rating_derail">
         <!--If user not login-->
         <div class="card-new-layout text-center" v-if="!login_status">
           <h4 class="mt-3">
@@ -303,7 +308,7 @@
         </div>
       </div>
       <div class="col-lg-4">
-        <!--Score-->
+        <!-- Score -->
         <div class="card-new-layout">
           <h6 class="text-muted text-normal text-uppercase">Rating
             <router-link :to="{name:'terms', query:{type:'rating'}}">
@@ -340,7 +345,7 @@
             <button class="btn btn-danger btn-sm" @click="autoInvest()" v-if="timeNotEnd(project.start_datetime, project.end_datetime)"><i class="fa fa-bitcoin"></i> INVEST NOW</button>
           </div>
         </div>
-        <!--Updates-->
+        <!-- Updates -->
         <div class="card-new-layout widget-featured-posts">
           <h6 class="text-muted text-normal text-uppercase">
             Updates
@@ -383,28 +388,38 @@
             </tr>
             <tr>
               <td class="pl-1">Token Name</td>
-              <td class="text-bold">{{project.coin_name}}</td>
+              <td class="text-bold" v-if="project.coin_name">{{project.coin_name}}</td>
+              <td class="text-bold" v-else>-</td>
+            </tr>
+            <tr>
+              <td class="pl-1">Initial Price</td>
+              <td class="text-bold" v-if="project.initial_price">$ {{project.initial_price}}</td>
+              <td class="text-bold" v-else>-</td>
             </tr>
             <tr>
               <td class="pl-1">Soft Cap</td>
-              <td class="text-bold">{{project.minimum_goal}} {{project.coin_unit}}</td>
+              <td class="text-bold" v-if="project.minimum_goal&&project.coin_unit">{{project.minimum_goal}} {{project.coin_unit}}</td>
+              <td class="text-bold" v-else>-</td>
             </tr>
             <tr>
               <td class="pl-1">Hard Cap</td>
-              <td class="text-bold">{{project.maximum_goal}} {{project.coin_unit}}</td>
+              <td class="text-bold" v-if="project.maximum_goal&&project.coin_unit">{{project.maximum_goal}} {{project.coin_unit}}</td>
+              <td class="text-bold" v-else>-</td>
             </tr>
             <tr>
               <td class="pl-1">Tokens for Sale</td>
-              <td class="text-bold">{{project.equality_on_offer}}%</td>
+              <td class="text-bold" v-if="project.equality_on_offer">{{project.equality_on_offer}}%</td>
+              <td class="text-bold" v-else>-</td>
             </tr>
             <tr>
               <td class="pl-1">Accepting</td>
-              <td class="text-bold">{{project.coin_unit}}</td>
+              <td class="text-bold" v-if="project.coin_unit">{{project.coin_unit}}</td>
+              <td class="text-bold" v-else>-</td>
             </tr>
             </tbody>
           </table>
         </div>
-        <!--Link-->
+        <!-- Link -->
         <div class="card-new-layout">
           <h6 class="text-muted text-normal text-uppercase">Link</h6>
           <hr class="mb-3 mt-2">
@@ -508,7 +523,7 @@
             this.$store.dispatch('toastr', {
               type: 'success',
               title: 'Success',
-              message: 'The selected ICO is added to your subscription list, you\'ll receive free updates from now on'
+              message: 'The selected ICO is added to your subscription list, you\'ll receive updates from now on'
             })
           })
       },
@@ -532,7 +547,6 @@
         }
         this.$store.dispatch('replyFeed', form_data)
           .then(() => {
-            this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'You have projected new comment!'})
             this.new_reply = ''
             // UI Control
             this.reply_feed_box_show = false
