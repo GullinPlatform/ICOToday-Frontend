@@ -205,8 +205,10 @@
                      class="d-flex rounded-circle align-self-start mr-4"
                      width="55">
                 <div class="media-body">
-                  <h6 class="comment-title">{{reply.creator.full_name}}
-                    <!--<span class="badge badge-primary" v-if="is_team_member">Team Member</span>-->
+                  <h6 class="comment-title">
+                    <router-link :to="{name:'user', params:{id:reply.creator.id}}" class="text-gray-dark" target="_blank">
+                      {{feed.creator.full_name}}
+                    </router-link>
                   </h6>
                   <p class="mb-1">{{reply.content}}</p>
                   <p class="mb-0">
