@@ -14,8 +14,6 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   plugins: [PersistedState()],
-  // state,
-  // actions
   modules: {
     account,
     company,

@@ -25,6 +25,7 @@ const state = {
   // other
   login_status: false,
   resend_email_until: '',
+  analysts: []
 }
 
 // getters
@@ -80,6 +81,13 @@ const getters = {
   },
   self_rated_projects: state => {
     return state.self_rated_projects
+  },
+
+  self_followings: state => {
+    return state.self_followings
+  },
+  self_followers: state => {
+    return state.self_followers
   },
 
   user: state => {
@@ -411,7 +419,7 @@ const actions = {
         return Promise.resolve(response)
       })
       .catch((error) => {
-
+        return Promise.reject(error)
       })
   },
 
@@ -421,7 +429,7 @@ const actions = {
         return Promise.resolve()
       })
       .catch((error) => {
-
+        return Promise.reject(error)
       })
   },
 
@@ -467,6 +475,7 @@ const mutations = {
   [types.LOGOUT] (state) {
     state.login_status = false
     state.self = {}
+    router.push({name: 'landing'})
   },
   [types.REGISTER_SUCCESS] (state) {
     state.login_status = true
@@ -480,7 +489,6 @@ const mutations = {
   [types.REFRESH_SUCCESS] (state, response) {
     state.login_status = true
   },
-  [types.LOG_IP] (state) {},
 
   // load data
   [types.LOAD_SELF] (state, response) {
@@ -510,8 +518,6 @@ const mutations = {
     state.white_list_email = ''
   },
 
-  [types.UPDATE_SELF] (state) {},
-
   [types.GET_SELF_ANALYST_APPLICATION] (state, response) {
     state.self_analyst_application = response
   },
@@ -533,6 +539,15 @@ const mutations = {
   [types.SET_RESEND_EMAIL_TIME_LIMIT] (state) {
     state.resend_email_until = moment().add(1, 'minutes')
   },
+
+  [types.FOLLOW_USER] (state, response) {
+    state.self_followings.unshift(response)
+  },
+
+  [types.LOAD_SELF_FOLLOWERS] (state) {
+    state.resend_email_until = moment().add(1, 'minutes')
+  },
+
 }
 
 export default {

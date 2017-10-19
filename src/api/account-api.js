@@ -119,10 +119,21 @@ export default {
     return apiCall('post', 'me/follow/' + id + '/')
   },
   getSelfFollowers () {
-    return apiCall('get', 'me/follow/', {}, {'followers': true})
+    return apiCall('get', 'me/followers/')
   },
   getSelfFollowings () {
-    return apiCall('get', 'me/follow/')
+    return apiCall('get', 'me/followings/')
+  },
+  getUserFollowers (id) {
+    return apiCall('get', id + '/followers/')
+  },
+  getUserFollowings (id) {
+    return apiCall('get', id + '/followings/')
+  },
+
+  // Load analysts
+  getAnalysts () {
+    return apiCall('get', 'analysts/')
   },
 
   // Analyst Application

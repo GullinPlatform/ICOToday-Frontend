@@ -18,6 +18,9 @@ import MyMarkedProjects from 'views/my_components/MyMarkedProjects'
 import MyProfile from 'views/my_components/MyProfile'
 import MySettings from 'views/my_components/MySettings'
 import MyWallet from 'views/my_components/MyWallet'
+import MyFollowers from 'views/my_components/MyFollowers'
+import MyFollowings from 'views/my_components/MyFollowings'
+
 import NeedVerify from 'views/my_components/NeedVerify'
 
 import CompanyFeed from 'views/my_components/CompanyFeed'
@@ -90,6 +93,14 @@ export default new Router({
           path: '/me/wallet',
           component: MyWallet,
           name: 'me_wallet'
+        },  {
+          path: '/me/followers',
+          component: MyFollowers,
+          name: 'me_followers'
+        },  {
+          path: '/me/followings',
+          component: MyFollowings,
+          name: 'me_followings'
         }, {
           path: '/me/company/newproject',
           component: CompanyNewProject,
