@@ -4,7 +4,7 @@
     <hr class="mb-3 mt-2">
     <div class="checkout-steps">
       <a :class="{active:step===4}" href="javascript:void(0)" @click="step=4">
-        <span class="fa fa-check-circle-o text-success" v-show="step>4"></span> 4. Social Media
+        <span class="fa fa-check-circle-o text-success" v-show="step>4"></span> 4. Team Members
       </a>
       <a :class="{active:step===3}" href="javascript:void(0)" @click="step=3"><span class="angle"></span>
         <span class="fa fa-check-circle-o text-success" v-show="step>3"></span> 3. Supplement
@@ -86,12 +86,20 @@
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Full  Description<span class="text-danger">*</span></label>
+        <label class="col-sm-2 col-form-label">Full Description<span class="text-danger">*</span></label>
         <div class="col-sm-10">
             <textarea class="form-control" v-model="description_full"
                       placeholder="( Markdown Support Enabled )" rows="10"></textarea>
         </div>
       </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Token Sale Plan</label>
+        <div class="col-sm-10">
+            <textarea class="form-control" v-model="token_sale_plan"
+                      placeholder="( Markdown Support Enabled )" rows="10"></textarea>
+        </div>
+      </div>
+
     </div>
     <div class="card-new-layout" v-show="step===2">
       <h6 class="text-muted text-normal text-uppercase ">ICO Detail</h6>
@@ -110,6 +118,13 @@
         <label class="col-sm-2 col-form-label">Token Name </label>
         <div class="col-sm-10">
           <input class="form-control" v-model="coin_name" placeholder="Token Name" type="text">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Initial Price</label>
+        <div class="col-sm-10">
+          <input class="form-control" placeholder="Price in US Dollars" v-model="initial_price"
+                 type="number">
         </div>
       </div>
       <div class="form-group row">
@@ -198,8 +213,6 @@
                  placeholder="https://example.com">
         </div>
       </div>
-    </div>
-    <div class="card-new-layout" v-show="step===4">
       <h6 class="text-muted text-normal text-uppercase ">Social Media</h6>
       <hr class="mb-3 mt-2">
       <div class="form-group row">
@@ -225,6 +238,119 @@
         <label class="col-sm-2 col-form-label">Telegram</label>
         <div class="col-sm-10">
           <input class="form-control" v-model="telegram" type="text">
+        </div>
+      </div>
+    </div>
+    <div class="card-new-layout" v-show="step===4">
+      <h6 class="text-muted text-normal text-uppercase ">Add Project members</h6>
+      <hr class="mb-3 mt-2">
+      <div class="team team-grid mt-4">
+        <div class="row">
+          <div class="col-md-6 mb-4" v-for="member in company_members" v-if="member.type===0">
+            <div class="d-table">
+              <router-link :to="{name:'user', params:{id:member.id}}">
+                <img class="d-block mx-auto img-thumbnail rounded-circle d-table-cell align-middle"
+                     width="100" :src="member.avatar">
+              </router-link>
+              <div class="pl-3 d-table-cell align-middle">
+                <h6 class="mb-0">
+                  <router-link class="text-gray-dark" :to="{name:'user', params:{id:member.id}}" target="_blank">
+                    {{member.full_name}}
+                  </router-link>
+                  <i class="fa fa-check text-primary" v-if="member.is_verified"></i>
+                </h6>
+                <span class="text-muted text-sm mb-2">{{member.title}}</span>
+                <p>{{member.description}}</p>
+                <div class="social-bar">
+                  <a :href="member.facebook" class="social-link branding-facebook"
+                     v-if="member.facebook">
+                    <i class="fa fa-facebook"></i>
+                  </a>
+                  <a :href="member.twitter" class="social-link branding-twitter"
+                     v-if="member.twitter">
+                    <i class="fa fa-twitter"></i>
+                  </a>
+                  <a :href="member.linkedin" class="social-link branding-linkedin"
+                     v-if="member.linkedin">
+                    <i class="fa fa-linkedin-square"></i>
+                  </a>
+                  <a :href="member.telegram" class="social-link branding-linkedin"
+                     v-if="member.telegram">
+                    <i class="fa fa-telegram"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-4">
+            <div class="d-table">
+              <a href="javascript:void(0)" @click="popUpModal(false)">
+                <img class="rounded-circle mb-2" height="100" width="100"
+                     src="../../../static/img/services/add.png" alt="Team Member">
+              </a>
+              <div class="pl-3 d-table-cell align-middle">
+                <h6>
+                  Add New Member
+                </h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h6 class="text-muted text-normal text-uppercase ">Add Project Advisors</h6>
+      <hr class="mb-3 mt-2">
+      <div class="team team-grid mt-4">
+        <div class="row">
+          <div class="col-md-6 mb-4" v-for="member in company_members" v-if="member.type===3">
+            <div class="d-table">
+              <router-link :to="{name:'user', params:{id:member.id}}">
+                <img class="d-block mx-auto img-thumbnail rounded-circle d-table-cell align-middle"
+                     width="100" :src="member.avatar" alt="Team">
+              </router-link>
+              <div class="pl-3 d-table-cell align-middle">
+                <h6 class="mb-0">
+                  <router-link class="text-gray-dark" :to="{name:'user', params:{id:member.id}}" target="_blank">
+                    {{member.full_name}}
+                  </router-link>
+                  <i class="fa fa-check text-primary" v-if="member.is_verified"></i>
+                </h6>
+                <span class="text-muted text-sm mb-2">{{member.title}}</span>
+                <p>{{member.description}}</p>
+                <div class="social-bar">
+                  <a :href="member.facebook" class="social-link branding-facebook"
+                     v-if="member.facebook">
+                    <i class="fa fa-facebook"></i>
+                  </a>
+                  <a :href="member.twitter" class="social-link branding-twitter"
+                     v-if="member.twitter">
+                    <i class="fa fa-twitter"></i>
+                  </a>
+                  <a :href="member.linkedin" class="social-link branding-linkedin"
+                     v-if="member.linkedin">
+                    <i class="fa fa-linkedin-square"></i>
+                  </a>
+                  <a :href="member.telegram" class="social-link branding-linkedin"
+                     v-if="member.telegram">
+                    <i class="fa fa-telegram"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-4">
+            <div class="d-table">
+              <a href="javascript:void(0)" @click="popUpModal(true)">
+                <img class="rounded-circle mb-2" height="100" width="100"
+                     src="../../../static/img/services/add.png" alt="Team Advisor">
+              </a>
+              <div class="pl-3 d-table-cell align-middle">
+                <h6>
+                  Add New Advisor
+                </h6>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -291,9 +417,12 @@
         category: '',
         description_short: '',
         description_full: '',
+        token_sale_plan: '',
+
         // ICO info
         type: '',
         coin_name: '',
+        initial_price: '',
         minimum_goal: '',
         maximum_goal: '',
         coin_unit: '',
@@ -302,10 +431,12 @@
         ratio: '',
         equality_on_offer: '',
         accept: '',
+
         // Supplement
         white_paper: '',
         video_link: 'https://youtube.com/embed/',
         website: '',
+
         // Social Media
         medium: '',
         twitter: '',
@@ -315,9 +446,6 @@
       }
     },
     methods: {
-      nextStep () {
-
-      },
       createNewProject () {
         // return if required fields left empty
         if (!(this.description_short && this.icon && this.category
@@ -389,6 +517,11 @@
         this.$refs.icon.changeScale(scale)
         this.icon = this.$refs.icon.getImageScaled()
       },
+      popUpModal (is_advisor) {
+        /* global $:true */
+        this.$store.dispatch('setIsAdvisor', is_advisor)
+        $('#add-member-modal').modal('show')
+      }
     },
     beforeCreate () {
       // redirect not verified user
@@ -404,7 +537,8 @@
         self_type: 'self_type',
         my_company: 'self_company',
         my_admin: 'self_company',
-        current_company: 'current_company'
+        current_company: 'current_company',
+        company_members: 'current_company_members'
       })
     },
     beforeMount () {
@@ -422,6 +556,7 @@
           this.has_project = !!this.current_company.project
           // if does not have project
           if (!this.has_project) {
+            this.$store.dispatch('getCompanyMembers', this.my_company.id)
             this.loaded = true
           }
           else {
@@ -435,4 +570,7 @@
 <style scoped>
   @import url("/static/css/glyphicons.css");
 
+  a {
+    text-decoration: none;
+  }
 </style>
