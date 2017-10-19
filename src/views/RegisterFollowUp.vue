@@ -11,22 +11,19 @@
               <div class="d-flex w-100 justify-content-between">
                 <h4>I'm an Investor</h4>
               </div>
-              <p>Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-              <small class="opacity-60">Donec id elit non mi porta.</small>
+
             </a>
             <a class="list-group-item flex-column align-items-start" :class="{active:account_type===0}" href="javascript:void(0)" @click="account_type=0">
               <div class="d-flex w-100 justify-content-between">
-                <h4>I'm an ICO Company</h4>
+                <h4>I'm a Company Launching an ICO</h4>
               </div>
-              <p>Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-              <small class="opacity-60">Donec id elit non mi porta.</small>
+
             </a>
             <a class="list-group-item flex-column align-items-start" :class="{active:account_type===2}" href="javascript:void(0)" @click="account_type=2">
               <div class="d-flex w-100 justify-content-between">
                 <h4>I'm an Analyst</h4>
               </div>
-              <p>Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-              <small class="opacity-60">Donec id elit non mi porta.</small>
+            
             </a>
           </div>
         </div>

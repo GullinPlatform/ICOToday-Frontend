@@ -33,6 +33,7 @@
               </div>
             </div>
           </div>
+
           <div class="row" v-else>
             <div class="col-md-12 text-center">
               <h1 class="text-white text-bold mb-2">
