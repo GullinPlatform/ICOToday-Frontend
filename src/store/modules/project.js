@@ -5,12 +5,15 @@ import * as types from '../mutation-types'
 const state = {
   projects: [],
   promo_projects: [],
-  current_project_search_result: {},
+
   current_project: {},
+  current_project_search_result: {},
   current_project_rating_detail: [],
+  current_project_subscribers:[],
+
   unrated_projects: [],
   tags: [],
-  project_stat: {}
+  project_stat: {},
 }
 
 const getters = {
@@ -23,6 +26,10 @@ const getters = {
   current_project_search_result: state => {
     return state.current_project_search_result
   },
+  current_project_subscribers: state => {
+    return state.current_project_subscribers
+  },
+
   projects: state => {
     return state.projects
   },
@@ -62,8 +69,8 @@ const actions = {
         return Promise.reject(error)
       })
   },
-  getProject ({commit}, pk) {
-    return projectApi.getProject(pk)
+  getProject ({commit}, id) {
+    return projectApi.getProject(id)
       .then((response) => {
         commit(types.GET_PROJECT, response)
         return Promise.resolve(response)
@@ -72,7 +79,16 @@ const actions = {
         return Promise.reject(error)
       })
   },
-
+  getProjectSubscribers ({commit}, id) {
+    return projectApi.getProjectSubscribers(id)
+      .then((response) => {
+        commit(types.GET_PROJECT_SUBSCRIBERS, response)
+        return Promise.resolve(response)
+      })
+      .catch((error) => {
+        return Promise.reject(error)
+      })
+  },
   getProjectStat ({commit}, formData) {
     return projectApi.projectStat(formData)
       .then((response) => {
@@ -243,6 +259,10 @@ const mutations = {
     state.current_project_rating_detail.unshift(response)
   },
   [types.UPDATE_PROJECT_RATING_DETAIL] (state, response) {},
+  [types.GET_PROJECT_SUBSCRIBERS] (state, response) {
+    state.current_project_subscribers = response
+  },
+
 }
 
 export default {

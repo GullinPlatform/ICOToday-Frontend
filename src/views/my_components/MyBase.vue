@@ -74,6 +74,9 @@
           <router-link :to="{name:'company_feed'}" class="list-group-item">
             <i class="fa fa-angle-right"></i> Project Feed
           </router-link>
+          <router-link :to="{name:'company_subscribers'}" class="list-group-item">
+            <i class="fa fa-angle-right"></i> Project Subscribers
+          </router-link>
           <router-link :to="{name:'company_wallet'}" class="list-group-item">
             <i class="fa fa-angle-right"></i> Project Wallet
           </router-link>

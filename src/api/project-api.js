@@ -57,7 +57,6 @@ export default {
   },
 
   getAllProjectTags () {
-    1
     return apiCall('get', '/tags/')
   },
 
@@ -71,4 +70,7 @@ export default {
     return apiCall('put', form_data.id + '/rate/', form_data)
   },
 
+  getProjectSubscribers(id) {
+    return apiCall('get', id + '/subs/')
+  }
 }

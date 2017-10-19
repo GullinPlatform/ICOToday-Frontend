@@ -29,6 +29,7 @@ import CompanyProject from 'views/my_components/CompanyProject'
 import CompanyTeam from 'views/my_components/CompanyTeam'
 import CompanyWallet from 'views/my_components/CompanyWallet'
 import CompanyPromotion from 'views/my_components/CompanyPromotion'
+import CompanySubscribers from 'views/my_components/CompanySubscribers'
 
 import ExpertRatedProjects from 'views/my_components/ExpertRatedProjects'
 import ExpertUnRatedProjects from 'views/my_components/ExpertUnRatedProjects'
@@ -93,11 +94,11 @@ export default new Router({
           path: '/me/wallet',
           component: MyWallet,
           name: 'me_wallet'
-        },  {
+        }, {
           path: '/me/followers',
           component: MyFollowers,
           name: 'me_followers'
-        },  {
+        }, {
           path: '/me/followings',
           component: MyFollowings,
           name: 'me_followings'
@@ -125,6 +126,10 @@ export default new Router({
           path: '/me/company/promotion',
           component: CompanyPromotion,
           name: 'company_promotion'
+        }, {
+          path: '/me/company/subscribers',
+          component: CompanySubscribers,
+          name: 'company_subscribers'
         }, {
           path: '/me/unverified',
           component: NeedVerify,
