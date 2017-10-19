@@ -258,7 +258,7 @@
               this.$store.dispatch('toastr', {
                 type: 'success',
                 title: 'Success',
-                message: 'The selected ICO is added to your subscription list, you\'ll receive free updates from now on'
+                message: 'The selected ICO is added to your subscription list, you\'ll receive updates from now on'
               })
             } else {
               this.$store.dispatch('toastr', {

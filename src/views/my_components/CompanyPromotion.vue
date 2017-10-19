@@ -23,16 +23,22 @@
           <p class="col-sm-2 col-form-label">Duration<span class="text-danger text-small">*</span></p>
           <div class="col-sm-10">
             <select class="form-control" v-model="duration">
-              <option value="7">1 Week - 1 BTC</option>
-              <option value="14">2 Weeks - 1.5 BTCs</option>
-              <option value="28">4 Weeks - 2 BTCs</option>
+              <option value="7">1 Week - 10 ETHs</option>
+              <option value="14">2 Weeks - 15 ETHs</option>
+              <option value="28">4 Weeks - 20 ETHs</option>
             </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <p class="col-sm-2 col-form-label">Eth wallet address<span class="text-danger text-small">*</span></p>
+          <div class="col-sm-10">
+            <input class="form-control" v-model="eth_wallet_address" placeholder="This helps us to make sure where we get payment from"/>
           </div>
         </div>
         <div class="form-group row">
           <p class="col-sm-2 col-form-label">Detail<span class="text-danger text-small">*</span></p>
           <div class="col-sm-10">
-            <textarea class="form-control" v-model="detail" placeholder="( Markdown Support Enabled )" rows="20"></textarea>
+            <textarea class="form-control" v-model="detail" placeholder="Provide a detailed analysis of why you would like to be listed as one of our promoted ICOs. We only promote the best ICOs on our platform." rows="20"></textarea>
           </div>
         </div>
         <div class="form-group row justify-content-end">
@@ -52,9 +58,16 @@
           <span class="col-sm-2 col-form-label">Duration<span class="text-danger text-small">*</span></span>
           <div class="col-sm-10">
             <select class="form-control" v-model="duration" :disabled="!edit">
-              <option value="1">1 Day</option>
-              <option value="7">1 Week</option>
+              <option value="7">1 Week - 10 ETHs</option>
+              <option value="14">2 Weeks - 15 ETHs</option>
+              <option value="28">4 Weeks - 20 ETHs</option>
             </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <p class="col-sm-2 col-form-label">Eth wallet address<span class="text-danger text-small">*</span></p>
+          <div class="col-sm-10">
+            <input class="form-control" v-model="eth_wallet_address" :disabled="!edit" placeholder="This helps us to make sure where we get payment from"/>
           </div>
         </div>
         <div class="form-group row">
@@ -94,7 +107,8 @@
         exists: false,
         error_message: '',
 
-        duration: '1',
+        duration: '7',
+        eth_wallet_address: '',
         detail: ''
       }
     },
@@ -111,6 +125,7 @@
             this.loaded = true
             this.exists = true
             this.duration = this.promotion_application.duration
+            this.eth_wallet_address = this.promotion_application.eth_wallet_address
             this.detail = this.promotion_application.detail
           })
           .catch(() => {
@@ -122,6 +137,7 @@
         this.uploading = true
         const form_data = {
           duration: this.duration,
+          eth_wallet_address: this.eth_wallet_address,
           detail: this.detail
         }
         this.$store.dispatch('submitPromotionApplication', form_data)
@@ -129,6 +145,7 @@
             this.uploading = false
             this.exists = true
             this.duration = this.promotion_application.duration
+            this.eth_wallet_address = this.promotion_application.eth_wallet_address
             this.detail = this.promotion_application.detail
             this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'Your promotion application is submitted!'})
           })

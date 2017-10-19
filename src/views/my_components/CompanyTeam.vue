@@ -3,7 +3,7 @@
     <h6 class="text-muted text-normal text-uppercase ">Members</h6>
     <hr class="mb-3 mt-2">
     <div class="card-new-layout">
-      <h6 class="text-muted text-normal text-uppercase ">Team members</h6>
+      <h6 class="text-muted text-normal text-uppercase ">Project members</h6>
       <hr class="mb-3 mt-2">
       <div class="team team-grid mt-4">
         <div class="row">
@@ -14,11 +14,13 @@
                      width="100" :src="member.avatar">
               </router-link>
               <div class="pl-3 d-table-cell align-middle">
-                <h6>
-                  <router-link class="text-decoration-none text-gray-dark" :to="{name:'user', params:{id:member.id}}">{{member.full_name}}</router-link><i class="fa fa-check text-primary" v-if="member.is_verified"></i>
-                  <span class="text-muted text-sm mb-2">{{member.title}}</span>
+                <h6 class="mb-0">
+                  <router-link class="text-gray-dark" :to="{name:'user', params:{id:member.id}}" target="_blank">
+                    {{member.full_name}}
+                  </router-link>
+                  <i class="fa fa-check text-primary" v-if="member.is_verified"></i>
                 </h6>
-
+                <span class="text-muted text-sm mb-2">{{member.title}}</span>
                 <p>{{member.description}}</p>
                 <div class="social-bar">
                   <a :href="member.facebook" class="social-link branding-facebook"
@@ -59,7 +61,7 @@
     </div>
 
     <div class="card-new-layout">
-      <h6 class="text-muted text-normal text-uppercase ">Team Advisors</h6>
+      <h6 class="text-muted text-normal text-uppercase ">Project Advisors</h6>
       <hr class="mb-3 mt-2">
       <div class="team team-grid mt-4">
         <div class="row">
@@ -70,10 +72,13 @@
                      width="100" :src="member.avatar" alt="Team">
               </router-link>
               <div class="pl-3 d-table-cell align-middle">
-                <h6>
-                  <router-link class="text-decoration-none text-gray-dark" :to="{name:'user', params:{id:member.id}}">{{member.full_name}}</router-link><i class="fa fa-check text-primary" v-if="member.is_verified"></i>
-                  <span class="text-muted text-sm mb-2">{{member.title}}</span>
+                <h6 class="mb-0">
+                  <router-link class="text-gray-dark" :to="{name:'user', params:{id:member.id}}" target="_blank">
+                    {{member.full_name}}
+                  </router-link>
+                  <i class="fa fa-check text-primary" v-if="member.is_verified"></i>
                 </h6>
+                <span class="text-muted text-sm mb-2">{{member.title}}</span>
                 <p>{{member.description}}</p>
                 <div class="social-bar">
                   <a :href="member.facebook" class="social-link branding-facebook"
@@ -112,7 +117,6 @@
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -161,3 +165,11 @@
     }
   }
 </script>
+
+<style scoped>
+  a {
+    text-decoration: none;
+  }
+
+</style>
+

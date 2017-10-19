@@ -14,7 +14,7 @@
         Hard Cap
       </div>
       <div class="column project-data">
-        Tokens On Sale
+        % Tokens On Sale
       </div>
     </div>
     <spinner v-if="!loaded" class="mt-3"></spinner>
@@ -56,7 +56,7 @@
       </div>
     </div>
     <div class="project-list" v-else-if="loaded && !projects.length">
-     <h6 class="text-center m-4">No matched projects</h6>
+     <h6 class="text-center m-4">No projects to show</h6>
     </div>
   </div>
 </template>
@@ -160,7 +160,7 @@
               this.$store.dispatch('toastr', {
                 type: 'success',
                 title: 'Success',
-                message: 'The selected ICO is added to your subscription list, you\'ll receive free updates from now on'
+                message: 'The selected ICO is added to your subscription list, you\'ll receive updates from now on'
               })
             } else {
               this.$store.dispatch('toastr', {

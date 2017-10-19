@@ -51,6 +51,12 @@
             <i class="fa fa-angle-right"></i> My Wallet
             <span class="badge badge-warning badge-pill">NEW!</span>
           </router-link>
+          <router-link :to="{name:'me_followings'}" class="list-group-item">
+            <i class="fa fa-angle-right"></i> My Followings
+          </router-link>
+          <router-link :to="{name:'me_followers'}" class="list-group-item">
+            <i class="fa fa-angle-right"></i> My Followers
+          </router-link>
           <router-link :to="{name:'me_profile'}" class="list-group-item">
             <i class="fa fa-angle-right"></i> Profile
           </router-link>
