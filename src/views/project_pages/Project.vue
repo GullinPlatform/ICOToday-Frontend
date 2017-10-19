@@ -63,9 +63,9 @@
                     <router-link class="text-gray-dark" :to="{name:'user', params:{id:member.id}}" target="_blank">
                       {{member.full_name}}
                     </router-link>
-                    <span class="text-muted text-sm mb-2">{{member.title}}</span>
+                    <i class="fa fa-check text-primary" v-if="member.is_verified"></i>
                   </h6>
-                  <i class="fa fa-check text-primary" v-if="member.is_verified"></i>
+                  <span class="text-muted text-sm mb-2">{{member.title}}</span>
                   <p>{{member.description}}</p>
                   <div class="social-bar">
                     <a :href="member.facebook" class="social-link branding-facebook" target="_blank"
