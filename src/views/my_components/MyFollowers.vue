@@ -18,7 +18,7 @@
                   </router-link>
                   <i class="fa fa-check text-primary" v-if="follower.is_verified"></i>
                 </h6>
-                <span class="text-muted text-sm mb-2">{{follower.title}}</span>
+                <span class="text-muted text-sm mb-2">{{follower.title}}</span> <span v-if="me.info.company" class="text-gray-dark">@ {{me.info.company.name}}</span>
                 <p>{{follower.description}}</p>
                 <div class="social-bar">
                   <a :href="follower.facebook" class="social-link branding-facebook"
