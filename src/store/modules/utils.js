@@ -86,6 +86,9 @@ const mutations = {
   [types.NEW_COMPANY_NAME] (state, new_company_name) {
     state.new_company_name = new_company_name
   },
+  [types.WHITE_LIST_EMAIL] (state, email) {
+    state.white_list_email = email
+  },
 }
 
 export default {

@@ -5,7 +5,7 @@
         <div class="card text-center">
           <div class="card-body">
             <h3 class="card-title"><i class="fa fa-check"></i> Congratulations</h3>
-            <p>Your email address has been proved!</p>
+            <p>Your email address has been approved!</p>
           </div>
           <div class="card-footer text-muted">
             <router-link :to="{name:'landing'}" class="btn btn-primary">Explore</router-link>
