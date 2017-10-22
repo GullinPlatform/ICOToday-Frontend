@@ -35,9 +35,9 @@
             <span v-show="errors.has('password')" class="text-danger"><i class="fa fa-warning"></i> {{ errors.first('password') }}</span>
           </div>
 
-          <div class="card capcha-card form-group">
-            <vue-recaptcha align="center" ref="recaptcha" :sitekey="sitekey" @verify="onVerify" @expired="onExpired"></vue-recaptcha>
-          </div>
+          <!--<div class="card capcha-card form-group">-->
+            <!--<vue-recaptcha align="center" ref="recaptcha" :sitekey="sitekey" @verify="onVerify" @expired="onExpired"></vue-recaptcha>-->
+          <!--</div>-->
 
           <label class="custom-control custom-checkbox d-block">
             <input name="check" v-model="check" v-validate.initial="'required'" type="checkbox" class="custom-control-input" @keyup.enter="getToken($event)">
@@ -103,11 +103,14 @@
 
         this.$validator.validateAll().then((result) => {
           // If Invalid
-          if (!result || !this.verified) {
+//          if (!result || !this.verified) {
+//            this.loading = false
+//            return
+//          }
+          if (!result) {
             this.loading = false
             return
           }
-
           // Valid
           getIP().then((response) => {
             const form_data = {
@@ -115,7 +118,7 @@
               password: SHA256(this.password),
               first_name: this.first_name,
               last_name: this.last_name,
-              verified: this.verified,
+//              verified: this.verified,
               last_login_ip: response.ip
             }
 
