@@ -36,7 +36,7 @@
           </div>
 
           <!--<div class="card capcha-card form-group">-->
-            <!--<vue-recaptcha align="center" ref="recaptcha" :sitekey="sitekey" @verify="onVerify" @expired="onExpired"></vue-recaptcha>-->
+          <!--<vue-recaptcha align="center" ref="recaptcha" :sitekey="sitekey" @verify="onVerify" @expired="onExpired"></vue-recaptcha>-->
           <!--</div>-->
 
           <label class="custom-control custom-checkbox d-block">
@@ -112,29 +112,52 @@
             return
           }
           // Valid
-          getIP().then((response) => {
-            const form_data = {
-              email: this.email,
-              password: SHA256(this.password),
-              first_name: this.first_name,
-              last_name: this.last_name,
-//              verified: this.verified,
-              last_login_ip: response.ip
-            }
+          getIP()
+            .then((response) => {
+              const form_data = {
+                email: this.email,
+                password: SHA256(this.password),
+                first_name: this.first_name,
+                last_name: this.last_name,
+                // verified: this.verified,
+                last_login_ip: response.ip
+              }
 
-            this.$store.dispatch('signup', form_data)
-              .then(() => {
-                this.$store.dispatch('cleanWhiteListEmail')
-                // Clean up
-                this.resetState()
-              })
-              .catch((error) => {
-                this.loading = false
-                console.log(error.response)
-                if (error.response.data.hasOwnProperty('email'))
-                  this.email_msg = error.response.data.email[0]
-              })
-          })
+              this.$store.dispatch('signup', form_data)
+                .then(() => {
+                  this.$store.dispatch('cleanWhiteListEmail')
+                  // Clean up
+                  this.resetState()
+                })
+                .catch((error) => {
+                  this.loading = false
+                  console.log(error.response)
+                  if (error.response.data.hasOwnProperty('email'))
+                    this.email_msg = error.response.data.email[0]
+                })
+            })
+            .catch(() => {
+              const form_data = {
+                email: this.email,
+                password: SHA256(this.password),
+                first_name: this.first_name,
+                last_name: this.last_name,
+                // verified: this.verified,
+              }
+
+              this.$store.dispatch('signup', form_data)
+                .then(() => {
+                  this.$store.dispatch('cleanWhiteListEmail')
+                  // Clean up
+                  this.resetState()
+                })
+                .catch((error) => {
+                  this.loading = false
+                  console.log(error.response)
+                  if (error.response.data.hasOwnProperty('email'))
+                    this.email_msg = error.response.data.email[0]
+                })
+            })
         })
       },
       onVerify (response) {
