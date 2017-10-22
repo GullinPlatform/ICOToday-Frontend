@@ -1,5 +1,5 @@
 <template>
-  <div class="container container-padding">
+  <div class="container container-padding" v-if="project_loaded">
     <div class="card-new-layout">
       <div class="row">
         <div class="col-lg-8">
@@ -344,7 +344,7 @@
           </h2>
           <p class="text-center mb-0 mt-2"> {{formatTime(project.start_datetime, project.end_datetime)}}</p>
           <div class="text-center">
-            <button class="btn btn-danger btn-sm" @click="autoInvest()" v-if="timeNotEnd(project.start_datetime, project.end_datetime)"><i class="fa fa-bitcoin"></i> INVEST NOW</button>
+            <button class="btn btn-danger btn-sm" @click="autoInvest()" v-if="timeNotEnd(project.start_datetime, project.end_datetime)"><i class="fa fa-bitcoin"></i> PURCHASE TOKEN</button>
           </div>
         </div>
         <!-- Updates -->
@@ -484,6 +484,7 @@
         delete_feed_id: '',
 
         // Data Load Trigger
+        project_loaded: false,
         team_loaded: false,
         feeds_loaded: false,
         ratings_loaded: false,
@@ -491,31 +492,33 @@
     },
     methods: {
       // Data Loading
-      loadMembers () {
+      loadData () {
+        this.project_loaded = false
         this.team_loaded = false
-        this.$store.dispatch('getCompanyMembers', this.$store.getters.current_project.company.id)
-          .then(() => {
-            this.team_loaded = true
-          })
-      },
-      loadFeed () {
         this.feeds_loaded = false
-        this.$store.dispatch('companyFeed', this.$store.getters.current_project.company.id)
-          .then(() => {
-            this.feeds_loaded = true
-          })
-      },
-      loadRatingDetail () {
         this.ratings_loaded = false
-        this.$store.dispatch('getProjectRatingDetail', this.$store.getters.current_project.id)
+
+        this.$store.dispatch('getProject', this.$route.params.id)
           .then(() => {
-            this.ratings_loaded = true
+            this.project_loaded = true
+            this.$store.dispatch('getCompanyMembers', this.$store.getters.current_project.company.id)
+              .then(() => {
+                this.team_loaded = true
+              })
+            this.$store.dispatch('companyFeed', this.$store.getters.current_project.company.id)
+              .then(() => {
+                this.feeds_loaded = true
+              })
+            this.$store.dispatch('getProjectRatingDetail', this.$route.params.id)
+              .then(() => {
+                this.ratings_loaded = true
+              })
           })
       },
 
       // Subscriptions
       subscribeProject () {
-        if(!this.login_status){
+        if (!this.login_status) {
           $('#signup-modal').show()
           return
         }
@@ -572,7 +575,7 @@
       // Rating Details
       newRating () {
         const form_data = {
-          id: this.$store.getters.current_project.id,
+          id: this.$route.params.id,
           score: this.new_rating_detail_score,
           content: 'Pros: \n' + this.new_rating_detail_pros + '\nCons: \n' + this.new_rating_detail_cons
         }
@@ -677,14 +680,24 @@
       })
     },
     beforeMount () {
-      this.loadMembers()
-      this.loadFeed()
-      this.loadRatingDetail()
+      this.loadData()
       // Check if project is marked
       this.subscribed = false
       for (let marked_project of this.marked_projects) {
         if (marked_project.id === this.project.id) {
           this.subscribed = true
+        }
+      }
+    },
+    watch: {
+      '$route': function () {
+        this.loadData()
+        // Check if project is marked
+        this.subscribed = false
+        for (let marked_project of this.marked_projects) {
+          if (marked_project.id === this.project.id) {
+            this.subscribed = true
+          }
         }
       }
     },

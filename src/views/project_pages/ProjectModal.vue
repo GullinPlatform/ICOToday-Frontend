@@ -343,7 +343,7 @@
                 </h2>
                 <p class="text-center mb-0 mt-2"> {{formatTime(project.start_datetime, project.end_datetime)}}</p>
                 <div class="text-center">
-                  <button class="btn btn-danger btn-sm" @click="autoInvest()" v-if="timeNotEnd(project.start_datetime, project.end_datetime)"><i class="fa fa-bitcoin"></i> INVEST NOW</button>
+                  <button class="btn btn-danger btn-sm" @click="autoInvest()" v-if="timeNotEnd(project.start_datetime, project.end_datetime)"><i class="fa fa-bitcoin"></i> PURCHASE TOKEN</button>
                 </div>
               </div>
               <!--Updates-->
