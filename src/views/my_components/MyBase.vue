@@ -10,6 +10,8 @@
               <div class="warning-label float-right" v-else="!is_verified"><i class="fa fa-envelope-o mb-01"></i> Unverified</div>
               <div class="warning-label float-right mr-2" v-if="type===2"><i class="fa fa-star mb-01"></i> Analyst</div>
               <div class="info-label float-right mr-2" v-if="type===0"><i class="fa fa-building-o mb-01"></i> Project Owner</div>
+              <div class="info-label float-right mr-2" v-if="type===3"><i class="fa fa-id-badge mb-01"></i> Project Advisor</div>
+
             </div>
           </div>
           <div class="user-info">
