@@ -106,6 +106,10 @@
         }
       },
       followUser () {
+        if (!this.login_status) {
+          $('#signup-modal').modal('show')
+          return
+        }
         this.$store.dispatch('followUser', this.$route.params.id)
           .then(() => {
             this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'Your start following ' + this.user_info.full_name})
@@ -117,7 +121,6 @@
           .then(() => {
             this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'Your are no longer following ' + this.user_info.full_name})
             this.followed = false
-
           })
       },
     },
@@ -125,6 +128,7 @@
       ...mapGetters({
         user_info: 'user_info',
         company: 'current_company',
+        login_status: 'login_status',
         self_followings: 'self_followings'
       })
     },
@@ -144,6 +148,9 @@
       for (let f of this.self_followings) {
         if (f.id === this.user_info.id)
           this.followed = true
+      }
+      if (!this.login_status) {
+        this.followed = false
       }
     },
     mounted () {
