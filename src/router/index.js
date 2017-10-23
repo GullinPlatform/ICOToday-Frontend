@@ -38,6 +38,8 @@ import UserBase from 'views/user_components/UserBase'
 import UserFeed from 'views/user_components/UserFeed'
 import UserMarkedProjects from 'views/user_components/UserMarkedProjects'
 import UserRatedProjects from 'views/user_components/UserRatedProjects'
+import UserFollowers from 'views/user_components/UserFollowers'
+import UserFollowings from 'views/user_components/UserFollowings'
 
 import Project from 'views/project_pages/Project'
 
@@ -160,7 +162,15 @@ export default new Router({
           path: '/user/:id/rated',
           component: UserRatedProjects,
           name: 'user_rated'
-        }
+        }, {
+          path: '/user/:id/followers',
+          component: UserFollowers,
+          name: 'user_followers'
+        }, {
+          path: '/user/:id/followings',
+          component: UserFollowings,
+          name: 'user_followings'
+        },
       ]
     }, {
       path: '/verify',
