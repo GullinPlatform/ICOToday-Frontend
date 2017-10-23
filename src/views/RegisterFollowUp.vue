@@ -10,18 +10,24 @@
             <a class="list-group-item flex-column align-items-start" :class="{active:account_type===1}" href="javascript:void(0)" @click="account_type=1">
               <div class="d-flex w-100 justify-content-between">
                 <h4>I'm an Investor</h4>
+                <br>
+                <small>Join to subscribe to ICOs to get updates on your feed, view detailed ratings and analysis, follow your favorite analysts and easily participate in Token Sales.</small>
               </div>
 
             </a>
             <a class="list-group-item flex-column align-items-start" :class="{active:account_type===0}" href="javascript:void(0)" @click="account_type=0">
               <div class="d-flex w-100 justify-content-between">
                 <h4>I'm a Company Launching an ICO</h4>
+                <br>
+                <small>Join and apply to list your ICO to reach our dedicated base of users. Run your ICO through our platform and we will take care of security and perform the KYC and AML requirements for the participants in your Token Sale. </small>
               </div>
 
             </a>
             <a class="list-group-item flex-column align-items-start" :class="{active:account_type===2}" href="javascript:void(0)" @click="account_type=2">
               <div class="d-flex w-100 justify-content-between">
                 <h4>I'm an Analyst</h4>
+                <br>
+                <small>Become an Analyst on our platform and get paid to evaluate ICOs looking to get listed on our platform. Build your credibility and following in the industry. </small>
               </div>
 
             </a>
