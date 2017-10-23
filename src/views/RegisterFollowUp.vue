@@ -23,7 +23,7 @@
               <div class="d-flex w-100 justify-content-between">
                 <h4>I'm an Analyst</h4>
               </div>
-            
+
             </a>
           </div>
         </div>
@@ -69,7 +69,7 @@
         </h2>
         <div class="row justify-content-center mt-5">
           <div class="col-10">
-            <textarea class="form-control" v-model="analyst_application" placeholder="Please tell us more about your self" rows="25"></textarea>
+            <textarea class="form-control" v-model="analyst_application" placeholder="Please tell us more about yourself" rows="25"></textarea>
           </div>
         </div>
       </div>
@@ -97,11 +97,13 @@
         <router-link :to="{name:'company_project'}" class="btn btn-outline-primary btn-sm text-primary" v-if="account_type===0">
           Continue to My Project
         </router-link>
+        <router-link :to="{name:'me'}" class="btn btn-outline-primary btn-sm text-primary" v-if="account_type===2">
+          Explore
+        </router-link>
       </div>
     </div>
   </div>
 </template>
-
 
 <script>
   import { mapGetters } from 'vuex'

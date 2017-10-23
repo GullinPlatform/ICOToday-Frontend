@@ -107,6 +107,7 @@
                 password: SHA256(this.password),
                 first_name: this.first_name,
                 last_name: this.last_name,
+                referrer: this.referrer,
                 // verified: this.verified,
                 last_login_ip: response.ip
               }
@@ -130,6 +131,7 @@
                 password: SHA256(this.password),
                 first_name: this.first_name,
                 last_name: this.last_name,
+                referrer: this.referrer,
                 // verified: this.verified,
               }
 
