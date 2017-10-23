@@ -118,6 +118,9 @@ export default {
   followUser (id) {
     return apiCall('post', 'me/follow/' + id + '/')
   },
+  unfollowUser (id) {
+    return apiCall('delete', 'me/follow/' + id + '/')
+  },
   getSelfFollowers () {
     return apiCall('get', 'me/followers/')
   },

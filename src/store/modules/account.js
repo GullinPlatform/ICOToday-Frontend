@@ -112,6 +112,12 @@ const getters = {
   user_rated_projects: state => {
     return state.user_rated_projects
   },
+  user_followings: state => {
+    return state.user_followings
+  },
+  user_followers: state => {
+    return state.user_followers
+  },
 
   // resend email
   able_to_resend: state => {
@@ -392,6 +398,17 @@ const actions = {
         return Promise.reject(error)
       })
   },
+  unfollowUser ({commit}, id) {
+    return userApi.unfollowUser(id)
+      .then(() => {
+        commit(types.UNFOLLOW_USER, id)
+        return Promise.resolve()
+      })
+      .catch((error) => {
+        return Promise.reject(error)
+      })
+  },
+
   getSelfFollowers ({commit}) {
     return userApi.getSelfFollowers()
       .then((response) => {
@@ -406,6 +423,27 @@ const actions = {
     return userApi.getSelfFollowings()
       .then((response) => {
         commit(types.LOAD_SELF_FOLLOWINGS, response)
+        return Promise.resolve()
+      })
+      .catch((error) => {
+        return Promise.reject(error)
+      })
+  },
+
+  getUserFollowers ({commit}, id) {
+    return userApi.getUserFollowers(id)
+      .then((response) => {
+        commit(types.LOAD_USER_FOLLOWERS, response)
+        return Promise.resolve()
+      })
+      .catch((error) => {
+        return Promise.reject(error)
+      })
+  },
+  getUserFollowings ({commit}, id) {
+    return userApi.getUserFollowings(id)
+      .then((response) => {
+        commit(types.LOAD_USER_FOLLOWINGS, response)
         return Promise.resolve()
       })
       .catch((error) => {
@@ -549,12 +587,25 @@ const mutations = {
   [types.FOLLOW_USER] (state, response) {
     state.self_followings.unshift(response)
   },
+  [types.UNFOLLOW_USER] (state, id) {
+    for (let user_index in state.self_followings) {
+      if (state.self_followings[user_index].id === id) {
+        state.self_followings.splice(user_index, 1)
+      }
+    }
+  },
 
   [types.LOAD_SELF_FOLLOWINGS] (state, response) {
     state.self_followings = response
   },
   [types.LOAD_SELF_FOLLOWERS] (state, response) {
     state.self_followers = response
+  },
+  [types.LOAD_USER_FOLLOWINGS] (state, response) {
+    state.user_followings = response
+  },
+  [types.LOAD_USER_FOLLOWERS] (state, response) {
+    state.user_followers = response
   }
 }
 

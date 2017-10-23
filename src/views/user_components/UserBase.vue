@@ -35,22 +35,28 @@
                   <i class="fa fa-telegram"></i>
                 </a>
               </div>
-              <button class="btn btn-danger btn-sm btn-block" @click="followUser()">Follow</button>
+              <button class="btn btn-danger btn-sm btn-block" @click="followUser()" v-if="!followed">Follow</button>
+              <button class="btn btn-danger btn-sm btn-block" @click="unfollowUser()" v-else>Unfollow</button>
             </div>
           </div>
         </aside>
         <nav class="list-group">
-          <router-link :to="{name:'user', params:{id:user_info.id}}" class="list-group-item"
-                       :class="{active: $route.name==='user'}">
+          <router-link :to="{name:'user', params:{id:user_info.id}}" class="list-group-item">
             <i class="fa fa-angle-right"></i>{{user_info.full_name}}'s Feed
           </router-link>
-          <router-link :to="{name:'user_marked', params:{id:user_info.id}}" class="list-group-item"
-                       :class="{active: $route.name==='user_marked'}">
+          <router-link :to="{name:'user_marked', params:{id:user_info.id}}" class="list-group-item">
             <i class="fa fa-angle-right"></i>{{user_info.full_name}}'s Subscriptions
           </router-link>
+          <router-link :to="{name:'user_followers', params:{id:user_info.id}}" class="list-group-item">
+            <i class="fa fa-angle-right"></i>{{user_info.full_name}}'s Followers
+          </router-link>
+          <router-link :to="{name:'user_followings', params:{id:user_info.id}}" class="list-group-item">
+            <i class="fa fa-angle-right"></i>{{user_info.full_name}}'s Followings
+          </router-link>
+
         </nav>
-        <h6 class="text-muted text-normal text-uppercase mt-4" v-if="user_info.type===0">Project</h6>
-        <nav class="list-group" v-if="user_info.type===0">
+        <h6 class="text-muted text-normal text-uppercase mt-4" v-if="user_info.type===0||user_info.type===3">Project</h6>
+        <nav class="list-group" v-if="user_info.type===0||user_info.type===3">
           <a href="javascript:void(0)" @click="projectModal(company.project)" class="list-group-item">
             <i class="fa fa-angle-right"></i> {{company.name}}
           </a>
@@ -77,6 +83,7 @@
     data () {
       return {
         loaded: false,
+        followed: false,
         window_width: 0
       }
     },
@@ -101,13 +108,23 @@
         this.$store.dispatch('followUser', this.$route.params.id)
           .then(() => {
             this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'Your start following ' + this.user_info.full_name})
+            this.followed = true
           })
-      }
+      },
+      unfollowUser () {
+        this.$store.dispatch('unfollowUser', this.$route.params.id)
+          .then(() => {
+            this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'Your are no longer following ' + this.user_info.full_name})
+            this.followed = false
+
+          })
+      },
     },
     computed: {
       ...mapGetters({
         user_info: 'user_info',
         company: 'current_company',
+        self_followings: 'self_followings'
       })
     },
     beforeMount () {
@@ -123,6 +140,10 @@
             this.loaded = true
           }
         })
+      for (let f of this.self_followings) {
+        if (f.id === this.user_info.id)
+          this.followed = true
+      }
     },
     mounted () {
       this.$nextTick(function () {
