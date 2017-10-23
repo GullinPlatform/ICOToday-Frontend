@@ -102,6 +102,13 @@
                       placeholder="( Markdown Support Enabled )" rows="10"></textarea>
         </div>
       </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Token Sale Plan</label>
+        <div class="col-sm-10">
+            <textarea class="form-control" v-model="token_sale_plan"
+                      placeholder="( Markdown Support Enabled )" rows="10"></textarea>
+        </div>
+      </div>
     </div>
 
     <div class="card-new-layout">
@@ -292,6 +299,8 @@
         category: '',
         description_short: '',
         description_full: '',
+        token_sale_plan: '',
+
         // ICO info
         type: '',
         coin_name: '',
@@ -343,6 +352,8 @@
         this.name = this.current_project.name
         this.description_short = this.current_project.description_short
         this.description_full = this.current_project.description_full
+        this.token_sale_plan = this.current_project.token_sale_plan
+
         this.category = this.current_project.category
 
         this.maximum_goal = this.current_project.maximum_goal
@@ -397,6 +408,7 @@
             formData.append('category', this.category)
             formData.append('description_short', this.description_short)
             formData.append('description_full', this.description_full)
+            formData.append('token_sale_plan', this.token_sale_plan)
 
             formData.append('type', this.type)
             formData.append('coin_name', this.coin_name)
@@ -450,6 +462,7 @@
           formData.append('category', this.category)
           formData.append('description_short', this.description_short)
           formData.append('description_full', this.description_full)
+          formData.append('token_sale_plan', this.token_sale_plan)
 
           formData.append('type', this.type)
           formData.append('coin_name', this.coin_name)
