@@ -64,7 +64,7 @@
               </a>
               <div class="promo-project-score">
                 <span v-if="project.rating">{{project.rating}} / 100</span>
-                <span v-else>No Score</span>
+                <span v-else>No Ratings</span>
               </div>
               <span class="promo-project-format">
                 <a class="text-warning" href="javascript:void(0)" @click="markPost(project.id, true)" v-if="!inSubscribeList(project.id)">

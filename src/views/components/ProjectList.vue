@@ -43,20 +43,26 @@
       </div>
       <div class="column project-data">
         <span class="text-bold text-primary" v-if="project.rating">{{project.rating}}/100</span>
-        <span class="text-bold text-primary" v-else>No Score</span>
+        <span class="text-bold text-primary" v-else>No Ratings</span>
       </div>
       <div class="column project-data">
         <b>{{timeCounter(project.start_datetime, project.end_datetime)}}</b>
       </div>
-      <div class="column project-data">
+      <div class="column project-data" v-if="project.maximum_goal&&project.coin_unit">
         {{project.maximum_goal}} {{project.coin_unit}}
       </div>
-      <div class="column project-data">
+      <div class="column project-data" v-else>
+        -
+      </div>
+      <div class="column project-data" v-if="project.equality_on_offer">
         <span>{{project.equality_on_offer}}%</span>
+      </div>
+      <div class="column project-data" v-else>
+        -
       </div>
     </div>
     <div class="project-list" v-else-if="loaded && !projects.length">
-     <h6 class="text-center m-4">No projects to show</h6>
+      <h6 class="text-center m-4">No projects to show</h6>
     </div>
   </div>
 </template>

@@ -3,7 +3,7 @@
     <h6 class="text-muted text-normal text-uppercase ">My Followers</h6>
     <hr class="mb-3 mt-2">
     <div class="card-new-layout" v-if="loaded&&self_followers.length">
-      <div class="team team-grid mt-4">
+      <div class="team team-grid">
         <div class="row">
           <div class="col-md-6 mb-4" v-for="follower in self_followers">
             <div class="d-table">
@@ -18,7 +18,7 @@
                   </router-link>
                   <i class="fa fa-check text-primary" v-if="follower.is_verified"></i>
                 </h6>
-                <span class="text-muted text-sm mb-2">{{follower.title}}</span> <span v-if="me.info.company" class="text-gray-dark">@ {{me.info.company.name}}</span>
+                <span class="text-muted text-sm mb-2">{{follower.title}}</span> <span v-if="follower.company" class="text-gray-dark">@ {{follower.company.name}}</span>
                 <p>{{follower.description}}</p>
                 <div class="social-bar">
                   <a :href="follower.facebook" class="social-link branding-facebook"
@@ -44,7 +44,7 @@
         </div>
       </div>
     </div>
-    <div class="card-new-layout" v-else>
+    <div class="card-new-layout" v-else-if="loaded&&!self_followers.length">
       <h6 class="mb-0 text-center">You have no followers</h6>
     </div>
   </div>
@@ -79,7 +79,6 @@
     },
     computed: {
       ...mapGetters({
-        me: 'self',
         self_followers: 'self_followers'
       })
     },

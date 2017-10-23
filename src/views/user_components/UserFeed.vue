@@ -1,7 +1,7 @@
 <template>
   <div class="col-md-8">
     <h6 class="text-muted text-normal text-uppercase">
-      User Feed
+      Feed
     </h6>
     <hr class="mb-3 mt-2">
     <spinner class="mt-4" v-if="!loaded"></spinner>

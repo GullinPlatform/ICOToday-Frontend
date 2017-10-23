@@ -326,7 +326,7 @@
                   <a href="javascript:void(0)" @click="rating_derail=true;project_detail=false;feed_detail=false">{{project.rating}}/100</a>
                 </h2>
                 <h2 class="text-bold text-info text-center mb-0" v-else>
-                  <a href="javascript:void(0)" @click="rating_derail=true;project_detail=false;feed_detail=false">No Score</a>
+                  <a href="javascript:void(0)" @click="rating_derail=true;project_detail=false;feed_detail=false">No Ratings</a>
                 </h2>
                 <div class="text-center" v-if="rating_derail">
                   <button class="btn btn-primary btn-sm"

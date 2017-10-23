@@ -1,7 +1,7 @@
 <template>
   <div class="col-md-8">
     <h6 class="text-muted text-normal text-uppercase">
-      User Marked ICO Projects
+      Subscribed ICO Projects
     </h6>
     <hr class="mb-3 mt-2">
     <post-list :loaded="loaded" :posts="user_marked_posts"></post-list>

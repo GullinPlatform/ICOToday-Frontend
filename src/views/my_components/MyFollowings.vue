@@ -18,7 +18,7 @@
                   </router-link>
                   <i class="fa fa-check text-primary" v-if="following.is_verified"></i>
                 </h6>
-                <span class="text-muted text-sm mb-2">{{following.title}}</span> <span v-if="me.info.company" class="text-gray-dark">@ {{me.info.company.name}}</span>
+                <span class="text-muted text-sm mb-2">{{following.title}}</span> <span v-if="following.company" class="text-gray-dark">@ {{following.company.name}}</span>
                 <p>{{following.description}}</p>
                 <div class="social-bar">
                   <a :href="following.facebook" class="social-link branding-facebook"
@@ -44,7 +44,7 @@
         </div>
       </div>
     </div>
-    <div class="card-new-layout" v-else>
+    <div class="card-new-layout" v-else-if="loaded&&!self_followings.length">
       <h6 class="mb-0 text-center">You are not following anyone</h6>
     </div>
   </div>
@@ -79,7 +79,6 @@
     },
     computed: {
       ...mapGetters({
-        me: 'self',
         self_followings: 'self_followings'
       })
     },

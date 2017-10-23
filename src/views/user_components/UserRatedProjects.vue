@@ -1,7 +1,7 @@
 <template>
   <div class="col-md-8">
     <h6 class="text-muted text-normal text-uppercase">
-      My Rated Projects
+      Rated Projects
     </h6>
     <hr class="mb-3 mt-2">
     <project-list :loaded="loaded" :projects="user_rated_projects"></project-list>
