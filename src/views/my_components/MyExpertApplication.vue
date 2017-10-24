@@ -223,7 +223,7 @@
   }
 
   .dropzone-area:hover {
-    border: 2px dashed #1ab394;
+    border: 2px dashed #0da9ef;
   }
 
   .dropzone-area input {
