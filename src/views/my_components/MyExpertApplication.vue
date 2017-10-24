@@ -14,7 +14,7 @@
           <div class="dropzone-area" v-if="!resume">
             <div class="dropzone-text ">
               <i class="fa fa-cloud-upload"> </i>
-              <span>Drop image here or click to select</span>
+              <span>Drop file here or click to select</span>
             </div>
             <input type="file" id="resume" @change="onFileChange(type='resume', $event)">
           </div>
@@ -35,7 +35,7 @@
           <div class="dropzone-area" v-if="!past_rating_example">
             <div class="dropzone-text ">
               <i class="fa fa-cloud-upload"> </i>
-              <span>Drop image here or click to select</span>
+              <span>Drop file here or click to select</span>
             </div>
             <input type="file" @change="onFileChange(type='example', $event)">
           </div>
