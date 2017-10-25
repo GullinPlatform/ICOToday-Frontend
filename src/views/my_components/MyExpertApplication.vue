@@ -9,7 +9,7 @@
     </h6>
     <div class="card-new-layout">
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Resume</label>
+        <label class="col-sm-2 col-form-label">Resume <span class="text-danger">*</span></label>
         <div class="col-sm-10">
           <div class="dropzone-area" v-if="!resume">
             <div class="dropzone-text ">
@@ -30,7 +30,7 @@
 
       </div>
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Rating Example</label>
+        <label class="col-sm-2 col-form-label">Rating Example <span class="text-danger">*</span></label>
         <div class="col-sm-10">
           <div class="dropzone-area" v-if="!past_rating_example">
             <div class="dropzone-text ">
@@ -50,13 +50,13 @@
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label">LinkedIn</label>
+        <label class="col-sm-2 col-form-label">LinkedIn <span class="text-danger">*</span></label>
         <div class="col-sm-10">
           <input class="form-control" v-model="linkedin" placeholder="https://linkedin.com/in/">
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Questions</label>
+        <label class="col-sm-2 col-form-label">Questions <span class="text-danger">*</span></label>
         <div class="col-sm-10">
           <textarea class="form-control" v-model="detail" placeholder="Please tell us more about you" rows="20"></textarea>
         </div>
@@ -136,6 +136,11 @@
     },
     methods: {
       newAnalystApplication () {
+        if (!(this.resume && this.past_rating_example && this.linkedin && this.detail)) {
+          this.error_message = 'Please fill all required fields'
+          return
+        }
+
         this.uploading = true
         const form_data = new FormData()
 

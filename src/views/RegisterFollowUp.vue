@@ -10,26 +10,21 @@
             <a class="list-group-item flex-column align-items-start" :class="{active:account_type===1}" href="javascript:void(0)" @click="account_type=1">
               <div class="d-flex w-100 justify-content-between">
                 <h4>I'm an Investor</h4>
-                <br>
-                <small>Join to subscribe to ICOs to get updates on your feed, view detailed ratings and analysis, follow your favorite analysts and easily participate in Token Sales.</small>
               </div>
+              <p>Join to subscribe to ICOs to get updates on your feed, view detailed ratings and analysis, follow your favorite analysts and easily participate in Token Sales.</p>
 
             </a>
             <a class="list-group-item flex-column align-items-start" :class="{active:account_type===0}" href="javascript:void(0)" @click="account_type=0">
               <div class="d-flex w-100 justify-content-between">
-                <h4>I'm a Company Launching an ICO</h4>
-                <br>
-                <small>Join and apply to list your ICO to reach our dedicated base of users. Run your ICO through our platform and we will take care of security and perform the KYC and AML requirements for the participants in your Token Sale. </small>
+                <h4>I'm a Company</h4>
               </div>
-
+              <p>Join and apply to list your ICO to reach our dedicated base of users. Run your ICO through our platform and we will take care of security and perform the KYC and AML requirements for the participants in your Token Sale. </p>
             </a>
             <a class="list-group-item flex-column align-items-start" :class="{active:account_type===2}" href="javascript:void(0)" @click="account_type=2">
               <div class="d-flex w-100 justify-content-between">
                 <h4>I'm an Analyst</h4>
-                <br>
-                <small>Become an Analyst on our platform and get paid to evaluate ICOs looking to get listed on our platform. Build your credibility and following in the industry. </small>
               </div>
-
+              <p>Become an Analyst on our platform and get paid to evaluate ICOs looking to get listed on our platform. Build your credibility and following in the industry. </p>
             </a>
           </div>
         </div>
@@ -106,6 +101,10 @@
         <router-link :to="{name:'me'}" class="btn btn-outline-primary btn-sm text-primary" v-if="account_type===2">
           Explore
         </router-link>
+      </div>
+      <div class="text-center mt-4">
+        <h6>Don't forget to join our <a href="https://t.me/joinchat/DDHesUIRiVuAx6Sne4XgLw" target="_blank"><i class="fa fa-telegram"></i> Telegram group</a></h6>
+        <h6 class="text-center">And follow us on <a href="https://twitter.com/icotoday1" target="_blank"><i class="fa fa-twitter"></i> Twitter</a></h6>
       </div>
     </div>
   </div>
