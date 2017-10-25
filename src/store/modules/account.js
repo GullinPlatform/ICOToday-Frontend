@@ -17,7 +17,7 @@ const state = {
   // loaded user
   user: {},
   user_info: {},
-  user_marked_posts: [],
+  user_marked_projects: [],
   user_rated_projects: [],
   user_followings: [],
   user_followers: [],
@@ -96,8 +96,8 @@ const getters = {
   user_info: state => {
     return state.user_info
   },
-  user_marked_posts: state => {
-    return state.user_marked_posts
+  user_marked_projects: state => {
+    return state.user_marked_projects
   },
   user_name: state => {
     if (state.user.info) {
@@ -551,7 +551,7 @@ const mutations = {
     state.self_marked_posts = response
   },
   [types.LOAD_USER_MARKED_PROJECT] (state, response) {
-    state.user_marked_posts = response
+    state.user_marked_projects = response
   },
 
   [types.WHITE_LIST_EMAIL] (state, email) {

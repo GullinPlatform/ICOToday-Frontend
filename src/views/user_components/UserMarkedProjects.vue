@@ -4,13 +4,13 @@
       Subscribed ICO Projects
     </h6>
     <hr class="mb-3 mt-2">
-    <post-list :loaded="loaded" :posts="user_marked_posts"></post-list>
+    <project-list :loaded="loaded" :projects="user_marked_projects"></project-list>
   </div>
 </template>
 
 <script>
   import { mapGetters } from 'vuex'
-  import PostList from 'src/views/components/ProjectList'
+  import ProjectList from 'src/views/components/ProjectList'
 
   export default {
     name: 'UserMarkedProjects',
@@ -25,10 +25,10 @@
         complement: 'User Subscribed ICOs'
       },
     },
-    components: {PostList},
+    components: {ProjectList},
     computed: {
       ...mapGetters({
-        user_marked_posts: 'user_marked_posts',
+        user_marked_projects: 'user_marked_projects',
       })
     },
     beforeMount () {
