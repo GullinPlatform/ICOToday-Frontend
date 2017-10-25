@@ -13,7 +13,7 @@
             </p>
 
             <a class="social-button shape-circle sb-facebook sb-light-skin" target="_blank" href="https://www.facebook.com/ICOToday/ "><i class="socicon-facebook"></i></a>
-            <a class="social-button shape-circle sb-twitter sb-light-skin" target="_blank" href="https://twitter.com/ICO_Today?lang=en "><i class="socicon-twitter"></i></a>
+            <a class="social-button shape-circle sb-twitter sb-light-skin" target="_blank" href="https://twitter.com/icotoday_io"><i class="socicon-twitter"></i></a>
             <a class="social-button shape-circle sb-reddit sb-light-skin" target="_blank" href="https://www.reddit.com/user/icotoday/ "><i class="socicon-reddit"></i></a>
             <br>
             <a class="social-button shape-circle sb-telegram sb-light-skin" target="_blank" href="https://t.me/joinchat/DDHesUIRiVuAx6Sne4XgLw"><i class="socicon-telegram"></i></a>

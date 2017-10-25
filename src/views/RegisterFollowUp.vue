@@ -104,7 +104,7 @@
       </div>
       <div class="text-center mt-4">
         <h6>Don't forget to join our <a href="https://t.me/joinchat/DDHesUIRiVuAx6Sne4XgLw" target="_blank"><i class="fa fa-telegram"></i> Telegram group</a></h6>
-        <h6 class="text-center">And follow us on <a href="https://twitter.com/icotoday1" target="_blank"><i class="fa fa-twitter"></i> Twitter</a></h6>
+        <h6 class="text-center">And follow us on <a href="https://twitter.com/ICOToday_io" target="_blank"><i class="fa fa-twitter"></i> Twitter</a></h6>
       </div>
     </div>
   </div>
