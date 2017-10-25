@@ -153,37 +153,6 @@
             })
         }
       },
-
-      markPost (id, mark) {
-        if (!this.login_status) {
-          $('#signup-modal').modal('show')
-          return
-        }
-
-        this.$store.dispatch('markPost', id)
-          .then(() => {
-            if (mark) {
-              this.$store.dispatch('toastr', {
-                type: 'success',
-                title: 'Success',
-                message: 'The selected ICO is added to your subscription list, you\'ll receive updates from now on'
-              })
-            } else {
-              this.$store.dispatch('toastr', {
-                type: 'success',
-                title: 'Success',
-                message: 'The selected ICO is removed from your subscription list, you\'ll no longer receive updates from this project'
-              })
-            }
-          })
-      },
-      inSubscribeList (id) {
-        for (let p of this.self_marked_posts) {
-          if (id === p.id)
-            return true
-        }
-        return false
-      },
       getWindowWidth (event) {
         this.window_width = document.documentElement.clientWidth
       },

@@ -160,6 +160,11 @@
           content: this.reply,
         }
         this.$store.dispatch('replyFeed', form_data)
+          .then(() => {
+            this.reply_feed_box_show = false
+            this.reply_feed_box_index = ''
+            this.reply = ''
+          })
           .catch(() => {
             this.$store.dispatch('toastr', {type: 'danger', title: 'Error', message: 'Please try again later.'})
           })
