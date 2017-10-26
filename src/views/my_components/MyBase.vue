@@ -97,6 +97,13 @@
             <span class="badge badge-warning badge-pill">NEW!</span>
           </router-link>
         </nav>
+        <h6 class="text-muted text-normal text-uppercase mt-4" v-if="type===1">List My ICO</h6>
+        <nav class="list-group" v-if="type===1">
+          <router-link :to="{name:'me_company_create'}" class="list-group-item with-badge">
+            <i class="fa fa-angle-right"></i> List My ICO
+            <span class="badge badge-warning badge-pill">NEW!</span>
+          </router-link>
+        </nav>
         <h6 class="text-muted text-normal text-uppercase mt-4" v-if="type===2">Analyst Center</h6>
         <nav class="list-group" v-if="type===2">
           <router-link :to="{name:'analyst_rated_projects'}" class="list-group-item">

@@ -12,7 +12,6 @@ import ForgetPassword from 'views/ForgetPassword'
 import ResetPassword from 'views/ResetPassword'
 
 import MyBase from 'views/my_components/MyBase'
-import MyExpertApplication from 'views/my_components/MyExpertApplication'
 import MyFeed from 'views/my_components/MyFeed'
 import MyMarkedProjects from 'views/my_components/MyMarkedProjects'
 import MyProfile from 'views/my_components/MyProfile'
@@ -20,6 +19,8 @@ import MySettings from 'views/my_components/MySettings'
 import MyWallet from 'views/my_components/MyWallet'
 import MyFollowers from 'views/my_components/MyFollowers'
 import MyFollowings from 'views/my_components/MyFollowings'
+import MyExpertApplication from 'views/my_components/MyExpertApplication'
+import MyCompanyCreation from 'views/my_components/MyCompanyCreation'
 
 import NeedVerify from 'views/my_components/NeedVerify'
 
@@ -76,6 +77,10 @@ export default new Router({
           path: '/me/analyst/application',
           component: MyExpertApplication,
           name: 'me_analyst_apply'
+        }, {
+          path: '/me/company/creation',
+          component: MyCompanyCreation,
+          name: 'me_company_create'
         }, {
           path: '/me/feed',
           component: MyFeed,
