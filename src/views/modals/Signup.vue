@@ -135,7 +135,7 @@
                 referrer: this.referrer,
                 verified: this.verified,
                 whitelist: this.whitelist,
-                amount_to_invest: this.invest_amount,
+                amount_to_invest: this.invest_amount ? this.invest_amount : 0,
                 last_login_ip: response.ip
               }
 
@@ -161,7 +161,7 @@
                 referrer: this.referrer,
                 verified: this.verified,
                 whitelist: this.whitelist,
-                amount_to_invest: this.invest_amount,
+                amount_to_invest: this.invest_amount ? this.invest_amount : 0,
               }
 
               this.$store.dispatch('signup', form_data)

@@ -32,7 +32,16 @@
           <div class="form-group">
             <vue-recaptcha align="center" ref="recaptcha" :sitekey="sitekey" @verify="onVerify" @expired="onExpired"></vue-recaptcha>
           </div>
+          <label class="custom-control custom-checkbox d-block">
+            <input name="check" v-model="whitelist" type="checkbox" class="custom-control-input">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description"> I want to signup for ICOToday Whitelist, too.
+            </span>
+          </label>
 
+          <div class="form-group" v-if="whitelist">
+            <input type="number" v-model="invest_amount" class="form-control" placeholder="How many ICT token are you willing to buy? *">
+          </div>
           <label class="custom-control custom-checkbox d-block">
             <input name="check" v-model="check" v-validate.initial="'required'" type="checkbox" class="custom-control-input" @keyup.enter="getToken($event)">
             <span class="custom-control-indicator"></span>
@@ -111,7 +120,7 @@
                 referrer: this.referrer,
                 verified: this.verified,
                 whitelist: this.whitelist,
-                amount_to_invest: this.invest_amount,
+                amount_to_invest: this.invest_amount ? this.invest_amount : 0,
                 last_login_ip: response.ip
               }
 
@@ -137,7 +146,7 @@
                 referrer: this.referrer,
                 verified: this.verified,
                 whitelist: this.whitelist,
-                amount_to_invest: this.invest_amount,
+                amount_to_invest: this.invest_amount ? this.invest_amount : 0,
               }
 
               this.$store.dispatch('signup', form_data)

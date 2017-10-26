@@ -11,9 +11,8 @@
                 ICOToday
               </h1>
               <h2 class="text-white text-uppercase">
-                Seamless Platform<br>
-                for Launching and Investing<br>
-                on Blockchain
+                The Trusted Platform <br>
+                to Launch and Participate in ICOs
               </h2>
             </div>
             <div class="col-md-5 float-right">
@@ -40,8 +39,8 @@
                 ICOToday
               </h1>
               <h2 class="text-white text-uppercase">
-                Seamless Platform<br>
-                for Launching and Investing on Blockchain
+                The Trusted Platform <br>
+                to Launch and Participate in ICOs
               </h2>
             </div>
           </div>
