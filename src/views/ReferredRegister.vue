@@ -40,7 +40,7 @@
           </label>
 
           <div class="form-group" v-if="whitelist">
-            <input type="number" v-model="invest_amount" class="form-control" placeholder="How many ICT token are you willing to buy? *">
+            <input type="number" v-model="invest_amount" class="form-control" placeholder="How many ETHs are you willing to invest in? *">
           </div>
           <label class="custom-control custom-checkbox d-block">
             <input name="check" v-model="check" v-validate.initial="'required'" type="checkbox" class="custom-control-input" @keyup.enter="getToken($event)">
