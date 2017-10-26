@@ -29,9 +29,9 @@
             <input name="password" v-model="password" v-validate="'required'" type="password" class="form-control" placeholder="Password *">
             <span v-show="errors.has('password')" class="text-danger"><i class="fa fa-warning"></i> {{ errors.first('password') }}</span>
           </div>
-          <!--<div class="form-group">-->
-          <!--<vue-recaptcha align="center" ref="recaptcha" :sitekey="sitekey" @verify="onVerify" @expired="onExpired"></vue-recaptcha>-->
-          <!--</div>-->
+          <div class="form-group">
+            <vue-recaptcha align="center" ref="recaptcha" :sitekey="sitekey" @verify="onVerify" @expired="onExpired"></vue-recaptcha>
+          </div>
 
           <label class="custom-control custom-checkbox d-block">
             <input name="check" v-model="check" v-validate.initial="'required'" type="checkbox" class="custom-control-input" @keyup.enter="getToken($event)">
@@ -72,6 +72,8 @@
         email: '',
         password: '',
         check: false,
+        whitelist: false,
+        invest_amount: '',
         verified: '',
         ip: '',
 
@@ -90,15 +92,14 @@
         this.email_msg = ''
         this.$validator.validateAll().then((result) => {
           // If Invalid
-          //  if (!result || !this.verified) {
-          //  this.loading = false
-          //  return
-          // }
-          if (!result) {
+          if (!result || !this.verified) {
             this.loading = false
             return
           }
-          // Valid
+//          if (!result) {
+//            this.loading = false
+//            return
+//          }
           // Valid
           getIP()
             .then((response) => {
@@ -108,7 +109,9 @@
                 first_name: this.first_name,
                 last_name: this.last_name,
                 referrer: this.referrer,
-                // verified: this.verified,
+                verified: this.verified,
+                whitelist: this.whitelist,
+                amount_to_invest: this.invest_amount,
                 last_login_ip: response.ip
               }
 
@@ -132,7 +135,9 @@
                 first_name: this.first_name,
                 last_name: this.last_name,
                 referrer: this.referrer,
-                // verified: this.verified,
+                verified: this.verified,
+                whitelist: this.whitelist,
+                amount_to_invest: this.invest_amount,
               }
 
               this.$store.dispatch('signup', form_data)
@@ -170,16 +175,6 @@
       },
       getReferrer () {
         this.referrer = this.$route.query.refer
-      }
-    },
-    computed: {
-      white_list_email () {
-        return this.$store.getters.white_list_email
-      }
-    },
-    watch: {
-      white_list_email: function () {
-        this.email = this.white_list_email
       }
     },
     beforeMount () {

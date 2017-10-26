@@ -38,6 +38,16 @@
           <!--<div class="card capcha-card form-group">-->
           <!--<vue-recaptcha align="center" ref="recaptcha" :sitekey="sitekey" @verify="onVerify" @expired="onExpired"></vue-recaptcha>-->
           <!--</div>-->
+          <label class="custom-control custom-checkbox d-block">
+            <input name="check" v-model="whitelist" type="checkbox" class="custom-control-input">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description"> I want to signup for ICOToday Whitelist, too.
+            </span>
+          </label>
+
+          <div class="form-group" v-if="whitelist">
+            <input type="number" v-model="invest_amount" class="form-control" placeholder="How many ICT token are you willing to buy? *">
+          </div>
 
           <label class="custom-control custom-checkbox d-block">
             <input name="check" v-model="check" v-validate.initial="'required'" type="checkbox" class="custom-control-input" @keyup.enter="getToken($event)">
@@ -72,6 +82,7 @@
   </div>
 </template>
 <script>
+  import { mapGetters } from 'vuex'
   import VueRecaptcha from 'vue-recaptcha'
   import Spinner from 'components/Spinner'
   import { SHA256 } from '../../config'
@@ -88,6 +99,8 @@
         email: '',
         password: '',
         check: false,
+        whitelist: false,
+        invest_amount: '',
         verified: '',
         ip: '',
 
@@ -119,7 +132,10 @@
                 password: SHA256(this.password),
                 first_name: this.first_name,
                 last_name: this.last_name,
-                // verified: this.verified,
+                referrer: this.referrer,
+                verified: this.verified,
+                whitelist: this.whitelist,
+                amount_to_invest: this.invest_amount,
                 last_login_ip: response.ip
               }
 
@@ -142,7 +158,10 @@
                 password: SHA256(this.password),
                 first_name: this.first_name,
                 last_name: this.last_name,
-                // verified: this.verified,
+                referrer: this.referrer,
+                verified: this.verified,
+                whitelist: this.whitelist,
+                amount_to_invest: this.invest_amount,
               }
 
               this.$store.dispatch('signup', form_data)
@@ -180,12 +199,14 @@
       }
     },
     computed: {
-      white_list_email () {
-        return this.$store.getters.white_list_email
-      }
+      ...mapGetters({
+        white_list_email: 'white_list_email',
+      })
     },
     watch: {
       white_list_email: function () {
+        if (this.white_list_email)
+          this.whitelist = true
         this.email = this.white_list_email
       }
     }
