@@ -68,15 +68,70 @@
         <h2 class="text-center">
           Analyst Application
         </h2>
-        <div class="row justify-content-center mt-5">
-          <div class="col-10">
-            <textarea class="form-control" v-model="analyst_application" placeholder="Please tell us more about yourself" rows="25"></textarea>
+        <div class="card-new-layout">
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Resume <span class="text-danger">*</span></label>
+            <div class="col-sm-10">
+              <div class="dropzone-area" v-if="!resume">
+                <div class="dropzone-text ">
+                  <i class="fa fa-cloud-upload"> </i>
+                  <span>Drop file here or click to select</span>
+                </div>
+                <input type="file" id="resume" @change="onFileChange(type='resume', $event)">
+              </div>
+              <div v-else>
+                <button type="button" class="mb-1 btn btn-secondary">{{resume.name}}</button>
+                <button type="button" class="mb-1 btn btn-secondary" @click="removeFile(type='resume')">
+              <span>
+                  <i class="fa fa-times"></i>
+              </span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Rating Example <span class="text-danger">*</span></label>
+            <div class="col-sm-10">
+              <div class="dropzone-area" v-if="!past_rating_example">
+                <div class="dropzone-text ">
+                  <i class="fa fa-cloud-upload"> </i>
+                  <span>Drop file here or click to select</span>
+                </div>
+                <input type="file" @change="onFileChange(type='example', $event)">
+              </div>
+              <div v-else>
+                <button type="button" class="mb-1 btn btn-secondary">{{past_rating_example.name}}</button>
+                <button type="button" class="mb-1 btn btn-secondary" @click="removeFile(type='example')">
+              <span>
+                  <i class="fa fa-times"></i>
+              </span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">LinkedIn <span class="text-danger">*</span></label>
+            <div class="col-sm-10">
+              <input class="form-control" v-model="linkedin" placeholder="https://linkedin.com/in/">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Questions <span class="text-danger">*</span></label>
+            <div class="col-sm-10">
+              <textarea class="form-control" v-model="detail" placeholder="Please tell us more about you" rows="20"></textarea>
+            </div>
+          </div>
+          <div class="form-group row justify-content-md-end">
+            <div class="col-md-10">
+              <p class="text-danger" v-if="error_message">{{error_message}}</p>
+            </div>
           </div>
         </div>
       </div>
       <div class="row justify-content-center mt-3">
         <button class="btn btn-secondary" @click="prevStep()">Prev</button>
-        <button class="btn btn-primary" @click="nextStep()">Next</button>
+        <button class="btn btn-primary" @click="nextStep()" :disabled="uploading"><span v-if="uploading">Uploading</span><span v-else>Next</span></button>
       </div>
     </div>
     <div v-if="step>=10">
@@ -128,7 +183,7 @@
         // Page Control
         loaded: false,
         account_type: 1,
-
+        uploading: false,
         // Utils
         error_message: '',
 
@@ -137,7 +192,14 @@
 
         company_name: '',
 
-        analyst_application: ''
+        resume: null,
+        past_rating_example: null,
+        linkedin: '',
+        detail: '1. What makes you qualified to be an ICO analyst?\n\n' +
+        '2. What are the key measures and metrics you use to evaluate ICOs?\n\n' +
+        '3. What are previous ICO you have be wrong with and why?\n\n' +
+        '4. What would you say has been your best ICO evaluation and why?\n\n' +
+        '5. Are there any conflicts of interest that could affect your judgment with analysis?\n\n'
       }
     },
     methods: {
@@ -164,7 +226,7 @@
         }
         // Analyst
         else if (this.step === 2 && this.account_type === 2) { // Company input and search
-          this.postMyAnalystApplication()
+          this.newAnalystApplication()
         }
 
         // Other
@@ -242,14 +304,46 @@
       },
 
       // Analyst Post applications
-      postMyAnalystApplication () {
-        const form_data = {detail: this.analyst_application}
+      newAnalystApplication () {
+        if (!(this.resume && this.past_rating_example && this.linkedin && this.detail)) {
+          this.error_message = 'Please fill all required fields'
+          return
+        }
+
+        this.uploading = true
+        const form_data = new FormData()
+
+        form_data.append('resume', this.resume)
+        form_data.append('past_rating_example', this.past_rating_example)
+        form_data.append('linkedin', this.linkedin)
+        form_data.append('detail', this.detail)
+
         this.$store.dispatch('postMyAnalystApplication', form_data)
           .then(() => {
+            this.uploading = false
             this.setAccountType()
             this.$store.dispatch('setFollowUpStep', 10)
           })
       },
+      onFileChange (type, e) {
+        const files = e.target.files || e.dataTransfer.files
+        if (!files.length) return
+        console.log(e)
+        if (type === 'resume') {
+          this.resume = files[0]
+        }
+        else if (type === 'example') {
+          this.past_rating_example = files[0]
+        }
+      },
+      removeFile (type) {
+        if (type === 'resume') {
+          this.resume = null
+        }
+        else if (type === 'example') {
+          this.past_rating_example = null
+        }
+      }
     },
     computed: {
       ...mapGetters({
