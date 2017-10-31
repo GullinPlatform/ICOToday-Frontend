@@ -243,42 +243,43 @@
               </div>
               <!--Ratings-->
               <div class="comment" v-else-if="ratings_loaded">
-                <div class="media pos-relative card-new-layout" v-if="!rating_details.length">
-                  <div class="media-body text-center">
-
-                    <h5 class="m-0" v-if="self_type===2">Be the first one to rate this project!</h5>
-
-                    <h5 class="m-0" v-else>No ratings right now, try come back later?</h5>
-                  </div>
-                </div>
-
                 <div class="card-new-layout" v-if="self_type===2 && !selfRated()">
                   <h6 class="text-muted text-normal text-uppercase ">New Rating</h6>
                   <hr class="mb-3 mt-2">
                   <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Score</label>
+                    <label class="col-sm-2 col-form-label">Overall Score</label>
                     <div class="col-sm-10">
                       <input class="form-control" v-model="new_rating_detail_score" placeholder="Between 0 and 100">
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Pros</label>
+                    <label class="col-sm-2 col-form-label">Summary</label>
                     <div class="col-sm-10">
                       <textarea class="form-control"
-                                style="resize:none" rows="4"
-                                placeholder="What's the good part of this project?"
-                                v-model="new_rating_detail_pros">
+                                style="resize:none" rows="5"
+                                placeholder="Summary"
+                                v-model="new_rating_detail_summary">
                       </textarea>
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Cons</label>
+                    <label class="col-sm-2 col-form-label">Full Analysis</label>
                     <div class="col-sm-10">
-                      <textarea class="form-control"
-                                style="resize:none" rows="4"
-                                placeholder="What's the 'not that good' part of this project?"
-                                v-model="new_rating_detail_cons">
-                      </textarea>
+                      <div class="dropzone-area" v-if="!new_rating_detail_file">
+                        <div class="dropzone-text ">
+                          <i class="fa fa-cloud-upload"> </i>
+                          <span>Drop file here or click to select</span>
+                        </div>
+                        <input type="file" @change="onFileChange">
+                      </div>
+                      <div v-else>
+                        <button type="button" class="mb-1 btn btn-secondary">{{new_rating_detail_file.name}}</button>
+                        <button type="button" class="mb-1 btn btn-secondary" @click="removeFile()">
+                          <span>
+                              <i class="fa fa-times"></i>
+                          </span>
+                        </button>
+                      </div>
                     </div>
                   </div>
 
@@ -288,6 +289,16 @@
                     </div>
                   </div>
                 </div>
+
+                <div class="media pos-relative card-new-layout" v-if="!rating_details.length">
+                  <div class="media-body text-center">
+
+                    <h5 class="m-0" v-if="self_type===2">Be the first one to rate this project!</h5>
+
+                    <h5 class="m-0" v-else>No ratings right now, try come back later?</h5>
+                  </div>
+                </div>
+
 
                 <div class="media pos-relative card-new-layout" v-for="detail in rating_details">
                   <img :src="detail.rater.avatar"
@@ -300,10 +311,13 @@
                       <span class="text-muted" v-if="detail.rater.title">{{detail.rater.title}}</span>
                       <span class="float-right"><i class="fa fa-clock-o"></i> {{timeFromNow(detail.created)}}</span>
                     </h6>
-                    <p class="mb-1 rating-detail">{{detail.content}}</p>
-                    <h5 class="mb-0">
-                      Score: <span class="text-bold text-primary">{{detail.score}}</span>
-                    </h5>
+                    <h6 class="rating-detail mb-0">{{detail.content}}
+
+                      Aggregate Score: <span class="text-bold text-primary">{{detail.score}}</span>
+
+                      Full Analysis: <a :href="detail.file" target="_blank"><i class="fa fa-file-pdf-o"></i> {{detail.rater.full_name}}'s Analysis</a>
+                    </h6>
+
                   </div>
                 </div>
               </div>
@@ -468,8 +482,8 @@
     data () {
       return {
         // rating
-        new_rating_detail_pros: '',
-        new_rating_detail_cons: '',
+        new_rating_detail_summary: '',
+        new_rating_detail_file: null,
         new_rating_detail_score: null,
 
         // UI Control
@@ -575,11 +589,12 @@
 
       // Rating Details
       newRating () {
-        const form_data = {
-          id: this.$store.getters.current_project.id,
-          score: this.new_rating_detail_score,
-          content: 'Pros: \n' + this.new_rating_detail_pros + '\nCons: \n' + this.new_rating_detail_cons
-        }
+        const form_data = new FormData()
+        form_data.append('id', this.$store.getters.current_project.id)
+        form_data.append('score', this.new_rating_detail_score)
+        form_data.append('content', this.new_rating_detail_summary)
+        form_data.append('file', this.new_rating_detail_file)
+
         this.$store.dispatch('createProjectRatingDetail', form_data)
           .catch(() => {
             this.$store.dispatch('toastr', {
@@ -590,7 +605,14 @@
 
           })
       },
-
+      onFileChange (e) {
+        const files = e.target.files || e.dataTransfer.files
+        if (!files.length) return
+        this.new_rating_detail_file = files[0]
+      },
+      removeFile () {
+        this.new_rating_detail_file = null
+      },
       // Auto Investment
       autoInvest () {
         this.$store.dispatch('toastr', {
@@ -723,5 +745,43 @@
 
   .rating-detail {
     white-space: pre-line;
+  }
+
+  .dropzone-area {
+    width: 100%;
+    height: 100px;
+    position: relative;
+    border: 2px dashed #CBCBCB;
+    border-radius: 22px;
+  }
+
+  .dropzone-area:hover {
+    border: 2px dashed #0da9ef;
+  }
+
+  .dropzone-area input {
+    position: absolute;
+    cursor: pointer;
+    top: 0px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+  }
+
+  .dropzone-text {
+    position: absolute;
+    top: 50%;
+    text-align: center;
+    transform: translate(0, -50%);
+    width: 100%;
+  }
+
+  .dropzone-text span {
+    display: block;
+    font-family: Arial, Helvetica;
+    line-height: 1.9;
   }
 </style>

@@ -64,7 +64,7 @@ export default {
     return apiCall('get', id + '/rating/')
   },
   createProjectRatingDetail (form_data) {
-    return apiCall('post', form_data.id + '/rate/', form_data)
+    return apiCall('post', form_data.get('id') + '/rate/', form_data)
   },
   updateProjectRatingDetail (form_data) {
     return apiCall('put', form_data.id + '/rate/', form_data)
