@@ -233,7 +233,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-8" v-else-if="rating_derail">
+      <div class="col-lg-8" v-else-if="rating_detail">
         <!--If user not login-->
         <div class="card-new-layout text-center" v-if="!login_status">
           <h4 class="mt-3">
@@ -244,42 +244,43 @@
         </div>
         <!--Ratings-->
         <div class="comment" v-else-if="ratings_loaded">
-          <div class="media pos-relative card-new-layout" v-if="!rating_details.length">
-            <div class="media-body text-center">
-
-              <h5 class="m-0" v-if="self_type===2">Be the first one to rate this project!</h5>
-
-              <h5 class="m-0" v-else>No ratings right now, try come back later?</h5>
-            </div>
-          </div>
-
           <div class="card-new-layout" v-if="self_type===2 && !selfRated()">
             <h6 class="text-muted text-normal text-uppercase ">New Rating</h6>
             <hr class="mb-3 mt-2">
             <div class="form-group row">
-              <label class="col-sm-2 col-form-label">Score</label>
+              <label class="col-sm-2 col-form-label">Overall Score</label>
               <div class="col-sm-10">
                 <input class="form-control" v-model="new_rating_detail_score" placeholder="Between 0 and 100">
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-sm-2 col-form-label">Pros</label>
+              <label class="col-sm-2 col-form-label">Summary</label>
               <div class="col-sm-10">
                       <textarea class="form-control"
-                                style="resize:none" rows="4"
-                                placeholder="What's the good part of this project?"
-                                v-model="new_rating_detail_pros">
+                                style="resize:none" rows="5"
+                                placeholder="Summary"
+                                v-model="new_rating_detail_summary">
                       </textarea>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-sm-2 col-form-label">Cons</label>
+              <label class="col-sm-2 col-form-label">Full Analysis</label>
               <div class="col-sm-10">
-                      <textarea class="form-control"
-                                style="resize:none" rows="4"
-                                placeholder="What's the 'not that good' part of this project?"
-                                v-model="new_rating_detail_cons">
-                      </textarea>
+                <div class="dropzone-area" v-if="!new_rating_detail_file">
+                  <div class="dropzone-text ">
+                    <i class="fa fa-cloud-upload"> </i>
+                    <span>Drop file here or click to select</span>
+                  </div>
+                  <input type="file" @change="onFileChange">
+                </div>
+                <div v-else>
+                  <button type="button" class="mb-1 btn btn-secondary">{{new_rating_detail_file.name}}</button>
+                  <button type="button" class="mb-1 btn btn-secondary" @click="removeFile()">
+                          <span>
+                              <i class="fa fa-times"></i>
+                          </span>
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -289,6 +290,16 @@
               </div>
             </div>
           </div>
+
+          <div class="media pos-relative card-new-layout" v-if="!rating_details.length">
+            <div class="media-body text-center">
+
+              <h5 class="m-0" v-if="self_type===2">Be the first one to rate this project!</h5>
+
+              <h5 class="m-0" v-else>No ratings right now, try come back later?</h5>
+            </div>
+          </div>
+
 
           <div class="media pos-relative card-new-layout" v-for="detail in rating_details">
             <img :src="detail.rater.avatar"
@@ -301,10 +312,13 @@
                 <span class="text-muted" v-if="detail.rater.title">{{detail.rater.title}}</span>
                 <span class="float-right"><i class="fa fa-clock-o"></i> {{timeFromNow(detail.created)}}</span>
               </h6>
-              <p class="mb-1 rating-detail">{{detail.content}}</p>
-              <h5 class="mb-0">
-                Score: <span class="text-bold text-primary">{{detail.score}}</span>
-              </h5>
+              <h6 class="rating-detail mb-0">{{detail.content}}
+
+                Aggregate Score: <span class="text-bold text-primary">{{detail.score}}</span>
+
+                Full Analysis: <a :href="detail.file" target="_blank"><i class="fa fa-file-pdf-o"></i> {{detail.rater.full_name}}'s Analysis</a>
+              </h6>
+
             </div>
           </div>
         </div>
@@ -317,21 +331,21 @@
               <i class="fa fa-question-circle"></i>
             </router-link>
 
-            <a class="float-right text-primary" href="javascript:void(0)" v-if="!rating_derail"
-               @click="project_detail=false;feed_detail=false;rating_derail=true">> Detail</a>
+            <a class="float-right text-primary" href="javascript:void(0)" v-if="!rating_detail"
+               @click="project_detail=false;feed_detail=false;rating_detail=true">> Detail</a>
             <a class="float-right text-primary" href="javascript:void(0)" v-else
-               @click="project_detail=true;feed_detail=false;rating_derail=false">> Back</a>
+               @click="project_detail=true;feed_detail=false;rating_detail=false">> Back</a>
           </h6>
           <hr class="mb-3 mt-2">
           <h2 class="text-bold text-info text-center mb-0" v-if="project.rating">
-            <a href="javascript:void(0)" @click="rating_derail=true;project_detail=false;feed_detail=false">{{project.rating}}/100</a>
+            <a href="javascript:void(0)" @click="rating_detail=true;project_detail=false;feed_detail=false">{{project.rating}}/100</a>
           </h2>
           <h2 class="text-bold text-info text-center mb-0" v-else>
-            <a href="javascript:void(0)" @click="rating_derail=true;project_detail=false;feed_detail=false">No Ratings</a>
+            <a href="javascript:void(0)" @click="rating_detail=true;project_detail=false;feed_detail=false">No Ratings</a>
           </h2>
-          <div class="text-center" v-if="rating_derail">
+          <div class="text-center" v-if="rating_detail">
             <button class="btn btn-primary btn-sm"
-                    @click="project_detail=true;feed_detail=false;rating_derail=false">Back
+                    @click="project_detail=true;feed_detail=false;rating_detail=false">Back
             </button>
           </div>
         </div>
@@ -352,9 +366,9 @@
           <h6 class="text-muted text-normal text-uppercase">
             Updates
             <a class="float-right text-primary" href="javascript:void(0)" v-if="!feed_detail"
-               @click="project_detail=false;feed_detail=true;rating_derail=false">> More</a>
+               @click="project_detail=false;feed_detail=true;rating_detail=false">> More</a>
             <a class="float-right text-primary" href="javascript:void(0)" v-else
-               @click="project_detail=true;feed_detail=false;rating_derail=false">> Back</a>
+               @click="project_detail=true;feed_detail=false;rating_detail=false">> Back</a>
           </h6>
           <hr class="mb-3 mt-2">
           <div class="entry mb-0 mt-3" v-for="(feed, index) in feeds" v-if="!feed_detail&&feeds_loaded&&index<2">
@@ -373,7 +387,7 @@
           </div>
           <div class="text-center" v-if="feed_detail">
             <button class="btn btn-primary btn-sm"
-                    @click="project_detail=true;feed_detail=false;rating_derail=false">Back
+                    @click="project_detail=true;feed_detail=false;rating_detail=false">Back
             </button>
           </div>
         </div>
@@ -464,14 +478,14 @@
     data () {
       return {
         // rating
-        new_rating_detail_pros: '',
-        new_rating_detail_cons: '',
+        new_rating_detail_summary: '',
+        new_rating_detail_file: '',
         new_rating_detail_score: null,
 
         // UI Control
         project_detail: true,
         feed_detail: false,
-        rating_derail: false,
+        rating_detail: false,
 
         // Subscription
         subscribed: false,
@@ -574,11 +588,12 @@
 
       // Rating Details
       newRating () {
-        const form_data = {
-          id: this.$route.params.id,
-          score: this.new_rating_detail_score,
-          content: 'Pros: \n' + this.new_rating_detail_pros + '\nCons: \n' + this.new_rating_detail_cons
-        }
+        const form_data = new FormData()
+        form_data.append('id', this.$store.getters.current_project.id)
+        form_data.append('score', this.new_rating_detail_score)
+        form_data.append('content', this.new_rating_detail_summary)
+        form_data.append('file', this.new_rating_detail_file)
+
         this.$store.dispatch('createProjectRatingDetail', form_data)
           .catch(() => {
             this.$store.dispatch('toastr', {
@@ -588,6 +603,14 @@
             })
 
           })
+      },
+      onFileChange (e) {
+        const files = e.target.files || e.dataTransfer.files
+        if (!files.length) return
+        this.new_rating_detail_file = files[0]
+      },
+      removeFile () {
+        this.new_rating_detail_file = null
       },
 
       // Auto Investment
