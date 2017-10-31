@@ -23,7 +23,10 @@
           </div>
         </div>
         <div class="card text-center" v-else>
-          <div class="card-body"><h3 class="card-title"><i class="fa fa-check"></i> We have sent the email with the password reset link</h3>
+          <div class="card-body">
+            <h5 class="card-title m-0">
+              <i class="fa fa-check text-success"></i> We have sent the email with the password reset link
+            </h5>
           </div>
         </div>
       </div>

@@ -36,7 +36,7 @@
       <div class="col-sm-8">
         <div class="card text-center">
           <div class="card-body">
-            <h3 class="card-title"><i class="fa fa-times"></i> Ooops, Something went wrong</h3>
+            <h4 class="card-title m-0"><i class="fa fa-times text-danger"></i> Ooops, Something went wrong</h4>
             <p class="text-danger">Error Message: {{err_msg}}</p>
             <p>Tips: Did you use the right URL?</p>
           </div>
@@ -47,8 +47,8 @@
       <div class="col-sm-8">
         <div class="card text-center">
           <div class="card-body">
-            <h3 class="card-title"><i class="fa fa-times"></i> Password Reset Successful!</h3>
-            <a href="javascript:void(0)" data-toggle="modal" data-target="#login-modal">Login using new password</a>
+            <h4 class="card-title"><i class="fa fa-check text-success"></i> You have successfully reset your password!</h4>
+            <a href="javascript:void(0)" style="text-decoration: none" data-toggle="modal" data-target="#login-modal">Login with new password</a>
           </div>
         </div>
       </div>
@@ -57,7 +57,7 @@
 </template>
 
 <script>
-  import { SHA256 } from '../../config'
+  import { SHA256 } from '../config'
 
   export default {
     name: 'InvitedRegister',
