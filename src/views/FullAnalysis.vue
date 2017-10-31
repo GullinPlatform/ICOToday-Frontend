@@ -88,11 +88,35 @@
     },
     computed: {
       ...mapGetters({
-        full_analysis_url: 'full_analysis_url'
+        full_analysis_url: 'full_analysis_url',
+        project_rating_detail_by_id: 'project_rating_detail_by_id',
+        login_status: 'login_status'
       })
     },
     beforeMount () {
-      this.src = this.full_analysis_url
+      if (this.$route.params.id) {
+        this.$store.dispatch('getProjectRatingDetailById', this.$route.params.id).then(() => {
+          this.src = this.project_rating_detail_by_id.file
+        })
+      } else {
+        this.src = this.full_analysis_url
+      }
+    },
+    mounted () {
+
+    },
+    watch: {
+      page: function () {
+        if (this.page > 5 && !this.login_status) {
+          this.page = 5
+          this.$store.dispatch('toastr', {
+            type: 'warning',
+            title: 'Notice',
+            message: 'Only ICOToday user can view the whole report, please signup to continue'
+          })
+          $('#signup-modal').modal('show')
+        }
+      }
     }
   }
 </script>

@@ -219,6 +219,10 @@ export default new Router({
       path: '/analysis',
       component: FullAnalysis,
       name: 'full_analysis'
+    }, {
+      path: '/analysis/:id',
+      component: FullAnalysis,
+      name: 'full_analysis'
     }
     ]
   }]

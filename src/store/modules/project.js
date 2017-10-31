@@ -9,7 +9,9 @@ const state = {
   current_project: {},
   current_project_search_result: {},
   current_project_rating_detail: [],
-  current_project_subscribers:[],
+  current_project_subscribers: [],
+
+  project_rating_detail_by_id: {},
 
   unrated_projects: [],
   tags: [],
@@ -46,6 +48,9 @@ const getters = {
     return state.project_stat
   },
 
+  project_rating_detail_by_id: state => {
+    return state.project_rating_detail_by_id
+  },
 }
 
 const actions = {
@@ -150,7 +155,7 @@ const actions = {
         return Promise.reject(error)
       })
   },
-  listUserRatedProjects({commit}, id) {
+  listUserRatedProjects ({commit}, id) {
     return projectApi.listUserRatedProjects(id)
       .then((response) => {
         commit(types.PROMO_PROJECTS, response)
@@ -212,6 +217,17 @@ const actions = {
         return Promise.reject(error)
       })
   },
+  getProjectRatingDetailById ({commit}, id) {
+    return projectApi.getProjectRatingDetailById(id)
+      .then((response) => {
+        commit(types.GET_PROJECT_RATING_DETAIL_BY_ID, response)
+        return Promise.resolve()
+      })
+      .catch((error) => {
+        return Promise.reject(error)
+      })
+  }
+
 }
 
 const mutations = {
@@ -235,7 +251,6 @@ const mutations = {
   [types.UNRATED_PROJECTS] (state, response) {
     state.unrated_projects = response
   },
-
 
   [types.PROMO_PROJECTS] (state, response) {
     state.promo_projects = response
@@ -262,7 +277,9 @@ const mutations = {
   [types.GET_PROJECT_SUBSCRIBERS] (state, response) {
     state.current_project_subscribers = response
   },
-
+  [types.GET_PROJECT_RATING_DETAIL_BY_ID] (state, response) {
+    state.project_rating_detail_by_id = response
+  },
 }
 
 export default {

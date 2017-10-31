@@ -69,8 +69,11 @@ export default {
   updateProjectRatingDetail (form_data) {
     return apiCall('put', form_data.id + '/rate/', form_data)
   },
+  getProjectRatingDetailById (id) {
+    return apiCall('get', 'rt/' + id + '/')
+  },
 
-  getProjectSubscribers(id) {
+  getProjectSubscribers (id) {
     return apiCall('get', id + '/subs/')
   }
 }
