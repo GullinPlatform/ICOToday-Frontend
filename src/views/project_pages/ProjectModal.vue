@@ -42,7 +42,7 @@
               <div class="card-new-layout" v-if="project.token_sale_plan">
                 <h6 class="text-muted text-normal text-uppercase">Token Sale Plan</h6>
                 <hr class="mb-3 mt-2">
-                <div class="text-left">{{project.token_sale_plan}}</div>
+                <vue-markdown class="text-left" :source="project.token_sale_plan"></vue-markdown>
               </div>
               <!--Team-->
               <div class="card-new-layout">
