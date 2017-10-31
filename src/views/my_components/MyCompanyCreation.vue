@@ -59,7 +59,7 @@
         this.$router.push({name: 'me_need_verify'})
       }
       // Redirect non investor user
-      if (this.self_type !== 1) {
+      if (this.$store.getters.self_type !== 1) {
         this.$router.push({name: 'landing'})
       }
 
