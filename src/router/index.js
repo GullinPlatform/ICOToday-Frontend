@@ -50,6 +50,8 @@ import TermsAndPolicy from 'views/static_pages/TermsAndPolicy'
 
 import NotificationsFeed from 'views/NotificationsFeed'
 
+import FullAnalysis from 'views/FullAnalysis'
+
 Vue.use(Router)
 
 export default new Router({
@@ -213,6 +215,10 @@ export default new Router({
       path: '/notifications',
       component: NotificationsFeed,
       name: 'notifications'
+    }, {
+      path: '/analysis',
+      component: FullAnalysis,
+      name: 'full_analysis'
     }
     ]
   }]

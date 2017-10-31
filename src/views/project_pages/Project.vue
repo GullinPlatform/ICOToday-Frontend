@@ -300,7 +300,6 @@
             </div>
           </div>
 
-
           <div class="media pos-relative card-new-layout" v-for="detail in rating_details">
             <img :src="detail.rater.avatar"
                  class="d-flex rounded-circle align-self-start mr-4" width="55">
@@ -310,15 +309,12 @@
                   {{detail.rater.full_name}}
                 </router-link>
                 <span class="text-muted" v-if="detail.rater.title">{{detail.rater.title}}</span>
-                <span class="float-right"><i class="fa fa-clock-o"></i> {{timeFromNow(detail.created)}}</span>
+                <h6 class="mb-0 float-right">Aggregate Score: <span class="text-bold text-primary">{{detail.score}}</span></h6>
               </h6>
-              <h6 class="rating-detail mb-0">{{detail.content}}
-
-                Aggregate Score: <span class="text-bold text-primary">{{detail.score}}</span>
-
-                Full Analysis: <a :href="detail.file" target="_blank"><i class="fa fa-file-pdf-o"></i> {{detail.rater.full_name}}'s Analysis</a>
-              </h6>
-
+              <p class="rating-detail p-0 m-0">{{detail.content}}</p>
+              <button class="btn btn-link-primary m-0 p-0" @click="fullAnalysis(detail.file)"><i class="fa fa-file-pdf-o"></i> See full analysis</button>
+              <br>
+              <span><i class="fa fa-clock-o"></i> {{timeFromNow(detail.created)}}</span>
             </div>
           </div>
         </div>
@@ -611,6 +607,10 @@
       },
       removeFile () {
         this.new_rating_detail_file = null
+      },
+      fullAnalysis (url) {
+        this.$store.dispatch('setFullAnalysis', url)
+        this.$router.push({name: 'full_analysis'})
       },
 
       // Auto Investment

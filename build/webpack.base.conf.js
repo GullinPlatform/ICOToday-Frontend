@@ -41,10 +41,12 @@ module.exports = {
       {
         test: /\.vue$/,
         exclude: [
-          path.resolve(__dirname, '../node_modules'),
           path.resolve(__dirname, '../static')
         ],
-        include: [path.resolve(__dirname, '../src')],
+        include: [
+          path.resolve(__dirname, '../src'),
+          path.resolve(__dirname, '../node_modules'),
+        ],
         loader: 'vue-loader',
         options: vueLoaderConfig
       }, {

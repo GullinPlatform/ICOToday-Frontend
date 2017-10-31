@@ -5,7 +5,9 @@ const state = {
   is_advisor: false,
 
   register_follow_up_step: 1,
-  new_company_name: ''
+  new_company_name: '',
+
+  full_analysis_url: '',
 }
 
 const getters = {
@@ -23,6 +25,11 @@ const getters = {
   },
   new_company_name: state => {
     return state.new_company_name
+  },
+
+  // url for full analysis
+  full_analysis_url: state => {
+    return state.full_analysis_url
   },
 }
 
@@ -46,9 +53,15 @@ const actions = {
     commit(types.FOLLOW_UP_STEP, step_move)
   },
 
-  setNewCompanyName({commit}, new_company_name) {
+  setNewCompanyName ({commit}, new_company_name) {
     commit(types.NEW_COMPANY_NAME, new_company_name)
   },
+
+  // Get url of full analysis
+  setFullAnalysis ({commit}, url) {
+    commit(types.SET_FULL_ANALYSIS_URL, url)
+  },
+
   // Global toastr trigger
   toastr ({commit}, data) {
     let toastOptions = {
@@ -88,6 +101,9 @@ const mutations = {
   },
   [types.WHITE_LIST_EMAIL] (state, email) {
     state.white_list_email = email
+  },
+  [types.SET_FULL_ANALYSIS_URL] (state, url) {
+    state.full_analysis_url = url
   },
 }
 
