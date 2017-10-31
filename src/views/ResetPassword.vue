@@ -57,6 +57,8 @@
 </template>
 
 <script>
+  import { SHA256 } from '../../config'
+
   export default {
     name: 'InvitedRegister',
     head: {
@@ -83,7 +85,7 @@
         if (this.password1 === this.password2) {
           const formData = {
             token: this.$route.query.token,
-            password: this.password1
+            password: SHA256(this.password1)
           }
           this.$store.dispatch('forgetPasswordResetPassword', formData)
             .then(() => {
@@ -96,7 +98,7 @@
         }
         else {
           this.pass_mismatch = true
-          this.err_msg = 'Password Mismatch'
+          this.err_msg = 'Password not match'
         }
       }
     },
