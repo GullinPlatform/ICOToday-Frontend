@@ -425,7 +425,7 @@
             </tr>
             <tr>
               <td class="pl-1">Accepting</td>
-              <td class="text-bold" v-if="project.coin_unit">{{project.coin_unit}}</td>
+              <td class="text-bold" v-if="project.accept">{{project.accept}}</td>
               <td class="text-bold" v-else>-</td>
             </tr>
             </tbody>

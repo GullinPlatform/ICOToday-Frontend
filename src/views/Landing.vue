@@ -194,7 +194,7 @@
     head: {
       title: {
         inner: 'ICOToday',
-        complement: 'Find Your Next ICO',
+        complement: 'The Trusted Platform to Launch and Participate in ICOs',
       }
     },
     components: {
