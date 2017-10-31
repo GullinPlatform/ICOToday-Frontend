@@ -112,7 +112,7 @@
           this.$store.dispatch('toastr', {
             type: 'warning',
             title: 'Notice',
-            message: 'Only ICOToday user can view the whole report, please signup to continue'
+            message: 'Only ICOToday users are allowed to view the full report, please signup to continue.'
           })
           $('#signup-modal').modal('show')
         }

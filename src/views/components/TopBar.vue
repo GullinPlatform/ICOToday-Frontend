@@ -157,6 +157,10 @@
       Please verify your account to have fully access to ICOToday's great features.
       <a href="javascript:void(0)" @click="resendConfirmEmail()" :class="{'text-muted':!able_to_resend}">RESEND <span v-show="!able_to_resend">(Retry Later)</span></a>
     </div>
+    <div class="alert alert-primary alert-dismissible alert-top text-center text-lg">
+      <span class="alert-close" data-dismiss="alert"></span>
+      <i class="icon-bell"></i>&nbsp;&nbsp;Welcome! This is ICOToday’s Launch week. We will be announcing our initial Analysts and adding ratings and reports each day of the week. Stay tuned.
+    </div>
   </div>
 </template>
 
@@ -241,6 +245,7 @@
     font-weight: 500;
     text-decoration: none;
   }
+
   .router-link-active {
     color: #0da9ef;
   }
