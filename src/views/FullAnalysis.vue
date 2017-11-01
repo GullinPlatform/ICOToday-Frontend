@@ -3,26 +3,20 @@
     <div class="text-center">
       <div class="mb-3">
         <div class="form-group row justify-content-center">
-          <div class="col-1">
-            <button class="btn btn-link-secondary p-0 m-0" @click="page=1" type="button"><<</button>
-          </div>
-          <div class="col-1">
+          <div class="col-2">
             <button class="btn btn-link-secondary p-0 m-0" v-if="page>1" @click="page-=1" type="button">< Prev</button>
             <button class="btn btn-link-secondary p-0 m-0" v-else type="button">< Prev</button>
           </div>
-          <div class="col-5">
+          <div class="col-5 hidden-sm-down">
             <div class="row justify-content-center">
               <label class="col-2 col-form-label p-r-3" for="page">Page:  </label>
               <input id="page" class="form-control form-control-sm col-2 text-center" type="number" v-model.number="page">
               <label class="col-2 col-form-label p-0 text-lg" for="page">/ {{numPages}}</label>
             </div>
           </div>
-          <div class="col-1">
+          <div class="col-2">
             <button class="btn btn-link-secondary p-0 m-0" v-if="page<numPages" @click="page+=1" type="button">Next ></button>
             <button class="btn btn-link-secondary p-0 m-0" v-else type="button">Next ></button>
-          </div>
-          <div class="col-1">
-            <button class="btn btn-link-secondary p-0 m-0" @click="page=numPages" type="button">>></button>
           </div>
         </div>
       </div>
@@ -30,28 +24,22 @@
         <div v-if=" loadedRatio> 0 && loadedRatio < 1" style="background-color: green; color: white; text-align: center" :style="{ width: loadedRatio * 100 + '%' }">{{ Math.floor(loadedRatio * 100) }}%</div>
         <pdf v-if="show" ref="pdf" :src="src" :page="page" :rotate="rotate" @password="password" @progress="loadedRatio = $event" @error="error" @numPages="numPages = $event"></pdf>
       </div>
-      <div class="mt-3">
+      <div class="mb-3">
         <div class="form-group row justify-content-center">
-          <div class="col-1">
-            <button class="btn btn-link-secondary p-0 m-0" @click="page=1" type="button"><<</button>
-          </div>
-          <div class="col-1">
+          <div class="col-2">
             <button class="btn btn-link-secondary p-0 m-0" v-if="page>1" @click="page-=1" type="button">< Prev</button>
             <button class="btn btn-link-secondary p-0 m-0" v-else type="button">< Prev</button>
           </div>
-          <div class="col-5">
+          <div class="col-5 hidden-sm-down">
             <div class="row justify-content-center">
-              <label class="col-2 col-form-label p-r-3" for="page_d">Page:  </label>
-              <input id="page_d" class="form-control form-control-sm col-2 text-center" type="number" v-model.number="page">
-              <label class="col-2 col-form-label p-0 text-lg" for="page_d">/ {{numPages}}</label>
+              <label class="col-2 col-form-label p-r-3" for="page">Page:  </label>
+              <input id="page" class="form-control form-control-sm col-2 text-center" type="number" v-model.number="page">
+              <label class="col-2 col-form-label p-0 text-lg" for="page">/ {{numPages}}</label>
             </div>
           </div>
-          <div class="col-1">
+          <div class="col-2">
             <button class="btn btn-link-secondary p-0 m-0" v-if="page<numPages" @click="page+=1" type="button">Next ></button>
             <button class="btn btn-link-secondary p-0 m-0" v-else type="button">Next ></button>
-          </div>
-          <div class="col-1">
-            <button class="btn btn-link-secondary p-0 m-0" @click="page=numPages" type="button">>></button>
           </div>
         </div>
       </div>
