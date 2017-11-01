@@ -25,9 +25,9 @@
             </router-link>
           </li>
           <li>
-            <a target="_blank" href="https://s3.us-east-2.amazonaws.com/icotoday/ICOToday+White+paper.pdf" class="hidden-sm-down">
+            <router-link :to="{name:'white_paper'}" class="hidden-sm-down">
               <span>WHITE PAPER</span>
-            </a>
+            </router-link>
           </li>
         </ul>
         <div class="toolbar">

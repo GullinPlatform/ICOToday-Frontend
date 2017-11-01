@@ -51,6 +51,7 @@ import TermsAndPolicy from 'views/static_pages/TermsAndPolicy'
 import NotificationsFeed from 'views/NotificationsFeed'
 
 import FullAnalysis from 'views/FullAnalysis'
+import WhitePaper from 'views/WhitePaper'
 
 Vue.use(Router)
 
@@ -223,6 +224,10 @@ export default new Router({
       path: '/analysis/:id',
       component: FullAnalysis,
       name: 'full_analysis'
+    }, {
+      path: '/whitepaper',
+      component: WhitePaper,
+      name: 'white_paper'
     }
     ]
   }]
