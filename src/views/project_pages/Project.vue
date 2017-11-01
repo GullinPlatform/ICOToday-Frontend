@@ -470,6 +470,14 @@
 
   export default {
     name: 'Project',
+    head: {
+      title: function () {
+        return {
+          inner: 'ICOToday',
+          complement: this.project.name
+        }
+      },
+    },
     components: {VueMarkdown, Spinner},
     data () {
       return {

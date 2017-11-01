@@ -65,13 +65,20 @@
   import pdf from 'vue-pdf'
 
   export default {
+    name: 'FullAnalysis',
+    head: {
+      title: {
+        inner: 'ICOToday',
+        complement: 'Full Analysis',
+      }
+    },
     components: {
       pdf: pdf
     },
     data () {
       return {
         show: true,
-        src: 'https://s3.us-east-2.amazonaws.com/icotoday/project_ratings/financialanalysismr.raven.pdf',
+        src: '',
         loadedRatio: 0,
         page: 1,
         numPages: 0,
@@ -101,9 +108,6 @@
       } else {
         this.src = this.full_analysis_url
       }
-    },
-    mounted () {
-
     },
     watch: {
       page: function () {
