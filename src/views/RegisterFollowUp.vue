@@ -2,29 +2,31 @@
   <div class="container container-padding">
     <div v-if="step===1">
       <h2 class="text-center">
-        Tell us more about you
+        Choose Account Type
       </h2>
       <div class="row justify-content-center mt-5">
         <div class="col-md-8">
           <div class="list-group">
             <a class="list-group-item flex-column align-items-start" :class="{active:account_type===1}" href="javascript:void(0)" @click="account_type=1">
               <div class="d-flex w-100 justify-content-between">
-                <h4>I'm an Investor</h4>
+                <h4>Investor Account</h4>
               </div>
-              <p>Join to subscribe to ICOs to get updates on your feed, view detailed ratings and analysis, follow your favorite analysts and easily participate in Token Sales.</p>
-
+              <p class="m-0">Participate in Token Sales. Subscribe to ICOs and get updates. View detailed ratings and analysis. Follow your favorite analysts.</p>
+              <small class="opacity-60">Click to select.</small>
             </a>
             <a class="list-group-item flex-column align-items-start" :class="{active:account_type===0}" href="javascript:void(0)" @click="account_type=0">
               <div class="d-flex w-100 justify-content-between">
-                <h4>I'm a Company</h4>
+                <h4>Company Account</h4>
               </div>
-              <p>Join and apply to list your ICO to reach our dedicated base of users. Run your ICO through our platform and we will take care of security and perform the KYC and AML requirements for the participants in your Token Sale. </p>
+              <p class="m-0">List your ICO to reach our dedicated base of users. Run your ICO through our platform. Help you perform the KYC and AML requirements for the participants in your Token Sale. </p>
+              <small class="opacity-60">Click to select.</small>
             </a>
             <a class="list-group-item flex-column align-items-start" :class="{active:account_type===2}" href="javascript:void(0)" @click="account_type=2">
               <div class="d-flex w-100 justify-content-between">
-                <h4>I'm an Analyst</h4>
+                <h4>Analyst Account</h4>
               </div>
-              <p>Become an Analyst on our platform and get paid to evaluate ICOs looking to get listed on our platform. Build your credibility and following in the industry. </p>
+              <p class="m-0">Become an Analyst on our platform and get paid to evaluate ICOs looking to get listed on our platform. Build your credibility and following in the industry. </p>
+              <small class="opacity-60">Click to select.</small>
             </a>
           </div>
         </div>

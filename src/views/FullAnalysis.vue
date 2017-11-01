@@ -111,13 +111,16 @@
     },
     watch: {
       page: function () {
-        if (this.page > 5 && !this.login_status) {
-          this.page = 5
-          this.$store.dispatch('toastr', {
-            type: 'warning',
-            title: 'Notice',
-            message: 'Only ICOToday users are allowed to view the full report, please signup to continue.'
-          })
+//        if (this.page > 5 && !this.login_status) {
+//          this.page = 5
+//          this.$store.dispatch('toastr', {
+//            type: 'warning',
+//            title: 'Notice',
+//            message: 'Only ICOToday users are allowed to view the full report, please signup to continue.'
+//          })
+//          $('#signup-modal').modal('show')
+//        }
+        if (this.page === this.numPage && !this.login_status) {
           $('#signup-modal').modal('show')
         }
       }
@@ -125,8 +128,3 @@
   }
 </script>
 
-<style scoped>
-  .pdf-container {
-    margin-bottom: -100%
-  }
-</style>
