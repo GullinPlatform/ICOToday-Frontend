@@ -36,8 +36,8 @@ export default {
   tokenRefresh () {
     return apiCall('post', 'refresh_login_status/')
   },
-  logIP (form_data) {
-    return apiCall('post', 'log_ip/', form_data)
+  logIP () {
+    return apiCall('post', 'log_ip/')
   },
 
   // Account Detail

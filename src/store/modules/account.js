@@ -265,14 +265,13 @@ const actions = {
         commit(types.REFRESH_FAILED)
       })
   },
-  logIP ({commit}, form_data) {
-    userApi.logIP(form_data)
+  logIP ({commit}) {
+    userApi.logIP()
       .then((response) => {
         commit(types.LOG_IP)
         return Promise.resolve(response)
       })
       .catch((error) => {
-
         return Promise.reject(error)
       })
   },

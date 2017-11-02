@@ -40,7 +40,6 @@
 
 <script>
   import { SHA256 } from '../../config'
-  import getIP from '../../api/ip'
 
   export default {
     name: 'Login',
@@ -65,11 +64,9 @@
         this.$store.dispatch('login', form_data)
           .then(() => {
             // Log IP
-            getIP().then((response) => {
-              this.$store.dispatch('logIP', response)
-              // Clean up
-              this.resetState()
-            })
+            this.$store.dispatch('logIP')
+            // Clean up
+            this.resetState()
           })
           .catch(() => {
             this.error_message = 'Unable to login using provided email and password'

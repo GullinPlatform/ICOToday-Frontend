@@ -86,7 +86,6 @@
   import VueRecaptcha from 'vue-recaptcha'
   import Spinner from 'components/Spinner'
   import { SHA256 } from '../../config'
-  import getIP from '../../api/ip.js'
 
   export default {
     name: 'SignUp',
@@ -102,7 +101,6 @@
         whitelist: false,
         invest_amount: '',
         verified: '',
-        ip: '',
 
         email_msg: '',
         sitekey: '6LcRUjIUAAAAAJ8u6wyy3mva4XchIbZ8-4fpyERM',
@@ -116,66 +114,37 @@
 
         this.$validator.validateAll().then((result) => {
           // If Invalid
-//          if (!result || !this.verified) {
-//            this.loading = false
-//            return
-//          }
+          // if (!result || !this.verified) {
+          //    this.loading = false
+          //    return
+          // }
           if (!result) {
             this.loading = false
             return
           }
           // Valid
-          getIP()
-            .then((response) => {
-              const form_data = {
-                email: this.email,
-                password: SHA256(this.password),
-                first_name: this.first_name,
-                last_name: this.last_name,
-                referrer: this.referrer,
-                verified: this.verified,
-                whitelist: this.whitelist,
-                amount_to_invest: this.invest_amount ? this.invest_amount : 0,
-                last_login_ip: response.ip
-              }
+          const form_data = {
+            email: this.email,
+            password: SHA256(this.password),
+            first_name: this.first_name,
+            last_name: this.last_name,
+            referrer: this.referrer,
+            verified: this.verified,
+            whitelist: this.whitelist,
+            amount_to_invest: this.invest_amount ? this.invest_amount : 0,
+          }
 
-              this.$store.dispatch('signup', form_data)
-                .then(() => {
-                  this.$store.dispatch('cleanWhiteListEmail')
-                  // Clean up
-                  this.resetState()
-                })
-                .catch((error) => {
-                  this.loading = false
-                  console.log(error.response)
-                  if (error.response.data.hasOwnProperty('email'))
-                    this.email_msg = error.response.data.email[0]
-                })
+          this.$store.dispatch('signup', form_data)
+            .then(() => {
+              this.$store.dispatch('cleanWhiteListEmail')
+              // Clean up
+              this.resetState()
             })
-            .catch(() => {
-              const form_data = {
-                email: this.email,
-                password: SHA256(this.password),
-                first_name: this.first_name,
-                last_name: this.last_name,
-                referrer: this.referrer,
-                verified: this.verified,
-                whitelist: this.whitelist,
-                amount_to_invest: this.invest_amount ? this.invest_amount : 0,
-              }
-
-              this.$store.dispatch('signup', form_data)
-                .then(() => {
-                  this.$store.dispatch('cleanWhiteListEmail')
-                  // Clean up
-                  this.resetState()
-                })
-                .catch((error) => {
-                  this.loading = false
-                  console.log(error.response)
-                  if (error.response.data.hasOwnProperty('email'))
-                    this.email_msg = error.response.data.email[0]
-                })
+            .catch((error) => {
+              this.loading = false
+              console.log(error.response)
+              if (error.response.data.hasOwnProperty('email'))
+                this.email_msg = error.response.data.email[0]
             })
         })
       },
@@ -192,7 +161,6 @@
         this.password = ''
         this.check = false
         this.verified = ''
-        this.ip = ''
         this.email_msg = ''
         this.sitekey = '6LcRUjIUAAAAAJ8u6wyy3mva4XchIbZ8-4fpyERM'
         this.loading = false
