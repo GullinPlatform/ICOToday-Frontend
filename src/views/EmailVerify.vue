@@ -8,7 +8,7 @@
             <p>Your email address has been approved!</p>
           </div>
           <div class="card-footer text-muted">
-            <router-link :to="{name:'landing'}" class="btn btn-primary">Explore</router-link>
+            <router-link :to="{name:'me'}" class="btn btn-primary">Explore</router-link>
           </div>
         </div>
       </div>
