@@ -24,7 +24,7 @@
         <div v-if=" loadedRatio> 0 && loadedRatio < 1" style="background-color: green; color: white; text-align: center" :style="{ width: loadedRatio * 100 + '%' }">{{ Math.floor(loadedRatio * 100) }}%</div>
         <pdf v-if="show" ref="pdf" :src="src" :page="page" :rotate="rotate" @password="password" @progress="loadedRatio = $event" @error="error" @numPages="numPages = $event"></pdf>
       </div>
-      <div class="mb-3">
+      <div class="mb-3 m-t-3">
         <div class="form-group row justify-content-center">
           <div class="col-2">
             <button class="btn btn-link-secondary p-0 m-0" v-if="page>1" @click="page-=1" type="button">< Prev</button>
@@ -32,9 +32,9 @@
           </div>
           <div class="col-5 hidden-sm-down">
             <div class="row justify-content-center">
-              <label class="col-2 col-form-label p-r-3" for="page">Page:  </label>
-              <input id="page" class="form-control form-control-sm col-2 text-center" type="number" v-model.number="page">
-              <label class="col-2 col-form-label p-0 text-lg" for="page">/ {{numPages}}</label>
+              <label class="col-2 col-form-label p-r-3" for="page_down">Page:  </label>
+              <input id="page_down" class="form-control form-control-sm col-2 text-center" type="number" v-model.number="page">
+              <label class="col-2 col-form-label p-0 text-lg" for="page_down">/ {{numPages}}</label>
             </div>
           </div>
           <div class="col-2">
