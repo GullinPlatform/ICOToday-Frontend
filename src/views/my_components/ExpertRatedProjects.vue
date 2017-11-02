@@ -1,5 +1,5 @@
 <template>
-  <div class="col-md-8">
+  <div class="col-md-9">
     <h6 class="text-muted text-normal text-uppercase">
      My Rated Projects
     </h6>

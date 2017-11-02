@@ -1,5 +1,5 @@
 <template>
-  <div class="col-md-8" v-if="loaded && is_verified">
+  <div class="col-md-9" v-if="loaded && is_verified">
     <h6 class="text-muted text-normal text-uppercase ">New Project</h6>
     <hr class="mb-3 mt-2">
     <div class="checkout-steps">

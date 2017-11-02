@@ -2,7 +2,7 @@
   <!-- Page Content-->
   <div class="container container-padding">
     <div class="row">
-      <div class="col-md-4 mb-5">
+      <div class="col-md-3 mb-5">
         <aside class="user-info-wrapper">
           <div class="user-cover" style="background-image: url(../../../static/img/account/user-cover-img.jpg);">
             <div>
@@ -11,7 +11,6 @@
               <div class="warning-label float-right mr-2" v-if="type===2"><i class="fa fa-star mb-01"></i> Analyst</div>
               <div class="info-label float-right mr-2" v-if="type===0"><i class="fa fa-building-o mb-01"></i> Project Owner</div>
               <div class="info-label float-right mr-2" v-if="type===3"><i class="fa fa-id-badge mb-01"></i> Project Advisor</div>
-
             </div>
           </div>
           <div class="user-info">
@@ -19,28 +18,29 @@
               <router-link class="edit-avatar" :to="{name:'me_profile'}"></router-link>
               <img :src="me.info.avatar" alt="User">
             </div>
-            <div class="pl-2">
-              <h4 class="mb-0">{{username}}</h4>
-              <h6 class="text-muted mb-0 mt-1">{{me.info.title}} <span v-if="me.info.company" class="text-gray-dark">@ {{me.info.company.name}}</span></h6>
-              <p>{{me.info.description}}</p>
-              <a :href="me.info.facebook" target="_blank"
-                 v-if="me.info.facebook">
-                <i class="fa fa-facebook"></i>
-              </a>
-              <a :href="me.info.linkedin" target="_blank"
-                 v-if="me.info.linkedin">
-                <i class="fa fa-linkedin-square"></i>
-              </a>
-              <a :href="me.info.twitter" target="_blank"
-                 v-if="me.info.twitter">
-                <i class="fa fa-twitter"></i>
-              </a>
-              <a :href="me.info.telegram" target="_blank"
-                 v-if="me.info.telegram">
-                <i class="fa fa-telegram"></i>
-              </a>
-            </div>
           </div>
+          <div class="text-center">
+            <h4 class="mb-0">{{username}}</h4>
+            <h6 class="text-muted mb-0 mt-1">{{me.info.title}} <span v-if="me.info.company" class="text-gray-dark">@ {{me.info.company.name}}</span></h6>
+            <p>{{me.info.description}}</p>
+            <a :href="me.info.facebook" target="_blank"
+               v-if="me.info.facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+            <a :href="me.info.linkedin" target="_blank"
+               v-if="me.info.linkedin">
+              <i class="fa fa-linkedin-square"></i>
+            </a>
+            <a :href="me.info.twitter" target="_blank"
+               v-if="me.info.twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+            <a :href="me.info.telegram" target="_blank"
+               v-if="me.info.telegram">
+              <i class="fa fa-telegram"></i>
+            </a>
+          </div>
+
         </aside>
         <nav class="list-group">
           <router-link :to="{name:'me'}" class="list-group-item">
@@ -93,7 +93,7 @@
         <h6 class="text-muted text-normal text-uppercase mt-4" v-if="type===1">Analyst</h6>
         <nav class="list-group" v-if="type===1">
           <router-link :to="{name:'me_analyst_apply'}" class="list-group-item with-badge">
-            <i class="fa fa-angle-right"></i> Apply To Be ICOToday Analyst
+            <i class="fa fa-angle-right"></i> Analyst Application
             <span class="badge badge-warning badge-pill">NEW!</span>
           </router-link>
         </nav>

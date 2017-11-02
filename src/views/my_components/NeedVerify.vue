@@ -1,5 +1,5 @@
 <template>
-  <div class="col-md-8 text-center" v-else>
+  <div class="col-md-9 text-center" v-else>
     <div class="card-new-layout">
       <h4 class="mt-3">
         You have to verify your email first

@@ -1,5 +1,5 @@
 <template>
-  <div class="col-md-8">
+  <div class="col-md-9">
     <h6 class="text-muted text-normal text-uppercase ">My Wallet</h6>
     <hr class="mb-3 mt-2">
     <div class="table-responsive table-wrapper">

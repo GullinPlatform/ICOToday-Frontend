@@ -1,5 +1,5 @@
 <template>
-  <div class="col-md-8">
+  <div class="col-md-9">
     <h6 class="text-muted text-normal text-uppercase ">My Followings</h6>
     <hr class="mb-3 mt-2">
     <div class="card-new-layout" v-if="loaded&&self_followings.length">

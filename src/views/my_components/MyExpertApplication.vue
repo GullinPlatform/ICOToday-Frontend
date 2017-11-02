@@ -1,5 +1,5 @@
 <template>
-  <div class="col-md-8" v-if="loaded && is_verified && !self_analyst_application">
+  <div class="col-md-9" v-if="loaded && is_verified && !self_analyst_application">
     <h6 class="text-muted text-normal text-uppercase ">
       ICOToday Analyst Application
     </h6>

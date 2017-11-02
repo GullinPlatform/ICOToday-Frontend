@@ -1,7 +1,7 @@
 <template>
   <div class="container container-padding">
     <div class="row">
-      <div class="col-md-4 mb-5" v-if="loaded">
+      <div class="col-md-3 mb-5" v-if="loaded">
         <aside class="user-info-wrapper">
           <div class="user-cover" style="background-image: url(../../../static/img/account/user-cover-img.jpg);">
             <div class="primary-label float-right" v-if="user_info.is_verified"><i class="fa fa-envelope-o mb-01"></i> Verified</div>
@@ -14,32 +14,33 @@
             <div class="user-avatar">
               <img :src="user_info.avatar">
             </div>
-            <div class="pl-2">
-              <h4 class="mb-0">{{user_info.full_name}}</h4>
-              <h6 class="text-muted mb-0 mt-1">{{user_info.title}} <span v-if="user_info.company" class="text-gray-dark">@ {{user_info.company.name}}</span></h6>
-              <p>{{user_info.description}}</p>
-              <div>
-                <a :href="user_info.facebook" target="_blank"
-                   v-if="user_info.facebook">
-                  <i class="fa fa-facebook"></i>
-                </a>
-                <a :href="user_info.linkedin" target="_blank"
-                   v-if="user_info.linkedin">
-                  <i class="fa fa-linkedin-square"></i>
-                </a>
-                <a :href="user_info.twitter" target="_blank"
-                   v-if="user_info.twitter">
-                  <i class="fa fa-twitter"></i>
-                </a>
-                <a :href="user_info.telegram" target="_blank"
-                   v-if="user_info.telegram">
-                  <i class="fa fa-telegram"></i>
-                </a>
-              </div>
-              <button class="btn btn-danger btn-sm btn-block" @click="followUser()" v-if="!followed">Follow</button>
-              <button class="btn btn-danger btn-sm btn-block" @click="unfollowUser()" v-else>Unfollow</button>
-            </div>
           </div>
+          <div class="text-center">
+            <h4 class="mb-0">{{user_info.full_name}}</h4>
+            <h6 class="text-muted mb-0 mt-1">{{user_info.title}} <span v-if="user_info.company" class="text-gray-dark">@ {{user_info.company.name}}</span></h6>
+            <p>{{user_info.description}}</p>
+            <div>
+              <a :href="user_info.facebook" target="_blank"
+                 v-if="user_info.facebook">
+                <i class="fa fa-facebook"></i>
+              </a>
+              <a :href="user_info.linkedin" target="_blank"
+                 v-if="user_info.linkedin">
+                <i class="fa fa-linkedin-square"></i>
+              </a>
+              <a :href="user_info.twitter" target="_blank"
+                 v-if="user_info.twitter">
+                <i class="fa fa-twitter"></i>
+              </a>
+              <a :href="user_info.telegram" target="_blank"
+                 v-if="user_info.telegram">
+                <i class="fa fa-telegram"></i>
+              </a>
+            </div>
+            <button class="btn btn-danger btn-sm " @click="followUser()" v-if="!followed">Follow</button>
+            <button class="btn btn-danger btn-sm " @click="unfollowUser()" v-else>Unfollow</button>
+          </div>
+
         </aside>
         <nav class="list-group">
           <router-link :to="{name:'user', params:{id:user_info.id}}" class="list-group-item">

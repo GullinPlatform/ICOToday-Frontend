@@ -1,5 +1,5 @@
 <template>
-  <div class="col-md-8">
+  <div class="col-md-9">
     <div class="card-new-layout text-center">
       <h6 class="m-0"><i class="fa fa-lightbulb-o"></i> Notice: This is project wallet, not your personal wallet!</h6>
     </div>
