@@ -122,6 +122,11 @@
                     </router-link>
                   </li>
                   <li>
+                    <router-link :to="{name:'me_company_create'}" class="dropdown-item" v-if="self_type===1||self_type===-1">
+                      <i class="fa fa-building-o"></i> List My ICO
+                    </router-link>
+                  </li>
+                  <li>
                     <router-link :to="{name:'analyst_unrated_projects'}" class="dropdown-item" v-if="self_type===2">
                       <i class="fa fa-star-o"></i>Rate projects
                     </router-link>

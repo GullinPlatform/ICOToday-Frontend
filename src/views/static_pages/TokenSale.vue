@@ -4,29 +4,32 @@
     <div id="home" class="jumbotron jumbotron-register">
       <div id="particles-js"></div><!-- /.particles div -->
       <div class="container center-vertically-holder">
-        <div class="center-vertically ">
+        <div class="center-vertically">
           <div class="row">
-            <div class="col-md-7">
+            <div class="col-md-12 text-center">
+              <h1 class="text-white text-bold mb-2">
+                ICOToday
+              </h1>
               <h2 class="text-white text-uppercase">
-                Seamless Platform<br>
-                for Launching and Investing<br>
-                on Blockchain
+                The Trusted Platform <br>
+                to Launch and Participate in ICOs
               </h2>
-
+            </div>
+            <div class="col-md-12 text-center">
               <div class="countdown" style="color:#fff;">
-                <div class="item mb-0">
+                <div class="item">
                   <div class="days">--</div>
                   <span class="days_ref">Days</span>
                 </div>
-                <div class="item mb-0">
+                <div class="item">
                   <div class="hours">--</div>
                   <span class="hours_ref">Hours</span>
                 </div>
-                <div class="item mb-0">
+                <div class="item">
                   <div class="minutes">--</div>
                   <span class="minutes_ref">Mins</span>
                 </div>
-                <div class="item mb-0">
+                <div class="item">
                   <div class="seconds">--</div>
                   <span class="seconds_ref">Secs</span>
                 </div>
@@ -37,21 +40,11 @@
                 </span>
               </div>
             </div>
-            <div class="col-sm-5">
-              <div class="register-form pb-0 pt-3">
-                <h3>Sign Up for our Whitelist</h3>
-                <div class="row">
-                  <div class="form-group col-sm-8">
-                    <input class="form-control" placeholder="Email Address" v-model="email"
-                           @keydown.enter="whiteListSubmit($event)">
-                  </div>
-                  <div class="form-group col-sm-4 mb-1">
-                    <button class="btn btn-primary mt-0"
-                            @click="whiteListSubmit($event)">Sign Up
-                    </button>
-                  </div>
-                </div>
-              </div>
+            <div class="col-md-12 text-center mt-3">
+              <button class="btn btn-primary"
+                      @click="whiteListSubmit($event)">Sign up for Whitelist
+              </button>
+              <router-link class="btn btn-secondary" :to="{name:'white_paper'}"><span class="text-gray-dark">White Paper</span></router-link>
             </div>
           </div>
         </div>

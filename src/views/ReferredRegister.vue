@@ -35,7 +35,7 @@
           <label class="custom-control custom-checkbox d-block">
             <input name="check" v-model="whitelist" type="checkbox" class="custom-control-input">
             <span class="custom-control-indicator"></span>
-            <span class="custom-control-description"> I want to signup for ICOToday Whitelist, too.
+            <span class="custom-control-description"> I want to signup for ICOToday Whitelist, too. (Optional)
             </span>
           </label>
 
@@ -80,7 +80,7 @@
         email: '',
         password: '',
         check: false,
-        whitelist: false,
+        whitelist: true,
         invest_amount: '',
         verified: '',
 

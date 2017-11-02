@@ -1,39 +1,11 @@
 <template>
   <div>
     <!-- Begin Jumbotron -->
-    <div id="home" class="jumbotron jumbotron-register" :class="{'jumbotron-login':login_status}">
+    <div id="home" class="jumbotron jumbotron-register jumbotron-login">
       <div id="particles-js" class="particles-login"></div><!-- /.particles div -->
       <div class="container center-vertically-holder">
         <div class="center-vertically">
-          <div class="row" v-if="!login_status">
-            <div class="col-md-7">
-              <h1 class="text-white text-bold mb-2">
-                ICOToday
-              </h1>
-              <h2 class="text-white text-uppercase">
-                The Trusted Platform <br>
-                to Launch and Participate in ICOs
-              </h2>
-            </div>
-            <div class="col-md-5 float-right">
-              <div class="register-form pb-0 pt-3">
-                <h3>Sign Up for our Whitelist</h3>
-                <div class="row">
-                  <div class="form-group col-sm-8">
-                    <input class="form-control" placeholder="Email Address" v-model="email"
-                           @keydown.enter="whiteListSubmit($event)">
-                  </div>
-                  <div class="form-group col-sm-4">
-                    <button class="btn btn-primary mt-0"
-                            @click="whiteListSubmit($event)">Sign Up
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="row" v-else>
+          <div class="row">
             <div class="col-md-12 text-center">
               <h1 class="text-white text-bold mb-2">
                 ICOToday
@@ -42,6 +14,10 @@
                 The Trusted Platform <br>
                 to Launch and Participate in ICOs
               </h2>
+              <button class="btn btn-primary mt-0"
+                      @click="whiteListSubmit($event)">Sign up for Whitelist
+              </button>
+              <router-link class="btn btn-secondary mt-0" :to="{name:'white_paper'}"><span class="text-gray-dark">White Paper</span></router-link>
             </div>
           </div>
         </div>
