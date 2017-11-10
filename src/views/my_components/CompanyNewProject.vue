@@ -2,9 +2,15 @@
   <div class="col-md-9" v-if="loaded && is_verified">
     <h6 class="text-muted text-normal text-uppercase ">New Project</h6>
     <hr class="mb-3 mt-2">
+    <h6 class="text-muted">
+      <i class="fa fa-lightbulb-o"></i> Tips: The more information you provide, the faster your ICO gets approved
+    </h6>
     <div class="checkout-steps">
+      <a :class="{active:step===5}" href="javascript:void(0)" @click="step=5">
+        <span class="fa fa-check-circle-o text-success" v-show="step>5"></span> 5. Team Members
+      </a>
       <a :class="{active:step===4}" href="javascript:void(0)" @click="step=4">
-        <span class="fa fa-check-circle-o text-success" v-show="step>4"></span> 4. Team Members
+        <span class="fa fa-check-circle-o text-success" v-show="step>4"></span><span class="angle"></span> 4. Timeline
       </a>
       <a :class="{active:step===3}" href="javascript:void(0)" @click="step=3"><span class="angle"></span>
         <span class="fa fa-check-circle-o text-success" v-show="step>3"></span> 3. Supplement
@@ -16,9 +22,6 @@
         <span class="fa fa-check-circle-o text-success" v-show="step>1"></span> 1. Basic Info
       </a>
     </div>
-    <h6 class="text-muted">
-      <i class="fa fa-lightbulb-o"></i> Tips: The more information you provide, the faster your ICO gets approved
-    </h6>
     <div class="card-new-layout" v-show="step===1">
       <h6 class="text-muted text-normal text-uppercase ">Basic info</h6>
       <hr class="mb-3 mt-2">

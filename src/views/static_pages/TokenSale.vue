@@ -191,15 +191,6 @@
         </div>
         <hr class="mb-30">
         <div class="container">
-          <div class="row text-center mt-30">
-            <div class="col-sm-12 mt-30">
-              <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 15%;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-                <div class="progress-bar bg-success" role="progressbar" style="width: 40%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                <div class="progress-bar bg-warning" role="progressbar" style="width: 45%;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div>
-          </div>
           <div class="mt-5 text-center">
             <h4>To be Announced</h4>
           </div>
@@ -215,11 +206,11 @@
       </div>
       <hr class="margin-bottom-1x">
       <div class="row">
-        <div class="col-md-3 col-sm-6 mb-30 text-center"><img
+        <div class="col-md-4 col-sm-6 mb-30 text-center"><img
           class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2"
           src="../../../static/img/team/joe_pic.png" alt="Team">
           <h6>Joseph Kitonga</h6>
-          <p class="text-muted mb-2">CEO</p>
+          <p class="text-muted mb-2">Co-Founder, CEO</p>
           <div class="social-bar">
             <a target="_blank" class="social-button shape-circle sb-linkedin"
                href="https://www.linkedin.com/in/joseph-kitonga-69702811b/"
@@ -227,7 +218,22 @@
               <i class="socicon-linkedin"></i></a>
           </div>
         </div>
-        <div class="col-md-2 col-sm-6 mb-30 text-center"><img
+        <div class="col-md-4 col-sm-6 mb-30 text-center">
+          <img target="_blank"
+               class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2"
+               src="../../../static/img/team/xl.jpg"
+               alt="Team">
+          <h6>Xiang Li</h6>
+          <p class="text-muted mb-2">Co-Founder, Full Stack Developer</p>
+          <div class="social-bar">
+            <a target="_blank" class="social-button shape-circle sb-linkedin"
+               href="https://www.linkedin.com/in/steve-xiangli/"
+               data-toggle="tooltip" data-placement="top" title="Linkedin">
+              <i class="socicon-linkedin"></i>
+            </a>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6 mb-30 text-center"><img
           class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2"
           src="../../../static/img/team/john_pic2.png" alt="Team">
           <h6>John Worthley</h6>
@@ -240,7 +246,7 @@
             </a>
           </div>
         </div>
-        <div class="col-md-2 col-sm-6 mb-30 text-center"><img
+        <div class="col-md-4 col-sm-6 mb-30 text-center"><img
           class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2"
           src="../../../static/img/team/nader_pic2.png" alt="Team">
           <h6>Nader Sadek</h6>
@@ -254,7 +260,7 @@
           </div>
 
         </div>
-        <div class="col-md-2 col-sm-6 mb-30 text-center">
+        <div class="col-md-4 col-sm-6 mb-30 text-center">
           <img target="_blank"
                class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2"
                src="../../../static/img/team/elorm_pic.jpg"
@@ -269,8 +275,7 @@
             </a>
           </div>
         </div>
-
-        <div class="col-md-3 col-sm-6 mb-30 text-center">
+        <div class="col-md-4 col-sm-6 mb-30 text-center">
           <img target="_blank"
                class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2"
                src="../../../static/img/team/Rounded.png"
@@ -285,6 +290,7 @@
             </a>
           </div>
         </div>
+
       </div>
     </div>
 
@@ -327,6 +333,32 @@
           src="../../../static/img/team/ismail_malik.png" alt="Team">
           <h6>Ismail Malik</h6>
           <p class="text-muted mb-2">Founder and CEO, Blockchain Lab</p>
+          <div class="social-bar">
+            <a target="_blank" class="social-button shape-circle sb-linkedin"
+               href="https://www.linkedin.com/in/blockchain/"
+               data-toggle="tooltip" data-placement="top" title="Linkedin">
+              <i class="socicon-linkedin"></i>
+            </a>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6 mb-30 text-center"><img
+          class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2"
+          src="../../../static/img/team/peter.jpg" alt="Team">
+          <h6>Peter Whalen</h6>
+          <p class="text-muted mb-2">Clinical Associate Professor of Entrepreneurship at Penn State University</p>
+          <div class="social-bar">
+            <a target="_blank" class="social-button shape-circle sb-linkedin"
+               href="https://www.linkedin.com/in/peter-whalen-11028215/"
+               data-toggle="tooltip" data-placement="top" title="Linkedin">
+              <i class="socicon-linkedin"></i>
+            </a>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6 mb-30 text-center"><img
+          class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2"
+          src="../../../static/img/team/ali.jpg" alt="Team">
+          <h6>Alireza Eatemadpour</h6>
+          <p class="text-muted mb-2">Principal Attorney of Alireza Eatemadpour, Esq.</p>
           <div class="social-bar">
             <a target="_blank" class="social-button shape-circle sb-linkedin"
                href="https://www.linkedin.com/in/blockchain/"
