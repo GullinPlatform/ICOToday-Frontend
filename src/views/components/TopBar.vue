@@ -14,21 +14,41 @@
           </div>
         </div>
         <ul>
+
           <li>
-            <router-link :to="{name:'faq', query:{type:'faq'}}" class="hidden-sm-down">
-              <span>User Guide</span>
+            <a href="#" class="hidden-sm-down" v-if="!login_status" data-toggle="modal" data-target="#signup-modal">
+              <span>Submit Your ICO</span>
+            </a>
+          </li>
+          <li>
+            <router-link :to="{name:'company_new_project'}"  v-if="login_status && self_type===0">
+                 <span>Submit Your ICO</span>
             </router-link>
           </li>
           <li>
-            <router-link :to="{name:'tokensale'}" class="hidden-sm-down">
-              <span>Token Sale</span>
+            <router-link :to="{name:'me_company_create'}" v-if="login_status && self_type===1||self_type===-1">
+               <span>Submit Your ICO</span>
             </router-link>
           </li>
           <li>
-            <router-link :to="{name:'white_paper'}" class="hidden-sm-down">
-              <span>WHITE PAPER</span>
+            <router-link :to="{name:'company_feed'}"  v-if="login_status && self_type===3">
+                 <span>Submit Your ICO</span>
             </router-link>
           </li>
+
+          <li>
+            <a class="hidden-sm-down" target="_blank" href="https://t.me/joinchat/DDHesUIRiVuAx6Sne4XgLw">
+              <span>Telegram/Support</span>
+            </a>
+          </li>
+
+          <li>
+            <a class="hidden-sm-down" target="_blank" href="https://icotoday.typeform.com/to/v5Pwco">
+              <span>Advertise Here</span>
+            </a>
+          </li>
+
+
         </ul>
         <div class="toolbar">
           <div class="inner">
@@ -162,9 +182,9 @@
       Please verify your account to have fully access to ICOToday's great features.
       <a href="javascript:void(0)" @click="resendConfirmEmail()" :class="{'text-muted':!able_to_resend}">RESEND <span v-show="!able_to_resend">(Retry Later)</span></a>
     </div>
-    <div class="alert alert-primary alert-dismissible alert-top text-center text-lg">
-      <span class="alert-close" data-dismiss="alert"></span>
-      <i class="icon-bell"></i>&nbsp;&nbsp;Welcome! This is ICOToday’s Launch week. We will be announcing our initial Analysts and adding ratings and reports each day of the week. Stay tuned.
+
+    <div class="alert alert-primary alert-top text-center text-lg">
+      See your advert here: - contact team@icotoday.io for pricing.
     </div>
   </div>
 </template>

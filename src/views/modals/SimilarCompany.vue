@@ -4,13 +4,13 @@
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title">
-            We found some companies with similar name, is those yours?
+            We found some companies with similar names, is those yours?
           </h4>
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         </div>
         <div class="modal-body">
           <h6 class="modal-title mb-3">
-            If you are the member of the following projects, click it and send a apply request instead of create a new project
+            If you are the member of the following projects, click it and send an apply request instead of creating a new project
           </h6>
           <div class="table-responsive shopping-cart">
             <table class="table">

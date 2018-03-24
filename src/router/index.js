@@ -53,6 +53,8 @@ import NotificationsFeed from 'views/NotificationsFeed'
 import FullAnalysis from 'views/FullAnalysis'
 import WhitePaper from 'views/WhitePaper'
 
+import Premium from 'views/premium'
+
 Vue.use(Router)
 
 export default new Router({
@@ -200,11 +202,7 @@ export default new Router({
       path: '/reset',
       component: ResetPassword,
       name: 'reset_password'
-    }, {
-      path: '/tokensale',
-      component: TokenSale,
-      name: 'tokensale'
-    }, {
+    },  {
       path: '/terms',
       component: TermsAndPolicy,
       name: 'terms'
@@ -228,6 +226,10 @@ export default new Router({
       path: '/whitepaper',
       component: WhitePaper,
       name: 'white_paper'
+    }, {
+      path: '/premium',
+      component: Premium,
+      name: 'premium'
     }
     ]
   }]

@@ -501,8 +501,9 @@
           this.$store.dispatch('createProject', formData)
             .then(() => {
               this.uploading = false
-              this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'Your project is submitted!'})
-              this.$router.push({name: 'company_project'})
+            //  this.$store.dispatch('toastr', {type: 'success', title: 'Success', message: 'Your project is submitted!'})
+            //  this.$router.push({name: 'company_project'})
+              this.$router.push({name: 'premium'})
             })
             .catch((error) => {
               this.uploading = false

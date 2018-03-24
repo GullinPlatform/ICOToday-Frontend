@@ -32,16 +32,7 @@
           <div class="form-group">
             <vue-recaptcha align="center" ref="recaptcha" :sitekey="sitekey" @verify="onVerify" @expired="onExpired"></vue-recaptcha>
           </div>
-          <label class="custom-control custom-checkbox d-block">
-            <input name="check" v-model="whitelist" type="checkbox" class="custom-control-input">
-            <span class="custom-control-indicator"></span>
-            <span class="custom-control-description"> I want to signup for ICOToday Whitelist, too. (Optional)
-            </span>
-          </label>
-
-          <div class="form-group" v-if="whitelist">
-            <input type="number" v-model="invest_amount" class="form-control" placeholder="How many ETHs are you willing to invest in? *">
-          </div>
+        
           <label class="custom-control custom-checkbox d-block">
             <input name="check" v-model="check" v-validate.initial="'required'" type="checkbox" class="custom-control-input" @keyup.enter="getToken($event)">
             <span class="custom-control-indicator"></span>

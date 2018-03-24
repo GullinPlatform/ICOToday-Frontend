@@ -12,6 +12,9 @@
     <signup-modal v-if="!login_status"></signup-modal>
     <add-team-member v-if="login_status"></add-team-member>
     <project-modal></project-modal>
+    <basic-modal></basic-modal>
+    <premium-modal></premium-modal>
+    <premiumplus-modal></premiumplus-modal>
     <similar-company v-if="login_status&&me.info.type===-1"></similar-company>
     <!-- Modal End-->
   </div>
@@ -27,6 +30,9 @@
   import AddTeamMember from 'modals/AddTeamMember'
   import ProjectModal from 'views/project_pages/ProjectModal'
   import SimilarCompany from 'modals/SimilarCompany'
+  import BasicModal from 'modals/BasicRedirect'
+  import PremiumModal from 'modals/PremiumRedirect'
+  import PremiumplusModal from 'modals/PremiumPlusRedirect'
 
   export default {
     name: 'RootLayout',
@@ -37,7 +43,10 @@
       LoginModal,
       SignupModal,
       AddTeamMember,
-      SimilarCompany
+      SimilarCompany,
+      BasicModal,
+      PremiumModal,
+      PremiumplusModal
     },
     computed: {
       ...mapGetters({

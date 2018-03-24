@@ -8,16 +8,27 @@
           <div class="row">
             <div class="col-md-12 text-center">
               <h1 class="text-white text-bold mb-2">
-                ICOToday
+                Invest Smarter.
               </h1>
               <h2 class="text-white text-uppercase">
                 The Trusted Platform <br>
-                to Launch and Participate in ICOs
+                FOR INVESTING IN AND LAUNCHING ICOS.
               </h2>
-              <button class="btn btn-primary mt-0"
-                      @click="whiteListSubmit($event)">Sign up for Whitelist
+              <button class="btn btn-primary mt-0" v-if="!login_status" data-toggle="modal" data-target="#signup-modal">Submit Your ICO
               </button>
-              <router-link class="btn btn-secondary mt-0" :to="{name:'white_paper'}"><span class="text-gray-dark">White Paper</span></router-link>
+
+              <router-link :to="{name:'company_new_project'}" class="btn btn-primary mt-0" v-if="login_status && self_type===0">
+                <span> Submit Your ICO</span>
+              </router-link>
+
+              <router-link :to="{name:'me_company_create'}" class="btn btn-primary mt-0" v-if="login_status && self_type===1||self_type===-1">
+                <span> Submit Your ICO</span>
+              </router-link>
+
+              <router-link :to="{name:'company_feed'}" class="btn btn-primary mt-0" v-if="login_status && self_type===3">
+                <span> Submit Your ICO</span>
+              </router-link>
+
             </div>
           </div>
         </div>
@@ -38,8 +49,8 @@
                 <img :src="project.promote_image">
               </a>
               <div class="promo-project-score">
-                <span v-if="project.rating">{{project.rating}} / 100</span>
-                <span v-else>No Ratings</span>
+                <span>Premium</span>
+
               </div>
               <span class="promo-project-format">
                 <a class="text-warning" href="javascript:void(0)" @click="markPost(project.id, true)" v-if="!inSubscribeList(project.id)">
